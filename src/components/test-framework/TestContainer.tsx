@@ -35,6 +35,7 @@ import QuestionRenderer from './QuestionRenderer'
 import ResultCard       from '@/components/results/ResultCard'
 import { getScoringFunction } from '@/utils/scoringFunctions'
 import type { ScoringResult, TestDefinitionForScoring } from '@/utils/scoringFunctions'
+import { trackEvent } from '@/config/analytics'
 
 // ── Props ────────────────────────────────────────────────────────────────────
 
@@ -124,6 +125,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
 
   const handleAnswer = (questionId: string, value: string | number | boolean) => {
     setAnswers((prev) => ({ ...prev, [questionId]: value }))
+    trackEvent('question_answered', { testId, questionId, answer: value })
   }
 
   /**
@@ -165,12 +167,27 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
       return
     }
 
+    trackEvent('test_completed', {
+      testId,
+      score: scored.score,
+      category: scored.category?.label,
+    })
+
+    if (scored.resultType === 'CRISIS' || (scored.redFlags && scored.redFlags.length > 0)) {
+      trackEvent('red_flag_detected', {
+        testId,
+        flagCount: scored.redFlags?.length ?? 0,
+        severity: 'critical',
+      })
+    }
+
     setResult(scored)
     setUiState('result')
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   const handleReset = () => {
+    trackEvent('test_reset', { testId })
     setAnswers({})
     setCurrentIdx(0)
     setResult(null)
@@ -194,7 +211,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
       <div className="flex min-h-screen items-center justify-center">
         <div role="status" aria-live="polite" className="flex flex-col items-center gap-4 text-gray-500">
           <div
-            className="h-10 w-10 animate-spin rounded-full border-4 border-gray-200 border-t-[#0066CC]"
+            className="h-10 w-10 animate-spin rounded-full border-4 border-gray-200" style={{ borderTopColor: 'var(--color-primary)' }}
             aria-hidden="true"
           />
           <p className="text-sm font-medium">Cargando cuestionario…</p>
