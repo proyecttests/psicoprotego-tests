@@ -2,111 +2,93 @@
   "tests": [
     {
       "id": "gad7",
-      "name": "GAD-7 — Escala de Ansiedad Generalizada",
-      "version": "1.0",
       "lang": "es",
-      "description": "Cuestionario de 7 ítems para evaluar la presencia y gravedad del trastorno de ansiedad generalizada.",
-      "disclaimerBefore": "Este cuestionario es una herramienta de cribado, no un diagnóstico clínico. Los resultados son orientativos y no sustituyen la evaluación de un profesional de la salud mental.",
+      "name": "Test de Ansiedad Generalizada (GAD-7)",
+      "version": "1.0",
+      "description": "Evalúa síntomas de trastorno de ansiedad generalizada en las últimas 2 semanas",
+      "disclaimerBefore": "Este cuestionario es solo educativo y NO es un diagnóstico clínico. Sus resultados son para reflexión personal. Si tienes dudas o síntomas graves, consulta con un profesional de la salud. Tus respuestas se guardan solo en tu navegador.",
+      "disclaimerAfter": "Este test NO es diagnóstico clínico y NO reemplaza la evaluación de un profesional. Si tienes síntomas graves o persistentes, consulta con tu médico o psicólogo.",
+
       "questions": [
         {
-          "id": "gad7_1",
+          "id": "q1",
           "type": "likert",
-          "text": "Sentirse nervioso/a, ansioso/a o con los nervios de punta",
+          "text": "¿Con qué frecuencia te has sentido nervioso/a, ansioso/a o tenso/a?",
           "scale": { "min": 0, "max": 3, "step": 1 },
           "labels": { "min": "Nunca", "max": "Casi todos los días" }
         },
         {
-          "id": "gad7_2",
+          "id": "q2",
           "type": "likert",
-          "text": "No poder dejar de preocuparse o no poder controlar la preocupación",
+          "text": "¿Con qué frecuencia no has podido dejar de preocuparte o controlar tus preocupaciones?",
           "scale": { "min": 0, "max": 3, "step": 1 },
           "labels": { "min": "Nunca", "max": "Casi todos los días" }
         },
         {
-          "id": "gad7_3",
+          "id": "q3",
           "type": "likert",
-          "text": "Preocuparse demasiado por diferentes cosas",
+          "text": "¿Con qué frecuencia te has preocupado demasiado por cosas diferentes?",
           "scale": { "min": 0, "max": 3, "step": 1 },
           "labels": { "min": "Nunca", "max": "Casi todos los días" }
         },
         {
-          "id": "gad7_4",
+          "id": "q4",
           "type": "likert",
-          "text": "Dificultad para relajarse",
+          "text": "¿Con qué frecuencia has tenido dificultad para relajarte?",
           "scale": { "min": 0, "max": 3, "step": 1 },
           "labels": { "min": "Nunca", "max": "Casi todos los días" }
         },
         {
-          "id": "gad7_5",
+          "id": "q5",
           "type": "likert",
-          "text": "Estar tan inquieto/a que es difícil permanecer sentado/a",
+          "text": "¿Con qué frecuencia te has sentido tan inquieto/a que te cuesta estar sentado/a?",
           "scale": { "min": 0, "max": 3, "step": 1 },
           "labels": { "min": "Nunca", "max": "Casi todos los días" }
         },
         {
-          "id": "gad7_6",
+          "id": "q6",
           "type": "likert",
-          "text": "Molestarse o ponerse irritable con facilidad",
+          "text": "¿Con qué frecuencia te has irritado o molestado fácilmente?",
           "scale": { "min": 0, "max": 3, "step": 1 },
           "labels": { "min": "Nunca", "max": "Casi todos los días" }
         },
         {
-          "id": "gad7_7",
+          "id": "q7",
           "type": "likert",
-          "text": "Sentir miedo como si algo terrible fuera a pasar",
+          "text": "¿Con qué frecuencia has tenido miedo de que ocurra algo terrible?",
           "scale": { "min": 0, "max": 3, "step": 1 },
-          "labels": { "min": "Nunca", "max": "Casi todos los días" },
-          "isRedFlag": true,
-          "redFlagValues": [3]
-        },
-        {
-          "id": "gad7_followup",
-          "type": "multipleChoice",
-          "text": "Si marcó algún problema, ¿qué tan difícil han sido estos problemas para hacer su trabajo, atender sus asuntos en casa o relacionarse con las demás personas?",
-          "options": [
-            { "value": "not_difficult", "label": "Nada difícil" },
-            { "value": "somewhat_difficult", "label": "Algo difícil" },
-            { "value": "very_difficult", "label": "Muy difícil" },
-            { "value": "extremely_difficult", "label": "Extremadamente difícil" }
-          ],
-          "showIf": { "questionId": "gad7_7", "value": 3 }
+          "labels": { "min": "Nunca", "max": "Casi todos los días" }
         }
       ],
+
       "scoring": [
         {
           "min": 0,
           "max": 4,
-          "category": "Ansiedad mínima",
+          "category": "Ansiedad Mínima",
           "color": "green",
           "messageKey": "minimal"
         },
         {
           "min": 5,
           "max": 9,
-          "category": "Ansiedad leve",
+          "category": "Ansiedad Leve",
           "color": "yellow",
           "messageKey": "mild"
         },
         {
           "min": 10,
           "max": 14,
-          "category": "Ansiedad moderada",
+          "category": "Ansiedad Moderada",
           "color": "orange",
           "messageKey": "moderate"
         },
         {
           "min": 15,
           "max": null,
-          "category": "Ansiedad severa",
+          "category": "Ansiedad Grave",
           "color": "red",
           "messageKey": "severe"
-        }
-      ],
-      "followUpTriggers": [
-        {
-          "questionId": "gad7_7",
-          "value": 3,
-          "followUpMessage": "Hemos detectado que podrías estar pasando por un momento muy difícil. Por favor, considera contactar con un profesional."
         }
       ]
     }

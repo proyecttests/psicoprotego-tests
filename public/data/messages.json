@@ -3,51 +3,43 @@
     "es": {
       "normal": {
         "minimal": {
-          "title": "Tu nivel de ansiedad es mínimo",
-          "body": "Los resultados sugieren que en las últimas dos semanas has experimentado muy poca ansiedad. Esto indica que tu bienestar emocional es bueno en este momento.",
-          "recommendation": "Mantén tus hábitos saludables: ejercicio regular, buen descanso y conexión social. Si en algún momento sientes que la ansiedad aumenta, no dudes en consultar con un profesional."
+          "title": "Ansiedad Mínima",
+          "body": "Tus síntomas de ansiedad están dentro de rangos normales. Es natural experimentar algo de preocupación en la vida cotidiana.",
+          "recommendation": "Continúa manteniendo buenos hábitos de bienestar: sueño regular, ejercicio, y actividades que disfrutes."
         },
         "mild": {
-          "title": "Presentas síntomas de ansiedad leve",
-          "body": "Los resultados indican que en las últimas dos semanas has experimentado algunos síntomas de ansiedad. Aunque son manejables, vale la pena prestarles atención.",
-          "recommendation": "Considera técnicas de relajación como la respiración diafragmática o el mindfulness. Si los síntomas persisten más de dos semanas o interfieren con tu vida diaria, consulta con un profesional de salud mental."
+          "title": "Ansiedad Leve",
+          "body": "Experimentas síntomas leves de ansiedad. Aunque no interfieren significativamente en tu vida diaria, podrías beneficiarte de técnicas de manejo del estrés.",
+          "recommendation": "Prueba técnicas de relajación como respiración profunda, meditación, o ejercicio regular. Si los síntomas persisten, considera hablar con un profesional."
         },
         "moderate": {
-          "title": "Presentas síntomas de ansiedad moderada",
-          "body": "Los resultados sugieren un nivel moderado de ansiedad en las últimas dos semanas. Este nivel puede estar afectando tu vida cotidiana, trabajo o relaciones personales.",
-          "recommendation": "Te recomendamos consultar con un profesional de salud mental. La ansiedad moderada responde bien a la terapia cognitivo-conductual. No esperes a que los síntomas empeoren."
+          "title": "Ansiedad Moderada",
+          "body": "Tus síntomas de ansiedad son moderados y podrían estar afectando tu calidad de vida en algunas áreas (trabajo, relaciones, sueño). Es recomendable buscar apoyo profesional.",
+          "recommendation": "ES RECOMENDABLE que consultes con un psicólogo o médico para evaluar tus síntomas y recibir un tratamiento apropiado."
         },
         "severe": {
-          "title": "Presentas síntomas de ansiedad severa",
-          "body": "Los resultados indican un nivel elevado de ansiedad. Es importante que busques apoyo profesional pronto, ya que este nivel de ansiedad puede impactar significativamente tu calidad de vida.",
-          "recommendation": "Por favor, contacta con un profesional de salud mental lo antes posible. Si no sabes por dónde empezar, puedes llamar al 024 (línea de atención a la conducta suicida) o consultar con tu médico de cabecera."
+          "title": "Ansiedad Grave",
+          "body": "Tus síntomas de ansiedad son significativos y probablemente están afectando tu bienestar y funcionamiento diario. Buscar ayuda profesional es importante.",
+          "recommendation": "Te recomendamos que contactes con un profesional de salud mental lo antes posible. Puedes llamar al 024 (Teléfono de la Esperanza) para hablar con alguien."
         }
       },
       "crisis": {
-        "title": "Necesitas apoyo inmediato",
-        "body": "Hemos detectado que podrías estar pasando por un momento muy difícil. No estás solo/a. Existen personas capacitadas para ayudarte ahora mismo.",
+        "title": "Necesitas hablar con alguien ahora",
+        "body": "Algunas de tus respuestas indican que podrías estar pasando por un momento muy difícil. No tienes que afrontarlo solo/a. Hay personas disponibles ahora mismo para escucharte.",
         "phones": [
           {
-            "label": "024 — Línea de atención a la conducta suicida",
+            "label": "Teléfono de la Esperanza",
             "number": "024"
           },
           {
-            "label": "112 — Emergencias",
+            "label": "Emergencias",
             "number": "112"
-          },
-          {
-            "label": "Teléfono de la Esperanza",
-            "number": "717003717"
           }
         ],
         "resources": [
           {
-            "label": "Confederación de Salud Mental España",
-            "url": "https://consaludmental.org"
-          },
-          {
-            "label": "Centro de atención a conducta suicida (MINISTERIO)",
-            "url": "https://sanidad.gob.es/linea024"
+            "label": "Centro de Crisis Online — Ministerio de Sanidad",
+            "url": "https://www.sanidad.gob.es/linea024"
           }
         ]
       }
