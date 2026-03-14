@@ -26,6 +26,7 @@ import type {
   TestResult,
   Question,
   NormalMessage,
+  ScoringRule,
 } from '@/types/test'
 
 import Header          from '@/components/common/Header'
@@ -34,6 +35,8 @@ import Disclaimer      from '@/components/common/Disclaimer'
 import ProgressBar     from './ProgressBar'
 import QuestionRenderer from './QuestionRenderer'
 import ResultCard      from '@/components/results/ResultCard'
+import { getScoringFunction } from '@/utils/scoringFunctions'
+import type { ScoringResult } from '@/utils/scoringFunctions'
 
 // ── Props ────────────────────────────────────────────────────────────────────
 
@@ -60,34 +63,40 @@ function shouldShowQuestion(question: Question, answers: AnswersMap): boolean {
 }
 
 /**
- * Detecta si alguna respuesta activa un red flag de crisis.
+ * Convierte un ScoringResult (del sistema de scoring puro) en un TestResult
+ * (el tipo que entienden ResultCard y el estado del componente).
  *
- * @param questions - Todas las preguntas del test
- * @param answers   - Respuestas actuales
- * @returns true si hay al menos una respuesta de crisis
+ * Para CRISIS se usa el crisis message completo de messages.json (teléfonos,
+ * recursos) ya que ScoringResult solo contiene el mensaje normal.
+ * Para NORMAL mapea score, categoría y mensaje directamente.
+ *
+ * @param scoringResult - Resultado del motor de scoring
+ * @param messages      - Mapa de mensajes cargado desde messages.json
+ * @param testId        - ID del test (para buscar en messages)
+ * @param lang          - Código de idioma
+ * @returns TestResult listo para pasar a ResultCard, o null si faltan datos
  */
-function hasRedFlag(questions: Question[], answers: AnswersMap): boolean {
-  return questions.some((q) => {
-    if (!q.isRedFlag || !q.redFlagValues) return false
-    const answer = answers[q.id]
-    return answer !== undefined && (q.redFlagValues as Array<string | number | boolean>).includes(answer)
-  })
-}
+function toTestResult(
+  scoringResult: ScoringResult,
+  messages: MessagesMap,
+  testId: string,
+  lang: string,
+): TestResult | null {
+  if (scoringResult.resultType === 'CRISIS') {
+    const crisisMessage = messages[testId]?.[lang]?.crisis
+    if (!crisisMessage) return null
+    return { score: null, type: 'CRISIS', message: crisisMessage }
+  }
 
-/**
- * Calcula el score numérico sumando las respuestas de tipo likert.
- * Solo suma las preguntas que sean `type: 'likert'` o que tengan valor numérico.
- *
- * @param questions - Preguntas del test
- * @param answers   - Respuestas del usuario
- * @returns Score total
- */
-function calculateScore(questions: Question[], answers: AnswersMap): number {
-  return questions.reduce((sum, q) => {
-    if (q.type !== 'likert') return sum
-    const val = answers[q.id]
-    return sum + (typeof val === 'number' ? val : 0)
-  }, 0)
+  if (!scoringResult.message || !scoringResult.category) return null
+
+  return {
+    score:    scoringResult.score,
+    type:     'NORMAL',
+    category: scoringResult.category.label,
+    color:    scoringResult.category.color as ScoringRule['color'],
+    message:  scoringResult.message as NormalMessage,
+  }
 }
 
 // ── Componente ────────────────────────────────────────────────────────────────
@@ -169,31 +178,15 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
 
   /**
    * Avanza a la siguiente pregunta o calcula el resultado si es la última.
-   * Detecta red flags antes de avanzar.
+   * La detección de red flags ocurre dentro del motor de scoring en handleSubmit.
    */
   const handleNext = () => {
     if (!testDef || !messages) return
 
-    const updatedAnswers = { ...answers }
-
-    // ── Detección de red flag ──────────────────────────────────────────────
-    if (hasRedFlag(testDef.questions, updatedAnswers)) {
-      const crisisMessages = messages[testId]?.[lang]?.crisis
-      if (crisisMessages) {
-        setResult({
-          score: null,
-          type: 'CRISIS',
-          message: crisisMessages,
-        })
-        setUiState('result')
-        return
-      }
-    }
-
     if (!isLastQuestion) {
       setCurrentIdx((prev) => prev + 1)
     } else {
-      handleSubmit(updatedAnswers)
+      handleSubmit({ ...answers })
     }
   }
 
@@ -205,49 +198,46 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
   }
 
   /**
-   * Calcula el score final, busca la regla de scoring correspondiente
-   * y construye el objeto TestResult.
+   * Calcula el score final usando el motor de scoring del test.
+   * Detecta red flags, resuelve categoría y mensaje, y actualiza el estado.
    *
    * @param finalAnswers - Mapa de respuestas completo
    */
   const handleSubmit = (finalAnswers: AnswersMap) => {
     if (!testDef || !messages) return
 
-    const score = calculateScore(testDef.questions, finalAnswers)
+    // ── 1. Obtener la función de scoring del test ──────────────────────────
+    let scoringFn
+    try {
+      scoringFn = getScoringFunction(`score${testDef.id.toUpperCase()}`)
+    } catch {
+      setErrorMsg(`No existe función de scoring para el test "${testDef.id}".`)
+      setUiState('error')
+      return
+    }
 
-    // Busca la regla de scoring que corresponde al score
-    const rule = testDef.scoring.find(
-      (r) => score >= r.min && (r.max === null || score <= r.max)
+    // ── 2. Calcular resultado (incluye red flags y categoría) ──────────────
+    const scoringResult = scoringFn(
+      testDef as unknown as Parameters<typeof scoringFn>[0],
+      finalAnswers as Record<string, number | string | boolean>,
+      messages as Record<string, Record<string, unknown>>,
+      lang,
     )
 
-    if (!rule) {
-      setErrorMsg(`No se encontró regla de scoring para score ${score}.`)
+    // ── 3. Convertir ScoringResult → TestResult ────────────────────────────
+    const testResult = toTestResult(scoringResult, messages, testId, lang)
+
+    if (!testResult) {
+      setErrorMsg(
+        scoringResult.resultType === 'CRISIS'
+          ? `No se encontró mensaje de crisis para "${testId}" (lang: ${lang}).`
+          : `No se pudo calcular el resultado del test "${testId}".`,
+      )
       setUiState('error')
       return
     }
 
-    // Busca el mensaje en messages.json
-    const testMessages = messages[testId]?.[lang]
-    if (!testMessages) {
-      setErrorMsg(`No se encontraron mensajes para test "${testId}" (lang: ${lang}).`)
-      setUiState('error')
-      return
-    }
-
-    const normalMessage = testMessages.normal?.[rule.messageKey] as NormalMessage | undefined
-    if (!normalMessage) {
-      setErrorMsg(`Mensaje no encontrado para clave "${rule.messageKey}".`)
-      setUiState('error')
-      return
-    }
-
-    setResult({
-      score,
-      type: 'NORMAL',
-      category: rule.category,
-      color: rule.color,
-      message: normalMessage,
-    })
+    setResult(testResult)
     setUiState('result')
   }
 
