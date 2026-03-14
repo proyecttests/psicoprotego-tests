@@ -39,17 +39,16 @@ const DEFAULT_TEXT_AFTER = (testName: string) =>
   `Si los resultados te generan preocupación, te recomendamos consultar con un profesional de la salud mental. ` +
   `Recuerda que buscar ayuda es un acto de fortaleza, no de debilidad.`
 
-// ── Utilidad para renderizar negrita en texto plano ───────────────────────────
+// ── Utilidad para renderizar negrita ─────────────────────────────────────────
 
 /**
  * Renderiza texto con **negrita** como spans de React.
- * Solo soporta el caso de un único par ** en el texto.
  */
 function renderWithBold(text: string): React.ReactNode[] {
   const parts = text.split('**')
   return parts.map((part, i) =>
     i % 2 === 1
-      ? <strong key={i} className="font-semibold text-amber-900">{part}</strong>
+      ? <strong key={i} className="font-semibold text-red-800">{part}</strong>
       : <React.Fragment key={i}>{part}</React.Fragment>
   )
 }
@@ -86,53 +85,62 @@ const Disclaimer: React.FC<DisclaimerProps> = ({
       role="alertdialog"
       aria-labelledby="disclaimer-title"
       aria-describedby="disclaimer-body"
-      className="mx-auto max-w-2xl px-4 py-8 sm:px-6"
+      className="mx-auto w-[95%] max-w-2xl px-0 py-8 sm:px-6 sm:w-full"
     >
-      {/* ── Caja de advertencia ────────────────────────────────────────────── */}
-      <div className="rounded-xl border border-amber-300 bg-amber-50 p-6 shadow-sm">
+      {/* ── Caja de advertencia ─────────────────────────────────────────────── */}
+      <div className="rounded-xl border border-red-200 bg-white p-5 shadow-sm border-l-4 border-l-red-500">
 
-        {/* Cabecera con icono */}
-        <div className="flex items-start gap-3">
-          <span aria-hidden="true" className="mt-0.5 text-2xl">⚠️</span>
-          <div>
+        {/* Cabecera con icono grande */}
+        <div className="flex items-start gap-4">
+          <span aria-hidden="true" className="mt-0.5 text-4xl shrink-0">⚠️</span>
+          <div className="min-w-0">
             <h2
               id="disclaimer-title"
-              className="text-base font-semibold text-amber-900"
+              className="text-base font-semibold text-gray-900 leading-snug"
             >
               {title}
             </h2>
             <p
               id="disclaimer-body"
-              className="mt-2 text-sm leading-relaxed text-amber-800"
+              className="mt-2 text-sm leading-relaxed text-gray-700"
+              style={{ lineHeight: '1.6' }}
             >
               {renderWithBold(text)}
             </p>
           </div>
         </div>
 
-        {/* Línea divisoria */}
-        <hr className="my-4 border-amber-200" />
+        {/* Divisor */}
+        <hr className="my-4 border-red-100" />
 
         {/* Recursos de crisis */}
-        <p className="text-xs text-amber-700">
-          <strong>En caso de crisis:</strong> llama al{' '}
+        <p className="text-xs text-gray-600">
+          <strong className="font-semibold">En caso de crisis:</strong> llama al{' '}
           <a
             href="tel:024"
-            className="font-bold underline hover:text-amber-900 focus:outline-none focus:ring-1 focus:ring-amber-500 rounded"
+            className="font-bold text-red-700 underline hover:text-red-900 focus:outline-none focus:ring-1 focus:ring-red-500 rounded"
           >
             024
           </a>{' '}
           (gratuito, 24 h) o al{' '}
           <a
             href="tel:112"
-            className="font-bold underline hover:text-amber-900 focus:outline-none focus:ring-1 focus:ring-amber-500 rounded"
+            className="font-bold text-red-700 underline hover:text-red-900 focus:outline-none focus:ring-1 focus:ring-red-500 rounded"
           >
             112
-          </a>.
+          </a>.{' '}
+          <a
+            href="https://www.sanidad.gob.es/linea024"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#0066CC] underline hover:text-blue-800 focus:outline-none focus:ring-1 focus:ring-[#0066CC] rounded"
+          >
+            Más información
+          </a>
         </p>
       </div>
 
-      {/* ── Botones de acción ─────────────────────────────────────────────── */}
+      {/* ── Botones de acción ────────────────────────────────────────────────── */}
       <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
         {onCancel && (
           <button

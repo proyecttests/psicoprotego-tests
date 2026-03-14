@@ -1,109 +1,91 @@
 /**
  * @file components/common/Footer.tsx
- * @description Pie de página de la aplicación.
- * Incluye copyright, enlaces legales, referencias científicas y
- * el teléfono de crisis 024.
+ * @description Footer de crisis. Solo se renderiza cuando showCrisisFooter=true,
+ * mostrando una barra sticky roja con botones directos de llamada (024 / 112).
+ * En el resto del flujo del test (answering, disclaimer, etc.) no aparece.
  */
 
 import React from 'react'
 
-// ── Constantes ────────────────────────────────────────────────────────────────
+// ── Props ────────────────────────────────────────────────────────────────────
 
-const CURRENT_YEAR = new Date().getFullYear()
-
-/** Referencias científicas del GAD-7 */
-const REFERENCES = [
-  'Spitzer RL, et al. A brief measure for assessing generalized anxiety disorder. Arch Intern Med. 2006;166(10):1092–7.',
-  'García-Campayo J, et al. Validación de la versión española del PHQ-9. Aten Primaria. 2008;40(11):540–7.',
-]
+interface FooterProps {
+  /**
+   * Controla si se muestra el footer de crisis.
+   * - false (por defecto): no renderiza nada
+   * - true: muestra la barra sticky roja con teléfonos de emergencia
+   */
+  showCrisisFooter?: boolean
+}
 
 // ── Componente ────────────────────────────────────────────────────────────────
 
 /**
- * Footer — pie de página con información legal y recursos.
+ * Footer — barra de crisis sticky.
  *
- * @returns Elemento <footer> con copyright, links, referencias y teléfono 024
+ * Solo se renderiza cuando `showCrisisFooter` es true (resultado de tipo CRISIS).
+ * Sticky en mobile (bottom: 0), relativa en desktop.
+ *
+ * @param showCrisisFooter - Mostrar footer rojo de crisis (default: false)
+ * @returns Null o barra roja con botones de llamada directa
  */
-const Footer: React.FC = () => {
+const Footer: React.FC<FooterProps> = ({ showCrisisFooter = false }) => {
+  if (!showCrisisFooter) return null
+
   return (
     <footer
-      className="mt-auto w-full border-t border-gray-200 bg-white"
       role="contentinfo"
+      aria-label="Recursos de ayuda inmediata"
+      className="
+        sticky bottom-0 left-0 right-0 z-50
+        bg-red-600 shadow-lg
+        sm:relative sm:bottom-auto sm:z-auto
+      "
     >
-      {/* ── Banda de crisis ────────────────────────────────────────────────── */}
-      <div className="bg-red-600 px-4 py-2 text-center text-sm font-medium text-white">
-        En caso de crisis llama al{' '}
-        <a
-          href="tel:024"
-          className="underline font-bold hover:text-red-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-1 focus:ring-offset-red-600 rounded"
-          aria-label="Llama al 024 — Teléfono de atención a la conducta suicida"
-        >
-          024
-        </a>{' '}
-        · Servicio gratuito 24 horas
-      </div>
+      <div className="mx-auto max-w-3xl px-4 py-3 sm:px-6">
+        <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
 
-      {/* ── Contenido principal ───────────────────────────────────────────── */}
-      <div className="mx-auto max-w-3xl px-4 py-6 sm:px-6">
+          {/* Texto de urgencia */}
+          <p className="text-center text-sm font-semibold text-white sm:text-left">
+            <span aria-hidden="true">⚠️ </span>
+            Necesitas ayuda inmediata — no estás solo/a
+          </p>
 
-        {/* Links legales */}
-        <nav
-          aria-label="Enlaces del pie de página"
-          className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-gray-500"
-        >
-          <a
-            href="/contacto"
-            className="hover:text-[#0066CC] transition-colors focus:outline-none focus:ring-2 focus:ring-[#0066CC] focus:ring-offset-2 rounded"
-          >
-            Contacto
-          </a>
-          <a
-            href="/privacidad"
-            className="hover:text-[#0066CC] transition-colors focus:outline-none focus:ring-2 focus:ring-[#0066CC] focus:ring-offset-2 rounded"
-          >
-            Política de privacidad
-          </a>
-          <a
-            href="/aviso-legal"
-            className="hover:text-[#0066CC] transition-colors focus:outline-none focus:ring-2 focus:ring-[#0066CC] focus:ring-offset-2 rounded"
-          >
-            Aviso legal
-          </a>
-          <a
-            href="/cookies"
-            className="hover:text-[#0066CC] transition-colors focus:outline-none focus:ring-2 focus:ring-[#0066CC] focus:ring-offset-2 rounded"
-          >
-            Cookies
-          </a>
-        </nav>
+          {/* Botones de llamada */}
+          <div className="flex w-full gap-3 sm:w-auto">
+            <a
+              href="tel:024"
+              className="
+                flex flex-1 items-center justify-center gap-2 rounded-lg
+                bg-white px-5 py-3 text-sm font-bold text-red-700
+                shadow-sm transition-colors
+                hover:bg-red-50
+                focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-red-600
+                sm:flex-none
+              "
+              aria-label="Llamar al 024 — Teléfono de atención a la conducta suicida (gratuito, 24h)"
+            >
+              <span aria-hidden="true">📞</span>
+              Llamar al 024
+            </a>
 
-        {/* Divisor */}
-        <hr className="my-4 border-gray-100" />
-
-        {/* Referencias científicas */}
-        <section aria-labelledby="footer-references">
-          <h3
-            id="footer-references"
-            className="mb-2 text-xs font-semibold uppercase tracking-wider text-gray-400"
-          >
-            Referencias científicas
-          </h3>
-          <ul className="space-y-1">
-            {REFERENCES.map((ref, i) => (
-              <li key={i} className="text-xs text-gray-400 leading-relaxed">
-                {ref}
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* Copyright */}
-        <p className="mt-4 text-center text-xs text-gray-400">
-          © {CURRENT_YEAR} Psicoprotego. Todos los derechos reservados.{' '}
-          <span className="block sm:inline">
-            Esta herramienta tiene fines educativos y no constituye diagnóstico clínico.
-          </span>
-        </p>
+            <a
+              href="tel:112"
+              className="
+                flex flex-1 items-center justify-center gap-2 rounded-lg
+                border-2 border-white px-5 py-3 text-sm font-bold text-white
+                transition-colors
+                hover:bg-red-700
+                focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-red-600
+                sm:flex-none
+              "
+              aria-label="Llamar al 112 — Emergencias"
+            >
+              <span aria-hidden="true">📞</span>
+              Llamar 112
+            </a>
+          </div>
+        </div>
       </div>
     </footer>
   )

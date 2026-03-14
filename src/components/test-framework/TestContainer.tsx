@@ -9,7 +9,8 @@
  * 4. Filtrar preguntas condicionales (showIf)
  * 5. Detectar red flags durante las respuestas
  * 6. Calcular el score final y mapear al mensaje correcto
- * 7. NO hardcodea ninguna pregunta — todo se lee del JSON
+ * 7. Auto-avanzar en preguntas Likert (pasa onAdvance a QuestionRenderer)
+ * 8. Scroll automático al cambiar de pregunta
  *
  * Uso:
  * ```tsx
@@ -26,12 +27,12 @@ import type {
   Question,
 } from '@/types/test'
 
-import Header          from '@/components/common/Header'
-import Footer          from '@/components/common/Footer'
-import Disclaimer      from '@/components/common/Disclaimer'
-import ProgressBar     from './ProgressBar'
+import Header           from '@/components/common/Header'
+import Footer           from '@/components/common/Footer'
+import Disclaimer       from '@/components/common/Disclaimer'
+import ProgressBar      from './ProgressBar'
 import QuestionRenderer from './QuestionRenderer'
-import ResultCard      from '@/components/results/ResultCard'
+import ResultCard       from '@/components/results/ResultCard'
 import { getScoringFunction } from '@/utils/scoringFunctions'
 import type { ScoringResult, TestDefinitionForScoring } from '@/utils/scoringFunctions'
 
@@ -48,10 +49,6 @@ interface TestContainerProps {
 
 /**
  * Evalúa si una pregunta debe mostrarse según su condición `showIf`.
- *
- * @param question - Pregunta a evaluar
- * @param answers  - Mapa de respuestas actuales
- * @returns true si la pregunta debe mostrarse, false si debe ocultarse
  */
 function shouldShowQuestion(question: Question, answers: AnswersMap): boolean {
   if (!question.showIf) return true
@@ -73,7 +70,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
   const [testDef,    setTestDef]    = React.useState<TestDefinition | null>(null)
   const [messages,   setMessages]   = React.useState<MessagesMap | null>(null)
   const [answers,    setAnswers]    = React.useState<AnswersMap>({})
-  const [currentIdx, setCurrentIdx] = React.useState(0)   // índice en visibleQuestions
+  const [currentIdx, setCurrentIdx] = React.useState(0)
   const [result,     setResult]     = React.useState<ScoringResult | null>(null)
   const [errorMsg,   setErrorMsg]   = React.useState<string>('')
 
@@ -83,7 +80,6 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
 
     const loadData = async () => {
       try {
-        // Carga en paralelo para mejor rendimiento
         const [testsRes, messagesRes] = await Promise.all([
           fetch('/data/tests.json'),
           fetch('/data/messages.json'),
@@ -101,7 +97,6 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
         if (!cancelled) {
           setTestDef(foundTest)
           setMessages(messagesData)
-          // Si hay disclaimer, ir a ese estado; si no, directo a preguntas
           setUiState(foundTest.disclaimerBefore ? 'disclaimer-before' : 'answering')
         }
       } catch (err) {
@@ -116,104 +111,88 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
     return () => { cancelled = true }
   }, [testId, lang])
 
-  // ── Preguntas visibles (filtradas por showIf) ──────────────────────────────
+  // ── Preguntas visibles ─────────────────────────────────────────────────────
   const visibleQuestions = React.useMemo(() => {
     if (!testDef) return []
     return testDef.questions.filter((q) => shouldShowQuestion(q, answers))
   }, [testDef, answers])
 
-  const currentQuestion  = visibleQuestions[currentIdx] ?? null
-  const isLastQuestion   = currentIdx === visibleQuestions.length - 1
+  const currentQuestion = visibleQuestions[currentIdx] ?? null
+  const isLastQuestion  = currentIdx === visibleQuestions.length - 1
 
   // ── Handlers ───────────────────────────────────────────────────────────────
 
-  /**
-   * Actualiza la respuesta de una pregunta en el mapa de respuestas.
-   * @param questionId - ID de la pregunta
-   * @param value      - Nuevo valor
-   */
   const handleAnswer = (questionId: string, value: string | number | boolean) => {
     setAnswers((prev) => ({ ...prev, [questionId]: value }))
   }
 
   /**
-   * Avanza a la siguiente pregunta o calcula el resultado si es la última.
-   * La detección de red flags ocurre dentro del motor de scoring en handleSubmit.
+   * Avanza a la siguiente pregunta (con scroll suave a top) o finaliza el test.
+   * También es el callback de auto-avance que se pasa a LikertScale.
    */
   const handleNext = () => {
     if (!testDef || !messages) return
 
     if (!isLastQuestion) {
       setCurrentIdx((prev) => prev + 1)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     } else {
       handleSubmit({ ...answers })
     }
   }
 
-  /**
-   * Vuelve a la pregunta anterior.
-   */
   const handleBack = () => {
-    if (currentIdx > 0) setCurrentIdx((prev) => prev - 1)
+    if (currentIdx > 0) {
+      setCurrentIdx((prev) => prev - 1)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
   }
 
-  /**
-   * Calcula el score final usando el motor de scoring del test.
-   * Detecta red flags, resuelve categoría y mensaje, y actualiza el estado.
-   *
-   * @param finalAnswers - Mapa de respuestas completo
-   */
   const handleSubmit = (finalAnswers: AnswersMap) => {
     if (!testDef || !messages) return
 
-    // ── 1. Obtener función de scoring y calcular resultado ─────────────────
     const scoringFn = getScoringFunction('scoreGAD7')
-    const result = scoringFn(
+    const scored = scoringFn(
       testDef as unknown as TestDefinitionForScoring,
       finalAnswers,
       messages as Record<string, Record<string, unknown>>,
       lang,
     )
 
-    // ── 2. Validar que CRISIS tenga su mensaje con teléfonos ───────────────
-    if (result.resultType === 'CRISIS' && !result.message) {
+    if (scored.resultType === 'CRISIS' && !scored.message) {
       setErrorMsg(`No se encontró mensaje de crisis para "${testId}" (lang: ${lang}).`)
       setUiState('error')
       return
     }
 
-    setResult(result)
+    setResult(scored)
     setUiState('result')
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  /**
-   * Reinicia el test al estado inicial de respuestas.
-   */
   const handleReset = () => {
     setAnswers({})
     setCurrentIdx(0)
     setResult(null)
     setUiState(testDef?.disclaimerBefore ? 'disclaimer-before' : 'answering')
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  // ── Render helpers ─────────────────────────────────────────────────────────
+  // ── Helpers de render ──────────────────────────────────────────────────────
 
-  // Determina si la pregunta actual tiene respuesta (para habilitar "Siguiente")
   const currentAnswered = currentQuestion
     ? answers[currentQuestion.id] !== undefined
     : false
 
+  // Footer de crisis solo cuando hay un resultado de tipo CRISIS
+  const showCrisisFooter = result?.resultType === 'CRISIS'
+
   // ── Render por estado ──────────────────────────────────────────────────────
 
-  // Loading
   if (uiState === 'loading') {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <div
-          role="status"
-          aria-live="polite"
-          className="flex flex-col items-center gap-4 text-gray-500"
-        >
+        <div role="status" aria-live="polite" className="flex flex-col items-center gap-4 text-gray-500">
           <div
             className="h-10 w-10 animate-spin rounded-full border-4 border-gray-200 border-t-[#0066CC]"
             aria-hidden="true"
@@ -224,7 +203,6 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
     )
   }
 
-  // Error
   if (uiState === 'error') {
     return (
       <div className="flex min-h-screen flex-col">
@@ -246,12 +224,11 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
             </button>
           </div>
         </main>
-        <Footer />
+        <Footer showCrisisFooter={false} />
       </div>
     )
   }
 
-  // Disclaimer antes
   if (uiState === 'disclaimer-before') {
     return (
       <div className="flex min-h-screen flex-col">
@@ -265,12 +242,11 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
             onCancel={() => window.history.back()}
           />
         </main>
-        <Footer />
+        <Footer showCrisisFooter={false} />
       </div>
     )
   }
 
-  // Resultado
   if (uiState === 'result' && result) {
     return (
       <div className="flex min-h-screen flex-col">
@@ -283,12 +259,12 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
             type={result.resultType}
           />
         </main>
-        <Footer />
+        <Footer showCrisisFooter={showCrisisFooter} />
       </div>
     )
   }
 
-  // Answering (estado principal)
+  // Answering
   if (!currentQuestion) return null
 
   const questionNumber = currentIdx + 1
@@ -307,15 +283,14 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
         aria-atomic="true"
       >
         <div className="w-full max-w-2xl">
-          {/* ── Barra de progreso ──────────────────────────────────────────── */}
+          {/* ── Barra de progreso ────────────────────────────────────────── */}
           <ProgressBar
             currentQuestion={questionNumber}
             totalQuestions={visibleQuestions.length}
           />
 
-          {/* ── Tarjeta de pregunta ────────────────────────────────────────── */}
+          {/* ── Tarjeta de pregunta ──────────────────────────────────────── */}
           <div className="card mt-4">
-            {/* Número y texto de la pregunta */}
             <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-gray-400">
               Pregunta {questionNumber}
             </p>
@@ -323,17 +298,23 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
               {currentQuestion.text}
             </h2>
 
-            {/* Renderizador dinámico del tipo de pregunta */}
+            {/* Renderizador dinámico del tipo de pregunta.
+                Para Likert: pasa onAdvance={handleNext} si no es la última pregunta,
+                lo que activa el auto-avance ~400ms tras selección. */}
             <QuestionRenderer
               question={currentQuestion}
               answers={answers}
               onChange={handleAnswer}
+              onAdvance={
+                currentQuestion.type === 'likert' && !isLastQuestion
+                  ? handleNext
+                  : undefined
+              }
             />
           </div>
 
-          {/* ── Botones de navegación ─────────────────────────────────────── */}
+          {/* ── Botones de navegación ────────────────────────────────────── */}
           <div className="mt-6 flex items-center justify-between gap-4">
-            {/* Botón Anterior */}
             {currentIdx > 0 ? (
               <button
                 type="button"
@@ -347,7 +328,6 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
               <div aria-hidden="true" />
             )}
 
-            {/* Botón Siguiente / Finalizar */}
             <button
               type="button"
               onClick={handleNext}
@@ -359,19 +339,15 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
             </button>
           </div>
 
-          {/* Hint de respuesta pendiente */}
           {!currentAnswered && (
-            <p
-              aria-live="polite"
-              className="mt-3 text-center text-xs text-gray-400"
-            >
+            <p aria-live="polite" className="mt-3 text-center text-xs text-gray-400">
               Selecciona una respuesta para continuar
             </p>
           )}
         </div>
       </main>
 
-      <Footer />
+      <Footer showCrisisFooter={false} />
     </div>
   )
 }
