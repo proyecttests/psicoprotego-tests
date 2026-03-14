@@ -108,3 +108,41 @@
 - FASE 4: Scoring logic + red flags detection
 - Crear src/utils/scoringFunctions.ts
 - Integrar análisis automático
+
+## FASE 4: Scoring Logic + Red Flags ✅
+
+### Fecha: 2025-03-14
+
+### Tareas completadas
+- [x] src/utils/scoringFunctions.ts creado
+- [x] scoreGAD7() implementado con scoring logic
+- [x] Red flags detection system
+- [x] ScoringResult types definidos
+- [x] getScoringFunction() factory pattern
+- [x] TestContainer integrado con scoring
+- [x] ResultCard adaptado (NORMAL vs CRISIS)
+- [x] Sistema extensible para PHQ-9, etc
+
+### Características
+✅ Scoring dinámico desde JSON
+✅ Métodos: direct, reverse, redFlag, text_analysis, none
+✅ Detección automática de red flags
+✅ Manejo de casos críticos
+✅ Tipos TypeScript completos
+✅ Compatible con multiidioma (Fase futura)
+
+### Flujo completo
+Usuario responde → scoreGAD7() calcula → detecta red flags → 
+determina categoría → busca mensaje → ResultCard renderiza
+
+### Estado actual
+✅ TEST COMPLETAMENTE FUNCIONAL CON SCORING
+- Preguntas dinámicas (JSON)
+- Scoring automático
+- Red flags detection
+- Resultados inteligentes
+
+### Próxima fase
+- FASE 5: Mejorar textos y formatos
+- O: Agregar más tests (PHQ-9)
+- O: Implementar DNS (tests.psicoprotego.es)
