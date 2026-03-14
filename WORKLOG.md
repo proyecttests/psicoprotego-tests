@@ -72,3 +72,39 @@
 - Mover datos hardcodeados a JSON
 - Integrar scoring logic
 - Mejoras de textos y formatos
+
+
+# FASE 3: Datos Dinámicos (JSON) ✅
+
+### Fecha: 2025-03-14
+
+### Tareas completadas
+- [x] tests.json creado (estructura GAD-7)
+- [x] messages.json creado (mensajes por categoría)
+- [x] TestContainer.tsx ajustado (ya leía JSON correctamente)
+- [x] JSONs alineados con tipos TypeScript
+- [x] Test funciona completamente desde JSON
+- [x] Datos separados del código
+
+### Estructura JSON
+├─ tests.json: { tests: TestDefinition[] }
+│  ├─ lang: "es"
+│  ├─ questions: 7 preguntas GAD-7
+│  ├─ scoring: categorías 0-21
+│  └─ disclaimers: before + after
+│
+└─ messages.json: MessagesMap
+   ├─ gad7.es.minimal/mild/moderate/severe
+   ├─ crisis (phones, resources)
+   └─ Listo para multiidioma (Fase futura)
+
+### Estado actual
+✅ TEST COMPLETAMENTE DINÁMICO
+- Datos en JSON (fácil editar)
+- Código agnóstico (mismo funciona para PHQ-9, etc)
+- Escalable y mantenible
+
+### Próxima fase
+- FASE 4: Scoring logic + red flags detection
+- Crear src/utils/scoringFunctions.ts
+- Integrar análisis automático
