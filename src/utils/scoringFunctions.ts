@@ -135,12 +135,16 @@ export interface ScoringResult {
   /**
    * Mensaje resuelto desde messages.json (si se pasó el mapa).
    * Opcional porque scoreXxx puede usarse sin messages (solo scoring puro).
+   * Para CRISIS incluye phones y resources; para NORMAL incluye recommendation.
    */
   message?: {
     title: string
     body: string
-    recommendation: string
+    recommendation?: string
     action?: string
+    // Campos de CRISIS
+    phones?: Array<{ label: string; number: string }>
+    resources?: Array<{ label: string; url?: string }>
   }
 }
 
@@ -350,12 +354,22 @@ export function scoreGAD7(
 
   // ── Paso 3: si hay red flag crítico → CRISIS ──────────────────────────────
   if (urgency === 'critical') {
+    let crisisMessage: ScoringResult['message'] | undefined
+
+    if (messages) {
+      const testMsgs = messages[testData.id] as
+        | Record<string, Record<string, unknown>>
+        | undefined
+      crisisMessage = testMsgs?.[lang]?.['crisis'] as ScoringResult['message'] | undefined
+    }
+
     return {
       score:      null,
       category:   null,
       redFlags,
       urgency:    'critical',
       resultType: 'CRISIS',
+      message:    crisisMessage,
     }
   }
 

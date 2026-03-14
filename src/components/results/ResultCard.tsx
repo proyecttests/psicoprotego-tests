@@ -12,11 +12,9 @@
  */
 
 import React from 'react'
+import type { ScoringResult } from '@/utils/scoringFunctions'
 import type {
-  TestResult,
   TestDefinition,
-  NormalMessage,
-  CrisisMessage,
   CrisisPhone,
   CrisisResource,
 } from '@/types/test'
@@ -25,7 +23,9 @@ import type {
 
 interface ResultCardProps {
   /** Resultado calculado por TestContainer */
-  result: TestResult
+  result: ScoringResult
+  /** Tipo de resultado: flujo normal o flujo de crisis */
+  type: 'NORMAL' | 'CRISIS'
   /** Definición del test (para nombre y contexto) */
   testData: TestDefinition | null
   /** Callback para reiniciar el test */
@@ -47,11 +47,12 @@ const COLOR_MAP: Record<string, { bg: string; text: string; border: string; badg
  * Renderiza la tarjeta para resultados de tipo NORMAL.
  */
 const NormalResult: React.FC<{
-  result: TestResult
-  message: NormalMessage
+  result: ScoringResult
   onReset: () => void
-}> = ({ result, message, onReset }) => {
-  const colors = COLOR_MAP[result.color ?? 'green']
+}> = ({ result, onReset }) => {
+  const colorKey = result.category?.color ?? 'green'
+  const colors   = COLOR_MAP[colorKey] ?? COLOR_MAP['green']
+  const message  = result.message
 
   return (
     <div className="w-full max-w-2xl space-y-4 px-4 py-6 sm:px-6">
@@ -68,21 +69,21 @@ const NormalResult: React.FC<{
         </div>
 
         <span className={`inline-block rounded-full px-4 py-1 text-sm font-semibold ${colors.badge}`}>
-          {result.category}
+          {result.category?.label}
         </span>
       </div>
 
       {/* ── Mensaje resultado ───────────────────────────────────────────── */}
       <div className="card space-y-4">
-        <h1 className="text-xl font-bold text-gray-800">{message.title}</h1>
-        <p className="text-sm leading-relaxed text-gray-600">{message.body}</p>
+        <h1 className="text-xl font-bold text-gray-800">{message?.title}</h1>
+        <p className="text-sm leading-relaxed text-gray-600">{message?.body}</p>
 
         {/* Recomendación */}
         <div className="rounded-lg border border-blue-200 bg-blue-50 p-4">
           <p className="text-xs font-semibold uppercase tracking-wider text-blue-600 mb-1">
             Recomendación
           </p>
-          <p className="text-sm leading-relaxed text-blue-800">{message.recommendation}</p>
+          <p className="text-sm leading-relaxed text-blue-800">{message?.recommendation}</p>
         </div>
 
         {/* Disclaimer obligatorio */}
@@ -124,9 +125,13 @@ const NormalResult: React.FC<{
  * NO muestra score. Muestra teléfonos y recursos de ayuda.
  */
 const CrisisResult: React.FC<{
-  message: CrisisMessage
+  result: ScoringResult
   onReset: () => void
-}> = ({ message, onReset }) => {
+}> = ({ result, onReset }) => {
+  const message   = result.message
+  const phones    = (message?.phones    ?? []) as CrisisPhone[]
+  const resources = (message?.resources ?? []) as CrisisResource[]
+
   return (
     <div className="w-full max-w-2xl space-y-4 px-4 py-6 sm:px-6">
 
@@ -137,9 +142,9 @@ const CrisisResult: React.FC<{
       >
         <p aria-hidden="true" className="text-5xl mb-3">⚠️</p>
         <h1 className="text-xl font-extrabold text-red-700 uppercase tracking-wide">
-          {message.title}
+          {message?.title}
         </h1>
-        <p className="mt-2 text-sm leading-relaxed text-red-700">{message.body}</p>
+        <p className="mt-2 text-sm leading-relaxed text-red-700">{message?.body}</p>
       </div>
 
       {/* ── Teléfonos de crisis ─────────────────────────────────────────── */}
@@ -148,7 +153,7 @@ const CrisisResult: React.FC<{
           Llama ahora — es gratuito y confidencial
         </h2>
 
-        {(message as CrisisMessage).phones.map((phone: CrisisPhone, i: number) => (
+        {phones.map((phone: CrisisPhone, i: number) => (
           <a
             key={i}
             href={`tel:${phone.number}`}
@@ -173,13 +178,13 @@ const CrisisResult: React.FC<{
       </div>
 
       {/* ── Recursos adicionales ────────────────────────────────────────── */}
-      {(message as CrisisMessage).resources.length > 0 && (
+      {resources.length > 0 && (
         <div className="card">
           <h2 className="mb-3 text-sm font-semibold text-gray-700">
             Más recursos de apoyo
           </h2>
           <ul className="space-y-2">
-            {(message as CrisisMessage).resources.map((resource: CrisisResource, i: number) => (
+            {resources.map((resource: CrisisResource, i: number) => (
               <li key={i}>
                 {resource.url ? (
                   <a
@@ -239,28 +244,18 @@ const CrisisResult: React.FC<{
  * Detecta el tipo del resultado (NORMAL | CRISIS) y delega
  * al sub-componente correspondiente.
  *
- * @param result   - Resultado calculado (score, type, message…)
+ * @param result   - Resultado calculado (ScoringResult con score, category, message…)
+ * @param type     - Tipo de resultado ('NORMAL' | 'CRISIS')
  * @param testData - Definición del test (nombre, etc.)
  * @param onReset  - Reiniciar el test
  * @returns Tarjeta de resultado apropiada al tipo
  */
-const ResultCard: React.FC<ResultCardProps> = ({ result, onReset }) => {
-  if (result.type === 'CRISIS') {
-    return (
-      <CrisisResult
-        message={result.message as CrisisMessage}
-        onReset={onReset}
-      />
-    )
+const ResultCard: React.FC<ResultCardProps> = ({ result, type, onReset }) => {
+  if (type === 'CRISIS') {
+    return <CrisisResult result={result} onReset={onReset} />
   }
 
-  return (
-    <NormalResult
-      result={result}
-      message={result.message as NormalMessage}
-      onReset={onReset}
-    />
-  )
+  return <NormalResult result={result} onReset={onReset} />
 }
 
 export default ResultCard

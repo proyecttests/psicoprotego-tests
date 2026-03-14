@@ -23,10 +23,7 @@ import type {
   MessagesMap,
   TestState,
   AnswersMap,
-  TestResult,
   Question,
-  NormalMessage,
-  ScoringRule,
 } from '@/types/test'
 
 import Header          from '@/components/common/Header'
@@ -36,7 +33,7 @@ import ProgressBar     from './ProgressBar'
 import QuestionRenderer from './QuestionRenderer'
 import ResultCard      from '@/components/results/ResultCard'
 import { getScoringFunction } from '@/utils/scoringFunctions'
-import type { ScoringResult } from '@/utils/scoringFunctions'
+import type { ScoringResult, TestDefinitionForScoring } from '@/utils/scoringFunctions'
 
 // ── Props ────────────────────────────────────────────────────────────────────
 
@@ -62,43 +59,6 @@ function shouldShowQuestion(question: Question, answers: AnswersMap): boolean {
   return answers[questionId] === value
 }
 
-/**
- * Convierte un ScoringResult (del sistema de scoring puro) en un TestResult
- * (el tipo que entienden ResultCard y el estado del componente).
- *
- * Para CRISIS se usa el crisis message completo de messages.json (teléfonos,
- * recursos) ya que ScoringResult solo contiene el mensaje normal.
- * Para NORMAL mapea score, categoría y mensaje directamente.
- *
- * @param scoringResult - Resultado del motor de scoring
- * @param messages      - Mapa de mensajes cargado desde messages.json
- * @param testId        - ID del test (para buscar en messages)
- * @param lang          - Código de idioma
- * @returns TestResult listo para pasar a ResultCard, o null si faltan datos
- */
-function toTestResult(
-  scoringResult: ScoringResult,
-  messages: MessagesMap,
-  testId: string,
-  lang: string,
-): TestResult | null {
-  if (scoringResult.resultType === 'CRISIS') {
-    const crisisMessage = messages[testId]?.[lang]?.crisis
-    if (!crisisMessage) return null
-    return { score: null, type: 'CRISIS', message: crisisMessage }
-  }
-
-  if (!scoringResult.message || !scoringResult.category) return null
-
-  return {
-    score:    scoringResult.score,
-    type:     'NORMAL',
-    category: scoringResult.category.label,
-    color:    scoringResult.category.color as ScoringRule['color'],
-    message:  scoringResult.message as NormalMessage,
-  }
-}
-
 // ── Componente ────────────────────────────────────────────────────────────────
 
 /**
@@ -114,7 +74,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
   const [messages,   setMessages]   = React.useState<MessagesMap | null>(null)
   const [answers,    setAnswers]    = React.useState<AnswersMap>({})
   const [currentIdx, setCurrentIdx] = React.useState(0)   // índice en visibleQuestions
-  const [result,     setResult]     = React.useState<TestResult | null>(null)
+  const [result,     setResult]     = React.useState<ScoringResult | null>(null)
   const [errorMsg,   setErrorMsg]   = React.useState<string>('')
 
   // ── Carga de datos ─────────────────────────────────────────────────────────
@@ -206,38 +166,23 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
   const handleSubmit = (finalAnswers: AnswersMap) => {
     if (!testDef || !messages) return
 
-    // ── 1. Obtener la función de scoring del test ──────────────────────────
-    let scoringFn
-    try {
-      scoringFn = getScoringFunction(`score${testDef.id.toUpperCase()}`)
-    } catch {
-      setErrorMsg(`No existe función de scoring para el test "${testDef.id}".`)
-      setUiState('error')
-      return
-    }
-
-    // ── 2. Calcular resultado (incluye red flags y categoría) ──────────────
-    const scoringResult = scoringFn(
-      testDef as unknown as Parameters<typeof scoringFn>[0],
-      finalAnswers as Record<string, number | string | boolean>,
+    // ── 1. Obtener función de scoring y calcular resultado ─────────────────
+    const scoringFn = getScoringFunction('scoreGAD7')
+    const result = scoringFn(
+      testDef as unknown as TestDefinitionForScoring,
+      finalAnswers,
       messages as Record<string, Record<string, unknown>>,
       lang,
     )
 
-    // ── 3. Convertir ScoringResult → TestResult ────────────────────────────
-    const testResult = toTestResult(scoringResult, messages, testId, lang)
-
-    if (!testResult) {
-      setErrorMsg(
-        scoringResult.resultType === 'CRISIS'
-          ? `No se encontró mensaje de crisis para "${testId}" (lang: ${lang}).`
-          : `No se pudo calcular el resultado del test "${testId}".`,
-      )
+    // ── 2. Validar que CRISIS tenga su mensaje con teléfonos ───────────────
+    if (result.resultType === 'CRISIS' && !result.message) {
+      setErrorMsg(`No se encontró mensaje de crisis para "${testId}" (lang: ${lang}).`)
       setUiState('error')
       return
     }
 
-    setResult(testResult)
+    setResult(result)
     setUiState('result')
   }
 
@@ -335,6 +280,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
             result={result}
             testData={testDef}
             onReset={handleReset}
+            type={result.resultType}
           />
         </main>
         <Footer />
