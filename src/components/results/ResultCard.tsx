@@ -117,17 +117,17 @@ const NormalResult: React.FC<{ result: ScoringResult; onReset: () => void }> = (
 
       {/* ── Mensaje de resultado ─────────────────────────────────────────── */}
       <div className="card space-y-4">
-        <h1 className="text-xl font-bold text-gray-800">{message?.title}</h1>
-        <p className="text-sm leading-relaxed text-gray-600" style={{ lineHeight: '1.6' }}>
+        <h1 className="text-xl">{message?.title}</h1>
+        <p className="text-sm leading-relaxed font-sans" style={{ color: '#666', lineHeight: '1.6' }}>
           {message?.body}
         </p>
 
         {/* Recomendación destacada */}
-        <div className="rounded-lg border border-[#0066CC]/20 bg-blue-50 p-4">
-          <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-[#0066CC]">
+        <div className="rounded-lg border p-4" style={{ borderColor: 'var(--color-accent)', backgroundColor: 'var(--color-cream)' }}>
+          <p className="mb-1 text-xs font-semibold uppercase tracking-wider font-sans" style={{ color: 'var(--color-accent)' }}>
             Recomendación
           </p>
-          <p className="text-sm font-medium leading-relaxed text-blue-900">
+          <p className="text-sm font-medium leading-relaxed font-sans" style={{ color: 'var(--color-primary)' }}>
             {message?.recommendation}
           </p>
         </div>
@@ -242,7 +242,7 @@ const CrisisResult: React.FC<{ result: ScoringResult; onReset: () => void }> = (
                     href={resource.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-[#0066CC] underline hover:text-blue-800 focus:outline-none focus:ring-1 focus:ring-[#0066CC] rounded"
+                    className="text-sm underline hover:opacity-80 focus:outline-none focus:ring-1 rounded" style={{ color: 'var(--color-primary)' }}
                   >
                     {resource.label}
                   </a>

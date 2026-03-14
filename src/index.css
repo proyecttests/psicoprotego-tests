@@ -3,38 +3,66 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom base styles */
+/* ── CSS Custom Properties — Psicoprotego Brand ────────────────────────────── */
+:root {
+  --color-primary:  #2d4a3e;
+  --color-accent:   #8b6914;
+  --color-cream:    #f5f0eb;
+  --font-serif:     'Source Serif 4', Georgia, serif;
+  --font-sans:      'Montserrat', system-ui, sans-serif;
+}
+
+/* ── Base styles ────────────────────────────────────────────────────────────── */
 @layer base {
   html {
     @apply scroll-smooth;
   }
 
   body {
-    @apply bg-gray-50 text-gray-900 antialiased;
-    font-family: 'Inter', system-ui, sans-serif;
+    @apply antialiased;
+    background-color: var(--color-cream);
+    color: #2d2d2d;
+    font-family: var(--font-sans);
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1, h2, h3 {
     @apply font-semibold leading-tight;
+    font-family: var(--font-serif);
+    color: var(--color-primary);
+  }
+
+  h4, h5, h6 {
+    @apply font-semibold leading-tight;
+    font-family: var(--font-sans);
   }
 }
 
-/* Custom component classes */
+/* ── Component classes ──────────────────────────────────────────────────────── */
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-lg bg-brand-600 px-5 py-2.5
+    @apply inline-flex items-center justify-center rounded-lg px-5 py-2.5
            text-sm font-medium text-white shadow-sm
-           hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500
+           focus:outline-none focus:ring-2
            disabled:opacity-50 disabled:cursor-not-allowed
            transition-colors duration-150;
+    background-color: var(--color-primary);
+    --tw-ring-color: var(--color-primary);
+  }
+  .btn-primary:hover:not(:disabled) {
+    background-color: #1f3530;
   }
 
   .btn-secondary {
     @apply inline-flex items-center justify-center rounded-lg border border-gray-300
-           bg-white px-5 py-2.5 text-sm font-medium text-gray-700 shadow-sm
-           hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-500
+           bg-white px-5 py-2.5 text-sm font-medium shadow-sm
+           focus:outline-none focus:ring-2
            disabled:opacity-50 disabled:cursor-not-allowed
            transition-colors duration-150;
+    color: var(--color-primary);
+    --tw-ring-color: var(--color-primary);
+  }
+  .btn-secondary:hover:not(:disabled) {
+    background-color: var(--color-cream);
   }
 
   .card {

@@ -1,8 +1,6 @@
 /**
  * @file components/common/Disclaimer.tsx
- * @description Componente de aviso legal/educativo que se muestra antes o
- * después de un test psicológico. Informa al usuario de que los resultados
- * son orientativos y no constituyen un diagnóstico clínico.
+ * @description Aviso legal/educativo antes o después del test. Branding Psicoprotego.
  */
 
 import React from 'react'
@@ -10,19 +8,10 @@ import React from 'react'
 // ── Props ────────────────────────────────────────────────────────────────────
 
 interface DisclaimerProps {
-  /**
-   * Tipo de disclaimer:
-   * - 'before' → se muestra antes de iniciar el test
-   * - 'after'  → se muestra tras completarlo (antes de ver resultados)
-   */
   type: 'before' | 'after'
-  /** Nombre del test para personalizar el mensaje */
   testName: string
-  /** Texto personalizado del aviso (opcional). Si se omite se usa el texto por defecto. */
   customText?: string
-  /** Callback al confirmar ("Entiendo y continuar") */
   onContinue: () => void
-  /** Callback al cancelar. Si se omite, el botón Cancelar no se muestra. */
   onCancel?: () => void
 }
 
@@ -41,9 +30,6 @@ const DEFAULT_TEXT_AFTER = (testName: string) =>
 
 // ── Utilidad para renderizar negrita ─────────────────────────────────────────
 
-/**
- * Renderiza texto con **negrita** como spans de React.
- */
 function renderWithBold(text: string): React.ReactNode[] {
   const parts = text.split('**')
   return parts.map((part, i) =>
@@ -55,16 +41,6 @@ function renderWithBold(text: string): React.ReactNode[] {
 
 // ── Componente ────────────────────────────────────────────────────────────────
 
-/**
- * Disclaimer — aviso informativo antes/después del test.
- *
- * @param type        - 'before' | 'after'
- * @param testName    - Nombre del test
- * @param customText  - Texto personalizado (opcional)
- * @param onContinue  - Confirmar y continuar
- * @param onCancel    - Cancelar (opcional)
- * @returns Sección de aviso con icono, texto y botones de acción
- */
 const Disclaimer: React.FC<DisclaimerProps> = ({
   type,
   testName,
@@ -88,33 +64,32 @@ const Disclaimer: React.FC<DisclaimerProps> = ({
       className="mx-auto w-[95%] max-w-2xl px-0 py-8 sm:px-6 sm:w-full"
     >
       {/* ── Caja de advertencia ─────────────────────────────────────────────── */}
-      <div className="rounded-xl border border-red-200 bg-white p-5 shadow-sm border-l-4 border-l-red-500">
-
-        {/* Cabecera con icono grande */}
+      <div
+        className="rounded-xl border border-red-200 p-5 shadow-sm border-l-4 border-l-red-500"
+        style={{ backgroundColor: 'var(--color-cream)' }}
+      >
         <div className="flex items-start gap-4">
           <span aria-hidden="true" className="mt-0.5 text-4xl shrink-0">⚠️</span>
           <div className="min-w-0">
             <h2
               id="disclaimer-title"
-              className="text-base font-semibold text-gray-900 leading-snug"
+              className="text-xl leading-snug"
             >
               {title}
             </h2>
             <p
               id="disclaimer-body"
-              className="mt-2 text-sm leading-relaxed text-gray-700"
-              style={{ lineHeight: '1.6' }}
+              className="mt-2 text-sm leading-relaxed font-sans"
+              style={{ color: '#666', lineHeight: '1.6' }}
             >
               {renderWithBold(text)}
             </p>
           </div>
         </div>
 
-        {/* Divisor */}
         <hr className="my-4 border-red-100" />
 
-        {/* Recursos de crisis */}
-        <p className="text-xs text-gray-600">
+        <p className="text-xs font-sans" style={{ color: '#666' }}>
           <strong className="font-semibold">En caso de crisis:</strong> llama al{' '}
           <a
             href="tel:024"
@@ -133,7 +108,8 @@ const Disclaimer: React.FC<DisclaimerProps> = ({
             href="https://www.sanidad.gob.es/linea024"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#0066CC] underline hover:text-blue-800 focus:outline-none focus:ring-1 focus:ring-[#0066CC] rounded"
+            style={{ color: 'var(--color-primary)' }}
+            className="underline hover:opacity-80 focus:outline-none rounded"
           >
             Más información
           </a>
@@ -151,7 +127,6 @@ const Disclaimer: React.FC<DisclaimerProps> = ({
             Cancelar
           </button>
         )}
-
         <button
           type="button"
           onClick={onContinue}
