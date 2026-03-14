@@ -1,0 +1,114 @@
+{
+  "tests": [
+    {
+      "id": "gad7",
+      "name": "GAD-7 — Escala de Ansiedad Generalizada",
+      "version": "1.0",
+      "lang": "es",
+      "description": "Cuestionario de 7 ítems para evaluar la presencia y gravedad del trastorno de ansiedad generalizada.",
+      "disclaimerBefore": "Este cuestionario es una herramienta de cribado, no un diagnóstico clínico. Los resultados son orientativos y no sustituyen la evaluación de un profesional de la salud mental.",
+      "questions": [
+        {
+          "id": "gad7_1",
+          "type": "likert",
+          "text": "Sentirse nervioso/a, ansioso/a o con los nervios de punta",
+          "scale": { "min": 0, "max": 3, "step": 1 },
+          "labels": { "min": "Nunca", "max": "Casi todos los días" }
+        },
+        {
+          "id": "gad7_2",
+          "type": "likert",
+          "text": "No poder dejar de preocuparse o no poder controlar la preocupación",
+          "scale": { "min": 0, "max": 3, "step": 1 },
+          "labels": { "min": "Nunca", "max": "Casi todos los días" }
+        },
+        {
+          "id": "gad7_3",
+          "type": "likert",
+          "text": "Preocuparse demasiado por diferentes cosas",
+          "scale": { "min": 0, "max": 3, "step": 1 },
+          "labels": { "min": "Nunca", "max": "Casi todos los días" }
+        },
+        {
+          "id": "gad7_4",
+          "type": "likert",
+          "text": "Dificultad para relajarse",
+          "scale": { "min": 0, "max": 3, "step": 1 },
+          "labels": { "min": "Nunca", "max": "Casi todos los días" }
+        },
+        {
+          "id": "gad7_5",
+          "type": "likert",
+          "text": "Estar tan inquieto/a que es difícil permanecer sentado/a",
+          "scale": { "min": 0, "max": 3, "step": 1 },
+          "labels": { "min": "Nunca", "max": "Casi todos los días" }
+        },
+        {
+          "id": "gad7_6",
+          "type": "likert",
+          "text": "Molestarse o ponerse irritable con facilidad",
+          "scale": { "min": 0, "max": 3, "step": 1 },
+          "labels": { "min": "Nunca", "max": "Casi todos los días" }
+        },
+        {
+          "id": "gad7_7",
+          "type": "likert",
+          "text": "Sentir miedo como si algo terrible fuera a pasar",
+          "scale": { "min": 0, "max": 3, "step": 1 },
+          "labels": { "min": "Nunca", "max": "Casi todos los días" },
+          "isRedFlag": true,
+          "redFlagValues": [3]
+        },
+        {
+          "id": "gad7_followup",
+          "type": "multipleChoice",
+          "text": "Si marcó algún problema, ¿qué tan difícil han sido estos problemas para hacer su trabajo, atender sus asuntos en casa o relacionarse con las demás personas?",
+          "options": [
+            { "value": "not_difficult", "label": "Nada difícil" },
+            { "value": "somewhat_difficult", "label": "Algo difícil" },
+            { "value": "very_difficult", "label": "Muy difícil" },
+            { "value": "extremely_difficult", "label": "Extremadamente difícil" }
+          ],
+          "showIf": { "questionId": "gad7_7", "value": 3 }
+        }
+      ],
+      "scoring": [
+        {
+          "min": 0,
+          "max": 4,
+          "category": "Ansiedad mínima",
+          "color": "green",
+          "messageKey": "minimal"
+        },
+        {
+          "min": 5,
+          "max": 9,
+          "category": "Ansiedad leve",
+          "color": "yellow",
+          "messageKey": "mild"
+        },
+        {
+          "min": 10,
+          "max": 14,
+          "category": "Ansiedad moderada",
+          "color": "orange",
+          "messageKey": "moderate"
+        },
+        {
+          "min": 15,
+          "max": null,
+          "category": "Ansiedad severa",
+          "color": "red",
+          "messageKey": "severe"
+        }
+      ],
+      "followUpTriggers": [
+        {
+          "questionId": "gad7_7",
+          "value": 3,
+          "followUpMessage": "Hemos detectado que podrías estar pasando por un momento muy difícil. Por favor, considera contactar con un profesional."
+        }
+      ]
+    }
+  ]
+}
