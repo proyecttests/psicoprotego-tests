@@ -4,24 +4,25 @@
  * usando React Router v6.
  */
 
-import { Routes, Route, Navigate } from 'react-router-dom'
-
-// ── Páginas (se crearán en FASE 2) ─────────────────────────────────────────
-// import HomePage    from '@/pages/HomePage'
-// import TestPage    from '@/pages/TestPage'
-// import ResultsPage from '@/pages/ResultsPage'
+import { Routes, Route, Navigate, Link } from 'react-router-dom'
+import TestContainer from '@/components/test-framework/TestContainer'
 
 /**
- * Placeholder temporal hasta implementar las páginas reales.
+ * Página de inicio temporal con navegación al test GAD-7.
  */
-const PlaceholderPage = ({ title }: { title: string }) => (
+const HomePage = () => (
   <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-gray-50 p-8">
     <div className="card max-w-md w-full text-center">
       <h1 className="text-2xl font-bold text-brand-700 mb-2">Psicoprotego</h1>
-      <p className="text-gray-500 text-sm mb-4">GAD-7 — Evaluación de ansiedad generalizada</p>
-      <div className="rounded-lg bg-brand-50 px-4 py-3">
-        <p className="text-brand-700 font-medium">{title}</p>
-      </div>
+      <p className="text-gray-500 text-sm mb-6">
+        Plataforma de evaluación psicológica — Tests validados clínicamente
+      </p>
+      <Link
+        to="/test/gad7"
+        className="btn-primary inline-block w-full"
+      >
+        Iniciar GAD-7 →
+      </Link>
       <p className="mt-4 text-xs text-gray-400">
         Stack: React 18 · Vite · Tailwind CSS · TypeScript · React Router v6
       </p>
@@ -32,21 +33,16 @@ const PlaceholderPage = ({ title }: { title: string }) => (
 /**
  * App — componente raíz con enrutamiento.
  *
- * Rutas planificadas:
- *  /          → Inicio / bienvenida
- *  /test      → Cuestionario GAD-7
- *  /results   → Resultados e interpretación
+ * Rutas:
+ *  /            → Inicio / bienvenida
+ *  /test/:id    → Test dinámico (cualquier test por ID)
+ *  *            → Redirect a /
  */
 function App() {
   return (
     <Routes>
-      {/* Ruta principal */}
-      <Route path="/" element={<PlaceholderPage title="Inicio — FASE 1 completada" />} />
-
-      {/* Rutas futuras */}
-      <Route path="/test"    element={<PlaceholderPage title="Test GAD-7 (próximamente)" />} />
-      <Route path="/results" element={<PlaceholderPage title="Resultados (próximamente)" />} />
-
+      <Route path="/"          element={<HomePage />} />
+      <Route path="/test/gad7" element={<TestContainer testId="gad7" lang="es" />} />
       {/* Fallback */}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
