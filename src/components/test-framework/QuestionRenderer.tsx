@@ -14,9 +14,9 @@
 import React from 'react'
 import type { Question, AnswersMap } from '@/types/test'
 
-import LikertScale           from './LikertScale'
-import BooleanQuestion       from './BooleanQuestion'
-import TextQuestion          from './TextQuestion'
+import LikertScale            from './LikertScale'
+import BooleanQuestion        from './BooleanQuestion'
+import TextQuestion           from './TextQuestion'
 import MultipleChoiceQuestion from './MultipleChoiceQuestion'
 
 // ── Props ────────────────────────────────────────────────────────────────────
@@ -28,6 +28,12 @@ interface QuestionRendererProps {
   answers: AnswersMap
   /** Callback que actualiza el mapa de respuestas */
   onChange: (questionId: string, value: string | number | boolean) => void
+  /**
+   * Callback de auto-avance para preguntas Likert.
+   * Si se pasa, LikertScale avanzará ~400ms después de que el usuario seleccione.
+   * Pasar `undefined` desactiva el auto-avance (ej: última pregunta).
+   */
+  onAdvance?: () => void
 }
 
 // ── Componente ────────────────────────────────────────────────────────────────
@@ -38,17 +44,18 @@ interface QuestionRendererProps {
  * Lee `question.type` y renderiza el componente correcto con las props
  * adecuadas. Si el tipo es desconocido, muestra un fallback de advertencia.
  *
- * @param question - Definición de la pregunta (type, text, scale, options…)
- * @param answers  - Respuestas actuales del usuario
- * @param onChange - Callback para actualizar una respuesta
+ * @param question   - Definición de la pregunta (type, text, scale, options…)
+ * @param answers    - Respuestas actuales del usuario
+ * @param onChange   - Callback para actualizar una respuesta
+ * @param onAdvance  - Callback de auto-avance (solo usado por LikertScale)
  * @returns El componente de input apropiado al tipo de pregunta
  */
 const QuestionRenderer: React.FC<QuestionRendererProps> = ({
   question,
   answers,
   onChange,
+  onAdvance,
 }) => {
-  // Valor actual de esta pregunta (puede ser undefined si no se ha respondido)
   const currentValue = answers[question.id]
 
   switch (question.type) {
@@ -62,6 +69,7 @@ const QuestionRenderer: React.FC<QuestionRendererProps> = ({
           onChange={(val) => onChange(question.id, val)}
           scale={question.scale}
           labels={question.labels}
+          onAdvance={onAdvance}
         />
       )
 
@@ -102,7 +110,6 @@ const QuestionRenderer: React.FC<QuestionRendererProps> = ({
 
     // ── Fallback para tipos desconocidos ────────────────────────────────────
     default: {
-      // En producción esto no debería ocurrir; el fallback evita errores en runtime
       const unknownType = (question as { type: string }).type
       return (
         <div

@@ -4,20 +4,16 @@
  *
  * Renderiza dos tipos de resultado:
  *
- * - NORMAL: muestra el score, categoría, título, cuerpo y recomendación.
- *   Con disclaimer de "no es diagnóstico" y botones de acción.
+ * - NORMAL: score animado (0→final, 600ms), fade-in, categoría destacada,
+ *   recomendación visible, botones neutrales.
  *
- * - CRISIS: muestra aviso de ayuda inmediata, teléfonos de crisis y
- *   recursos. NO muestra score. Botones de llamada directa.
+ * - CRISIS: alerta roja prominente, teléfonos con botones grandes (48px),
+ *   animate-pulse en llamadas, sin score.
  */
 
 import React from 'react'
 import type { ScoringResult } from '@/utils/scoringFunctions'
-import type {
-  TestDefinition,
-  CrisisPhone,
-  CrisisResource,
-} from '@/types/test'
+import type { TestDefinition, CrisisPhone, CrisisResource } from '@/types/test'
 
 // ── Props ────────────────────────────────────────────────────────────────────
 
@@ -41,30 +37,76 @@ const COLOR_MAP: Record<string, { bg: string; text: string; border: string; badg
   red:    { bg: 'bg-red-50',    text: 'text-red-700',    border: 'border-red-300',    badge: 'bg-red-100 text-red-800'      },
 }
 
-// ── Sub-componentes ───────────────────────────────────────────────────────────
+// ── Hook: contador animado ────────────────────────────────────────────────────
 
-/**
- * Renderiza la tarjeta para resultados de tipo NORMAL.
- */
-const NormalResult: React.FC<{
-  result: ScoringResult
-  onReset: () => void
-}> = ({ result, onReset }) => {
-  const colorKey = result.category?.color ?? 'green'
-  const colors   = COLOR_MAP[colorKey] ?? COLOR_MAP['green']
-  const message  = result.message
+/** Anima un número de 0 hasta `target` en `duration` ms. */
+function useCountUp(target: number, duration = 600): number {
+  const [display, setDisplay] = React.useState(0)
+
+  React.useEffect(() => {
+    if (target === 0) { setDisplay(0); return }
+
+    const steps    = 20
+    const interval = duration / steps
+    const increment = target / steps
+    let current = 0
+
+    const timer = setInterval(() => {
+      current += increment
+      if (current >= target) {
+        setDisplay(target)
+        clearInterval(timer)
+      } else {
+        setDisplay(Math.round(current))
+      }
+    }, interval)
+
+    return () => clearInterval(timer)
+  }, [target, duration])
+
+  return display
+}
+
+// ── Hook: fade-in al montar ───────────────────────────────────────────────────
+
+function useFadeIn(): boolean {
+  const [visible, setVisible] = React.useState(false)
+  React.useEffect(() => {
+    const id = requestAnimationFrame(() => setVisible(true))
+    return () => cancelAnimationFrame(id)
+  }, [])
+  return visible
+}
+
+// ── Sub-componente: NormalResult ──────────────────────────────────────────────
+
+const NormalResult: React.FC<{ result: ScoringResult; onReset: () => void }> = ({
+  result,
+  onReset,
+}) => {
+  const visible      = useFadeIn()
+  const displayScore = useCountUp(result.score ?? 0)
+  const colorKey     = result.category?.color ?? 'green'
+  const colors       = COLOR_MAP[colorKey] ?? COLOR_MAP['green']
+  const message      = result.message
+
+  // Scroll al inicio al mostrar el resultado
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
 
   return (
-    <div className="w-full max-w-2xl space-y-4 px-4 py-6 sm:px-6">
-
-      {/* ── Score grande + categoría ────────────────────────────────────── */}
+    <div
+      className={`w-full max-w-2xl space-y-4 px-4 py-6 sm:px-6 transition-opacity duration-300 ${visible ? 'opacity-100' : 'opacity-0'}`}
+    >
+      {/* ── Score + categoría ────────────────────────────────────────────── */}
       <div className={`card text-center ${colors.bg} ${colors.border} border-2`}>
         <div
           aria-label={`Puntuación: ${result.score}`}
-          className={`mx-auto mb-2 flex h-24 w-24 items-center justify-center rounded-full border-4 ${colors.border} ${colors.bg}`}
+          className={`mx-auto mb-3 flex h-24 w-24 items-center justify-center rounded-full border-4 ${colors.border} ${colors.bg}`}
         >
           <span className={`text-5xl font-extrabold ${colors.text}`}>
-            {result.score}
+            {displayScore}
           </span>
         </div>
 
@@ -73,28 +115,32 @@ const NormalResult: React.FC<{
         </span>
       </div>
 
-      {/* ── Mensaje resultado ───────────────────────────────────────────── */}
+      {/* ── Mensaje de resultado ─────────────────────────────────────────── */}
       <div className="card space-y-4">
         <h1 className="text-xl font-bold text-gray-800">{message?.title}</h1>
-        <p className="text-sm leading-relaxed text-gray-600">{message?.body}</p>
+        <p className="text-sm leading-relaxed text-gray-600" style={{ lineHeight: '1.6' }}>
+          {message?.body}
+        </p>
 
-        {/* Recomendación */}
-        <div className="rounded-lg border border-blue-200 bg-blue-50 p-4">
-          <p className="text-xs font-semibold uppercase tracking-wider text-blue-600 mb-1">
+        {/* Recomendación destacada */}
+        <div className="rounded-lg border border-[#0066CC]/20 bg-blue-50 p-4">
+          <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-[#0066CC]">
             Recomendación
           </p>
-          <p className="text-sm leading-relaxed text-blue-800">{message?.recommendation}</p>
+          <p className="text-sm font-medium leading-relaxed text-blue-900">
+            {message?.recommendation}
+          </p>
         </div>
 
         {/* Disclaimer obligatorio */}
-        <p className="text-xs text-gray-400 italic border-t border-gray-100 pt-3">
+        <p className="border-t border-gray-100 pt-3 text-xs italic text-gray-400">
           Estos resultados tienen fines exclusivamente educativos y orientativos.
           No constituyen un diagnóstico clínico ni sustituyen la valoración de un
           profesional de la salud mental.
         </p>
       </div>
 
-      {/* ── Botones de acción ──────────────────────────────────────────── */}
+      {/* ── Botones ─────────────────────────────────────────────────────── */}
       <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
         <button
           type="button"
@@ -105,11 +151,10 @@ const NormalResult: React.FC<{
           ↺ Volver a intentar
         </button>
 
-        {/* Compartir: deshabilitado por ahora */}
         <button
           type="button"
           disabled
-          className="btn-primary w-full sm:w-auto opacity-50 cursor-not-allowed"
+          className="btn-primary w-full cursor-not-allowed opacity-50 sm:w-auto"
           aria-label="Compartir resultado (próximamente)"
           title="Función próximamente disponible"
         >
@@ -120,34 +165,40 @@ const NormalResult: React.FC<{
   )
 }
 
-/**
- * Renderiza la tarjeta para resultados de tipo CRISIS.
- * NO muestra score. Muestra teléfonos y recursos de ayuda.
- */
-const CrisisResult: React.FC<{
-  result: ScoringResult
-  onReset: () => void
-}> = ({ result, onReset }) => {
+// ── Sub-componente: CrisisResult ──────────────────────────────────────────────
+
+const CrisisResult: React.FC<{ result: ScoringResult; onReset: () => void }> = ({
+  result,
+  onReset,
+}) => {
+  const visible   = useFadeIn()
   const message   = result.message
   const phones    = (message?.phones    ?? []) as CrisisPhone[]
   const resources = (message?.resources ?? []) as CrisisResource[]
 
-  return (
-    <div className="w-full max-w-2xl space-y-4 px-4 py-6 sm:px-6">
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
 
-      {/* ── Alerta de crisis ────────────────────────────────────────────── */}
+  return (
+    <div
+      className={`w-full max-w-2xl space-y-4 px-4 py-6 sm:px-6 transition-opacity duration-300 ${visible ? 'opacity-100' : 'opacity-0'}`}
+    >
+      {/* ── Alerta de crisis ─────────────────────────────────────────────── */}
       <div
         role="alert"
         className="rounded-xl border-2 border-red-400 bg-red-50 p-6 text-center shadow-md"
       >
-        <p aria-hidden="true" className="text-5xl mb-3">⚠️</p>
-        <h1 className="text-xl font-extrabold text-red-700 uppercase tracking-wide">
+        <p aria-hidden="true" className="mb-3 text-5xl">⚠️</p>
+        <h1 className="text-xl font-extrabold uppercase tracking-wide text-red-800">
           {message?.title}
         </h1>
-        <p className="mt-2 text-sm leading-relaxed text-red-700">{message?.body}</p>
+        <p className="mt-2 text-sm leading-relaxed text-red-700" style={{ lineHeight: '1.6' }}>
+          {message?.body}
+        </p>
       </div>
 
-      {/* ── Teléfonos de crisis ─────────────────────────────────────────── */}
+      {/* ── Teléfonos de crisis ──────────────────────────────────────────── */}
       <div className="card space-y-3">
         <h2 className="text-base font-semibold text-gray-700">
           Llama ahora — es gratuito y confidencial
@@ -158,10 +209,12 @@ const CrisisResult: React.FC<{
             key={i}
             href={`tel:${phone.number}`}
             className="
-              flex items-center justify-between gap-3 rounded-xl border-2 border-red-400
-              bg-red-600 px-5 py-4 text-white shadow-sm
-              hover:bg-red-700 transition-colors
+              flex min-h-[48px] items-center justify-between gap-3 rounded-xl
+              border-2 border-red-400 bg-red-600 px-5 py-4
+              text-white shadow-sm transition-colors
+              hover:bg-red-700
               focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2
+              animate-pulse
             "
             aria-label={`Llamar al ${phone.number} — ${phone.label}`}
           >
@@ -177,12 +230,10 @@ const CrisisResult: React.FC<{
         ))}
       </div>
 
-      {/* ── Recursos adicionales ────────────────────────────────────────── */}
+      {/* ── Recursos adicionales ─────────────────────────────────────────── */}
       {resources.length > 0 && (
         <div className="card">
-          <h2 className="mb-3 text-sm font-semibold text-gray-700">
-            Más recursos de apoyo
-          </h2>
+          <h2 className="mb-3 text-sm font-semibold text-gray-700">Más recursos de apoyo</h2>
           <ul className="space-y-2">
             {resources.map((resource: CrisisResource, i: number) => (
               <li key={i}>
@@ -204,25 +255,35 @@ const CrisisResult: React.FC<{
         </div>
       )}
 
-      {/* ── Acciones ────────────────────────────────────────────────────── */}
+      {/* ── Botones de acción directa ────────────────────────────────────── */}
       <div className="flex flex-col gap-3 sm:flex-row">
         <a
           href="tel:024"
-          className="btn-primary flex-1 text-center bg-red-600 hover:bg-red-700 focus:ring-red-500"
+          className="
+            flex min-h-[48px] flex-1 items-center justify-center gap-2 rounded-lg
+            bg-red-700 px-5 py-3 text-sm font-bold text-white shadow-sm
+            transition-colors hover:bg-red-800
+            focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2
+          "
           aria-label="Llamar al 024 ahora"
         >
-          📞 Llamar al 024
+          <span aria-hidden="true">📞</span> Llamar al 024
         </a>
         <a
           href="tel:112"
-          className="btn-secondary flex-1 text-center border-red-400 text-red-700 hover:bg-red-50"
+          className="
+            flex min-h-[48px] flex-1 items-center justify-center gap-2 rounded-lg
+            border-2 border-red-400 px-5 py-3 text-sm font-bold text-red-700
+            transition-colors hover:bg-red-50
+            focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2
+          "
           aria-label="Llamar al 112 ahora"
         >
-          📞 Llamar al 112
+          <span aria-hidden="true">📞</span> Llamar al 112
         </a>
       </div>
 
-      {/* Volver a intentar */}
+      {/* Volver al inicio */}
       <div className="text-center">
         <button
           type="button"
@@ -244,17 +305,15 @@ const CrisisResult: React.FC<{
  * Detecta el tipo del resultado (NORMAL | CRISIS) y delega
  * al sub-componente correspondiente.
  *
- * @param result   - Resultado calculado (ScoringResult con score, category, message…)
+ * @param result   - Resultado calculado (ScoringResult)
  * @param type     - Tipo de resultado ('NORMAL' | 'CRISIS')
- * @param testData - Definición del test (nombre, etc.)
+ * @param testData - Definición del test
  * @param onReset  - Reiniciar el test
- * @returns Tarjeta de resultado apropiada al tipo
  */
 const ResultCard: React.FC<ResultCardProps> = ({ result, type, onReset }) => {
   if (type === 'CRISIS') {
     return <CrisisResult result={result} onReset={onReset} />
   }
-
   return <NormalResult result={result} onReset={onReset} />
 }
 
