@@ -146,3 +146,45 @@ determina categoría → busca mensaje → ResultCard renderiza
 - FASE 5: Mejorar textos y formatos
 - O: Agregar más tests (PHQ-9)
 - O: Implementar DNS (tests.psicoprotego.es)
+
+---
+
+## RESUMEN GENERAL - MVP COMPLETADO ✅
+
+### Fecha: 2025-03-14
+
+### Línea de tiempo
+- Setup infraestructura: 30 min
+- FASE 1: React setup: 30 min
+- FASE 2: Framework componentes: 90 min
+- FASE 3: JSONs dinámicos: 30 min
+- FASE 4: Scoring logic: 45 min
+- FASE 5: UX improvements: 90 min
+- FASE 5.5: Branding + Analytics: 60 min
+**TOTAL: ~6 horas de desarrollo**
+
+### MVP Conseguido
+✅ Test GAD-7 completamente funcional
+✅ Scoring dinámico desde JSON
+✅ Red flags detection
+✅ Crisis handling (teléfono 024)
+✅ Branding Psicoprotego integrado
+✅ Analytics GTM + GA4
+✅ Mobile-first responsive
+✅ Live en Vercel
+✅ Código limpio y escalable
+✅ TypeScript strict mode
+
+### Arquitectura
+- Frontend: React 18 + Vite + Tailwind
+- Datos: JSON-driven (agnóstico)
+- Hosting: Vercel + Apache proxy
+- Analytics: GTM-MN3QW7Q7 + GA4
+- Code: TypeScript + componentes reutilizables
+
+### Próximas prioridades
+1. Refinar textos / DNS (Corto plazo)
+2. PHQ-9 + más tests (Mediano plazo)
+3. Multiidioma (Largo plazo)
+4. SaaS platform (Futuro lejano)
+
