@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psicoprotego Tests - TDAH Perfect</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2d4a3e;
+            --accent: #8b6914;
+            --cream: #f5f0eb;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Montserrat', sans-serif;
+            color: #2d2d2d;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--cream) 0%, #ffffff 100%);
+        }
+
+        /* ============ MAIN CONTAINER ============ */
+
+        .test-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ============ PROGRESS BAR ============ */
+
+        .progress-bar-minimal {
+            width: 100%;
+            height: 6px;
+            background: #E5E7EB;
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            width: 14%;
+            transition: width 0.6s ease;
+        }
+
+        /* ============ QUESTION WRAPPER ============ */
+
+        .question-wrapper {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, var(--cream) 0%, #ffffff 100%);
+        }
+
+        /* ============ QUESTION CONTENT ============ */
+
+        .question-content {
+            width: 100%;
+            height: 100%;
+            padding: 60px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            opacity: 0;
+        }
+
+        /* ENTRADA - FADE IN */
+        .question-content.entering {
+            animation: fadeIn 0.4s ease-out 0.2s forwards;
+        }
+
+        /* SALIDA - TIKTOK STYLE */
+        .question-content.exiting {
+            animation: slideOutUp 0.4s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutUp {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(-100vh);
+            }
+        }
+
+        /* ============ QUESTION TEXT - SIMPLE, APARECE COMPLETA ============ */
+
+        .question-text {
+            font-family: 'Source Serif 4', serif;
+            font-size: 2.3rem;
+            color: var(--primary);
+            line-height: 1.45;
+            font-weight: 500;
+            text-align: center;
+            max-width: 75%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            opacity: 0;
+            animation: fadeInQuestion 0.6s ease-out 0.2s forwards;
+        }
+
+        @keyframes fadeInQuestion {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ============ QUESTION SUBE DESPUÉS COMPLETARSE ============ */
+
+        .question-container {
+            animation: riseUpAfterReveal 0.8s ease-out 0.9s forwards;
+            opacity: 0;
+        }
+
+        @keyframes riseUpAfterReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(0);
+            }
+            1% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(-50px);
+            }
+        }
+
+        /* ============ CARDS OPTIONS ============ */
+
+        .cards-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 500px;
+            margin-top: 50px;
+        }
+
+        .card-option {
+            padding: 16px;
+            border: 2px solid #E5E7EB;
+            background: white;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            opacity: 0;
+            animation: slideUpIn 0.5s ease-out forwards;
+        }
+
+        .card-option:nth-child(1) { animation-delay: 1.8s; }
+        .card-option:nth-child(2) { animation-delay: 1.95s; }
+        .card-option:nth-child(3) { animation-delay: 2.1s; }
+        .card-option:nth-child(4) { animation-delay: 2.25s; }
+
+        /* FLOTANTE */
+        .cards-options.floating .card-option {
+            animation: slideUpIn 0.5s ease-out forwards, floatUp 3s ease-in-out 2.5s infinite !important;
+        }
+
+        .cards-options.floating .card-option:nth-child(1) {
+            animation-delay: 1.8s, 2.5s !important;
+        }
+        .cards-options.floating .card-option:nth-child(2) {
+            animation-delay: 1.95s, 2.65s !important;
+        }
+        .cards-options.floating .card-option:nth-child(3) {
+            animation-delay: 2.1s, 2.8s !important;
+        }
+        .cards-options.floating .card-option:nth-child(4) {
+            animation-delay: 2.25s, 2.95s !important;
+        }
+
+        .card-option:hover:not(.selected) {
+            border-color: var(--accent);
+            background: rgba(139, 105, 20, 0.03);
+            transform: translateX(8px);
+        }
+
+        .card-option.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(45, 74, 62, 0.3);
+            animation: none !important;
+            transform: none !important;
+        }
+
+        .card-radio {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid #E5E7EB;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-option.selected .card-radio {
+            border-color: white;
+            background: var(--accent);
+        }
+
+        .card-radio::after {
+            content: '✓';
+            color: white;
+            font-weight: bold;
+            font-size: 0.85rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card-option.selected .card-radio::after {
+            opacity: 1;
+        }
+
+        .card-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .card-label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 2px;
+            font-size: 0.95rem;
+        }
+
+        .card-value {
+            font-size: 0.8rem;
+            opacity: 0.75;
+        }
+
+        /* ============ ANIMATIONS ============ */
+
+        @keyframes slideUpIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes floatUp {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* ============ CONTROLS ============ */
+
+        .controls {
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-top: 1px solid #E5E7EB;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .btn-nav {
+            padding: 8px 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+        .btn-nav:hover:not(:disabled) {
+            background: var(--accent);
+        }
+
+        .btn-nav:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .progress-info {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 500;
+            flex: 1;
+            text-align: center;
+        }
+
+        /* ============ MOBILE ============ */
+
+        @media (max-width: 600px) {
+            .question-content {
+                padding: 35px 16px;
+            }
+
+            .question-text {
+                font-size: 1.9rem;
+                max-width: 90%;
+            }
+
+            .card-option {
+                padding: 14px;
+                gap: 10px;
+            }
+
+            .card-label {
+                font-size: 0.9rem;
+            }
+
+            .btn-nav {
+                padding: 7px 12px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <!-- PROGRESS BAR -->
+        <div class="progress-bar-minimal">
+            <div class="progress-fill" id="progressFill" style="width: 14%;"></div>
+        </div>
+
+        <!-- QUESTION WRAPPER -->
+        <div class="question-wrapper">
+            <div class="question-content entering" id="questionContent">
+                <!-- QUESTION -->
+                <div class="question-container">
+                    <div class="question-text" id="questionText"></div>
+                </div>
+
+                <!-- OPCIONES -->
+                <div class="cards-options" id="cardsOptions"></div>
+            </div>
+        </div>
+
+        <!-- CONTROLS -->
+        <div class="controls">
+            <button class="btn-nav" onclick="previousQuestion()" id="btnPrev">← Anterior</button>
+            <div class="progress-info">
+                <span id="questionNumber">1</span> de 7 • <span id="remaining">6</span> restantes
+            </div>
+            <button class="btn-nav" onclick="nextQuestion()" id="btnNext" disabled>Siguiente →</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            "¿Con qué frecuencia te has sentido nervioso, ansioso o tenso?",
+            "¿Con qué frecuencia no has podido dejar de preocuparte o controlar tus preocupaciones?",
+            "¿Con qué frecuencia te has preocupado demasiado por cosas diferentes?",
+            "¿Con qué frecuencia has tenido dificultad para relajarte?",
+            "¿Con qué frecuencia te has sentido tan inquieto que te cuesta estar sentado?",
+            "¿Con qué frecuencia te has irritado o molestado fácilmente?",
+            "¿Con qué frecuencia has tenido miedo de que ocurra algo terrible?"
+        ];
+
+        const labels = ['Nunca', 'Varios días', 'Más de la mitad de los días', 'Casi todos los días'];
+
+        let currentQuestion = 0;
+        let answers = [null, null, null, null, null, null, null];
+        let isTransitioning = false;
+        let floatingTimer = null;
+
+        function loadQuestion(index) {
+            const text = questions[index];
+            document.getElementById('questionNumber').textContent = index + 1;
+            
+            // Poner texto completo (sin separa en palabras)
+            const questionTextEl = document.getElementById('questionText');
+            questionTextEl.textContent = text;
+            
+            // Crear opciones
+            const cardsOptions = document.getElementById('cardsOptions');
+            cardsOptions.innerHTML = '';
+            cardsOptions.classList.remove('floating');
+
+            for (let i = 0; i < 4; i++) {
+                const card = document.createElement('div');
+                card.className = 'card-option';
+                if (answers[index] === i) {
+                    card.classList.add('selected');
+                }
+                card.setAttribute('data-value', i);
+                card.innerHTML = `
+                    <div class="card-radio"></div>
+                    <div class="card-text">
+                        <span class="card-label">${labels[i]}</span>
+                        <span class="card-value">(${i})</span>
+                    </div>
+                `;
+                card.addEventListener('click', () => selectAnswer(i));
+                cardsOptions.appendChild(card);
+            }
+
+            updateProgress();
+            updateButtons();
+            
+            // Timer para flotación
+            clearTimeout(floatingTimer);
+            floatingTimer = setTimeout(() => {
+                if (answers[index] === null && !isTransitioning) {
+                    document.getElementById('cardsOptions').classList.add('floating');
+                }
+            }, 2800);
+        }
+
+        function selectAnswer(value) {
+            if (isTransitioning) return;
+
+            clearTimeout(floatingTimer);
+
+            answers[currentQuestion] = value;
+            document.querySelectorAll('.card-option').forEach(card => {
+                card.classList.remove('selected');
+                if (parseInt(card.getAttribute('data-value')) === value) {
+                    card.classList.add('selected');
+                }
+            });
+            updateButtons();
+
+            setTimeout(() => {
+                if (currentQuestion < questions.length - 1) {
+                    nextQuestion();
+                }
+            }, 200);
+        }
+
+        function nextQuestion() {
+            if (isTransitioning || currentQuestion >= questions.length - 1) return;
+
+            isTransitioning = true;
+            const content = document.getElementById('questionContent');
+            content.classList.remove('entering');
+            content.classList.add('exiting');
+            
+            // Espera salida TikTok (400ms) + carga (200ms) + fadeIn completo (700ms)
+            setTimeout(() => {
+                currentQuestion++;
+                content.classList.remove('exiting');
+                content.classList.add('entering');
+                loadQuestion(currentQuestion);
+                setTimeout(() => {
+                    isTransitioning = false;
+                }, 800); // Espera a que fadeIn + animaciones terminen
+            }, 400);
+        }
+
+        function previousQuestion() {
+            if (isTransitioning || currentQuestion <= 0) return;
+
+            isTransitioning = true;
+            const content = document.getElementById('questionContent');
+            content.classList.remove('entering');
+            content.classList.add('exiting');
+            
+            setTimeout(() => {
+                currentQuestion--;
+                content.classList.remove('exiting');
+                content.classList.add('entering');
+                loadQuestion(currentQuestion);
+                setTimeout(() => {
+                    isTransitioning = false;
+                }, 800); // Espera a que fadeIn + animaciones terminen
+            }, 400);
+        }
+
+        function updateProgress() {
+            // Mostrar lo que está COMPLETADO: 0% al inicio, 100% al final
+            const completed = currentQuestion + 1;
+            const completedPercent = (completed / questions.length) * 100;
+            document.getElementById('progressFill').style.width = completedPercent + '%';
+            document.getElementById('remaining').textContent = questions.length - completed;
+        }
+
+        function updateButtons() {
+            // Botón anterior: disponible siempre que no estemos en pregunta 1
+            document.getElementById('btnPrev').disabled = currentQuestion === 0;
+            
+            // Botón siguiente: disponible si respondiste Y no es última pregunta
+            const isLastQuestion = currentQuestion === questions.length - 1;
+            const hasAnswered = answers[currentQuestion] !== null;
+            document.getElementById('btnNext').disabled = !hasAnswered || isLastQuestion;
+        }
+
+        // Init
+        loadQuestion(0);
+
+        // Keyboard
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowUp' && currentQuestion > 0) previousQuestion();
+            if (e.key === 'ArrowDown' && currentQuestion < questions.length - 1 && answers[currentQuestion] !== null) nextQuestion();
+        });
+    </script>
+</body>
+</html>
