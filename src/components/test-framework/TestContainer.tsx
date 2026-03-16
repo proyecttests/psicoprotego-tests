@@ -10,7 +10,7 @@
  * 5. Detectar red flags durante las respuestas
  * 6. Calcular el score final y mapear al mensaje correcto
  * 7. Auto-avanzar en preguntas Likert (pasa onAdvance a QuestionRenderer)
- * 8. Scroll automático al cambiar de pregunta
+ * 8. Transiciones TDAH: slideOutUpTikTok (salida) + fadeInQuestion (entrada)
  *
  * Uso:
  * ```tsx
@@ -59,12 +59,6 @@ function shouldShowQuestion(question: Question, answers: AnswersMap): boolean {
 
 // ── Componente ────────────────────────────────────────────────────────────────
 
-/**
- * TestContainer — orquestador principal del test psicológico.
- *
- * @param testId - ID del test en tests.json
- * @param lang   - Idioma de los mensajes (por defecto 'es')
- */
 const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) => {
   // ── Estado ─────────────────────────────────────────────────────────────────
   const [uiState,    setUiState]    = React.useState<TestState>('loading')
@@ -74,6 +68,9 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
   const [currentIdx, setCurrentIdx] = React.useState(0)
   const [result,     setResult]     = React.useState<ScoringResult | null>(null)
   const [errorMsg,   setErrorMsg]   = React.useState<string>('')
+
+  // Estado de transición (animación de salida activa)
+  const [isExiting, setIsExiting] = React.useState(false)
 
   // ── Carga de datos ─────────────────────────────────────────────────────────
   React.useEffect(() => {
@@ -128,28 +125,6 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
     trackEvent('question_answered', { testId, questionId, answer: value })
   }
 
-  /**
-   * Avanza a la siguiente pregunta (con scroll suave a top) o finaliza el test.
-   * También es el callback de auto-avance que se pasa a LikertScale.
-   */
-  const handleNext = () => {
-    if (!testDef || !messages) return
-
-    if (!isLastQuestion) {
-      setCurrentIdx((prev) => prev + 1)
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    } else {
-      handleSubmit({ ...answers })
-    }
-  }
-
-  const handleBack = () => {
-    if (currentIdx > 0) {
-      setCurrentIdx((prev) => prev - 1)
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
-  }
-
   const handleSubmit = (finalAnswers: AnswersMap) => {
     if (!testDef || !messages) return
 
@@ -186,11 +161,43 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
+  /**
+   * Avanza con animación de salida (slideOutUpTikTok, 400ms) y luego cambia pregunta.
+   * También es el callback de auto-avance de LikertScale.
+   */
+  const handleNext = () => {
+    if (!testDef || !messages || isExiting) return
+
+    setIsExiting(true)
+    // 800ms total de transición: salida 400ms + 400ms margen de respuesta de botones
+    setTimeout(() => {
+      setIsExiting(false)
+      if (!isLastQuestion) {
+        setCurrentIdx((prev) => prev + 1)
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      } else {
+        handleSubmit({ ...answers })
+      }
+    }, 400)
+  }
+
+  const handleBack = () => {
+    if (currentIdx <= 0 || isExiting) return
+
+    setIsExiting(true)
+    setTimeout(() => {
+      setIsExiting(false)
+      setCurrentIdx((prev) => prev - 1)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }, 400)
+  }
+
   const handleReset = () => {
     trackEvent('test_reset', { testId })
     setAnswers({})
     setCurrentIdx(0)
     setResult(null)
+    setIsExiting(false)
     setUiState(testDef?.disclaimerBefore ? 'disclaimer-before' : 'answering')
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -201,7 +208,6 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
     ? answers[currentQuestion.id] !== undefined
     : false
 
-  // Footer de crisis solo cuando hay un resultado de tipo CRISIS
   const showCrisisFooter = result?.resultType === 'CRISIS'
 
   // ── Render por estado ──────────────────────────────────────────────────────
@@ -295,29 +301,32 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
       />
 
       <main
-        className="flex flex-1 flex-col items-center px-4 py-6 sm:px-6"
+        className="flex flex-1 flex-col items-center justify-between px-4 py-6 sm:px-6"
         aria-live="polite"
-        aria-atomic="true"
       >
+        {/* SECCIÓN SUPERIOR: Barra de progreso */}
         <div className="w-full max-w-2xl">
-          {/* ── Barra de progreso ────────────────────────────────────────── */}
           <ProgressBar
             currentQuestion={questionNumber}
             totalQuestions={visibleQuestions.length}
           />
+        </div>
 
-          {/* ── Tarjeta de pregunta ──────────────────────────────────────── */}
-          <div className="card mt-4">
-            <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-gray-400">
-              Pregunta {questionNumber}
-            </p>
-            <h2 className="mb-6 text-xl font-semibold leading-snug text-gray-800">
-              {currentQuestion.text}
-            </h2>
+        {/* SECCIÓN CENTRAL: Pregunta + Opciones con transición TDAH */}
+        <div
+          key={currentIdx}
+          className={`w-full max-w-2xl flex flex-col items-center gap-10 flex-1 justify-center py-4${isExiting ? ' animate-slide-out-tiktok' : ''}`}
+        >
+          {/* Pregunta - Grande, fade suave, centrada */}
+          <h2
+            className="text-2xl sm:text-3xl font-semibold leading-snug text-center px-4 animate-fadeInQuestion max-w-md pb-2"
+            style={{ color: 'var(--color-primary)' }}
+          >
+            {currentQuestion.text}
+          </h2>
 
-            {/* Renderizador dinámico del tipo de pregunta.
-                Para Likert: pasa onAdvance={handleNext} si no es la última pregunta,
-                lo que activa el auto-avance ~400ms tras selección. */}
+          {/* Opciones - Cards con animación de subida */}
+          <div className="w-full max-w-md animate-riseUpAfter">
             <QuestionRenderer
               question={currentQuestion}
               answers={answers}
@@ -329,39 +338,39 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
               }
             />
           </div>
+        </div>
 
-          {/* ── Botones de navegación ────────────────────────────────────── */}
-          <div className="mt-6 flex items-center justify-between gap-4">
-            {currentIdx > 0 ? (
-              <button
-                type="button"
-                onClick={handleBack}
-                className="btn-secondary"
-                aria-label="Ir a la pregunta anterior"
-              >
-                ← Anterior
-              </button>
-            ) : (
-              <div aria-hidden="true" />
-            )}
-
+        {/* SECCIÓN INFERIOR: Botones de navegación */}
+        <div className="w-full max-w-2xl flex items-center justify-between gap-4">
+          {currentIdx > 0 ? (
             <button
               type="button"
-              onClick={handleNext}
-              disabled={!currentAnswered}
-              className="btn-primary"
-              aria-label={isLastQuestion ? 'Finalizar y ver resultados' : 'Ir a la siguiente pregunta'}
+              onClick={handleBack}
+              className="btn-secondary"
+              aria-label="Ir a la pregunta anterior"
             >
-              {isLastQuestion ? 'Ver resultados →' : 'Siguiente →'}
+              ← Anterior
             </button>
-          </div>
-
-          {!currentAnswered && (
-            <p aria-live="polite" className="mt-3 text-center text-xs text-gray-400">
-              Selecciona una respuesta para continuar
-            </p>
+          ) : (
+            <div aria-hidden="true" />
           )}
+
+          <button
+            type="button"
+            onClick={handleNext}
+            disabled={!currentAnswered}
+            className="btn-primary"
+            aria-label={isLastQuestion ? 'Finalizar y ver resultados' : 'Ir a la siguiente pregunta'}
+          >
+            {isLastQuestion ? 'Ver resultados →' : 'Siguiente →'}
+          </button>
         </div>
+
+        {!currentAnswered && (
+          <p aria-live="polite" className="text-center text-xs text-gray-400 mt-2">
+            Selecciona una respuesta para continuar
+          </p>
+        )}
       </main>
 
       <Footer showCrisisFooter={false} />

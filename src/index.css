@@ -69,3 +69,74 @@
     @apply rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-200;
   }
 }
+
+/* ── TDAH Keyframe Animations ───────────────────────────────────────────────── */
+
+@keyframes fadeInQuestion {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes riseUpAfterReveal {
+  0%   { opacity: 0; transform: translateY(0); }
+  1%   { opacity: 1; }
+  100% { opacity: 1; transform: translateY(-50px); }
+}
+
+@keyframes slideOutUpTikTok {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-100vh); }
+}
+
+@keyframes floatUp {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+@keyframes fadeInContent {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@layer utilities {
+  /* Pregunta: fade-in suave + sube 50px después de aparecer */
+  .animate-question-slide {
+    animation:
+      fadeInQuestion    0.6s ease-out 0.2s both,
+      riseUpAfterReveal 0.8s ease-out 0.9s both;
+  }
+  /* Salida TikTok: sube fuera del viewport */
+  .animate-slide-out-tiktok {
+    animation: slideOutUpTikTok 0.4s ease-in forwards;
+  }
+  /* Flotación suave (hint visual sin respuesta) */
+  .animate-float-up {
+    animation: floatUp 3s ease-in-out infinite;
+  }
+  /* Opciones: aparecen con delay post-pregunta */
+  .animate-options-appear {
+    animation: fadeInContent 0.5s ease-out 1.8s both;
+  }
+  /* Fade-in genérico */
+  .animate-fade-in-content {
+    animation: fadeInContent 0.5s ease-out both;
+  }
+
+  /* ── TDAH v2: clases individuales ───────────────────────────────────── */
+  /* Pregunta grande: fade-in suave */
+  .animate-fadeInQuestion {
+    animation: fadeInQuestion 0.6s ease-out 0.2s both;
+  }
+  /* Opciones/cards: aparecen ocultas luego suben mientras se revelan */
+  .animate-riseUpAfter {
+    animation: riseUpAfterReveal 0.8s ease-out 0.9s forwards;
+  }
+  /* Float suave infinito (hint sin respuesta) */
+  .animate-floatUp {
+    animation: floatUp 3s ease-in-out infinite;
+  }
+  /* Salida TikTok: alias sin guiones */
+  .animate-slideOutUp {
+    animation: slideOutUpTikTok 0.4s ease-in forwards;
+  }
+}
