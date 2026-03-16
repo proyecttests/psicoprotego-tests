@@ -5,6 +5,7 @@
 ### Fecha: 2025-03-14
 
 ### Tareas completadas
+
 - [x] GitHub repo público
 - [x] WSL2 + Node v24.14.0
 - [x] Git + SSH GitHub
@@ -14,15 +15,16 @@
 - [x] WORKLOG.md creado
 
 ### Próximos pasos
+
 - Conectar Vercel
 - FASE 1: React + Vite + Tailwind
-
 
 ## FASE 1: React Base Architecture ✅
 
 ### Fecha: 2025-03-14
 
 ### Tareas completadas
+
 - [x] React 18 + Vite setup
 - [x] React Router v6 configurado
 - [x] Tailwind CSS integrado
@@ -32,6 +34,7 @@
 - [x] URL productiva: psicoprotego-tests.vercel.app
 
 ### Stack Confirmado
+
 ├─ React 18
 ├─ Vite 5
 ├─ Tailwind CSS
@@ -39,15 +42,16 @@
 └─ React Router v6
 
 ### Próxima fase
+
 - FASE 2: Framework de tests (componentes genéricos)
 - TestContainer, QuestionRenderer, LikertScale, etc.
-
 
 ## FASE 2: Test Framework ✅
 
 ### Fecha: 2025-03-14
 
 ### Tareas completadas
+
 - [x] TestContainer.tsx (orquestador genérico)
 - [x] QuestionRenderer.tsx (router tipos pregunta)
 - [x] LikertScale.tsx (slider 0-3)
@@ -60,7 +64,9 @@
 - [x] Vercel redeploy automático
 
 ### Estado actual
+
 ✅ Test GAD-7 COMPLETAMENTE FUNCIONAL
+
 - Preguntas se cargan (hardcodeadas en TestContainer)
 - Usuario puede responder
 - Cálculo de resultado automático
@@ -68,17 +74,18 @@
 - Reset funciona
 
 ### Próximos pasos (FASE 3)
+
 - Crear JSONs: tests.json + messages.json
 - Mover datos hardcodeados a JSON
 - Integrar scoring logic
 - Mejoras de textos y formatos
-
 
 # FASE 3: Datos Dinámicos (JSON) ✅
 
 ### Fecha: 2025-03-14
 
 ### Tareas completadas
+
 - [x] tests.json creado (estructura GAD-7)
 - [x] messages.json creado (mensajes por categoría)
 - [x] TestContainer.tsx ajustado (ya leía JSON correctamente)
@@ -87,24 +94,28 @@
 - [x] Datos separados del código
 
 ### Estructura JSON
+
 ├─ tests.json: { tests: TestDefinition[] }
-│  ├─ lang: "es"
-│  ├─ questions: 7 preguntas GAD-7
-│  ├─ scoring: categorías 0-21
-│  └─ disclaimers: before + after
+│ ├─ lang: "es"
+│ ├─ questions: 7 preguntas GAD-7
+│ ├─ scoring: categorías 0-21
+│ └─ disclaimers: before + after
 │
 └─ messages.json: MessagesMap
-   ├─ gad7.es.minimal/mild/moderate/severe
-   ├─ crisis (phones, resources)
-   └─ Listo para multiidioma (Fase futura)
+├─ gad7.es.minimal/mild/moderate/severe
+├─ crisis (phones, resources)
+└─ Listo para multiidioma (Fase futura)
 
 ### Estado actual
+
 ✅ TEST COMPLETAMENTE DINÁMICO
+
 - Datos en JSON (fácil editar)
 - Código agnóstico (mismo funciona para PHQ-9, etc)
 - Escalable y mantenible
 
 ### Próxima fase
+
 - FASE 4: Scoring logic + red flags detection
 - Crear src/utils/scoringFunctions.ts
 - Integrar análisis automático
@@ -114,6 +125,7 @@
 ### Fecha: 2025-03-14
 
 ### Tareas completadas
+
 - [x] src/utils/scoringFunctions.ts creado
 - [x] scoreGAD7() implementado con scoring logic
 - [x] Red flags detection system
@@ -124,6 +136,7 @@
 - [x] Sistema extensible para PHQ-9, etc
 
 ### Características
+
 ✅ Scoring dinámico desde JSON
 ✅ Métodos: direct, reverse, redFlag, text_analysis, none
 ✅ Detección automática de red flags
@@ -132,17 +145,21 @@
 ✅ Compatible con multiidioma (Fase futura)
 
 ### Flujo completo
-Usuario responde → scoreGAD7() calcula → detecta red flags → 
+
+Usuario responde → scoreGAD7() calcula → detecta red flags →
 determina categoría → busca mensaje → ResultCard renderiza
 
 ### Estado actual
+
 ✅ TEST COMPLETAMENTE FUNCIONAL CON SCORING
+
 - Preguntas dinámicas (JSON)
 - Scoring automático
 - Red flags detection
 - Resultados inteligentes
 
 ### Próxima fase
+
 - FASE 5: Mejorar textos y formatos
 - O: Agregar más tests (PHQ-9)
 - O: Implementar DNS (tests.psicoprotego.es)
@@ -154,6 +171,7 @@ determina categoría → busca mensaje → ResultCard renderiza
 ### Fecha: 2025-03-14
 
 ### Línea de tiempo
+
 - Setup infraestructura: 30 min
 - FASE 1: React setup: 30 min
 - FASE 2: Framework componentes: 90 min
@@ -161,9 +179,10 @@ determina categoría → busca mensaje → ResultCard renderiza
 - FASE 4: Scoring logic: 45 min
 - FASE 5: UX improvements: 90 min
 - FASE 5.5: Branding + Analytics: 60 min
-**TOTAL: ~6 horas de desarrollo**
+  **TOTAL: ~6 horas de desarrollo**
 
 ### MVP Conseguido
+
 ✅ Test GAD-7 completamente funcional
 ✅ Scoring dinámico desde JSON
 ✅ Red flags detection
@@ -176,6 +195,7 @@ determina categoría → busca mensaje → ResultCard renderiza
 ✅ TypeScript strict mode
 
 ### Arquitectura
+
 - Frontend: React 18 + Vite + Tailwind
 - Datos: JSON-driven (agnóstico)
 - Hosting: Vercel + Apache proxy
@@ -183,8 +203,67 @@ determina categoría → busca mensaje → ResultCard renderiza
 - Code: TypeScript + componentes reutilizables
 
 ### Próximas prioridades
+
 1. Refinar textos / DNS (Corto plazo)
 2. PHQ-9 + más tests (Mediano plazo)
 3. Multiidioma (Largo plazo)
 4. SaaS platform (Futuro lejano)
 
+## 2025-03-16 - Sesión UI TDAH Optimized
+
+### Objetivos
+
+- Migrar HTML TDAH Perfect a componentes React
+- Implementar animaciones para usuarios con TDAH
+- Validar progreso y navegación
+
+### Trabajo Realizado
+
+#### ✅ Completado
+
+1. **ProgressBar mejorada**
+   - Muestra "X de Y • Z restantes"
+   - Barra progreso 0%→100% (completado)
+   - Sticky top con gradient Psicoprotego
+   - Altura aumentada para mejor visibilidad
+
+2. **Animaciones CSS TDAH**
+   - fadeInQuestion: pregunta aparece suave (0.6s)
+   - riseUpAfterReveal: pregunta sube -50px (0.8s delay 0.9s)
+   - slideOutUpTikTok: salida dramática -100vh (0.4s)
+   - floatUp: opciones flotan si no responde (3s infinito)
+
+3. **Componentes actualizados**
+   - TestContainer: layout centrado, pregunta grande (2.3rem)
+   - LikertScale: reemplazado por 4 cards con radio buttons
+   - Botones: Anterior/Siguiente siempre disponibles (excepto Q1)
+   - Auto-advance: 200ms al seleccionar
+
+4. **Flujo visual completo**
+   - Pregunta fade suave entrada
+   - Pregunta sube después de aparecer
+   - Cards aparecen con stagger (1.8s-2.25s)
+   - Flotación automática 2.8s+
+   - Transición salida: sube -100vh rápido
+   - Siguiente: fade suave entrada
+
+#### ⚠️ WIP / Issues
+
+- Spacing pregunta-opciones: se solapan en algunas resoluciones
+  - Pendiente: ajustar margins/gaps/flex en TestContainer
+  - Solución a refinar en próxima sesión
+
+### Decisiones Tomadas
+
+1. **UI TDAH > UX estándar**: prioridad en usuarios con TDAH
+2. **Cards > Slider**: mejor UX para mobile y accesibilidad
+3. **Animaciones CSS puras**: 0 dependencias extra, mejor perf
+4. **Claude Code**: para ajustes de spacing (acceso código vivo)
+
+### Próximos Pasos
+
+- [ ] Arreglar spacing pregunta-opciones (Claude Code)
+- [ ] Multiidioma (/es/test/gad7, /en/, /pt/)
+- [ ] PHQ-9 (prueba framework multi-test)
+- [ ] Crisis handling (teléfono 024)
+- [ ] Deployment psicoprotego.es/tests
