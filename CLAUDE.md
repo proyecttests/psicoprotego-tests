@@ -1,6 +1,7 @@
 # CLAUDE.md — TestPsycho Suite
 
 ## Identity
+
 **testpsycho:** Suite of psychological tests (psychometric + quizzes).  
 **Owner:** Emmanuel, clinical psychologist, Psicoprotego practice (Madrid).  
 **Repo:** github.com/proyecttests/psicoprotego-tests  
@@ -12,6 +13,7 @@
 ---
 
 ## Stack (Current)
+
 - **Frontend:** React 18 + Vite + TypeScript + Tailwind CSS
 - **Hosting:** Vercel (serverless)
 - **CDN:** Cloudflare (edge caching, DNS)
@@ -23,9 +25,19 @@
 
 ---
 
+## Vision (Context, Not Instructions)
+
+Suite of 60+ psychological tools (30 psychometric + 30 quizzes) in 14 languages,
+monetized with ads, growing organically through shareable results and SEO.
+Future: percentile comparisons, OG image generation, embed codes, header bidding.
+Do not build for these unless explicitly asked.
+
+---
+
 ## 🚨 CRITICAL BLOCKERS (Session 2)
 
 ### 1. Spacing Bug (BLOCKING)
+
 - **File:** `src/components/test-framework/TestContainer.tsx`
 - **Issue:** h2 question + option cards overlap on desktop
 - **Impact:** Broken UX, visual confusion
@@ -33,11 +45,13 @@
 - **Status:** Identified, needs manual fix
 
 ### 2. Router Not Implemented
+
 - **Pattern:** `/:lang/test/:testId` (es/en/pt/...)
 - **Fallback:** `/tests` → `/es/test/gad7`
 - **Languages:** es, en, pt (then fr, de, it, ar, he, etc.)
 
 ### 3. Crisis Handling Incomplete
+
 - **Trigger:** score >= severe OR red flags non-empty
 - **Show:** Phone 024 (Spain), localized per country
 - **Required:** Post-test disclaimer always
@@ -48,6 +62,7 @@
 ## ✅ Current Status
 
 ### Working
+
 - [x] GAD-7 test (7 questions, scoring, results)
 - [x] ADHD-optimized UI (cards, animations, progress bar)
 - [x] Brand colors and typography
@@ -55,6 +70,7 @@
 - [x] Navigation buttons (Previous/Next)
 
 ### Pending
+
 - [ ] Fix spacing bug (BLOCKING)
 - [ ] Multiidioma router
 - [ ] PHQ-9 test (validate framework extensibility)
@@ -75,6 +91,7 @@
 ## 🔗 Rules & Architecture
 
 See `.claude/rules/`:
+
 - **ux-rules.md** → ADHD-optimized design (locked)
 - **code-standards.md** → TypeScript, commits, patterns
 - **safety.md** → Crisis handling, disclaimers

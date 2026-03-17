@@ -3,6 +3,7 @@
 ## Architecture Rules
 
 ### Routing Pattern
+
 ```
 /:lang/test/:testId
 
@@ -21,12 +22,14 @@ Examples:
 **SEO:** Include hreflang tags in `<head>` for all language variants
 
 ### Data Model (JSON-Driven)
+
 - **tests.json** — Test definitions (questions, metadata, scoring function reference)
 - **messages.json** — Result messages per language + category
 - **disclaimers/ folder** — Clinical disclaimers per country
 - **crisis-phones.json** — Emergency numbers per language/country
 
 Example test.json entry:
+
 ```json
 {
   "gad7": {
@@ -40,7 +43,12 @@ Example test.json entry:
         "type": "likert",
         "text": "Over the past two weeks, how often have you been bothered by...",
         "scale": 4,
-        "labels": ["Not at all", "Several days", "More than half", "Nearly every day"]
+        "labels": [
+          "Not at all",
+          "Several days",
+          "More than half",
+          "Nearly every day"
+        ]
       }
     ]
   }
@@ -48,6 +56,7 @@ Example test.json entry:
 ```
 
 ### Component Structure
+
 ```
 src/components/
 ├─ test-framework/
@@ -67,27 +76,31 @@ src/components/
 ```
 
 ### Scoring is Agnostic (Factory Pattern)
+
 - Add new test = add entry to tests.json + new function in scoringFunctions.ts
 - NEVER modify QuestionRenderer or TestContainer for new tests
 - ScoringFunction interface:
+
 ```tsx
-type ScoringFunction = (answers: AnswersMap) => ScoringResult
+type ScoringFunction = (answers: AnswersMap) => ScoringResult;
 
 interface ScoringResult {
-  score: number
-  category: 'normal' | 'mild' | 'moderate' | 'severe' | 'crisis'
-  message: string
-  redFlags: string[]
+  score: number;
+  category: "normal" | "mild" | "moderate" | "severe" | "crisis";
+  message: string;
+  redFlags: string[];
 }
 ```
 
 ### Question Types Supported
+
 - `likert` — Scale 0-X (e.g., GAD-7)
 - `boolean` — Yes/No
 - `text` — Free text input
 - `multipleChoice` — Single select from options
 
 ### Environment Variables
+
 ```
 VITE_ANTHROPIC_API_KEY  (if using Claude API in frontend)
 VITE_GTM_ID             (Google Tag Manager)
@@ -97,5 +110,22 @@ VITE_GA4_ID             (Google Analytics 4)
 Never commit `.env.local` to git.
 
 ---
+
+### Ad Placements (Reserve Space From Day 1)
+
+- Pre-result interstitial: After last question, before results. Highest value.
+- Too after user actions: sharing, sending to friend, copying link. High value.
+- Test intro page: Below description. Medium value.
+- Results page: Between score and analysis. Medium value.
+- During questions: NEVER.
+- Component: <AdSlot position="pre-result" size="rectangle" network="adsense" />
+- Phase 1: Empty div with reserved dimensions (prevents CLS)
+
+### Shareable Results
+
+- Unique result URL: /:lang/test/:testId/result?s=XX&t=category
+- Dynamic OG tags per result (title, description, image)
+- Share buttons: WhatsApp (primary), Twitter/X, copy link
+- "Send to someone" button: viral loop mechanism
 
 **Status:** These rules define extensibility. Follow them or new tests/languages will break.
