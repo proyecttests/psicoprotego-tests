@@ -1,0 +1,158 @@
+{
+  "id": "phq9",
+  "lang": "pt",
+  "name": "Questionário de Saúde do Paciente (PHQ-9)",
+  "version": "1.0",
+  "scoringFunction": "scorePHQ9",
+  "disclaimerBefore": "Este questionário é apenas educativo e NÃO é um diagnóstico clínico. Os resultados são para reflexão pessoal. Se tiver dúvidas ou sintomas graves, consulte um profissional de saúde. As suas respostas são guardadas apenas no seu navegador.",
+  "disclaimerAfter": "Este teste NÃO é diagnóstico clínico e NÃO substitui a avaliação de um profissional. Se tiver sintomas graves ou persistentes, consulte o seu médico ou psicólogo. Baseado em Kroenke, Spitzer & Williams (2001).",
+  "landing": {
+    "hook": "Tem-se sentido em baixo ou sem esperança ultimamente?",
+    "description": "O PHQ-9 é o questionário de referência mundial para a deteção de sintomas depressivos. Avalia 9 sintomas-chave de um episódio depressivo major segundo os critérios DSM-5, nas últimas duas semanas.",
+    "whatItMeasures": "Mede 9 sintomas de depressão: anedonia (falta de interesse ou prazer), humor deprimido, perturbações do sono, fadiga, alterações do apetite, sentimentos de inutilidade, dificuldade de concentração, alterações psicomotoras e pensamentos de morte.",
+    "whoIsItFor": "Adultos (+18 anos) que experienciem sintomas de depressão ou tristeza persistente. Também útil para monitorizar sintomas em pessoas que já estão a receber tratamento.",
+    "howItWorks": [
+      "Responda a 9 perguntas sobre as últimas 2 semanas",
+      "Obtenha o seu nível de depressão com interpretação clínica detalhada",
+      "Partilhe o resultado com o seu médico ou psicólogo se necessário"
+    ],
+    "faq": [
+      {
+        "q": "Isto é um diagnóstico de depressão?",
+        "a": "Não. O PHQ-9 é uma ferramenta de rastreio, não um diagnóstico. Apenas um profissional de saúde mental qualificado pode diagnosticar um transtorno depressivo. Este teste ajuda-o/a a identificar se os seus sintomas merecem atenção profissional."
+      },
+      {
+        "q": "As minhas respostas são privadas?",
+        "a": "Sim. Todas as respostas são processadas no seu navegador e nunca são enviadas para nenhum servidor. Não guardamos nenhum dado pessoal."
+      },
+      {
+        "q": "O que faço se obtiver uma pontuação alta?",
+        "a": "Recomendamos que consulte o seu médico de família ou um psicólogo. Se sentir que não pode esperar, pode ligar para o CVV (188) no Brasil ou SOS Voz Amiga (213 544 545) em Portugal, disponíveis 24 horas."
+      },
+      {
+        "q": "Posso fazer este teste se já estou a fazer tratamento?",
+        "a": "Sim. O PHQ-9 é frequentemente utilizado na prática clínica para monitorizar a evolução do tratamento. Pode partilhar o resultado com o seu terapeuta."
+      },
+      {
+        "q": "Quanto tempo demora a preencher?",
+        "a": "Entre 3 e 5 minutos. São 9 perguntas com 4 opções de resposta cada."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "likert",
+      "text": "Com que frequência teve pouco interesse ou prazer em fazer as coisas?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Nunca", "max": "Quase todos os dias" }
+    },
+    {
+      "id": "q2",
+      "type": "likert",
+      "text": "Com que frequência se sentiu deprimido/a, triste ou sem esperança?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Nunca", "max": "Quase todos os dias" }
+    },
+    {
+      "id": "q3",
+      "type": "likert",
+      "text": "Com que frequência teve dificuldade em adormecer, em dormir continuamente ou dormiu demasiado?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Nunca", "max": "Quase todos os dias" }
+    },
+    {
+      "id": "q4",
+      "type": "likert",
+      "text": "Com que frequência se sentiu cansado/a ou com pouca energia?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Nunca", "max": "Quase todos os dias" }
+    },
+    {
+      "id": "q5",
+      "type": "likert",
+      "text": "Com que frequência teve pouco apetite ou comeu em excesso?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Nunca", "max": "Quase todos os dias" }
+    },
+    {
+      "id": "q6",
+      "type": "likert",
+      "text": "Com que frequência se sentiu mal consigo mesmo/a, como um fracasso ou que desapontou a si mesmo/a ou a sua família?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Nunca", "max": "Quase todos os dias" }
+    },
+    {
+      "id": "q7",
+      "type": "likert",
+      "text": "Com que frequência teve dificuldade em concentrar-se em coisas como ler o jornal ou ver televisão?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Nunca", "max": "Quase todos os dias" }
+    },
+    {
+      "id": "q8",
+      "type": "likert",
+      "text": "Com que frequência se moveu ou falou tão devagar que as outras pessoas poderiam ter reparado? Ou o oposto — esteve tão agitado/a que se mexeu muito mais do que o habitual?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Nunca", "max": "Quase todos os dias" }
+    },
+    {
+      "id": "q9",
+      "type": "likert",
+      "text": "Com que frequência teve pensamentos de que estaria melhor morto/a, ou pensamentos de se magoar de alguma forma?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Nunca", "max": "Quase todos os dias" },
+      "isRedFlag": true,
+      "redFlagValues": [1, 2, 3]
+    }
+  ],
+  "scoring": [
+    { "min": 0,  "max": 4,    "category": "Depressão Mínima",         "color": "green",  "messageKey": "minimal"           },
+    { "min": 5,  "max": 9,    "category": "Depressão Leve",           "color": "yellow", "messageKey": "mild"              },
+    { "min": 10, "max": 14,   "category": "Depressão Moderada",       "color": "orange", "messageKey": "moderate"          },
+    { "min": 15, "max": 19,   "category": "Depressão Moderada-Grave", "color": "red",    "messageKey": "moderately_severe" },
+    { "min": 20, "max": null, "category": "Depressão Grave",          "color": "red",    "messageKey": "severe"            }
+  ],
+  "results": {
+    "normal": {
+      "minimal": {
+        "title": "Depressão Mínima",
+        "body": "Os seus sintomas são mínimos. É normal sentir-se em baixo ocasionalmente.",
+        "recommendation": "Mantenha bons hábitos: sono regular, atividade física e ligações sociais."
+      },
+      "mild": {
+        "title": "Depressão Leve",
+        "body": "Está a experienciar sintomas leves que podem afetar ocasionalmente o seu dia a dia.",
+        "recommendation": "Considere técnicas de autocuidado e, se os sintomas persistirem mais de 2 semanas, fale com o seu médico."
+      },
+      "moderate": {
+        "title": "Depressão Moderada",
+        "body": "Os seus sintomas são moderados e provavelmente estão a afetar o seu bem-estar em várias áreas da sua vida.",
+        "recommendation": "É RECOMENDÁVEL que consulte um psicólogo ou médico. Um tratamento atempado faz uma grande diferença."
+      },
+      "moderately_severe": {
+        "title": "Depressão Moderada-Grave",
+        "body": "Os seus sintomas são significativos e certamente estão a interferir no seu trabalho, relações e bem-estar.",
+        "recommendation": "É IMPORTANTE que contacte um profissional de saúde mental o mais brevemente possível."
+      },
+      "severe": {
+        "title": "Depressão Grave",
+        "body": "Os seus sintomas indicam uma depressão grave que requer atenção profissional urgente.",
+        "recommendation": "Contacte o seu médico ou psicólogo HOJE. Se não tiver, pode ligar para o CVV (188) no Brasil ou SOS Voz Amiga (213 544 545) em Portugal."
+      }
+    },
+    "crisis": {
+      "title": "Precisa de apoio agora mesmo",
+      "body": "Indicou pensamentos de se magoar. Isso importa-nos muito. Não tem de estar sozinho/a com isto. Há pessoas treinadas para o/a ouvir agora mesmo.",
+      "phones": [
+        { "label": "CVV — Centro de Valorização da Vida (Brasil)", "number": "188" },
+        { "label": "SOS Voz Amiga (Portugal)", "number": "213 544 545" },
+        { "label": "Emergências", "number": "112" }
+      ],
+      "resources": [
+        { "label": "CVV — cvv.org.br", "url": "https://www.cvv.org.br" },
+        { "label": "SOS Voz Amiga — sosvozamiga.pt", "url": "https://www.sosvozamiga.pt" }
+      ]
+    }
+  }
+}

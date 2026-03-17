@@ -1,0 +1,46 @@
+{
+  "id": "gad7",
+  "availableLangs": ["es", "en", "pt"],
+  "category": "psychometric",
+  "originalInstrument": "GAD-7",
+  "use": ["clinical_screening"],
+  "measures": ["generalized_anxiety"],
+  "validated": true,
+  "validationDetails": {
+    "original": {
+      "lang": "en",
+      "reference": "Spitzer RL, Kroenke K, Williams JBW, Löwe B (2006)",
+      "journal": "Archives of Internal Medicine, 166(10), 1092-1097",
+      "doi": "10.1001/archinte.166.10.1092",
+      "sample": "2740 patients",
+      "sensitivity": "89%",
+      "specificity": "82%"
+    },
+    "translations": {
+      "es": { "validated": true, "reference": "García-Campayo et al., 2010" },
+      "en": { "validated": true, "reference": "Original instrument" },
+      "pt": { "validated": true, "reference": "Moreno et al., 2016" },
+      "fr": { "validated": true, "reference": "Micoulaud-Franchi et al., 2016" },
+      "de": { "validated": true, "reference": "Löwe et al., 2008" },
+      "it": { "validated": true, "reference": "Ruiz et al., 2011" },
+      "ar": { "validated": false, "note": "Traducción no validada clínicamente" },
+      "he": { "validated": false, "note": "Traducción no validada clínicamente" },
+      "tr": { "validated": true, "reference": "Konkan et al., 2013" },
+      "ja": { "validated": true, "reference": "Muramatsu et al., 2009" },
+      "ko": { "validated": true, "reference": "Seo & Park, 2015" }
+    }
+  },
+  "ageRange": { "min": 18, "max": null },
+  "selfAdministrable": true,
+  "timeToComplete": "2-3 min",
+  "itemCount": 7,
+  "itemType": "likert_4",
+  "scoringRange": { "min": 0, "max": 21 },
+  "cutoffs": {
+    "minimal": [0, 4],
+    "mild": [5, 9],
+    "moderate": [10, 14],
+    "severe": [15, 21]
+  },
+  "copyright": "free_use"
+}
