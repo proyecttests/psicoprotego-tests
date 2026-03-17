@@ -30,6 +30,7 @@ import type {
 import Header              from '@/components/common/Header'
 import Footer              from '@/components/common/Footer'
 import Disclaimer          from '@/components/common/Disclaimer'
+import LangSwitcher        from '@/components/common/LangSwitcher'
 import ProgressBar         from './ProgressBar'
 import QuestionRenderer    from './QuestionRenderer'
 import ResultCard          from '@/components/results/ResultCard'
@@ -111,6 +112,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
   const [uiState,        setUiState]        = React.useState<TestState>('loading')
   const [testDef,        setTestDef]        = React.useState<TestDefinition | null>(null)
   const [messages,       setMessages]       = React.useState<MessagesMap | null>(null)
+  const [availableLangs, setAvailableLangs] = React.useState<string[]>([])
   const [answers,        setAnswers]        = React.useState<AnswersMap>({})
   const [currentIdx,     setCurrentIdx]     = React.useState(0)
   const [result,         setResult]         = React.useState<ScoringResult | null>(null)
@@ -144,9 +146,14 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
           testsData.tests.find((t) => t.id === testId)
         if (!foundTest) throw new Error(`Test "${testId}" no encontrado.`)
 
+        const langs = testsData.tests
+          .filter((t) => t.id === testId)
+          .map((t) => t.lang)
+
         if (!cancelled) {
           setTestDef(foundTest)
           setMessages(messagesData)
+          setAvailableLangs(langs)
           setUiState(foundTest.disclaimerBefore ? 'disclaimer-before' : 'answering')
         }
       } catch (err) {
@@ -325,7 +332,17 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
     return (
       <div className="flex min-h-screen flex-col">
         <Header testName={testDef?.name} />
-        <main className="flex flex-1 flex-col items-center gap-6 pt-8 px-4 pb-8">
+        <main className="flex flex-1 flex-col items-center gap-6 pt-6 px-4 pb-8">
+          {/* Selector de idioma — solo si hay más de uno disponible */}
+          {availableLangs.length > 1 && (
+            <div className="w-[95%] max-w-2xl flex justify-end sm:px-6">
+              <LangSwitcher
+                currentLang={lang}
+                testId={testId}
+                availableLangs={availableLangs}
+              />
+            </div>
+          )}
           <Disclaimer
             type="before"
             testName={testDef?.name ?? ''}

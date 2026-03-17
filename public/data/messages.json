@@ -44,6 +44,43 @@
         ]
       }
     },
+    "pt": {
+      "normal": {
+        "minimal": {
+          "title": "Ansiedade Mínima",
+          "body": "Os seus sintomas de ansiedade estão dentro de valores normais. É natural sentir alguma preocupação na vida quotidiana.",
+          "recommendation": "Continue a manter bons hábitos de bem-estar: sono regular, exercício físico e atividades de que goze."
+        },
+        "mild": {
+          "title": "Ansiedade Leve",
+          "body": "Está a experienciar sintomas leves de ansiedade. Embora não interfiram significativamente no seu dia a dia, poderia beneficiar de técnicas de gestão do stress.",
+          "recommendation": "Experimente técnicas de relaxamento como respiração profunda, meditação ou exercício regular. Se os sintomas persistirem, considere falar com um profissional."
+        },
+        "moderate": {
+          "title": "Ansiedade Moderada",
+          "body": "Os seus sintomas de ansiedade são moderados e podem estar a afetar a sua qualidade de vida em algumas áreas (trabalho, relações, sono). É recomendável procurar apoio profissional.",
+          "recommendation": "É RECOMENDÁVEL que consulte um psicólogo ou médico para avaliar os seus sintomas e receber um tratamento adequado."
+        },
+        "severe": {
+          "title": "Ansiedade Grave",
+          "body": "Os seus sintomas de ansiedade são significativos e provavelmente estão a afetar o seu bem-estar e funcionamento diário. Procurar ajuda profissional é importante.",
+          "recommendation": "Recomendamos que contacte um profissional de saúde mental o mais brevemente possível. Pode ligar para o CVV (188) no Brasil ou para o SOS Voz Amiga (213 544 545) em Portugal."
+        }
+      },
+      "crisis": {
+        "title": "Precisa de falar com alguém agora",
+        "body": "Algumas das suas respostas indicam que pode estar a passar por um momento muito difícil. Não tem de enfrentá-lo sozinho/a. Há pessoas disponíveis agora mesmo para o/a ouvir.",
+        "phones": [
+          { "label": "CVV — Centro de Valorização da Vida (Brasil)", "number": "188" },
+          { "label": "SOS Voz Amiga (Portugal)", "number": "213 544 545" },
+          { "label": "Emergências", "number": "112" }
+        ],
+        "resources": [
+          { "label": "CVV — cvv.org.br", "url": "https://www.cvv.org.br" },
+          { "label": "SOS Voz Amiga — sosvozamiga.pt", "url": "https://www.sosvozamiga.pt" }
+        ]
+      }
+    },
     "es": {
       "normal": {
         "minimal": {
@@ -136,6 +173,48 @@
             "label": "988 Suicide & Crisis Lifeline",
             "url": "https://988lifeline.org"
           }
+        ]
+      }
+    },
+    "pt": {
+      "normal": {
+        "minimal": {
+          "title": "Depressão Mínima",
+          "body": "Os seus sintomas são mínimos. É normal sentir-se em baixo ocasionalmente.",
+          "recommendation": "Mantenha bons hábitos: sono regular, atividade física e ligações sociais."
+        },
+        "mild": {
+          "title": "Depressão Leve",
+          "body": "Está a experienciar sintomas leves que podem afetar ocasionalmente o seu dia a dia.",
+          "recommendation": "Considere técnicas de autocuidado e, se os sintomas persistirem mais de 2 semanas, fale com o seu médico."
+        },
+        "moderate": {
+          "title": "Depressão Moderada",
+          "body": "Os seus sintomas são moderados e provavelmente estão a afetar o seu bem-estar em várias áreas da sua vida.",
+          "recommendation": "É RECOMENDÁVEL que consulte um psicólogo ou médico. Um tratamento atempado faz uma grande diferença."
+        },
+        "moderately_severe": {
+          "title": "Depressão Moderada-Grave",
+          "body": "Os seus sintomas são significativos e certamente estão a interferir no seu trabalho, relações e bem-estar.",
+          "recommendation": "É IMPORTANTE que contacte um profissional de saúde mental o mais brevemente possível."
+        },
+        "severe": {
+          "title": "Depressão Grave",
+          "body": "Os seus sintomas indicam uma depressão grave que requer atenção profissional urgente.",
+          "recommendation": "Contacte o seu médico ou psicólogo HOJE. Se não tiver, pode ligar para o CVV (188) no Brasil ou SOS Voz Amiga (213 544 545) em Portugal."
+        }
+      },
+      "crisis": {
+        "title": "Precisa de apoio agora mesmo",
+        "body": "Indicou pensamentos de se magoar. Isso importa-nos muito. Não tem de estar sozinho/a com isto. Há pessoas treinadas para o/a ouvir agora mesmo.",
+        "phones": [
+          { "label": "CVV — Centro de Valorização da Vida (Brasil)", "number": "188" },
+          { "label": "SOS Voz Amiga (Portugal)", "number": "213 544 545" },
+          { "label": "Emergências", "number": "112" }
+        ],
+        "resources": [
+          { "label": "CVV — cvv.org.br", "url": "https://www.cvv.org.br" },
+          { "label": "SOS Voz Amiga — sosvozamiga.pt", "url": "https://www.sosvozamiga.pt" }
         ]
       }
     },
