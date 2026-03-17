@@ -37,6 +37,50 @@ import { getScoringFunction } from '@/utils/scoringFunctions'
 import type { ScoringResult, TestDefinitionForScoring } from '@/utils/scoringFunctions'
 import { trackEvent } from '@/config/analytics'
 
+// ── UI strings ────────────────────────────────────────────────────────────────
+
+const UI_STRINGS: Record<string, {
+  loading: string
+  errorTitle: string
+  reload: string
+  prev: string
+  next: string
+  finish: string
+  selectAnswer: string
+}> = {
+  es: {
+    loading:      'Cargando cuestionario…',
+    errorTitle:   'Error al cargar el test',
+    reload:       'Recargar página',
+    prev:         '← Anterior',
+    next:         'Siguiente →',
+    finish:       'Ver resultados →',
+    selectAnswer: 'Selecciona una respuesta para continuar',
+  },
+  en: {
+    loading:      'Loading questionnaire…',
+    errorTitle:   'Error loading the test',
+    reload:       'Reload page',
+    prev:         '← Previous',
+    next:         'Next →',
+    finish:       'See results →',
+    selectAnswer: 'Select an answer to continue',
+  },
+  pt: {
+    loading:      'Carregando questionário…',
+    errorTitle:   'Erro ao carregar o teste',
+    reload:       'Recarregar página',
+    prev:         '← Anterior',
+    next:         'Próximo →',
+    finish:       'Ver resultados →',
+    selectAnswer: 'Selecione uma resposta para continuar',
+  },
+}
+
+function getUiStrings(lang: string) {
+  return UI_STRINGS[lang] ?? UI_STRINGS['es']
+}
+
 // ── Props ────────────────────────────────────────────────────────────────────
 
 interface TestContainerProps {
@@ -69,6 +113,8 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
   const [result,     setResult]     = React.useState<ScoringResult | null>(null)
   const [errorMsg,   setErrorMsg]   = React.useState<string>('')
 
+  const ui = getUiStrings(lang)
+
   // Estado de transición (animación de salida activa)
   const [isExiting, setIsExiting] = React.useState(false)
 
@@ -89,8 +135,10 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
         const testsData    = await testsRes.json()    as { tests: TestDefinition[] }
         const messagesData = await messagesRes.json() as MessagesMap
 
-        const foundTest = testsData.tests.find((t) => t.id === testId && t.lang === lang)
-        if (!foundTest) throw new Error(`Test "${testId}" (lang: ${lang}) no encontrado.`)
+        const foundTest =
+          testsData.tests.find((t) => t.id === testId && t.lang === lang) ??
+          testsData.tests.find((t) => t.id === testId)
+        if (!foundTest) throw new Error(`Test "${testId}" no encontrado.`)
 
         if (!cancelled) {
           setTestDef(foundTest)
@@ -221,7 +269,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
             className="h-10 w-10 animate-spin rounded-full border-4 border-gray-200" style={{ borderTopColor: 'var(--color-primary)' }}
             aria-hidden="true"
           />
-          <p className="text-sm font-medium">Cargando cuestionario…</p>
+          <p className="text-sm font-medium">{ui.loading}</p>
         </div>
       </div>
     )
@@ -237,14 +285,14 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
             className="max-w-md rounded-xl border border-red-300 bg-red-50 p-6 text-center shadow-sm"
           >
             <span aria-hidden="true" className="text-4xl">⚠️</span>
-            <h1 className="mt-3 text-lg font-semibold text-red-800">Error al cargar el test</h1>
+            <h1 className="mt-3 text-lg font-semibold text-red-800">{ui.errorTitle}</h1>
             <p className="mt-2 text-sm text-red-700">{errorMsg}</p>
             <button
               type="button"
               onClick={() => window.location.reload()}
               className="btn-primary mt-5"
             >
-              Recargar página
+              {ui.reload}
             </button>
           </div>
         </main>
@@ -350,7 +398,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
               className="btn-secondary"
               aria-label="Ir a la pregunta anterior"
             >
-              ← Anterior
+              {ui.prev}
             </button>
           ) : (
             <div aria-hidden="true" />
@@ -361,15 +409,15 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
             onClick={handleNext}
             disabled={!currentAnswered}
             className="btn-primary"
-            aria-label={isLastQuestion ? 'Finalizar y ver resultados' : 'Ir a la siguiente pregunta'}
+            aria-label={isLastQuestion ? ui.finish : ui.next}
           >
-            {isLastQuestion ? 'Ver resultados →' : 'Siguiente →'}
+            {isLastQuestion ? ui.finish : ui.next}
           </button>
         </div>
 
         {!currentAnswered && (
           <p aria-live="polite" className="text-center text-xs text-gray-400 mt-2">
-            Selecciona una respuesta para continuar
+            {ui.selectAnswer}
           </p>
         )}
       </main>

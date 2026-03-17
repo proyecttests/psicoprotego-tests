@@ -209,5 +209,215 @@
         }
       ]
     }
+    ,
+    {
+      "id": "gad7",
+      "lang": "en",
+      "name": "Generalized Anxiety Disorder Scale (GAD-7)",
+      "version": "1.0",
+      "scoringFunction": "scoreGAD7",
+      "description": "Assesses symptoms of generalized anxiety disorder over the past 2 weeks. Based on Spitzer et al., 2006.",
+      "disclaimerBefore": "This questionnaire is for educational purposes only and is NOT a clinical diagnosis. Results are for personal reflection. If you have concerns or severe symptoms, please consult a healthcare professional. Your answers are stored only in your browser.",
+      "disclaimerAfter": "This test is NOT a clinical diagnosis and does NOT replace evaluation by a professional. If you have severe or persistent symptoms, please consult your doctor or psychologist.",
+
+      "questions": [
+        {
+          "id": "q1",
+          "type": "likert",
+          "text": "How often have you been feeling nervous, anxious, or on edge?",
+          "scale": { "min": 0, "max": 3, "step": 1 },
+          "labels": { "min": "Not at all", "max": "Nearly every day" }
+        },
+        {
+          "id": "q2",
+          "type": "likert",
+          "text": "How often have you been unable to stop or control worrying?",
+          "scale": { "min": 0, "max": 3, "step": 1 },
+          "labels": { "min": "Not at all", "max": "Nearly every day" }
+        },
+        {
+          "id": "q3",
+          "type": "likert",
+          "text": "How often have you been worrying too much about different things?",
+          "scale": { "min": 0, "max": 3, "step": 1 },
+          "labels": { "min": "Not at all", "max": "Nearly every day" }
+        },
+        {
+          "id": "q4",
+          "type": "likert",
+          "text": "How often have you had trouble relaxing?",
+          "scale": { "min": 0, "max": 3, "step": 1 },
+          "labels": { "min": "Not at all", "max": "Nearly every day" }
+        },
+        {
+          "id": "q5",
+          "type": "likert",
+          "text": "How often have you been so restless that it was hard to sit still?",
+          "scale": { "min": 0, "max": 3, "step": 1 },
+          "labels": { "min": "Not at all", "max": "Nearly every day" }
+        },
+        {
+          "id": "q6",
+          "type": "likert",
+          "text": "How often have you become easily annoyed or irritable?",
+          "scale": { "min": 0, "max": 3, "step": 1 },
+          "labels": { "min": "Not at all", "max": "Nearly every day" }
+        },
+        {
+          "id": "q7",
+          "type": "likert",
+          "text": "How often have you felt afraid as if something awful might happen?",
+          "scale": { "min": 0, "max": 3, "step": 1 },
+          "labels": { "min": "Not at all", "max": "Nearly every day" }
+        }
+      ],
+
+      "scoring": [
+        {
+          "min": 0,
+          "max": 4,
+          "category": "Minimal Anxiety",
+          "color": "green",
+          "messageKey": "minimal"
+        },
+        {
+          "min": 5,
+          "max": 9,
+          "category": "Mild Anxiety",
+          "color": "yellow",
+          "messageKey": "mild"
+        },
+        {
+          "min": 10,
+          "max": 14,
+          "category": "Moderate Anxiety",
+          "color": "orange",
+          "messageKey": "moderate"
+        },
+        {
+          "min": 15,
+          "max": null,
+          "category": "Severe Anxiety",
+          "color": "red",
+          "messageKey": "severe"
+        }
+      ]
+    },
+    {
+      "id": "phq9",
+      "lang": "en",
+      "name": "Patient Health Questionnaire (PHQ-9)",
+      "version": "1.0",
+      "scoringFunction": "scorePHQ9",
+      "description": "Assesses symptoms of depression over the past 2 weeks. Based on Kroenke, Spitzer & Williams (2001).",
+      "disclaimerBefore": "This questionnaire is for educational purposes only and is NOT a clinical diagnosis. Results are for personal reflection. If you have concerns or severe symptoms, please consult a healthcare professional. Your answers are stored only in your browser.",
+      "disclaimerAfter": "This test is NOT a clinical diagnosis and does NOT replace evaluation by a professional. If you have severe or persistent symptoms, please consult your doctor or psychologist. Based on Kroenke, Spitzer & Williams (2001).",
+
+      "questions": [
+        {
+          "id": "q1",
+          "type": "likert",
+          "text": "How often have you had little interest or pleasure in doing things?",
+          "scale": { "min": 0, "max": 3, "step": 1 },
+          "labels": { "min": "Not at all", "max": "Nearly every day" }
+        },
+        {
+          "id": "q2",
+          "type": "likert",
+          "text": "How often have you been feeling down, depressed, or hopeless?",
+          "scale": { "min": 0, "max": 3, "step": 1 },
+          "labels": { "min": "Not at all", "max": "Nearly every day" }
+        },
+        {
+          "id": "q3",
+          "type": "likert",
+          "text": "How often have you had trouble falling or staying asleep, or sleeping too much?",
+          "scale": { "min": 0, "max": 3, "step": 1 },
+          "labels": { "min": "Not at all", "max": "Nearly every day" }
+        },
+        {
+          "id": "q4",
+          "type": "likert",
+          "text": "How often have you been feeling tired or having little energy?",
+          "scale": { "min": 0, "max": 3, "step": 1 },
+          "labels": { "min": "Not at all", "max": "Nearly every day" }
+        },
+        {
+          "id": "q5",
+          "type": "likert",
+          "text": "How often have you had poor appetite or been overeating?",
+          "scale": { "min": 0, "max": 3, "step": 1 },
+          "labels": { "min": "Not at all", "max": "Nearly every day" }
+        },
+        {
+          "id": "q6",
+          "type": "likert",
+          "text": "How often have you been feeling bad about yourself — or that you are a failure or have let yourself or your family down?",
+          "scale": { "min": 0, "max": 3, "step": 1 },
+          "labels": { "min": "Not at all", "max": "Nearly every day" }
+        },
+        {
+          "id": "q7",
+          "type": "likert",
+          "text": "How often have you had trouble concentrating on things, such as reading or watching television?",
+          "scale": { "min": 0, "max": 3, "step": 1 },
+          "labels": { "min": "Not at all", "max": "Nearly every day" }
+        },
+        {
+          "id": "q8",
+          "type": "likert",
+          "text": "How often have you been moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around much more than usual?",
+          "scale": { "min": 0, "max": 3, "step": 1 },
+          "labels": { "min": "Not at all", "max": "Nearly every day" }
+        },
+        {
+          "id": "q9",
+          "type": "likert",
+          "text": "How often have you had thoughts that you would be better off dead, or thoughts of hurting yourself in some way?",
+          "scale": { "min": 0, "max": 3, "step": 1 },
+          "labels": { "min": "Not at all", "max": "Nearly every day" },
+          "isRedFlag": true,
+          "redFlagValues": [1, 2, 3]
+        }
+      ],
+
+      "scoring": [
+        {
+          "min": 0,
+          "max": 4,
+          "category": "Minimal Depression",
+          "color": "green",
+          "messageKey": "minimal"
+        },
+        {
+          "min": 5,
+          "max": 9,
+          "category": "Mild Depression",
+          "color": "yellow",
+          "messageKey": "mild"
+        },
+        {
+          "min": 10,
+          "max": 14,
+          "category": "Moderate Depression",
+          "color": "orange",
+          "messageKey": "moderate"
+        },
+        {
+          "min": 15,
+          "max": 19,
+          "category": "Moderately Severe Depression",
+          "color": "red",
+          "messageKey": "moderately_severe"
+        },
+        {
+          "min": 20,
+          "max": null,
+          "category": "Severe Depression",
+          "color": "red",
+          "messageKey": "severe"
+        }
+      ]
+    }
   ]
 }

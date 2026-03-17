@@ -85,6 +85,7 @@ function App() {
       <Route path="/:lang/test/:testId"      element={<TestRoute />} />
 
       {/* Compatibilidad hacia atrás con rutas legacy */}
+      <Route path="/:lang/test"              element={<LangTestRedirect />} />
       <Route path="/test/:testId"            element={<LegacyTestRedirect />} />
       <Route path="/tests"                   element={<Navigate to="/es/test/gad7" replace />} />
 
@@ -92,6 +93,15 @@ function App() {
       <Route path="*"                        element={<Navigate to="/" replace />} />
     </Routes>
   )
+}
+
+/**
+ * Redirige /:lang/test → /:lang/test/gad7
+ */
+const LangTestRedirect: React.FC = () => {
+  const { lang = 'es' } = useParams<{ lang: string }>()
+  const target = isValidLang(lang) ? lang : 'es'
+  return <Navigate to={`/${target}/test/gad7`} replace />
 }
 
 /**

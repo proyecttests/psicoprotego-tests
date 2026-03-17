@@ -262,8 +262,67 @@ determina categoría → busca mensaje → ResultCard renderiza
 
 ### Próximos Pasos
 
-- [ ] Arreglar spacing pregunta-opciones (Claude Code)
-- [ ] Multiidioma (/es/test/gad7, /en/, /pt/)
-- [ ] PHQ-9 (prueba framework multi-test)
-- [ ] Crisis handling (teléfono 024)
+- [x] Arreglar spacing pregunta-opciones (Claude Code)
+- [x] Multiidioma router (/es/test/gad7, /en/test/gad7, /pt/)
+- [x] PHQ-9 (prueba framework multi-test)
+- [ ] Crisis handling UI (teléfono 024 visible post-test)
 - [ ] Deployment psicoprotego.es/tests
+
+---
+
+## 2026-03-17 - Sesión Multiidioma + PHQ-9 + i18n
+
+### Objetivos
+
+- Implementar router /:lang/test/:testId
+- Añadir test PHQ-9
+- Internacionalizar UI strings
+
+### Trabajo Realizado
+
+#### ✅ Completado
+
+1. **Fix spacing pregunta-opciones**
+   - Ajuste de márgenes/gaps en TestContainer.tsx
+   - Ya no hay solapamiento en desktop ni mobile
+
+2. **Router /:lang/test/:testId implementado**
+   - Validación de idiomas: es, en, pt, fr, de, it, ar, he, ku, tr, el, hi, ja, ko
+   - Fallback: lang desconocido → /es/test/:testId
+   - Redirect legacy: /test/:testId → /es/test/:testId
+   - Redirect nuevo: /:lang/test → /:lang/test/gad7
+
+3. **PHQ-9 añadido**
+   - 9 preguntas, scoring 5 categorías (minimal → severe)
+   - Red flag en q9 (pensamiento suicida)
+   - Disponible en ES y EN
+   - Validó el factory pattern (sin tocar QuestionRenderer)
+
+4. **UI strings multiidioma en TestContainer**
+   - Soporte para es / en / pt
+   - Textos: loading, error, botones prev/next/finish, hint
+   - Fallback a ES si idioma no soportado
+
+5. **messages.json: traducciones EN**
+   - GAD-7 EN: 4 categorías + crisis (988 Lifeline)
+   - PHQ-9 EN: 5 categorías + crisis (988 + Crisis Text Line)
+
+6. **tests.json: versiones EN**
+   - GAD-7 EN con preguntas y scoring clínico
+   - PHQ-9 EN con preguntas y scoring clínico (5 rangos)
+   - Fallback en TestContainer: si no existe test para el lang, usa el primero disponible
+
+### Estado Actual
+
+✅ GAD-7 funcional en ES y EN
+✅ PHQ-9 funcional en ES y EN
+✅ Router multiidioma operativo
+✅ UI strings internacionalizados
+
+### Próximos Pasos
+
+- [ ] Crisis handling UI — mostrar teléfono 024/988 visible post-test
+- [ ] Versiones PT de tests y mensajes
+- [ ] ResultCard mejorada (score visual, barra, share)
+- [ ] AdSlot placeholder (reservar espacio CLS-safe)
+- [ ] SEO: hreflang tags en <head>
