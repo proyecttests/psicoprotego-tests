@@ -2,25 +2,23 @@
  * @file components/results/ResultCard.tsx
  * @description Tarjeta de resultados del test psicológico.
  *
- * - NORMAL: score animado + barra visual (score/maxScore), categoría con color,
- *   recomendación, botones de compartir (WhatsApp + copiar enlace obfuscado).
- *
- * - CRISIS: alerta roja prominente, teléfonos con botones grandes (48px),
- *   animate-pulse en llamadas, sin score.
+ * - Siempre muestra el resultado normal (score, categoría, recomendación).
+ * - Si hay red flags, urgencia o resultType === 'CRISIS', añade un bloque
+ *   de apoyo profesional calmado debajo del resultado (sin rojo, sin alarma).
  *
  * Compartir: la URL se ofusca con base64 para no exponer score ni categoría
  * en texto plano. Formato: /:lang/test/:testId/result?r=<btoa(score:categoryKey)>
  */
 
 import React from 'react'
+import { Link } from 'react-router-dom'
 import type { ScoringResult } from '@/utils/scoringFunctions'
-import type { TestDefinition, CrisisPhone, CrisisResource } from '@/types/test'
+import type { TestDefinition } from '@/types/test'
 
 // ── Props ────────────────────────────────────────────────────────────────────
 
 interface ResultCardProps {
   result: ScoringResult
-  type: 'NORMAL' | 'CRISIS'
   testData: TestDefinition | null
   onReset: () => void
   onShareWhatsApp?: (url: string) => void
@@ -40,6 +38,14 @@ const COLOR_MAP: Record<string, {
   red:    { bg: 'bg-red-50',    text: 'text-red-700',    border: 'border-red-300',    badge: 'bg-red-100 text-red-800',      bar: 'bg-red-500'    },
 }
 
+// ── Mapa de rutas de ayuda por idioma ────────────────────────────────────────
+
+const HELP_ROUTES: Record<string, string> = {
+  es: '/es/ayuda-urgente',
+  en: '/en/urgent-help',
+  pt: '/pt/ajuda-urgente',
+}
+
 // ── UI strings ────────────────────────────────────────────────────────────────
 
 const RESULT_UI: Record<string, {
@@ -51,7 +57,10 @@ const RESULT_UI: Record<string, {
   copied: string
   shareText: string
   scoreLabel: string
-  callNow: string
+  supportTitle: string
+  supportBody: string
+  supportLink: string
+  emergencyNote: string
 }> = {
   es: {
     retry:          '↺ Volver a intentar',
@@ -62,7 +71,10 @@ const RESULT_UI: Record<string, {
     copied:         '¡Copiado!',
     shareText:      'Acabo de completar este test psicológico. ¿Lo intentas tú también?',
     scoreLabel:     'Puntuación',
-    callNow:        'Llama ahora — es gratuito y confidencial',
+    supportTitle:   'Tu resultado sugiere que podrías beneficiarte de apoyo profesional',
+    supportBody:    'Hablar con un profesional de la salud mental puede ayudarte a entender mejor lo que estás experimentando y a encontrar el apoyo adecuado.',
+    supportLink:    'Ver recursos de ayuda →',
+    emergencyNote:  'Si es una emergencia, llama al 112',
   },
   en: {
     retry:          '↺ Try again',
@@ -73,7 +85,10 @@ const RESULT_UI: Record<string, {
     copied:         'Copied!',
     shareText:      'I just completed this psychological test. Want to try?',
     scoreLabel:     'Score',
-    callNow:        'Call now — it\'s free and confidential',
+    supportTitle:   'Your result suggests you might benefit from professional support',
+    supportBody:    'Talking to a mental health professional can help you better understand what you\'re experiencing and find the right support.',
+    supportLink:    'See help resources →',
+    emergencyNote:  'If this is an emergency, call 112',
   },
   pt: {
     retry:          '↺ Tentar novamente',
@@ -84,7 +99,10 @@ const RESULT_UI: Record<string, {
     copied:         'Copiado!',
     shareText:      'Acabei de completar este teste psicológico. Quer tentar?',
     scoreLabel:     'Pontuação',
-    callNow:        'Ligue agora — é gratuito e confidencial',
+    supportTitle:   'Seu resultado sugere que você pode se beneficiar de apoio profissional',
+    supportBody:    'Conversar com um profissional de saúde mental pode ajudá-lo a entender melhor o que está vivenciando e a encontrar o apoio adequado.',
+    supportLink:    'Ver recursos de ajuda →',
+    emergencyNote:  'Se for uma emergência, ligue para o 112',
   },
 }
 
@@ -236,6 +254,54 @@ const ShareButtons: React.FC<{
   )
 }
 
+// ── Sub-componente: SupportBlock ──────────────────────────────────────────────
+
+/**
+ * Bloque de apoyo profesional calmado. Se muestra cuando el resultado indica
+ * puntuación severa, urgencia > none, o red flags detectados.
+ * Sin rojo, sin alarma — tono de psicólogo que señala dónde ir.
+ */
+const SupportBlock: React.FC<{ lang: string }> = ({ lang }) => {
+  const ui       = getUi(lang)
+  const helpRoute = HELP_ROUTES[lang] ?? HELP_ROUTES['es']
+
+  return (
+    <div
+      className="rounded-xl px-5 py-5"
+      style={{
+        backgroundColor: '#ede8df',
+        borderLeft: '4px solid var(--color-primary)',
+      }}
+    >
+      <p
+        className="text-sm font-semibold leading-snug mb-2"
+        style={{ color: 'var(--color-primary)' }}
+      >
+        {ui.supportTitle}
+      </p>
+      <p
+        className="text-sm leading-relaxed font-sans mb-3"
+        style={{ color: 'var(--color-primary)', opacity: 0.75 }}
+      >
+        {ui.supportBody}
+      </p>
+      <Link
+        to={helpRoute}
+        className="text-sm font-medium underline underline-offset-2 transition-opacity hover:opacity-70 focus:outline-none focus-visible:ring-2 rounded"
+        style={{ color: 'var(--color-accent)' }}
+      >
+        {ui.supportLink}
+      </Link>
+      <p
+        className="mt-3 text-xs"
+        style={{ color: 'var(--color-primary)', opacity: 0.45 }}
+      >
+        {ui.emergencyNote}
+      </p>
+    </div>
+  )
+}
+
 // ── Sub-componente: NormalResult ──────────────────────────────────────────────
 
 const NormalResult: React.FC<{
@@ -253,6 +319,11 @@ const NormalResult: React.FC<{
   const message      = result.message
   const ui           = getUi(lang)
   const shareUrl     = buildShareUrl(lang, testId, result.score ?? 0, result.category?.messageKey ?? '')
+
+  const showSupport =
+    result.resultType === 'CRISIS' ||
+    (result.redFlags?.length ?? 0) > 0 ||
+    (result.urgency != null && result.urgency !== 'none')
 
   React.useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -313,6 +384,9 @@ const NormalResult: React.FC<{
       {/* ── Compartir ───────────────────────────────────────────────────── */}
       <ShareButtons shareUrl={shareUrl} lang={lang} onShareWhatsApp={onShareWhatsApp} />
 
+      {/* ── Bloque de apoyo profesional (solo si hay red flags / urgencia) ─ */}
+      {showSupport && <SupportBlock lang={lang} />}
+
       {/* ── Reintentar ──────────────────────────────────────────────────── */}
       <div className="flex justify-start">
         <button
@@ -328,148 +402,19 @@ const NormalResult: React.FC<{
   )
 }
 
-// ── Sub-componente: CrisisResult ──────────────────────────────────────────────
-
-const CrisisResult: React.FC<{
-  result: ScoringResult
-  onReset: () => void
-  lang: string
-}> = ({ result, onReset, lang }) => {
-  const visible   = useFadeIn()
-  const message   = result.message
-  const phones    = (message?.phones    ?? []) as CrisisPhone[]
-  const resources = (message?.resources ?? []) as CrisisResource[]
-  const ui        = getUi(lang)
-
-  React.useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }, [])
-
-  return (
-    <div
-      className={`w-full max-w-2xl space-y-4 px-4 py-6 sm:px-6 transition-opacity duration-300 ${visible ? 'opacity-100' : 'opacity-0'}`}
-    >
-      {/* ── Alerta de crisis ─────────────────────────────────────────────── */}
-      <div
-        role="alert"
-        className="rounded-xl border-2 border-red-400 bg-red-50 p-6 text-center shadow-md"
-      >
-        <p aria-hidden="true" className="mb-3 text-5xl">⚠️</p>
-        <h1 className="text-xl font-extrabold uppercase tracking-wide text-red-800">
-          {message?.title}
-        </h1>
-        <p className="mt-2 text-sm leading-relaxed text-red-700" style={{ lineHeight: '1.6' }}>
-          {message?.body}
-        </p>
-      </div>
-
-      {/* ── Teléfonos de crisis ──────────────────────────────────────────── */}
-      <div className="card space-y-3">
-        <h2 className="text-base font-semibold text-gray-700">
-          {ui.callNow}
-        </h2>
-
-        {phones.map((phone: CrisisPhone, i: number) => (
-          <a
-            key={i}
-            href={`tel:${phone.number}`}
-            className="
-              flex min-h-[48px] items-center justify-between gap-3 rounded-xl
-              border-2 border-red-400 bg-red-600 px-5 py-4
-              text-white shadow-sm transition-colors
-              hover:bg-red-700
-              focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2
-              animate-pulse
-            "
-            aria-label={`Llamar al ${phone.number} — ${phone.label}`}
-          >
-            <span className="flex items-center gap-2">
-              <span aria-hidden="true" className="text-xl">📞</span>
-              <span>
-                <span className="text-2xl font-extrabold tracking-wider">{phone.number}</span>
-                <span className="ml-3 text-sm font-medium opacity-90">{phone.label}</span>
-              </span>
-            </span>
-            <span aria-hidden="true" className="text-red-200">→</span>
-          </a>
-        ))}
-      </div>
-
-      {/* ── Recursos adicionales ─────────────────────────────────────────── */}
-      {resources.length > 0 && (
-        <div className="card">
-          <h2 className="mb-3 text-sm font-semibold text-gray-700">Más recursos de apoyo</h2>
-          <ul className="space-y-2">
-            {resources.map((resource: CrisisResource, i: number) => (
-              <li key={i}>
-                {resource.url ? (
-                  <a
-                    href={resource.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm underline hover:opacity-80 focus:outline-none focus:ring-1 rounded"
-                    style={{ color: 'var(--color-primary)' }}
-                  >
-                    {resource.label}
-                  </a>
-                ) : (
-                  <span className="text-sm text-gray-600">{resource.label}</span>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {/* ── Botones de acción directa ────────────────────────────────────── */}
-      <div className="flex flex-col gap-3 sm:flex-row">
-        <a
-          href="tel:024"
-          className="
-            flex min-h-[48px] flex-1 items-center justify-center gap-2 rounded-lg
-            bg-red-700 px-5 py-3 text-sm font-bold text-white shadow-sm
-            transition-colors hover:bg-red-800
-            focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2
-          "
-          aria-label="Llamar al 024 ahora"
-        >
-          <span aria-hidden="true">📞</span> Llamar al 024
-        </a>
-        <a
-          href="tel:112"
-          className="
-            flex min-h-[48px] flex-1 items-center justify-center gap-2 rounded-lg
-            border-2 border-red-400 px-5 py-3 text-sm font-bold text-red-700
-            transition-colors hover:bg-red-50
-            focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2
-          "
-          aria-label="Llamar al 112 ahora"
-        >
-          <span aria-hidden="true">📞</span> Llamar al 112
-        </a>
-      </div>
-
-      {/* Volver al inicio */}
-      <div className="text-center">
-        <button
-          type="button"
-          onClick={onReset}
-          className="text-sm text-gray-400 underline hover:text-gray-600 focus:outline-none focus:ring-1 focus:ring-gray-400 rounded"
-        >
-          {ui.retry}
-        </button>
-      </div>
-    </div>
-  )
-}
-
 // ── Componente principal ──────────────────────────────────────────────────────
 
-const ResultCard: React.FC<ResultCardProps> = ({ result, type, onReset, onShareWhatsApp, lang, testId, maxScore }) => {
-  if (type === 'CRISIS') {
-    return <CrisisResult result={result} onReset={onReset} lang={lang} />
-  }
-  return <NormalResult result={result} onReset={onReset} onShareWhatsApp={onShareWhatsApp} lang={lang} testId={testId} maxScore={maxScore} />
+const ResultCard: React.FC<ResultCardProps> = ({ result, onReset, onShareWhatsApp, lang, testId, maxScore }) => {
+  return (
+    <NormalResult
+      result={result}
+      onReset={onReset}
+      onShareWhatsApp={onShareWhatsApp}
+      lang={lang}
+      testId={testId}
+      maxScore={maxScore}
+    />
+  )
 }
 
 export default ResultCard
