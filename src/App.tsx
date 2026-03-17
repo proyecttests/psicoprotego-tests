@@ -1,17 +1,31 @@
 /**
  * @file App.tsx
- * @description Componente raíz con rutas /:lang/test/:testId y page tracking via GTM/GA4.
+ * @description Enrutamiento principal de la aplicación.
+ *
+ * Flujo del test (subrutas con historial nativo del navegador):
+ *
+ *   /:lang/test/:testId         → TestLandingPage  (indexable por Google)
+ *   /:lang/test/:testId/start   → TestInterstitial (disclaimer + ad; redirige a landing si acceso directo)
+ *   /:lang/test/:testId/play    → TestContainer    (test real; redirige a landing si acceso directo)
+ *
+ * El botón Atrás funciona correctamente porque cada paso empuja una entrada
+ * al historial del navegador con React Router navigate().
+ *
+ * Protección de acceso directo: cada subruta requiere location.state del paso
+ * anterior. Sin él, redirige a la landing.
  */
 
-import { Routes, Route, Navigate, Link, useLocation, useParams } from 'react-router-dom'
+import { Routes, Route, Navigate, Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import React from 'react'
 import TestContainer    from '@/components/test-framework/TestContainer'
 import TestLandingPage  from '@/pages/TestLandingPage'
 import TestInterstitial from '@/pages/TestInterstitial'
 import { trackPageView } from '@/config/analytics'
 
+// ── Constantes ────────────────────────────────────────────────────────────────
+
 const VALID_LANGS = ['es', 'en', 'pt', 'fr', 'de', 'it', 'ar', 'he', 'ku', 'tr', 'el', 'hi', 'ja', 'ko'] as const
-const RTL_LANGS = ['ar', 'he', 'ku']
+const RTL_LANGS   = ['ar', 'he', 'ku'] as const
 
 type Lang = typeof VALID_LANGS[number]
 
@@ -19,12 +33,33 @@ function isValidLang(lang: string): lang is Lang {
   return (VALID_LANGS as readonly string[]).includes(lang)
 }
 
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
 /**
- * Página de inicio temporal con navegación al test GAD-7.
+ * Lee location.state de forma segura (RRv6 lo tipifica como `unknown`).
+ * Devuelve las flags de flujo o un objeto vacío.
  */
+function getFlowState(state: unknown): { fromLanding?: boolean; fromInterstitial?: boolean } {
+  if (state !== null && typeof state === 'object') {
+    return state as { fromLanding?: boolean; fromInterstitial?: boolean }
+  }
+  return {}
+}
+
+/**
+ * Guarda y aplica dirección RTL al contenedor raíz del test.
+ */
+const RtlWrapper: React.FC<{ lang: string; children: React.ReactNode }> = ({ lang, children }) => (
+  <div dir={RTL_LANGS.includes(lang as typeof RTL_LANGS[number]) ? 'rtl' : 'ltr'}>
+    {children}
+  </div>
+)
+
+// ── HomePage ──────────────────────────────────────────────────────────────────
+
 const FEATURED_TESTS = [
-  { id: 'gad7',  label: 'GAD-7 — Ansiedad Generalizada' },
-  { id: 'phq9',  label: 'PHQ-9 — Depresión' },
+  { id: 'gad7', label: 'GAD-7 — Ansiedad Generalizada' },
+  { id: 'phq9', label: 'PHQ-9 — Depresión' },
 ]
 
 const HomePage = () => (
@@ -49,50 +84,91 @@ const HomePage = () => (
   </div>
 )
 
-/**
- * Ruta dinámica /:lang/test/:testId.
- * Gestiona el flujo: landing → interstitial → test.
- * Valida el idioma y aplica dir="rtl" si corresponde.
- */
-type TestFlow = 'landing' | 'interstitial' | 'test'
+// ── Ruta 1: Landing /:lang/test/:testId ───────────────────────────────────────
+//
+// URL canónica del test. Google indexa esta página.
+// Al pulsar "Iniciar test" → navega a /start con state { fromLanding: true }.
 
-const TestRoute: React.FC = () => {
+const TestLandingRoute: React.FC = () => {
   const { lang = 'es', testId = 'gad7' } = useParams<{ lang: string; testId: string }>()
-  const [flow, setFlow] = React.useState<TestFlow>('landing')
+  const navigate = useNavigate()
 
-  if (!isValidLang(lang)) {
-    return <Navigate to={`/es/test/${testId}`} replace />
-  }
-
-  const isRtl = RTL_LANGS.includes(lang)
+  if (!isValidLang(lang)) return <Navigate to={`/es/test/${testId}`} replace />
 
   return (
-    <div dir={isRtl ? 'rtl' : 'ltr'}>
-      {flow === 'landing' && (
-        <TestLandingPage
-          testId={testId}
-          lang={lang}
-          onStart={() => setFlow('interstitial')}
-        />
-      )}
-      {flow === 'interstitial' && (
-        <TestInterstitial
-          testId={testId}
-          lang={lang}
-          onContinue={() => setFlow('test')}
-          onCancel={() => setFlow('landing')}
-        />
-      )}
-      {flow === 'test' && (
-        <TestContainer testId={testId} lang={lang} />
-      )}
-    </div>
+    <RtlWrapper lang={lang}>
+      <TestLandingPage
+        testId={testId}
+        lang={lang}
+        onStart={() =>
+          navigate(`/${lang}/test/${testId}/start`, {
+            state: { fromLanding: true },
+          })
+        }
+      />
+    </RtlWrapper>
   )
 }
 
-/**
- * App — componente raíz con enrutamiento y page tracking automático.
- */
+// ── Ruta 2: Intersticial /:lang/test/:testId/start ────────────────────────────
+//
+// Disclaimer clínico + ad de mayor valor.
+// Acceso directo (sin state.fromLanding) → redirige a la landing.
+// Botón "Cancelar" → navigate(-1) vuelve a la landing (historial nativo).
+// Al aceptar → navega a /play con state { fromInterstitial: true }.
+
+const TestInterstitialRoute: React.FC = () => {
+  const { lang = 'es', testId = 'gad7' } = useParams<{ lang: string; testId: string }>()
+  const navigate  = useNavigate()
+  const location  = useLocation()
+  const flowState = getFlowState(location.state)
+
+  if (!isValidLang(lang)) return <Navigate to={`/es/test/${testId}`} replace />
+
+  // Protección de acceso directo: sin pasar por la landing, vuelve a ella
+  if (!flowState.fromLanding) return <Navigate to={`/${lang}/test/${testId}`} replace />
+
+  return (
+    <RtlWrapper lang={lang}>
+      <TestInterstitial
+        testId={testId}
+        lang={lang}
+        onContinue={() =>
+          navigate(`/${lang}/test/${testId}/play`, {
+            state: { fromInterstitial: true },
+          })
+        }
+        onCancel={() => navigate(-1)}
+      />
+    </RtlWrapper>
+  )
+}
+
+// ── Ruta 3: Test /:lang/test/:testId/play ─────────────────────────────────────
+//
+// El test propiamente dicho (preguntas → resultados).
+// Acceso directo (sin state.fromInterstitial) → redirige a la landing,
+// asegurando que el usuario siempre vea el disclaimer antes de empezar.
+
+const TestPlayRoute: React.FC = () => {
+  const { lang = 'es', testId = 'gad7' } = useParams<{ lang: string; testId: string }>()
+  const location  = useLocation()
+  const flowState = getFlowState(location.state)
+
+  if (!isValidLang(lang)) return <Navigate to={`/es/test/${testId}`} replace />
+
+  // Protección de acceso directo: sin pasar por el intersticial, vuelve a landing
+  if (!flowState.fromInterstitial) return <Navigate to={`/${lang}/test/${testId}`} replace />
+
+  return (
+    <RtlWrapper lang={lang}>
+      <TestContainer testId={testId} lang={lang} />
+    </RtlWrapper>
+  )
+}
+
+// ── App ───────────────────────────────────────────────────────────────────────
+
 function App() {
   const location = useLocation()
 
@@ -102,46 +178,43 @@ function App() {
 
   return (
     <Routes>
-      {/* Rutas canónicas */}
-      <Route path="/"                        element={<HomePage />} />
-      <Route path="/:lang/test/:testId"      element={<TestRoute />} />
+      {/* Inicio */}
+      <Route path="/" element={<HomePage />} />
 
-      {/* Página de resultado compartida (redirige al test; el token r= se ignora por ahora) */}
+      {/* Flujo del test: 3 subrutas con historial independiente */}
+      <Route path="/:lang/test/:testId"        element={<TestLandingRoute />} />
+      <Route path="/:lang/test/:testId/start"  element={<TestInterstitialRoute />} />
+      <Route path="/:lang/test/:testId/play"   element={<TestPlayRoute />} />
+
+      {/* Enlace de resultado compartido — redirige a la landing del test */}
       <Route path="/:lang/test/:testId/result" element={<ResultPageRedirect />} />
 
-      {/* Compatibilidad hacia atrás con rutas legacy */}
-      <Route path="/:lang/test"              element={<LangTestRedirect />} />
-      <Route path="/test/:testId"            element={<LegacyTestRedirect />} />
-      <Route path="/tests"                   element={<Navigate to="/es/test/gad7" replace />} />
+      {/* Redirects legacy */}
+      <Route path="/:lang/test"    element={<LangTestRedirect />} />
+      <Route path="/test/:testId"  element={<LegacyTestRedirect />} />
+      <Route path="/tests"         element={<Navigate to="/es/test/gad7" replace />} />
 
       {/* Fallback */}
-      <Route path="*"                        element={<Navigate to="/" replace />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   )
 }
 
-/**
- * Redirige /:lang/test/:testId/result → /:lang/test/:testId
- * El token ?r= es decodificable en el futuro para restaurar el resultado directamente.
- */
+// ── Redirects ─────────────────────────────────────────────────────────────────
+
+/** Enlace de resultado compartido → landing del test (el ?r= se procesa en el futuro). */
 const ResultPageRedirect: React.FC = () => {
   const { lang = 'es', testId = 'gad7' } = useParams<{ lang: string; testId: string }>()
-  const target = isValidLang(lang) ? lang : 'es'
-  return <Navigate to={`/${target}/test/${testId}`} replace />
+  return <Navigate to={`/${isValidLang(lang) ? lang : 'es'}/test/${testId}`} replace />
 }
 
-/**
- * Redirige /:lang/test → /:lang/test/gad7
- */
+/** /:lang/test → /:lang/test/gad7 */
 const LangTestRedirect: React.FC = () => {
   const { lang = 'es' } = useParams<{ lang: string }>()
-  const target = isValidLang(lang) ? lang : 'es'
-  return <Navigate to={`/${target}/test/gad7`} replace />
+  return <Navigate to={`/${isValidLang(lang) ? lang : 'es'}/test/gad7`} replace />
 }
 
-/**
- * Redirige /test/:testId → /es/test/:testId
- */
+/** /test/:testId → /es/test/:testId */
 const LegacyTestRedirect: React.FC = () => {
   const { testId = 'gad7' } = useParams<{ testId: string }>()
   return <Navigate to={`/es/test/${testId}`} replace />
