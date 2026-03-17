@@ -1,5 +1,49 @@
 {
   "gad7": {
+    "en": {
+      "normal": {
+        "minimal": {
+          "title": "Minimal Anxiety",
+          "body": "Your anxiety symptoms are within normal ranges. It's natural to experience some worry in daily life.",
+          "recommendation": "Continue maintaining good wellness habits: regular sleep, exercise, and activities you enjoy."
+        },
+        "mild": {
+          "title": "Mild Anxiety",
+          "body": "You are experiencing mild anxiety symptoms. While they are not significantly interfering with your daily life, you could benefit from stress management techniques.",
+          "recommendation": "Try relaxation techniques such as deep breathing, meditation, or regular exercise. If symptoms persist, consider speaking with a professional."
+        },
+        "moderate": {
+          "title": "Moderate Anxiety",
+          "body": "Your anxiety symptoms are moderate and may be affecting your quality of life in some areas (work, relationships, sleep). Seeking professional support is recommended.",
+          "recommendation": "It is RECOMMENDED that you consult a psychologist or doctor to assess your symptoms and receive appropriate treatment."
+        },
+        "severe": {
+          "title": "Severe Anxiety",
+          "body": "Your anxiety symptoms are significant and are likely affecting your wellbeing and daily functioning. Seeking professional help is important.",
+          "recommendation": "We encourage you to contact a mental health professional as soon as possible. You can call the 988 Suicide & Crisis Lifeline if you need immediate support."
+        }
+      },
+      "crisis": {
+        "title": "You need to talk to someone now",
+        "body": "Some of your answers suggest you may be going through a very difficult time. You don't have to face this alone. There are people available right now to listen to you.",
+        "phones": [
+          {
+            "label": "988 Suicide & Crisis Lifeline",
+            "number": "988"
+          },
+          {
+            "label": "Emergency Services",
+            "number": "911"
+          }
+        ],
+        "resources": [
+          {
+            "label": "988 Suicide & Crisis Lifeline",
+            "url": "https://988lifeline.org"
+          }
+        ]
+      }
+    },
     "es": {
       "normal": {
         "minimal": {
@@ -46,6 +90,55 @@
     }
   },
   "phq9": {
+    "en": {
+      "normal": {
+        "minimal": {
+          "title": "Minimal Depression",
+          "body": "Your symptoms are minimal. It's normal to feel low occasionally.",
+          "recommendation": "Keep up healthy habits: regular sleep, physical activity, and social connections."
+        },
+        "mild": {
+          "title": "Mild Depression",
+          "body": "You are experiencing mild symptoms that may occasionally affect your daily life.",
+          "recommendation": "Consider self-care strategies and, if symptoms persist beyond 2 weeks, speak with your doctor."
+        },
+        "moderate": {
+          "title": "Moderate Depression",
+          "body": "Your symptoms are moderate and are likely affecting your wellbeing in several areas of life.",
+          "recommendation": "It is RECOMMENDED that you consult a psychologist or doctor. Early treatment makes a significant difference."
+        },
+        "moderately_severe": {
+          "title": "Moderately Severe Depression",
+          "body": "Your symptoms are significant and are likely interfering with your work, relationships, and wellbeing.",
+          "recommendation": "It is IMPORTANT that you contact a mental health professional as soon as possible."
+        },
+        "severe": {
+          "title": "Severe Depression",
+          "body": "Your symptoms indicate severe depression that requires urgent professional attention.",
+          "recommendation": "Contact your doctor or psychologist TODAY. If you don't have one, you can call a crisis line for guidance."
+        }
+      },
+      "crisis": {
+        "title": "You need support right now",
+        "body": "You indicated thoughts of harming yourself. That matters deeply. You don't have to face this alone. There are trained people available to listen to you right now.",
+        "phones": [
+          {
+            "label": "National Suicide Prevention Lifeline",
+            "number": "988"
+          },
+          {
+            "label": "Crisis Text Line",
+            "number": "Text HOME to 741741"
+          }
+        ],
+        "resources": [
+          {
+            "label": "988 Suicide & Crisis Lifeline",
+            "url": "https://988lifeline.org"
+          }
+        ]
+      }
+    },
     "es": {
       "normal": {
         "minimal": {
