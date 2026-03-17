@@ -1,0 +1,134 @@
+{
+  "id": "gad7",
+  "lang": "es",
+  "name": "Test de Ansiedad Generalizada (GAD-7)",
+  "version": "1.0",
+  "scoringFunction": "scoreGAD7",
+  "disclaimerBefore": "Este cuestionario es solo educativo y NO es un diagnóstico clínico. Sus resultados son para reflexión personal. Si tienes dudas o síntomas graves, consulta con un profesional de la salud. Tus respuestas se guardan solo en tu navegador.",
+  "disclaimerAfter": "Este test NO es diagnóstico clínico y NO reemplaza la evaluación de un profesional. Si tienes síntomas graves o persistentes, consulta con tu médico o psicólogo.",
+  "landing": {
+    "hook": "¿Sientes que la ansiedad controla tu vida?",
+    "description": "El GAD-7 es un cuestionario validado clínicamente que evalúa la frecuencia e intensidad de los síntomas de ansiedad generalizada durante las últimas dos semanas. Es uno de los instrumentos más utilizados en atención primaria en todo el mundo.",
+    "whatItMeasures": "Mide 7 síntomas clave del trastorno de ansiedad generalizada: nerviosismo, incapacidad para controlar las preocupaciones, preocupación excesiva, dificultad para relajarse, inquietud, irritabilidad y miedo anticipatorio.",
+    "whoIsItFor": "Adultos (+18 años) que experimenten síntomas de ansiedad, o cualquier persona que quiera evaluar su nivel de bienestar emocional. También útil para compartir con un profesional de salud mental.",
+    "howItWorks": [
+      "Responde 7 preguntas sobre las últimas 2 semanas",
+      "Obtén tu puntuación con interpretación clínica clara",
+      "Comparte el resultado con un profesional si lo necesitas"
+    ],
+    "faq": [
+      {
+        "q": "¿Es esto un diagnóstico clínico?",
+        "a": "No. El GAD-7 es una herramienta de cribado, no un diagnóstico. Solo un profesional de la salud mental puede diagnosticar un trastorno de ansiedad. Este test te ayuda a identificar si tus síntomas merecen atención profesional."
+      },
+      {
+        "q": "¿Mis respuestas son privadas?",
+        "a": "Sí. Todas las respuestas se procesan en tu navegador y nunca se envían a ningún servidor. No guardamos ningún dato personal."
+      },
+      {
+        "q": "¿Qué hago si obtengo una puntuación alta?",
+        "a": "Te recomendamos consultar con tu médico de cabecera o un psicólogo. Puedes llevar tu resultado impreso o en pantalla a la consulta."
+      },
+      {
+        "q": "¿Puedo compartir los resultados con mi terapeuta?",
+        "a": "Sí. Al finalizar podrás compartir el enlace con tu resultado. Muchos profesionales utilizan el GAD-7 en consulta y reconocerán la puntuación."
+      },
+      {
+        "q": "¿Cuánto tiempo lleva completarlo?",
+        "a": "Entre 2 y 3 minutos. Son solo 7 preguntas con 4 opciones de respuesta cada una."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "likert",
+      "text": "¿Con qué frecuencia te has sentido nervioso/a, ansioso/a o tenso/a?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Nunca", "max": "Casi todos los días" }
+    },
+    {
+      "id": "q2",
+      "type": "likert",
+      "text": "¿Con qué frecuencia no has podido dejar de preocuparte o controlar tus preocupaciones?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Nunca", "max": "Casi todos los días" }
+    },
+    {
+      "id": "q3",
+      "type": "likert",
+      "text": "¿Con qué frecuencia te has preocupado demasiado por cosas diferentes?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Nunca", "max": "Casi todos los días" }
+    },
+    {
+      "id": "q4",
+      "type": "likert",
+      "text": "¿Con qué frecuencia has tenido dificultad para relajarte?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Nunca", "max": "Casi todos los días" }
+    },
+    {
+      "id": "q5",
+      "type": "likert",
+      "text": "¿Con qué frecuencia te has sentido tan inquieto/a que te cuesta estar sentado/a?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Nunca", "max": "Casi todos los días" }
+    },
+    {
+      "id": "q6",
+      "type": "likert",
+      "text": "¿Con qué frecuencia te has irritado o molestado fácilmente?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Nunca", "max": "Casi todos los días" }
+    },
+    {
+      "id": "q7",
+      "type": "likert",
+      "text": "¿Con qué frecuencia has tenido miedo de que ocurra algo terrible?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Nunca", "max": "Casi todos los días" }
+    }
+  ],
+  "scoring": [
+    { "min": 0,  "max": 4,    "category": "Ansiedad Mínima",   "color": "green",  "messageKey": "minimal"  },
+    { "min": 5,  "max": 9,    "category": "Ansiedad Leve",     "color": "yellow", "messageKey": "mild"     },
+    { "min": 10, "max": 14,   "category": "Ansiedad Moderada", "color": "orange", "messageKey": "moderate" },
+    { "min": 15, "max": null, "category": "Ansiedad Grave",    "color": "red",    "messageKey": "severe"   }
+  ],
+  "results": {
+    "normal": {
+      "minimal": {
+        "title": "Ansiedad Mínima",
+        "body": "Tus síntomas de ansiedad están dentro de rangos normales. Es natural experimentar algo de preocupación en la vida cotidiana.",
+        "recommendation": "Continúa manteniendo buenos hábitos de bienestar: sueño regular, ejercicio, y actividades que disfrutes."
+      },
+      "mild": {
+        "title": "Ansiedad Leve",
+        "body": "Experimentas síntomas leves de ansiedad. Aunque no interfieren significativamente en tu vida diaria, podrías beneficiarte de técnicas de manejo del estrés.",
+        "recommendation": "Prueba técnicas de relajación como respiración profunda, meditación, o ejercicio regular. Si los síntomas persisten, considera hablar con un profesional."
+      },
+      "moderate": {
+        "title": "Ansiedad Moderada",
+        "body": "Tus síntomas de ansiedad son moderados y podrían estar afectando tu calidad de vida en algunas áreas (trabajo, relaciones, sueño). Es recomendable buscar apoyo profesional.",
+        "recommendation": "ES RECOMENDABLE que consultes con un psicólogo o médico para evaluar tus síntomas y recibir un tratamiento apropiado."
+      },
+      "severe": {
+        "title": "Ansiedad Grave",
+        "body": "Tus síntomas de ansiedad son significativos y probablemente están afectando tu bienestar y funcionamiento diario. Buscar ayuda profesional es importante.",
+        "recommendation": "Te recomendamos que contactes con un profesional de salud mental lo antes posible. Puedes llamar al 024 (Teléfono de la Esperanza) para hablar con alguien."
+      }
+    },
+    "crisis": {
+      "title": "Necesitas hablar con alguien ahora",
+      "body": "Algunas de tus respuestas indican que podrías estar pasando por un momento muy difícil. No tienes que afrontarlo solo/a. Hay personas disponibles ahora mismo para escucharte.",
+      "phones": [
+        { "label": "Teléfono de la Esperanza", "number": "024" },
+        { "label": "Emergencias", "number": "112" }
+      ],
+      "resources": [
+        { "label": "Centro de Crisis Online — Ministerio de Sanidad", "url": "https://www.sanidad.gob.es/linea024" }
+      ]
+    }
+  }
+}

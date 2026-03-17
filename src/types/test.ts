@@ -185,3 +185,76 @@ export interface TestResult {
   color?: ScoringRule['color']
   message: NormalMessage | CrisisMessage
 }
+
+// ── Metadata del test ────────────────────────────────────────────────────────
+
+export interface TestMetadataTranslation {
+  validated: boolean
+  reference?: string
+  note?: string
+}
+
+export interface TestMetadata {
+  id: string
+  availableLangs: string[]
+  category: 'psychometric' | 'quiz'
+  originalInstrument: string
+  use: string[]
+  measures: string[]
+  validated: boolean
+  validationDetails: {
+    original: {
+      lang: string
+      reference: string
+      journal: string
+      doi: string
+      sample: string
+      sensitivity: string
+      specificity: string
+    }
+    translations: Record<string, TestMetadataTranslation>
+  }
+  ageRange: { min: number; max: number | null }
+  selfAdministrable: boolean
+  timeToComplete: string
+  itemCount: number
+  itemType: string
+  scoringRange: { min: number; max: number }
+  cutoffs: Record<string, [number, number]>
+  copyright: string
+}
+
+// ── Landing page del test ─────────────────────────────────────────────────────
+
+export interface TestLandingFaq {
+  q: string
+  a: string
+}
+
+export interface TestLanding {
+  hook: string
+  description: string
+  whatItMeasures: string
+  whoIsItFor: string
+  howItWorks: string[]
+  faq: TestLandingFaq[]
+}
+
+// ── Archivo de idioma completo ────────────────────────────────────────────────
+
+export interface TestLangFile {
+  id: string
+  lang: string
+  name: string
+  version: string
+  scoringFunction: string
+  disclaimerBefore?: string
+  disclaimerAfter?: string
+  landing: TestLanding
+  questions: Question[]
+  scoring: ScoringRule[]
+  results: {
+    normal: Record<string, NormalMessage>
+    crisis: CrisisMessage
+  }
+}

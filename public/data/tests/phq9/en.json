@@ -1,0 +1,156 @@
+{
+  "id": "phq9",
+  "lang": "en",
+  "name": "Patient Health Questionnaire (PHQ-9)",
+  "version": "1.0",
+  "scoringFunction": "scorePHQ9",
+  "disclaimerBefore": "This questionnaire is for educational purposes only and is NOT a clinical diagnosis. Results are for personal reflection. If you have concerns or severe symptoms, please consult a healthcare professional. Your answers are stored only in your browser.",
+  "disclaimerAfter": "This test is NOT a clinical diagnosis and does NOT replace evaluation by a professional. If you have severe or persistent symptoms, please consult your doctor or psychologist. Based on Kroenke, Spitzer & Williams (2001).",
+  "landing": {
+    "hook": "Have you been feeling down or hopeless lately?",
+    "description": "The PHQ-9 is the world's leading questionnaire for detecting depressive symptoms. It assesses 9 key symptoms of major depressive episode according to DSM-5 criteria, over the past two weeks.",
+    "whatItMeasures": "It measures 9 depression symptoms: anhedonia (lack of interest or pleasure), depressed mood, sleep disturbances, fatigue, appetite changes, feelings of worthlessness, difficulty concentrating, psychomotor changes, and thoughts of death.",
+    "whoIsItFor": "Adults (18+) experiencing symptoms of depression or persistent sadness. Also useful for monitoring symptoms in people already receiving treatment.",
+    "howItWorks": [
+      "Answer 9 questions about the past 2 weeks",
+      "Get your depression level with detailed clinical interpretation",
+      "Share the result with your doctor or psychologist if needed"
+    ],
+    "faq": [
+      {
+        "q": "Is this a diagnosis of depression?",
+        "a": "No. The PHQ-9 is a screening tool, not a diagnosis. Only a qualified mental health professional can diagnose a depressive disorder. This test helps you identify whether your symptoms warrant professional attention."
+      },
+      {
+        "q": "Are my answers private?",
+        "a": "Yes. All answers are processed in your browser and never sent to any server. We do not store any personal data."
+      },
+      {
+        "q": "What should I do if I score high?",
+        "a": "We recommend consulting your primary care doctor or a psychologist. If you feel you cannot wait, you can call the 988 Suicide & Crisis Lifeline, available 24 hours."
+      },
+      {
+        "q": "Can I take this test if I am already in treatment?",
+        "a": "Yes. The PHQ-9 is frequently used in clinical practice to monitor treatment progress. You can share the result with your therapist."
+      },
+      {
+        "q": "How long does it take?",
+        "a": "Between 3 and 5 minutes. There are 9 questions with 4 response options each."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "likert",
+      "text": "How often have you had little interest or pleasure in doing things?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Not at all", "max": "Nearly every day" }
+    },
+    {
+      "id": "q2",
+      "type": "likert",
+      "text": "How often have you been feeling down, depressed, or hopeless?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Not at all", "max": "Nearly every day" }
+    },
+    {
+      "id": "q3",
+      "type": "likert",
+      "text": "How often have you had trouble falling or staying asleep, or sleeping too much?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Not at all", "max": "Nearly every day" }
+    },
+    {
+      "id": "q4",
+      "type": "likert",
+      "text": "How often have you been feeling tired or having little energy?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Not at all", "max": "Nearly every day" }
+    },
+    {
+      "id": "q5",
+      "type": "likert",
+      "text": "How often have you had poor appetite or been overeating?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Not at all", "max": "Nearly every day" }
+    },
+    {
+      "id": "q6",
+      "type": "likert",
+      "text": "How often have you been feeling bad about yourself — or that you are a failure or have let yourself or your family down?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Not at all", "max": "Nearly every day" }
+    },
+    {
+      "id": "q7",
+      "type": "likert",
+      "text": "How often have you had trouble concentrating on things, such as reading or watching television?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Not at all", "max": "Nearly every day" }
+    },
+    {
+      "id": "q8",
+      "type": "likert",
+      "text": "How often have you been moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around much more than usual?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Not at all", "max": "Nearly every day" }
+    },
+    {
+      "id": "q9",
+      "type": "likert",
+      "text": "How often have you had thoughts that you would be better off dead, or thoughts of hurting yourself in some way?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Not at all", "max": "Nearly every day" },
+      "isRedFlag": true,
+      "redFlagValues": [1, 2, 3]
+    }
+  ],
+  "scoring": [
+    { "min": 0,  "max": 4,    "category": "Minimal Depression",           "color": "green",  "messageKey": "minimal"           },
+    { "min": 5,  "max": 9,    "category": "Mild Depression",              "color": "yellow", "messageKey": "mild"              },
+    { "min": 10, "max": 14,   "category": "Moderate Depression",          "color": "orange", "messageKey": "moderate"          },
+    { "min": 15, "max": 19,   "category": "Moderately Severe Depression", "color": "red",    "messageKey": "moderately_severe" },
+    { "min": 20, "max": null, "category": "Severe Depression",            "color": "red",    "messageKey": "severe"            }
+  ],
+  "results": {
+    "normal": {
+      "minimal": {
+        "title": "Minimal Depression",
+        "body": "Your symptoms are minimal. It is normal to feel low occasionally.",
+        "recommendation": "Keep up healthy habits: regular sleep, physical activity, and social connections."
+      },
+      "mild": {
+        "title": "Mild Depression",
+        "body": "You are experiencing mild symptoms that may occasionally affect your daily life.",
+        "recommendation": "Consider self-care strategies and, if symptoms persist beyond 2 weeks, speak with your doctor."
+      },
+      "moderate": {
+        "title": "Moderate Depression",
+        "body": "Your symptoms are moderate and are likely affecting your wellbeing in several areas of life.",
+        "recommendation": "It is RECOMMENDED that you consult a psychologist or doctor. Early treatment makes a significant difference."
+      },
+      "moderately_severe": {
+        "title": "Moderately Severe Depression",
+        "body": "Your symptoms are significant and are likely interfering with your work, relationships, and wellbeing.",
+        "recommendation": "It is IMPORTANT that you contact a mental health professional as soon as possible."
+      },
+      "severe": {
+        "title": "Severe Depression",
+        "body": "Your symptoms indicate severe depression that requires urgent professional attention.",
+        "recommendation": "Contact your doctor or psychologist TODAY. If you do not have one, you can call a crisis line for guidance."
+      }
+    },
+    "crisis": {
+      "title": "You need support right now",
+      "body": "You indicated thoughts of harming yourself. That matters deeply. You do not have to face this alone. There are trained people available to listen to you right now.",
+      "phones": [
+        { "label": "National Suicide Prevention Lifeline", "number": "988" },
+        { "label": "Crisis Text Line", "number": "Text HOME to 741741" }
+      ],
+      "resources": [
+        { "label": "988 Suicide & Crisis Lifeline", "url": "https://988lifeline.org" }
+      ]
+    }
+  }
+}

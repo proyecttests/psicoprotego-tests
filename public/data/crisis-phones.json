@@ -1,0 +1,27 @@
+{
+  "es": [
+    { "label": "Teléfono de la Esperanza", "number": "024" },
+    { "label": "Emergencias", "number": "112" }
+  ],
+  "en": [
+    { "label": "988 Suicide & Crisis Lifeline", "number": "988" },
+    { "label": "Emergency Services", "number": "911" }
+  ],
+  "pt": [
+    { "label": "CVV — Centro de Valorização da Vida (Brasil)", "number": "188" },
+    { "label": "SOS Voz Amiga (Portugal)", "number": "213 544 545" },
+    { "label": "Emergências", "number": "112" }
+  ],
+  "fr": [
+    { "label": "Numéro National Prévention Suicide", "number": "3114" },
+    { "label": "Urgences", "number": "15" }
+  ],
+  "de": [
+    { "label": "Telefonseelsorge", "number": "0800 111 0 111" },
+    { "label": "Notruf", "number": "112" }
+  ],
+  "it": [
+    { "label": "Telefono Amico", "number": "02 2327 2327" },
+    { "label": "Emergenze", "number": "112" }
+  ]
+}

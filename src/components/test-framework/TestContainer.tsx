@@ -113,6 +113,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
   const [testDef,        setTestDef]        = React.useState<TestDefinition | null>(null)
   const [messages,       setMessages]       = React.useState<MessagesMap | null>(null)
   const [availableLangs, setAvailableLangs] = React.useState<string[]>([])
+  const [effectiveLang,  setEffectiveLang]  = React.useState(lang)
   const [answers,        setAnswers]        = React.useState<AnswersMap>({})
   const [currentIdx,     setCurrentIdx]     = React.useState(0)
   const [result,         setResult]         = React.useState<ScoringResult | null>(null)
@@ -130,30 +131,39 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
 
     const loadData = async () => {
       try {
-        const [testsRes, messagesRes] = await Promise.all([
-          fetch('/data/tests.json'),
-          fetch('/data/messages.json'),
-        ])
+        // 1. Fetch metadata for availableLangs
+        const metaRes = await fetch(`/data/tests/${testId}/metadata.json`)
+        if (!metaRes.ok) throw new Error(`Test "${testId}" no encontrado.`)
+        const metadata = await metaRes.json() as { availableLangs: string[] }
 
-        if (!testsRes.ok)    throw new Error(`Error cargando tests.json: ${testsRes.status}`)
-        if (!messagesRes.ok) throw new Error(`Error cargando messages.json: ${messagesRes.status}`)
+        // 2. Fetch lang file, fall back to 'es' if lang not available
+        const resolvedLang = metadata.availableLangs.includes(lang) ? lang : 'es'
+        const langRes = await fetch(`/data/tests/${testId}/${resolvedLang}.json`)
+        if (!langRes.ok) throw new Error(`Contenido de "${testId}" en "${resolvedLang}" no encontrado.`)
+        const langData = await langRes.json() as import('@/types/test').TestLangFile
 
-        const testsData    = await testsRes.json()    as { tests: TestDefinition[] }
-        const messagesData = await messagesRes.json() as MessagesMap
+        // 3. Build testDef compatible with TestDefinition interface
+        const foundTest: TestDefinition = {
+          id:               langData.id,
+          lang:             langData.lang,
+          name:             langData.name,
+          version:          langData.version,
+          questions:        langData.questions,
+          scoring:          langData.scoring,
+          disclaimerBefore: langData.disclaimerBefore,
+          disclaimerAfter:  langData.disclaimerAfter,
+        }
 
-        const foundTest =
-          testsData.tests.find((t) => t.id === testId && t.lang === lang) ??
-          testsData.tests.find((t) => t.id === testId)
-        if (!foundTest) throw new Error(`Test "${testId}" no encontrado.`)
-
-        const langs = testsData.tests
-          .filter((t) => t.id === testId)
-          .map((t) => t.lang)
+        // 4. Build messages map compatible with scoringFunctions format
+        const messagesData: MessagesMap = {
+          [testId]: { [resolvedLang]: langData.results },
+        }
 
         if (!cancelled) {
           setTestDef(foundTest)
           setMessages(messagesData)
-          setAvailableLangs(langs)
+          setAvailableLangs(metadata.availableLangs)
+          setEffectiveLang(resolvedLang)
           setUiState(foundTest.disclaimerBefore ? 'disclaimer-before' : 'answering')
         }
       } catch (err) {
@@ -201,7 +211,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
       testDef as unknown as TestDefinitionForScoring,
       finalAnswers,
       messages as Record<string, Record<string, unknown>>,
-      lang,
+      effectiveLang,
     )
 
     if (scored.resultType === 'CRISIS' && !scored.message) {

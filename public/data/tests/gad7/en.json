@@ -1,0 +1,134 @@
+{
+  "id": "gad7",
+  "lang": "en",
+  "name": "Generalized Anxiety Disorder Scale (GAD-7)",
+  "version": "1.0",
+  "scoringFunction": "scoreGAD7",
+  "disclaimerBefore": "This questionnaire is for educational purposes only and is NOT a clinical diagnosis. Results are for personal reflection. If you have concerns or severe symptoms, please consult a healthcare professional. Your answers are stored only in your browser.",
+  "disclaimerAfter": "This test is NOT a clinical diagnosis and does NOT replace evaluation by a professional. If you have severe or persistent symptoms, please consult your doctor or psychologist.",
+  "landing": {
+    "hook": "Is anxiety running your life?",
+    "description": "The GAD-7 is a clinically validated questionnaire that assesses the frequency and intensity of generalized anxiety symptoms over the past two weeks. It is one of the most widely used screening tools in primary care worldwide.",
+    "whatItMeasures": "It measures 7 key symptoms of generalized anxiety disorder: nervousness, inability to control worry, excessive worrying, difficulty relaxing, restlessness, irritability, and anticipatory fear.",
+    "whoIsItFor": "Adults (18+) experiencing anxiety symptoms, or anyone who wants to assess their emotional wellbeing. Also useful for sharing results with a mental health professional.",
+    "howItWorks": [
+      "Answer 7 questions about the past 2 weeks",
+      "Get your score with a clear clinical interpretation",
+      "Share the result with a professional if needed"
+    ],
+    "faq": [
+      {
+        "q": "Is this a clinical diagnosis?",
+        "a": "No. The GAD-7 is a screening tool, not a diagnosis. Only a qualified mental health professional can diagnose an anxiety disorder. This test helps you identify whether your symptoms warrant professional attention."
+      },
+      {
+        "q": "Are my answers private?",
+        "a": "Yes. All answers are processed in your browser and never sent to any server. We do not store any personal data."
+      },
+      {
+        "q": "What should I do if I score high?",
+        "a": "We recommend consulting your primary care doctor or a psychologist. You can bring your result printed or on-screen to your appointment."
+      },
+      {
+        "q": "Can I share my results with my therapist?",
+        "a": "Yes. When you finish, you will be able to share a link with your result. Many professionals use the GAD-7 in clinical practice and will recognize the score."
+      },
+      {
+        "q": "How long does it take?",
+        "a": "Between 2 and 3 minutes. There are only 7 questions with 4 response options each."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "likert",
+      "text": "How often have you been feeling nervous, anxious, or on edge?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Not at all", "max": "Nearly every day" }
+    },
+    {
+      "id": "q2",
+      "type": "likert",
+      "text": "How often have you been unable to stop or control worrying?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Not at all", "max": "Nearly every day" }
+    },
+    {
+      "id": "q3",
+      "type": "likert",
+      "text": "How often have you been worrying too much about different things?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Not at all", "max": "Nearly every day" }
+    },
+    {
+      "id": "q4",
+      "type": "likert",
+      "text": "How often have you had trouble relaxing?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Not at all", "max": "Nearly every day" }
+    },
+    {
+      "id": "q5",
+      "type": "likert",
+      "text": "How often have you been so restless that it was hard to sit still?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Not at all", "max": "Nearly every day" }
+    },
+    {
+      "id": "q6",
+      "type": "likert",
+      "text": "How often have you become easily annoyed or irritable?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Not at all", "max": "Nearly every day" }
+    },
+    {
+      "id": "q7",
+      "type": "likert",
+      "text": "How often have you felt afraid as if something awful might happen?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Not at all", "max": "Nearly every day" }
+    }
+  ],
+  "scoring": [
+    { "min": 0,  "max": 4,    "category": "Minimal Anxiety",   "color": "green",  "messageKey": "minimal"  },
+    { "min": 5,  "max": 9,    "category": "Mild Anxiety",      "color": "yellow", "messageKey": "mild"     },
+    { "min": 10, "max": 14,   "category": "Moderate Anxiety",  "color": "orange", "messageKey": "moderate" },
+    { "min": 15, "max": null, "category": "Severe Anxiety",    "color": "red",    "messageKey": "severe"   }
+  ],
+  "results": {
+    "normal": {
+      "minimal": {
+        "title": "Minimal Anxiety",
+        "body": "Your anxiety symptoms are within normal ranges. It is natural to experience some worry in daily life.",
+        "recommendation": "Continue maintaining good wellness habits: regular sleep, exercise, and activities you enjoy."
+      },
+      "mild": {
+        "title": "Mild Anxiety",
+        "body": "You are experiencing mild anxiety symptoms. While they are not significantly interfering with your daily life, you could benefit from stress management techniques.",
+        "recommendation": "Try relaxation techniques such as deep breathing, meditation, or regular exercise. If symptoms persist, consider speaking with a professional."
+      },
+      "moderate": {
+        "title": "Moderate Anxiety",
+        "body": "Your anxiety symptoms are moderate and may be affecting your quality of life in some areas (work, relationships, sleep). Seeking professional support is recommended.",
+        "recommendation": "It is RECOMMENDED that you consult a psychologist or doctor to assess your symptoms and receive appropriate treatment."
+      },
+      "severe": {
+        "title": "Severe Anxiety",
+        "body": "Your anxiety symptoms are significant and are likely affecting your wellbeing and daily functioning. Seeking professional help is important.",
+        "recommendation": "We encourage you to contact a mental health professional as soon as possible. You can call the 988 Suicide & Crisis Lifeline if you need immediate support."
+      }
+    },
+    "crisis": {
+      "title": "You need to talk to someone now",
+      "body": "Some of your answers suggest you may be going through a very difficult time. You do not have to face this alone. There are people available right now to listen to you.",
+      "phones": [
+        { "label": "988 Suicide & Crisis Lifeline", "number": "988" },
+        { "label": "Emergency Services", "number": "911" }
+      ],
+      "resources": [
+        { "label": "988 Suicide & Crisis Lifeline", "url": "https://988lifeline.org" }
+      ]
+    }
+  }
+}

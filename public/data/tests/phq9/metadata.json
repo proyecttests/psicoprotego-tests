@@ -1,0 +1,46 @@
+{
+  "id": "phq9",
+  "availableLangs": ["es", "en", "pt"],
+  "category": "psychometric",
+  "originalInstrument": "PHQ-9",
+  "use": ["clinical_screening"],
+  "measures": ["depression"],
+  "validated": true,
+  "validationDetails": {
+    "original": {
+      "lang": "en",
+      "reference": "Kroenke K, Spitzer RL, Williams JBW (2001)",
+      "journal": "Journal of General Internal Medicine, 16(9), 606-613",
+      "doi": "10.1046/j.1525-1497.2001.016009606.x",
+      "sample": "6000 patients",
+      "sensitivity": "88%",
+      "specificity": "88%"
+    },
+    "translations": {
+      "es": { "validated": true, "reference": "Diez-Quevedo et al., 2001" },
+      "en": { "validated": true, "reference": "Original instrument" },
+      "pt": { "validated": true, "reference": "Santos et al., 2013" },
+      "fr": { "validated": true, "reference": "Carballeira et al., 2007" },
+      "de": { "validated": true, "reference": "Gräfe et al., 2004" },
+      "it": { "validated": true, "reference": "Mazzotti et al., 2003" },
+      "ar": { "validated": true, "reference": "AlHadi et al., 2017" },
+      "tr": { "validated": true, "reference": "Yazici Güleç et al., 2009" },
+      "ja": { "validated": true, "reference": "Muramatsu et al., 2007" },
+      "ko": { "validated": true, "reference": "Park et al., 2010" }
+    }
+  },
+  "ageRange": { "min": 18, "max": null },
+  "selfAdministrable": true,
+  "timeToComplete": "3-5 min",
+  "itemCount": 9,
+  "itemType": "likert_4",
+  "scoringRange": { "min": 0, "max": 27 },
+  "cutoffs": {
+    "minimal": [0, 4],
+    "mild": [5, 9],
+    "moderate": [10, 14],
+    "moderately_severe": [15, 19],
+    "severe": [20, 27]
+  },
+  "copyright": "free_use"
+}

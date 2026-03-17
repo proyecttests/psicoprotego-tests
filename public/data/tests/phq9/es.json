@@ -1,0 +1,156 @@
+{
+  "id": "phq9",
+  "lang": "es",
+  "name": "Cuestionario de Salud del Paciente (PHQ-9)",
+  "version": "1.0",
+  "scoringFunction": "scorePHQ9",
+  "disclaimerBefore": "Este cuestionario es solo educativo y NO es un diagnóstico clínico. Sus resultados son para reflexión personal. Si tienes dudas o síntomas graves, consulta con un profesional de la salud. Tus respuestas se guardan solo en tu navegador.",
+  "disclaimerAfter": "Este test NO es diagnóstico clínico y NO reemplaza la evaluación de un profesional. Si tienes síntomas graves o persistentes, consulta con tu médico o psicólogo. Basado en Kroenke, Spitzer & Williams (2001).",
+  "landing": {
+    "hook": "¿Te has sentido sin energía o sin esperanza últimamente?",
+    "description": "El PHQ-9 es el cuestionario de referencia mundial para la detección de síntomas depresivos. Evalúa 9 síntomas clave del episodio depresivo mayor según los criterios DSM-5, durante las últimas dos semanas.",
+    "whatItMeasures": "Mide 9 síntomas de depresión: anhedonia (falta de interés o placer), estado de ánimo deprimido, alteraciones del sueño, fatiga, cambios en el apetito, sentimientos de inutilidad, dificultad de concentración, enlentecimiento psicomotor y pensamientos de muerte.",
+    "whoIsItFor": "Adultos (+18 años) que experimenten síntomas de depresión o tristeza persistente. También útil para el seguimiento de síntomas en personas que ya están en tratamiento.",
+    "howItWorks": [
+      "Responde 9 preguntas sobre las últimas 2 semanas",
+      "Obtén tu nivel de depresión con interpretación clínica detallada",
+      "Si es necesario, comparte el resultado con tu médico o psicólogo"
+    ],
+    "faq": [
+      {
+        "q": "¿Es esto un diagnóstico de depresión?",
+        "a": "No. El PHQ-9 es una herramienta de cribado, no un diagnóstico. Solo un profesional de la salud mental puede diagnosticar un trastorno depresivo. Este test te ayuda a identificar si tus síntomas merecen atención profesional."
+      },
+      {
+        "q": "¿Mis respuestas son privadas?",
+        "a": "Sí. Todas las respuestas se procesan en tu navegador y nunca se envían a ningún servidor. No guardamos ningún dato personal."
+      },
+      {
+        "q": "¿Qué hago si obtengo una puntuación alta?",
+        "a": "Te recomendamos consultar con tu médico de cabecera o un psicólogo. Si sientes que no puedes esperar, puedes llamar al 024 (línea de crisis) que está disponible las 24 horas."
+      },
+      {
+        "q": "¿Puedo hacer este test si ya estoy en tratamiento?",
+        "a": "Sí. El PHQ-9 se usa frecuentemente en consulta para monitorizar la evolución del tratamiento. Puedes compartir el resultado con tu terapeuta."
+      },
+      {
+        "q": "¿Cuánto tiempo lleva completarlo?",
+        "a": "Entre 3 y 5 minutos. Son 9 preguntas con 4 opciones de respuesta cada una."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "likert",
+      "text": "¿Con qué frecuencia te has sentido sin interés o placer en hacer las cosas?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Nunca", "max": "Casi todos los días" }
+    },
+    {
+      "id": "q2",
+      "type": "likert",
+      "text": "¿Con qué frecuencia te has sentido decaído/a, deprimido/a o sin esperanza?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Nunca", "max": "Casi todos los días" }
+    },
+    {
+      "id": "q3",
+      "type": "likert",
+      "text": "¿Con qué frecuencia has tenido dificultad para dormir, mantenerte dormido/a o has dormido demasiado?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Nunca", "max": "Casi todos los días" }
+    },
+    {
+      "id": "q4",
+      "type": "likert",
+      "text": "¿Con qué frecuencia te has sentido cansado/a o con poca energía?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Nunca", "max": "Casi todos los días" }
+    },
+    {
+      "id": "q5",
+      "type": "likert",
+      "text": "¿Con qué frecuencia has tenido poco apetito o has comido en exceso?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Nunca", "max": "Casi todos los días" }
+    },
+    {
+      "id": "q6",
+      "type": "likert",
+      "text": "¿Con qué frecuencia te has sentido mal contigo mismo/a, que eres un/a fracasado/a, o que has fallado a ti o a tu familia?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Nunca", "max": "Casi todos los días" }
+    },
+    {
+      "id": "q7",
+      "type": "likert",
+      "text": "¿Con qué frecuencia has tenido dificultad para concentrarte en cosas como leer el periódico o ver la televisión?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Nunca", "max": "Casi todos los días" }
+    },
+    {
+      "id": "q8",
+      "type": "likert",
+      "text": "¿Con qué frecuencia te has movido o hablado tan despacio que los demás lo han notado? ¿O lo contrario, has estado tan inquieto/a o agitado/a que te has movido mucho más de lo normal?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Nunca", "max": "Casi todos los días" }
+    },
+    {
+      "id": "q9",
+      "type": "likert",
+      "text": "¿Con qué frecuencia has pensado que estarías mejor muerto/a, o has tenido pensamientos de hacerte daño de alguna manera?",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "labels": { "min": "Nunca", "max": "Casi todos los días" },
+      "isRedFlag": true,
+      "redFlagValues": [1, 2, 3]
+    }
+  ],
+  "scoring": [
+    { "min": 0,  "max": 4,    "category": "Depresión Mínima",         "color": "green",  "messageKey": "minimal"           },
+    { "min": 5,  "max": 9,    "category": "Depresión Leve",           "color": "yellow", "messageKey": "mild"              },
+    { "min": 10, "max": 14,   "category": "Depresión Moderada",       "color": "orange", "messageKey": "moderate"          },
+    { "min": 15, "max": 19,   "category": "Depresión Moderada-Grave", "color": "red",    "messageKey": "moderately_severe" },
+    { "min": 20, "max": null, "category": "Depresión Grave",          "color": "red",    "messageKey": "severe"            }
+  ],
+  "results": {
+    "normal": {
+      "minimal": {
+        "title": "Depresión Mínima",
+        "body": "Tus síntomas son mínimos. Es normal sentirse bajo de ánimo ocasionalmente.",
+        "recommendation": "Mantén buenos hábitos: sueño regular, actividad física, y conexiones sociales."
+      },
+      "mild": {
+        "title": "Depresión Leve",
+        "body": "Experimentas síntomas leves que podrían estar afectando tu día a día de forma ocasional.",
+        "recommendation": "Considera técnicas de autocuidado y, si los síntomas persisten más de 2 semanas, habla con tu médico."
+      },
+      "moderate": {
+        "title": "Depresión Moderada",
+        "body": "Tus síntomas son moderados y probablemente están afectando tu bienestar en varias áreas de tu vida.",
+        "recommendation": "ES RECOMENDABLE que consultes con un psicólogo o médico. Un tratamiento a tiempo marca la diferencia."
+      },
+      "moderately_severe": {
+        "title": "Depresión Moderada-Grave",
+        "body": "Tus síntomas son significativos y seguramente están interfiriendo en tu trabajo, relaciones y bienestar.",
+        "recommendation": "ES IMPORTANTE que contactes con un profesional de salud mental a la brevedad posible."
+      },
+      "severe": {
+        "title": "Depresión Grave",
+        "body": "Tus síntomas indican una depresión grave que requiere atención profesional urgente.",
+        "recommendation": "Contacta con tu médico o psicólogo HOY. Si no tienes uno, puedes llamar al 024 para orientación."
+      }
+    },
+    "crisis": {
+      "title": "Necesitas apoyo ahora mismo",
+      "body": "Has indicado pensamientos de hacerte daño. Eso nos importa mucho. No tienes que estar solo/a con esto. Hay personas entrenadas para escucharte ahora mismo.",
+      "phones": [
+        { "label": "Línea de Atención a la Conducta Suicida", "number": "024" },
+        { "label": "Emergencias", "number": "112" }
+      ],
+      "resources": [
+        { "label": "Información sobre el 024 — Ministerio de Sanidad", "url": "https://www.sanidad.gob.es/linea024" }
+      ]
+    }
+  }
+}
