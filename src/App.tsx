@@ -1,12 +1,21 @@
 /**
  * @file App.tsx
- * @description Componente raíz con rutas y page tracking via GTM/GA4.
+ * @description Componente raíz con rutas /:lang/test/:testId y page tracking via GTM/GA4.
  */
 
-import { Routes, Route, Navigate, Link, useLocation } from 'react-router-dom'
+import { Routes, Route, Navigate, Link, useLocation, useParams } from 'react-router-dom'
 import React from 'react'
 import TestContainer from '@/components/test-framework/TestContainer'
 import { trackPageView } from '@/config/analytics'
+
+const VALID_LANGS = ['es', 'en', 'pt', 'fr', 'de', 'it', 'ar', 'he', 'ku', 'tr', 'el', 'hi', 'ja', 'ko'] as const
+const RTL_LANGS = ['ar', 'he', 'ku']
+
+type Lang = typeof VALID_LANGS[number]
+
+function isValidLang(lang: string): lang is Lang {
+  return (VALID_LANGS as readonly string[]).includes(lang)
+}
 
 /**
  * Página de inicio temporal con navegación al test GAD-7.
@@ -19,7 +28,7 @@ const HomePage = () => (
         Plataforma de evaluación psicológica — Tests validados clínicamente
       </p>
       <Link
-        to="/test/gad7"
+        to="/es/test/gad7"
         className="btn-primary inline-block w-full"
       >
         Iniciar GAD-7 →
@@ -27,6 +36,27 @@ const HomePage = () => (
     </div>
   </div>
 )
+
+/**
+ * Ruta dinámica /:lang/test/:testId.
+ * Valida el idioma y aplica dir="rtl" si corresponde.
+ * Redirige a /es/test/:testId si el idioma no es válido.
+ */
+const TestRoute: React.FC = () => {
+  const { lang = 'es', testId = 'gad7' } = useParams<{ lang: string; testId: string }>()
+
+  if (!isValidLang(lang)) {
+    return <Navigate to={`/es/test/${testId}`} replace />
+  }
+
+  const isRtl = RTL_LANGS.includes(lang)
+
+  return (
+    <div dir={isRtl ? 'rtl' : 'ltr'}>
+      <TestContainer testId={testId} lang={lang} />
+    </div>
+  )
+}
 
 /**
  * App — componente raíz con enrutamiento y page tracking automático.
@@ -40,11 +70,26 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/"          element={<HomePage />} />
-      <Route path="/test/gad7" element={<TestContainer testId="gad7" lang="es" />} />
-      <Route path="*"          element={<Navigate to="/" replace />} />
+      {/* Rutas canónicas */}
+      <Route path="/"                        element={<HomePage />} />
+      <Route path="/:lang/test/:testId"      element={<TestRoute />} />
+
+      {/* Compatibilidad hacia atrás con rutas legacy */}
+      <Route path="/test/:testId"            element={<LegacyTestRedirect />} />
+      <Route path="/tests"                   element={<Navigate to="/es/test/gad7" replace />} />
+
+      {/* Fallback */}
+      <Route path="*"                        element={<Navigate to="/" replace />} />
     </Routes>
   )
+}
+
+/**
+ * Redirige /test/:testId → /es/test/:testId
+ */
+const LegacyTestRedirect: React.FC = () => {
+  const { testId = 'gad7' } = useParams<{ testId: string }>()
+  return <Navigate to={`/es/test/${testId}`} replace />
 }
 
 export default App
