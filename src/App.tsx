@@ -20,6 +20,11 @@ function isValidLang(lang: string): lang is Lang {
 /**
  * Página de inicio temporal con navegación al test GAD-7.
  */
+const FEATURED_TESTS = [
+  { id: 'gad7',  label: 'GAD-7 — Ansiedad Generalizada' },
+  { id: 'phq9',  label: 'PHQ-9 — Depresión' },
+]
+
 const HomePage = () => (
   <div className="flex min-h-screen flex-col items-center justify-center gap-4 p-8" style={{ backgroundColor: 'var(--color-cream)' }}>
     <div className="card max-w-md w-full text-center">
@@ -27,12 +32,17 @@ const HomePage = () => (
       <p className="text-neutral-600 text-sm mb-6 font-sans">
         Plataforma de evaluación psicológica — Tests validados clínicamente
       </p>
-      <Link
-        to="/es/test/gad7"
-        className="btn-primary inline-block w-full"
-      >
-        Iniciar GAD-7 →
-      </Link>
+      <div className="flex flex-col gap-3">
+        {FEATURED_TESTS.map((t) => (
+          <Link
+            key={t.id}
+            to={`/es/test/${t.id}`}
+            className="btn-primary inline-block w-full"
+          >
+            {t.label} →
+          </Link>
+        ))}
+      </div>
     </div>
   </div>
 )

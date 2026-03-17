@@ -431,6 +431,19 @@ export function scoreGAD7(
   }
 }
 
+// ── PHQ-9 Scoring ─────────────────────────────────────────────────────────────
+
+/**
+ * Calcula el score del PHQ-9 (Cuestionario de Salud del Paciente, depresión).
+ *
+ * Algoritmo idéntico al GAD-7: suma directa de respuestas Likert 0-3,
+ * con detección de red flag en Q9 (pensamientos de autolesión).
+ * Categorías: 0-4 minimal, 5-9 mild, 10-14 moderate, 15-19 moderately_severe, 20+ severe.
+ *
+ * Basado en: Kroenke, Spitzer & Williams (2001). J Gen Intern Med, 16(9), 606–613.
+ */
+export const scorePHQ9: ScoringFunction = scoreGAD7
+
 // ── Registry de funciones de scoring ─────────────────────────────────────────
 
 /**
@@ -442,7 +455,7 @@ export function scoreGAD7(
  */
 const SCORING_REGISTRY: Record<string, ScoringFunction> = {
   scoreGAD7,
-  // scorePHQ9:  scorePHQ9,   ← ejemplo futuro
+  scorePHQ9,
   // scorePSS10: scorePSS10,  ← ejemplo futuro
 }
 
