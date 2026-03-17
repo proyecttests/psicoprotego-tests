@@ -171,7 +171,7 @@ export interface MessagesMap {
 // ── Estado del test ──────────────────────────────────────────────────────────
 
 /** Estado del componente TestContainer */
-export type TestState = 'loading' | 'disclaimer-before' | 'answering' | 'calculating' | 'sharing' | 'result' | 'error'
+export type TestState = 'loading' | 'answering' | 'calculating' | 'sharing' | 'result' | 'error'
 
 /** Respuestas del usuario: mapa de questionId → valor */
 export type AnswersMap = Record<string, string | number | boolean>

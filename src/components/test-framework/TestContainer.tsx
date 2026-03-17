@@ -29,14 +29,11 @@ import type {
 
 import Header              from '@/components/common/Header'
 import Footer              from '@/components/common/Footer'
-import Disclaimer          from '@/components/common/Disclaimer'
-import LangSwitcher        from '@/components/common/LangSwitcher'
 import ProgressBar         from './ProgressBar'
 import QuestionRenderer    from './QuestionRenderer'
 import ResultCard          from '@/components/results/ResultCard'
 import CalculatingScreen   from './CalculatingScreen'
 import SharingScreen       from './SharingScreen'
-import AdSlot              from '@/components/ads/AdSlot'
 import { getScoringFunction } from '@/utils/scoringFunctions'
 import type { ScoringResult, TestDefinitionForScoring } from '@/utils/scoringFunctions'
 import { trackEvent } from '@/config/analytics'
@@ -112,7 +109,6 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
   const [uiState,        setUiState]        = React.useState<TestState>('loading')
   const [testDef,        setTestDef]        = React.useState<TestDefinition | null>(null)
   const [messages,       setMessages]       = React.useState<MessagesMap | null>(null)
-  const [availableLangs, setAvailableLangs] = React.useState<string[]>([])
   const [effectiveLang,  setEffectiveLang]  = React.useState(lang)
   const [answers,        setAnswers]        = React.useState<AnswersMap>({})
   const [currentIdx,     setCurrentIdx]     = React.useState(0)
@@ -162,9 +158,8 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
         if (!cancelled) {
           setTestDef(foundTest)
           setMessages(messagesData)
-          setAvailableLangs(metadata.availableLangs)
           setEffectiveLang(resolvedLang)
-          setUiState(foundTest.disclaimerBefore ? 'disclaimer-before' : 'answering')
+          setUiState('answering')
         }
       } catch (err) {
         if (!cancelled) {
@@ -277,7 +272,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
     setResult(null)
     setPendingShareUrl('')
     setIsExiting(false)
-    setUiState(testDef?.disclaimerBefore ? 'disclaimer-before' : 'answering')
+    setUiState('answering')
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
@@ -332,36 +327,6 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
               {ui.reload}
             </button>
           </div>
-        </main>
-        <Footer showCrisisFooter={false} />
-      </div>
-    )
-  }
-
-  if (uiState === 'disclaimer-before') {
-    return (
-      <div className="flex min-h-screen flex-col">
-        <Header testName={testDef?.name} />
-        <main className="flex flex-1 flex-col items-center gap-6 pt-6 px-4 pb-8">
-          {/* Selector de idioma — solo si hay más de uno disponible */}
-          {availableLangs.length > 1 && (
-            <div className="w-[95%] max-w-2xl flex justify-end sm:px-6">
-              <LangSwitcher
-                currentLang={lang}
-                testId={testId}
-                availableLangs={availableLangs}
-              />
-            </div>
-          )}
-          <Disclaimer
-            type="before"
-            testName={testDef?.name ?? ''}
-            customText={testDef?.disclaimerBefore}
-            onContinue={() => setUiState('answering')}
-            onCancel={() => window.history.back()}
-          />
-          {/* Slot publicitario en intro — valor medio */}
-          <AdSlot position="intro" size="rectangle" />
         </main>
         <Footer showCrisisFooter={false} />
       </div>

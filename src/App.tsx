@@ -5,7 +5,9 @@
 
 import { Routes, Route, Navigate, Link, useLocation, useParams } from 'react-router-dom'
 import React from 'react'
-import TestContainer from '@/components/test-framework/TestContainer'
+import TestContainer    from '@/components/test-framework/TestContainer'
+import TestLandingPage  from '@/pages/TestLandingPage'
+import TestInterstitial from '@/pages/TestInterstitial'
 import { trackPageView } from '@/config/analytics'
 
 const VALID_LANGS = ['es', 'en', 'pt', 'fr', 'de', 'it', 'ar', 'he', 'ku', 'tr', 'el', 'hi', 'ja', 'ko'] as const
@@ -49,11 +51,14 @@ const HomePage = () => (
 
 /**
  * Ruta dinámica /:lang/test/:testId.
+ * Gestiona el flujo: landing → interstitial → test.
  * Valida el idioma y aplica dir="rtl" si corresponde.
- * Redirige a /es/test/:testId si el idioma no es válido.
  */
+type TestFlow = 'landing' | 'interstitial' | 'test'
+
 const TestRoute: React.FC = () => {
   const { lang = 'es', testId = 'gad7' } = useParams<{ lang: string; testId: string }>()
+  const [flow, setFlow] = React.useState<TestFlow>('landing')
 
   if (!isValidLang(lang)) {
     return <Navigate to={`/es/test/${testId}`} replace />
@@ -63,7 +68,24 @@ const TestRoute: React.FC = () => {
 
   return (
     <div dir={isRtl ? 'rtl' : 'ltr'}>
-      <TestContainer testId={testId} lang={lang} />
+      {flow === 'landing' && (
+        <TestLandingPage
+          testId={testId}
+          lang={lang}
+          onStart={() => setFlow('interstitial')}
+        />
+      )}
+      {flow === 'interstitial' && (
+        <TestInterstitial
+          testId={testId}
+          lang={lang}
+          onContinue={() => setFlow('test')}
+          onCancel={() => setFlow('landing')}
+        />
+      )}
+      {flow === 'test' && (
+        <TestContainer testId={testId} lang={lang} />
+      )}
     </div>
   )
 }
