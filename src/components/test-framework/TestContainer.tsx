@@ -128,7 +128,8 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
   const handleSubmit = (finalAnswers: AnswersMap) => {
     if (!testDef || !messages) return
 
-    const scoringFn = getScoringFunction('scoreGAD7')
+    const scoringFnName = (testDef as unknown as Record<string, unknown>).scoringFunction as string | undefined
+    const scoringFn = getScoringFunction(scoringFnName ?? 'scoreGAD7')
     const scored = scoringFn(
       testDef as unknown as TestDefinitionForScoring,
       finalAnswers,

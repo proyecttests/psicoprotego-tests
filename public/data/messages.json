@@ -44,5 +44,56 @@
         ]
       }
     }
+  },
+  "phq9": {
+    "es": {
+      "normal": {
+        "minimal": {
+          "title": "Depresión Mínima",
+          "body": "Tus síntomas son mínimos. Es normal sentirse bajo de ánimo ocasionalmente.",
+          "recommendation": "Mantén buenos hábitos: sueño regular, actividad física, y conexiones sociales."
+        },
+        "mild": {
+          "title": "Depresión Leve",
+          "body": "Experimentas síntomas leves que podrían estar afectando tu día a día de forma ocasional.",
+          "recommendation": "Considera técnicas de autocuidado y, si los síntomas persisten más de 2 semanas, habla con tu médico."
+        },
+        "moderate": {
+          "title": "Depresión Moderada",
+          "body": "Tus síntomas son moderados y probablemente están afectando tu bienestar en varias áreas de tu vida.",
+          "recommendation": "ES RECOMENDABLE que consultes con un psicólogo o médico. Un tratamiento a tiempo marca la diferencia."
+        },
+        "moderately_severe": {
+          "title": "Depresión Moderada-Grave",
+          "body": "Tus síntomas son significativos y seguramente están interfiriendo en tu trabajo, relaciones y bienestar.",
+          "recommendation": "ES IMPORTANTE que contactes con un profesional de salud mental a la brevedad posible."
+        },
+        "severe": {
+          "title": "Depresión Grave",
+          "body": "Tus síntomas indican una depresión grave que requiere atención profesional urgente.",
+          "recommendation": "Contacta con tu médico o psicólogo HOY. Si no tienes uno, puedes llamar al 024 para orientación."
+        }
+      },
+      "crisis": {
+        "title": "Necesitas apoyo ahora mismo",
+        "body": "Has indicado pensamientos de hacerte daño. Eso nos importa mucho. No tienes que estar solo/a con esto. Hay personas entrenadas para escucharte ahora mismo.",
+        "phones": [
+          {
+            "label": "Línea de Atención a la Conducta Suicida",
+            "number": "024"
+          },
+          {
+            "label": "Emergencias",
+            "number": "112"
+          }
+        ],
+        "resources": [
+          {
+            "label": "Información sobre el 024 — Ministerio de Sanidad",
+            "url": "https://www.sanidad.gob.es/linea024"
+          }
+        ]
+      }
+    }
   }
 }
