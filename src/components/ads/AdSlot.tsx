@@ -15,7 +15,7 @@ import React from 'react'
 
 // ── Props ─────────────────────────────────────────────────────────────────────
 
-export type AdPosition = 'intro' | 'pre-result' | 'post-share' | 'test-intro'
+export type AdPosition = 'intro' | 'pre-result' | 'post-share' | 'test-intro' | 'pre-test'
 export type AdSize     = 'rectangle' | 'banner' | 'leaderboard'
 
 interface AdSlotProps {
