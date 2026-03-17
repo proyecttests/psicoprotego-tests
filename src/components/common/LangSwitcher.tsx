@@ -19,20 +19,20 @@ interface LangSwitcherProps {
 // ── Etiquetas nativas por código ISO ─────────────────────────────────────────
 
 const LANG_LABELS: Record<string, string> = {
-  es: 'ES',
-  en: 'EN',
-  pt: 'PT',
-  fr: 'FR',
-  de: 'DE',
-  it: 'IT',
-  ar: 'AR',
-  he: 'HE',
-  ku: 'KU',
-  tr: 'TR',
-  el: 'EL',
-  hi: 'HI',
-  ja: 'JA',
-  ko: 'KO',
+  es: 'Español',
+  en: 'English',
+  pt: 'Português',
+  fr: 'Français',
+  de: 'Deutsch',
+  it: 'Italiano',
+  ar: 'العربية',
+  he: 'עברית',
+  ku: 'Kurdî',
+  tr: 'Türkçe',
+  el: 'Ελληνικά',
+  hi: 'हिन्दी',
+  ja: '日本語',
+  ko: '한국어',
 }
 
 // ── Componente ────────────────────────────────────────────────────────────────
@@ -43,37 +43,29 @@ const LangSwitcher: React.FC<LangSwitcherProps> = ({ currentLang, testId, availa
   if (availableLangs.length <= 1) return null
 
   return (
-    <div
-      role="navigation"
-      aria-label="Seleccionar idioma"
-      className="flex items-center gap-2 flex-wrap"
-    >
-      {availableLangs.map((lang) => {
-        const isActive = lang === currentLang
-        return (
-          <button
-            key={lang}
-            type="button"
-            onClick={() => navigate(`/${lang}/test/${testId}`, { replace: true })}
-            aria-current={isActive ? 'true' : undefined}
-            aria-label={`Cambiar idioma a ${lang.toUpperCase()}`}
-            className={[
-              'min-w-[40px] rounded-full px-3 py-1 text-xs font-semibold font-sans',
-              'border transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1',
-              isActive
-                ? 'border-transparent text-white'
-                : 'border-gray-300 text-gray-500 hover:border-gray-400 hover:text-gray-700',
-            ].join(' ')}
-            style={
-              isActive
-                ? { backgroundColor: 'var(--color-primary)', borderColor: 'var(--color-primary)' }
-                : undefined
-            }
-          >
+    <div className="flex items-center gap-2">
+      <label htmlFor="lang-switcher" className="text-xs text-gray-400 font-sans">
+        🌐
+      </label>
+      <select
+        id="lang-switcher"
+        value={currentLang}
+        onChange={(e) => navigate(`/${e.target.value}/test/${testId}`, { replace: true })}
+        aria-label="Seleccionar idioma"
+        className="
+          rounded-lg border border-gray-300 bg-white px-3 py-1.5
+          text-sm font-sans text-gray-700
+          focus:border-transparent focus:outline-none focus:ring-2
+          cursor-pointer
+        "
+        style={{ ['--tw-ring-color' as string]: 'var(--color-primary)' }}
+      >
+        {availableLangs.map((lang) => (
+          <option key={lang} value={lang}>
             {LANG_LABELS[lang] ?? lang.toUpperCase()}
-          </button>
-        )
-      })}
+          </option>
+        ))}
+      </select>
     </div>
   )
 }
