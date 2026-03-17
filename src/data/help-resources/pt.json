@@ -1,0 +1,122 @@
+{
+  "page": {
+    "title": "Como pedir ajuda",
+    "subtitle": "Se precisar de apoio agora, ou conhecer alguém que precise, aqui estão recursos disponíveis para você."
+  },
+  "sections": {
+    "emergency": {
+      "title": "Se há perigo imediato",
+      "intro": "Se você ou alguém próximo estiver em perigo imediato, ligue para os serviços de emergência.",
+      "resources": [
+        {
+          "type": "phone",
+          "number": "192",
+          "tel": "192",
+          "label": "SAMU",
+          "description": "Serviço de Atendimento Móvel de Urgência.",
+          "scope": "Brasil",
+          "available": "24 horas · Gratuito"
+        },
+        {
+          "type": "phone",
+          "number": "112",
+          "tel": "112",
+          "label": "Emergências",
+          "description": "Número europeu de emergência, disponível em todos os países da UE.",
+          "scope": "Portugal · Europa",
+          "available": "24 horas · Gratuito"
+        }
+      ]
+    },
+    "mentalHealth": {
+      "title": "Apoio em saúde mental",
+      "intro": "Se estiver passando por um momento difícil e precisar conversar com alguém, estas linhas estão disponíveis para te ouvir.",
+      "primary": [
+        {
+          "type": "phone",
+          "number": "188",
+          "tel": "188",
+          "label": "CVV — Centro de Valorização da Vida",
+          "description": "Apoio emocional e prevenção do suicídio por ligação ou chat.",
+          "scope": "Brasil",
+          "available": "24 horas · Gratuito"
+        },
+        {
+          "type": "phone",
+          "number": "213 544 545",
+          "tel": "213544545",
+          "label": "SOS Voz Amiga",
+          "description": "Apoio emocional anónimo e confidencial.",
+          "scope": "Portugal",
+          "available": "15h30–00h30 · Gratuito"
+        }
+      ],
+      "expandLabel": "Ver recursos de outros países",
+      "collapseLabel": "Ver menos",
+      "others": [
+        {
+          "type": "phone",
+          "number": "988",
+          "tel": "988",
+          "label": "Suicide & Crisis Lifeline",
+          "description": "Apoio em crise por ligação ou mensagem (em inglês).",
+          "scope": "Estados Unidos",
+          "available": "24 horas · Gratuito"
+        },
+        {
+          "type": "phone",
+          "number": "116 123",
+          "tel": "116123",
+          "label": "Samaritans",
+          "description": "Apoio emocional confidencial (em inglês).",
+          "scope": "Reino Unido · Irlanda",
+          "available": "24 horas · Gratuito"
+        },
+        {
+          "type": "phone",
+          "number": "024",
+          "tel": "024",
+          "label": "Línea de Atención a la Conducta Suicida",
+          "description": "Apoio em crise e prevenção do suicídio (em espanhol).",
+          "scope": "Espanha",
+          "available": "24 horas · Gratuito"
+        }
+      ]
+    },
+    "otherResources": {
+      "title": "Outros recursos",
+      "resources": [
+        {
+          "type": "phone",
+          "number": "180",
+          "tel": "180",
+          "label": "Central de Atendimento à Mulher",
+          "description": "Denúncias e apoio em situações de violência doméstica.",
+          "scope": "Brasil",
+          "available": "24 horas · Gratuito"
+        },
+        {
+          "type": "phone",
+          "number": "116 111",
+          "tel": "116111",
+          "label": "Linha de Apoio à Criança e Adolescente",
+          "description": "Apoio a crianças e adolescentes em situações de dificuldade.",
+          "scope": "Europa",
+          "available": "24 horas · Gratuito"
+        },
+        {
+          "type": "link",
+          "label": "AFAM — Associação de Famílias e Amigos do Doente Mental",
+          "description": "Informação e apoio em saúde mental em Portugal.",
+          "url": "https://www.afam.pt"
+        }
+      ]
+    },
+    "professional": {
+      "title": "Conversar com um profissional",
+      "body": "Se não é uma urgência, mas você sente que precisa de apoio, conversar com um psicólogo pode fazer uma diferença real. Não é preciso estar em crise para pedir ajuda.",
+      "linkLabel": "Psicoprotego · Psicologia online e presencial",
+      "linkUrl": "https://psicoprotego.es"
+    }
+  }
+}

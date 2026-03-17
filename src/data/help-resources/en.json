@@ -1,0 +1,140 @@
+{
+  "page": {
+    "title": "How to get help",
+    "subtitle": "If you need support right now, or know someone who does, here are resources available to you."
+  },
+  "sections": {
+    "emergency": {
+      "title": "If there is immediate danger",
+      "intro": "If you or someone nearby is in immediate danger, call emergency services.",
+      "resources": [
+        {
+          "type": "phone",
+          "number": "911",
+          "tel": "911",
+          "label": "Emergency Services",
+          "description": "For immediate life-threatening situations.",
+          "scope": "USA · Canada",
+          "available": "24 hours · Free"
+        },
+        {
+          "type": "phone",
+          "number": "999",
+          "tel": "999",
+          "label": "Emergency Services",
+          "description": "For immediate life-threatening situations.",
+          "scope": "UK · Ireland",
+          "available": "24 hours · Free"
+        },
+        {
+          "type": "phone",
+          "number": "112",
+          "tel": "112",
+          "label": "Emergency Services",
+          "description": "European emergency number, available in all EU countries.",
+          "scope": "Europe",
+          "available": "24 hours · Free"
+        }
+      ]
+    },
+    "mentalHealth": {
+      "title": "Mental health support",
+      "intro": "If you're going through a difficult time and need someone to talk to, these lines are available to listen.",
+      "primary": [
+        {
+          "type": "phone",
+          "number": "988",
+          "tel": "988",
+          "label": "Suicide & Crisis Lifeline",
+          "description": "Call or text for confidential support during a mental health crisis.",
+          "scope": "USA",
+          "available": "24 hours · Free"
+        },
+        {
+          "type": "phone",
+          "number": "116 123",
+          "tel": "116123",
+          "label": "Samaritans",
+          "description": "Confidential emotional support for anyone in distress or despair.",
+          "scope": "UK · Ireland",
+          "available": "24 hours · Free"
+        }
+      ],
+      "expandLabel": "See resources for other countries",
+      "collapseLabel": "See less",
+      "others": [
+        {
+          "type": "phone",
+          "number": "13 11 14",
+          "tel": "131114",
+          "label": "Lifeline",
+          "description": "Crisis support and suicide prevention.",
+          "scope": "Australia",
+          "available": "24 hours · Free"
+        },
+        {
+          "type": "phone",
+          "number": "1-833-456-4566",
+          "tel": "18334564566",
+          "label": "Crisis Services Canada",
+          "description": "Bilingual crisis support by phone.",
+          "scope": "Canada",
+          "available": "24 hours · Free"
+        },
+        {
+          "type": "phone",
+          "number": "024",
+          "tel": "024",
+          "label": "Mental Health Crisis Line",
+          "description": "Specialized crisis and suicide prevention support (in Spanish).",
+          "scope": "Spain",
+          "available": "24 hours · Free"
+        },
+        {
+          "type": "phone",
+          "number": "188",
+          "tel": "188",
+          "label": "CVV — Centro de Valorização da Vida",
+          "description": "Emotional support and suicide prevention (in Portuguese).",
+          "scope": "Brazil",
+          "available": "24 hours · Free"
+        }
+      ]
+    },
+    "otherResources": {
+      "title": "Other resources",
+      "resources": [
+        {
+          "type": "phone",
+          "number": "1-800-799-7233",
+          "tel": "18007997233",
+          "label": "National Domestic Violence Hotline",
+          "description": "Confidential support for domestic violence situations.",
+          "scope": "USA",
+          "available": "24 hours · Free"
+        },
+        {
+          "type": "phone",
+          "number": "116 111",
+          "tel": "116111",
+          "label": "Child Helpline",
+          "description": "Support for children and young people in difficulty.",
+          "scope": "Europe",
+          "available": "24 hours · Free"
+        },
+        {
+          "type": "link",
+          "label": "Mind",
+          "description": "Mental health information, advice and local support resources.",
+          "url": "https://www.mind.org.uk"
+        }
+      ]
+    },
+    "professional": {
+      "title": "Talk to a professional",
+      "body": "If it's not an emergency, but you feel like you need support, talking to a therapist or psychologist can make a real difference. You don't need to be in crisis to ask for help.",
+      "linkLabel": "Psicoprotego · Online and in-person psychology",
+      "linkUrl": "https://psicoprotego.es"
+    }
+  }
+}
