@@ -23,10 +23,19 @@
  */
 
 import React from 'react'
+import { Link } from 'react-router-dom'
 import type { TestLangFile } from '@/types/test'
 import Header  from '@/components/common/Header'
 import Footer  from '@/components/common/Footer'
 import AdSlot  from '@/components/ads/AdSlot'
+
+// ── Mapa de rutas de ayuda por idioma ────────────────────────────────────────
+
+const HELP_ROUTES: Record<string, string> = {
+  es: '/es/ayuda-urgente',
+  en: '/en/urgent-help',
+  pt: '/pt/ajuda-urgente',
+}
 
 // ── UI strings ────────────────────────────────────────────────────────────────
 
@@ -37,13 +46,8 @@ const UI = {
     defaultText:     (name: string) =>
       `El cuestionario **${name}** es una herramienta de evaluación psicológica orientativa. ` +
       `Sus resultados tienen únicamente carácter educativo. **No sustituyen la evaluación, el diagnóstico ` +
-      `ni el tratamiento de un profesional de la salud mental.** Si experimentas síntomas graves o tienes ` +
-      `pensamientos de hacerte daño, por favor contacta con un profesional de inmediato.`,
-    crisisLabel:     'En caso de crisis',
-    crisisLine:      'Llama al',
-    crisisFree:      '(gratuito, 24 h)',
-    crisisOr:        'o al',
-    crisisMore:      'Más información',
+      `ni el tratamiento de un profesional de la salud mental.**`,
+    helpLink:        '¿Necesitas ayuda ahora? Recursos disponibles →',
     continueButton:  'Entiendo y continuar',
     cancelLink:      'Cancelar, volver atrás',
     loading:         'Cargando…',
@@ -56,13 +60,8 @@ const UI = {
     defaultText:     (name: string) =>
       `The **${name}** questionnaire is an orientative psychological assessment tool. ` +
       `Its results are for educational purposes only. **They do not replace evaluation, diagnosis, ` +
-      `or treatment by a mental health professional.** If you experience severe symptoms or thoughts ` +
-      `of self-harm, please contact a professional immediately.`,
-    crisisLabel:     'In case of crisis',
-    crisisLine:      'Call',
-    crisisFree:      '(free, 24 h)',
-    crisisOr:        'or',
-    crisisMore:      'More information',
+      `or treatment by a mental health professional.**`,
+    helpLink:        'Need help now? Available resources →',
     continueButton:  'I understand, continue',
     cancelLink:      'Cancel, go back',
     loading:         'Loading…',
@@ -75,13 +74,8 @@ const UI = {
     defaultText:     (name: string) =>
       `O questionário **${name}** é uma ferramenta de avaliação psicológica orientativa. ` +
       `Seus resultados têm caráter exclusivamente educativo. **Não substituem a avaliação, o diagnóstico ` +
-      `nem o tratamento por um profissional de saúde mental.** Se você tiver sintomas graves ou pensamentos ` +
-      `de se machucar, entre em contato com um profissional imediatamente.`,
-    crisisLabel:     'Em caso de crise',
-    crisisLine:      'Ligue para',
-    crisisFree:      '(gratuito, 24 h)',
-    crisisOr:        'ou',
-    crisisMore:      'Mais informações',
+      `nem o tratamento por um profissional de saúde mental.**`,
+    helpLink:        'Precisa de ajuda agora? Recursos disponíveis →',
     continueButton:  'Entendo e continuar',
     cancelLink:      'Cancelar, voltar',
     loading:         'Carregando…',
@@ -213,37 +207,31 @@ const TestInterstitial: React.FC<TestInterstitialProps> = ({
 
           {/* ── 1. DISCLAIMER ──────────────────────────────────────────────── */}
           <section
-            role="alertdialog"
             aria-labelledby="interstitial-title"
             aria-describedby="interstitial-body"
           >
             <div
-              className="rounded-xl p-6 border-l-4 shadow-sm"
+              className="rounded-xl p-6 shadow-sm"
               style={{
                 backgroundColor: '#fff',
-                border: '1px solid #fca5a5',
-                borderLeftColor: '#dc2626',
-                borderLeftWidth: '4px',
+                border: '1px solid rgba(45,74,62,0.15)',
               }}
             >
               {/* Header del disclaimer */}
-              <div className="flex items-start gap-4 mb-4">
-                <span aria-hidden="true" className="text-3xl flex-shrink-0 mt-0.5">⚠️</span>
-                <div>
-                  <h1
-                    id="interstitial-title"
-                    className="text-lg font-semibold leading-snug"
-                    style={{ color: 'var(--color-primary)' }}
-                  >
-                    {ui.pageTitle}
-                  </h1>
-                  <p
-                    className="text-xs mt-0.5 font-medium uppercase tracking-wide opacity-60"
-                    style={{ color: 'var(--color-primary)' }}
-                  >
-                    {ui.disclaimerTitle}
-                  </p>
-                </div>
+              <div className="flex flex-col gap-0.5 mb-4">
+                <h1
+                  id="interstitial-title"
+                  className="text-lg font-semibold leading-snug"
+                  style={{ color: 'var(--color-primary)' }}
+                >
+                  {ui.pageTitle}
+                </h1>
+                <p
+                  className="text-xs font-medium uppercase tracking-wide opacity-50"
+                  style={{ color: 'var(--color-primary)' }}
+                >
+                  {ui.disclaimerTitle}
+                </p>
               </div>
 
               {/* Texto del disclaimer */}
@@ -255,46 +243,15 @@ const TestInterstitial: React.FC<TestInterstitialProps> = ({
                 {renderBold(disclaimerText)}
               </p>
 
-              {/* Teléfono de crisis — siempre visible */}
-              <div
-                className="mt-5 pt-4 flex flex-col gap-2"
-                style={{ borderTop: '1px solid #fecaca' }}
-              >
-                <p
-                  className="text-xs font-semibold uppercase tracking-wide"
-                  style={{ color: '#991b1b' }}
+              {/* Enlace sutil a recursos de ayuda */}
+              <div className="mt-4 pt-4" style={{ borderTop: '1px solid rgba(45,74,62,0.1)' }}>
+                <Link
+                  to={HELP_ROUTES[lang] ?? HELP_ROUTES['es']}
+                  className="text-xs transition-opacity hover:opacity-70 focus:outline-none focus-visible:ring-2 rounded"
+                  style={{ color: 'var(--color-accent)' }}
                 >
-                  {ui.crisisLabel}
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  <a
-                    href="tel:024"
-                    className="inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-bold transition-colors hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-red-500"
-                    style={{ backgroundColor: '#dc2626', color: '#fff' }}
-                    aria-label="Llamar al 024 — gratuito, disponible 24 horas"
-                  >
-                    <span aria-hidden="true">📞</span>
-                    024 <span className="font-normal opacity-80">{ui.crisisFree}</span>
-                  </a>
-                  <a
-                    href="tel:112"
-                    className="inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-bold transition-colors hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-red-500"
-                    style={{ backgroundColor: '#fff', color: '#dc2626', border: '2px solid #dc2626' }}
-                    aria-label="Llamar al 112 — Emergencias"
-                  >
-                    <span aria-hidden="true">📞</span>
-                    112
-                  </a>
-                  <a
-                    href="https://www.sanidad.gob.es/linea024"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center text-xs underline self-center hover:opacity-75"
-                    style={{ color: 'var(--color-primary)' }}
-                  >
-                    {ui.crisisMore} →
-                  </a>
-                </div>
+                  {ui.helpLink}
+                </Link>
               </div>
             </div>
           </section>
