@@ -23,6 +23,7 @@ interface ResultCardProps {
   type: 'NORMAL' | 'CRISIS'
   testData: TestDefinition | null
   onReset: () => void
+  onShareWhatsApp?: (url: string) => void
   lang: string
   testId: string
   maxScore: number
@@ -184,7 +185,8 @@ const ScoreBar: React.FC<{
 const ShareButtons: React.FC<{
   shareUrl: string
   lang: string
-}> = ({ shareUrl, lang }) => {
+  onShareWhatsApp?: (url: string) => void
+}> = ({ shareUrl, lang, onShareWhatsApp }) => {
   const [copied, setCopied] = React.useState(false)
   const ui = getUi(lang)
 
@@ -200,12 +202,20 @@ const ShareButtons: React.FC<{
 
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(`${ui.shareText} ${shareUrl}`)}`
 
+  const handleWhatsApp = (e: React.MouseEvent) => {
+    if (onShareWhatsApp) {
+      e.preventDefault()
+      onShareWhatsApp(whatsappUrl)
+    }
+  }
+
   return (
     <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
       <a
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={handleWhatsApp}
         className="btn-primary flex items-center justify-center gap-2 w-full sm:w-auto"
         aria-label={ui.shareWhatsApp}
       >
@@ -231,10 +241,11 @@ const ShareButtons: React.FC<{
 const NormalResult: React.FC<{
   result: ScoringResult
   onReset: () => void
+  onShareWhatsApp?: (url: string) => void
   lang: string
   testId: string
   maxScore: number
-}> = ({ result, onReset, lang, testId, maxScore }) => {
+}> = ({ result, onReset, onShareWhatsApp, lang, testId, maxScore }) => {
   const visible      = useFadeIn()
   const displayScore = useCountUp(result.score ?? 0)
   const colorKey     = result.category?.color ?? 'green'
@@ -300,7 +311,7 @@ const NormalResult: React.FC<{
       </div>
 
       {/* ── Compartir ───────────────────────────────────────────────────── */}
-      <ShareButtons shareUrl={shareUrl} lang={lang} />
+      <ShareButtons shareUrl={shareUrl} lang={lang} onShareWhatsApp={onShareWhatsApp} />
 
       {/* ── Reintentar ──────────────────────────────────────────────────── */}
       <div className="flex justify-start">
@@ -454,11 +465,11 @@ const CrisisResult: React.FC<{
 
 // ── Componente principal ──────────────────────────────────────────────────────
 
-const ResultCard: React.FC<ResultCardProps> = ({ result, type, onReset, lang, testId, maxScore }) => {
+const ResultCard: React.FC<ResultCardProps> = ({ result, type, onReset, onShareWhatsApp, lang, testId, maxScore }) => {
   if (type === 'CRISIS') {
     return <CrisisResult result={result} onReset={onReset} lang={lang} />
   }
-  return <NormalResult result={result} onReset={onReset} lang={lang} testId={testId} maxScore={maxScore} />
+  return <NormalResult result={result} onReset={onReset} onShareWhatsApp={onShareWhatsApp} lang={lang} testId={testId} maxScore={maxScore} />
 }
 
 export default ResultCard

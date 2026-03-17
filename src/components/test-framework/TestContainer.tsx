@@ -27,12 +27,15 @@ import type {
   Question,
 } from '@/types/test'
 
-import Header           from '@/components/common/Header'
-import Footer           from '@/components/common/Footer'
-import Disclaimer       from '@/components/common/Disclaimer'
-import ProgressBar      from './ProgressBar'
-import QuestionRenderer from './QuestionRenderer'
-import ResultCard       from '@/components/results/ResultCard'
+import Header              from '@/components/common/Header'
+import Footer              from '@/components/common/Footer'
+import Disclaimer          from '@/components/common/Disclaimer'
+import ProgressBar         from './ProgressBar'
+import QuestionRenderer    from './QuestionRenderer'
+import ResultCard          from '@/components/results/ResultCard'
+import CalculatingScreen   from './CalculatingScreen'
+import SharingScreen       from './SharingScreen'
+import AdSlot              from '@/components/ads/AdSlot'
 import { getScoringFunction } from '@/utils/scoringFunctions'
 import type { ScoringResult, TestDefinitionForScoring } from '@/utils/scoringFunctions'
 import { trackEvent } from '@/config/analytics'
@@ -105,13 +108,14 @@ function shouldShowQuestion(question: Question, answers: AnswersMap): boolean {
 
 const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) => {
   // ── Estado ─────────────────────────────────────────────────────────────────
-  const [uiState,    setUiState]    = React.useState<TestState>('loading')
-  const [testDef,    setTestDef]    = React.useState<TestDefinition | null>(null)
-  const [messages,   setMessages]   = React.useState<MessagesMap | null>(null)
-  const [answers,    setAnswers]    = React.useState<AnswersMap>({})
-  const [currentIdx, setCurrentIdx] = React.useState(0)
-  const [result,     setResult]     = React.useState<ScoringResult | null>(null)
-  const [errorMsg,   setErrorMsg]   = React.useState<string>('')
+  const [uiState,        setUiState]        = React.useState<TestState>('loading')
+  const [testDef,        setTestDef]        = React.useState<TestDefinition | null>(null)
+  const [messages,       setMessages]       = React.useState<MessagesMap | null>(null)
+  const [answers,        setAnswers]        = React.useState<AnswersMap>({})
+  const [currentIdx,     setCurrentIdx]     = React.useState(0)
+  const [result,         setResult]         = React.useState<ScoringResult | null>(null)
+  const [errorMsg,       setErrorMsg]       = React.useState<string>('')
+  const [pendingShareUrl, setPendingShareUrl] = React.useState<string>('')
 
   const ui = getUiStrings(lang)
 
@@ -214,7 +218,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
     }
 
     setResult(scored)
-    setUiState('result')
+    setUiState('calculating')
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
@@ -254,8 +258,16 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
     setAnswers({})
     setCurrentIdx(0)
     setResult(null)
+    setPendingShareUrl('')
     setIsExiting(false)
     setUiState(testDef?.disclaimerBefore ? 'disclaimer-before' : 'answering')
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const handleShareWhatsApp = (url: string) => {
+    trackEvent('share_whatsapp', { testId })
+    setPendingShareUrl(url)
+    setUiState('sharing')
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
@@ -313,7 +325,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
     return (
       <div className="flex min-h-screen flex-col">
         <Header testName={testDef?.name} />
-        <main className="flex flex-1 items-start justify-center pt-8">
+        <main className="flex flex-1 flex-col items-center gap-6 pt-8 px-4 pb-8">
           <Disclaimer
             type="before"
             testName={testDef?.name ?? ''}
@@ -321,9 +333,39 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
             onContinue={() => setUiState('answering')}
             onCancel={() => window.history.back()}
           />
+          {/* Slot publicitario en intro — valor medio */}
+          <AdSlot position="intro" size="rectangle" />
         </main>
         <Footer showCrisisFooter={false} />
       </div>
+    )
+  }
+
+  if (uiState === 'calculating') {
+    return (
+      <CalculatingScreen
+        lang={lang}
+        testName={testDef?.name}
+        onDone={() => {
+          setUiState('result')
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        }}
+      />
+    )
+  }
+
+  if (uiState === 'sharing' && pendingShareUrl) {
+    return (
+      <SharingScreen
+        lang={lang}
+        testName={testDef?.name}
+        shareUrl={pendingShareUrl}
+        onDone={() => {
+          setPendingShareUrl('')
+          setUiState('result')
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        }}
+      />
     )
   }
 
@@ -336,6 +378,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
             result={result}
             testData={testDef}
             onReset={handleReset}
+            onShareWhatsApp={handleShareWhatsApp}
             type={result.resultType}
             lang={lang}
             testId={testId}
