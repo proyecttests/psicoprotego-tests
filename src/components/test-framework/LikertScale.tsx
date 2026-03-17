@@ -15,16 +15,16 @@ interface LikertScaleProps {
   scale?: { min: number; max: number; step?: number }
   labels?: { min: string; max: string }
   onAdvance?: () => void
+  lang?: string
 }
 
-// ── Labels por defecto (GAD-7 / PHQ-9 estándar) ───────────────────────────
+// ── Labels por defecto por idioma (GAD-7 / PHQ-9 estándar) ───────────────
 
-const DEFAULT_OPTION_LABELS = [
-  'Nunca',
-  'Varios días',
-  'Más de la mitad de los días',
-  'Casi todos los días',
-]
+const DEFAULT_OPTION_LABELS: Record<string, string[]> = {
+  es: ['Nunca', 'Varios días', 'Más de la mitad de los días', 'Casi todos los días'],
+  en: ['Not at all', 'Several days', 'More than half the days', 'Nearly every day'],
+  pt: ['Nunca', 'Vários dias', 'Mais de metade dos dias', 'Quase todos os dias'],
+}
 
 // ── Delays de stagger para entrada de cards ───────────────────────────────
 
@@ -38,6 +38,7 @@ const LikertScale: React.FC<LikertScaleProps> = ({
   onChange,
   scale    = { min: 0, max: 3, step: 1 },
   onAdvance,
+  lang = 'es',
 }) => {
   const { min, max } = scale
   const hasValue = value !== undefined
@@ -76,9 +77,10 @@ const LikertScale: React.FC<LikertScaleProps> = ({
 
   // ── Opciones generadas del rango ─────────────────────────────────────────
 
+  const optionLabels = DEFAULT_OPTION_LABELS[lang] ?? DEFAULT_OPTION_LABELS['es']
   const options = Array.from({ length: max - min + 1 }, (_, i) => ({
     value: i + min,
-    label: DEFAULT_OPTION_LABELS[i] ?? String(i + min),
+    label: optionLabels[i] ?? String(i + min),
   }))
 
   // ── Render ────────────────────────────────────────────────────────────────

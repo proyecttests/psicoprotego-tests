@@ -84,6 +84,9 @@ function App() {
       <Route path="/"                        element={<HomePage />} />
       <Route path="/:lang/test/:testId"      element={<TestRoute />} />
 
+      {/* Página de resultado compartida (redirige al test; el token r= se ignora por ahora) */}
+      <Route path="/:lang/test/:testId/result" element={<ResultPageRedirect />} />
+
       {/* Compatibilidad hacia atrás con rutas legacy */}
       <Route path="/:lang/test"              element={<LangTestRedirect />} />
       <Route path="/test/:testId"            element={<LegacyTestRedirect />} />
@@ -93,6 +96,16 @@ function App() {
       <Route path="*"                        element={<Navigate to="/" replace />} />
     </Routes>
   )
+}
+
+/**
+ * Redirige /:lang/test/:testId/result → /:lang/test/:testId
+ * El token ?r= es decodificable en el futuro para restaurar el resultado directamente.
+ */
+const ResultPageRedirect: React.FC = () => {
+  const { lang = 'es', testId = 'gad7' } = useParams<{ lang: string; testId: string }>()
+  const target = isValidLang(lang) ? lang : 'es'
+  return <Navigate to={`/${target}/test/${testId}`} replace />
 }
 
 /**

@@ -163,6 +163,14 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
     return testDef.questions.filter((q) => shouldShowQuestion(q, answers))
   }, [testDef, answers])
 
+  // Puntuación máxima teórica (suma de scale.max de preguntas Likert no redFlag)
+  const maxScore = React.useMemo(() => {
+    if (!testDef) return 0
+    return testDef.questions
+      .filter((q) => !q.isRedFlag && q.type === 'likert')
+      .reduce((sum, q) => sum + (q.scale?.max ?? 3), 0)
+  }, [testDef])
+
   const currentQuestion = visibleQuestions[currentIdx] ?? null
   const isLastQuestion  = currentIdx === visibleQuestions.length - 1
 
@@ -329,6 +337,9 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
             testData={testDef}
             onReset={handleReset}
             type={result.resultType}
+            lang={lang}
+            testId={testId}
+            maxScore={maxScore}
           />
         </main>
         <Footer showCrisisFooter={showCrisisFooter} />
@@ -385,6 +396,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
                   ? handleNext
                   : undefined
               }
+              lang={lang}
             />
           </div>
         </div>

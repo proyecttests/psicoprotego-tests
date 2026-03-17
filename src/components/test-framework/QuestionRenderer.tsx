@@ -34,6 +34,8 @@ interface QuestionRendererProps {
    * Pasar `undefined` desactiva el auto-avance (ej: última pregunta).
    */
   onAdvance?: () => void
+  /** Código de idioma para localizar labels por defecto */
+  lang?: string
 }
 
 // ── Componente ────────────────────────────────────────────────────────────────
@@ -55,6 +57,7 @@ const QuestionRenderer: React.FC<QuestionRendererProps> = ({
   answers,
   onChange,
   onAdvance,
+  lang = 'es',
 }) => {
   const currentValue = answers[question.id]
 
@@ -70,6 +73,7 @@ const QuestionRenderer: React.FC<QuestionRendererProps> = ({
           scale={question.scale}
           labels={question.labels}
           onAdvance={onAdvance}
+          lang={lang}
         />
       )
 
