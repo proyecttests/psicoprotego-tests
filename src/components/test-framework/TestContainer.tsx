@@ -371,7 +371,6 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
             testData={testDef}
             onReset={handleReset}
             onShareWhatsApp={handleShareWhatsApp}
-            type={result.resultType}
             lang={lang}
             testId={testId}
             maxScore={maxScore}
