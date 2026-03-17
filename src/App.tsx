@@ -17,9 +17,10 @@
 
 import { Routes, Route, Navigate, Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import React from 'react'
-import TestContainer    from '@/components/test-framework/TestContainer'
-import TestLandingPage  from '@/pages/TestLandingPage'
-import TestInterstitial from '@/pages/TestInterstitial'
+import TestContainer      from '@/components/test-framework/TestContainer'
+import TestLandingPage    from '@/pages/TestLandingPage'
+import TestInterstitial   from '@/pages/TestInterstitial'
+import HelpResourcesPage  from '@/pages/HelpResourcesPage'
 import { trackPageView } from '@/config/analytics'
 
 // ── Constantes ────────────────────────────────────────────────────────────────
@@ -188,6 +189,11 @@ function App() {
 
       {/* Enlace de resultado compartido — redirige a la landing del test */}
       <Route path="/:lang/test/:testId/result" element={<ResultPageRedirect />} />
+
+      {/* Páginas de ayuda urgente — una URL por idioma */}
+      <Route path="/es/ayuda-urgente" element={<HelpResourcesPage lang="es" />} />
+      <Route path="/en/urgent-help"   element={<HelpResourcesPage lang="en" />} />
+      <Route path="/pt/ajuda-urgente" element={<HelpResourcesPage lang="pt" />} />
 
       {/* Redirects legacy */}
       <Route path="/:lang/test"    element={<LangTestRedirect />} />

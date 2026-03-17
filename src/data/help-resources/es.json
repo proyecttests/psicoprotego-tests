@@ -1,0 +1,122 @@
+{
+  "page": {
+    "title": "Cómo pedir ayuda",
+    "subtitle": "Si necesitas apoyo ahora, o conoces a alguien que lo necesite, aquí tienes recursos disponibles."
+  },
+  "sections": {
+    "emergency": {
+      "title": "Si hay peligro inmediato",
+      "intro": "Si tú o alguien cercano está en peligro o riesgo inmediato, llama a los servicios de emergencia.",
+      "resources": [
+        {
+          "type": "phone",
+          "number": "112",
+          "tel": "112",
+          "label": "Emergencias",
+          "description": "Servicio europeo de emergencias. Atiende situaciones de peligro inmediato.",
+          "scope": "Europa",
+          "available": "24 horas · Gratuito"
+        }
+      ]
+    },
+    "mentalHealth": {
+      "title": "Apoyo en salud mental",
+      "intro": "Si estás pasando por un momento difícil y necesitas hablar con alguien, estas líneas están disponibles para escucharte.",
+      "primary": [
+        {
+          "type": "phone",
+          "number": "024",
+          "tel": "024",
+          "label": "Línea de atención a la conducta suicida",
+          "description": "Atención especializada en crisis emocional y conducta suicida.",
+          "scope": "España",
+          "available": "24 horas · Gratuito"
+        },
+        {
+          "type": "phone",
+          "number": "717 003 717",
+          "tel": "717003717",
+          "label": "Teléfono de la Esperanza",
+          "description": "Atención a personas en crisis emocional, soledad o dificultades personales.",
+          "scope": "España",
+          "available": "24 horas · Gratuito"
+        }
+      ],
+      "expandLabel": "Ver recursos de otros países",
+      "collapseLabel": "Ver menos",
+      "others": [
+        {
+          "type": "phone",
+          "number": "988",
+          "tel": "988",
+          "label": "Suicide & Crisis Lifeline",
+          "description": "Apoyo en crisis por llamada o mensaje de texto.",
+          "scope": "Estados Unidos",
+          "available": "24 horas · Gratuito"
+        },
+        {
+          "type": "phone",
+          "number": "116 123",
+          "tel": "116123",
+          "label": "Samaritans",
+          "description": "Apoyo emocional confidencial para cualquier persona en dificultad.",
+          "scope": "Reino Unido · Irlanda",
+          "available": "24 horas · Gratuito"
+        },
+        {
+          "type": "phone",
+          "number": "0800 111 0 111",
+          "tel": "08001110111",
+          "label": "Telefonseelsorge",
+          "description": "Asesoramiento confidencial en situaciones de crisis emocional.",
+          "scope": "Alemania",
+          "available": "24 horas · Gratuito"
+        },
+        {
+          "type": "phone",
+          "number": "188",
+          "tel": "188",
+          "label": "CVV — Centro de Valorização da Vida",
+          "description": "Apoyo emocional y prevención del suicidio.",
+          "scope": "Brasil",
+          "available": "24 horas · Gratuito"
+        }
+      ]
+    },
+    "otherResources": {
+      "title": "Otros recursos",
+      "resources": [
+        {
+          "type": "phone",
+          "number": "016",
+          "tel": "016",
+          "label": "Violencia de género",
+          "description": "Información y orientación sobre violencia de género. No deja rastro en la factura telefónica.",
+          "scope": "España",
+          "available": "24 horas · Gratuito"
+        },
+        {
+          "type": "phone",
+          "number": "116 111",
+          "tel": "116111",
+          "label": "Línea de ayuda a la infancia y adolescencia",
+          "description": "Apoyo a niñas, niños y adolescentes en situaciones de dificultad.",
+          "scope": "Europa",
+          "available": "24 horas · Gratuito"
+        },
+        {
+          "type": "link",
+          "label": "Fundación Salud Mental España",
+          "description": "Recursos, guías y directorio de profesionales en salud mental.",
+          "url": "https://consaludmental.org"
+        }
+      ]
+    },
+    "professional": {
+      "title": "Hablar con un profesional",
+      "body": "Si no es una urgencia, pero sientes que necesitas apoyo, hablar con un psicólogo puede marcar una diferencia real. No hace falta llegar a una crisis para pedir ayuda.",
+      "linkLabel": "Psicoprotego · Psicología online y presencial",
+      "linkUrl": "https://psicoprotego.es"
+    }
+  }
+}
