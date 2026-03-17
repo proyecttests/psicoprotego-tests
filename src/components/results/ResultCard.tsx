@@ -60,6 +60,7 @@ const RESULT_UI: Record<string, {
   supportTitle: string
   supportBody: string
   supportLink: string
+  privacyNote: string
   emergencyNote: string
 }> = {
   es: {
@@ -71,9 +72,10 @@ const RESULT_UI: Record<string, {
     copied:         '¡Copiado!',
     shareText:      'Acabo de completar este test psicológico. ¿Lo intentas tú también?',
     scoreLabel:     'Puntuación',
-    supportTitle:   'Tu resultado sugiere que podrías beneficiarte de apoyo profesional',
-    supportBody:    'Hablar con un profesional de la salud mental puede ayudarte a entender mejor lo que estás experimentando y a encontrar el apoyo adecuado.',
-    supportLink:    'Ver recursos de ayuda →',
+    supportTitle:   'En tus respuestas hemos detectado algunos aspectos que pueden indicar que necesitas apoyo',
+    supportBody:    'Te recomendamos que consultes con un profesional lo antes posible.',
+    supportLink:    'Puedes pedir ayuda en estos recursos →',
+    privacyNote:    'Esta información está solo en tu navegador y no la verá nadie si tú no la compartes.',
     emergencyNote:  'Si es una emergencia, llama al 112',
   },
   en: {
@@ -85,9 +87,10 @@ const RESULT_UI: Record<string, {
     copied:         'Copied!',
     shareText:      'I just completed this psychological test. Want to try?',
     scoreLabel:     'Score',
-    supportTitle:   'Your result suggests you might benefit from professional support',
-    supportBody:    'Talking to a mental health professional can help you better understand what you\'re experiencing and find the right support.',
-    supportLink:    'See help resources →',
+    supportTitle:   'Some of your responses include aspects that may indicate you need support',
+    supportBody:    'We recommend consulting with a professional as soon as possible.',
+    supportLink:    'You can find help resources here →',
+    privacyNote:    'This information stays only in your browser — no one can see it unless you share it.',
     emergencyNote:  'If this is an emergency, call 112',
   },
   pt: {
@@ -99,9 +102,10 @@ const RESULT_UI: Record<string, {
     copied:         'Copiado!',
     shareText:      'Acabei de completar este teste psicológico. Quer tentar?',
     scoreLabel:     'Pontuação',
-    supportTitle:   'Seu resultado sugere que você pode se beneficiar de apoio profissional',
-    supportBody:    'Conversar com um profissional de saúde mental pode ajudá-lo a entender melhor o que está vivenciando e a encontrar o apoio adequado.',
-    supportLink:    'Ver recursos de ajuda →',
+    supportTitle:   'Algumas das suas respostas incluem aspectos que podem indicar que você precisa de apoio',
+    supportBody:    'Recomendamos que consulte um profissional o quanto antes.',
+    supportLink:    'Você pode pedir ajuda nestes recursos →',
+    privacyNote:    'Estas informações ficam apenas no seu navegador e ninguém poderá vê-las se você não as compartilhar.',
     emergencyNote:  'Se for uma emergência, ligue para o 112',
   },
 }
@@ -293,8 +297,14 @@ const SupportBlock: React.FC<{ lang: string }> = ({ lang }) => {
         {ui.supportLink}
       </Link>
       <p
-        className="mt-3 text-xs"
-        style={{ color: 'var(--color-primary)', opacity: 0.45 }}
+        className="mt-4 text-xs"
+        style={{ color: 'var(--color-primary)', opacity: 0.5 }}
+      >
+        {ui.privacyNote}
+      </p>
+      <p
+        className="mt-1 text-xs"
+        style={{ color: 'var(--color-primary)', opacity: 0.4 }}
       >
         {ui.emergencyNote}
       </p>
@@ -365,15 +375,17 @@ const NormalResult: React.FC<{
           {message?.body}
         </p>
 
-        {/* Recomendación destacada */}
-        <div className="rounded-lg border p-4" style={{ borderColor: 'var(--color-accent)', backgroundColor: 'var(--color-cream)' }}>
-          <p className="mb-1 text-xs font-semibold uppercase tracking-wider font-sans" style={{ color: 'var(--color-accent)' }}>
-            {ui.recommendation}
-          </p>
-          <p className="text-sm font-medium leading-relaxed font-sans" style={{ color: 'var(--color-primary)' }}>
-            {message?.recommendation}
-          </p>
-        </div>
+        {/* Recomendación destacada — solo si existe */}
+        {message?.recommendation && (
+          <div className="rounded-lg border p-4" style={{ borderColor: 'var(--color-accent)', backgroundColor: 'var(--color-cream)' }}>
+            <p className="mb-1 text-xs font-semibold uppercase tracking-wider font-sans" style={{ color: 'var(--color-accent)' }}>
+              {ui.recommendation}
+            </p>
+            <p className="text-sm font-medium leading-relaxed font-sans" style={{ color: 'var(--color-primary)' }}>
+              {message.recommendation}
+            </p>
+          </div>
+        )}
 
         {/* Disclaimer obligatorio */}
         <p className="border-t border-gray-100 pt-3 text-xs italic text-gray-400">
