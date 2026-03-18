@@ -326,3 +326,93 @@ determina categoría → busca mensaje → ResultCard renderiza
 - [ ] ResultCard mejorada (score visual, barra, share)
 - [ ] AdSlot placeholder (reservar espacio CLS-safe)
 - [ ] SEO: hreflang tags en <head>
+
+---
+
+## 2026-03-18 - Sesión Landing Pages + Flujo completo + Páginas de ayuda + ResultCard
+
+### Objetivos
+
+- Crear landing pages SEO para cada test
+- Implementar flujo completo con subrutas (landing → intersticial → test)
+- Crear páginas de recursos de ayuda urgente
+- Rediseñar pantalla de resultados con red flags (tono menos alarmante)
+
+### Trabajo Realizado
+
+#### ✅ Completado
+
+1. **TestMetadataTable.tsx** — Ficha técnica del test
+   - Renderiza metadata desde `metadata.json` (validación, idiomas disponibles, scoring range, cutoffs)
+   - Grid responsivo 1→2 columnas; cutoffs con código de color por severidad
+   - Muestra advertencia si el idioma solicitado no tiene traducción validada
+
+2. **TestLandingPage.tsx** — Landing page SEO completa
+   - Secciones: Hero (h1 + hook + CTA), Qué mide, Para quién, Cómo funciona, Ficha técnica, FAQ accordion, CTA final
+   - AdSlot `leaderboard` entre Hero y contenido
+   - SEO completo: `document.title`, `meta[description]`, JSON-LD inject/remove en mount/unmount
+   - Schemas: FAQPage, BreadcrumbList, MedicalWebPage (si psychometric + validated)
+   - Datos: fetch paralelo de `metadata.json` + `{lang}.json`; fallback a `es.json`
+
+3. **TestInterstitial.tsx** — Pantalla intersticial (disclaimer + ad)
+   - Disclaimer clínico limpio (sin rojo, sin ⚠️)
+   - AdSlot `pre-test` de mayor valor publicitario
+   - Enlace discreto a página de ayuda urgente (en lugar de teléfonos visibles)
+   - Botones: "Entiendo y continuar" + "Cancelar, volver atrás"
+
+4. **Flujo completo con subrutas (App.tsx reescrito)**
+   - `/:lang/test/:testId` → TestLandingPage (indexable, SEO)
+   - `/:lang/test/:testId/start` → TestInterstitial (disclaimer + ad)
+   - `/:lang/test/:testId/play` → TestContainer (test real)
+   - Protección acceso directo: `location.state` con flags `fromLanding` / `fromInterstitial`
+   - Botón Atrás nativo funciona correctamente (historial React Router)
+   - RTL wrapper para ar/he/ku
+   - Redirects legacy: `/test/:testId`, `/:lang/test`, `/tests`
+
+5. **Datos JSON de tests reorganizados**
+   - `public/data/tests/{testId}/metadata.json` — ficha técnica, idiomas, cutoffs
+   - `public/data/tests/{testId}/{lang}.json` — contenido por idioma (landing, preguntas, mensajes)
+   - Completados: GAD-7 (es/en/pt) y PHQ-9 (es/en/pt)
+
+6. **HelpResourcesPage.tsx** — Páginas de ayuda urgente
+   - Rutas: `/es/ayuda-urgente`, `/en/urgent-help`, `/pt/ajuda-urgente`
+   - Tono: calmo y profesional (psicólogo que indica dónde ir, no alarma)
+   - Secciones: Emergencias, Salud mental (con expandible "otros países"), Otros recursos, Hablar con profesional
+   - PhoneCard: área completa tappable en móvil, número prominente
+   - Datos en `src/data/help-resources/{es,en,pt}.json`
+
+7. **ResultCard.tsx rediseñado — tono más humano**
+   - Eliminado `CrisisResult` (rojo, pulsante, teléfonos prominentes, `animate-pulse`, `role="alert"`)
+   - Todos los resultados usan `NormalResult` (score + categoría + recomendación)
+   - `SupportBlock` nuevo: se muestra cuando `resultType === 'CRISIS'` o hay red flags o urgencia
+     - Fondo crema cálido (`#ede8df`), borde Verde Bosque izquierdo
+     - Título: "En tus respuestas hemos detectado algunos aspectos que pueden indicar que necesitas apoyo"
+     - Texto: "Te recomendamos que consultes con un profesional lo antes posible."
+     - Enlace: "Puedes pedir ayuda en estos recursos →" (a `/ayuda-urgente`)
+     - Nota de privacidad: "Esta información está solo en tu navegador y no la verá nadie si tú no la compartes."
+     - Nota de emergencia: "Si es una emergencia, llama al 112"
+   - Bloque "Recomendación" ahora solo se renderiza si `message.recommendation` existe (fix etiqueta vacía)
+   - Prop `type` eliminada de `ResultCardProps` (se deriva del resultado)
+
+8. **AdSlot.tsx ampliado**
+   - Nuevas posiciones: `test-intro`, `pre-test`
+   - Nuevo tamaño: `leaderboard` (responsivo, max 728×90)
+
+#### ⚠️ Pendiente
+
+- [ ] Footer de pantalla red flags sigue con color rojo — revisar y neutralizar
+- [ ] Pantallas de resultados finales: revisar coherencia visual completa
+- [ ] PHQ-9: crear landing page + metadata completa (próxima prioridad)
+- [ ] Fix spacing bug en TestContainer (h2 / cards) — identificado pero no confirmado resuelto
+- [ ] SEO: hreflang tags en `<head>`
+- [ ] Shareable results (OG tags, share buttons)
+
+### Commits de la sesión
+
+- `feat: reorganizar datos de tests con metadata y landing para GAD-7 y PHQ-9 en es/en/pt`
+- `refactor: change LangSwitcher from pills to dropdown`
+- `feat: add PT language and lang switcher on test intro page`
+- `feat: add AdSlot component and ad interstitial screens`
+- `fix: localize Likert option labels for EN/PT tests`
+- `fix: rediseñar pantalla de red flags con enfoque calmo y profesional`
+- `fix: tono menos diagnosticador en bloque de apoyo y fix recomendación vacía`

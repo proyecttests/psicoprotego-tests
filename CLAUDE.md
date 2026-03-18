@@ -34,82 +34,91 @@ Do not build for these unless explicitly asked.
 
 ---
 
-## 🚨 CRITICAL BLOCKERS (Session 2)
+## ⚠️ Pendiente (Sesión 3)
 
-### 1. Spacing Bug (BLOCKING)
+### 1. Footer de red flags — sigue rojo
+
+- **Archivo:** `src/components/common/Footer.tsx` (o componente equivalente)
+- **Issue:** Cuando hay red flags, el footer de la pantalla de resultados mantiene color rojo
+- **Fix:** Neutralizar color — usar paleta Psicoprotego en lugar de rojo
+
+### 2. Pantallas de resultados — revisión visual completa
+
+- **Issue:** Revisar coherencia visual de ResultCard en todos los estados (normal, severe, crisis)
+- **Status:** SupportBlock implementado pero pendiente revisión visual end-to-end
+
+### 3. Spacing bug TestContainer — por confirmar
 
 - **File:** `src/components/test-framework/TestContainer.tsx`
-- **Issue:** h2 question + option cards overlap on desktop
-- **Impact:** Broken UX, visual confusion
-- **Fix:** Increase vertical gap/margin between h2 and QuestionRenderer
-- **Status:** Identified, needs manual fix
-
-### 2. Router Not Implemented
-
-- **Pattern:** `/:lang/test/:testId` (es/en/pt/...)
-- **Fallback:** `/tests` → `/es/test/gad7`
-- **Languages:** es, en, pt (then fr, de, it, ar, he, etc.)
-
-### 3. Crisis Handling Incomplete
-
-- **Trigger:** score >= severe OR red flags non-empty
-- **Show:** Phone 024 (Spain), localized per country
-- **Required:** Post-test disclaimer always
-- **Status:** Structure ready, UI pending
+- **Issue:** h2 question + option cards podrían seguir solapando en desktop
+- **Status:** Parcialmente corregido; pendiente verificación visual definitiva
 
 ---
 
-## ✅ Current Status
+## ✅ Estado Actual
 
-### Working
+### Funciona
 
-- [x] GAD-7 test (7 questions, scoring, results)
-- [x] ADHD-optimized UI (cards, animations, progress bar)
-- [x] Brand colors and typography
-- [x] Header + breadcrumb
-- [x] Navigation buttons (Previous/Next)
+- [x] GAD-7 — funcional en ES / EN / PT (landing + intersticial + test + resultados)
+- [x] PHQ-9 — funcional en ES / EN / PT
+- [x] Router multiidioma `/:lang/test/:testId` con subrutas `/start` y `/play`
+- [x] Protección acceso directo (location.state)
+- [x] Landing pages SEO con JSON-LD (FAQPage, BreadcrumbList, MedicalWebPage)
+- [x] TestInterstitial — disclaimer + AdSlot + enlace a ayuda (sin teléfonos alarmantes)
+- [x] HelpResourcesPage — `/es/ayuda-urgente`, `/en/urgent-help`, `/pt/ajuda-urgente`
+- [x] ResultCard — tono calmado, SupportBlock con nota de privacidad
+- [x] Mensajes de apoyo: tono menos diagnosticador ("hemos detectado" vs "tu resultado sugiere"), nota de privacidad incluida
+- [x] AdSlot — posiciones: intro, pre-test, leaderboard
+- [x] ADHD-optimized UI (cards, animaciones, progress bar)
+- [x] Analytics GTM + GA4
 
-### Pending
+### Pendiente
 
-- [ ] Fix spacing bug (BLOCKING)
-- [ ] Multiidioma router
-- [ ] PHQ-9 test (validate framework extensibility)
-- [ ] Crisis UI (024, disclaimers)
-- [ ] AdSlot component (reserve space for ads)
+- [ ] Footer rojo en pantalla red flags — **neutralizar**
+- [ ] Revisión visual completa ResultCard (todos los estados)
+- [ ] **Crear landing + metadata para PHQ-9** ← próxima prioridad
 - [ ] Shareable results (OG tags, share buttons)
+- [ ] SEO: hreflang tags en `<head>`
+- [ ] Versiones FR / DE / IT / AR de tests
 
 ---
 
-## 📋 Next 3 Steps (Priority Order)
+## 📋 Próximas Prioridades
 
-1. **Fix spacing** → h2/cards overlap in TestContainer.tsx
-2. **Implement router** → /:lang/test/:testId with validation
-3. **Add PHQ-9** → 9 questions, validate scoring agnostic pattern
+1. **Arreglar footer rojo** → pantalla de red flags / crisis
+2. **PHQ-9 landing + metadata** → `public/data/tests/phq9/metadata.json` + landing en es/en/pt
+3. **Revisión visual ResultCard** → coherencia end-to-end en todos los estados
 
 ---
 
-## 🔗 Rules & Architecture
+## 🔗 Reglas y Arquitectura
 
-See `.claude/rules/`:
+Ver `.claude/rules/`:
 
-- **ux-rules.md** → ADHD-optimized design (locked)
-- **code-standards.md** → TypeScript, commits, patterns
+- **ux-rules.md** → Diseño ADHD-optimizado (bloqueado)
+- **code-standards.md** → TypeScript, commits, patrones
 - **safety.md** → Crisis handling, disclaimers
-- **architecture.md** → Routing, data model, components
+- **architecture.md** → Routing, modelo de datos, componentes
 
 ---
 
-## 📂 Key Files
+## 📂 Archivos Clave
 
-- `src/components/test-framework/TestContainer.tsx` ← SPACING ISSUE HERE
-- `src/config/tests.json` ← Test definitions
-- `src/utils/scoringFunctions.ts` ← Scoring logic (agnostic factory)
-- `src/index.css` ← ADHD animations
-- `.env.local` ← Secrets (never commit)
+- `src/components/test-framework/TestContainer.tsx`
+- `src/components/results/ResultCard.tsx` ← SupportBlock de red flags
+- `src/pages/TestLandingPage.tsx` ← Landing SEO
+- `src/pages/TestInterstitial.tsx` ← Disclaimer + ad pre-test
+- `src/pages/HelpResourcesPage.tsx` ← Recursos de ayuda urgente
+- `src/data/help-resources/{es,en,pt}.json` ← Contenido páginas de ayuda
+- `public/data/tests/{testId}/{lang}.json` ← Contenido de cada test
+- `public/data/tests/{testId}/metadata.json` ← Ficha técnica
+- `src/utils/scoringFunctions.ts` ← Lógica de scoring (factory)
+- `src/index.css` ← Animaciones ADHD
+- `.env.local` ← Secrets (nunca commitear)
 
 ---
 
-## ⚡ Quick Commands
+## ⚡ Comandos Rápidos
 
 ```bash
 npm run dev          # Vite dev server (localhost:5173)
@@ -120,5 +129,5 @@ git commit -m "..."  # Conventional commits
 
 ---
 
-**Last Updated:** 2026-03-17  
-**Focus:** Fix spacing, then router, then PHQ-9
+**Última actualización:** 2026-03-18
+**Foco:** Footer rojo → PHQ-9 landing → revisión visual ResultCard
