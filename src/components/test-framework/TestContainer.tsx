@@ -421,8 +421,8 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
               {testDef.instructions.split('\n\n').map((paragraph, i) => (
                 <p
                   key={i}
-                  className={`text-sm leading-relaxed font-sans text-center${i > 0 ? ' mt-3 font-medium' : ''}`}
-                  style={{ color: 'var(--color-primary)', opacity: 0.7 }}
+                  className={`text-base leading-relaxed font-sans text-center${i > 0 ? ' mt-3 font-semibold' : ''}`}
+                  style={{ color: 'var(--color-primary)', opacity: 0.85 }}
                 >
                   {paragraph}
                 </p>
