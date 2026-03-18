@@ -129,7 +129,10 @@ export default function StartPage() {
     return () => { cancelled = true }
   }, [testId, lang])
 
-  const handleContinue = () => router.push(`/${lang}/test/${testId}/play`)
+  const handleContinue = () => {
+    sessionStorage.setItem('test_access_granted', testId)
+    router.push(`/${lang}/test/${testId}/play`)
+  }
   const handleCancel   = () => router.push(`/${lang}/test/${testId}`)
 
   // ── Loading ───────────────────────────────────────────────────────────────
