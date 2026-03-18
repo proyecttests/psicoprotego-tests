@@ -6,7 +6,7 @@
  */
 
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 
 // ── Props ─────────────────────────────────────────────────────────────────────
 
@@ -38,7 +38,7 @@ const LANG_LABELS: Record<string, string> = {
 // ── Componente ────────────────────────────────────────────────────────────────
 
 const LangSwitcher: React.FC<LangSwitcherProps> = ({ currentLang, testId, availableLangs }) => {
-  const navigate = useNavigate()
+  const router = useRouter()
 
   if (availableLangs.length <= 1) return null
 
@@ -50,7 +50,7 @@ const LangSwitcher: React.FC<LangSwitcherProps> = ({ currentLang, testId, availa
       <select
         id="lang-switcher"
         value={currentLang}
-        onChange={(e) => navigate(`/${e.target.value}/test/${testId}`, { replace: true })}
+        onChange={(e) => router.replace(`/${e.target.value}/test/${testId}`)}
         aria-label="Seleccionar idioma"
         className="
           rounded-lg border border-gray-300 bg-white px-3 py-1.5

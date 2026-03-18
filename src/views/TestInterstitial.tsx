@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import type { TestLangFile } from '@/types/test'
 import Header  from '@/components/common/Header'
 import Footer  from '@/components/common/Footer'
@@ -246,7 +246,7 @@ const TestInterstitial: React.FC<TestInterstitialProps> = ({
               {/* Enlace sutil a recursos de ayuda */}
               <div className="mt-4 pt-4" style={{ borderTop: '1px solid rgba(45,74,62,0.1)' }}>
                 <Link
-                  to={HELP_ROUTES[lang] ?? HELP_ROUTES['es']}
+                  href={HELP_ROUTES[lang] ?? HELP_ROUTES['es']}
                   className="text-xs transition-opacity hover:opacity-70 focus:outline-none focus-visible:ring-2 rounded"
                   style={{ color: 'var(--color-accent)' }}
                 >
