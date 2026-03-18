@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "GAD-7 MVP - Plataforma de evaluación psicológica",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
