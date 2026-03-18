@@ -323,6 +323,7 @@ const NormalResult: React.FC<{
   maxScore: number
 }> = ({ result, onReset, onShareWhatsApp, lang, testId, maxScore }) => {
   const visible      = useFadeIn()
+  const isCrisis     = result.resultType === 'CRISIS'
   const displayScore = useCountUp(result.score ?? 0)
   const colorKey     = result.category?.color ?? 'green'
   const colors       = COLOR_MAP[colorKey] ?? COLOR_MAP['green']
@@ -331,7 +332,7 @@ const NormalResult: React.FC<{
   const shareUrl     = buildShareUrl(lang, testId, result.score ?? 0, result.category?.messageKey ?? '')
 
   const showSupport =
-    result.resultType === 'CRISIS' ||
+    isCrisis ||
     (result.redFlags?.length ?? 0) > 0 ||
     (result.urgency != null && result.urgency !== 'none')
 
@@ -343,7 +344,8 @@ const NormalResult: React.FC<{
     <div
       className={`w-full max-w-2xl space-y-4 px-4 py-6 sm:px-6 transition-opacity duration-300 ${visible ? 'opacity-100' : 'opacity-0'}`}
     >
-      {/* ── Score + barra visual ────────────────────────────────────────── */}
+      {/* ── Score + barra visual (oculto en CRISIS: score es null) ──────── */}
+      {!isCrisis && (
       <div className={`card text-center ${colors.bg} ${colors.border} border-2`}>
         <div
           aria-label={`${ui.scoreLabel}: ${result.score}`}
@@ -367,6 +369,7 @@ const NormalResult: React.FC<{
           />
         )}
       </div>
+      )}
 
       {/* ── Mensaje de resultado ─────────────────────────────────────────── */}
       <div className="card space-y-4">
