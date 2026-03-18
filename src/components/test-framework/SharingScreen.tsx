@@ -10,9 +10,9 @@
  * (Twitter/X, copiar enlace con confirmación animada, "enviar a un amigo", etc.)
  */
 
+'use client'
+
 import React from 'react'
-import Header  from '@/components/common/Header'
-import Footer  from '@/components/common/Footer'
 import AdSlot  from '@/components/ads/AdSlot'
 
 // ── UI strings ────────────────────────────────────────────────────────────────
@@ -28,8 +28,6 @@ const STRINGS: Record<string, { title: string; subtitle: string }> = {
 interface SharingScreenProps {
   /** Código de idioma para UI strings */
   lang: string
-  /** Nombre del test para el Header */
-  testName?: string
   /** URL a abrir al finalizar el delay (WhatsApp u otro destino) */
   shareUrl: string
   /** Callback para volver a la pantalla anterior (resultados) */
@@ -40,7 +38,7 @@ const DELAY_MS = 1500
 
 // ── Componente ────────────────────────────────────────────────────────────────
 
-const SharingScreen: React.FC<SharingScreenProps> = ({ lang, testName, shareUrl, onDone }) => {
+const SharingScreen: React.FC<SharingScreenProps> = ({ lang, shareUrl, onDone }) => {
   const s = STRINGS[lang] ?? STRINGS['es']
 
   React.useEffect(() => {
@@ -53,31 +51,25 @@ const SharingScreen: React.FC<SharingScreenProps> = ({ lang, testName, shareUrl,
   }, [])
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <Header testName={testName} />
+    <div className="flex flex-1 flex-col items-center justify-center gap-10 px-4 py-8">
+      {/* Indicador + texto */}
+      <div className="flex flex-col items-center gap-4 text-center">
+        <div
+          className="h-14 w-14 animate-spin rounded-full border-4 border-gray-200"
+          style={{ borderTopColor: 'var(--color-primary)' }}
+          aria-hidden="true"
+        />
+        <h2
+          className="text-xl font-semibold"
+          style={{ color: 'var(--color-primary)' }}
+        >
+          {s.title}
+        </h2>
+        <p className="text-sm text-gray-500 font-sans">{s.subtitle}</p>
+      </div>
 
-      <main className="flex flex-1 flex-col items-center justify-center gap-10 px-4">
-        {/* Indicador + texto */}
-        <div className="flex flex-col items-center gap-4 text-center">
-          <div
-            className="h-14 w-14 animate-spin rounded-full border-4 border-gray-200"
-            style={{ borderTopColor: 'var(--color-primary)' }}
-            aria-hidden="true"
-          />
-          <h2
-            className="text-xl font-semibold"
-            style={{ color: 'var(--color-primary)' }}
-          >
-            {s.title}
-          </h2>
-          <p className="text-sm text-gray-500 font-sans">{s.subtitle}</p>
-        </div>
-
-        {/* Slot publicitario post-share */}
-        <AdSlot position="post-share" size="rectangle" />
-      </main>
-
-      <Footer showCrisisFooter={false} />
+      {/* Slot publicitario post-share */}
+      <AdSlot position="post-share" size="rectangle" />
     </div>
   )
 }

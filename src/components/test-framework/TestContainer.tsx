@@ -18,6 +18,8 @@
  * ```
  */
 
+'use client'
+
 import React from 'react'
 import type {
   TestDefinition,
@@ -27,8 +29,6 @@ import type {
   Question,
 } from '@/types/test'
 
-import Header              from '@/components/common/Header'
-import Footer              from '@/components/common/Footer'
 import ProgressBar         from './ProgressBar'
 import QuestionRenderer    from './QuestionRenderer'
 import ResultCard          from '@/components/results/ResultCard'
@@ -37,6 +37,53 @@ import SharingScreen       from './SharingScreen'
 import { getScoringFunction } from '@/utils/scoringFunctions'
 import type { ScoringResult, TestDefinitionForScoring } from '@/utils/scoringFunctions'
 import { trackEvent } from '@/config/analytics'
+
+// ── Crisis bar (sticky bottom, solo cuando resultType === 'CRISIS') ───────────
+
+const CRISIS_STRINGS: Record<string, { message: string; phone1Label: string; phone1: string; phone2: string }> = {
+  es: { message: 'Hay apoyo disponible — no estás solo/a', phone1Label: '024 – Esperanza', phone1: '024', phone2: '112' },
+  en: { message: 'Support is available — you are not alone',  phone1Label: '988',              phone1: '988', phone2: '911' },
+  pt: { message: 'Há apoio disponível — você não está sozinho/a', phone1Label: '192',           phone1: '192', phone2: '190' },
+}
+
+const CrisisBar: React.FC<{ lang: string }> = ({ lang }) => {
+  const t = CRISIS_STRINGS[lang] ?? CRISIS_STRINGS['es']
+  return (
+    <div
+      role="complementary"
+      aria-label="Recursos de ayuda inmediata"
+      className="fixed bottom-0 left-0 right-0 z-50 shadow-lg"
+      style={{ backgroundColor: 'var(--color-primary)' }}
+    >
+      <div className="mx-auto max-w-3xl px-4 py-3 sm:px-6">
+        <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
+          <p className="text-center text-sm font-semibold text-white sm:text-left">
+            {t.message}
+          </p>
+          <div className="flex w-full gap-3 sm:w-auto">
+            <a
+              href={`tel:${t.phone1}`}
+              className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-white px-5 py-3 text-sm font-bold sm:flex-none"
+              style={{ color: 'var(--color-primary)' }}
+              aria-label={`Llamar al ${t.phone1Label}`}
+            >
+              <span aria-hidden="true">📞</span>
+              {t.phone1Label}
+            </a>
+            <a
+              href={`tel:${t.phone2}`}
+              className="flex flex-1 items-center justify-center gap-2 rounded-lg border-2 border-white px-5 py-3 text-sm font-bold text-white sm:flex-none"
+              aria-label={`Llamar al ${t.phone2}`}
+            >
+              <span aria-hidden="true">📞</span>
+              {t.phone2}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 // ── UI strings ────────────────────────────────────────────────────────────────
 
@@ -296,7 +343,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
 
   if (uiState === 'loading') {
     return (
-      <div className="flex min-h-screen items-center justify-center">
+      <div className="flex min-h-[60vh] items-center justify-center">
         <div role="status" aria-live="polite" className="flex flex-col items-center gap-4 text-gray-500">
           <div
             className="h-10 w-10 animate-spin rounded-full border-4 border-gray-200" style={{ borderTopColor: 'var(--color-primary)' }}
@@ -310,26 +357,22 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
 
   if (uiState === 'error') {
     return (
-      <div className="flex min-h-screen flex-col">
-        <Header />
-        <main className="flex flex-1 items-center justify-center px-4 py-8">
-          <div
-            role="alert"
-            className="max-w-md rounded-xl border border-red-300 bg-red-50 p-6 text-center shadow-sm"
+      <div className="flex flex-1 items-center justify-center px-4 py-8">
+        <div
+          role="alert"
+          className="max-w-md rounded-xl border border-red-300 bg-red-50 p-6 text-center shadow-sm"
+        >
+          <span aria-hidden="true" className="text-4xl">⚠️</span>
+          <h1 className="mt-3 text-lg font-semibold text-red-800">{ui.errorTitle}</h1>
+          <p className="mt-2 text-sm text-red-700">{errorMsg}</p>
+          <button
+            type="button"
+            onClick={() => window.location.reload()}
+            className="btn-primary mt-5"
           >
-            <span aria-hidden="true" className="text-4xl">⚠️</span>
-            <h1 className="mt-3 text-lg font-semibold text-red-800">{ui.errorTitle}</h1>
-            <p className="mt-2 text-sm text-red-700">{errorMsg}</p>
-            <button
-              type="button"
-              onClick={() => window.location.reload()}
-              className="btn-primary mt-5"
-            >
-              {ui.reload}
-            </button>
-          </div>
-        </main>
-        <Footer showCrisisFooter={false} />
+            {ui.reload}
+          </button>
+        </div>
       </div>
     )
   }
@@ -338,7 +381,6 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
     return (
       <CalculatingScreen
         lang={lang}
-        testName={testDef?.name}
         onDone={() => {
           setUiState('result')
           window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -351,7 +393,6 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
     return (
       <SharingScreen
         lang={lang}
-        testName={testDef?.name}
         shareUrl={pendingShareUrl}
         onDone={() => {
           setPendingShareUrl('')
@@ -364,9 +405,8 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
 
   if (uiState === 'result' && result) {
     return (
-      <div className="flex min-h-screen flex-col">
-        <Header testName={testDef?.name} />
-        <main className="flex flex-1 items-start justify-center py-8">
+      <>
+        <div className="flex flex-1 items-start justify-center py-8">
           <ResultCard
             result={result}
             testData={testDef}
@@ -376,9 +416,9 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
             testId={testId}
             maxScore={maxScore}
           />
-        </main>
-        <Footer showCrisisFooter={showCrisisFooter} />
-      </div>
+        </div>
+        {showCrisisFooter && <CrisisBar lang={lang} />}
+      </>
     )
   }
 
@@ -388,13 +428,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
   const questionNumber = currentIdx + 1
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <Header
-        testName={testDef?.name}
-        currentQuestion={questionNumber}
-        totalQuestions={visibleQuestions.length}
-      />
-
+    <>
       <main
         className="flex flex-1 flex-col items-center justify-between px-4 py-6 sm:px-6"
         aria-live="polite"
@@ -486,9 +520,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
           </p>
         )}
       </main>
-
-      <Footer showCrisisFooter={false} />
-    </div>
+    </>
   )
 }
 
