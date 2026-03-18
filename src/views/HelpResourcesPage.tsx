@@ -14,10 +14,10 @@
  *   /pt/ajuda-urgente
  */
 
+'use client'
+
 import React from 'react'
 import Link from 'next/link'
-import Header from '@/components/common/Header'
-import Footer from '@/components/common/Footer'
 
 import esData from '@/data/help-resources/es.json'
 import enData from '@/data/help-resources/en.json'
@@ -209,9 +209,7 @@ const HelpResourcesPage: React.FC<HelpResourcesPageProps> = ({ lang }) => {
   const [othersExpanded, setOthersExpanded] = React.useState(false)
 
   return (
-    <div className="flex min-h-screen flex-col" style={{ backgroundColor: 'var(--color-cream)' }}>
-      <Header />
-
+    <div className="flex flex-col" style={{ backgroundColor: 'var(--color-cream)' }}>
       <main className="flex flex-1 flex-col items-center px-4 py-12 sm:px-6">
         <div className="w-full max-w-xl mx-auto flex flex-col gap-12">
 
@@ -369,8 +367,6 @@ const HelpResourcesPage: React.FC<HelpResourcesPageProps> = ({ lang }) => {
 
         </div>
       </main>
-
-      <Footer showCrisisFooter={false} />
     </div>
   )
 }
