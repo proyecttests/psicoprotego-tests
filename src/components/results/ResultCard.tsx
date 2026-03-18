@@ -32,10 +32,10 @@ interface ResultCardProps {
 const COLOR_MAP: Record<string, {
   bg: string; text: string; border: string; badge: string; bar: string
 }> = {
-  green:  { bg: 'bg-green-50',  text: 'text-green-700',  border: 'border-green-300',  badge: 'bg-green-100 text-green-800',  bar: 'bg-green-500'  },
-  yellow: { bg: 'bg-yellow-50', text: 'text-yellow-700', border: 'border-yellow-300', badge: 'bg-yellow-100 text-yellow-800', bar: 'bg-yellow-500' },
-  orange: { bg: 'bg-orange-50', text: 'text-orange-700', border: 'border-orange-300', badge: 'bg-orange-100 text-orange-800', bar: 'bg-orange-500' },
-  red:    { bg: 'bg-red-50',    text: 'text-red-700',    border: 'border-red-300',    badge: 'bg-red-100 text-red-800',      bar: 'bg-red-500'    },
+  green:  { bg: 'bg-green-50',    text: 'text-green-700',   border: 'border-green-300',   badge: 'bg-green-100 text-green-800',    bar: 'bg-green-500'    },
+  yellow: { bg: 'bg-accent-50',   text: 'text-accent-600',  border: 'border-accent-200',  badge: 'bg-accent-100 text-accent-700',  bar: 'bg-accent-400'   },
+  orange: { bg: 'bg-accent-50',   text: 'text-accent-600',  border: 'border-accent-300',  badge: 'bg-accent-100 text-accent-700',  bar: 'bg-accent-500'   },
+  red:    { bg: 'bg-primary-50',  text: 'text-primary-500', border: 'border-primary-300', badge: 'bg-primary-100 text-primary-600', bar: 'bg-primary-500'  },
 }
 
 // ── Mapa de rutas de ayuda por idioma ────────────────────────────────────────
