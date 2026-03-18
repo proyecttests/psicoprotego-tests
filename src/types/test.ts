@@ -127,6 +127,8 @@ export interface TestDefinition {
   disclaimerBefore?: string
   /** Texto del disclaimer después del test */
   disclaimerAfter?: string
+  /** Instrucciones originales del instrumento validado. Se muestran encima de la primera pregunta. */
+  instructions?: string
 }
 
 // ── Mensajes de resultado ────────────────────────────────────────────────────
@@ -250,6 +252,8 @@ export interface TestLangFile {
   scoringFunction: string
   disclaimerBefore?: string
   disclaimerAfter?: string
+  /** Instrucciones originales del instrumento. Se muestran encima de la primera pregunta. */
+  instructions?: string
   landing: TestLanding
   questions: Question[]
   scoring: ScoringRule[]
