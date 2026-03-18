@@ -21,8 +21,8 @@ import AdSlot from '@/components/ads/AdSlot'
 
 const HELP_ROUTES: Record<string, string> = {
   es: '/es/ayuda-urgente',
-  en: '/en/urgent-help',
-  pt: '/pt/ajuda-urgente',
+  en: '/en/ayuda-urgente',
+  pt: '/pt/ayuda-urgente',
 }
 
 // ── UI strings ────────────────────────────────────────────────────────────────
