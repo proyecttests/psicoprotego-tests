@@ -34,7 +34,7 @@ function renderWithBold(text: string): React.ReactNode[] {
   const parts = text.split('**')
   return parts.map((part, i) =>
     i % 2 === 1
-      ? <strong key={i} className="font-semibold text-red-800">{part}</strong>
+      ? <strong key={i} className="font-semibold text-primary-600">{part}</strong>
       : <React.Fragment key={i}>{part}</React.Fragment>
   )
 }
@@ -65,7 +65,7 @@ const Disclaimer: React.FC<DisclaimerProps> = ({
     >
       {/* ── Caja de advertencia ─────────────────────────────────────────────── */}
       <div
-        className="rounded-xl border border-red-200 p-5 shadow-sm border-l-4 border-l-red-500"
+        className="rounded-xl border border-primary-200 p-5 shadow-sm border-l-4 border-l-primary-500"
         style={{ backgroundColor: 'var(--color-cream)' }}
       >
         <div className="flex items-start gap-4">
@@ -87,20 +87,20 @@ const Disclaimer: React.FC<DisclaimerProps> = ({
           </div>
         </div>
 
-        <hr className="my-4 border-red-100" />
+        <hr className="my-4 border-primary-100" />
 
         <p className="text-xs font-sans" style={{ color: '#666' }}>
           <strong className="font-semibold">En caso de crisis:</strong> llama al{' '}
           <a
             href="tel:024"
-            className="font-bold text-red-700 underline hover:text-red-900 focus:outline-none focus:ring-1 focus:ring-red-500 rounded"
+            className="font-bold text-primary-500 underline hover:text-primary-700 focus:outline-none focus:ring-1 focus:ring-primary-500 rounded"
           >
             024
           </a>{' '}
           (gratuito, 24 h) o al{' '}
           <a
             href="tel:112"
-            className="font-bold text-red-700 underline hover:text-red-900 focus:outline-none focus:ring-1 focus:ring-red-500 rounded"
+            className="font-bold text-primary-500 underline hover:text-primary-700 focus:outline-none focus:ring-1 focus:ring-primary-500 rounded"
           >
             112
           </a>.{' '}
