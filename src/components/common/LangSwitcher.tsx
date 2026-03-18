@@ -1,3 +1,5 @@
+'use client'
+
 /**
  * @file components/common/LangSwitcher.tsx
  * @description Selector de idioma para la página inicial de cada test.
