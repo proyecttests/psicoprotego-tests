@@ -22,11 +22,11 @@
  * ```
  */
 
+'use client'
+
 import React from 'react'
 import Link from 'next/link'
 import type { TestLangFile } from '@/types/test'
-import Header  from '@/components/common/Header'
-import Footer  from '@/components/common/Footer'
 import AdSlot  from '@/components/ads/AdSlot'
 
 // ── Mapa de rutas de ayuda por idioma ────────────────────────────────────────
@@ -173,35 +173,29 @@ const TestInterstitial: React.FC<TestInterstitialProps> = ({
   // ── Error ─────────────────────────────────────────────────────────────────
   if (loadState === 'error') {
     return (
-      <div className="flex min-h-screen flex-col">
-        <Header />
-        <main className="flex flex-1 items-center justify-center px-4 py-8">
-          <div
-            role="alert"
-            className="max-w-md rounded-xl border border-red-300 bg-red-50 p-6 text-center shadow-sm"
+      <main className="flex flex-1 items-center justify-center px-4 py-8">
+        <div
+          role="alert"
+          className="max-w-md rounded-xl border border-red-300 bg-red-50 p-6 text-center shadow-sm"
+        >
+          <span aria-hidden="true" className="text-4xl">⚠️</span>
+          <h1 className="mt-3 text-lg font-semibold text-red-800">{ui.errorTitle}</h1>
+          <p className="mt-2 text-sm text-red-700">{errorMsg}</p>
+          <button
+            type="button"
+            onClick={() => window.location.reload()}
+            className="btn-primary mt-5"
           >
-            <span aria-hidden="true" className="text-4xl">⚠️</span>
-            <h1 className="mt-3 text-lg font-semibold text-red-800">{ui.errorTitle}</h1>
-            <p className="mt-2 text-sm text-red-700">{errorMsg}</p>
-            <button
-              type="button"
-              onClick={() => window.location.reload()}
-              className="btn-primary mt-5"
-            >
-              {ui.errorRetry}
-            </button>
-          </div>
-        </main>
-        <Footer showCrisisFooter={false} />
-      </div>
+            {ui.errorRetry}
+          </button>
+        </div>
+      </main>
     )
   }
 
   // ── Loaded ────────────────────────────────────────────────────────────────
   return (
-    <div className="flex min-h-screen flex-col" style={{ backgroundColor: 'var(--color-cream)' }}>
-      <Header testName={testName} />
-
+    <div className="flex flex-col" style={{ backgroundColor: 'var(--color-cream)' }}>
       <main className="flex flex-1 flex-col items-center px-4 py-10 sm:px-6">
         <div className="w-full max-w-xl mx-auto flex flex-col gap-8">
 
@@ -285,8 +279,6 @@ const TestInterstitial: React.FC<TestInterstitialProps> = ({
 
         </div>
       </main>
-
-      <Footer showCrisisFooter={false} />
     </div>
   )
 }
