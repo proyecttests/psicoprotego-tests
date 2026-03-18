@@ -21,7 +21,7 @@
 - **DNS:** Piensa Solutions
 - **Repo:** github.com/proyecttests/psicoprotego-tests
 
-> ⚠️ Possible future migration to Next.js (SSR for SEO, API routes). Current: Vite+React.
+> ⚠️ Migración a Next.js en curso — SSR para SEO, API routes para OG dinámicos.
 
 ---
 
@@ -34,26 +34,6 @@ Do not build for these unless explicitly asked.
 
 ---
 
-## ⚠️ Pendiente (Sesión 3)
-
-### 1. Footer de red flags — sigue rojo
-
-- **Archivo:** `src/components/common/Footer.tsx` (o componente equivalente)
-- **Issue:** Cuando hay red flags, el footer de la pantalla de resultados mantiene color rojo
-- **Fix:** Neutralizar color — usar paleta Psicoprotego en lugar de rojo
-
-### 2. Pantallas de resultados — revisión visual completa
-
-- **Issue:** Revisar coherencia visual de ResultCard en todos los estados (normal, severe, crisis)
-- **Status:** SupportBlock implementado pero pendiente revisión visual end-to-end
-
-### 3. Spacing bug TestContainer — por confirmar
-
-- **File:** `src/components/test-framework/TestContainer.tsx`
-- **Issue:** h2 question + option cards podrían seguir solapando en desktop
-- **Status:** Parcialmente corregido; pendiente verificación visual definitiva
-
----
 
 ## ✅ Estado Actual
 
@@ -66,18 +46,20 @@ Do not build for these unless explicitly asked.
 - [x] Landing pages SEO con JSON-LD (FAQPage, BreadcrumbList, MedicalWebPage)
 - [x] TestInterstitial — disclaimer + AdSlot + enlace a ayuda (sin teléfonos alarmantes)
 - [x] HelpResourcesPage — `/es/ayuda-urgente`, `/en/urgent-help`, `/pt/ajuda-urgente`
-- [x] ResultCard — tono calmado, SupportBlock con nota de privacidad
-- [x] Mensajes de apoyo: tono menos diagnosticador ("hemos detectado" vs "tu resultado sugiere"), nota de privacidad incluida
+- [x] ResultCard — paleta brand en todos los estados, sin rojos ni naranjas
+- [x] SupportBlock — fondo crema, borde verde bosque, tono calmo
+- [x] Estado CRISIS — score card oculto (score null), muestra mensaje + SupportBlock
+- [x] Footer crisis — verde bosque, tono "Hay apoyo disponible" (no alarmante)
+- [x] Disclaimer — paleta brand (primary-*), sin red-*
 - [x] AdSlot — posiciones: intro, pre-test, leaderboard
 - [x] ADHD-optimized UI (cards, animaciones, progress bar)
 - [x] Analytics GTM + GA4
 
 ### Pendiente
 
-- [ ] Footer rojo en pantalla red flags — **neutralizar**
-- [ ] Revisión visual completa ResultCard (todos los estados)
-- [ ] **Crear landing + metadata para PHQ-9** ← próxima prioridad
-- [ ] Shareable results (OG tags, share buttons)
+- [ ] Migración a Next.js (SSR, API routes)
+- [ ] PHQ-9 landing + metadata en Next.js
+- [ ] Shareable results con OG dinámicos (requiere Next.js API route)
 - [ ] SEO: hreflang tags en `<head>`
 - [ ] Versiones FR / DE / IT / AR de tests
 
@@ -85,9 +67,9 @@ Do not build for these unless explicitly asked.
 
 ## 📋 Próximas Prioridades
 
-1. **Arreglar footer rojo** → pantalla de red flags / crisis
-2. **PHQ-9 landing + metadata** → `public/data/tests/phq9/metadata.json` + landing en es/en/pt
-3. **Revisión visual ResultCard** → coherencia end-to-end en todos los estados
+1. **Migración a Next.js** → SSR para SEO, API routes para OG dinámicos
+2. **PHQ-9 landing + metadata** → en Next.js (SSR + JSON-LD server-side)
+3. **Shareable results con OG dinámicos** → API route `/api/og?testId=&score=&lang=`
 
 ---
 
@@ -130,4 +112,4 @@ git commit -m "..."  # Conventional commits
 ---
 
 **Última actualización:** 2026-03-18
-**Foco:** Footer rojo → PHQ-9 landing → revisión visual ResultCard
+**Foco:** Migración Next.js → PHQ-9 landing → Shareable results con OG dinámicos

@@ -416,3 +416,54 @@ determina categoría → busca mensaje → ResultCard renderiza
 - `fix: localize Likert option labels for EN/PT tests`
 - `fix: rediseñar pantalla de red flags con enfoque calmo y profesional`
 - `fix: tono menos diagnosticador en bloque de apoyo y fix recomendación vacía`
+
+---
+
+## 2026-03-18 - Sesión Paleta Brand + Coherencia Visual ResultCard
+
+### Objetivos
+
+- Eliminar todos los colores rojos de la pantalla de resultados y footer
+- Verificar coherencia visual de ResultCard en todos los estados
+- Corregir el bug del estado CRISIS en la tarjeta de score
+
+### Trabajo Realizado
+
+#### ✅ Completado
+
+1. **Footer.tsx — crisis footer neutralizado**
+   - `bg-red-600` → `bg-primary-500` (verde bosque `#2d4a3e`)
+   - Botones: `text-red-700` → `text-primary-500`, `hover:bg-red-50` → `hover:bg-primary-50`
+   - Texto del banner: "⚠️ Necesitas ayuda inmediata" → "Hay apoyo disponible — no estás solo/a" (sin emoji de alarma, tono calmo)
+
+2. **ResultCard.tsx — COLOR_MAP reemplazado por paleta brand**
+   - `yellow` (mild): `bg-accent-50 / text-accent-600 / border-accent-200` (dorado suave)
+   - `orange` (moderate): `bg-accent-50 / text-accent-600 / border-accent-300` (dorado marcado)
+   - `red` (severe/crisis): `bg-primary-50 / text-primary-500 / border-primary-300` (verde bosque)
+   - Ningún estado muestra rojo, naranja ni amarillo de alerta
+
+3. **Disclaimer.tsx — todos los red-* sustituidos**
+   - `border-l-red-500` → `border-l-primary-500`
+   - `text-red-800` (negritas) → `text-primary-600`
+   - Links de teléfono: `text-red-700` → `text-primary-500`
+   - HR y bordes: `red-*` → `primary-*`
+
+4. **ResultCard.tsx — bug CRISIS state corregido**
+   - Problema: `resultType === 'CRISIS'` → `score=null`, `category=null` → componente mostraba "0" en círculo verde con badge vacío
+   - Fix: `{!isCrisis && <div className="card ...score...">}` — bloque score oculto en CRISIS
+   - En CRISIS se muestra directamente el mensaje de crisis + SupportBlock
+
+### Verificación de estados (ResultCard)
+
+| Estado | Color key | Visual |
+|--------|-----------|--------|
+| minimal (0–4) | green | Verde estándar ✓ |
+| mild (5–9) | yellow → accent | Dorado suave ✓ |
+| moderate (10–14) | orange → accent | Dorado marcado ✓ |
+| severe (15+) | red → primary | Verde bosque ✓ |
+| crisis (red flags) | — | Score oculto, mensaje + SupportBlock ✓ |
+
+### Commits de la sesión
+
+- `fix: eliminar colores rojos de crisis, usar paleta brand`
+- `fix: ocultar score card en estado CRISIS (score null con círculo verde)`
