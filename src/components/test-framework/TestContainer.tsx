@@ -148,6 +148,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
           scoring:          langData.scoring,
           disclaimerBefore: langData.disclaimerBefore,
           disclaimerAfter:  langData.disclaimerAfter,
+          instructions:     langData.instructions,
         }
 
         // 4. Build messages map compatible with scoringFunctions format
@@ -411,6 +412,24 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
           key={currentIdx}
           className={`w-full max-w-2xl flex flex-col items-center gap-14 flex-1 justify-center py-4${isExiting ? ' animate-slide-out-tiktok' : ''}`}
         >
+          {/* Instrucciones validadas — solo en la primera pregunta */}
+          {currentIdx === 0 && testDef?.instructions && (
+            <div
+              className="w-full max-w-md px-4 animate-fadeInQuestion"
+              aria-label="Instrucciones del test"
+            >
+              {testDef.instructions.split('\n\n').map((paragraph, i) => (
+                <p
+                  key={i}
+                  className={`text-sm leading-relaxed font-sans text-center${i > 0 ? ' mt-3 font-medium' : ''}`}
+                  style={{ color: 'var(--color-primary)', opacity: 0.7 }}
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          )}
+
           {/* Pregunta - Grande, fade suave, centrada */}
           <h2
             className="text-2xl sm:text-3xl font-semibold leading-snug text-center px-4 animate-fadeInQuestion max-w-md pb-2"

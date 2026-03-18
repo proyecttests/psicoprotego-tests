@@ -6,6 +6,7 @@
   "scoringFunction": "scorePHQ9",
   "disclaimerBefore": "Este cuestionario es solo educativo y NO es un diagnóstico clínico. Sus resultados son para reflexión personal. Si tienes dudas o síntomas graves, consulta con un profesional de la salud. Tus respuestas se guardan solo en tu navegador.",
   "disclaimerAfter": "Este test NO es diagnóstico clínico y NO reemplaza la evaluación de un profesional. Si tienes síntomas graves o persistentes, consulta con tu médico o psicólogo. Basado en Kroenke, Spitzer & Williams (2001).",
+  "instructions": "Durante las últimas 2 semanas, ¿con qué frecuencia le han molestado cada uno de los siguientes problemas?",
   "landing": {
     "hook": "¿Te has sentido sin energía o sin esperanza últimamente?",
     "description": "El PHQ-9 es el cuestionario de referencia mundial para la detección de síntomas depresivos. Evalúa 9 síntomas clave del episodio depresivo mayor según los criterios DSM-5, durante las últimas dos semanas.",

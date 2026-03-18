@@ -6,6 +6,7 @@
   "scoringFunction": "scoreGAD7",
   "disclaimerBefore": "Este questionário é apenas educativo e NÃO é um diagnóstico clínico. Os resultados são para reflexão pessoal. Se tiver dúvidas ou sintomas graves, consulte um profissional de saúde. As suas respostas são guardadas apenas no seu navegador.",
   "disclaimerAfter": "Este teste NÃO é diagnóstico clínico e NÃO substitui a avaliação de um profissional. Se tiver sintomas graves ou persistentes, consulte o seu médico ou psicólogo.",
+  "instructions": "As perguntas abaixo referem-se à frequência e à gravidade com que você pode ter experimentado sintomas de ansiedade nas últimas duas semanas. Por favor, ajude-nos a oferecer o melhor atendimento respondendo às seguintes perguntas.\n\nNas últimas 2 semanas, com que frequência você foi incomodado(a) pelos seguintes problemas?",
   "landing": {
     "hook": "A ansiedade está a controlar a sua vida?",
     "description": "O GAD-7 é um questionário clinicamente validado que avalia a frequência e intensidade dos sintomas de ansiedade generalizada nas últimas duas semanas. É um dos instrumentos de rastreio mais utilizados em cuidados de saúde primários em todo o mundo.",

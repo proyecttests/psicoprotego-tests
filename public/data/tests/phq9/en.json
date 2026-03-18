@@ -6,6 +6,7 @@
   "scoringFunction": "scorePHQ9",
   "disclaimerBefore": "This questionnaire is for educational purposes only and is NOT a clinical diagnosis. Results are for personal reflection. If you have concerns or severe symptoms, please consult a healthcare professional. Your answers are stored only in your browser.",
   "disclaimerAfter": "This test is NOT a clinical diagnosis and does NOT replace evaluation by a professional. If you have severe or persistent symptoms, please consult your doctor or psychologist. Based on Kroenke, Spitzer & Williams (2001).",
+  "instructions": "Over the last 2 weeks, how often have you been bothered by any of the following problems?",
   "landing": {
     "hook": "Have you been feeling down or hopeless lately?",
     "description": "The PHQ-9 is the world's leading questionnaire for detecting depressive symptoms. It assesses 9 key symptoms of major depressive episode according to DSM-5 criteria, over the past two weeks.",
