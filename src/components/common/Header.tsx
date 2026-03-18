@@ -4,7 +4,7 @@
  */
 
 import React from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 
 // ── Props ────────────────────────────────────────────────────────────────────
 
@@ -29,7 +29,7 @@ const Header: React.FC<HeaderProps> = ({ testName, currentQuestion, totalQuestio
 
         {/* ── Logo ─────────────────────────────────────────────────────────── */}
         <Link
-          to="/"
+          href="/"
           className="flex items-center focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-md"
           aria-label="Psicoprotego — Inicio"
         >

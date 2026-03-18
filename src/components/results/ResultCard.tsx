@@ -11,7 +11,7 @@
  */
 
 import React from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import type { ScoringResult } from '@/utils/scoringFunctions'
 import type { TestDefinition } from '@/types/test'
 
@@ -290,7 +290,7 @@ const SupportBlock: React.FC<{ lang: string }> = ({ lang }) => {
         {ui.supportBody}
       </p>
       <Link
-        to={helpRoute}
+        href={helpRoute}
         className="text-sm font-medium underline underline-offset-2 transition-opacity hover:opacity-70 focus:outline-none focus-visible:ring-2 rounded"
         style={{ color: 'var(--color-accent)' }}
       >

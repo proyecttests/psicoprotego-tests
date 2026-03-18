@@ -15,7 +15,7 @@
  */
 
 import React from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import Header from '@/components/common/Header'
 import Footer from '@/components/common/Footer'
 
@@ -359,7 +359,7 @@ const HelpResourcesPage: React.FC<HelpResourcesPageProps> = ({ lang }) => {
           {/* ── Navegación de vuelta ──────────────────────────────────────── */}
           <div className="pt-4">
             <Link
-              to="/"
+              href="/"
               className="text-xs transition-opacity hover:opacity-60 focus:outline-none focus-visible:ring-2 rounded"
               style={{ color: 'var(--color-primary)', opacity: 0.45 }}
             >

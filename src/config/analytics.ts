@@ -27,7 +27,7 @@ export function trackEvent(
       timestamp: Date.now(),
     })
 
-    if (import.meta.env.DEV) {
+    if (process.env.NODE_ENV === 'development') {
       console.log('[Analytics]', eventName, data)
     }
   } catch {
