@@ -464,6 +464,42 @@ determina categoría → busca mensaje → ResultCard renderiza
 
 ---
 
+## 2026-03-19 — Sesión 6: Fix deploy Vercel (Production Overrides + ESM/CJS)
+
+### Problema
+
+Deploy completaba en ~108ms sin ejecutar `npm install` ni `next build`. Resultado: 404 en todas las rutas.
+
+### Causa Raíz
+
+Vercel Dashboard tenía **Production Overrides** activos con comandos vacíos. Estos overrides tienen prioridad sobre `vercel.json`, causando builds vacíos (sin instalación, sin compilación, sin output).
+
+### Fixes Aplicados
+
+1. **`"type": "module"` eliminado de `package.json`** — incompatible con Next.js 15 tooling (PostCSS, Tailwind)
+2. **`next.config.js` → `next.config.mjs`** — ESM explícito sin depender de `"type":"module"`
+3. **`postcss.config.js`** — cambiado de `export default` a `module.exports` (CommonJS)
+4. **`tailwind.config.js`** — cambiado de `export default` a `module.exports` (CommonJS)
+5. **Vercel Production Overrides** — limpiados vía REST API (`PATCH /v9/projects/{id}` con `buildCommand: null, installCommand: null, outputDirectory: null`)
+
+### Verificación
+
+- `/es/test/gad7` → HTTP 200 ✅
+- `/en/test/phq9` → HTTP 200 ✅
+- `/` → HTTP 307 (redirect correcto) ✅
+
+### Lección Aprendida
+
+Los **Vercel Production Overrides** del dashboard sobreescriben `vercel.json` completamente. Si están activos con valores vacíos, el build no ejecuta nada. Limpiarlos requiere la REST API o el dashboard (UI no muestra el estado activo claramente).
+
+### Commits de la sesión
+
+- `fix: forzar build command en vercel.json`
+- `fix: downgrade a Next.js 15 + React 18 para compatibilidad Vercel`
+- `chore: trigger Vercel build`
+
+---
+
 ## 2026-03-18 - Sesión Paleta Brand + Coherencia Visual ResultCard
 
 ### Objetivos

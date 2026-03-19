@@ -14,9 +14,9 @@
 
 ## Stack (Current)
 
-- **Frontend:** Next.js 16 + React 18 + TypeScript + Tailwind CSS
+- **Frontend:** Next.js 15.5.13 + React 18 + TypeScript + Tailwind CSS
 - **Rendering:** Server Components (SSG) para SEO + Client Components para interactividad
-- **Hosting:** Vercel (detección automática Next.js)
+- **Hosting:** Vercel (detección automática Next.js; `vercel.json` solo define installCommand + buildCommand)
 - **CDN:** Cloudflare (edge caching, DNS)
 - **Proxy:** Apache on Hetzner (reverse proxy to Vercel)
 - **DNS:** Piensa Solutions
@@ -54,12 +54,16 @@ Do not build for these unless explicitly asked.
 - [x] ADHD-optimized UI (cards, animaciones, progress bar)
 - [x] Analytics GTM + GA4
 
-### Completado (migración)
+### Completado (migración + deploy)
 
 - [x] Migración a Next.js (SSG, SSR, App Router)
 - [x] Landing pages con SSG + generateMetadata + JSON-LD server-side
 - [x] Homepage por idioma con listado de tests
 - [x] hreflang implementado vía generateMetadata alternates
+- [x] Deploy en Vercel funcionando (HTTP 200 en /es/test/gad7, /en/test/phq9)
+- [x] Fix: `postcss.config.js` y `tailwind.config.js` usan CommonJS (`module.exports`)
+- [x] Fix: `next.config.mjs` (ESM explícito sin `"type":"module"` en package.json)
+- [x] Fix: Vercel Production Overrides limpiados vía API (causaban builds de 108ms sin npm install)
 
 ### Pendiente
 
