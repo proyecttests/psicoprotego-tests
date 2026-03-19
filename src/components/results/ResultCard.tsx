@@ -32,10 +32,10 @@ interface ResultCardProps {
 const COLOR_MAP: Record<string, {
   bg: string; text: string; border: string; badge: string; bar: string
 }> = {
-  green:  { bg: 'bg-green-50',    text: 'text-green-700',   border: 'border-green-300',   badge: 'bg-green-100 text-green-800',    bar: 'bg-green-500'    },
-  yellow: { bg: 'bg-accent-50',   text: 'text-accent-600',  border: 'border-accent-200',  badge: 'bg-accent-100 text-accent-700',  bar: 'bg-accent-400'   },
-  orange: { bg: 'bg-accent-50',   text: 'text-accent-600',  border: 'border-accent-300',  badge: 'bg-accent-100 text-accent-700',  bar: 'bg-accent-500'   },
-  red:    { bg: 'bg-primary-50',  text: 'text-primary-500', border: 'border-primary-300', badge: 'bg-primary-100 text-primary-600', bar: 'bg-primary-500'  },
+  green:  { bg: 'bg-primary-50',   text: 'text-primary-600',  border: 'border-primary-200',  badge: 'bg-primary-100 text-primary-700',  bar: 'bg-primary-400'  },
+  yellow: { bg: 'bg-accent-50',    text: 'text-accent-600',   border: 'border-accent-200',   badge: 'bg-accent-100 text-accent-700',   bar: 'bg-accent-400'   },
+  orange: { bg: 'bg-accent-50',    text: 'text-accent-700',   border: 'border-accent-300',   badge: 'bg-accent-100 text-accent-700',   bar: 'bg-accent-500'   },
+  red:    { bg: 'bg-primary-100',  text: 'text-primary-700',  border: 'border-primary-400',  badge: 'bg-primary-200 text-primary-800',  bar: 'bg-primary-600'  },
 }
 
 // ── Mapa de rutas de ayuda por idioma ────────────────────────────────────────
@@ -183,12 +183,12 @@ const ScoreBar: React.FC<{
 
   return (
     <div className="w-full mt-4" aria-label={`${ui.scoreLabel}: ${score} de ${maxScore}`}>
-      <div className="flex justify-between text-xs text-gray-500 mb-1 font-sans">
+      <div className="flex justify-between text-xs text-neutral-500 mb-1 font-sans">
         <span>0</span>
         <span className={`font-semibold ${colors.text}`}>{score} / {maxScore}</span>
         <span>{maxScore}</span>
       </div>
-      <div className="h-3 w-full rounded-full bg-gray-200 overflow-hidden">
+      <div className="h-3 w-full rounded-full bg-neutral-200 overflow-hidden">
         <div
           className={`h-full rounded-full ${colors.bar}`}
           style={{ width: `${width}%`, transition: 'width 0.7s ease-out' }}
@@ -391,7 +391,7 @@ const NormalResult: React.FC<{
         )}
 
         {/* Disclaimer obligatorio */}
-        <p className="border-t border-gray-100 pt-3 text-xs italic text-gray-400">
+        <p className="border-t border-neutral-100 pt-3 text-xs italic text-neutral-400">
           {ui.disclaimer}
         </p>
       </div>
