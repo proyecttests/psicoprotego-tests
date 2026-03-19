@@ -70,11 +70,12 @@ const STRINGS = {
       creative_commons:'Creative Commons',
     } as Record<string, string>,
     cutoffLabels: {
-      minimal:  'Mínimo',
-      mild:     'Leve',
-      moderate: 'Moderado',
-      severe:   'Severo',
-      crisis:   'Crisis',
+      minimal:            'Mínimo',
+      mild:               'Leve',
+      moderate:           'Moderado',
+      moderately_severe:  'Moderadamente severo',
+      severe:             'Severo',
+      crisis:             'Crisis',
     } as Record<string, string>,
   },
   en: {
@@ -130,11 +131,12 @@ const STRINGS = {
       creative_commons:'Creative Commons',
     } as Record<string, string>,
     cutoffLabels: {
-      minimal:  'Minimal',
-      mild:     'Mild',
-      moderate: 'Moderate',
-      severe:   'Severe',
-      crisis:   'Crisis',
+      minimal:            'Minimal',
+      mild:               'Mild',
+      moderate:           'Moderate',
+      moderately_severe:  'Moderately severe',
+      severe:             'Severe',
+      crisis:             'Crisis',
     } as Record<string, string>,
   },
   pt: {
@@ -190,11 +192,12 @@ const STRINGS = {
       creative_commons:'Creative Commons',
     } as Record<string, string>,
     cutoffLabels: {
-      minimal:  'Mínimo',
-      mild:     'Leve',
-      moderate: 'Moderado',
-      severe:   'Grave',
-      crisis:   'Crise',
+      minimal:            'Mínimo',
+      mild:               'Leve',
+      moderate:           'Moderado',
+      moderately_severe:  'Moderadamente grave',
+      severe:             'Grave',
+      crisis:             'Crise',
     } as Record<string, string>,
   },
 } as const
@@ -208,11 +211,12 @@ function getStrings(lang: string) {
 // ── Cutoff colors ─────────────────────────────────────────────────────────────
 
 const CUTOFF_COLORS: Record<string, { bg: string; text: string }> = {
-  minimal:  { bg: '#d1fae5', text: '#065f46' },
-  mild:     { bg: '#fef9c3', text: '#713f12' },
-  moderate: { bg: '#ffedd5', text: '#7c2d12' },
-  severe:   { bg: '#fee2e2', text: '#7f1d1d' },
-  crisis:   { bg: '#fce7f3', text: '#831843' },
+  minimal:           { bg: '#d1fae5', text: '#065f46' },
+  mild:              { bg: '#fef9c3', text: '#713f12' },
+  moderate:          { bg: '#ffedd5', text: '#7c2d12' },
+  moderately_severe: { bg: '#fed7aa', text: '#7c2d12' },
+  severe:            { bg: '#fee2e2', text: '#7f1d1d' },
+  crisis:            { bg: '#fce7f3', text: '#831843' },
 }
 
 function getCutoffColor(key: string) {
