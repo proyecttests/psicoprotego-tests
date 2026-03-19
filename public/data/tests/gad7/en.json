@@ -6,7 +6,7 @@
   "scoringFunction": "scoreGAD7",
   "disclaimerBefore": "This questionnaire is for educational purposes only and is NOT a clinical diagnosis. Results are for personal reflection. If you have concerns or severe symptoms, please consult a healthcare professional. Your answers are stored only in your browser.",
   "disclaimerAfter": "This test is NOT a clinical diagnosis and does NOT replace evaluation by a professional. If you have severe or persistent symptoms, please consult your doctor or psychologist.",
-  "instructions": "The questions below refer to how often and how severely you may experience symptoms of anxiety over the last two weeks. Please help us provide the best medical care by answering the following questions.\n\nOver the last 2 weeks, how often have you been bothered by the following problems?",
+  "instructions": "Over the last 2 weeks, how often have you been bothered by the following problems?",
   "landing": {
     "hook": "Is anxiety running your life?",
     "description": "The GAD-7 is a clinically validated questionnaire that assesses the frequency and intensity of generalized anxiety symptoms over the past two weeks. It is one of the most widely used screening tools in primary care worldwide.",
