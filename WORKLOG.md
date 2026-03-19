@@ -419,6 +419,51 @@ determina categoría → busca mensaje → ResultCard renderiza
 
 ---
 
+## 2026-03-19 — Sesiones 4-5: Migración a Next.js
+
+### Completado
+
+- [x] Migración completa de Vite + React SPA a Next.js App Router
+- [x] Root layout (`app/layout.tsx`) con Google Fonts, GTM, y `suppressHydrationWarning`
+- [x] Layout por idioma (`app/[lang]/layout.tsx`) con validación lang + RTL support
+- [x] Landing pages como Server Components con SSG (`generateStaticParams`)
+- [x] `generateMetadata()` con title, description, canonical, hreflang y OG tags por página
+- [x] JSON-LD schemas renderizados en servidor (FAQPage, BreadcrumbList, MedicalWebPage)
+- [x] Intersticial como Client Component con fetch en cliente y sessionStorage guard
+- [x] Test interactivo como Client Component (TestContainer reutilizado sin cambios)
+- [x] Homepage por idioma (`app/[lang]/page.tsx`) con listado de tests, badges y CTA
+- [x] Página de ayuda urgente como SSG (`app/[lang]/ayuda-urgente/page.tsx`)
+- [x] Configuración de deploy para Vercel (sin vercel.json, sin `output: standalone`)
+- [x] Fix: bold en disclaimer usaba color rojo (#991b1b) → corregido a `var(--color-primary)`
+- [x] Fix: scoringFunction no se pasaba al resolver el test → corregido con ref
+
+### Impacto SEO
+
+- Google ahora recibe HTML completo con todo el contenido (h1, meta, JSON-LD)
+- OG tags dinámicos por test y por idioma (antes estaban vacíos en Vite SPA)
+- hreflang implementado vía `alternates.languages` en `generateMetadata`
+- JSON-LD inline en el HTML estático (sin hydration penalty)
+- Tiempo de build: 15 páginas SSG generadas en ~13s
+
+### Stack resultante
+
+- Next.js 16 + React 18 + TypeScript + Tailwind CSS
+- Server Components para SEO / Client Components para interactividad
+- Vercel (detección automática Next.js, sin configuración manual)
+
+### Commits de la sesión
+
+- `refactor: crear root layout y layout por idioma`
+- `feat: landing page como Server Component con SEO dinámico`
+- `feat: intersticial como Client Component en Next.js`
+- `feat: test interactivo como Client Component en Next.js`
+- `feat: página de ayuda urgente como SSG en Next.js`
+- `feat: homepage con listado de tests por idioma`
+- `chore: configurar Next.js para deploy en Vercel`
+- `fix: correcciones post-migración Next.js`
+
+---
+
 ## 2026-03-18 - Sesión Paleta Brand + Coherencia Visual ResultCard
 
 ### Objetivos

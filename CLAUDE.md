@@ -14,14 +14,13 @@
 
 ## Stack (Current)
 
-- **Frontend:** React 18 + Vite + TypeScript + Tailwind CSS
-- **Hosting:** Vercel (serverless)
+- **Frontend:** Next.js 16 + React 18 + TypeScript + Tailwind CSS
+- **Rendering:** Server Components (SSG) para SEO + Client Components para interactividad
+- **Hosting:** Vercel (detección automática Next.js)
 - **CDN:** Cloudflare (edge caching, DNS)
 - **Proxy:** Apache on Hetzner (reverse proxy to Vercel)
 - **DNS:** Piensa Solutions
 - **Repo:** github.com/proyecttests/psicoprotego-tests
-
-> ⚠️ Migración a Next.js en curso — SSR para SEO, API routes para OG dinámicos.
 
 ---
 
@@ -42,7 +41,7 @@ Do not build for these unless explicitly asked.
 - [x] GAD-7 — funcional en ES / EN / PT (landing + intersticial + test + resultados)
 - [x] PHQ-9 — funcional en ES / EN / PT
 - [x] Router multiidioma `/:lang/test/:testId` con subrutas `/start` y `/play`
-- [x] Protección acceso directo (location.state)
+- [x] Protección acceso directo (sessionStorage token)
 - [x] Landing pages SEO con JSON-LD (FAQPage, BreadcrumbList, MedicalWebPage)
 - [x] TestInterstitial — disclaimer + AdSlot + enlace a ayuda (sin teléfonos alarmantes)
 - [x] HelpResourcesPage — `/es/ayuda-urgente`, `/en/urgent-help`, `/pt/ajuda-urgente`
@@ -55,21 +54,26 @@ Do not build for these unless explicitly asked.
 - [x] ADHD-optimized UI (cards, animaciones, progress bar)
 - [x] Analytics GTM + GA4
 
+### Completado (migración)
+
+- [x] Migración a Next.js (SSG, SSR, App Router)
+- [x] Landing pages con SSG + generateMetadata + JSON-LD server-side
+- [x] Homepage por idioma con listado de tests
+- [x] hreflang implementado vía generateMetadata alternates
+
 ### Pendiente
 
-- [ ] Migración a Next.js (SSR, API routes)
-- [ ] PHQ-9 landing + metadata en Next.js
-- [ ] Shareable results con OG dinámicos (requiere Next.js API route)
-- [ ] SEO: hreflang tags en `<head>`
+- [ ] PHQ-9 landing con metadata completa (ya funciona; falta SEO específico)
+- [ ] Shareable results con OG dinámicos (API route /api/og)
 - [ ] Versiones FR / DE / IT / AR de tests
 
 ---
 
 ## 📋 Próximas Prioridades
 
-1. **Migración a Next.js** → SSR para SEO, API routes para OG dinámicos
-2. **PHQ-9 landing + metadata** → en Next.js (SSR + JSON-LD server-side)
-3. **Shareable results con OG dinámicos** → API route `/api/og?testId=&score=&lang=`
+1. **PHQ-9 landing + metadata** → SEO específico del PHQ-9 (ya funciona en el framework; añadir landing.description específica para SEO)
+2. **Shareable results con OG dinámicos** → API route `/api/og?testId=&score=&lang=` con @vercel/og
+3. **Añadir idiomas FR / DE / IT / AR** → JSON de tests + páginas de ayuda urgente
 
 ---
 
@@ -88,9 +92,12 @@ Ver `.claude/rules/`:
 
 - `src/components/test-framework/TestContainer.tsx`
 - `src/components/results/ResultCard.tsx` ← SupportBlock de red flags
-- `src/pages/TestLandingPage.tsx` ← Landing SEO
-- `src/pages/TestInterstitial.tsx` ← Disclaimer + ad pre-test
-- `src/pages/HelpResourcesPage.tsx` ← Recursos de ayuda urgente
+- `app/[lang]/test/[testId]/page.tsx` ← Landing page SSG (Server Component)
+- `app/[lang]/test/[testId]/start/page.tsx` ← Intersticial (Client Component)
+- `app/[lang]/test/[testId]/play/page.tsx` ← Test interactivo (Client Component)
+- `app/[lang]/page.tsx` ← Homepage por idioma (SSG)
+- `src/views/TestLandingPage.tsx` ← Vista de landing (Server-safe)
+- `src/views/HelpResourcesPage.tsx` ← Recursos de ayuda urgente
 - `src/data/help-resources/{es,en,pt}.json` ← Contenido páginas de ayuda
 - `public/data/tests/{testId}/{lang}.json` ← Contenido de cada test
 - `public/data/tests/{testId}/metadata.json` ← Ficha técnica
@@ -103,7 +110,7 @@ Ver `.claude/rules/`:
 ## ⚡ Comandos Rápidos
 
 ```bash
-npm run dev          # Vite dev server (localhost:5173)
+npm run dev          # Next.js dev server (localhost:3000)
 npm run build        # Production build
 npm run preview      # Preview build locally
 git commit -m "..."  # Conventional commits
@@ -111,5 +118,5 @@ git commit -m "..."  # Conventional commits
 
 ---
 
-**Última actualización:** 2026-03-18
-**Foco:** Migración Next.js → PHQ-9 landing → Shareable results con OG dinámicos
+**Última actualización:** 2026-03-19
+**Foco:** PHQ-9 SEO específico → Shareable results con OG dinámicos → Nuevos idiomas
