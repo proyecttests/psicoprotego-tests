@@ -163,6 +163,9 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
   const [errorMsg,       setErrorMsg]       = React.useState<string>('')
   const [pendingShareUrl, setPendingShareUrl] = React.useState<string>('')
 
+  // Scoring function name loaded from JSON — stored in ref to avoid re-renders
+  const scoringFnNameRef = React.useRef<string>('scoreGAD7')
+
   const ui = getUiStrings(lang)
 
   // Estado de transición (animación de salida activa)
@@ -204,6 +207,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
         }
 
         if (!cancelled) {
+          scoringFnNameRef.current = langData.scoringFunction ?? 'scoreGAD7'
           setTestDef(foundTest)
           setMessages(messagesData)
           setEffectiveLang(resolvedLang)
@@ -248,8 +252,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
   const handleSubmit = (finalAnswers: AnswersMap) => {
     if (!testDef || !messages) return
 
-    const scoringFnName = (testDef as unknown as Record<string, unknown>).scoringFunction as string | undefined
-    const scoringFn = getScoringFunction(scoringFnName ?? 'scoreGAD7')
+    const scoringFn = getScoringFunction(scoringFnNameRef.current)
     const scored = scoringFn(
       testDef as unknown as TestDefinitionForScoring,
       finalAnswers,

@@ -83,7 +83,7 @@ function getUI(lang: string) {
 function renderBold(text: string): React.ReactNode[] {
   return text.split('**').map((part, i) =>
     i % 2 === 1
-      ? <strong key={i} className="font-semibold" style={{ color: '#991b1b' }}>{part}</strong>
+      ? <strong key={i} className="font-semibold" style={{ color: 'var(--color-primary)' }}>{part}</strong>
       : <React.Fragment key={i}>{part}</React.Fragment>
   )
 }
