@@ -65,19 +65,22 @@ Do not build for these unless explicitly asked.
 - [x] Fix: `next.config.mjs` (ESM explícito sin `"type":"module"` en package.json)
 - [x] Fix: Vercel Production Overrides limpiados vía API (causaban builds de 108ms sin npm install)
 
-### Pendiente
+### También resuelto en sesión 7 (2026-03-19)
 
-- [ ] PHQ-9 landing con metadata completa (ya funciona; falta SEO específico)
-- [ ] Shareable results con OG dinámicos (API route /api/og)
-- [ ] Versiones FR / DE / IT / AR de tests
+- [x] Badge duración "3-5 min min" corregido (durationLabel no añade " min" si el JSON ya lo incluye)
+- [x] Cutoff `moderately_severe` traducido en ficha técnica (ES / EN / PT)
+- [x] Instrucciones exactas del instrumento validado mostradas encima de la primera pregunta
+- [x] ResultCard — paleta brand completa: eliminados todos los `gray-*` y `green-*` de Tailwind built-in
+- [x] COLOR_MAP.green (minimal) → `primary-*`; COLOR_MAP.red (severe) → `primary-*` más oscuro
 
 ---
 
 ## 📋 Próximas Prioridades
 
-1. **PHQ-9 landing + metadata** → SEO específico del PHQ-9 (ya funciona en el framework; añadir landing.description específica para SEO)
-2. **Shareable results con OG dinámicos** → API route `/api/og?testId=&score=&lang=` con @vercel/og
-3. **Añadir idiomas FR / DE / IT / AR** → JSON de tests + páginas de ayuda urgente
+1. **Shareable results con OG dinámicos** → API route `/api/og?testId=&score=&lang=` con @vercel/og
+2. **Más tests** → quizzes virales (personalidad, bienestar, estilo de apego…)
+3. **Más idiomas** → JSON de tests + páginas de ayuda en FR / DE / IT / AR
+4. **Dominio definitivo** → configurar reverse proxy Apache, Cloudflare y DNS para psicoprotego.es/tests
 
 ---
 
@@ -122,5 +125,5 @@ git commit -m "..."  # Conventional commits
 
 ---
 
-**Última actualización:** 2026-03-19
-**Foco:** PHQ-9 SEO específico → Shareable results con OG dinámicos → Nuevos idiomas
+**Última actualización:** 2026-03-19 (sesión 7)
+**Foco:** Shareable results con OG dinámicos → Más tests → Más idiomas → Dominio definitivo

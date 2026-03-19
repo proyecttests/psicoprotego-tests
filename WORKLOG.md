@@ -500,6 +500,54 @@ Los **Vercel Production Overrides** del dashboard sobreescriben `vercel.json` co
 
 ---
 
+## 2026-03-19 — Sesión 7: Fixes de datos, instrucciones validadas y limpieza de paleta
+
+### Trabajo Realizado
+
+#### ✅ Completado
+
+1. **Fix badge duplicado "min"** (`TestLandingPage.tsx`)
+   - `durationLabel` añadía " min" pero el JSON ya incluía "3-5 min" / "2-3 min"
+   - Corregido: `(t) => \`${t} min\`` → `(t) => t` en los tres idiomas (es/en/pt)
+
+2. **Fix cutoffs sin traducir en ficha técnica** (`TestMetadataTable.tsx`)
+   - La clave `moderately_severe` del PHQ-9 aparecía como texto crudo
+   - Añadido `moderately_severe` a `cutoffLabels` para ES ("Moderadamente severo"), EN ("Moderately severe"), PT ("Moderadamente grave")
+   - Añadido color propio (`#fed7aa`, naranja suave) en `CUTOFF_COLORS` para diferenciarlo de `moderate` y `severe`
+
+3. **Instrucciones validadas del instrumento** (`TestContainer.tsx`, JSONs)
+   - GAD-7 (es/en/pt): reemplazado texto multi-párrafo por la instrucción exacta y única del instrumento validado
+   - PHQ-9 (es/en/pt): ya tenían la instrucción exacta — sin cambios
+   - El bloque de instrucciones ya existía en TestContainer (currentIdx === 0); ajustado estilo: `text-sm`, `opacity: 0.6`, sin fondo — como nota introductoria discreta, no como cartel
+   - Tipos TypeScript (`instructions?: string`) ya correctos en `TestLangFile` y `TestDefinition`
+
+4. **Coherencia visual ResultCard — paleta brand completa** (`ResultCard.tsx`, `index.css`)
+   - `COLOR_MAP.green` (minimal): sustituido `bg-green-50 text-green-700 border-green-300` (Tailwind built-in, fuera de paleta) por `bg-primary-50 text-primary-600 border-primary-200` (Verde Bosque)
+   - `COLOR_MAP.red` (severe): diferenciado de minimal con `bg-primary-100 text-primary-700 border-primary-400 bar:primary-600` (tono más profundo, visualmente grave pero no alarmante)
+   - `ScoreBar`: `text-gray-500 bg-gray-200` → `text-neutral-500 bg-neutral-200`
+   - Disclaimer: `border-gray-100 text-gray-400` → `border-neutral-100 text-neutral-400`
+   - `.card`: `ring-gray-200` → `ring-neutral-200`
+   - `.btn-secondary`: `border-gray-300` → `border-neutral-300`
+   - Ningún estado usa ahora clases Tailwind `gray-*` o `green-*` fuera de la paleta brand
+
+### Verificación de estados ResultCard (post-fix)
+
+| Estado | color key | Clases bg/text |
+|--------|-----------|----------------|
+| minimal (0–4) | green | primary-50 / primary-600 |
+| mild (5–9) | yellow | accent-50 / accent-600 |
+| moderate (10–14) | orange | accent-50 / accent-700 |
+| severe (15+) | red | primary-100 / primary-700 |
+| crisis | — | Score oculto, SupportBlock |
+
+### Commits de la sesión
+
+- `fix: corregir badge duplicado 'min' y traducir cutoffs`
+- `feat: añadir instrucciones validadas antes de primera pregunta`
+- `fix: coherencia visual ResultCard en todos los estados`
+
+---
+
 ## 2026-03-18 - Sesión Paleta Brand + Coherencia Visual ResultCard
 
 ### Objetivos
