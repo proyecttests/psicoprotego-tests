@@ -451,20 +451,13 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
         >
           {/* Instrucciones validadas — solo en la primera pregunta */}
           {currentIdx === 0 && testDef?.instructions && (
-            <div
-              className="w-full max-w-md px-4 animate-fadeInQuestion"
+            <p
+              className="w-full max-w-md px-4 text-sm leading-relaxed text-center animate-fadeInQuestion"
+              style={{ color: 'var(--color-primary)', opacity: 0.6 }}
               aria-label="Instrucciones del test"
             >
-              {testDef.instructions.split('\n\n').map((paragraph, i) => (
-                <p
-                  key={i}
-                  className={`text-base leading-relaxed font-sans text-center${i > 0 ? ' mt-3 font-semibold' : ''}`}
-                  style={{ color: 'var(--color-primary)', opacity: 0.85 }}
-                >
-                  {paragraph}
-                </p>
-              ))}
-            </div>
+              {testDef.instructions}
+            </p>
           )}
 
           {/* Pregunta - Grande, fade suave, centrada */}
