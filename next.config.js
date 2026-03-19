@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
+  // No output override — Vercel detects Next.js automatically.
+  // 'standalone' is for Docker/self-hosting only.
 }
 
 export default nextConfig
