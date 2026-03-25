@@ -369,7 +369,7 @@ const PageFooter: React.FC<{ date: string }> = ({ date }) => (
       {formatShortDate(date)}
     </Text>
     <Text style={styles.footerText}>
-      Uso educativo, no diagnóstico clínico
+      Herramienta de cribado · No sustituye evaluacion clinica profesional
     </Text>
   </View>
 )
@@ -567,6 +567,13 @@ export const TestReportDocument: React.FC<TestReportDocumentProps> = ({
               </View>
             )
           })}
+        </View>
+
+        {/* ── Disclaimer ────────────────────────────────────────────────────── */}
+        <View style={{ marginTop: 20, padding: 10, backgroundColor: '#f5f3ef', borderRadius: 4, borderLeftWidth: 3, borderLeftColor: '#2d4a3e' }}>
+          <Text style={{ fontSize: 7, color: '#444444', lineHeight: 1.5 }}>
+            {metadata.userLang === 'en' ? 'This test is exclusively informational and orientational in nature, and does not constitute a diagnostic instrument nor replace the assessment performed by a duly qualified psychology professional. Results should be interpreted with caution, as they may be influenced by multiple factors and do not necessarily reflect a real clinical situation. For an adequate assessment and possible diagnosis, it is essential to consult a licensed psychologist who can conduct a comprehensive evaluation through clinical interview and, where appropriate, correctly administered validated instruments. By completing this test, you acknowledge having been informed of its limitations and accept its use for merely informational purposes.' : metadata.userLang === 'pt' ? 'Este teste tem carater exclusivamente informativo e orientativo, e nao constitui em caso algum um instrumento de diagnostico nem substitui a avaliacao realizada por um profissional de psicologia devidamente qualificado. Os resultados devem ser interpretados com cautela, tendo em conta que podem ser influenciados por multiplos fatores e que nao refletem necessariamente uma situacao clinica real. Para uma avaliacao adequada e possivel diagnostico, e imprescindivel consultar um psicologo licenciado que realize uma avaliacao completa por meio de entrevista clinica e, se necessario, instrumentos validados administrados corretamente. Ao completar este teste, voce reconhece ter sido informado das suas limitacoes e aceita o seu uso com fins meramente orientativos.' : 'Este test tiene un caracter exclusivamente informativo y orientativo, y no constituye en ningun caso un instrumento diagnostico ni sustituye la evaluacion realizada por un profesional de la psicologia debidamente cualificado. Los resultados deben interpretarse con cautela, teniendo en cuenta que pueden estar influidos por multiples factores y que no reflejan necesariamente una situacion clinica real. Para una valoracion adecuada y un posible diagnostico, es imprescindible acudir a un psicologo colegiado que realice una evaluacion completa mediante entrevista clinica y, en su caso, instrumentos validados administrados correctamente. Al completar este test, usted reconoce haber sido informado de sus limitaciones y acepta su uso con fines meramente orientativos.'}
+          </Text>
         </View>
 
         {/* ── Footer (fixed, every page) ────────────────────────────────────── */}
