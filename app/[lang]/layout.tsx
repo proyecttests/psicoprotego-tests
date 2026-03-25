@@ -3,6 +3,7 @@ import Header from '@/components/common/Header'
 import Footer from '@/components/common/Footer'
 import { VALID_LANGS } from '@/generated/validLangs'
 import { LangHtmlUpdater } from '../components/LangHtmlUpdater'
+import CookieBanner      from '@/components/common/CookieBanner'
 
 // ── Constantes ────────────────────────────────────────────────────────────────
 
@@ -35,6 +36,7 @@ export default async function LangLayout({
         </main>
         <Footer showCrisisFooter={false} lang={lang} />
       </div>
+      <CookieBanner lang={lang} gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
     </>
   )
 }

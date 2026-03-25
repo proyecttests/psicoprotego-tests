@@ -14,7 +14,8 @@
     "availableLangs": [
       "es",
       "en",
-      "pt"
+      "pt",
+      "ku"
     ],
     "validated": false,
     "timeToComplete": "3-4 min",
@@ -22,12 +23,14 @@
     "names": {
       "es": "¿Cuál es tu estilo de apego?",
       "en": "What is your attachment style?",
-      "pt": "Qual é o seu estilo de apego?"
+      "pt": "Qual é o seu estilo de apego?",
+      "ku": "شێوازی دڵبەستایی تۆ چییە؟"
     },
     "hooks": {
       "es": "Descubre cómo te vinculas en tus relaciones",
       "en": "Discover how you bond in your relationships",
-      "pt": "Descubra como você se vincula nos seus relacionamentos"
+      "pt": "Descubra como você se vincula nos seus relacionamentos",
+      "ku": "دەریبکەوە چۆن پەیوەندی داددەنێیت"
     }
   },
   {

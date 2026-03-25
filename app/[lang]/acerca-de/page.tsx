@@ -7,7 +7,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://psicoprotego.es'
-const LANGS = ['es', 'en', 'pt']
+const LANGS = ['es', 'en', 'pt', 'ku']
 
 type LangContent = {
   metaTitle: string
