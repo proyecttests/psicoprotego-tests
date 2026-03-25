@@ -102,8 +102,8 @@
   /* Pregunta: fade-in suave + sube 50px después de aparecer */
   .animate-question-slide {
     animation:
-      fadeInQuestion    0.3s ease-out 0.05s both,
-      riseUpAfterReveal 0.3s ease-out 0.2s both;
+      fadeInQuestion    0.6s ease-out 0.2s both,
+      riseUpAfterReveal 0.8s ease-out 0.9s both;
   }
   /* Salida TikTok: sube fuera del viewport */
   .animate-slide-out-tiktok {
@@ -125,11 +125,11 @@
   /* ── TDAH v2: clases individuales ───────────────────────────────────── */
   /* Pregunta grande: fade-in suave */
   .animate-fadeInQuestion {
-    animation: fadeInQuestion 0.3s ease-out 0.05s both;
+    animation: fadeInQuestion 0.6s ease-out 0.2s both;
   }
   /* Opciones/cards: aparecen ocultas luego suben mientras se revelan */
   .animate-riseUpAfter {
-    animation: riseUpAfterReveal 0.3s ease-out 0.2s forwards;
+    animation: riseUpAfterReveal 0.8s ease-out 0.9s forwards;
   }
   /* Float suave infinito (hint sin respuesta) */
   .animate-floatUp {
