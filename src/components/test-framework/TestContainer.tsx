@@ -165,8 +165,10 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
   const [pendingShareUrl, setPendingShareUrl] = React.useState<string>('')
 
   // Scoring function name loaded from JSON — stored in ref to avoid re-renders
-  const scoringFnNameRef = React.useRef<string>('scoreGAD7')
-  const testCategoryRef  = React.useRef<'psychometric' | 'quiz'>('psychometric')
+  const scoringFnNameRef    = React.useRef<string>('scoreGAD7')
+  const testCategoryRef     = React.useRef<'psychometric' | 'quiz'>('psychometric')
+  const topicCategoryRef    = React.useRef<string | null>(null)
+  const testTagsRef         = React.useRef<string[]>([])
 
   const ui = getUiStrings(lang)
 
@@ -182,7 +184,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
         // 1. Fetch metadata for availableLangs
         const metaRes = await fetch(`/data/tests/${testId}/metadata.json`)
         if (!metaRes.ok) throw new Error(`Test "${testId}" no encontrado.`)
-        const metadata = await metaRes.json() as { availableLangs: string[]; category?: 'psychometric' | 'quiz' }
+        const metadata = await metaRes.json() as { availableLangs: string[]; category?: 'psychometric' | 'quiz'; topicCategory?: string; tags?: string[] }
 
         // 2. Fetch lang file, fall back to 'es' if lang not available
         const resolvedLang = metadata.availableLangs.includes(lang) ? lang : 'es'
@@ -210,7 +212,9 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
 
         if (!cancelled) {
           scoringFnNameRef.current = langData.scoringFunction ?? 'scoreGAD7'
-          testCategoryRef.current  = metadata.category ?? 'psychometric'
+          testCategoryRef.current   = metadata.category ?? 'psychometric'
+          topicCategoryRef.current  = metadata.topicCategory ?? null
+          testTagsRef.current       = metadata.tags ?? []
           setTestDef(foundTest)
           setMessages(messagesData)
           setEffectiveLang(resolvedLang)
@@ -284,6 +288,13 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
     }
 
     setResult(scored)
+    // Save to history
+    try {
+      const hkey = `psico_history_${testId}`
+      const prev: Array<{score:number; categoryLabel:string; date:string}> = JSON.parse(localStorage.getItem(hkey) ?? '[]')
+      const entry = { score: scored.score ?? 0, categoryLabel: scored.category?.label ?? '', date: new Date().toISOString() }
+      localStorage.setItem(hkey, JSON.stringify([entry, ...prev].slice(0, 10)))
+    } catch { /* ignore */ }
     setUiState('calculating')
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -424,6 +435,8 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
             lang={lang}
             testId={testId}
             maxScore={maxScore}
+            topicCategory={topicCategoryRef.current}
+            tags={testTagsRef.current}
           />
         </div>
         {showCrisisFooter && <CrisisBar lang={lang} />}

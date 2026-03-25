@@ -1,0 +1,52 @@
+#!/usr/bin/env node
+/**
+ * scripts/generate-tests-index.js
+ * Generates public/data/tests-index.json from individual test metadata.
+ * Run automatically as prebuild step.
+ */
+const fs   = require('fs')
+const path = require('path')
+
+const TESTS_DIR = path.join(__dirname, '../public/data/tests')
+const OUTPUT    = path.join(__dirname, '../public/data/tests-index.json')
+
+function main() {
+  const testIds = fs.readdirSync(TESTS_DIR).filter(d =>
+    fs.statSync(path.join(TESTS_DIR, d)).isDirectory()
+  )
+
+  const index = []
+  for (const testId of testIds) {
+    const dir      = path.join(TESTS_DIR, testId)
+    const metaPath = path.join(dir, 'metadata.json')
+    if (!fs.existsSync(metaPath)) continue
+
+    const meta  = JSON.parse(fs.readFileSync(metaPath, 'utf-8'))
+    const names = {}
+    const hooks = {}
+    for (const lang of (meta.availableLangs || ['es'])) {
+      const langPath = path.join(dir, `${lang}.json`)
+      if (!fs.existsSync(langPath)) continue
+      const d = JSON.parse(fs.readFileSync(langPath, 'utf-8'))
+      names[lang] = d.name  || testId
+      hooks[lang] = d.hook  || ''
+    }
+
+    index.push({
+      testId,
+      topicCategory:   meta.topicCategory   || null,
+      tags:            meta.tags             || [],
+      availableLangs:  meta.availableLangs   || ['es'],
+      validated:       meta.validated        || false,
+      timeToComplete:  meta.timeToComplete   || null,
+      itemCount:       meta.itemCount        || null,
+      names,
+      hooks,
+    })
+  }
+
+  fs.writeFileSync(OUTPUT, JSON.stringify(index, null, 2))
+  console.log(`tests-index.json: ${index.length} tests`)
+}
+
+main()

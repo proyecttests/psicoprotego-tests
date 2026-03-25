@@ -1,0 +1,60 @@
+[
+  {
+    "testId": "gad7",
+    "topicCategory": "ansiedad",
+    "tags": [
+      "validado-clinicamente",
+      "adultos",
+      "likert",
+      "7-items",
+      "cribado"
+    ],
+    "availableLangs": [
+      "es",
+      "en",
+      "pt"
+    ],
+    "validated": true,
+    "timeToComplete": "2-3 min",
+    "itemCount": 7,
+    "names": {
+      "es": "Test de Ansiedad Generalizada (GAD-7)",
+      "en": "Generalized Anxiety Disorder Scale (GAD-7)",
+      "pt": "Escala de Transtorno de Ansiedade Generalizada (GAD-7)"
+    },
+    "hooks": {
+      "es": "",
+      "en": "",
+      "pt": ""
+    }
+  },
+  {
+    "testId": "phq9",
+    "topicCategory": "depresion",
+    "tags": [
+      "validado-clinicamente",
+      "adultos",
+      "likert",
+      "9-items",
+      "cribado"
+    ],
+    "availableLangs": [
+      "es",
+      "en",
+      "pt"
+    ],
+    "validated": true,
+    "timeToComplete": "3-5 min",
+    "itemCount": 9,
+    "names": {
+      "es": "Cuestionario de Salud del Paciente (PHQ-9)",
+      "en": "Patient Health Questionnaire (PHQ-9)",
+      "pt": "Questionário de Saúde do Paciente (PHQ-9)"
+    },
+    "hooks": {
+      "es": "",
+      "en": "",
+      "pt": ""
+    }
+  }
+]
