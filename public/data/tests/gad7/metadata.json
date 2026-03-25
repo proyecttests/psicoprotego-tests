@@ -2,6 +2,8 @@
   "id": "gad7",
   "availableLangs": ["es", "en", "pt"],
   "category": "psychometric",
+  "topicCategory": "ansiedad",
+  "tags": ["validado-clinicamente", "adultos", "likert", "7-items", "cribado"],
   "originalInstrument": "GAD-7",
   "use": ["clinical_screening"],
   "measures": ["generalized_anxiety"],

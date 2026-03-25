@@ -200,6 +200,8 @@ export interface TestMetadata {
   id: string
   availableLangs: string[]
   category: 'psychometric' | 'quiz'
+  topicCategory: string
+  tags: string[]
   originalInstrument: string
   use: string[]
   measures: string[]

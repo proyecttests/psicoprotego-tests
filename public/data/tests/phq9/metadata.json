@@ -2,6 +2,8 @@
   "id": "phq9",
   "availableLangs": ["es", "en", "pt"],
   "category": "psychometric",
+  "topicCategory": "depresion",
+  "tags": ["validado-clinicamente", "adultos", "likert", "9-items", "cribado"],
   "originalInstrument": "PHQ-9",
   "use": ["clinical_screening"],
   "measures": ["depression"],
