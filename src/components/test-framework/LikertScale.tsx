@@ -28,7 +28,7 @@ const DEFAULT_OPTION_LABELS: Record<string, string[]> = {
 
 // ── Delays de stagger para entrada de cards ───────────────────────────────
 
-const STAGGER_DELAYS = ['1.8s', '1.95s', '2.1s', '2.25s']
+const STAGGER_DELAYS = ['0.1s', '0.17s', '0.24s', '0.31s']
 
 // ── Componente ────────────────────────────────────────────────────────────────
 
