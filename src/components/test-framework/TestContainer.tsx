@@ -495,9 +495,11 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
               answers={answers}
               onChange={handleAnswer}
               onAdvance={
-                currentQuestion.type === 'likert' && !isLastQuestion
-                  ? handleNext
-                  : undefined
+                currentQuestion.type === 'likert'
+                  ? (isLastQuestion ? undefined : handleNext)
+                  : (testCategoryRef.current === 'quiz' && currentQuestion.type === 'multipleChoice')
+                    ? handleNext
+                    : undefined
               }
               lang={lang}
             />
@@ -519,15 +521,18 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
             <div aria-hidden="true" />
           )}
 
-          <button
-            type="button"
-            onClick={handleNext}
-            disabled={!currentAnswered}
-            className="btn-primary"
-            aria-label={isLastQuestion ? ui.finish : ui.next}
-          >
-            {isLastQuestion ? ui.finish : ui.next}
-          </button>
+          {/* En quiz, el auto-avance maneja la siguiente pregunta — solo mostrar Next en la última */}
+          {(testCategoryRef.current !== 'quiz' || isLastQuestion) && (
+            <button
+              type="button"
+              onClick={handleNext}
+              disabled={!currentAnswered}
+              className="btn-primary"
+              aria-label={isLastQuestion ? ui.finish : ui.next}
+            >
+              {isLastQuestion ? ui.finish : ui.next}
+            </button>
+          )}
         </div>
 
         {!currentAnswered && (

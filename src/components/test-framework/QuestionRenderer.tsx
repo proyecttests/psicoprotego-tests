@@ -109,6 +109,7 @@ const QuestionRenderer: React.FC<QuestionRendererProps> = ({
           value={currentValue as string | undefined}
           onChange={(val) => onChange(question.id, val)}
           options={question.options ?? []}
+          onAdvance={onAdvance}
         />
       )
 

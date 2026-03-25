@@ -112,6 +112,10 @@ export default function TestLandingPage({
   const { landing } = langData
   const isValidated = metadata.validated
   const startHref   = `/${lang}/test/${testId}/start`
+  const isQuiz      = metadata.category === 'quiz'
+  const startLabel  = isQuiz
+    ? ({ es: 'Empezar quiz', en: 'Start quiz', pt: 'Iniciar quiz' } as Record<string,string>)[lang] ?? 'Empezar quiz'
+    : ui.startButton
 
   return (
     <div className="flex flex-col" style={{ backgroundColor: 'var(--color-cream)' }}>

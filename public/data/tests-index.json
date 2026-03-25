@@ -1,6 +1,7 @@
 [
   {
     "testId": "apego",
+    "category": "quiz",
     "topicCategory": "relaciones",
     "tags": [
       "relaciones",
@@ -31,6 +32,7 @@
   },
   {
     "testId": "gad7",
+    "category": "psychometric",
     "topicCategory": "ansiedad",
     "tags": [
       "validado-clinicamente",
@@ -60,6 +62,7 @@
   },
   {
     "testId": "phq9",
+    "category": "psychometric",
     "topicCategory": "depresion",
     "tags": [
       "validado-clinicamente",

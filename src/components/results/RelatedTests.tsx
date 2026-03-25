@@ -10,6 +10,7 @@ import Link from 'next/link'
 
 interface TestIndexEntry {
   testId:        string
+  category:      string
   topicCategory: string | null
   tags:          string[]
   availableLangs: string[]
@@ -20,10 +21,10 @@ interface TestIndexEntry {
   hooks:         Record<string, string>
 }
 
-const UI: Record<string, { title: string; cta: string; validated: string }> = {
-  es: { title: 'También podría interesarte', cta: 'Hacer el test →', validated: 'Validado clínicamente' },
-  en: { title: 'You might also like',        cta: 'Take the test →', validated: 'Clinically validated'  },
-  pt: { title: 'Você também pode gostar',    cta: 'Fazer o teste →', validated: 'Validado clinicamente' },
+const UI: Record<string, { title: string; cta: string; ctaQuiz: string; validated: string }> = {
+  es: { title: 'También podría interesarte', cta: 'Hacer el test →', ctaQuiz: 'Hacer el quiz →', validated: 'Validado clínicamente' },
+  en: { title: 'You might also like',        cta: 'Take the test →', ctaQuiz: 'Take the quiz →', validated: 'Clinically validated'  },
+  pt: { title: 'Você também pode gostar',    cta: 'Fazer o teste →', ctaQuiz: 'Fazer o quiz →',  validated: 'Validado clinicamente' },
 }
 
 function score(entry: TestIndexEntry, currentCategory: string | null, currentTags: string[]): number {
@@ -91,7 +92,7 @@ const RelatedTests: React.FC<RelatedTestsProps> = ({
               </p>
             </div>
             <span className="text-xs font-medium ml-3 shrink-0" style={{ color: 'var(--color-accent)' }}>
-              {ui.cta}
+              {entry.category === 'quiz' ? ui.ctaQuiz : ui.cta}
             </span>
           </Link>
         )

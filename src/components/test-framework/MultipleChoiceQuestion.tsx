@@ -19,6 +19,11 @@ interface MultipleChoiceQuestionProps {
   onChange: (value: string) => void
   /** Lista de opciones disponibles */
   options: QuestionOption[]
+  /**
+   * Callback de auto-avance (quiz mode).
+   * Si se pasa, avanza automáticamente ~350ms después de seleccionar.
+   */
+  onAdvance?: () => void
 }
 
 // ── Componente ────────────────────────────────────────────────────────────────
@@ -37,8 +42,10 @@ const MultipleChoiceQuestion: React.FC<MultipleChoiceQuestionProps> = ({
   value,
   onChange,
   options,
+  onAdvance,
 }) => {
   const groupId = React.useId()
+  const advanceTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null)
 
   return (
     <div
@@ -60,7 +67,13 @@ const MultipleChoiceQuestion: React.FC<MultipleChoiceQuestionProps> = ({
               type="button"
               role="radio"
               aria-checked={isSelected}
-              onClick={() => onChange(option.value)}
+              onClick={() => {
+                onChange(option.value)
+                if (onAdvance) {
+                  if (advanceTimer.current) clearTimeout(advanceTimer.current)
+                  advanceTimer.current = setTimeout(onAdvance, 350)
+                }
+              }}
               className={`
                 w-full min-h-[48px] rounded-xl border-2 px-5 py-3 text-left text-base
                 font-medium transition-all duration-150
