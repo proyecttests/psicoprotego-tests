@@ -45,6 +45,7 @@ const CRISIS_STRINGS: Record<string, { message: string; phone1Label: string; pho
   es: { message: 'Hay apoyo disponible — no estás solo/a', phone1Label: '024 – Esperanza', phone1: '024', phone2: '112' },
   en: { message: 'Support is available — you are not alone',  phone1Label: '988',              phone1: '988', phone2: '911' },
   pt: { message: 'Há apoio disponível — você não está sozinho/a', phone1Label: '192',           phone1: '192', phone2: '190' },
+  ku: { message: 'پشتگیری هەیە — تەنیا نیت', phone1Label: '115', phone1: '115', phone2: '112' },
 }
 
 const CrisisBar: React.FC<{ lang: string }> = ({ lang }) => {
@@ -123,6 +124,15 @@ const UI_STRINGS: Record<string, {
     next:         'Próximo →',
     finish:       'Ver resultados →',
     selectAnswer: 'Selecione uma resposta para continuar',
+  },
+  ku: {
+    loading:      'کوێزەکە بارکرانە…',
+    errorTitle:   'هەڵەی بارکردنی کوێز',
+    reload:       'لاپەڕەکە دووبارە بکەرەوە',
+    prev:         'پێشوو →',
+    next:         '← دواتر',
+    finish:       'ئەنجامەکان ببینە ←',
+    selectAnswer: 'وەڵامێک هەڵبژێرە بۆ بەردەوامبوون',
   },
 }
 

@@ -68,6 +68,19 @@ const UI: Record<string, {
     back:       'Voltar aos resultados',
     mobileHint: 'O seletor de apps será aberto',
   },
+  ku: {
+    title:      'ئەنجامەکان بڵاوبکەرەوە',
+    subtitle:   'هەڵبژێرە چۆن ئەنجامەکەت بڵاوبکەیتەوە',
+    shareText:  'ئەم کوێزی پسیکۆلۆژیم تازە تەواو کرد. تۆیش هەوڵ بدە؟',
+    whatsapp:   'WhatsApp',
+    tiktok:     'TikTok',
+    instagram:  'Instagram',
+    twitter:    'Twitter / X',
+    copy:       'لینکەکە کۆپی بکە',
+    copied:     'کۆپیکرا!',
+    back:       'گەڕانەوە بۆ ئەنجامەکان',
+    mobileHint: 'هەڵبژاردەری ئەپ دەکرێتەوە',
+  },
 }
 
 // ── Props ─────────────────────────────────────────────────────────────────────

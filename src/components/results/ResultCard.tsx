@@ -57,6 +57,7 @@ const HELP_ROUTES: Record<string, string> = {
   es: '/es/ayuda-urgente',
   en: '/en/ayuda-urgente',
   pt: '/pt/ayuda-urgente',
+  ku: '/ku/ayuda-urgente',
 }
 
 // ── UI strings ────────────────────────────────────────────────────────────────
@@ -120,6 +121,21 @@ const RESULT_UI: Record<string, {
     supportLink:    'Você pode pedir ajuda nestes recursos →',
     privacyNote:    'Estas informações ficam apenas no seu navegador e ninguém poderá vê-las se você não as compartilhar.',
     emergencyNote:  'Se for uma emergência, ligue para o 112',
+  },
+  ku: {
+    retry:          '↺ دووبارە هەوڵبدەرەوە',
+    recommendation: 'پێشنیار',
+    disclaimer:     'ئەم ئەنجامانە بۆ مەبەستی پەروەردەیی و ڕابەریی تەنهان. نییەتە دیاریکردنی نەخۆشی کلینیکی و شوێنی ئەرزیابیکردنی پزیشکی تەندروستی دەروونی ناگرن.',
+    shareResults:   'ئەنجامەکان بڵاوبکەرەوە',
+    remindMe:       'بیرم بهێنەوە بۆ دووبارەکردنەوە',
+    copyLink:       'لینکەکە کۆپی بکە',
+    copied:         'کۆپیکرا!',
+    scoreLabel:     'خاڵ',
+    supportTitle:   'هەندێک لە وەڵامەکانت ئاماژەیان دەدات کە دەبێت پشتگیریت پێ بکرێت',
+    supportBody:    'پێشنیارت دەکەین هەرچوانتر لەگەڵ پزیشکێک مشتومڕ بکەیت.',
+    supportLink:    'لێرەوە یارمەتی بدۆزەرەوە ←',
+    privacyNote:    'ئەم زانیارییە تەنها لە گەڕەکەکەی تۆدایە و کەس نایبینێت ئەگەر خۆت بڵاوی نەکەیتەوە.',
+    emergencyNote:  'ئەگەر ئەمەرجەنسییە، پەیوەندی بکە بە 112',
   },
 }
 

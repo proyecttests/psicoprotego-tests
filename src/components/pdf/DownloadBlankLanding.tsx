@@ -12,6 +12,7 @@ const LABEL: Record<string, { btn: string; interstitial: string; countdown: stri
   es: { btn: 'Descargar test en blanco', interstitial: 'Preparando el test...', countdown: 'Descargando en', ad: 'Publicidad' },
   en: { btn: 'Download blank test',      interstitial: 'Preparing the test...', countdown: 'Downloading in', ad: 'Advertisement' },
   pt: { btn: 'Baixar teste em branco',   interstitial: 'Preparando o teste...', countdown: 'Baixando em',   ad: 'Publicidade' },
+  ku: { btn: 'کوێزی خاڵی داگرە',           interstitial: 'کوێزەکە ئامادەدەکرێت...', countdown: 'داگرتن لە',      ad: 'ڕیکلام' },
 }
 
 interface DownloadBlankLandingProps {

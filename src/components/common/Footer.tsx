@@ -74,7 +74,7 @@ const Footer: React.FC<FooterProps> = ({ showCrisisFooter = false, lang = 'es' }
                 className="transition-colors hover:underline"
                 style={{ color: 'var(--color-accent)' }}
               >
-                {lang === 'en' ? 'About' : lang === 'pt' ? 'Sobre nós' : 'Acerca de'}
+                {lang === 'en' ? 'About' : lang === 'pt' ? 'Sobre nós' : lang === 'ku' ? 'دەربارە' : 'Acerca de'}
               </Link>
               <Link
                 href={`/${lang}/blog`}
@@ -88,7 +88,7 @@ const Footer: React.FC<FooterProps> = ({ showCrisisFooter = false, lang = 'es' }
                 className="transition-colors hover:underline"
                 style={{ color: 'var(--color-accent)' }}
               >
-                {lang === 'en' ? 'Contact' : lang === 'pt' ? 'Contato' : 'Contacto'}
+                {lang === 'en' ? 'Contact' : lang === 'pt' ? 'Contato' : lang === 'ku' ? 'پەیوەندی' : 'Contacto'}
               </Link>
             </div>
             {/* Row 2 */}
@@ -98,7 +98,7 @@ const Footer: React.FC<FooterProps> = ({ showCrisisFooter = false, lang = 'es' }
                 className="transition-colors hover:underline"
                 style={{ color: 'var(--color-accent)' }}
               >
-                {lang === 'en' ? 'Privacy' : lang === 'pt' ? 'Privacidade' : 'Privacidad'}
+                {lang === 'en' ? 'Privacy' : lang === 'pt' ? 'Privacidade' : lang === 'ku' ? 'تایبەتمەندی' : 'Privacidad'}
               </Link>
               <Link
                 href={`/${lang}/cookies`}
@@ -112,7 +112,7 @@ const Footer: React.FC<FooterProps> = ({ showCrisisFooter = false, lang = 'es' }
                 className="transition-colors hover:underline"
                 style={{ color: 'var(--color-accent)' }}
               >
-                {lang === 'en' ? 'Legal notice' : lang === 'pt' ? 'Aviso legal' : 'Aviso legal'}
+                {lang === 'en' ? 'Legal notice' : lang === 'pt' ? 'Aviso legal' : lang === 'ku' ? 'ئاگاداری یاسایی' : 'Aviso legal'}
               </Link>
             </div>
           </nav>
