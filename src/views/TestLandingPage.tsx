@@ -10,6 +10,7 @@
 import Link from 'next/link'
 import type { TestLangFile, TestMetadata } from '@/types/test'
 import AdStrategy        from '@/components/ads/AdStrategy'
+import DownloadBlankLanding from '@/components/pdf/DownloadBlankLanding'
 import TestMetadataTable from '@/components/test-framework/TestMetadataTable'
 import { FaqAccordion }  from '@/components/landing/FaqAccordion'
 
@@ -166,6 +167,13 @@ export default function TestLandingPage({
             <p className="text-xs" style={{ color: 'var(--color-primary)', opacity: 0.55 }}>
               {ui.freeLine}
             </p>
+            {!isQuiz && (
+              <DownloadBlankLanding
+                testId={testId}
+                lang={lang}
+                testName={langData.name}
+              />
+            )}
           </div>
         </section>
 

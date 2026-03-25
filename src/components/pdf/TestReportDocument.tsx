@@ -27,6 +27,12 @@ export interface TestReportDocumentProps {
     viewLang: string       // language for viewing (may differ)
     userName?: string
     testId: string
+    validationDetails?: {
+      validated: boolean
+      reference?: string
+      originalReference?: string
+      originalJournal?: string
+    }
   }
   viewLangData?: TestLangFile  // test data in view language (if different)
 }
@@ -458,6 +464,38 @@ export const TestReportDocument: React.FC<TestReportDocumentProps> = ({
               {result.message?.recommendation && (
                 <Text style={styles.resultRecommendation}>
                   {`${recommendationLabel}: ${result.message.recommendation}`}
+                </Text>
+              )}
+            </View>
+          )}
+
+          {/* ── Validation info ─────────────────────────────────────────── */}
+          {metadata.validationDetails && (
+            <View style={{ marginBottom: 16, padding: 10, backgroundColor: '#f0f7f4', borderRadius: 4, borderLeftWidth: 3, borderLeftColor: '#2d4a3e' }}>
+              <Text style={{ fontSize: 8, fontFamily: 'Helvetica-Bold', color: '#2d4a3e', marginBottom: 4, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+                {metadata.userLang === 'en' ? 'Validation' : metadata.userLang === 'pt' ? 'Validacao' : 'Validacion'}
+              </Text>
+              {metadata.validationDetails.validated ? (
+                <>
+                  <Text style={{ fontSize: 8, fontFamily: 'Helvetica-Bold', color: '#2d6b4a', marginBottom: 2 }}>
+                    {metadata.userLang === 'en' ? 'Validated in this language' : metadata.userLang === 'pt' ? 'Validado neste idioma' : 'Validado en este idioma'}
+                  </Text>
+                  {metadata.validationDetails.reference ? (
+                    <Text style={{ fontSize: 7.5, fontFamily: 'Helvetica', color: '#444444', lineHeight: 1.4 }}>
+                      {metadata.validationDetails.reference}
+                    </Text>
+                  ) : null}
+                  {metadata.validationDetails.originalReference ? (
+                    <Text style={{ fontSize: 7, fontFamily: 'Helvetica-Oblique', color: '#666666', marginTop: 3 }}>
+                      {'Original: '}
+                      {metadata.validationDetails.originalReference}
+                      {metadata.validationDetails.originalJournal ? ' · ' + metadata.validationDetails.originalJournal : ''}
+                    </Text>
+                  ) : null}
+                </>
+              ) : (
+                <Text style={{ fontSize: 7.5, fontFamily: 'Helvetica', color: '#c0392b' }}>
+                  {metadata.userLang === 'en' ? 'Not validated in this language' : metadata.userLang === 'pt' ? 'Nao validado neste idioma' : 'No validado en este idioma'}
                 </Text>
               )}
             </View>
