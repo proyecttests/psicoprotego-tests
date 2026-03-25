@@ -246,9 +246,6 @@ export const TestBlankDocument: React.FC<TestBlankDocumentProps> = ({
     >
       <Page size="A4" style={styles.page}>
         {/* ── Watermark ─────────────────────────────────────────────────────── */}
-        <View style={styles.watermark} fixed>
-          <Text style={styles.watermarkText}>USO EDUCATIVO</Text>
-        </View>
 
         {/* ── Header ──────────────────────────────────────────────────────── */}
         <View style={styles.header}>
@@ -348,6 +345,13 @@ export const TestBlankDocument: React.FC<TestBlankDocumentProps> = ({
           ))}
         </View>
 
+        {/* ── Disclaimer ───────────────────────────────────────────────────── */}
+        <View style={{ marginTop: 20, padding: 10, backgroundColor: '#f5f3ef', borderRadius: 4, borderLeftWidth: 3, borderLeftColor: '#2d4a3e' }}>
+          <Text style={{ fontSize: 7, color: '#444444', lineHeight: 1.5 }}>
+            {'Este test tiene un caracter exclusivamente informativo y orientativo, y no constituye en ningun caso un instrumento diagnostico ni sustituye la evaluacion realizada por un profesional de la psicologia debidamente cualificado. Los resultados deben interpretarse con cautela, teniendo en cuenta que pueden estar influidos por multiples factores y que no reflejan necesariamente una situacion clinica real. Para una valoracion adecuada y un posible diagnostico, es imprescindible acudir a un psicologo colegiado que realice una evaluacion completa mediante entrevista clinica y, en su caso, instrumentos validados administrados correctamente. Al completar este test, usted reconoce haber sido informado de sus limitaciones y acepta su uso con fines meramente orientativos.'}
+          </Text>
+        </View>
+
         {/* ── Footer ───────────────────────────────────────────────────────── */}
         <View style={styles.footer} fixed>
           <Text style={styles.footerText}>
@@ -356,7 +360,7 @@ export const TestBlankDocument: React.FC<TestBlankDocumentProps> = ({
             {formatShortDate(metadata.generatedAt)}
           </Text>
           <Text style={styles.footerText}>
-            Uso educativo, no diagnóstico clínico
+            Herramienta de cribado · No sustituye evaluacion clinica profesional
           </Text>
         </View>
       </Page>
