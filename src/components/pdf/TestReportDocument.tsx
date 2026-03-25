@@ -35,7 +35,6 @@ export interface TestReportDocumentProps {
     }
   }
   viewLangData?: TestLangFile  // test data in view language (if different)
-  printMode?: boolean           // true = print-friendly (no color backgrounds)
 }
 
 // ── Color palette ─────────────────────────────────────────────────────────────
@@ -109,7 +108,7 @@ const styles = StyleSheet.create({
 
   // Metadata bar
   metadataBar: {
-    backgroundColor:   COLORS.cream,
+    backgroundColor:   COLORS.white,
     paddingHorizontal: 36,
     paddingVertical:   10,
     borderBottomWidth: 1,
@@ -398,7 +397,6 @@ export const TestReportDocument: React.FC<TestReportDocumentProps> = ({
   result,
   metadata,
   viewLangData,
-  printMode = false,
 }) => {
   const isRTL = RTL_LANGS.has(metadata.userLang)
   const isBilingual = viewLangData !== null && viewLangData !== undefined && viewLangData.lang !== testData.lang
@@ -418,10 +416,10 @@ export const TestReportDocument: React.FC<TestReportDocumentProps> = ({
     >
       <Page size="A4" style={[styles.page, isRTL ? { direction: 'rtl' } : {}]}>
         {/* ── Header ──────────────────────────────────────────────────────── */}
-        <View style={[styles.header, isRTL ? { flexDirection: 'row-reverse' } : {}, printMode ? { backgroundColor: '#ffffff', borderBottomWidth: 2, borderBottomColor: '#2d4a3e' } : {}]}>
+        <View style={[styles.header, isRTL ? { flexDirection: 'row-reverse' } : {}]}>
           <View style={styles.headerLeft}>
-            <Text style={[styles.headerTestName, printMode ? { color: '#2d4a3e' } : {}]}>{displayData.name}</Text>
-            <Text style={[styles.headerBranding, printMode ? { color: '#2d4a3e' } : {}]}>Informe de resultados</Text>
+            <Text style={styles.headerTestName}>{displayData.name}</Text>
+            <Text style={styles.headerBranding}>Informe de resultados</Text>
           </View>
           <View style={styles.headerRight}>
             <Text style={styles.headerBrandingRight}>PSICOPROTEGO</Text>
@@ -430,7 +428,7 @@ export const TestReportDocument: React.FC<TestReportDocumentProps> = ({
         </View>
 
         {/* ── Metadata bar ─────────────────────────────────────────────────── */}
-        <View style={[styles.metadataBar, printMode ? { backgroundColor: '#ffffff' } : {}]}>
+        <View style={styles.metadataBar}>
           {isBilingual ? (
             <Text style={styles.metadataText}>
               {`Rellenado en ${getLangLabel(metadata.userLang)}  |  Visualizado en ${getLangLabel(metadata.viewLang)}  ·  Completado: ${formatDate(metadata.completedAt)}`}
@@ -455,7 +453,7 @@ export const TestReportDocument: React.FC<TestReportDocumentProps> = ({
 
           {/* ── Result summary line ───────────────────────────────────────── */}
           {result.resultType === 'NORMAL' && result.category && (
-            <View style={{ marginBottom: 12, paddingVertical: 8, paddingHorizontal: 12, backgroundColor: printMode ? '#ffffff' : '#f0f7f4', borderRadius: 4, borderWidth: printMode ? 1 : 0, borderColor: '#2d4a3e' }}>
+            <View style={{ marginBottom: 12, paddingVertical: 8, paddingHorizontal: 12, backgroundColor: '#ffffff', borderRadius: 4, borderWidth: 1, borderColor: '#d0ddd8' }}>
               <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: '#2d4a3e' }}>
                 {[
                   (result.score !== null && result.score !== undefined) ? `${scoreLabel}: ${result.score}` : null,
@@ -467,7 +465,7 @@ export const TestReportDocument: React.FC<TestReportDocumentProps> = ({
 
           {/* ── Validation info ─────────────────────────────────────────── */}
           {metadata.validationDetails && (
-            <View style={[{ marginBottom: 16, padding: 10, backgroundColor: '#f0f7f4', borderRadius: 4 }, isRTL ? { borderRightWidth: 3, borderRightColor: '#2d4a3e' } : { borderLeftWidth: 3, borderLeftColor: '#2d4a3e' }]}>
+            <View style={[{ marginBottom: 16, padding: 10, backgroundColor: '#ffffff', borderRadius: 4 }, isRTL ? { borderRightWidth: 3, borderRightColor: '#2d4a3e' } : { borderLeftWidth: 3, borderLeftColor: '#2d4a3e' }]}>
               <Text style={{ fontSize: 8, fontFamily: 'Helvetica-Bold', color: '#2d4a3e', marginBottom: 4, textTransform: 'uppercase', letterSpacing: 0.5 }}>
                 {metadata.userLang === 'en' ? 'Validation' : metadata.userLang === 'pt' ? 'Validacao' : 'Validacion'}
               </Text>
@@ -608,7 +606,7 @@ export const TestReportDocument: React.FC<TestReportDocumentProps> = ({
         </View>
 
         {/* ── Disclaimer ────────────────────────────────────────────────────── */}
-        <View style={[{ marginTop: 20, padding: 10, backgroundColor: printMode ? '#ffffff' : '#f5f3ef', borderRadius: 4 }, isRTL ? { borderRightWidth: 3, borderRightColor: '#2d4a3e' } : { borderLeftWidth: 3, borderLeftColor: '#2d4a3e' }]}>
+        <View style={[{ marginTop: 20, padding: 10, backgroundColor: '#ffffff', borderRadius: 4 }, isRTL ? { borderRightWidth: 3, borderRightColor: '#2d4a3e' } : { borderLeftWidth: 3, borderLeftColor: '#2d4a3e' }]}>
           <Text style={{ fontSize: 9, color: '#444444', lineHeight: 1.6 }}>
             {metadata.userLang === 'en' ? 'This test is exclusively informational and orientational in nature, and does not constitute a diagnostic instrument nor replace the assessment performed by a duly qualified psychology professional. Results should be interpreted with caution, as they may be influenced by multiple factors and do not necessarily reflect a real clinical situation. For an adequate assessment and possible diagnosis, it is essential to consult a licensed psychologist who can conduct a comprehensive evaluation through clinical interview and, where appropriate, correctly administered validated instruments. By completing this test, you acknowledge having been informed of its limitations and accept its use for merely informational purposes.' : metadata.userLang === 'pt' ? 'Este teste tem carater exclusivamente informativo e orientativo, e nao constitui em caso algum um instrumento de diagnostico nem substitui a avaliacao realizada por um profissional de psicologia devidamente qualificado. Os resultados devem ser interpretados com cautela, tendo em conta que podem ser influenciados por multiplos fatores e que nao refletem necessariamente uma situacao clinica real. Para uma avaliacao adequada e possivel diagnostico, e imprescindivel consultar um psicologo licenciado que realize uma avaliacao completa por meio de entrevista clinica e, se necessario, instrumentos validados administrados corretamente. Ao completar este teste, voce reconhece ter sido informado das suas limitacoes e aceita o seu uso com fins meramente orientativos.' : 'Este test tiene un caracter exclusivamente informativo y orientativo, y no constituye en ningun caso un instrumento diagnostico ni sustituye la evaluacion realizada por un profesional de la psicologia debidamente cualificado. Los resultados deben interpretarse con cautela, teniendo en cuenta que pueden estar influidos por multiples factores y que no reflejan necesariamente una situacion clinica real. Para una valoracion adecuada y un posible diagnostico, es imprescindible acudir a un psicologo colegiado que realice una evaluacion completa mediante entrevista clinica y, en su caso, instrumentos validados administrados correctamente. Al completar este test, usted reconoce haber sido informado de sus limitaciones y acepta su uso con fines meramente orientativos.'}
           </Text>

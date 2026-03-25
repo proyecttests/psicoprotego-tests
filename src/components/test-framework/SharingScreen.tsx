@@ -12,6 +12,7 @@
 
 import React from 'react'
 import AdStrategy from '@/components/ads/AdStrategy'
+import { buildShortShareUrl } from '@/utils/shareEncoding'
 import { trackEvent } from '@/config/analytics'
 
 // ── UI strings ────────────────────────────────────────────────────────────────
@@ -102,27 +103,47 @@ const SharingScreen: React.FC<SharingScreenProps> = ({
 }) => {
   const ui = UI[lang] ?? UI['es']
   const [copied, setCopied] = React.useState(false)
+  const [shortUrl, setShortUrl] = React.useState(shareUrl)
   const hasNativeShare = typeof navigator !== 'undefined' && !!navigator.share
+
+  React.useEffect(() => {
+    buildShortShareUrl('', '', {}).catch(() => {})  // warm cache
+    // Shorten the URL asynchronously
+    fetch('/api/shorten', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url: shareUrl }),
+    })
+      .then((r) => r.json())
+      .then((j: { slug?: string }) => {
+        if (j.slug) {
+          const origin = window.location.origin
+          setShortUrl(`${origin}/r/${j.slug}`)
+        }
+      })
+      .catch(() => { /* keep longUrl */ })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shareUrl])
 
   // ── Handlers ───────────────────────────────────────────────────────────────
 
   const handleWhatsApp = () => {
-    const url = `https://wa.me/?text=${encodeURIComponent(`${ui.shareText} ${shareUrl}`)}`
-    trackEvent('share_whatsapp', { shareUrl })
+    const url = `https://wa.me/?text=${encodeURIComponent(`${ui.shareText} ${shortUrl}`)}`
+    trackEvent('share_whatsapp', { shareUrl: shortUrl })
     window.open(url, '_blank', 'noopener,noreferrer')
   }
 
   const handleTwitter = () => {
-    const url = `https://x.com/intent/tweet?text=${encodeURIComponent(`${ui.shareText} ${shareUrl}`)}`
-    trackEvent('share_twitter', { shareUrl })
+    const url = `https://x.com/intent/tweet?text=${encodeURIComponent(`${ui.shareText} ${shortUrl}`)}`
+    trackEvent('share_twitter', { shareUrl: shortUrl })
     window.open(url, '_blank', 'noopener,noreferrer')
   }
 
   const handleNative = async (platform: 'tiktok' | 'instagram') => {
-    trackEvent(`share_${platform}`, { shareUrl })
+    trackEvent(`share_${platform}`, { shareUrl: shortUrl })
     if (hasNativeShare) {
       try {
-        await navigator.share({ title: ui.title, text: ui.shareText, url: shareUrl })
+        await navigator.share({ title: ui.title, text: ui.shareText, url: shortUrl })
       } catch { /* user cancelled */ }
     } else {
       // Desktop fallback: copy to clipboard
@@ -132,8 +153,8 @@ const SharingScreen: React.FC<SharingScreenProps> = ({
 
   const handleCopy = async (silent = false) => {
     try {
-      await navigator.clipboard.writeText(shareUrl)
-      trackEvent('share_copy', { shareUrl })
+      await navigator.clipboard.writeText(shortUrl)
+      trackEvent('share_copy', { shareUrl: shortUrl })
       if (!silent) {
         setCopied(true)
         setTimeout(() => setCopied(false), 2000)
