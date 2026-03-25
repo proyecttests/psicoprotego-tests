@@ -35,6 +35,7 @@ import ResultCard          from '@/components/results/ResultCard'
 import CalculatingScreen   from './CalculatingScreen'
 import SharingScreen       from './SharingScreen'
 import { getScoringFunction } from '@/utils/scoringFunctions'
+import { buildShareUrl } from '@/utils/shareEncoding'
 import type { ScoringResult, TestDefinitionForScoring } from '@/utils/scoringFunctions'
 import { trackEvent } from '@/config/analytics'
 
@@ -329,8 +330,9 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  const handleShareWhatsApp = (url: string) => {
-    trackEvent('share_whatsapp', { testId })
+  const handleShare = () => {
+    const url = buildShareUrl(lang, testId, answers)
+    trackEvent('share_open', { testId })
     setPendingShareUrl(url)
     setUiState('sharing')
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -418,7 +420,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
             result={result}
             testData={testDef}
             onReset={handleReset}
-            onShareWhatsApp={handleShareWhatsApp}
+            onShare={handleShare}
             lang={lang}
             testId={testId}
             maxScore={maxScore}
