@@ -2,7 +2,7 @@
  * @file app/[lang]/test/[testId]/page.tsx
  * @description Landing page del test — Server Component.
  *
- * - generateStaticParams() → SSG para gad7 + phq9 en es/en/pt
+ * - generateStaticParams() → SSG auto-descubierto desde /public/data/tests/
  * - generateMetadata()     → title, description, OG, hreflang
  * - JSON-LD inline         → FAQPage + BreadcrumbList + MedicalWebPage
  * - Sin 'use client'       → HTML estático en build time
@@ -14,12 +14,11 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import type { TestLangFile, TestMetadata } from '@/types/test'
 import TestLandingPage from '@/views/TestLandingPage'
+import { discoverTests } from '@/utils/discoverTests'
 
 // ── Constantes ────────────────────────────────────────────────────────────────
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://testpsycho.com'
-const TESTS    = ['gad7', 'phq9'] as const
-const LANGS    = ['es', 'en', 'pt'] as const
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -108,8 +107,9 @@ function buildJsonLd(
 
 // ── generateStaticParams ──────────────────────────────────────────────────────
 
-export function generateStaticParams() {
-  return TESTS.flatMap((testId) => LANGS.map((lang) => ({ lang, testId })))
+export async function generateStaticParams() {
+  const tests = await discoverTests()
+  return tests.flatMap(({ testId, langs }) => langs.map((lang) => ({ lang, testId })))
 }
 
 // ── generateMetadata ──────────────────────────────────────────────────────────

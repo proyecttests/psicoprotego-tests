@@ -13,12 +13,11 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import type { TestLangFile, TestMetadata } from '@/types/test'
+import { discoverLangs } from '@/utils/discoverTests'
 
 // ── Constantes ────────────────────────────────────────────────────────────────
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://testpsycho.com'
-const LANGS    = ['es', 'en', 'pt'] as const
-
 // ── UI strings ────────────────────────────────────────────────────────────────
 
 const UI: Record<string, {
@@ -117,8 +116,9 @@ async function loadAllTests(lang: string): Promise<TestCard[]> {
 
 // ── generateStaticParams ──────────────────────────────────────────────────────
 
-export function generateStaticParams() {
-  return LANGS.map((lang) => ({ lang }))
+export async function generateStaticParams() {
+  const langs = await discoverLangs()
+  return langs.map((lang) => ({ lang }))
 }
 
 // ── generateMetadata ──────────────────────────────────────────────────────────

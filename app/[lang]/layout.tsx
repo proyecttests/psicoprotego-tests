@@ -1,17 +1,19 @@
 import { redirect } from 'next/navigation'
 import Header from '@/components/common/Header'
 import Footer from '@/components/common/Footer'
+import { discoverLangs } from '@/utils/discoverTests'
 import { LangHtmlUpdater } from '../components/LangHtmlUpdater'
 
 // ── Constantes ────────────────────────────────────────────────────────────────
 
-const VALID_LANGS = ['es', 'en', 'pt'] as const
-const RTL_LANGS   = ['ar', 'he', 'ku'] as const
+const RTL_LANGS = ['ar', 'he', 'ku'] as const
 
-type ValidLang = typeof VALID_LANGS[number]
-
-function isValidLang(lang: string): lang is ValidLang {
-  return (VALID_LANGS as readonly string[]).includes(lang)
+// Cache para no releer el filesystem en cada request
+let _validLangsCache: string[] | null = null
+async function getValidLangs(): Promise<string[]> {
+  if (_validLangsCache) return _validLangsCache
+  _validLangsCache = await discoverLangs()
+  return _validLangsCache
 }
 
 // ── Layout ────────────────────────────────────────────────────────────────────
@@ -25,7 +27,8 @@ export default async function LangLayout({
 }) {
   const { lang } = await params
 
-  if (!isValidLang(lang)) redirect('/es')
+  const validLangs = await getValidLangs()
+  if (!validLangs.includes(lang)) redirect('/es')
 
   const dir = (RTL_LANGS as readonly string[]).includes(lang) ? 'rtl' : 'ltr'
 
