@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { getAllBlogPosts } from '@/utils/blog'
-
+import BlogTracker from '@/components/blog/BlogTracker'
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://psicoprotego.es'
 const LANGS = ['es', 'en', 'pt']
 
@@ -87,7 +87,9 @@ export default async function BlogListPage({
   const posts = getAllBlogPosts(lang)
 
   return (
-    <div style={{ backgroundColor: 'var(--color-cream)' }} className="min-h-screen">
+    <>
+      <BlogTracker slug="list" lang={lang} />
+      <div style={{ backgroundColor: 'var(--color-cream)' }} className="min-h-screen">
       {/* Hero */}
       <section
         className="w-full py-14 px-4"
@@ -158,5 +160,6 @@ export default async function BlogListPage({
         )}
       </section>
     </div>
+    </>
   )
 }

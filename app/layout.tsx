@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Source_Serif_4, Montserrat } from 'next/font/google'
 import Script from 'next/script'
+import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 // ── Google Fonts via next/font (auto-hosted, no external request) ─────────────
@@ -68,6 +69,7 @@ export default function RootLayout({
         </noscript>
 
         {children}
+        <Analytics />
       </body>
     </html>
   )

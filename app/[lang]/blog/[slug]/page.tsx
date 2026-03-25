@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { getBlogPost, getAllBlogPosts, getAllBlogSlugs } from '@/utils/blog'
+import BlogTracker from '@/components/blog/BlogTracker'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://psicoprotego.es'
 const LANGS = ['es', 'en', 'pt']
@@ -92,7 +93,9 @@ export default async function BlogPostPage({
     .slice(0, 3)
 
   return (
-    <div style={{ backgroundColor: 'var(--color-cream)' }} className="min-h-screen">
+    <>
+      <BlogTracker slug={post.slug} lang={post.lang} tags={post.tags} relatedTestId={post.relatedTestId} />
+      <div style={{ backgroundColor: 'var(--color-cream)' }} className="min-h-screen">
       <article className="mx-auto max-w-2xl px-4 py-12">
         {/* Back link */}
         <Link
@@ -200,5 +203,6 @@ export default async function BlogPostPage({
         </section>
       )}
     </div>
+    </>
   )
 }
