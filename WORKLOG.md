@@ -635,3 +635,46 @@ Los **Vercel Production Overrides** del dashboard sobreescriben `vercel.json` co
 ### Commits de la sesión
 - `refactor: remove all hardcoded test/lang arrays, add ad config`
 - `refactor: connect AdStrategy to all ad placements, fix GTM performance`
+
+## 2026-03-25 — Sesión 8 (cont.): Categorías + Etiquetas + Limpieza final de hardcodeos
+
+### Limpieza de hardcodeos completada
+
+- `test/[testId]/page.tsx`: hreflang ahora derivado de `metadata.availableLangs` — se actualiza solo al añadir idiomas
+- `ayuda-urgente/page.tsx`: `LANGS` eliminado, usa `discoverHelpLangs()` que lee `/src/data/help-resources/` en build time
+- `HelpResourcesPage`: recibe `data` como prop desde el server component — cliente no necesita saber qué archivos existen
+- **Resultado:** cero arrays hardcodeados en todo el proyecto
+
+### Sistema de categorías y etiquetas (WP-style)
+
+#### Cambios en metadata.json
+Nuevos campos en cada test:
+- `topicCategory`: categoría temática única (ej: "ansiedad", "depresion")
+- `tags`: array de etiquetas específicas (ej: ["validado-clinicamente", "adultos", "7-items"])
+
+#### Nuevas utilidades en `discoverTests.ts`
+- `discoverCategories()`: lista todas las topicCategory únicas desde metadata.json
+- `discoverTags()`: lista todos los tags únicos
+- `loadTestCards(lang, filter?)`: carga tests como TestCard[], con filtro opcional por categoría o tag
+- `TestCard` interface: incluye name, hook, duration, itemCount, validated, topicCategory, tags
+
+#### Nuevas rutas (noindex + ItemList schema)
+- `/[lang]/categoria/[categoria]/page.tsx` — tests filtrados por topicCategory
+- `/[lang]/tag/[tag]/page.tsx` — tests filtrados por tag
+- Ambas: `robots: { index: false, follow: true }` (comportamiento WP por defecto)
+- Ambas: schema `ItemList` con los tests de la colección
+
+#### Componente compartido
+- `src/components/common/TestGrid.tsx` — grid de tarjetas reutilizable (home, categoria, tag)
+
+#### Home actualizada
+- Usa `TestGrid` + `loadTestCards`
+- Muestra nav de categorías con links a `/categoria/[slug]`
+
+#### Páginas generadas: 16 → 40
+- 6 páginas de categoría (2 cats × 3 langs)
+- 18 páginas de tags (6 tags × 3 langs)
+
+### Commits de la sesión (cont.)
+- `refactor: remove all remaining hardcoded lang arrays`
+- `feat: categories + tags system (WP-style)`
