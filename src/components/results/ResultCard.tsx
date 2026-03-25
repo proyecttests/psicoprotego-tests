@@ -17,7 +17,10 @@ import DownloadCard from './DownloadCard'
 import RelatedTests from './RelatedTests'
 import Link from 'next/link'
 import type { ScoringResult } from '@/utils/scoringFunctions'
-import type { TestDefinition } from '@/types/test'
+import type { TestDefinition, TestLangFile, AnswersMap } from '@/types/test'
+import dynamic from 'next/dynamic'
+
+const DownloadPDF = dynamic(() => import('./DownloadPDF').then(m => m.DownloadPDF), { ssr: false })
 
 // ── Props ────────────────────────────────────────────────────────────────────
 
@@ -32,6 +35,9 @@ interface ResultCardProps {
   topicCategory?: string | null
   tags?: string[]
   testCategory?: 'psychometric' | 'quiz'
+  answers?: AnswersMap
+  availableLangs?: string[]
+  testLangFile?: TestLangFile
 }
 
 // ── Paleta de colores por categoría ──────────────────────────────────────────
@@ -292,7 +298,10 @@ const NormalResult: React.FC<{
   topicCategory?: string | null
   tags?: string[]
   testCategory?: 'psychometric' | 'quiz'
-}> = ({ result, onReset, onShare, lang, testId, maxScore, topicCategory, tags, testCategory }) => {
+  answers?: AnswersMap
+  availableLangs?: string[]
+  testLangFile?: TestLangFile
+}> = ({ result, onReset, onShare, lang, testId, maxScore, topicCategory, tags, testCategory, answers, availableLangs, testLangFile }) => {
   const visible      = useFadeIn()
   const isCrisis     = result.resultType === 'CRISIS'
   const displayScore = useCountUp(result.score ?? 0)
@@ -401,6 +410,18 @@ const NormalResult: React.FC<{
         )}
       </div>
 
+      {/* ── PDF Download (psychometric tests only) ──────────────────────── */}
+      {!isCrisis && testCategory !== 'quiz' && answers && availableLangs && testLangFile && (
+        <DownloadPDF
+          testData={testLangFile}
+          answers={answers}
+          result={result}
+          testId={testId}
+          lang={lang}
+          availableLangs={availableLangs}
+        />
+      )}
+
       {/* ── Recordatorio de repetición ──────────────────────────────────── */}
       <RemindMe lang={lang} testId={testId} testCategory={testCategory} />
 
@@ -432,7 +453,7 @@ const NormalResult: React.FC<{
 
 // ── Componente principal ──────────────────────────────────────────────────────
 
-const ResultCard: React.FC<ResultCardProps> = ({ result, onReset, onShare, lang, testId, maxScore, topicCategory, tags, testCategory }) => {
+const ResultCard: React.FC<ResultCardProps> = ({ result, onReset, onShare, lang, testId, maxScore, topicCategory, tags, testCategory, answers, availableLangs, testLangFile }) => {
   return (
     <NormalResult
       result={result}
@@ -444,6 +465,9 @@ const ResultCard: React.FC<ResultCardProps> = ({ result, onReset, onShare, lang,
       topicCategory={topicCategory}
       tags={tags}
       testCategory={testCategory}
+      answers={answers}
+      availableLangs={availableLangs}
+      testLangFile={testLangFile}
     />
   )
 }
