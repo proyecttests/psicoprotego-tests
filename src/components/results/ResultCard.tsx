@@ -11,6 +11,7 @@
  */
 
 import React from 'react'
+import RemindMe from './RemindMe'
 import Link from 'next/link'
 import type { ScoringResult } from '@/utils/scoringFunctions'
 import type { TestDefinition } from '@/types/test'
@@ -53,6 +54,7 @@ const RESULT_UI: Record<string, {
   recommendation: string
   disclaimer: string
   shareResults: string
+  remindMe: string
   copyLink: string
   copied: string
   scoreLabel: string
@@ -67,6 +69,7 @@ const RESULT_UI: Record<string, {
     recommendation: 'Recomendación',
     disclaimer:     'Estos resultados tienen fines exclusivamente educativos y orientativos. No constituyen un diagnóstico clínico ni sustituyen la valoración de un profesional de la salud mental.',
     shareResults:   'Compartir resultados',
+    remindMe:       'Recordarme para repetir el test',
     copyLink:       'Copiar enlace',
     copied:         '¡Copiado!',
     scoreLabel:     'Puntuación',
@@ -81,6 +84,7 @@ const RESULT_UI: Record<string, {
     recommendation: 'Recommendation',
     disclaimer:     'These results are for educational and informational purposes only. They do not constitute a clinical diagnosis and do not replace the assessment of a mental health professional.',
     shareResults:   'Share results',
+    remindMe:       'Remind me to retake',
     copyLink:       'Copy link',
     copied:         'Copied!',
     scoreLabel:     'Score',
@@ -95,6 +99,7 @@ const RESULT_UI: Record<string, {
     recommendation: 'Recomendação',
     disclaimer:     'Estes resultados têm fins exclusivamente educativos e orientativos. Não constituem um diagnóstico clínico nem substituem a avaliação de um profissional de saúde mental.',
     shareResults:   'Compartilhar resultados',
+    remindMe:       'Lembrar de refazer',
     copyLink:       'Copiar link',
     copied:         'Copiado!',
     scoreLabel:     'Pontuação',
@@ -353,6 +358,9 @@ const NormalResult: React.FC<{
 
       {/* ── Compartir ───────────────────────────────────────────────────── */}
       <ShareButtons lang={lang} onShare={onShare} />
+
+      {/* ── Recordatorio de repetición ──────────────────────────────────── */}
+      <RemindMe lang={lang} testId={testId} />
 
       {/* ── Bloque de apoyo profesional (solo si hay red flags / urgencia) ─ */}
       {showSupport && <SupportBlock lang={lang} />}
