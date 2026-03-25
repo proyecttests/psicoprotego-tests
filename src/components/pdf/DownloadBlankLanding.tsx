@@ -28,6 +28,7 @@ export default function DownloadBlankLanding({ testId, lang, testName }: Downloa
     validated: boolean; reference?: string; originalReference?: string; originalJournal?: string
   } | null>(null)
   const blobPromiseRef = React.useRef<Promise<Blob> | null>(null)
+  const printMode = false  // future: expose as prop
   const [countdown, setCountdown] = React.useState(5)
 
   const handleClick = () => {
@@ -84,7 +85,8 @@ export default function DownloadBlankLanding({ testId, lang, testName }: Downloa
       const url = URL.createObjectURL(blob)
       const a   = document.createElement('a')
       a.href    = url
-      a.download = `psicoprotego_${testId}_blank.pdf`
+      const dateStr = new Date().toISOString().slice(0,10).replace(/-/g,'')
+      a.download = `psicoprotego_${testId}_blank_${dateStr}.pdf`
       a.click()
       URL.revokeObjectURL(url)
       trackEvent('pdf_download', { testId, isBlank: true, source: 'landing' })

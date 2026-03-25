@@ -58,6 +58,14 @@ function wrapText(
   return currentY + lineHeight
 }
 
+function shadeColor(hex: string, amount: number): string {
+  const num = parseInt(hex.replace('#',''), 16)
+  const r = Math.min(255, Math.max(0, (num >> 16) + amount))
+  const g = Math.min(255, Math.max(0, ((num >> 8) & 0xff) + amount))
+  const b = Math.min(255, Math.max(0, (num & 0xff) + amount))
+  return `rgb(${r},${g},${b})`
+}
+
 const DownloadCard: React.FC<DownloadCardProps> = ({
   lang, testName, score, maxScore, categoryLabel, colorKey, testId,
 }) => {
@@ -80,88 +88,141 @@ const DownloadCard: React.FC<DownloadCardProps> = ({
       canvas.width  = SIZE
       canvas.height = SIZE
       const ctx = canvas.getContext('2d')!
+      const colors = COLORS[colorKey] ?? COLORS['green']
 
-      // Background gradient
-      const grad = ctx.createLinearGradient(0, 0, SIZE, SIZE)
+      // ── Background ──────────────────────────────────────────────────────
+      const grad = ctx.createLinearGradient(0, 0, SIZE * 0.6, SIZE)
       grad.addColorStop(0, colors.bg)
-      grad.addColorStop(1, '#0a1a12')
+      grad.addColorStop(1, shadeColor(colors.bg, -20))
       ctx.fillStyle = grad
       ctx.fillRect(0, 0, SIZE, SIZE)
 
-      // Decorative circles
-      ctx.globalAlpha = 0.06
-      ctx.fillStyle   = '#ffffff'
+      // Subtle geometric accent — top-right quarter circle
+      ctx.save()
+      ctx.globalAlpha = 0.08
+      ctx.fillStyle = '#ffffff'
       ctx.beginPath()
-      ctx.arc(SIZE, 0, 420, 0, Math.PI * 2)
+      ctx.arc(SIZE, 0, 560, 0, Math.PI * 2)
       ctx.fill()
+      ctx.globalAlpha = 0.04
       ctx.beginPath()
-      ctx.arc(0, SIZE, 320, 0, Math.PI * 2)
+      ctx.arc(0, SIZE, 400, 0, Math.PI * 2)
       ctx.fill()
-      ctx.globalAlpha = 1
+      ctx.restore()
 
-      // Score circle
+      // ── Top branding bar ─────────────────────────────────────────────────
+      ctx.fillStyle = 'rgba(255,255,255,0.06)'
+      ctx.fillRect(0, 0, SIZE, 100)
+      ctx.fillStyle = 'rgba(255,255,255,0.55)'
+      ctx.font = '600 30px -apple-system, "Helvetica Neue", Arial, sans-serif'
+      ctx.textAlign = 'left'
+      ctx.textBaseline = 'middle'
+      ctx.fillText('psicoprotego.es', 60, 50)
+
+      // Logo dot
+      ctx.fillStyle = colors.circle
+      ctx.beginPath()
+      ctx.arc(46, 50, 9, 0, Math.PI * 2)
+      ctx.fill()
+
+      // ── Test name ─────────────────────────────────────────────────────────
+      ctx.fillStyle = 'rgba(255,255,255,0.65)'
+      ctx.font = '400 38px -apple-system, "Helvetica Neue", Arial, sans-serif'
+      ctx.textAlign = 'center'
+      ctx.textBaseline = 'top'
+      wrapText(ctx, testName, SIZE / 2, 136, SIZE - 120, 50)
+
+      // ── Score area ───────────────────────────────────────────────────────
       const cx = SIZE / 2
-      const cy = 400
-      const r  = 180
+      const cy = 460
+      const r  = 200
+
+      // Shadow ring
+      ctx.save()
+      ctx.globalAlpha = 0.15
+      ctx.beginPath()
+      ctx.arc(cx, cy, r + 12, 0, Math.PI * 2)
+      ctx.strokeStyle = '#ffffff'
+      ctx.lineWidth = 4
+      ctx.stroke()
+      ctx.restore()
+
+      // Background track
       ctx.beginPath()
       ctx.arc(cx, cy, r, 0, Math.PI * 2)
-      ctx.strokeStyle = colors.circle
-      ctx.lineWidth   = 10
+      ctx.strokeStyle = 'rgba(255,255,255,0.12)'
+      ctx.lineWidth = 24
       ctx.stroke()
 
-      // Score arc (progress)
-      const pct = maxScore > 0 ? score / maxScore : 0
+      // Progress arc
+      const pct = maxScore > 0 ? Math.min(score / maxScore, 1) : 0
       ctx.beginPath()
       ctx.arc(cx, cy, r, -Math.PI / 2, -Math.PI / 2 + pct * Math.PI * 2)
       ctx.strokeStyle = colors.circle
-      ctx.lineWidth   = 20
-      ctx.lineCap     = 'round'
+      ctx.lineWidth = 24
+      ctx.lineCap = 'round'
       ctx.stroke()
       ctx.lineCap = 'butt'
 
-      // Score number
-      ctx.fillStyle   = '#ffffff'
-      ctx.font        = 'bold 160px Georgia, serif'
-      ctx.textAlign   = 'center'
+      // Score number — large
+      ctx.fillStyle = '#ffffff'
+      ctx.font = `bold ${score >= 100 ? 130 : 160}px -apple-system, "Helvetica Neue", Arial, sans-serif`
+      ctx.textAlign = 'center'
       ctx.textBaseline = 'middle'
-      ctx.fillText(String(score), cx, cy)
+      ctx.fillText(String(score), cx, cy - 16)
 
-      // Max score label
-      ctx.font      = '36px Arial, sans-serif'
-      ctx.fillStyle = 'rgba(255,255,255,0.5)'
-      ctx.fillText(`/ ${maxScore}`, cx, cy + 110)
+      // "/ maxScore" label
+      ctx.fillStyle = 'rgba(255,255,255,0.4)'
+      ctx.font = '400 38px -apple-system, "Helvetica Neue", Arial, sans-serif'
+      ctx.fillText(`/ ${maxScore}`, cx, cy + 90)
 
-      // Category label chip
-      const chipW = ctx.measureText(categoryLabel).width + 60
-      const chipX = cx - chipW / 2
-      const chipY = 630
-      ctx.fillStyle = 'rgba(255,255,255,0.12)'
+      // ── Category pill ─────────────────────────────────────────────────────
+      ctx.font = 'bold 36px -apple-system, "Helvetica Neue", Arial, sans-serif'
+      const pillW = Math.min(ctx.measureText(categoryLabel).width + 80, SIZE - 120)
+      const pillH = 68
+      const pillX = cx - pillW / 2
+      const pillY = 720
+
+      // Pill background
+      ctx.fillStyle = colors.circle
+      ctx.globalAlpha = 0.2
       ctx.beginPath()
-      ctx.roundRect(chipX, chipY, chipW, 54, 27)
+      ;(ctx as CanvasRenderingContext2D & { roundRect: Function }).roundRect(pillX, pillY, pillW, pillH, pillH / 2)
       ctx.fill()
+      ctx.globalAlpha = 1
 
-      ctx.fillStyle    = colors.circle
-      ctx.font         = 'bold 28px Arial, sans-serif'
+      // Pill border
+      ctx.strokeStyle = colors.circle
+      ctx.lineWidth = 2
+      ctx.beginPath()
+      ;(ctx as CanvasRenderingContext2D & { roundRect: Function }).roundRect(pillX, pillY, pillW, pillH, pillH / 2)
+      ctx.stroke()
+
+      // Pill text
+      ctx.fillStyle = colors.circle
+      ctx.font = 'bold 34px -apple-system, "Helvetica Neue", Arial, sans-serif'
+      ctx.textAlign = 'center'
       ctx.textBaseline = 'middle'
-      ctx.fillText(categoryLabel, cx, chipY + 27)
+      ctx.fillText(categoryLabel, cx, pillY + pillH / 2)
 
-      // Test name
-      ctx.fillStyle    = 'rgba(255,255,255,0.9)'
-      ctx.font         = '44px Georgia, serif'
-      ctx.textBaseline = 'top'
-      wrapText(ctx, testName, cx, 730, 900, 56)
-
-      // Domain
-      ctx.fillStyle    = 'rgba(255,255,255,0.3)'
-      ctx.font         = '30px Arial, sans-serif'
+      // ── CTA bottom line ──────────────────────────────────────────────────
+      ctx.fillStyle = 'rgba(255,255,255,0.35)'
+      ctx.font = '400 28px -apple-system, "Helvetica Neue", Arial, sans-serif'
+      ctx.textAlign = 'center'
       ctx.textBaseline = 'bottom'
-      ctx.fillText('testpsycho.com', cx, SIZE - 40)
+      ctx.fillText('¿Cuál es tu resultado?', cx, SIZE - 48)
 
-      // Download
-      const link    = document.createElement('a')
-      link.download = `resultado-${testId}.png`
-      link.href     = canvas.toDataURL('image/png')
-      link.click()
+      // ── Download ──────────────────────────────────────────────────────────
+      canvas.toBlob((blob) => {
+        if (!blob) return
+        const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, '')
+        const link    = document.createElement('a')
+        link.download = `psicoprotego_${testId}_story_${dateStr}.png`
+        link.href     = URL.createObjectURL(blob)
+        link.click()
+        setTimeout(() => URL.revokeObjectURL(link.href), 2000)
+      }, 'image/png')
+
     } finally {
       setLoading(false)
     }
