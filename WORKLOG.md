@@ -678,3 +678,65 @@ Nuevos campos en cada test:
 ### Commits de la sesión (cont.)
 - `refactor: remove all remaining hardcoded lang arrays`
 - `feat: categories + tags system (WP-style)`
+
+## 2026-03-25 — Sesión 8 (cont.): Sharing panel + URL compartible con respuestas
+
+### Sharing panel (4 plataformas)
+
+- `SharingScreen` rediseñado como panel real (no auto-redirect):
+  - WhatsApp — URL directa `wa.me`
+  - Twitter / X — URL directa `x.com/intent/tweet`
+  - "Más opciones" — Web Share API del sistema operativo (TikTok, Instagram, Telegram, etc. en móvil); fallback a copiar enlace en escritorio
+  - Copiar enlace — clipboard API
+- `ResultCard`: botón único "Compartir resultados" que abre el panel
+- `TestContainer`: genera `shareUrl` desde **todas** las respuestas (`buildShareUrl`)
+
+### URL compartible con respuestas completas
+
+- `src/utils/shareEncoding.ts`: encode/decode URL-safe base64
+  - Payload: `{ v: 1, a: { q1: 2, q2: 0, ... } }` (todas las respuestas)
+  - Ofuscado (no legible a ojo), decodificable para análisis / PDF
+  - `encodeAnswers()`, `decodeAnswers()`, `buildShareUrl()`
+- URL resultante: `/[lang]/test/[testId]/resultado?d=BASE64TOKEN`
+
+### Página de resultado compartido
+
+- `app/[lang]/test/[testId]/resultado/page.tsx` + `ResultadoClient.tsx`
+  - Decodifica el token → re-ejecuta el scoring → muestra `ResultCard` en modo lectura
+  - Banner "Resultado compartido" en la parte superior
+  - Si el token es inválido: error + CTA al test
+  - `noindex, nofollow` — contenido personal, no se indexa
+
+### Commits
+- `feat: sharing panel (WhatsApp+Twitter+TikTok/Instagram+Copy) + shareable result URL`
+
+## 2026-03-25 — Sesión 8 (cont.): Sharing panel + URL compartible con respuestas
+
+### Sharing panel (4 plataformas)
+
+- `SharingScreen` rediseñado como panel real (no auto-redirect):
+  - WhatsApp — URL directa `wa.me`
+  - Twitter / X — URL directa `x.com/intent/tweet`
+  - "Más opciones" — Web Share API del sistema operativo (TikTok, Instagram, Telegram, etc. en móvil); fallback a copiar enlace en escritorio
+  - Copiar enlace — clipboard API
+- `ResultCard`: botón único "Compartir resultados" que abre el panel
+- `TestContainer`: genera `shareUrl` desde **todas** las respuestas (`buildShareUrl`)
+
+### URL compartible con respuestas completas
+
+- `src/utils/shareEncoding.ts`: encode/decode URL-safe base64
+  - Payload: `{ v: 1, a: { q1: 2, q2: 0, ... } }` (todas las respuestas)
+  - Ofuscado (no legible a ojo), decodificable para análisis / PDF
+  - `encodeAnswers()`, `decodeAnswers()`, `buildShareUrl()`
+- URL resultante: `/[lang]/test/[testId]/resultado?d=BASE64TOKEN`
+
+### Página de resultado compartido
+
+- `app/[lang]/test/[testId]/resultado/page.tsx` + `ResultadoClient.tsx`
+  - Decodifica el token → re-ejecuta el scoring → muestra `ResultCard` en modo lectura
+  - Banner "Resultado compartido" en la parte superior
+  - Si el token es inválido: error + CTA al test
+  - `noindex, nofollow` — contenido personal, no se indexa
+
+### Commits
+- `feat: sharing panel (WhatsApp+Twitter+TikTok/Instagram+Copy) + shareable result URL`
