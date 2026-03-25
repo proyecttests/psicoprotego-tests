@@ -596,3 +596,42 @@ Los **Vercel Production Overrides** del dashboard sobreescriben `vercel.json` co
 
 - `fix: eliminar colores rojos de crisis, usar paleta brand`
 - `fix: ocultar score card en estado CRISIS (score null con círculo verde)`
+
+## 2026-03-25 — Sesión 8: Auditoría, Escalabilidad y Arquitectura de Ads
+
+### Objetivos de la sesión
+- Auditoría completa del proyecto (software, SEO, monetización, escalado)
+- Eliminar todos los hardcodeos que bloquean el escalado
+- Conectar sistema de ads data-driven
+
+### Cambios realizados
+
+#### 1. Auto-discovery de tests y langs (`src/utils/discoverTests.ts`)
+- Nuevo fichero: lee `/public/data/tests/` en build time
+- `discoverTests()` → devuelve `[{ testId, langs }]` desde cada `metadata.json`
+- `discoverLangs()` → lista única de todos los idiomas disponibles
+- `generateStaticParams()` en `[lang]/test/[testId]/page.tsx` y `[lang]/page.tsx` ahora usan este helper
+- `VALID_LANGS` en `layout.tsx` ahora es dinámico con cache de módulo
+- **Resultado:** añadir test nuevo = solo JSON. Sin tocar código.
+
+#### 2. `scoreStandard` en scoring registry
+- Nueva función registrada: alias de `scoreGAD7` (algoritmo genérico suma directa + red flags)
+- Tests nuevos pueden declarar `"scoringFunction": "scoreStandard"` en su JSON
+- Sin necesidad de modificar `scoringFunctions.ts` para el 90% de los tests
+
+#### 3. Sistema de ads data-driven (`public/data/ads.config.json` + `AdStrategy.tsx`)
+- `ads.config.json`: define qué slots se muestran por categoría (psychometric/quiz)
+  - psychometric: test-intro + pre-test + pre-result
+  - quiz: test-intro + pre-test + pre-result + post-share (mayor densidad)
+- `AdStrategy.tsx`: componente que consulta el config y renderiza `AdSlot` solo si procede
+- Conectado a: `TestLandingPage`, `start/page.tsx`, `CalculatingScreen`, `SharingScreen`
+- `TestContainer` extrae `category` de `metadata.json` y lo pasa a los hijos
+- **Resultado:** cambiar densidad o posiciones de ads = solo editar el JSON
+
+#### 4. Fix de rendimiento: GTM
+- `layout.tsx`: `strategy="beforeInteractive"` → `strategy="afterInteractive"`
+- Impacto: GTM ya no bloquea el renderizado inicial (mejora LCP)
+
+### Commits de la sesión
+- `refactor: remove all hardcoded test/lang arrays, add ad config`
+- `refactor: connect AdStrategy to all ad placements, fix GTM performance`
