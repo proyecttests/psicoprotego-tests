@@ -12,6 +12,7 @@ const UI: Record<string, { btn: string; hintShare: string; hintDownload: string 
   es: { btn: 'Compartir en stories',     hintShare: 'Elige Instagram o TikTok',    hintDownload: 'Se descargará la imagen' },
   en: { btn: 'Share to stories',         hintShare: 'Choose Instagram or TikTok',  hintDownload: 'Image will be downloaded' },
   pt: { btn: 'Compartilhar nos stories', hintShare: 'Escolha Instagram ou TikTok', hintDownload: 'A imagem será baixada' },
+  ku: { btn: 'لە ستۆریدا بڵاوبکەرەوە', hintShare: 'Instagram یان TikTok هەڵبژێرە', hintDownload: 'وێنەکە داگیردەکرێت' },
 }
 
 const COLORS: Record<string, { bg: string; text: string; circle: string }> = {

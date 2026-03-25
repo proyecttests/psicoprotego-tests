@@ -96,6 +96,23 @@ const UI: Record<string, {
     adPlaceholder:       'Publicidade',
     done:                'Baixado!',
   },
+  ku: {
+    downloadWithResults: '⬇ PDF لەگەڵ ئەنجامەکان داگرە',
+    downloadBlank:       '⬇ کوێزی خاڵی داگرە',
+    configureTitle:      'ڕاپۆرتی PDF ڕێکبخە',
+    nameLabel:           'ناوت (دڵخوازانە)',
+    namePlaceholder:     'نموونە: ئەحمەد عەلی',
+    nameDisclaimer:      'ناوت تەنها بۆ دروستکردنی ئەم بەلگەنامەیە بەکاردێت و هیچکات گەڕەکەکەی تۆ نایێڵێت. تۆمارمان ناکات و پرۆسەسمان ناکات. تۆ بەرپرسی بەکارهێنان و دابەشکردنی ئەم ڕاپۆرتەیت.',
+    langLabel:           'زمانی ڕاپۆرت',
+    consentLabel:        'مەرجەکانی بەکارهێنانی ئەم ڕاپۆرتەم خوێندووەتەوە و قبوولم کردووە',
+    generateButton:      'ڕاپۆرت دروست بکە',
+    cancelButton:        'هەڵوەشاندنەوە',
+    generating:          'ڕاپۆرتەکەت دروستدەکرێت...',
+    downloadingIn:       'داگرتن لە',
+    seconds:             'چرکە...',
+    adPlaceholder:       'ڕیکلام',
+    done:                'داگیرا!',
+  },
 }
 
 const LANG_FLAGS: Record<string, string> = {
@@ -103,6 +120,7 @@ const LANG_FLAGS: Record<string, string> = {
   en: '🇬🇧 English',
   pt: '🇧🇷 Português',
   ar: '🇸🇦 العربية',
+  ku: '🏳 کوردی',
   fr: '🇫🇷 Français',
   de: '🇩🇪 Deutsch',
   it: '🇮🇹 Italiano',

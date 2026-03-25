@@ -59,6 +59,20 @@ const UI = {
     faqTitle:            'Perguntas frequentes',
     disclaimerText:      'Este teste é educativo e não constitui diagnóstico clínico. O Psicoprotego não armazena suas respostas.',
   },
+  ku: {
+    startButton:         'کوێزەکە دەستپێبکە',
+    startButtonAria:     (name: string) => `${name} دەستپێبکە`,
+    freeLine:            'بەخۆڕایی · تۆمارنامە نییە',
+    validatedBadge:      'زانستیانە پشتڕاستکراوەتەوە',
+    questionsLabel:      (n: number) => `${n} پرسیار`,
+    durationLabel:       (t: string) => t,
+    whatItMeasuresTitle: 'ئەم کوێزە چیی دەسەنجێت؟',
+    whoIsItForTitle:     'بۆ کێیە؟',
+    howItWorksTitle:     'چۆن کار دەکات',
+    technicalSheetTitle: 'کاغەزی تەکنیکی کوێز',
+    faqTitle:            'پرسیارە باوەکان',
+    disclaimerText:      'ئەم کوێزە پەروەردەییەو نییەتە دیاریکردنی نەخۆشی کلینیکی. Psicoprotego وەڵامەکانت تۆمار ناکات.',
+  },
 } as const
 
 type SupportedLang = keyof typeof UI
@@ -115,7 +129,7 @@ export default function TestLandingPage({
   const startHref   = `/${lang}/test/${testId}/start`
   const isQuiz      = metadata.category === 'quiz'
   const startLabel  = isQuiz
-    ? ({ es: 'Empezar quiz', en: 'Start quiz', pt: 'Iniciar quiz' } as Record<string,string>)[lang] ?? 'Empezar quiz'
+    ? ({ es: 'Empezar quiz', en: 'Start quiz', pt: 'Iniciar quiz', ku: 'کوێزەکە دەستپێبکە' } as Record<string,string>)[lang] ?? 'Empezar quiz'
     : ui.startButton
 
   return (
