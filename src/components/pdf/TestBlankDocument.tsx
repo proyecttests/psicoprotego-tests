@@ -31,6 +31,8 @@ export interface TestBlankDocumentProps {
 
 // ── Color palette ─────────────────────────────────────────────────────────────
 
+const RTL_LANGS = new Set(['ar', 'he', 'fa', 'ur', 'ku'])
+
 const COLORS = {
   primary:   '#2d4a3e',
   accent:    '#c8a96e',
@@ -242,6 +244,7 @@ export const TestBlankDocument: React.FC<TestBlankDocumentProps> = ({
   testData,
   metadata,
 }) => {
+  const isRTL = RTL_LANGS.has(testData.lang)
   const questionCount = testData.questions.length
 
   return (
@@ -250,11 +253,11 @@ export const TestBlankDocument: React.FC<TestBlankDocumentProps> = ({
       author="Psicoprotego.es"
       subject="Test psicológico para imprimir"
     >
-      <Page size="A4" style={styles.page}>
+      <Page size="A4" style={[styles.page, isRTL ? { direction: 'rtl' } : {}]}>
         {/* ── Watermark ─────────────────────────────────────────────────────── */}
 
         {/* ── Header ──────────────────────────────────────────────────────── */}
-        <View style={styles.header}>
+        <View style={[styles.header, isRTL ? { flexDirection: 'row-reverse' } : {}]}>
           <View style={styles.headerLeft}>
             <Text style={styles.headerTestName}>{testData.name} — Para rellenar</Text>
             <Text style={styles.headerSubtitle}>Cuestionario de evaluación psicológica</Text>
@@ -266,7 +269,7 @@ export const TestBlankDocument: React.FC<TestBlankDocumentProps> = ({
         </View>
 
         {/* ── Metadata bar ─────────────────────────────────────────────────── */}
-        <View style={styles.metadataBar}>
+        <View style={[styles.metadataBar, isRTL ? { flexDirection: 'row-reverse' } : {}]}>
           <Text style={styles.metadataText}>
             {`Test: ${testData.name}  ·  ${questionCount} preguntas  ·  Generado: ${formatShortDate(metadata.generatedAt)}`}
           </Text>
@@ -281,7 +284,7 @@ export const TestBlankDocument: React.FC<TestBlankDocumentProps> = ({
 
           {/* ── Validation info ─────────────────────────────────────────── */}
           {metadata.validationDetails && (
-            <View style={{ marginBottom: 16, padding: 10, backgroundColor: '#f0f7f4', borderRadius: 4, borderLeftWidth: 3, borderLeftColor: '#2d4a3e' }}>
+            <View style={[{ marginBottom: 16, padding: 10, backgroundColor: '#f0f7f4', borderRadius: 4 }, isRTL ? { borderRightWidth: 3, borderRightColor: '#2d4a3e' } : { borderLeftWidth: 3, borderLeftColor: '#2d4a3e' }]}>
               <Text style={{ fontSize: 8, fontFamily: 'Helvetica-Bold', color: '#2d4a3e', marginBottom: 4 }}>
                 {'VALIDACION'}
               </Text>
@@ -321,7 +324,7 @@ export const TestBlankDocument: React.FC<TestBlankDocumentProps> = ({
               {question.options && question.options.length > 0 && (
                 <View style={styles.optionsRow}>
                   {question.options.map((opt) => (
-                    <View key={opt.value} style={styles.optionItem}>
+                    <View key={opt.value} style={[styles.optionItem, isRTL ? { flexDirection: 'row-reverse' } : {}]}>
                       <Text style={styles.optionBullet}>{' '}</Text>
                       <Text style={styles.optionLabel}>{opt.label}</Text>
                     </View>
@@ -346,7 +349,7 @@ export const TestBlankDocument: React.FC<TestBlankDocumentProps> = ({
                       ? `${val} – ${labelMax}`
                       : String(val)
                     return (
-                      <View key={val} style={styles.optionItem}>
+                      <View key={val} style={[styles.optionItem, isRTL ? { flexDirection: 'row-reverse' } : {}]}>
                         <Text style={styles.optionBullet}>{' '}</Text>
                         <Text style={styles.optionLabel}>{labelText}</Text>
                       </View>
@@ -362,7 +365,7 @@ export const TestBlankDocument: React.FC<TestBlankDocumentProps> = ({
                     question.booleanOptions?.yes ?? 'Sí',
                     question.booleanOptions?.no  ?? 'No',
                   ].map((label) => (
-                    <View key={label} style={styles.optionItem}>
+                    <View key={label} style={[styles.optionItem, isRTL ? { flexDirection: 'row-reverse' } : {}]}>
                       <Text style={styles.optionBullet}>{' '}</Text>
                       <Text style={styles.optionLabel}>{label}</Text>
                     </View>
@@ -383,7 +386,7 @@ export const TestBlankDocument: React.FC<TestBlankDocumentProps> = ({
         </View>
 
         {/* ── Disclaimer ───────────────────────────────────────────────────── */}
-        <View style={{ marginTop: 20, padding: 10, backgroundColor: '#f5f3ef', borderRadius: 4, borderLeftWidth: 3, borderLeftColor: '#2d4a3e' }}>
+        <View style={[{ marginTop: 20, padding: 10, backgroundColor: '#f5f3ef', borderRadius: 4 }, isRTL ? { borderRightWidth: 3, borderRightColor: '#2d4a3e' } : { borderLeftWidth: 3, borderLeftColor: '#2d4a3e' }]}>
           <Text style={{ fontSize: 9, color: '#444444', lineHeight: 1.6 }}>
             {'Este test tiene un caracter exclusivamente informativo y orientativo, y no constituye en ningun caso un instrumento diagnostico ni sustituye la evaluacion realizada por un profesional de la psicologia debidamente cualificado. Los resultados deben interpretarse con cautela, teniendo en cuenta que pueden estar influidos por multiples factores y que no reflejan necesariamente una situacion clinica real. Para una valoracion adecuada y un posible diagnostico, es imprescindible acudir a un psicologo colegiado que realice una evaluacion completa mediante entrevista clinica y, en su caso, instrumentos validados administrados correctamente. Al completar este test, usted reconoce haber sido informado de sus limitaciones y acepta su uso con fines meramente orientativos.'}
           </Text>
