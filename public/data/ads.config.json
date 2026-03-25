@@ -2,15 +2,17 @@
   "_comment": "Ad density config per test category. Edit here to change ad placement globally — no code changes needed.",
   "psychometric": {
     "slots": [
-      { "position": "pre-test",    "size": "rectangle" },
-      { "position": "pre-result",  "size": "rectangle" }
+      { "position": "test-intro",  "size": "leaderboard" },
+      { "position": "pre-test",    "size": "rectangle"   },
+      { "position": "pre-result",  "size": "rectangle"   }
     ]
   },
   "quiz": {
     "slots": [
-      { "position": "pre-test",    "size": "rectangle" },
-      { "position": "pre-result",  "size": "rectangle" },
-      { "position": "post-share",  "size": "rectangle" }
+      { "position": "test-intro",  "size": "leaderboard" },
+      { "position": "pre-test",    "size": "rectangle"   },
+      { "position": "pre-result",  "size": "rectangle"   },
+      { "position": "post-share",  "size": "rectangle"   }
     ]
   }
 }

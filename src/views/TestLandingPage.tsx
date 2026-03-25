@@ -9,7 +9,7 @@
 
 import Link from 'next/link'
 import type { TestLangFile, TestMetadata } from '@/types/test'
-import AdSlot            from '@/components/ads/AdSlot'
+import AdStrategy        from '@/components/ads/AdStrategy'
 import TestMetadataTable from '@/components/test-framework/TestMetadataTable'
 import { FaqAccordion }  from '@/components/landing/FaqAccordion'
 
@@ -167,7 +167,7 @@ export default function TestLandingPage({
 
         {/* ── 2. AD SLOT ──────────────────────────────────────────────────── */}
         <div className="w-full max-w-2xl mx-auto">
-          <AdSlot position="test-intro" size="leaderboard" />
+          <AdStrategy category={metadata.category} position="test-intro" />
         </div>
 
         {/* ── 3. QUÉ MIDE ─────────────────────────────────────────────────── */}
