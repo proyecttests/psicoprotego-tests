@@ -127,6 +127,9 @@ export const DownloadPDF: React.FC<DownloadPDFProps> = ({
   const [userName, setUserName]     = React.useState('')
   const [viewLang, setViewLang]     = React.useState(lang)
   const [viewLangData, setViewLangData] = React.useState<TestLangFile | null>(null)
+  const [validationDetails, setValidationDetails] = React.useState<{
+    validated: boolean; reference?: string; originalReference?: string; originalJournal?: string
+  } | null>(null)
   const [loadingLang, setLoadingLang]   = React.useState(false)
   const [countdown, setCountdown]   = React.useState(5)
   const [nameConsent, setNameConsent]   = React.useState(false)
@@ -140,7 +143,24 @@ export const DownloadPDF: React.FC<DownloadPDFProps> = ({
       const saved = sessionStorage.getItem('psico_pdf_name')
       if (saved) setUserName(saved)
     } catch { /* ignore */ }
-  }, [])
+    // Load validation details for this test/lang
+    fetch(`/data/tests/${testId}/metadata.json`)
+      .then(r => r.json())
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .then((meta: any) => {
+        const vd = meta?.validationDetails
+        if (!vd) return
+        const langV = vd.translations?.[lang]
+        const orig  = vd.original
+        setValidationDetails({
+          validated:         langV?.validated ?? false,
+          reference:         langV?.reference,
+          originalReference: orig?.reference,
+          originalJournal:   orig?.journal,
+        })
+      })
+      .catch(() => {/* silent */})
+  }, [testId, lang])
 
   // ── Load viewLangData when viewLang changes ──────────────────────────────
   React.useEffect(() => {
@@ -238,6 +258,7 @@ export const DownloadPDF: React.FC<DownloadPDFProps> = ({
             viewLang,
             userName:    userName.trim() || undefined,
             testId,
+            validationDetails: validationDetails ?? undefined,
           },
           viewLangData: viewLangData ?? undefined,
         })
