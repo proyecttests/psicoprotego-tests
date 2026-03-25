@@ -12,6 +12,9 @@
 
 import React from 'react'
 import RemindMe from './RemindMe'
+import ScoreHistory from './ScoreHistory'
+import DownloadCard from './DownloadCard'
+import RelatedTests from './RelatedTests'
 import Link from 'next/link'
 import type { ScoringResult } from '@/utils/scoringFunctions'
 import type { TestDefinition } from '@/types/test'
@@ -26,6 +29,8 @@ interface ResultCardProps {
   lang: string
   testId: string
   maxScore: number
+  topicCategory?: string | null
+  tags?: string[]
 }
 
 // ── Paleta de colores por categoría ──────────────────────────────────────────
@@ -283,7 +288,9 @@ const NormalResult: React.FC<{
   lang: string
   testId: string
   maxScore: number
-}> = ({ result, onReset, onShare, lang, testId, maxScore }) => {
+  topicCategory?: string | null
+  tags?: string[]
+}> = ({ result, onReset, onShare, lang, testId, maxScore, topicCategory, tags }) => {
   const visible      = useFadeIn()
   const isCrisis     = result.resultType === 'CRISIS'
   const displayScore = useCountUp(result.score ?? 0)
@@ -356,8 +363,26 @@ const NormalResult: React.FC<{
         </p>
       </div>
 
-      {/* ── Compartir ───────────────────────────────────────────────────── */}
-      <ShareButtons lang={lang} onShare={onShare} />
+      {/* ── Historial de puntuaciones ──────────────────────────────────── */}
+      {!isCrisis && (
+        <ScoreHistory testId={testId} currentScore={result.score ?? 0} lang={lang} />
+      )}
+
+      {/* ── Compartir + Descargar ────────────────────────────────────────── */}
+      <div className="flex items-center justify-between flex-wrap gap-3">
+        <ShareButtons lang={lang} onShare={onShare} />
+        {!isCrisis && (
+          <DownloadCard
+            lang={lang}
+            testName={testId}
+            score={result.score ?? 0}
+            maxScore={maxScore}
+            categoryLabel={result.category?.label ?? ''}
+            colorKey={colorKey}
+            testId={testId}
+          />
+        )}
+      </div>
 
       {/* ── Recordatorio de repetición ──────────────────────────────────── */}
       <RemindMe lang={lang} testId={testId} />
@@ -376,13 +401,21 @@ const NormalResult: React.FC<{
           {ui.retry}
         </button>
       </div>
+
+      {/* ── Tests relacionados ────────────────────────────────────────────── */}
+      <RelatedTests
+        lang={lang}
+        currentTestId={testId}
+        currentCategory={topicCategory ?? null}
+        currentTags={tags ?? []}
+      />
     </div>
   )
 }
 
 // ── Componente principal ──────────────────────────────────────────────────────
 
-const ResultCard: React.FC<ResultCardProps> = ({ result, onReset, onShare, lang, testId, maxScore }) => {
+const ResultCard: React.FC<ResultCardProps> = ({ result, onReset, onShare, lang, testId, maxScore, topicCategory, tags }) => {
   return (
     <NormalResult
       result={result}
@@ -391,6 +424,8 @@ const ResultCard: React.FC<ResultCardProps> = ({ result, onReset, onShare, lang,
       lang={lang}
       testId={testId}
       maxScore={maxScore}
+      topicCategory={topicCategory}
+      tags={tags}
     />
   )
 }
