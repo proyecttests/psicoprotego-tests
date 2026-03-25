@@ -21,7 +21,7 @@ interface ResultCardProps {
   result: ScoringResult
   testData: TestDefinition | null
   onReset: () => void
-  onShareWhatsApp?: (url: string) => void
+  onShare?: () => void
   lang: string
   testId: string
   maxScore: number
@@ -52,10 +52,9 @@ const RESULT_UI: Record<string, {
   retry: string
   recommendation: string
   disclaimer: string
-  shareWhatsApp: string
+  shareResults: string
   copyLink: string
   copied: string
-  shareText: string
   scoreLabel: string
   supportTitle: string
   supportBody: string
@@ -67,10 +66,9 @@ const RESULT_UI: Record<string, {
     retry:          '↺ Volver a intentar',
     recommendation: 'Recomendación',
     disclaimer:     'Estos resultados tienen fines exclusivamente educativos y orientativos. No constituyen un diagnóstico clínico ni sustituyen la valoración de un profesional de la salud mental.',
-    shareWhatsApp:  'Compartir en WhatsApp',
+    shareResults:   'Compartir resultados',
     copyLink:       'Copiar enlace',
     copied:         '¡Copiado!',
-    shareText:      'Acabo de completar este test psicológico. ¿Lo intentas tú también?',
     scoreLabel:     'Puntuación',
     supportTitle:   'En tus respuestas hemos detectado algunos aspectos que pueden indicar que necesitas apoyo',
     supportBody:    'Te recomendamos que consultes con un profesional lo antes posible.',
@@ -82,10 +80,9 @@ const RESULT_UI: Record<string, {
     retry:          '↺ Try again',
     recommendation: 'Recommendation',
     disclaimer:     'These results are for educational and informational purposes only. They do not constitute a clinical diagnosis and do not replace the assessment of a mental health professional.',
-    shareWhatsApp:  'Share on WhatsApp',
+    shareResults:   'Share results',
     copyLink:       'Copy link',
     copied:         'Copied!',
-    shareText:      'I just completed this psychological test. Want to try?',
     scoreLabel:     'Score',
     supportTitle:   'Some of your responses include aspects that may indicate you need support',
     supportBody:    'We recommend consulting with a professional as soon as possible.',
@@ -97,10 +94,9 @@ const RESULT_UI: Record<string, {
     retry:          '↺ Tentar novamente',
     recommendation: 'Recomendação',
     disclaimer:     'Estes resultados têm fins exclusivamente educativos e orientativos. Não constituem um diagnóstico clínico nem substituem a avaliação de um profissional de saúde mental.',
-    shareWhatsApp:  'Compartilhar no WhatsApp',
+    shareResults:   'Compartilhar resultados',
     copyLink:       'Copiar link',
     copied:         'Copiado!',
-    shareText:      'Acabei de completar este teste psicológico. Quer tentar?',
     scoreLabel:     'Pontuação',
     supportTitle:   'Algumas das suas respostas incluem aspectos que podem indicar que você precisa de apoio',
     supportBody:    'Recomendamos que consulte um profissional o quanto antes.',
@@ -114,16 +110,6 @@ function getUi(lang: string) {
   return RESULT_UI[lang] ?? RESULT_UI['es']
 }
 
-// ── Share URL (ofuscada con base64) ───────────────────────────────────────────
-
-/**
- * Genera una URL de resultado ofuscada.
- * El token es btoa(score:categoryKey), que oculta el dato a inspección casual.
- */
-function buildShareUrl(lang: string, testId: string, score: number, categoryKey: string): string {
-  const token = btoa(`${score}:${categoryKey}`)
-  return `${window.location.origin}/${lang}/test/${testId}/result?r=${encodeURIComponent(token)}`
-}
 
 // ── Hooks ─────────────────────────────────────────────────────────────────────
 
@@ -205,54 +191,25 @@ const ScoreBar: React.FC<{
 // ── Sub-componente: ShareButtons ──────────────────────────────────────────────
 
 const ShareButtons: React.FC<{
-  shareUrl: string
   lang: string
-  onShareWhatsApp?: (url: string) => void
-}> = ({ shareUrl, lang, onShareWhatsApp }) => {
-  const [copied, setCopied] = React.useState(false)
+  onShare?: () => void
+}> = ({ lang, onShare }) => {
   const ui = getUi(lang)
-
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(shareUrl)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    } catch {
-      // clipboard API not available — silent fail
-    }
-  }
-
-  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(`${ui.shareText} ${shareUrl}`)}`
-
-  const handleWhatsApp = (e: React.MouseEvent) => {
-    if (onShareWhatsApp) {
-      e.preventDefault()
-      onShareWhatsApp(whatsappUrl)
-    }
-  }
+  if (!onShare) return null
 
   return (
-    <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
-      <a
-        href={whatsappUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={handleWhatsApp}
-        className="btn-primary flex items-center justify-center gap-2 w-full sm:w-auto"
-        aria-label={ui.shareWhatsApp}
-      >
-        <span aria-hidden="true">💬</span>
-        {ui.shareWhatsApp}
-      </a>
-
+    <div className="flex justify-end">
       <button
         type="button"
-        onClick={handleCopy}
-        className="btn-secondary flex items-center justify-center gap-2 w-full sm:w-auto"
-        aria-label={ui.copyLink}
+        onClick={onShare}
+        className="btn-primary flex items-center gap-2"
+        aria-label={ui.shareResults}
       >
-        <span aria-hidden="true">{copied ? '✓' : '🔗'}</span>
-        {copied ? ui.copied : ui.copyLink}
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4" aria-hidden="true">
+          <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+        </svg>
+        {ui.shareResults}
       </button>
     </div>
   )
@@ -317,11 +274,11 @@ const SupportBlock: React.FC<{ lang: string }> = ({ lang }) => {
 const NormalResult: React.FC<{
   result: ScoringResult
   onReset: () => void
-  onShareWhatsApp?: (url: string) => void
+  onShare?: () => void
   lang: string
   testId: string
   maxScore: number
-}> = ({ result, onReset, onShareWhatsApp, lang, testId, maxScore }) => {
+}> = ({ result, onReset, onShare, lang, testId, maxScore }) => {
   const visible      = useFadeIn()
   const isCrisis     = result.resultType === 'CRISIS'
   const displayScore = useCountUp(result.score ?? 0)
@@ -329,8 +286,6 @@ const NormalResult: React.FC<{
   const colors       = COLOR_MAP[colorKey] ?? COLOR_MAP['green']
   const message      = result.message
   const ui           = getUi(lang)
-  const shareUrl     = buildShareUrl(lang, testId, result.score ?? 0, result.category?.messageKey ?? '')
-
   const showSupport =
     isCrisis ||
     (result.redFlags?.length ?? 0) > 0 ||
@@ -397,7 +352,7 @@ const NormalResult: React.FC<{
       </div>
 
       {/* ── Compartir ───────────────────────────────────────────────────── */}
-      <ShareButtons shareUrl={shareUrl} lang={lang} onShareWhatsApp={onShareWhatsApp} />
+      <ShareButtons lang={lang} onShare={onShare} />
 
       {/* ── Bloque de apoyo profesional (solo si hay red flags / urgencia) ─ */}
       {showSupport && <SupportBlock lang={lang} />}
@@ -419,12 +374,12 @@ const NormalResult: React.FC<{
 
 // ── Componente principal ──────────────────────────────────────────────────────
 
-const ResultCard: React.FC<ResultCardProps> = ({ result, onReset, onShareWhatsApp, lang, testId, maxScore }) => {
+const ResultCard: React.FC<ResultCardProps> = ({ result, onReset, onShare, lang, testId, maxScore }) => {
   return (
     <NormalResult
       result={result}
       onReset={onReset}
-      onShareWhatsApp={onShareWhatsApp}
+      onShare={onShare}
       lang={lang}
       testId={testId}
       maxScore={maxScore}
