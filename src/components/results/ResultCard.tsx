@@ -31,6 +31,7 @@ interface ResultCardProps {
   maxScore: number
   topicCategory?: string | null
   tags?: string[]
+  testCategory?: 'psychometric' | 'quiz'
 }
 
 // ── Paleta de colores por categoría ──────────────────────────────────────────
@@ -290,7 +291,8 @@ const NormalResult: React.FC<{
   maxScore: number
   topicCategory?: string | null
   tags?: string[]
-}> = ({ result, onReset, onShare, lang, testId, maxScore, topicCategory, tags }) => {
+  testCategory?: 'psychometric' | 'quiz'
+}> = ({ result, onReset, onShare, lang, testId, maxScore, topicCategory, tags, testCategory }) => {
   const visible      = useFadeIn()
   const isCrisis     = result.resultType === 'CRISIS'
   const displayScore = useCountUp(result.score ?? 0)
@@ -371,7 +373,7 @@ const NormalResult: React.FC<{
       {/* ── Compartir + Descargar ────────────────────────────────────────── */}
       <div className="flex items-center justify-between flex-wrap gap-3">
         <ShareButtons lang={lang} onShare={onShare} />
-        {!isCrisis && (
+        {!isCrisis && testCategory === 'quiz' && (
           <DownloadCard
             lang={lang}
             testName={testId}
@@ -415,7 +417,7 @@ const NormalResult: React.FC<{
 
 // ── Componente principal ──────────────────────────────────────────────────────
 
-const ResultCard: React.FC<ResultCardProps> = ({ result, onReset, onShare, lang, testId, maxScore, topicCategory, tags }) => {
+const ResultCard: React.FC<ResultCardProps> = ({ result, onReset, onShare, lang, testId, maxScore, topicCategory, tags, testCategory }) => {
   return (
     <NormalResult
       result={result}
@@ -426,6 +428,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ result, onReset, onShare, lang,
       maxScore={maxScore}
       topicCategory={topicCategory}
       tags={tags}
+      testCategory={testCategory}
     />
   )
 }
