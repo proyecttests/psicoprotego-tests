@@ -19,9 +19,6 @@
 import React from 'react'
 import Link from 'next/link'
 
-import esData from '@/data/help-resources/es.json'
-import enData from '@/data/help-resources/en.json'
-import ptData from '@/data/help-resources/pt.json'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -44,7 +41,7 @@ interface LinkResource {
 
 type Resource = PhoneResource | LinkResource
 
-interface HelpData {
+export interface HelpData {
   page: {
     title: string
     subtitle: string
@@ -76,22 +73,11 @@ interface HelpData {
   }
 }
 
-// ── Data map ──────────────────────────────────────────────────────────────────
-
-const DATA: Record<string, HelpData> = {
-  es: esData as HelpData,
-  en: enData as HelpData,
-  pt: ptData as HelpData,
-}
-
-function getData(lang: string): HelpData {
-  return DATA[lang] ?? DATA['es']
-}
-
 // ── Props ─────────────────────────────────────────────────────────────────────
 
 interface HelpResourcesPageProps {
   lang: string
+  data: HelpData
 }
 
 // ── Sub-components ────────────────────────────────────────────────────────────
@@ -202,8 +188,7 @@ const SectionHeading: React.FC<{ children: React.ReactNode }> = ({ children }) =
 
 // ── Componente principal ──────────────────────────────────────────────────────
 
-const HelpResourcesPage: React.FC<HelpResourcesPageProps> = ({ lang }) => {
-  const data = getData(lang)
+const HelpResourcesPage: React.FC<HelpResourcesPageProps> = ({ lang, data }) => {
   const { page, sections } = data
 
   const [othersExpanded, setOthersExpanded] = React.useState(false)

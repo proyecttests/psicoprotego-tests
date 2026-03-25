@@ -123,7 +123,7 @@ export async function generateMetadata({
   const data = await loadTestData(testId, lang)
   if (!data) return { title: 'Test — Psicoprotego' }
 
-  const { langData } = data
+  const { langData, metadata } = data
   const url = `${SITE_URL}/${lang}/test/${testId}`
 
   return {
@@ -131,11 +131,9 @@ export async function generateMetadata({
     description: langData.landing.description,
     alternates: {
       canonical: url,
-      languages: {
-        es: `/es/test/${testId}`,
-        en: `/en/test/${testId}`,
-        pt: `/pt/test/${testId}`,
-      },
+      languages: Object.fromEntries(
+        metadata.availableLangs.map((l) => [l, `/${l}/test/${testId}`])
+      ),
     },
     openGraph: {
       title:       langData.name,

@@ -2,53 +2,58 @@
  * @file app/[lang]/ayuda-urgente/page.tsx
  * @description Página de recursos de ayuda urgente — Server Component + SSG.
  *
- * Ruta única para los tres idiomas:
- *   /es/ayuda-urgente  /en/ayuda-urgente  /pt/ayuda-urgente
- *
- * generateStaticParams() → 3 páginas estáticas en build time.
- * generateMetadata()     → título y descripción por idioma.
- *
- * HelpResourcesPage es Client Component ('use client') porque usa
- * useState para la sección expandible de "otros países".
+ * generateStaticParams() auto-descubre langs desde /src/data/help-resources/.
+ * Añadir un idioma nuevo = soltar fr.json en esa carpeta. Sin tocar código.
  */
 
+import fs from 'node:fs/promises'
+import path from 'node:path'
+import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import HelpResourcesPage from '@/views/HelpResourcesPage'
-
-import esData from '@/data/help-resources/es.json'
-import enData from '@/data/help-resources/en.json'
-import ptData from '@/data/help-resources/pt.json'
+import HelpResourcesPage, { type HelpData } from '@/views/HelpResourcesPage'
 
 // ── Constantes ────────────────────────────────────────────────────────────────
 
-const LANGS = ['es', 'en', 'pt'] as const
-type Lang = typeof LANGS[number]
+const SITE_URL      = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://testpsycho.com'
+const HELP_DATA_DIR = path.join(process.cwd(), 'src', 'data', 'help-resources')
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://testpsycho.com'
+// ── Auto-discovery ────────────────────────────────────────────────────────────
 
-const DATA_MAP = {
-  es: esData,
-  en: enData,
-  pt: ptData,
-} as const
-
-const META_DESCRIPTION: Record<Lang, string> = {
-  es: 'Recursos de crisis, líneas de ayuda y apoyo psicológico urgente disponibles 24 horas.',
-  en: 'Crisis resources, helplines and urgent psychological support. Available 24 hours.',
-  pt: 'Recursos de crise, linhas de apoio e suporte psicológico urgente. Disponíveis 24 horas.',
+async function discoverHelpLangs(): Promise<string[]> {
+  try {
+    const files = await fs.readdir(HELP_DATA_DIR)
+    return files
+      .filter((f) => f.endsWith('.json'))
+      .map((f) => f.replace('.json', ''))
+  } catch {
+    return ['es']
+  }
 }
 
-function getData(lang: string) {
-  return DATA_MAP[(lang as Lang) in DATA_MAP ? (lang as Lang) : 'es']
+async function loadHelpData(lang: string): Promise<unknown> {
+  try {
+    const raw = await fs.readFile(path.join(HELP_DATA_DIR, `${lang}.json`), 'utf-8')
+      .catch(() => fs.readFile(path.join(HELP_DATA_DIR, 'es.json'), 'utf-8'))
+    return JSON.parse(raw) as Record<string, unknown>
+  } catch {
+    return null
+  }
 }
 
 // ── generateStaticParams ──────────────────────────────────────────────────────
 
-export function generateStaticParams() {
-  return LANGS.map((lang) => ({ lang }))
+export async function generateStaticParams() {
+  const langs = await discoverHelpLangs()
+  return langs.map((lang) => ({ lang }))
 }
 
 // ── generateMetadata ──────────────────────────────────────────────────────────
+
+const META_DESCRIPTION: Record<string, string> = {
+  es: 'Recursos de crisis, líneas de ayuda y apoyo psicológico urgente disponibles 24 horas.',
+  en: 'Crisis resources, helplines and urgent psychological support. Available 24 hours.',
+  pt: 'Recursos de crise, linhas de apoio e suporte psicológico urgente. Disponíveis 24 horas.',
+}
 
 export async function generateMetadata({
   params,
@@ -56,20 +61,20 @@ export async function generateMetadata({
   params: Promise<{ lang: string }>
 }): Promise<Metadata> {
   const { lang } = await params
-  const data = getData(lang)
-  const url = `${SITE_URL}/${lang}/ayuda-urgente`
+  const data = await loadHelpData(lang)
+  if (!data) return { title: 'Ayuda — Psicoprotego' }
+
+  const page = (data as { page?: { title?: string } }).page
+  const url  = `${SITE_URL}/${lang}/ayuda-urgente`
+  const langs = await discoverHelpLangs()
 
   return {
-    title:       `${data.page.title} — Psicoprotego`,
-    description: META_DESCRIPTION[(lang as Lang) in META_DESCRIPTION ? (lang as Lang) : 'es'],
+    title:       `${page?.title ?? 'Ayuda urgente'} — Psicoprotego`,
+    description: META_DESCRIPTION[lang] ?? META_DESCRIPTION['es'],
     robots:      { index: false, follow: true },
     alternates: {
       canonical: url,
-      languages: {
-        es: `/es/ayuda-urgente`,
-        en: `/en/ayuda-urgente`,
-        pt: `/pt/ayuda-urgente`,
-      },
+      languages: Object.fromEntries(langs.map((l) => [l, `/${l}/ayuda-urgente`])),
     },
   }
 }
@@ -82,5 +87,11 @@ export default async function AyudaUrgenteRoute({
   params: Promise<{ lang: string }>
 }) {
   const { lang } = await params
-  return <HelpResourcesPage lang={lang} />
+  const langs = await discoverHelpLangs()
+  if (!langs.includes(lang)) notFound()
+
+  const data = await loadHelpData(lang)
+  if (!data) notFound()
+
+  return <HelpResourcesPage lang={lang} data={data as unknown as HelpData} />
 }
