@@ -231,7 +231,7 @@ export default function TestLandingPage({
           <h2 className="text-xl sm:text-2xl font-semibold" style={{ color: 'var(--color-primary)' }}>
             {ui.technicalSheetTitle}
           </h2>
-          <TestMetadataTable metadata={metadata} lang={lang} />
+          {metadata.validationDetails && <TestMetadataTable metadata={metadata} lang={lang} />}
         </section>
 
         {/* ── 7. FAQ (client component por el accordion interactivo) ───────── */}

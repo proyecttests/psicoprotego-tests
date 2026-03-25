@@ -1,5 +1,35 @@
 [
   {
+    "testId": "apego",
+    "topicCategory": "relaciones",
+    "tags": [
+      "relaciones",
+      "apego",
+      "pareja",
+      "personalidad",
+      "autoconocimiento",
+      "quiz"
+    ],
+    "availableLangs": [
+      "es",
+      "en",
+      "pt"
+    ],
+    "validated": false,
+    "timeToComplete": "3-4 min",
+    "itemCount": 10,
+    "names": {
+      "es": "¿Cuál es tu estilo de apego?",
+      "en": "What is your attachment style?",
+      "pt": "Qual é o seu estilo de apego?"
+    },
+    "hooks": {
+      "es": "Descubre cómo te vinculas en tus relaciones",
+      "en": "Discover how you bond in your relationships",
+      "pt": "Descubra como você se vincula nos seus relacionamentos"
+    }
+  },
+  {
     "testId": "gad7",
     "topicCategory": "ansiedad",
     "tags": [

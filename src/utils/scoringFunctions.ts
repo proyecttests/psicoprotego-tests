@@ -78,6 +78,7 @@ export interface TestDefinitionForScoring {
     category: string
     color: string
     messageKey: string
+    typeKey?: string
   }>
   [key: string]: unknown
 }
@@ -452,6 +453,65 @@ export const scorePHQ9: ScoringFunction = scoreGAD7
  */
 export const scoreStandard: ScoringFunction = scoreGAD7
 
+
+// ── Apego Quiz Scoring ────────────────────────────────────────────────────────
+
+/**
+ * Calcula el estilo de apego dominante contando las respuestas por tipo.
+ * Cada respuesta tiene value: 'S' | 'A' | 'E' | 'D'.
+ * El tipo con más votos gana. Empate: S > A > E > D.
+ */
+export function scoreApego(
+  testData: TestDefinitionForScoring,
+  answers: Record<string, number | string | boolean>,
+  messages?: Record<string, Record<string, unknown>>,
+  lang = 'es',
+): ScoringResult {
+  const counts: Record<string, number> = { S: 0, A: 0, E: 0, D: 0 }
+
+  for (const question of testData.questions) {
+    const answer = answers[question.id]
+    if (typeof answer === 'string' && answer in counts) {
+      counts[answer]++
+    }
+  }
+
+  // Dominant type (tie-break: S > A > E > D)
+  const priority = ['S', 'A', 'E', 'D']
+  let dominantType = 'S'
+  let dominantCount = 0
+  for (const type of priority) {
+    if (counts[type] > dominantCount) {
+      dominantType  = type
+      dominantCount = counts[type]
+    }
+  }
+
+  // Find scoring rule for dominant type
+  const rule = testData.scoring.find((r) => r.typeKey === dominantType)
+
+  const category: ScoringCategory = rule
+    ? { min: 0, max: null, label: rule.category, color: rule.color, messageKey: rule.messageKey }
+    : { min: 0, max: null, label: dominantType, color: 'green', messageKey: dominantType }
+
+  // Resolve message
+  let message: ScoringResult['message'] | undefined
+  if (messages) {
+    const testMessages = messages[testData.id] as
+      | Record<string, Record<string, Record<string, unknown>>>
+      | undefined
+    const normalMsgs = testMessages?.[lang]?.['normal'] as
+      | Record<string, { title: string; body: string; recommendation: string }>
+      | undefined
+    const resolved = normalMsgs?.[category.messageKey]
+    if (resolved) {
+      message = { title: resolved.title, body: resolved.body, recommendation: resolved.recommendation }
+    }
+  }
+
+  return { score: dominantCount, category, redFlags: [], urgency: 'none', resultType: 'NORMAL', message }
+}
+
 // ── Registry de funciones de scoring ─────────────────────────────────────────
 
 /**
@@ -468,6 +528,7 @@ const SCORING_REGISTRY: Record<string, ScoringFunction> = {
   scoreStandard,
   scoreGAD7,
   scorePHQ9,
+  scoreApego,
   // scorePSS10: scorePSS10,  ← ejemplo para test con lógica especial
 }
 
