@@ -165,6 +165,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
 
   // Scoring function name loaded from JSON — stored in ref to avoid re-renders
   const scoringFnNameRef = React.useRef<string>('scoreGAD7')
+  const testCategoryRef  = React.useRef<'psychometric' | 'quiz'>('psychometric')
 
   const ui = getUiStrings(lang)
 
@@ -180,7 +181,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
         // 1. Fetch metadata for availableLangs
         const metaRes = await fetch(`/data/tests/${testId}/metadata.json`)
         if (!metaRes.ok) throw new Error(`Test "${testId}" no encontrado.`)
-        const metadata = await metaRes.json() as { availableLangs: string[] }
+        const metadata = await metaRes.json() as { availableLangs: string[]; category?: 'psychometric' | 'quiz' }
 
         // 2. Fetch lang file, fall back to 'es' if lang not available
         const resolvedLang = metadata.availableLangs.includes(lang) ? lang : 'es'
@@ -208,6 +209,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
 
         if (!cancelled) {
           scoringFnNameRef.current = langData.scoringFunction ?? 'scoreGAD7'
+          testCategoryRef.current  = metadata.category ?? 'psychometric'
           setTestDef(foundTest)
           setMessages(messagesData)
           setEffectiveLang(resolvedLang)
@@ -384,6 +386,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
     return (
       <CalculatingScreen
         lang={lang}
+        category={testCategoryRef.current}
         onDone={() => {
           setUiState('result')
           window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -396,6 +399,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
     return (
       <SharingScreen
         lang={lang}
+        category={testCategoryRef.current}
         shareUrl={pendingShareUrl}
         onDone={() => {
           setPendingShareUrl('')

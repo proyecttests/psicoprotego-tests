@@ -13,7 +13,7 @@
 'use client'
 
 import React from 'react'
-import AdSlot  from '@/components/ads/AdSlot'
+import AdStrategy from '@/components/ads/AdStrategy'
 
 // ── UI strings ────────────────────────────────────────────────────────────────
 
@@ -32,13 +32,14 @@ interface SharingScreenProps {
   shareUrl: string
   /** Callback para volver a la pantalla anterior (resultados) */
   onDone: () => void
+  category?: 'psychometric' | 'quiz'
 }
 
 const DELAY_MS = 1500
 
 // ── Componente ────────────────────────────────────────────────────────────────
 
-const SharingScreen: React.FC<SharingScreenProps> = ({ lang, shareUrl, onDone }) => {
+const SharingScreen: React.FC<SharingScreenProps> = ({ lang, shareUrl, onDone, category = 'psychometric' }) => {
   const s = STRINGS[lang] ?? STRINGS['es']
 
   React.useEffect(() => {
@@ -69,7 +70,7 @@ const SharingScreen: React.FC<SharingScreenProps> = ({ lang, shareUrl, onDone })
       </div>
 
       {/* Slot publicitario post-share */}
-      <AdSlot position="post-share" size="rectangle" />
+      <AdStrategy category={category} position="post-share" />
     </div>
   )
 }

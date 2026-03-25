@@ -52,7 +52,7 @@ export default function RootLayout({
       className={`${sourceSerif4.variable} ${montserrat.variable}`}
     >
       <head>
-        <Script id="gtm-head" strategy="beforeInteractive">
+        <Script id="gtm-head" strategy="afterInteractive">
           {gtmScript}
         </Script>
       </head>

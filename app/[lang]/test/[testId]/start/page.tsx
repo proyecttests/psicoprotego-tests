@@ -15,7 +15,7 @@ import React from 'react'
 import Link from 'next/link'
 import { useRouter, useParams } from 'next/navigation'
 import type { TestLangFile } from '@/types/test'
-import AdSlot from '@/components/ads/AdSlot'
+import AdStrategy from '@/components/ads/AdStrategy'
 
 // ── Rutas de ayuda por idioma ─────────────────────────────────────────────────
 
@@ -98,6 +98,7 @@ export default function StartPage() {
   const [testName,       setTestName]       = React.useState('')
   const [disclaimerText, setDisclaimerText] = React.useState('')
   const [loadState,      setLoadState]      = React.useState<'loading' | 'loaded' | 'error'>('loading')
+  const [testCategory,   setTestCategory]   = React.useState<'psychometric' | 'quiz'>('psychometric')
   const [errorMsg,       setErrorMsg]       = React.useState('')
 
   // ── Fetch disclaimer del JSON del test ────────────────────────────────────
@@ -106,15 +107,22 @@ export default function StartPage() {
 
     const load = async () => {
       try {
-        const res      = await fetch(`/data/tests/${testId}/${lang}.json`)
-        const finalRes = res.ok ? res : await fetch(`/data/tests/${testId}/es.json`)
+        const [metaRes, langRes] = await Promise.all([
+          fetch(`/data/tests/${testId}/metadata.json`),
+          fetch(`/data/tests/${testId}/${lang}.json`),
+        ])
+        const finalRes = langRes.ok ? langRes : await fetch(`/data/tests/${testId}/es.json`)
         if (!finalRes.ok) throw new Error(`Content for "${testId}" not found.`)
 
         const data = await finalRes.json() as TestLangFile
+        const meta = metaRes.ok
+          ? await metaRes.json() as { category?: 'psychometric' | 'quiz' }
+          : {}
 
         if (!cancelled) {
           setTestName(data.name)
           setDisclaimerText(data.disclaimerBefore ?? getUI(lang).defaultText(data.name))
+          setTestCategory((meta as { category?: 'psychometric' | 'quiz' }).category ?? 'psychometric')
           setLoadState('loaded')
         }
       } catch (err) {
@@ -224,7 +232,7 @@ export default function StartPage() {
 
           {/* ── 2. AD SLOT (mayor valor: pre-test) ───────────────────────── */}
           <div className="flex justify-center">
-            <AdSlot position="pre-test" size="rectangle" />
+            <AdStrategy category={testCategory} position="pre-test" />
           </div>
 
           {/* ── 3. BOTÓN + CANCELAR ──────────────────────────────────────── */}
