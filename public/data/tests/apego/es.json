@@ -1,0 +1,330 @@
+{
+  "id": "apego",
+  "lang": "es",
+  "version": "1.0.0",
+  "name": "¿Cuál es tu estilo de apego?",
+  "hook": "Descubre cómo te vinculas en tus relaciones",
+  "scoringFunction": "scoreApego",
+  "instructions": "Elige la opción que mejor describe cómo te comportas habitualmente. No hay respuestas correctas o incorrectas.",
+  "disclaimerBefore": "Este quiz es orientativo y no constituye un diagnóstico psicológico. Está basado en la teoría del apego de John Bowlby y Mary Ainsworth.",
+  "disclaimerAfter": "Este resultado es una aproximación. Si sientes que tus patrones relacionales te generan malestar, hablar con un profesional puede ser muy valioso.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "multipleChoice",
+      "text": "Cuando alguien cercano no te contesta el mensaje en horas...",
+      "options": [
+        {
+          "value": "S",
+          "label": "Asumo que está ocupado y sigo con mis cosas tranquilo/a"
+        },
+        {
+          "value": "A",
+          "label": "Empiezo a preocuparme y reviso el teléfono con frecuencia"
+        },
+        {
+          "value": "E",
+          "label": "No me afecta especialmente; cada uno tiene su vida"
+        },
+        {
+          "value": "D",
+          "label": "Me pongo ansioso/a pero luego me distancio para no parecer necesitado/a"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "multipleChoice",
+      "text": "En una discusión con tu pareja o un amigo cercano, tú normalmente...",
+      "options": [
+        {
+          "value": "S",
+          "label": "Busco hablar y resolver juntos cuando los ánimos se calman"
+        },
+        {
+          "value": "A",
+          "label": "Tengo miedo de que discutir dañe la relación para siempre"
+        },
+        {
+          "value": "E",
+          "label": "Prefiero salir a despejarme y hablar cuando esté frío/a"
+        },
+        {
+          "value": "D",
+          "label": "A veces me acerco mucho y de repente me alejo sin saber por qué"
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "multipleChoice",
+      "text": "Cuando necesitas apoyo emocional de alguien cercano...",
+      "options": [
+        {
+          "value": "S",
+          "label": "Lo pido abiertamente y con naturalidad"
+        },
+        {
+          "value": "A",
+          "label": "Lo insinúo pero me cuesta pedirlo directamente por miedo al rechazo"
+        },
+        {
+          "value": "E",
+          "label": "Prefiero resolverlo solo/a; no me gusta ser una carga"
+        },
+        {
+          "value": "D",
+          "label": "A veces pido ayuda pero luego me siento incómodo/a recibiéndola"
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "multipleChoice",
+      "text": "¿Cómo reaccionas cuando alguien te dice 'necesito un poco de espacio'?",
+      "options": [
+        {
+          "value": "S",
+          "label": "Lo entiendo y lo respeto; cada uno necesita su tiempo"
+        },
+        {
+          "value": "A",
+          "label": "Me angustia; pienso que algo va mal entre nosotros"
+        },
+        {
+          "value": "E",
+          "label": "Con alivio, la verdad — yo también necesito espacio"
+        },
+        {
+          "value": "D",
+          "label": "Me asusta pero finjo que no me importa"
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "type": "multipleChoice",
+      "text": "En una relación romántica, tu mayor miedo es...",
+      "options": [
+        {
+          "value": "S",
+          "label": "Que no tengamos suficientes cosas en común a largo plazo"
+        },
+        {
+          "value": "A",
+          "label": "Que me abandonen o que dejen de quererme"
+        },
+        {
+          "value": "E",
+          "label": "Que me ahoguen, controlen o pierda mi independencia"
+        },
+        {
+          "value": "D",
+          "label": "Tanto el abandono como la intimidad me generan miedo"
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "type": "multipleChoice",
+      "text": "Cuando tu pareja o amigo/a está triste, tú sueles...",
+      "options": [
+        {
+          "value": "S",
+          "label": "Estar presente, preguntar qué necesita y acompañar sin agobiar"
+        },
+        {
+          "value": "A",
+          "label": "Angustiarme yo también; me cuesta ver sufrir a quien quiero"
+        },
+        {
+          "value": "E",
+          "label": "Dar consejos prácticos, pero el contacto emocional me cuesta"
+        },
+        {
+          "value": "D",
+          "label": "Querer ayudar mucho pero bloquearme sin saber qué hacer"
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "type": "multipleChoice",
+      "text": "Después de una pelea importante, ¿cuánto tardas en volver a la normalidad?",
+      "options": [
+        {
+          "value": "S",
+          "label": "Relativamente rápido; hablo, resolvemos y seguimos"
+        },
+        {
+          "value": "A",
+          "label": "Me cuesta mucho; necesito que me confirmen que todo está bien"
+        },
+        {
+          "value": "E",
+          "label": "Me desconecto y necesito días de espacio antes de hablar"
+        },
+        {
+          "value": "D",
+          "label": "Varía mucho: a veces me acerco, otras me alejo durante días"
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "type": "multipleChoice",
+      "text": "¿Cómo describirías tu relación con la intimidad emocional?",
+      "options": [
+        {
+          "value": "S",
+          "label": "Me siento cómodo/a abriendo mi mundo interior con quien confío"
+        },
+        {
+          "value": "A",
+          "label": "La busco intensamente pero siempre temo ser rechazado/a"
+        },
+        {
+          "value": "E",
+          "label": "Me incomoda ser vulnerable; prefiero que me vean fuerte"
+        },
+        {
+          "value": "D",
+          "label": "La deseo profundamente pero también me asusta; es confuso"
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "type": "multipleChoice",
+      "text": "Cuando notas que alguien cercano empieza a alejarse emocionalmente...",
+      "options": [
+        {
+          "value": "S",
+          "label": "Lo hablo directamente con calma cuando veo el momento"
+        },
+        {
+          "value": "A",
+          "label": "Me vuelvo más insistente para recuperar la conexión"
+        },
+        {
+          "value": "E",
+          "label": "También me alejo; si quieren espacio, se lo doy"
+        },
+        {
+          "value": "D",
+          "label": "Mi reacción es impredecible: a veces más cariño, a veces más frío/a"
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "type": "multipleChoice",
+      "text": "Generalmente, ¿cómo crees que quienes te conocen bien te ven en las relaciones?",
+      "options": [
+        {
+          "value": "S",
+          "label": "Como alguien fiable, presente y emocionalmente disponible"
+        },
+        {
+          "value": "A",
+          "label": "Como alguien que necesita mucha atención o reaseguramiento"
+        },
+        {
+          "value": "E",
+          "label": "Como alguien independiente y difícil de leer emocionalmente"
+        },
+        {
+          "value": "D",
+          "label": "Como alguien impredecible, que sopla caliente y frío"
+        }
+      ]
+    }
+  ],
+  "scoring": [
+    {
+      "typeKey": "S",
+      "category": "Apego Seguro",
+      "color": "green",
+      "messageKey": "seguro",
+      "min": 0,
+      "max": null
+    },
+    {
+      "typeKey": "A",
+      "category": "Apego Ansioso",
+      "color": "yellow",
+      "messageKey": "ansioso",
+      "min": 0,
+      "max": null
+    },
+    {
+      "typeKey": "E",
+      "category": "Apego Evitativo",
+      "color": "orange",
+      "messageKey": "evitativo",
+      "min": 0,
+      "max": null
+    },
+    {
+      "typeKey": "D",
+      "category": "Apego Desorganizado",
+      "color": "red",
+      "messageKey": "desorganizado",
+      "min": 0,
+      "max": null
+    }
+  ],
+  "results": {
+    "normal": {
+      "seguro": {
+        "title": "Tu base es sólida: apego seguro",
+        "body": "Te sientes cómodo/a en las relaciones, pides lo que necesitas, respetas los límites ajenos y confías sin perder tu identidad. Esto no significa que nunca tengas inseguridades — significa que has construido una base emocional que te permite gestionar la intimidad con relativa calma. Las relaciones no te definen, pero sí te enriquecen.",
+        "recommendation": "Sigue cultivando esa base. Si alguna relación concreta te genera ansiedad persistente, es una señal de que la dinámica de ese vínculo pide atención — no tu estilo de apego."
+      },
+      "ansioso": {
+        "title": "Tu corazón siempre en alerta: apego ansioso",
+        "body": "Valoras profundamente las relaciones, pero una voz interior te susurra constantemente que podrías perderlas. Eso te lleva a buscar reaseguramiento, a veces de formas que generan exactamente lo que más temes. No es un defecto — es una estrategia que aprendiste para sobrevivir en un entorno donde el amor fue inconsistente o impredecible.",
+        "recommendation": "El trabajo clave es aprender a calmarte sin necesitar que los demás confirmen que todo está bien. La terapia (especialmente con enfoque de apego o EMDR) puede ser muy transformadora."
+      },
+      "evitativo": {
+        "title": "Tu fortaleza y tu coraza: apego evitativo",
+        "body": "Eres muy capaz, independiente y autosuficiente — y también has aprendido a no necesitar a nadie demasiado. Esa independencia fue una solución inteligente cuando tus necesidades emocionales no fueron atendidas. El coste es que la intimidad puede sentirse amenazante o incómoda, aunque en el fondo la desees.",
+        "recommendation": "No tienes que cambiar quién eres. Pero si te preguntas por qué las relaciones no llegan a cierta profundidad, ahí está la clave. Pequeños pasos hacia la vulnerabilidad pueden cambiar mucho."
+      },
+      "desorganizado": {
+        "title": "Quiero estar cerca... y también huir: apego desorganizado",
+        "body": "Deseas conexión profundamente, pero la intimidad también activa tu sistema de alarma. Eso crea patrones contradictorios: te acercas y luego huyes, pides presencia y después te asfixias. Suele tener raíces en experiencias tempranas donde la figura de apego fue a la vez fuente de consuelo y de miedo.",
+        "recommendation": "Este patrón es el más complejo pero también el que más puede transformarse con apoyo especializado. La terapia centrada en el trauma (EMDR, Somatic Experiencing, terapia de apego) puede ser muy valiosa."
+      }
+    }
+  },
+  "landing": {
+    "hook": "¿Sabes por qué reaccionas así en tus relaciones?",
+    "description": "El estilo de apego determina cómo nos vinculamos emocionalmente con los demás, cómo gestionamos la intimidad y el conflicto, y por qué repetimos ciertos patrones relacionales. Basado en la teoría del apego de Bowlby y Ainsworth, este quiz identifica cuál de los 4 estilos principales describe mejor tu forma de relacionarte.",
+    "whatItMeasures": "Evalúa tus patrones de comportamiento en situaciones relacionales clave: comunicación emocional, gestión del conflicto, respuesta al distanciamiento y tolerancia a la intimidad.",
+    "whoIsItFor": "Cualquier persona a partir de 16 años que quiera comprender mejor cómo se vincula con su pareja, familia o amigos cercanos.",
+    "howItWorks": [
+      "Responde 10 preguntas sobre cómo te comportas habitualmente en tus relaciones",
+      "Descubre cuál de los 4 estilos de apego domina tu forma de vincularte",
+      "Recibe una descripción detallada de tu perfil y qué puedes hacer con ello"
+    ],
+    "faq": [
+      {
+        "q": "¿El estilo de apego puede cambiar?",
+        "a": "Sí. El apego no es un destino fijo. Con trabajo personal, terapia o relaciones significativas y sanas, es posible desarrollar un apego más seguro con el tiempo."
+      },
+      {
+        "q": "¿Mis respuestas son privadas?",
+        "a": "Completamente. Todas las respuestas se procesan en tu navegador y nunca se envían a ningún servidor. No almacenamos ningún dato personal."
+      },
+      {
+        "q": "¿Esto es un diagnóstico psicológico?",
+        "a": "No. Es un quiz orientativo basado en la teoría del apego. Si crees que tus patrones relacionales te generan malestar significativo, te recomendamos hablar con un psicólogo."
+      },
+      {
+        "q": "¿Puede cambiar mi resultado si lo hago en otro momento?",
+        "a": "Sí. Tu estilo de apego puede variar según el contexto y el momento vital. Si lo repites en unas semanas podrás comparar tus resultados."
+      }
+    ]
+  }
+}

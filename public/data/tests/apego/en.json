@@ -1,0 +1,330 @@
+{
+  "id": "apego",
+  "lang": "en",
+  "version": "1.0.0",
+  "name": "What is your attachment style?",
+  "hook": "Discover how you bond in your relationships",
+  "scoringFunction": "scoreApego",
+  "instructions": "Choose the option that best describes how you usually behave. There are no right or wrong answers.",
+  "disclaimerBefore": "This quiz is for informational purposes and does not constitute a psychological diagnosis. It is based on John Bowlby and Mary Ainsworth's attachment theory.",
+  "disclaimerAfter": "This result is an approximation. If your relational patterns cause you distress, speaking with a professional can be very valuable.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "multipleChoice",
+      "text": "When someone close to you doesn't reply to your message for hours...",
+      "options": [
+        {
+          "value": "S",
+          "label": "I assume they're busy and carry on with my day"
+        },
+        {
+          "value": "A",
+          "label": "I start worrying and keep checking my phone"
+        },
+        {
+          "value": "E",
+          "label": "It doesn't really affect me; everyone has their own life"
+        },
+        {
+          "value": "D",
+          "label": "I get anxious but then distance myself to avoid seeming needy"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "multipleChoice",
+      "text": "During an argument with your partner or close friend, you usually...",
+      "options": [
+        {
+          "value": "S",
+          "label": "Seek to talk it through together when emotions settle"
+        },
+        {
+          "value": "A",
+          "label": "Fear that arguing could damage the relationship permanently"
+        },
+        {
+          "value": "E",
+          "label": "Prefer to take a walk and talk once I've cooled down"
+        },
+        {
+          "value": "D",
+          "label": "Sometimes draw close then suddenly pull away without knowing why"
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "multipleChoice",
+      "text": "When you need emotional support from someone close...",
+      "options": [
+        {
+          "value": "S",
+          "label": "I ask openly and naturally"
+        },
+        {
+          "value": "A",
+          "label": "I hint at it but struggle to ask directly for fear of rejection"
+        },
+        {
+          "value": "E",
+          "label": "I prefer to handle it alone; I don't want to be a burden"
+        },
+        {
+          "value": "D",
+          "label": "Sometimes I ask for help but then feel uncomfortable receiving it"
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "multipleChoice",
+      "text": "How do you react when someone tells you 'I need some space'?",
+      "options": [
+        {
+          "value": "S",
+          "label": "I understand and respect it; everyone needs their time"
+        },
+        {
+          "value": "A",
+          "label": "It makes me anxious; I think something must be wrong between us"
+        },
+        {
+          "value": "E",
+          "label": "With relief, honestly — I need space too"
+        },
+        {
+          "value": "D",
+          "label": "It scares me but I pretend it doesn't matter"
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "type": "multipleChoice",
+      "text": "In a romantic relationship, your biggest fear is...",
+      "options": [
+        {
+          "value": "S",
+          "label": "That we won't have enough in common in the long run"
+        },
+        {
+          "value": "A",
+          "label": "Being abandoned or falling out of love"
+        },
+        {
+          "value": "E",
+          "label": "Being smothered, controlled, or losing my independence"
+        },
+        {
+          "value": "D",
+          "label": "Both abandonment and intimacy frighten me equally"
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "type": "multipleChoice",
+      "text": "When your partner or close friend is sad, you tend to...",
+      "options": [
+        {
+          "value": "S",
+          "label": "Be present, ask what they need, and support without overwhelming them"
+        },
+        {
+          "value": "A",
+          "label": "Get distressed myself; it's hard to see those I love suffer"
+        },
+        {
+          "value": "E",
+          "label": "Offer practical solutions, but emotional closeness is hard for me"
+        },
+        {
+          "value": "D",
+          "label": "Want to help a lot but freeze and not know what to do"
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "type": "multipleChoice",
+      "text": "After a major argument, how long does it take you to get back to normal?",
+      "options": [
+        {
+          "value": "S",
+          "label": "Relatively quickly; we talk, resolve it, and move on"
+        },
+        {
+          "value": "A",
+          "label": "It takes a while; I need reassurance that everything is okay"
+        },
+        {
+          "value": "E",
+          "label": "I disconnect and need days of space before I can talk"
+        },
+        {
+          "value": "D",
+          "label": "It varies a lot: sometimes I get closer, other times I pull away for days"
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "type": "multipleChoice",
+      "text": "How would you describe your relationship with emotional intimacy?",
+      "options": [
+        {
+          "value": "S",
+          "label": "I feel comfortable opening up to those I trust"
+        },
+        {
+          "value": "A",
+          "label": "I crave it intensely but always fear being rejected"
+        },
+        {
+          "value": "E",
+          "label": "Vulnerability makes me uncomfortable; I prefer to seem strong"
+        },
+        {
+          "value": "D",
+          "label": "I deeply want it but it also scares me — it's confusing"
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "type": "multipleChoice",
+      "text": "When you notice someone close is emotionally pulling away...",
+      "options": [
+        {
+          "value": "S",
+          "label": "I address it calmly when the moment feels right"
+        },
+        {
+          "value": "A",
+          "label": "I become more persistent to restore the connection"
+        },
+        {
+          "value": "E",
+          "label": "I also pull back; if they want space, I give it"
+        },
+        {
+          "value": "D",
+          "label": "My reaction is unpredictable: sometimes warmer, sometimes colder"
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "type": "multipleChoice",
+      "text": "In general, how do those who know you well see you in relationships?",
+      "options": [
+        {
+          "value": "S",
+          "label": "As reliable, present, and emotionally available"
+        },
+        {
+          "value": "A",
+          "label": "As someone who needs a lot of attention or reassurance"
+        },
+        {
+          "value": "E",
+          "label": "As independent and emotionally hard to read"
+        },
+        {
+          "value": "D",
+          "label": "As unpredictable — hot and cold at different times"
+        }
+      ]
+    }
+  ],
+  "scoring": [
+    {
+      "typeKey": "S",
+      "category": "Secure Attachment",
+      "color": "green",
+      "messageKey": "seguro",
+      "min": 0,
+      "max": null
+    },
+    {
+      "typeKey": "A",
+      "category": "Anxious Attachment",
+      "color": "yellow",
+      "messageKey": "ansioso",
+      "min": 0,
+      "max": null
+    },
+    {
+      "typeKey": "E",
+      "category": "Avoidant Attachment",
+      "color": "orange",
+      "messageKey": "evitativo",
+      "min": 0,
+      "max": null
+    },
+    {
+      "typeKey": "D",
+      "category": "Disorganized Attachment",
+      "color": "red",
+      "messageKey": "desorganizado",
+      "min": 0,
+      "max": null
+    }
+  ],
+  "results": {
+    "normal": {
+      "seguro": {
+        "title": "Your foundation is solid: secure attachment",
+        "body": "You feel comfortable in relationships, ask for what you need, respect others' boundaries, and trust without losing your identity. This doesn't mean you never have insecurities — it means you've built an emotional base that lets you handle intimacy with relative calm. Relationships don't define you, but they do enrich you.",
+        "recommendation": "Keep nurturing that foundation. If a specific relationship causes persistent anxiety, that's a signal that the dynamic of that bond needs attention — not your attachment style."
+      },
+      "ansioso": {
+        "title": "Your heart always on alert: anxious attachment",
+        "body": "You value relationships deeply, but an inner voice constantly whispers that you could lose them. This leads you to seek reassurance, sometimes in ways that produce exactly what you fear most. It's not a flaw — it's a strategy you learned to survive in an environment where love was inconsistent or unpredictable.",
+        "recommendation": "The key work is learning to soothe yourself without needing others to confirm everything is okay. Therapy (especially attachment-focused or EMDR) can be very transformative."
+      },
+      "evitativo": {
+        "title": "Your strength and your armor: avoidant attachment",
+        "body": "You are very capable, independent, and self-sufficient — and you've also learned not to need anyone too much. That independence was an intelligent solution when your emotional needs weren't met. The cost is that intimacy can feel threatening or uncomfortable, even when you secretly desire it.",
+        "recommendation": "You don't have to change who you are. But if you wonder why relationships don't reach a certain depth, there's your answer. Small steps toward vulnerability can change a lot."
+      },
+      "desorganizado": {
+        "title": "I want closeness... and I also want to run: disorganized attachment",
+        "body": "You deeply desire connection, but intimacy also triggers your alarm system. This creates contradictory patterns: you get close then run, ask for presence then feel suffocated. It often has roots in early experiences where your attachment figure was both a source of comfort and of fear.",
+        "recommendation": "This pattern is the most complex but also the one that can be most transformed with specialized support. Trauma-focused therapy (EMDR, Somatic Experiencing, attachment therapy) can be very valuable."
+      }
+    }
+  },
+  "landing": {
+    "hook": "Do you know why you react the way you do in relationships?",
+    "description": "Attachment style determines how we emotionally bond with others, how we handle intimacy and conflict, and why we repeat certain relational patterns. Based on Bowlby and Ainsworth's attachment theory, this quiz identifies which of the 4 main styles best describes how you relate to others.",
+    "whatItMeasures": "Evaluates your behavioral patterns in key relational situations: emotional communication, conflict management, response to distancing, and tolerance for intimacy.",
+    "whoIsItFor": "Anyone aged 16 and over who wants to better understand how they bond with their partner, family, or close friends.",
+    "howItWorks": [
+      "Answer 10 questions about how you usually behave in your relationships",
+      "Discover which of the 4 attachment styles dominates your way of bonding",
+      "Get a detailed description of your profile and what you can do with it"
+    ],
+    "faq": [
+      {
+        "q": "Can attachment style change?",
+        "a": "Yes. Attachment is not a fixed destination. Through personal work, therapy, or meaningful and healthy relationships, it is possible to develop a more secure attachment over time."
+      },
+      {
+        "q": "Are my answers private?",
+        "a": "Completely. All answers are processed in your browser and never sent to any server. We do not store any personal data."
+      },
+      {
+        "q": "Is this a psychological diagnosis?",
+        "a": "No. This is an informational quiz based on attachment theory. If you feel your relational patterns cause significant distress, we recommend speaking with a psychologist."
+      },
+      {
+        "q": "Can my result change if I take it at a different time?",
+        "a": "Yes. Your attachment style can vary depending on context and life stage. If you retake it in a few weeks, you'll be able to compare your results."
+      }
+    ]
+  }
+}

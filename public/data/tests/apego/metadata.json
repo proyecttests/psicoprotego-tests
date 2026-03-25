@@ -1,0 +1,24 @@
+{
+  "id": "apego",
+  "availableLangs": [
+    "es",
+    "en",
+    "pt"
+  ],
+  "category": "quiz",
+  "topicCategory": "relaciones",
+  "tags": [
+    "relaciones",
+    "apego",
+    "pareja",
+    "personalidad",
+    "autoconocimiento",
+    "quiz"
+  ],
+  "validated": false,
+  "selfAdministrable": true,
+  "timeToComplete": "3-4 min",
+  "itemCount": 10,
+  "itemType": "multipleChoice_4",
+  "copyright": "free_use"
+}

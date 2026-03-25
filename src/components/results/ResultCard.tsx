@@ -313,29 +313,44 @@ const NormalResult: React.FC<{
     <div
       className={`w-full max-w-2xl space-y-4 px-4 py-6 sm:px-6 transition-opacity duration-300 ${visible ? 'opacity-100' : 'opacity-0'}`}
     >
-      {/* ── Score + barra visual (oculto en CRISIS: score es null) ──────── */}
+      {/* ── Score + categoría (oculto en CRISIS) ───────────────────────── */}
       {!isCrisis && (
       <div className={`card text-center ${colors.bg} ${colors.border} border-2`}>
-        <div
-          aria-label={`${ui.scoreLabel}: ${result.score}`}
-          className={`mx-auto mb-3 flex h-24 w-24 items-center justify-center rounded-full border-4 ${colors.border} ${colors.bg}`}
-        >
-          <span className={`text-5xl font-extrabold ${colors.text}`}>
-            {displayScore}
-          </span>
-        </div>
-
-        <span className={`inline-block rounded-full px-4 py-1 text-sm font-semibold ${colors.badge}`}>
-          {result.category?.label}
-        </span>
-
-        {maxScore > 0 && (
-          <ScoreBar
-            score={result.score ?? 0}
-            maxScore={maxScore}
-            colorKey={colorKey}
-            lang={lang}
-          />
+        {maxScore > 0 ? (
+          /* Tests clínicos: círculo de score numérico */
+          <>
+            <div
+              aria-label={`${ui.scoreLabel}: ${result.score}`}
+              className={`mx-auto mb-3 flex h-24 w-24 items-center justify-center rounded-full border-4 ${colors.border} ${colors.bg}`}
+            >
+              <span className={`text-5xl font-extrabold ${colors.text}`}>
+                {displayScore}
+              </span>
+            </div>
+            <span className={`inline-block rounded-full px-4 py-1 text-sm font-semibold ${colors.badge}`}>
+              {result.category?.label}
+            </span>
+            <ScoreBar
+              score={result.score ?? 0}
+              maxScore={maxScore}
+              colorKey={colorKey}
+              lang={lang}
+            />
+          </>
+        ) : (
+          /* Quiz: solo categoría con emoji grande */
+          <div className="py-4">
+            <div
+              className={`mx-auto mb-4 flex h-28 w-28 items-center justify-center rounded-full border-4 ${colors.border} ${colors.bg}`}
+            >
+              <span className="text-5xl" role="img" aria-hidden="true">
+                {colorKey === 'green' ? '🌿' : colorKey === 'yellow' ? '💛' : colorKey === 'orange' ? '🍂' : '🌊'}
+              </span>
+            </div>
+            <span className={`inline-block rounded-full px-5 py-2 text-base font-bold ${colors.badge}`}>
+              {result.category?.label}
+            </span>
+          </div>
         )}
       </div>
       )}
