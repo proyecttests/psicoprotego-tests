@@ -18,8 +18,14 @@ import type { TestLangFile } from '@/types/test'
 export interface TestBlankDocumentProps {
   testData: TestLangFile
   metadata: {
-    generatedAt: string   // ISO date string
-    testId: string
+    generatedAt:        string   // ISO date string
+    testId:             string
+    validationDetails?: {
+      validated:          boolean
+      reference?:         string
+      originalReference?: string
+      originalJournal?:   string
+    }
   }
 }
 
@@ -273,6 +279,37 @@ export const TestBlankDocument: React.FC<TestBlankDocumentProps> = ({
         <View style={styles.body}>
           <Text style={styles.sectionTitle}>Preguntas</Text>
 
+          {/* ── Validation info ─────────────────────────────────────────── */}
+          {metadata.validationDetails && (
+            <View style={{ marginBottom: 16, padding: 10, backgroundColor: '#f0f7f4', borderRadius: 4, borderLeftWidth: 3, borderLeftColor: '#2d4a3e' }}>
+              <Text style={{ fontSize: 8, fontFamily: 'Helvetica-Bold', color: '#2d4a3e', marginBottom: 4 }}>
+                {'VALIDACION'}
+              </Text>
+              {metadata.validationDetails.validated ? (
+                <>
+                  <Text style={{ fontSize: 8, fontFamily: 'Helvetica-Bold', color: '#2d6b4a', marginBottom: 2 }}>
+                    {'Validado en este idioma'}
+                  </Text>
+                  {metadata.validationDetails.reference ? (
+                    <Text style={{ fontSize: 7.5, fontFamily: 'Helvetica', color: '#444444' }}>
+                      {metadata.validationDetails.reference}
+                    </Text>
+                  ) : null}
+                  {metadata.validationDetails.originalReference ? (
+                    <Text style={{ fontSize: 7, fontFamily: 'Helvetica-Oblique', color: '#666666', marginTop: 3 }}>
+                      {'Original: '}{metadata.validationDetails.originalReference}
+                      {metadata.validationDetails.originalJournal ? ' · ' + metadata.validationDetails.originalJournal : ''}
+                    </Text>
+                  ) : null}
+                </>
+              ) : (
+                <Text style={{ fontSize: 7.5, fontFamily: 'Helvetica', color: '#c0392b' }}>
+                  {'No validado en este idioma'}
+                </Text>
+              )}
+            </View>
+          )}
+
           {testData.questions.map((question, index) => (
             <View key={question.id} style={styles.questionItem} wrap={false}>
               <Text style={styles.questionNumber}>
@@ -285,7 +322,7 @@ export const TestBlankDocument: React.FC<TestBlankDocumentProps> = ({
                 <View style={styles.optionsRow}>
                   {question.options.map((opt) => (
                     <View key={opt.value} style={styles.optionItem}>
-                      <Text style={styles.optionBullet}>{'\u25CB'}</Text>
+                      <Text style={styles.optionBullet}>{' '}</Text>
                       <Text style={styles.optionLabel}>{opt.label}</Text>
                     </View>
                   ))}
@@ -310,7 +347,7 @@ export const TestBlankDocument: React.FC<TestBlankDocumentProps> = ({
                       : String(val)
                     return (
                       <View key={val} style={styles.optionItem}>
-                        <Text style={styles.optionBullet}>{'\u25CB'}</Text>
+                        <Text style={styles.optionBullet}>{' '}</Text>
                         <Text style={styles.optionLabel}>{labelText}</Text>
                       </View>
                     )
@@ -326,7 +363,7 @@ export const TestBlankDocument: React.FC<TestBlankDocumentProps> = ({
                     question.booleanOptions?.no  ?? 'No',
                   ].map((label) => (
                     <View key={label} style={styles.optionItem}>
-                      <Text style={styles.optionBullet}>{'\u25CB'}</Text>
+                      <Text style={styles.optionBullet}>{' '}</Text>
                       <Text style={styles.optionLabel}>{label}</Text>
                     </View>
                   ))}
@@ -347,7 +384,7 @@ export const TestBlankDocument: React.FC<TestBlankDocumentProps> = ({
 
         {/* ── Disclaimer ───────────────────────────────────────────────────── */}
         <View style={{ marginTop: 20, padding: 10, backgroundColor: '#f5f3ef', borderRadius: 4, borderLeftWidth: 3, borderLeftColor: '#2d4a3e' }}>
-          <Text style={{ fontSize: 7, color: '#444444', lineHeight: 1.5 }}>
+          <Text style={{ fontSize: 9, color: '#444444', lineHeight: 1.6 }}>
             {'Este test tiene un caracter exclusivamente informativo y orientativo, y no constituye en ningun caso un instrumento diagnostico ni sustituye la evaluacion realizada por un profesional de la psicologia debidamente cualificado. Los resultados deben interpretarse con cautela, teniendo en cuenta que pueden estar influidos por multiples factores y que no reflejan necesariamente una situacion clinica real. Para una valoracion adecuada y un posible diagnostico, es imprescindible acudir a un psicologo colegiado que realice una evaluacion completa mediante entrevista clinica y, en su caso, instrumentos validados administrados correctamente. Al completar este test, usted reconoce haber sido informado de sus limitaciones y acepta su uso con fines meramente orientativos.'}
           </Text>
         </View>
