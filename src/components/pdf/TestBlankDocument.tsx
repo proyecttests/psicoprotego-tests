@@ -27,7 +27,6 @@ export interface TestBlankDocumentProps {
       originalJournal?:   string
     }
   }
-  printMode?: boolean
 }
 
 // ── Color palette ─────────────────────────────────────────────────────────────
@@ -96,7 +95,7 @@ const styles = StyleSheet.create({
 
   // Metadata bar
   metadataBar: {
-    backgroundColor:   COLORS.cream,
+    backgroundColor:   COLORS.white,
     paddingHorizontal: 36,
     paddingVertical:   10,
     borderBottomWidth: 1,
@@ -244,7 +243,6 @@ function formatShortDate(isoString: string): string {
 export const TestBlankDocument: React.FC<TestBlankDocumentProps> = ({
   testData,
   metadata,
-  printMode = false,
 }) => {
   const isRTL = RTL_LANGS.has(testData.lang)
   const questionCount = testData.questions.length
@@ -259,9 +257,9 @@ export const TestBlankDocument: React.FC<TestBlankDocumentProps> = ({
         {/* ── Watermark ─────────────────────────────────────────────────────── */}
 
         {/* ── Header ──────────────────────────────────────────────────────── */}
-        <View style={[styles.header, isRTL ? { flexDirection: 'row-reverse' } : {}, printMode ? { backgroundColor: '#ffffff', borderBottomWidth: 2, borderBottomColor: '#2d4a3e' } : {}]}>
+        <View style={[styles.header, isRTL ? { flexDirection: 'row-reverse' } : {}]}>
           <View style={styles.headerLeft}>
-            <Text style={[styles.headerTestName, printMode ? { color: '#2d4a3e' } : {}]}>{testData.name} — Para rellenar</Text>
+            <Text style={styles.headerTestName}>{testData.name} — Para rellenar</Text>
             <Text style={styles.headerSubtitle}>Cuestionario de evaluación psicológica</Text>
           </View>
           <View style={styles.headerRight}>
@@ -286,7 +284,7 @@ export const TestBlankDocument: React.FC<TestBlankDocumentProps> = ({
 
           {/* ── Validation info ─────────────────────────────────────────── */}
           {metadata.validationDetails && (
-            <View style={[{ marginBottom: 16, padding: 10, backgroundColor: '#f0f7f4', borderRadius: 4 }, isRTL ? { borderRightWidth: 3, borderRightColor: '#2d4a3e' } : { borderLeftWidth: 3, borderLeftColor: '#2d4a3e' }]}>
+            <View style={[{ marginBottom: 16, padding: 10, backgroundColor: '#ffffff', borderRadius: 4 }, isRTL ? { borderRightWidth: 3, borderRightColor: '#2d4a3e' } : { borderLeftWidth: 3, borderLeftColor: '#2d4a3e' }]}>
               <Text style={{ fontSize: 8, fontFamily: 'Helvetica-Bold', color: '#2d4a3e', marginBottom: 4 }}>
                 {'VALIDACION'}
               </Text>
@@ -388,7 +386,7 @@ export const TestBlankDocument: React.FC<TestBlankDocumentProps> = ({
         </View>
 
         {/* ── Disclaimer ───────────────────────────────────────────────────── */}
-        <View style={[{ marginTop: 20, padding: 10, backgroundColor: printMode ? '#ffffff' : '#f5f3ef', borderRadius: 4 }, isRTL ? { borderRightWidth: 3, borderRightColor: '#2d4a3e' } : { borderLeftWidth: 3, borderLeftColor: '#2d4a3e' }]}>
+        <View style={[{ marginTop: 20, padding: 10, backgroundColor: '#ffffff', borderRadius: 4 }, isRTL ? { borderRightWidth: 3, borderRightColor: '#2d4a3e' } : { borderLeftWidth: 3, borderLeftColor: '#2d4a3e' }]}>
           <Text style={{ fontSize: 9, color: '#444444', lineHeight: 1.6 }}>
             {'Este test tiene un caracter exclusivamente informativo y orientativo, y no constituye en ningun caso un instrumento diagnostico ni sustituye la evaluacion realizada por un profesional de la psicologia debidamente cualificado. Los resultados deben interpretarse con cautela, teniendo en cuenta que pueden estar influidos por multiples factores y que no reflejan necesariamente una situacion clinica real. Para una valoracion adecuada y un posible diagnostico, es imprescindible acudir a un psicologo colegiado que realice una evaluacion completa mediante entrevista clinica y, en su caso, instrumentos validados administrados correctamente. Al completar este test, usted reconoce haber sido informado de sus limitaciones y acepta su uso con fines meramente orientativos.'}
           </Text>

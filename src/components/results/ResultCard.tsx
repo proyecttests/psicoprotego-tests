@@ -439,7 +439,7 @@ const NormalResult: React.FC<{
       )}
 
       {/* ── Recordatorio de repetición ──────────────────────────────────── */}
-      <RemindMe lang={lang} testId={testId} testCategory={testCategory} />
+      <RemindMe lang={lang} testId={testId} testCategory={testCategory} currentScore={result.score ?? 0} currentCategory={result.category?.label} />
 
       {/* ── Bloque de apoyo profesional (solo si hay red flags / urgencia) ─ */}
       {showSupport && <SupportBlock lang={lang} />}

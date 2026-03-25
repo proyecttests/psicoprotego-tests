@@ -19,18 +19,21 @@ const AGO: Record<string, (n: number, unit: string) => string> = {
   es: (n, u) => `hace ${n} ${u}`,
   en: (n, u) => `${n} ${u} ago`,
   pt: (n, u) => `há ${n} ${u}`,
+  ku: (n, u) => `${n} ${u} پێش`,
 }
 
 const UNITS: Record<string, { day: string; week: string; month: string }> = {
   es: { day: 'días',    week: 'semanas', month: 'meses'   },
   en: { day: 'days',   week: 'weeks',   month: 'months'  },
   pt: { day: 'dias',   week: 'semanas', month: 'meses'   },
+  ku: { day: 'ڕۆژ',   week: 'هەفتە',    month: 'مانگ'   },
 }
 
 const UI: Record<string, { label: string; better: string; worse: string; same: string }> = {
   es: { label: 'Resultado anterior', better: 'Has mejorado', worse: 'Ha subido la puntuación', same: 'Sin cambios' },
   en: { label: 'Previous result',    better: "You've improved", worse: 'Score went up', same: 'No change' },
   pt: { label: 'Resultado anterior', better: 'Você melhorou', worse: 'A pontuação subiu', same: 'Sem mudanças' },
+  ku: { label: 'ئەنجامی پێشوو', better: 'باوتر بوویت', worse: 'خاڵت زیادبووە', same: 'گۆڕانی نییە' },
 }
 
 function timeAgo(dateStr: string, lang: string): string {

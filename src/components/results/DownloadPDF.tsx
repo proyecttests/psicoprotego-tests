@@ -44,7 +44,6 @@ const UI: Record<string, {
   seconds: string
   adPlaceholder: string
   done: string
-  printModeLabel: string
 }> = {
   es: {
     downloadWithResults: '⬇ Descargar PDF con resultados',
@@ -62,7 +61,6 @@ const UI: Record<string, {
     seconds:             'segundos...',
     adPlaceholder:       'Publicidad',
     done:                '¡Descargado!',
-    printModeLabel:      'Versión para imprimir (sin fondos de color)',
   },
   en: {
     downloadWithResults: '⬇ Download PDF with results',
@@ -80,7 +78,6 @@ const UI: Record<string, {
     seconds:             'seconds...',
     adPlaceholder:       'Advertisement',
     done:                'Downloaded!',
-    printModeLabel:      'Print-friendly (no color backgrounds)',
   },
   pt: {
     downloadWithResults: '⬇ Baixar PDF com resultados',
@@ -98,7 +95,6 @@ const UI: Record<string, {
     seconds:             'segundos...',
     adPlaceholder:       'Publicidade',
     done:                'Baixado!',
-    printModeLabel:      'Versão para imprimir (sem fundos coloridos)',
   },
   ku: {
     downloadWithResults: '⬇ PDF لەگەڵ ئەنجامەکان داگرە',
@@ -116,7 +112,6 @@ const UI: Record<string, {
     seconds:             'چرکە...',
     adPlaceholder:       'ڕیکلام',
     done:                'داگیرا!',
-    printModeLabel:      'نوسخەی چاپکردن (بێ پاشخانی رەنگین)',
   },
 }
 
@@ -156,7 +151,6 @@ export const DownloadPDF: React.FC<DownloadPDFProps> = ({
   const [loadingLang, setLoadingLang]   = React.useState(false)
   const [countdown, setCountdown]   = React.useState(5)
   const blobPromiseRef = React.useRef<Promise<Blob> | null>(null)
-  const [printMode, setPrintMode] = React.useState(false)
   const [nameConsent, setNameConsent]   = React.useState(false)
   const [progress, setProgress]     = React.useState(0)
 
@@ -294,9 +288,8 @@ export const DownloadPDF: React.FC<DownloadPDFProps> = ({
       const blob = await (blobPromiseRef.current ?? buildBlob(isBlank))
       blobPromiseRef.current = null
       const dateStr = new Date().toISOString().slice(0,10).replace(/-/g,'')
-      const printSuffix = printMode ? '_print' : ''
       const blankSuffix = isBlank ? '_blank' : ''
-      downloadBlob(blob, `psicoprotego_${testId}${blankSuffix}${printSuffix}_${dateStr}.pdf`)
+      downloadBlob(blob, `psicoprotego_${testId}${blankSuffix}_${dateStr}.pdf`)
       trackEvent('pdf_download', { testId, isBlank, viewLang })
     } catch (err) {
       console.error('[DownloadPDF] Error generating PDF:', err)
@@ -421,18 +414,6 @@ export const DownloadPDF: React.FC<DownloadPDFProps> = ({
               <p className="text-xs" style={{ color: '#888' }}>Cargando idioma...</p>
             )}
           </div>
-
-          {/* Print mode toggle */}
-          <label className="flex items-center gap-3 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={printMode}
-              onChange={(e) => setPrintMode(e.target.checked)}
-              className="h-4 w-4 shrink-0 accent-current"
-              style={{ accentColor: 'var(--color-primary)' }}
-            />
-            <span className="text-xs" style={{ color: '#666' }}>{ui.printModeLabel}</span>
-          </label>
 
           {/* Consent checkbox */}
           <label className="flex items-start gap-3 cursor-pointer">

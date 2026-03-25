@@ -22,6 +22,8 @@ interface ReminderData {
   testId: string
   completedAt: string   // ISO date
   remindAt: string      // ISO date
+  score?: number
+  category?: string
 }
 
 // ── UI strings ────────────────────────────────────────────────────────────────
@@ -36,6 +38,7 @@ const UI: Record<string, {
   retake: string
   retakeQuiz: string
   dismiss: string
+  prevScore: (score: number, category: string) => string
 }> = {
   es: {
     set:     (w) => `Recordarme en ${w} semanas`,
@@ -47,6 +50,7 @@ const UI: Record<string, {
     retake:  'Hacer el test de nuevo',
     retakeQuiz: 'Hacer el quiz de nuevo',
     dismiss: 'Descartar',
+    prevScore: (s: number, cat: string) => `Último resultado: ${s} pts — ${cat}`,
   },
   en: {
     set:     (w) => `Remind me in ${w} weeks`,
@@ -58,6 +62,7 @@ const UI: Record<string, {
     retake:  'Retake the test',
     retakeQuiz: 'Retake the quiz',
     dismiss: 'Dismiss',
+    prevScore: (s: number, cat: string) => `Last result: ${s} pts — ${cat}`,
   },
   pt: {
     set:     (w) => `Lembrar em ${w} semanas`,
@@ -69,6 +74,7 @@ const UI: Record<string, {
     retake:  'Refazer o teste',
     retakeQuiz: 'Refazer o quiz',
     dismiss: 'Descartar',
+    prevScore: (s: number, cat: string) => `Último resultado: ${s} pts — ${cat}`,
   },
   ku: {
     set:     (w) => `لە ${w} هەفتەدا بیرمبهێنەرەوە`,
@@ -80,6 +86,7 @@ const UI: Record<string, {
     retake:  'کوێزەکە دووبارە بکەرەوە',
     retakeQuiz: 'کوێزەکە دووبارە بکەرەوە',
     dismiss: 'پشتگوێخستن',
+    prevScore: (s: number, cat: string) => `کۆتا ئەنجام: ${s} خاڵ — ${cat}`,
   },
 }
 
@@ -90,9 +97,11 @@ interface RemindMeProps {
   testId: string
   weeks?: number
   testCategory?: string
+  currentScore?: number
+  currentCategory?: string
 }
 
-const RemindMe: React.FC<RemindMeProps> = ({ lang, testId, weeks = DEFAULT_WEEKS, testCategory }) => {
+const RemindMe: React.FC<RemindMeProps> = ({ lang, testId, weeks = DEFAULT_WEEKS, testCategory, currentScore, currentCategory }) => {
   const ui = UI[lang] ?? UI['es']
   const key = STORAGE_KEY(testId)
 
@@ -121,6 +130,8 @@ const RemindMe: React.FC<RemindMeProps> = ({ lang, testId, weeks = DEFAULT_WEEKS
       testId,
       completedAt: now.toISOString(),
       remindAt:    remindAt.toISOString(),
+      score:    currentScore,
+      category: currentCategory,
     }
     try {
       localStorage.setItem(key, JSON.stringify(data))
@@ -149,6 +160,15 @@ const RemindMe: React.FC<RemindMeProps> = ({ lang, testId, weeks = DEFAULT_WEEKS
             {ui.due}
           </p>
           <p className="text-xs mt-1 text-gray-600">{ui.dueBody}</p>
+          {(() => {
+            try {
+              const stored = JSON.parse(localStorage.getItem(key) ?? 'null') as ReminderData | null
+              if (stored?.score !== undefined && stored.category) {
+                return <p className="text-xs font-semibold mt-1" style={{ color: 'var(--color-primary)' }}>{ui.prevScore(stored.score, stored.category)}</p>
+              }
+            } catch { /* ignore */ }
+            return null
+          })()}
         </div>
         <div className="flex gap-2">
           <button

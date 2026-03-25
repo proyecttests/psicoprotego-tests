@@ -28,7 +28,6 @@ export default function DownloadBlankLanding({ testId, lang, testName }: Downloa
     validated: boolean; reference?: string; originalReference?: string; originalJournal?: string
   } | null>(null)
   const blobPromiseRef = React.useRef<Promise<Blob> | null>(null)
-  const printMode = false  // future: expose as prop
   const [countdown, setCountdown] = React.useState(5)
 
   const handleClick = () => {

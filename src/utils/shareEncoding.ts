@@ -90,9 +90,31 @@ export function decodeAnswersWithKeys(token: string, questionIds: string[]): Ans
   }
 }
 
-/** Construye la URL completa de resultado compartible. */
+/** Construye la URL larga de resultado compartible. */
 export function buildShareUrl(lang: string, testId: string, answers: AnswersMap): string {
   const token  = encodeAnswers(answers)
   const origin = typeof window !== 'undefined' ? window.location.origin : ''
   return `${origin}/${lang}/test/${testId}/resultado?d=${token}`
 }
+
+/**
+ * Construye la URL compartible y la acorta vía /api/shorten.
+ * Devuelve la URL corta si el servidor responde, o la larga como fallback.
+ */
+export async function buildShortShareUrl(lang: string, testId: string, answers: AnswersMap): Promise<string> {
+  const longUrl = buildShareUrl(lang, testId, answers)
+  try {
+    const res = await fetch('/api/shorten', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url: longUrl }),
+    })
+    if (res.ok) {
+      const { slug } = (await res.json()) as { slug: string }
+      const origin = typeof window !== 'undefined' ? window.location.origin : ''
+      return `${origin}/r/${slug}`
+    }
+  } catch { /* fallback to long URL */ }
+  return longUrl
+}
+
