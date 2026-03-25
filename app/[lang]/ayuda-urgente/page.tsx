@@ -11,6 +11,7 @@ import path from 'node:path'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import HelpResourcesPage, { type HelpData } from '@/views/HelpResourcesPage'
+import { getRobots } from '@/utils/siteConfig'
 
 // ── Constantes ────────────────────────────────────────────────────────────────
 
@@ -71,7 +72,7 @@ export async function generateMetadata({
   return {
     title:       `${page?.title ?? 'Ayuda urgente'} — Psicoprotego`,
     description: META_DESCRIPTION[lang] ?? META_DESCRIPTION['es'],
-    robots:      { index: false, follow: true },
+    robots:      await getRobots('ayuda-urgente'),
     alternates: {
       canonical: url,
       languages: Object.fromEntries(langs.map((l) => [l, `/${l}/ayuda-urgente`])),

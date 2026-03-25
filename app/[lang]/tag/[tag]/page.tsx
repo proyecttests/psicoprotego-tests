@@ -9,7 +9,8 @@
 
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { discoverTests, discoverTags, loadTestCards } from '@/utils/discoverTests'
+import { discoverTagParams, loadTestCards } from '@/utils/discoverTests'
+import { getRobots } from '@/utils/siteConfig'
 import TestGrid from '@/components/common/TestGrid'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://testpsycho.com'
@@ -35,9 +36,7 @@ function getUI(lang: string) {
 // ── generateStaticParams ──────────────────────────────────────────────────────
 
 export async function generateStaticParams() {
-  const [tests, tags] = await Promise.all([discoverTests(), discoverTags()])
-  const langs = [...new Set(tests.flatMap((t) => t.langs))]
-  return langs.flatMap((lang) => tags.map((tag) => ({ lang, tag })))
+  return discoverTagParams()
 }
 
 // ── generateMetadata ──────────────────────────────────────────────────────────
@@ -50,9 +49,10 @@ export async function generateMetadata({
   const { lang, tag } = await params
   const ui = getUI(lang)
 
+  const robots = await getRobots('tag')
   return {
     title:   `${ui.prefix} ${tag} — Psicoprotego`,
-    robots:  { index: false, follow: true },
+    robots,
   }
 }
 
