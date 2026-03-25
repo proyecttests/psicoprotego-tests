@@ -169,6 +169,8 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
   const testCategoryRef     = React.useRef<'psychometric' | 'quiz'>('psychometric')
   const topicCategoryRef    = React.useRef<string | null>(null)
   const testTagsRef         = React.useRef<string[]>([])
+  const availableLangsRef   = React.useRef<string[]>([])
+  const testLangFileRef     = React.useRef<import('@/types/test').TestLangFile | null>(null)
 
   const ui = getUiStrings(lang)
 
@@ -215,6 +217,8 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
           testCategoryRef.current   = metadata.category ?? 'psychometric'
           topicCategoryRef.current  = metadata.topicCategory ?? null
           testTagsRef.current       = metadata.tags ?? []
+          availableLangsRef.current = metadata.availableLangs ?? [resolvedLang]
+          testLangFileRef.current   = langData
           setTestDef(foundTest)
           setMessages(messagesData)
           setEffectiveLang(resolvedLang)
@@ -438,6 +442,9 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
             topicCategory={topicCategoryRef.current}
             tags={testTagsRef.current}
             testCategory={testCategoryRef.current}
+            answers={answers}
+            availableLangs={availableLangsRef.current}
+            testLangFile={testLangFileRef.current ?? undefined}
           />
         </div>
         {showCrisisFooter && <CrisisBar lang={lang} />}
