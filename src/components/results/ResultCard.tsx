@@ -16,6 +16,7 @@ import ScoreHistory from './ScoreHistory'
 import DownloadCard from './DownloadCard'
 import RelatedTests from './RelatedTests'
 import Link from 'next/link'
+import { encodeAnswers } from '@/utils/shareEncoding'
 import type { ScoringResult } from '@/utils/scoringFunctions'
 import type { TestDefinition, TestLangFile, AnswersMap } from '@/types/test'
 import dynamic from 'next/dynamic'
@@ -76,6 +77,7 @@ const RESULT_UI: Record<string, {
   supportLink: string
   privacyNote: string
   emergencyNote: string
+  groupResults?: string
 }> = {
   es: {
     retry:          '↺ Volver a intentar',
@@ -91,6 +93,7 @@ const RESULT_UI: Record<string, {
     supportLink:    'Puedes pedir ayuda en estos recursos →',
     privacyNote:    'Esta información está solo en tu navegador y no la verá nadie si tú no la compartes.',
     emergencyNote:  'Si es una emergencia, llama al 112',
+    groupResults:   'Ver resultados grupales →',
   },
   en: {
     retry:          '↺ Try again',
@@ -106,6 +109,7 @@ const RESULT_UI: Record<string, {
     supportLink:    'You can find help resources here →',
     privacyNote:    'This information stays only in your browser — no one can see it unless you share it.',
     emergencyNote:  'If this is an emergency, call 112',
+    groupResults:   'See group results →',
   },
   pt: {
     retry:          '↺ Tentar novamente',
@@ -121,6 +125,7 @@ const RESULT_UI: Record<string, {
     supportLink:    'Você pode pedir ajuda nestes recursos →',
     privacyNote:    'Estas informações ficam apenas no seu navegador e ninguém poderá vê-las se você não as compartilhar.',
     emergencyNote:  'Se for uma emergência, ligue para o 112',
+    groupResults:   'Ver resultados grupais →',
   },
   ku: {
     retry:          '↺ دووبارە هەوڵبدەرەوە',
@@ -136,6 +141,7 @@ const RESULT_UI: Record<string, {
     supportLink:    'لێرەوە یارمەتی بدۆزەرەوە ←',
     privacyNote:    'ئەم زانیارییە تەنها لە گەڕەکەکەی تۆدایە و کەس نایبینێت ئەگەر خۆت بڵاوی نەکەیتەوە.',
     emergencyNote:  'ئەگەر ئەمەرجەنسییە، پەیوەندی بکە بە 112',
+    groupResults:   'ئەنجامە کۆمەڵایەتییەکان ببینە ←',
   },
 }
 
@@ -413,6 +419,15 @@ const NormalResult: React.FC<{
       {/* ── Compartir + Descargar ────────────────────────────────────────── */}
       <div className="flex items-center justify-between flex-wrap gap-3">
         <ShareButtons lang={lang} onShare={onShare} />
+        {!isCrisis && testCategory === 'quiz' && answers && (
+          <Link
+            href={`/${lang}/grupo/${testId}?a=${encodeAnswers(answers)}`}
+            className="text-sm font-medium underline underline-offset-2 opacity-70 hover:opacity-100 transition"
+            style={{ color: 'var(--color-primary)' }}
+          >
+            {ui.groupResults}
+          </Link>
+        )}
         {!isCrisis && testCategory === 'quiz' && (
           <DownloadCard
             lang={lang}
