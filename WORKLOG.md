@@ -740,3 +740,35 @@ Nuevos campos en cada test:
 
 ### Commits
 - `feat: sharing panel (WhatsApp+Twitter+TikTok/Instagram+Copy) + shareable result URL`
+
+## 2026-03-25 — Sesión 9: OG image + RemindMe + Schema con categorías/tags
+
+### A) OG image dinámica para /resultado
+
+- `app/[lang]/test/[testId]/resultado/opengraph-image.tsx`
+  - Runtime nodejs, tamaño 1200×630
+  - Lee el nombre del test desde el lang file en build time
+  - Diseño de marca: fondo degradado verde oscuro, nombre del test, "Mis resultados / My results / Meus resultados", dominio testpsycho.com
+  - Per-test (mismo para todos los resultados de un test — crawlers sociales no ejecutan JS)
+
+### B) Recordatorio de repetición (RemindMe)
+
+- `src/components/results/RemindMe.tsx` — componente client-side
+  - Guarda en localStorage `psico_remind_${testId}` con completedAt + remindAt
+  - 3 botones: 2 semanas / 4 semanas / 8 semanas
+  - En visita posterior: si el recordatorio venció, muestra banner con CTA para repetir el test
+  - i18n: es / en / pt
+- Integrado en `ResultCard` (NormalResult), debajo del botón compartir
+
+### C) Schema MedicalWebPage con categorías y tags
+
+- `app/[lang]/test/[testId]/page.tsx` — buildJsonLd actualizado
+  - Si metadata.topicCategory existe → `about: [{ @type: MedicalCondition, name: topicCategory }]`
+  - Si metadata.tags existe → keywords: tags.join(virgula) → auto-generado para cualquier test con estos campos en metadata.json
+
+### Build
+- Build limpio: 40 paginas SSG, sin errores de tipos
+
+### Commits
+- feat: OG image resultado + RemindMe + schema MedicalCondition/keywords
+
