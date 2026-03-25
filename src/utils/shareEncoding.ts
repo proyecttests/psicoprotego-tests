@@ -2,39 +2,89 @@
  * @file utils/shareEncoding.ts
  * @description Encode/decode de respuestas de test para URLs compartibles.
  *
- * Formato: URL-safe base64 del JSON { v: 1, a: answers }
- * Ofuscado (no encriptado) — oculta los datos a inspección casual.
+ * v1: base64(JSON { v:1, a: {q1:0, q2:1, ...} }) — objeto con claves (compat)
+ * v2: base64(JSON { v:2, a: [0,1,...] }) — array ordenado por clave numérica
+ *
+ * v2 es ~45% más corto. Requiere que el decoder conozca las claves
+ * (disponibles en la definición del test, cargada en ResultadoClient).
  *
  * URL resultante: /[lang]/test/[testId]/resultado?d=TOKEN
  */
 
 import type { AnswersMap } from '@/types/test'
 
-const PAYLOAD_VERSION = 1
+/** Ordena claves de pregunta numéricamente: q1, q2, ..., q10 */
+function sortKeys(keys: string[]): string[] {
+  return [...keys].sort((a, b) => {
+    const na = parseInt(a.replace(/\D/g, ''), 10) || 0
+    const nb = parseInt(b.replace(/\D/g, ''), 10) || 0
+    return na - nb
+  })
+}
 
-/** Codifica las respuestas en un token URL-safe. */
-export function encodeAnswers(answers: AnswersMap): string {
-  const json  = JSON.stringify({ v: PAYLOAD_VERSION, a: answers })
+function toBase64Url(json: string): string {
   const bytes = new TextEncoder().encode(json)
   let binary  = ''
   bytes.forEach((b) => { binary += String.fromCharCode(b) })
-  return btoa(binary)
-    .replace(/\+/g, '-')
-    .replace(/\//g, '_')
-    .replace(/=/g, '')
+  return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '')
 }
 
-/** Decodifica un token y devuelve las respuestas, o null si es inválido. */
+function fromBase64Url(token: string): string {
+  const padded = token.replace(/-/g, '+').replace(/_/g, '/')
+  const pad    = (4 - (padded.length % 4)) % 4
+  const binary = atob(padded + '='.repeat(pad))
+  const bytes  = Uint8Array.from(binary, (c) => c.charCodeAt(0))
+  return new TextDecoder().decode(bytes)
+}
+
+/**
+ * Codifica respuestas en token URL-safe (formato v2: array ordenado).
+ * ~45% más corto que v1 para tests con muchas preguntas.
+ */
+export function encodeAnswers(answers: AnswersMap): string {
+  const keys   = sortKeys(Object.keys(answers))
+  const values = keys.map((k) => answers[k])
+  return toBase64Url(JSON.stringify({ v: 2, a: values }))
+}
+
+/**
+ * Decodifica token v1 (objeto) sin conocer las claves del test.
+ * Devuelve null para tokens v2 (necesitan questionIds).
+ */
 export function decodeAnswers(token: string): AnswersMap | null {
   try {
-    const padded = token.replace(/-/g, '+').replace(/_/g, '/')
-    const pad    = (4 - (padded.length % 4)) % 4
-    const binary = atob(padded + '='.repeat(pad))
-    const bytes  = Uint8Array.from(binary, (c) => c.charCodeAt(0))
-    const json   = new TextDecoder().decode(bytes)
-    const payload = JSON.parse(json) as { v: number; a: AnswersMap }
-    if (!payload?.a) return null
-    return payload.a
+    const payload = JSON.parse(fromBase64Url(token)) as { v: number; a: unknown }
+    if (payload.v === 1 && payload.a && typeof payload.a === 'object' && !Array.isArray(payload.a)) {
+      return payload.a as AnswersMap
+    }
+    // v2 requires question IDs — caller must use decodeAnswersV2
+    return null
+  } catch {
+    return null
+  }
+}
+
+/**
+ * Decodifica token v1 o v2 dado el array ordenado de IDs de pregunta.
+ * Usar en ResultadoClient donde ya se ha cargado el JSON del test.
+ */
+export function decodeAnswersWithKeys(token: string, questionIds: string[]): AnswersMap | null {
+  try {
+    const payload = JSON.parse(fromBase64Url(token)) as { v: number; a: unknown }
+
+    if (payload.v === 1 && payload.a && typeof payload.a === 'object' && !Array.isArray(payload.a)) {
+      return payload.a as AnswersMap
+    }
+
+    if (payload.v === 2 && Array.isArray(payload.a)) {
+      const sortedIds = sortKeys(questionIds)
+      const entries   = (payload.a as Array<string | number | boolean>).map(
+        (val, i) => [sortedIds[i], val] as [string, string | number | boolean]
+      )
+      return Object.fromEntries(entries) as AnswersMap
+    }
+
+    return null
   } catch {
     return null
   }
@@ -42,7 +92,7 @@ export function decodeAnswers(token: string): AnswersMap | null {
 
 /** Construye la URL completa de resultado compartible. */
 export function buildShareUrl(lang: string, testId: string, answers: AnswersMap): string {
-  const token = encodeAnswers(answers)
+  const token  = encodeAnswers(answers)
   const origin = typeof window !== 'undefined' ? window.location.origin : ''
   return `${origin}/${lang}/test/${testId}/resultado?d=${token}`
 }
