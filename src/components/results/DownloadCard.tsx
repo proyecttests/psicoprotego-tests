@@ -8,10 +8,10 @@
 
 import React from 'react'
 
-const UI: Record<string, { btn: string; hint: string }> = {
-  es: { btn: 'Descargar imagen', hint: 'Para compartir en stories' },
-  en: { btn: 'Download image',   hint: 'Share in your stories'    },
-  pt: { btn: 'Baixar imagem',    hint: 'Para compartilhar nos stories' },
+const UI: Record<string, { btn: string; hintShare: string; hintDownload: string }> = {
+  es: { btn: 'Compartir en stories',     hintShare: 'Elige Instagram o TikTok',    hintDownload: 'Se descargará la imagen' },
+  en: { btn: 'Share to stories',         hintShare: 'Choose Instagram or TikTok',  hintDownload: 'Image will be downloaded' },
+  pt: { btn: 'Compartilhar nos stories', hintShare: 'Escolha Instagram ou TikTok', hintDownload: 'A imagem será baixada' },
 }
 
 const COLORS: Record<string, { bg: string; text: string; circle: string }> = {
@@ -62,9 +62,16 @@ const DownloadCard: React.FC<DownloadCardProps> = ({
 }) => {
   const ui     = UI[lang] ?? UI['es']
   const colors = COLORS[colorKey] ?? COLORS['green']
-  const [loading, setLoading] = React.useState(false)
+  const [loading,   setLoading]   = React.useState(false)
+  const [canShare,  setCanShare]  = React.useState(false)
 
-  const handleDownload = async () => {
+  React.useEffect(() => {
+    // Check if the browser supports sharing files (mobile Web Share API)
+    const testFile = new File([''], 'test.png', { type: 'image/png' })
+    setCanShare(!!navigator.canShare?.({ files: [testFile] }))
+  }, [])
+
+  const handleShare = async () => {
     setLoading(true)
     try {
       const SIZE = 1080
@@ -163,7 +170,7 @@ const DownloadCard: React.FC<DownloadCardProps> = ({
     <div className="flex flex-col items-center gap-1">
       <button
         type="button"
-        onClick={handleDownload}
+        onClick={handleShare}
         disabled={loading}
         className="flex items-center gap-2 rounded-xl border-2 px-4 py-2.5 text-sm font-semibold transition active:opacity-80 disabled:opacity-50"
         style={{ borderColor: 'var(--color-primary)', color: 'var(--color-primary)' }}
@@ -176,7 +183,7 @@ const DownloadCard: React.FC<DownloadCardProps> = ({
         </svg>
         {loading ? '…' : ui.btn}
       </button>
-      <p className="text-xs text-gray-400">{ui.hint}</p>
+      <p className="text-xs text-gray-400">{canShare ? ui.hintShare : ui.hintDownload}</p>
     </div>
   )
 }
