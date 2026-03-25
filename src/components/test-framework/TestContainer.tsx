@@ -437,6 +437,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
             maxScore={maxScore}
             topicCategory={topicCategoryRef.current}
             tags={testTagsRef.current}
+            testCategory={testCategoryRef.current}
           />
         </div>
         {showCrisisFooter && <CrisisBar lang={lang} />}
