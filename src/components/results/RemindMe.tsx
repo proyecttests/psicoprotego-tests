@@ -34,6 +34,7 @@ const UI: Record<string, {
   due: string
   dueBody: string
   retake: string
+  retakeQuiz: string
   dismiss: string
 }> = {
   es: {
@@ -44,6 +45,7 @@ const UI: Record<string, {
     due:     '¿Repites el test?',
     dueBody: 'Han pasado las semanas acordadas. Puedes repetir el test y comparar tu progreso.',
     retake:  'Hacer el test de nuevo',
+    retakeQuiz: 'Hacer el quiz de nuevo',
     dismiss: 'Descartar',
   },
   en: {
@@ -54,6 +56,7 @@ const UI: Record<string, {
     due:     'Time to retake?',
     dueBody: 'The agreed time has passed. You can retake the test and compare your progress.',
     retake:  'Retake the test',
+    retakeQuiz: 'Retake the quiz',
     dismiss: 'Dismiss',
   },
   pt: {
@@ -64,6 +67,7 @@ const UI: Record<string, {
     due:     'Hora de refazer?',
     dueBody: 'O tempo acordado passou. Você pode refazer o teste e comparar seu progresso.',
     retake:  'Refazer o teste',
+    retakeQuiz: 'Refazer o quiz',
     dismiss: 'Descartar',
   },
 }
@@ -74,9 +78,10 @@ interface RemindMeProps {
   lang: string
   testId: string
   weeks?: number
+  testCategory?: string
 }
 
-const RemindMe: React.FC<RemindMeProps> = ({ lang, testId, weeks = DEFAULT_WEEKS }) => {
+const RemindMe: React.FC<RemindMeProps> = ({ lang, testId, weeks = DEFAULT_WEEKS, testCategory }) => {
   const ui = UI[lang] ?? UI['es']
   const key = STORAGE_KEY(testId)
 
@@ -140,7 +145,7 @@ const RemindMe: React.FC<RemindMeProps> = ({ lang, testId, weeks = DEFAULT_WEEKS
             onClick={() => { localStorage.removeItem(key); window.location.href = `/${lang}/test/${testId}` }}
             className="btn-primary text-xs py-2 px-4"
           >
-            {ui.retake}
+            {testCategory === 'quiz' ? ui.retakeQuiz : ui.retake}
           </button>
           <button
             type="button"

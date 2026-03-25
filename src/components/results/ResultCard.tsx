@@ -402,7 +402,7 @@ const NormalResult: React.FC<{
       </div>
 
       {/* ── Recordatorio de repetición ──────────────────────────────────── */}
-      <RemindMe lang={lang} testId={testId} />
+      <RemindMe lang={lang} testId={testId} testCategory={testCategory} />
 
       {/* ── Bloque de apoyo profesional (solo si hay red flags / urgencia) ─ */}
       {showSupport && <SupportBlock lang={lang} />}

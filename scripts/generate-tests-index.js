@@ -34,6 +34,7 @@ function main() {
 
     index.push({
       testId,
+      category:        meta.category         || 'psychometric',
       topicCategory:   meta.topicCategory   || null,
       tags:            meta.tags             || [],
       availableLangs:  meta.availableLangs   || ['es'],

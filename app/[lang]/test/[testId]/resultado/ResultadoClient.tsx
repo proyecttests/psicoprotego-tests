@@ -29,6 +29,7 @@ const UI: Record<string, {
   errorInvalidLink: string
   errorTestNotFound: string
   tryTest: string
+  tryQuiz: string
   sharedBy: string
 }> = {
   es: {
@@ -37,6 +38,7 @@ const UI: Record<string, {
     errorInvalidLink: 'El enlace no es válido o ha expirado.',
     errorTestNotFound:'No se encontró el test.',
     tryTest:          'Hacer el test',
+    tryQuiz:          'Hacer el quiz',
     sharedBy:         'Resultado compartido',
   },
   en: {
@@ -45,6 +47,7 @@ const UI: Record<string, {
     errorInvalidLink: 'The link is invalid or has expired.',
     errorTestNotFound:'Test not found.',
     tryTest:          'Take the test',
+    tryQuiz:          'Take the quiz',
     sharedBy:         'Shared result',
   },
   pt: {
@@ -53,6 +56,7 @@ const UI: Record<string, {
     errorInvalidLink: 'O link é inválido ou expirou.',
     errorTestNotFound:'Teste não encontrado.',
     tryTest:          'Fazer o teste',
+    tryQuiz:          'Fazer o quiz',
     sharedBy:         'Resultado compartilhado',
   },
 }
@@ -69,6 +73,7 @@ export default function ResultadoClient({ lang, testId }: ResultadoClientProps) 
   const [result,     setResult]     = React.useState<any>(null)
   const [testDef,    setTestDef]    = React.useState<TestLangFile | null>(null)
   const [maxScore,   setMaxScore]   = React.useState(0)
+  const [testCategory, setTestCategory] = React.useState<string>('psychometric')
 
   React.useEffect(() => {
     const token = searchParams.get('d')
@@ -82,9 +87,10 @@ export default function ResultadoClient({ lang, testId }: ResultadoClientProps) 
       try {
         const metaRes = await fetch(`/data/tests/${testId}/metadata.json`)
         if (!metaRes.ok) throw new Error(ui.errorTestNotFound)
-        const meta = await metaRes.json() as { availableLangs: string[] }
+        const meta = await metaRes.json() as { availableLangs: string[]; category?: string }
 
         const resolvedLang = meta.availableLangs.includes(lang) ? lang : 'es'
+        if (meta.category) setTestCategory(meta.category)
         const langRes = await fetch(`/data/tests/${testId}/${resolvedLang}.json`)
         if (!langRes.ok) throw new Error(ui.errorTestNotFound)
         const langData = await langRes.json() as TestLangFile
@@ -149,7 +155,7 @@ export default function ResultadoClient({ lang, testId }: ResultadoClientProps) 
             onClick={() => router.push(`/${lang}/test/${testId}`)}
             className="btn-primary mt-6"
           >
-            {ui.tryTest}
+            {testCategory === 'quiz' ? ui.tryQuiz : ui.tryTest}
           </button>
         </div>
       </div>
