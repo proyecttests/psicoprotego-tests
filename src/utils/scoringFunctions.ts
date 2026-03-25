@@ -444,19 +444,31 @@ export function scoreGAD7(
  */
 export const scorePHQ9: ScoringFunction = scoreGAD7
 
+/**
+ * Función de scoring genérica para tests de suma directa + red flags.
+ * Sirve para el 90% de tests psicométricos estándar.
+ * Los tests nuevos pueden declarar "scoringFunction": "scoreStandard" en su JSON
+ * sin necesidad de registrar ninguna función nueva.
+ */
+export const scoreStandard: ScoringFunction = scoreGAD7
+
 // ── Registry de funciones de scoring ─────────────────────────────────────────
 
 /**
  * Mapa de nombre → función de scoring.
  *
- * Para agregar un nuevo test:
- *  1. Implementa scoreTuTest() siguiendo el mismo contrato que scoreGAD7.
- *  2. Agrégalo aquí: SCORING_REGISTRY['scoreTuTest'] = scoreTuTest
+ * Para agregar un nuevo test con lógica estándar (suma directa + red flags):
+ *   Declarar "scoringFunction": "scoreStandard" en el JSON — no hace falta tocar código.
+ *
+ * Para tests con lógica propia:
+ *   1. Implementar la función siguiendo el contrato ScoringFunction.
+ *   2. Registrarla aquí.
  */
 const SCORING_REGISTRY: Record<string, ScoringFunction> = {
+  scoreStandard,
   scoreGAD7,
   scorePHQ9,
-  // scorePSS10: scorePSS10,  ← ejemplo futuro
+  // scorePSS10: scorePSS10,  ← ejemplo para test con lógica especial
 }
 
 // ── Factory pública ───────────────────────────────────────────────────────────
