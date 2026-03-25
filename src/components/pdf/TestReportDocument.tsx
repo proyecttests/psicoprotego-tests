@@ -319,6 +319,19 @@ function formatShortDate(isoString: string): string {
   }
 }
 
+function formatDateDMY(isoString: string): string {
+  try {
+    const d = new Date(isoString)
+    const day   = String(d.getDate()).padStart(2, '0')
+    const month = String(d.getMonth() + 1).padStart(2, '0')
+    const year  = d.getFullYear()
+    const hh    = String(d.getHours()).padStart(2, '0')
+    const mm    = String(d.getMinutes()).padStart(2, '0')
+    return `${day}/${month}/${year} ${hh}:${mm}`
+  } catch { return isoString }
+}
+
+
 const LANG_LABELS: Record<string, string> = {
   es: 'Español',
   en: 'English',
@@ -358,12 +371,6 @@ const SCORE_LABEL: Record<string, string> = {
   ar: 'النتيجة',
 }
 
-const RECOMMENDATION_LABEL: Record<string, string> = {
-  es: 'Recomendación',
-  en: 'Recommendation',
-  pt: 'Recomendação',
-  ar: 'التوصية',
-}
 
 // ── Sub-components ────────────────────────────────────────────────────────────
 
@@ -396,7 +403,6 @@ export const TestReportDocument: React.FC<TestReportDocumentProps> = ({
     : COLORS.primary
   const viewLang = metadata.viewLang
   const scoreLabel = SCORE_LABEL[viewLang] ?? SCORE_LABEL['es']
-  const recommendationLabel = RECOMMENDATION_LABEL[viewLang] ?? RECOMMENDATION_LABEL['es']
   const questionsLabel = getQuestionsLabel(viewLang)
 
   return (
@@ -434,38 +440,23 @@ export const TestReportDocument: React.FC<TestReportDocumentProps> = ({
               {`Paciente / Patient: ${metadata.userName}`}
             </Text>
           )}
+          <Text style={styles.metadataText}>
+            {`Rellenado online el ${formatDateDMY(metadata.completedAt)}`}
+          </Text>
         </View>
 
         {/* ── Body ─────────────────────────────────────────────────────────── */}
         <View style={styles.body}>
 
-          {/* ── Result block ──────────────────────────────────────────────── */}
+          {/* ── Result summary line ───────────────────────────────────────── */}
           {result.resultType === 'NORMAL' && result.category && (
-            <View style={[styles.resultBlock, { borderLeftColor: categoryColor }]}>
-              <Text style={[styles.resultCategory, { color: categoryColor }]}>
-                {result.category.label}
+            <View style={{ marginBottom: 12, paddingVertical: 8, paddingHorizontal: 12, backgroundColor: '#f0f7f4', borderRadius: 4 }}>
+              <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: '#2d4a3e' }}>
+                {[
+                  (result.score !== null && result.score !== undefined) ? `${scoreLabel}: ${result.score}` : null,
+                  result.category.label,
+                ].filter(Boolean).join('  —  ')}
               </Text>
-
-              {result.score !== null && (
-                <>
-                  <Text style={[styles.resultScore, { color: categoryColor }]}>
-                    {result.score}
-                  </Text>
-                  <Text style={styles.resultScoreLabel}>{scoreLabel}</Text>
-                </>
-              )}
-
-              {result.message?.title && (
-                <Text style={styles.resultMessageTitle}>{result.message.title}</Text>
-              )}
-              {result.message?.body && (
-                <Text style={styles.resultMessageBody}>{result.message.body}</Text>
-              )}
-              {result.message?.recommendation && (
-                <Text style={styles.resultRecommendation}>
-                  {`${recommendationLabel}: ${result.message.recommendation}`}
-                </Text>
-              )}
             </View>
           )}
 
@@ -531,9 +522,13 @@ export const TestReportDocument: React.FC<TestReportDocumentProps> = ({
                       const isSelected = String(answer) === String(opt.value)
                       return (
                         <View key={opt.value} style={styles.optionItem}>
-                          <Text style={isSelected ? [styles.optionBullet, styles.optionBulletSelected] : styles.optionBullet}>
-                            {isSelected ? '\u25CF' : '\u25CB'}
-                          </Text>
+                          {/* Drawn circle/bullet — avoids font encoding issues */}
+                          <View style={{
+                            width: 12, height: 12, borderRadius: 6, marginTop: 2, flexShrink: 0,
+                            borderWidth: 1.5,
+                            borderColor: isSelected ? '#2d4a3e' : '#999999',
+                            backgroundColor: isSelected ? '#2d4a3e' : 'transparent',
+                          }} />
                           <Text style={isSelected ? [styles.optionLabel, styles.optionLabelSelected] : styles.optionLabel}>
                             {opt.label}
                           </Text>
@@ -563,7 +558,7 @@ export const TestReportDocument: React.FC<TestReportDocumentProps> = ({
                       return (
                         <View key={val} style={styles.optionItem}>
                           <Text style={isSelected ? [styles.optionBullet, styles.optionBulletSelected] : styles.optionBullet}>
-                            {isSelected ? '\u25CF' : '\u25CB'}
+                            {isSelected ? '*' : '-'}
                           </Text>
                           <Text style={isSelected ? [styles.optionLabel, styles.optionLabelSelected] : styles.optionLabel}>
                             {labelText}
@@ -609,7 +604,7 @@ export const TestReportDocument: React.FC<TestReportDocumentProps> = ({
 
         {/* ── Disclaimer ────────────────────────────────────────────────────── */}
         <View style={{ marginTop: 20, padding: 10, backgroundColor: '#f5f3ef', borderRadius: 4, borderLeftWidth: 3, borderLeftColor: '#2d4a3e' }}>
-          <Text style={{ fontSize: 7, color: '#444444', lineHeight: 1.5 }}>
+          <Text style={{ fontSize: 9, color: '#444444', lineHeight: 1.6 }}>
             {metadata.userLang === 'en' ? 'This test is exclusively informational and orientational in nature, and does not constitute a diagnostic instrument nor replace the assessment performed by a duly qualified psychology professional. Results should be interpreted with caution, as they may be influenced by multiple factors and do not necessarily reflect a real clinical situation. For an adequate assessment and possible diagnosis, it is essential to consult a licensed psychologist who can conduct a comprehensive evaluation through clinical interview and, where appropriate, correctly administered validated instruments. By completing this test, you acknowledge having been informed of its limitations and accept its use for merely informational purposes.' : metadata.userLang === 'pt' ? 'Este teste tem carater exclusivamente informativo e orientativo, e nao constitui em caso algum um instrumento de diagnostico nem substitui a avaliacao realizada por um profissional de psicologia devidamente qualificado. Os resultados devem ser interpretados com cautela, tendo em conta que podem ser influenciados por multiplos fatores e que nao refletem necessariamente uma situacao clinica real. Para uma avaliacao adequada e possivel diagnostico, e imprescindivel consultar um psicologo licenciado que realize uma avaliacao completa por meio de entrevista clinica e, se necessario, instrumentos validados administrados corretamente. Ao completar este teste, voce reconhece ter sido informado das suas limitacoes e aceita o seu uso com fins meramente orientativos.' : 'Este test tiene un caracter exclusivamente informativo y orientativo, y no constituye en ningun caso un instrumento diagnostico ni sustituye la evaluacion realizada por un profesional de la psicologia debidamente cualificado. Los resultados deben interpretarse con cautela, teniendo en cuenta que pueden estar influidos por multiples factores y que no reflejan necesariamente una situacion clinica real. Para una valoracion adecuada y un posible diagnostico, es imprescindible acudir a un psicologo colegiado que realice una evaluacion completa mediante entrevista clinica y, en su caso, instrumentos validados administrados correctamente. Al completar este test, usted reconoce haber sido informado de sus limitaciones y acepta su uso con fines meramente orientativos.'}
           </Text>
         </View>

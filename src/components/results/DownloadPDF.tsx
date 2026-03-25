@@ -132,6 +132,7 @@ export const DownloadPDF: React.FC<DownloadPDFProps> = ({
   } | null>(null)
   const [loadingLang, setLoadingLang]   = React.useState(false)
   const [countdown, setCountdown]   = React.useState(5)
+  const blobPromiseRef = React.useRef<Promise<Blob> | null>(null)
   const [nameConsent, setNameConsent]   = React.useState(false)
   const [progress, setProgress]     = React.useState(0)
 
@@ -222,53 +223,53 @@ export const DownloadPDF: React.FC<DownloadPDFProps> = ({
   }
 
   const handleGenerate = () => {
+    // Start generating PDF immediately so it's ready when countdown ends
+    blobPromiseRef.current = buildBlob(isBlank)
     setStep('interstitial')
+  }
+
+  const buildBlob = async (blank: boolean): Promise<Blob> => {
+    const now = new Date().toISOString()
+    if (blank) {
+      const { pdf } = await import('@react-pdf/renderer')
+      const { TestBlankDocument } = await import('@/components/pdf/TestBlankDocument')
+      const doc = React.createElement(TestBlankDocument, {
+        testData,
+        metadata: {
+          generatedAt: now,
+          testId,
+          validationDetails: validationDetails ?? undefined,
+        },
+      })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return pdf(doc as any).toBlob()
+    } else {
+      const { pdf } = await import('@react-pdf/renderer')
+      const { TestReportDocument } = await import('@/components/pdf/TestReportDocument')
+      const doc = React.createElement(TestReportDocument, {
+        testData,
+        answers,
+        result,
+        metadata: {
+          completedAt: now,
+          userLang:    lang,
+          viewLang,
+          userName:    userName.trim() || undefined,
+          testId,
+          validationDetails: validationDetails ?? undefined,
+        },
+        viewLangData: viewLangData ?? undefined,
+      })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return pdf(doc as any).toBlob()
+    }
   }
 
   const triggerDownload = async () => {
     try {
-      const now = new Date().toISOString()
-
-      if (isBlank) {
-        const { pdf } = await import('@react-pdf/renderer')
-        const { TestBlankDocument } = await import('@/components/pdf/TestBlankDocument')
-
-        const doc = React.createElement(TestBlankDocument, {
-          testData,
-          metadata: {
-            generatedAt: now,
-            testId,
-          },
-        })
-
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const blob = await pdf(doc as any).toBlob()
-        downloadBlob(blob, `psicoprotego_${testId}_blank_${Date.now()}.pdf`)
-      } else {
-        const { pdf } = await import('@react-pdf/renderer')
-        const { TestReportDocument } = await import('@/components/pdf/TestReportDocument')
-
-        const doc = React.createElement(TestReportDocument, {
-          testData,
-          answers,
-          result,
-          metadata: {
-            completedAt: now,
-            userLang:    lang,
-            viewLang,
-            userName:    userName.trim() || undefined,
-            testId,
-            validationDetails: validationDetails ?? undefined,
-          },
-          viewLangData: viewLangData ?? undefined,
-        })
-
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const blob = await pdf(doc as any).toBlob()
-        downloadBlob(blob, `psicoprotego_${testId}_${Date.now()}.pdf`)
-      }
-
-      // Analytics — name is NEVER included
+      const blob = await (blobPromiseRef.current ?? buildBlob(isBlank))
+      blobPromiseRef.current = null
+      downloadBlob(blob, `psicoprotego_${testId}${isBlank ? '_blank' : ''}_${Date.now()}.pdf`)
       trackEvent('pdf_download', { testId, isBlank, viewLang })
     } catch (err) {
       console.error('[DownloadPDF] Error generating PDF:', err)

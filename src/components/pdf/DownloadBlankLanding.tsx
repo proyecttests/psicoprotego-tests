@@ -23,12 +23,32 @@ interface DownloadBlankLandingProps {
 export default function DownloadBlankLanding({ testId, lang, testName }: DownloadBlankLandingProps) {
   const ui = LABEL[lang] ?? LABEL['es']
   const [state, setState]       = React.useState<'idle' | 'interstitial' | 'done'>('idle')
+  const [validationDetails, setValidationDetails] = React.useState<{
+    validated: boolean; reference?: string; originalReference?: string; originalJournal?: string
+  } | null>(null)
+  const blobPromiseRef = React.useRef<Promise<Blob> | null>(null)
   const [countdown, setCountdown] = React.useState(5)
 
   const handleClick = () => {
+    // Start building PDF immediately
+    blobPromiseRef.current = buildBlob()
     setState('interstitial')
     setCountdown(5)
   }
+
+  React.useEffect(() => {
+    fetch(`/data/tests/${testId}/metadata.json`)
+      .then(r => r.json())
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .then((meta: any) => {
+        const vd = meta?.validationDetails
+        if (!vd) return
+        const langV = vd.translations?.[lang]
+        const orig  = vd.original
+        setValidationDetails({ validated: langV?.validated ?? false, reference: langV?.reference, originalReference: orig?.reference, originalJournal: orig?.journal })
+      })
+      .catch(() => {/* silent */})
+  }, [testId, lang])
 
   React.useEffect(() => {
     if (state !== 'interstitial') return
@@ -41,24 +61,28 @@ export default function DownloadBlankLanding({ testId, lang, testName }: Downloa
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state, countdown])
 
+  const buildBlob = async (): Promise<Blob> => {
+    const [{ pdf }, { TestBlankDocument }] = await Promise.all([
+      import('@react-pdf/renderer'),
+      import('@/components/pdf/TestBlankDocument'),
+    ])
+    const r = await fetch(`/data/tests/${testId}/${lang}.json`)
+    const testData = await r.json() as TestLangFile
+    const doc = React.createElement(TestBlankDocument, {
+      testData,
+      metadata: { generatedAt: new Date().toISOString(), testId, validationDetails: validationDetails ?? undefined },
+    })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return pdf(doc as any).toBlob()
+  }
+
   const triggerDownload = async () => {
     try {
-      const [{ pdf }, { TestBlankDocument }] = await Promise.all([
-        import('@react-pdf/renderer'),
-        import('@/components/pdf/TestBlankDocument'),
-      ])
-      // Fetch test lang file
-      const r = await fetch(`/data/tests/${testId}/${lang}.json`)
-      const testData = await r.json() as TestLangFile
-      const doc = React.createElement(TestBlankDocument, {
-        testData,
-        metadata: { generatedAt: new Date().toISOString(), testId },
-      })
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const blob = await pdf(doc as any).toBlob()
-      const url  = URL.createObjectURL(blob)
-      const a    = document.createElement('a')
-      a.href     = url
+      const blob = await (blobPromiseRef.current ?? buildBlob())
+      blobPromiseRef.current = null
+      const url = URL.createObjectURL(blob)
+      const a   = document.createElement('a')
+      a.href    = url
       a.download = `psicoprotego_${testId}_blank.pdf`
       a.click()
       URL.revokeObjectURL(url)
