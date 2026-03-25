@@ -12,7 +12,7 @@
 
 import React from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
-import { decodeAnswers } from '@/utils/shareEncoding'
+import { decodeAnswers, decodeAnswersWithKeys } from '@/utils/shareEncoding'
 import { getScoringFunction } from '@/utils/scoringFunctions'
 import type { TestLangFile } from '@/types/test'
 import type { TestDefinitionForScoring } from '@/utils/scoringFunctions'
@@ -78,13 +78,6 @@ export default function ResultadoClient({ lang, testId }: ResultadoClientProps) 
       return
     }
 
-    const answers = decodeAnswers(token)
-    if (!answers) {
-      setErrorMsg(ui.errorInvalidLink)
-      setState('error')
-      return
-    }
-
     const load = async () => {
       try {
         const metaRes = await fetch(`/data/tests/${testId}/metadata.json`)
@@ -95,6 +88,11 @@ export default function ResultadoClient({ lang, testId }: ResultadoClientProps) 
         const langRes = await fetch(`/data/tests/${testId}/${resolvedLang}.json`)
         if (!langRes.ok) throw new Error(ui.errorTestNotFound)
         const langData = await langRes.json() as TestLangFile
+
+        // Decode token after loading question IDs (supports both v1 and v2)
+        const questionIds = langData.questions.map((q) => q.id)
+        const answers = decodeAnswersWithKeys(token, questionIds) ?? decodeAnswers(token)
+        if (!answers) throw new Error(ui.errorInvalidLink)
 
         const testDefForScoring: TestDefinitionForScoring = {
           id:       langData.id,
