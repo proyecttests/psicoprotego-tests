@@ -2,11 +2,10 @@
  * @file components/test-framework/SharingScreen.tsx
  * @description Panel de compartir resultados.
  *
- * Muestra opciones de sharing: WhatsApp, Twitter/X, nativo (TikTok/Instagram via
- * Web Share API) y copiar enlace. Incluye slot publicitario post-share.
- *
- * El sharing nativo (navigator.share) abre el selector del SO en móvil,
- * que incluye TikTok, Instagram, Telegram, etc.
+ * Botones primarios: WhatsApp, TikTok, Instagram.
+ * TikTok e Instagram usan Web Share API (selector nativo del OS en móvil).
+ * En escritorio sin Web Share API: copia el enlace al portapapeles.
+ * Botones secundarios: Twitter/X, Copiar enlace.
  */
 
 'use client'
@@ -22,48 +21,52 @@ const UI: Record<string, {
   subtitle: string
   shareText: string
   whatsapp: string
+  tiktok: string
+  instagram: string
   twitter: string
-  native: string
   copy: string
   copied: string
   back: string
-  nativeUnavailable: string
+  mobileHint: string
 }> = {
   es: {
-    title:            'Compartir resultados',
-    subtitle:         'Elige cómo quieres compartir tu resultado',
-    shareText:        'Acabo de completar este test psicológico. ¿Lo intentas tú también?',
-    whatsapp:         'WhatsApp',
-    twitter:          'Twitter / X',
-    native:           'Más opciones',
-    copy:             'Copiar enlace',
-    copied:           '¡Copiado!',
-    back:             'Volver a resultados',
-    nativeUnavailable:'Enlace copiado al portapapeles',
+    title:      'Compartir resultados',
+    subtitle:   'Elige cómo quieres compartir tu resultado',
+    shareText:  'Acabo de completar este test psicológico. ¿Lo intentas tú también?',
+    whatsapp:   'WhatsApp',
+    tiktok:     'TikTok',
+    instagram:  'Instagram',
+    twitter:    'Twitter / X',
+    copy:       'Copiar enlace',
+    copied:     '¡Copiado!',
+    back:       'Volver a resultados',
+    mobileHint: 'Se abrirá el selector de apps',
   },
   en: {
-    title:            'Share your results',
-    subtitle:         'Choose how to share your result',
-    shareText:        'I just completed this psychological test. Want to try?',
-    whatsapp:         'WhatsApp',
-    twitter:          'Twitter / X',
-    native:           'More options',
-    copy:             'Copy link',
-    copied:           'Copied!',
-    back:             'Back to results',
-    nativeUnavailable:'Link copied to clipboard',
+    title:      'Share your results',
+    subtitle:   'Choose how to share your result',
+    shareText:  'I just completed this psychological test. Want to try?',
+    whatsapp:   'WhatsApp',
+    tiktok:     'TikTok',
+    instagram:  'Instagram',
+    twitter:    'Twitter / X',
+    copy:       'Copy link',
+    copied:     'Copied!',
+    back:       'Back to results',
+    mobileHint: 'App selector will open',
   },
   pt: {
-    title:            'Compartilhar resultados',
-    subtitle:         'Escolha como compartilhar seu resultado',
-    shareText:        'Acabei de completar este teste psicológico. Quer tentar?',
-    whatsapp:         'WhatsApp',
-    twitter:          'Twitter / X',
-    native:           'Mais opções',
-    copy:             'Copiar link',
-    copied:           'Copiado!',
-    back:             'Voltar aos resultados',
-    nativeUnavailable:'Link copiado para a área de transferência',
+    title:      'Compartilhar resultados',
+    subtitle:   'Escolha como compartilhar seu resultado',
+    shareText:  'Acabei de completar este teste psicológico. Quer tentar?',
+    whatsapp:   'WhatsApp',
+    tiktok:     'TikTok',
+    instagram:  'Instagram',
+    twitter:    'Twitter / X',
+    copy:       'Copiar link',
+    copied:     'Copiado!',
+    back:       'Voltar aos resultados',
+    mobileHint: 'O seletor de apps será aberto',
   },
 }
 
@@ -84,8 +87,9 @@ const SharingScreen: React.FC<SharingScreenProps> = ({
   onDone,
   category = 'psychometric',
 }) => {
-  const ui      = UI[lang] ?? UI['es']
+  const ui = UI[lang] ?? UI['es']
   const [copied, setCopied] = React.useState(false)
+  const hasNativeShare = typeof navigator !== 'undefined' && !!navigator.share
 
   // ── Handlers ───────────────────────────────────────────────────────────────
 
@@ -101,16 +105,14 @@ const SharingScreen: React.FC<SharingScreenProps> = ({
     window.open(url, '_blank', 'noopener,noreferrer')
   }
 
-  const handleNative = async () => {
-    trackEvent('share_native', { shareUrl })
-    if (typeof navigator !== 'undefined' && navigator.share) {
+  const handleNative = async (platform: 'tiktok' | 'instagram') => {
+    trackEvent(`share_${platform}`, { shareUrl })
+    if (hasNativeShare) {
       try {
         await navigator.share({ title: ui.title, text: ui.shareText, url: shareUrl })
-      } catch {
-        // User cancelled — silent fail
-      }
+      } catch { /* user cancelled */ }
     } else {
-      // Fallback: copy link
+      // Desktop fallback: copy to clipboard
       await handleCopy(true)
     }
   }
@@ -118,13 +120,11 @@ const SharingScreen: React.FC<SharingScreenProps> = ({
   const handleCopy = async (silent = false) => {
     try {
       await navigator.clipboard.writeText(shareUrl)
+      trackEvent('share_copy', { shareUrl })
       if (!silent) {
         setCopied(true)
         setTimeout(() => setCopied(false), 2000)
-      } else {
-        // Brief native-unavailable feedback could be added here
       }
-      trackEvent('share_copy', { shareUrl })
     } catch { /* silent */ }
   }
 
@@ -148,7 +148,7 @@ const SharingScreen: React.FC<SharingScreenProps> = ({
           <p className="mt-1 text-sm text-gray-500 font-sans">{ui.subtitle}</p>
         </div>
 
-        {/* Sharing buttons */}
+        {/* Primary buttons: WhatsApp + TikTok + Instagram */}
         <div className="flex flex-col gap-3">
 
           {/* WhatsApp */}
@@ -164,41 +164,58 @@ const SharingScreen: React.FC<SharingScreenProps> = ({
             {ui.whatsapp}
           </button>
 
-          {/* Twitter / X */}
+          {/* TikTok */}
+          <button
+            type="button"
+            onClick={() => handleNative('tiktok')}
+            className="flex items-center justify-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-white transition active:opacity-80"
+            style={{ backgroundColor: '#010101' }}
+            title={!hasNativeShare ? ui.mobileHint : undefined}
+          >
+            {/* TikTok icon */}
+            <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden="true">
+              <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.84 4.84 0 01-1.01-.07z"/>
+            </svg>
+            {ui.tiktok}
+          </button>
+
+          {/* Instagram */}
+          <button
+            type="button"
+            onClick={() => handleNative('instagram')}
+            className="flex items-center justify-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-white transition active:opacity-80"
+            style={{ background: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)' }}
+            title={!hasNativeShare ? ui.mobileHint : undefined}
+          >
+            {/* Instagram icon */}
+            <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden="true">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+            {ui.instagram}
+          </button>
+        </div>
+
+        {/* Secondary: Twitter + Copy */}
+        <div className="flex gap-2">
           <button
             type="button"
             onClick={handleTwitter}
-            className="flex items-center justify-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-white transition active:opacity-80"
-            style={{ backgroundColor: '#000000' }}
+            className="flex flex-1 items-center justify-center gap-2 rounded-xl border px-3 py-2.5 text-xs font-medium transition active:opacity-80"
+            style={{ borderColor: '#e5e7eb', color: '#374151' }}
           >
-            <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4" aria-hidden="true">
               <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
             </svg>
             {ui.twitter}
           </button>
 
-          {/* Native share (TikTok, Instagram, etc.) */}
-          <button
-            type="button"
-            onClick={handleNative}
-            className="flex items-center justify-center gap-3 rounded-xl border-2 px-4 py-3 text-sm font-semibold transition active:opacity-80"
-            style={{ borderColor: 'var(--color-primary)', color: 'var(--color-primary)' }}
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5" aria-hidden="true">
-              <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
-              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
-            </svg>
-            {ui.native}
-          </button>
-
-          {/* Copy link */}
           <button
             type="button"
             onClick={() => handleCopy()}
-            className="flex items-center justify-center gap-3 rounded-xl border px-4 py-3 text-sm font-medium transition active:opacity-80"
-            style={{ borderColor: 'var(--color-primary)', color: copied ? '#16a34a' : 'var(--color-primary)', opacity: 0.8 }}
+            className="flex flex-1 items-center justify-center gap-2 rounded-xl border px-3 py-2.5 text-xs font-medium transition active:opacity-80"
+            style={{ borderColor: '#e5e7eb', color: copied ? '#16a34a' : '#374151' }}
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4" aria-hidden="true">
               {copied
                 ? <path d="M20 6L9 17l-5-5" strokeLinecap="round" strokeLinejoin="round"/>
                 : <><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></>
