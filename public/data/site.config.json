@@ -1,0 +1,8 @@
+{
+  "_comment": "Global site configuration. Edit here — no code changes needed.",
+  "indexing": {
+    "categoria": false,
+    "tag": false,
+    "ayuda-urgente": false
+  }
+}
