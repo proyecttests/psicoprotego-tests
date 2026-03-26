@@ -1,3 +1,5 @@
+'use client'
+
 /**
  * @file components/common/Footer.tsx
  * @description Footer de Psicoprotego con navegación interna por idioma.
@@ -7,6 +9,7 @@
 
 import React from 'react'
 import Link from 'next/link'
+import { CONSENT_KEY } from './CookieBanner'
 
 // ── Props ────────────────────────────────────────────────────────────────────
 
@@ -114,6 +117,14 @@ const Footer: React.FC<FooterProps> = ({ showCrisisFooter = false, lang = 'es' }
               >
                 {lang === 'en' ? 'Legal notice' : lang === 'pt' ? 'Aviso legal' : lang === 'ku' ? 'ئاگاداری یاسایی' : 'Aviso legal'}
               </Link>
+              <button
+                type="button"
+                onClick={() => { localStorage.removeItem(CONSENT_KEY); location.reload() }}
+                className="transition-colors hover:underline cursor-pointer bg-transparent border-0 p-0 text-xs"
+                style={{ color: 'var(--color-accent)' }}
+              >
+                {lang === 'en' ? 'Cookie preferences' : lang === 'pt' ? 'Preferências de cookies' : lang === 'ku' ? 'ئەرجێندانی کوکیەکان' : 'Preferencias de cookies'}
+              </button>
             </div>
           </nav>
         </div>
