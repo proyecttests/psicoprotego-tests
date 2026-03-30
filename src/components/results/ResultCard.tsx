@@ -15,6 +15,7 @@ import RemindMe from './RemindMe'
 import ScoreHistory from './ScoreHistory'
 import DownloadCard from './DownloadCard'
 import RelatedTests from './RelatedTests'
+import GroupSession from './GroupSession'
 import Link from 'next/link'
 import { encodeAnswers } from '@/utils/shareEncoding'
 import type { ScoringResult } from '@/utils/scoringFunctions'
@@ -419,15 +420,7 @@ const NormalResult: React.FC<{
       {/* ── Compartir + Descargar ────────────────────────────────────────── */}
       <div className="flex items-center justify-between flex-wrap gap-3">
         <ShareButtons lang={lang} onShare={onShare} />
-        {!isCrisis && testCategory === 'quiz' && answers && (
-          <Link
-            href={`/${lang}/grupo/${testId}?a=${encodeAnswers(answers)}`}
-            className="text-sm font-medium underline underline-offset-2 opacity-70 hover:opacity-100 transition"
-            style={{ color: 'var(--color-primary)' }}
-          >
-            {ui.groupResults}
-          </Link>
-        )}
+        {/* Group session button removed here — rendered below via GroupSession */}
         {!isCrisis && testCategory === 'quiz' && (
           <DownloadCard
             lang={lang}
@@ -455,6 +448,17 @@ const NormalResult: React.FC<{
 
       {/* ── Recordatorio de repetición ──────────────────────────────────── */}
       <RemindMe lang={lang} testId={testId} testCategory={testCategory} currentScore={result.score ?? 0} currentCategory={result.category?.label} />
+
+      {/* ── Sesión grupal (solo quizzes) ─────────────────────────────────── */}
+      {!isCrisis && testCategory === 'quiz' && answers && (
+        <GroupSession
+          lang={lang}
+          testId={testId}
+          testName={testLangFile?.name ?? testId}
+          token={encodeAnswers(answers)}
+          shareUrl={typeof window !== 'undefined' ? window.location.href : ''}
+        />
+      )}
 
       {/* ── Bloque de apoyo profesional (solo si hay red flags / urgencia) ─ */}
       {showSupport && <SupportBlock lang={lang} />}
