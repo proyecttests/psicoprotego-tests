@@ -8,27 +8,28 @@ import type { GroupSession } from '../route'
 
 const TTL = 60 * 60 * 24
 
-async function kvGet(key: string): Promise<unknown> {
+async function upstash(cmd: unknown[]): Promise<unknown> {
   const url = process.env.UPSTASH_REDIS_REST_URL
   const token = process.env.UPSTASH_REDIS_REST_TOKEN
   if (!url || !token) throw new Error('Upstash not configured')
-  const res = await fetch(`${url}/get/${encodeURIComponent(key)}`, {
-    headers: { Authorization: `Bearer ${token}` },
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify(cmd),
   })
-  const data = await res.json() as { result: string | null }
-  if (!data.result) return null
-  try { return JSON.parse(data.result) } catch { return data.result }
+  const data = await res.json() as { result: unknown; error?: string }
+  if (data.error) throw new Error(data.error)
+  return data.result
+}
+
+async function kvGet(key: string): Promise<unknown> {
+  const raw = await upstash(['GET', key]) as string | null
+  if (!raw) return null
+  try { return JSON.parse(raw) } catch { return raw }
 }
 
 async function kvSet(key: string, value: unknown, exSeconds: number): Promise<void> {
-  const url = process.env.UPSTASH_REDIS_REST_URL
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN
-  if (!url || !token) throw new Error('Upstash not configured')
-  await fetch(`${url}/set/${encodeURIComponent(key)}`, {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify([JSON.stringify(value), 'EX', exSeconds]),
-  })
+  await upstash(['SET', key, JSON.stringify(value), 'EX', exSeconds])
 }
 
 export async function POST(req: NextRequest) {
