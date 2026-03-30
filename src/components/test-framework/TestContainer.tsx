@@ -428,6 +428,9 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
         lang={lang}
         category={testCategoryRef.current}
         shareUrl={pendingShareUrl}
+        testName={testDef?.name ?? ''}
+        resultLabel={result?.category?.label ?? ''}
+        resultColor={(result?.category?.color ?? 'green') as 'green' | 'yellow' | 'orange' | 'red'}
         onDone={() => {
           setPendingShareUrl('')
           setUiState('result')
