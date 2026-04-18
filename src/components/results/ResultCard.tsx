@@ -13,9 +13,7 @@
 import React from 'react'
 import DownloadCard from './DownloadCard'
 import RelatedTests from './RelatedTests'
-import GroupSession from './GroupSession'
 import Link from 'next/link'
-import { encodeAnswers } from '@/utils/shareEncoding'
 import type { ScoringResult } from '@/utils/scoringFunctions'
 import type { TestDefinition, TestLangFile, AnswersMap } from '@/types/test'
 import dynamic from 'next/dynamic'
@@ -426,17 +424,6 @@ const NormalResult: React.FC<{
           testId={testId}
           lang={lang}
           availableLangs={availableLangs}
-        />
-      )}
-
-      {/* ── Sesión grupal (solo quizzes) ─────────────────────────────────── */}
-      {!isCrisis && testCategory === 'quiz' && answers && (
-        <GroupSession
-          lang={lang}
-          testId={testId}
-          testName={testLangFile?.name ?? testId}
-          token={encodeAnswers(answers)}
-          shareUrl={typeof window !== 'undefined' ? window.location.href : ''}
         />
       )}
 
