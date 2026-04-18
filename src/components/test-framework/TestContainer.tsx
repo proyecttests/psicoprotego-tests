@@ -413,7 +413,6 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
     return (
       <CalculatingScreen
         lang={lang}
-        category={testCategoryRef.current}
         onDone={() => {
           setUiState('result')
           window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -426,7 +425,6 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
     return (
       <SharingScreen
         lang={lang}
-        category={testCategoryRef.current}
         shareUrl={pendingShareUrl}
         testName={testDef?.name ?? ''}
         resultLabel={result?.category?.label ?? ''}
