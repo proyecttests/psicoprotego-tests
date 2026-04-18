@@ -1,0 +1,26 @@
+{
+  "emmanuel": {
+    "id": "emmanuel",
+    "name": "Emmanuel Rodríguez de Vera",
+    "role": "Psicólogo General Sanitario",
+    "collegeNumber": "M-18523",
+    "college": "Colegio Oficial de la Psicología de Madrid",
+    "education": "Licenciado en Psicología (UAM, 2003)",
+    "profileUrl": "https://psicoprotego.es/equipo/emmanuel-rodriguez-de-vera/",
+    "photo": "/images/team/emmanuel.jpg",
+    "specialties": ["Adultos", "Adolescentes", "EMDR", "Trauma"],
+    "bio": "Cofundador de Psicólogos Protego. Psicoterapeuta con amplia experiencia en intervención psicoeducativa, tercer sector y psicología clínica."
+  },
+  "cristina": {
+    "id": "cristina",
+    "name": "Cristina [APELLIDOS PENDIENTE]",
+    "role": "Psicóloga General Sanitaria",
+    "collegeNumber": "M-30745",
+    "college": "Colegio Oficial de la Psicología de Madrid",
+    "education": "Licenciada en Psicología (UNED, 2009)",
+    "profileUrl": "https://psicoprotego.es/equipo/cristina-[PENDIENTE]/",
+    "photo": "/images/team/cristina.jpg",
+    "specialties": ["EMDR", "Trauma", "Adultos"],
+    "bio": "Cofundadora de Psicólogos Protego. Psicóloga clínica con enfoque integrativo, especialista en EMDR."
+  }
+}
