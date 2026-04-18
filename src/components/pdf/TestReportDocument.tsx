@@ -14,6 +14,7 @@ import {
 } from '@react-pdf/renderer'
 import type { TestLangFile, AnswersMap } from '@/types/test'
 import type { ScoringResult } from '@/utils/scoringFunctions'
+import { RTL_LANGS } from '@/config/brand'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -38,8 +39,6 @@ export interface TestReportDocumentProps {
 }
 
 // ── Color palette ─────────────────────────────────────────────────────────────
-
-const RTL_LANGS = new Set(['ar', 'he', 'fa', 'ur', 'ku'])
 
 const COLORS = {
   primary:   '#2d4a3e',

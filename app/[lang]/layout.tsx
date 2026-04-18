@@ -2,12 +2,9 @@ import { redirect } from 'next/navigation'
 import Header from '@/components/common/Header'
 import Footer from '@/components/common/Footer'
 import { VALID_LANGS } from '@/generated/validLangs'
+import { RTL_LANGS } from '@/config/brand'
 import { LangHtmlUpdater } from '../components/LangHtmlUpdater'
 import CookieBanner      from '@/components/common/CookieBanner'
-
-// ── Constantes ────────────────────────────────────────────────────────────────
-
-const RTL_LANGS = ['ar', 'he'] as const
 
 // ── Layout ────────────────────────────────────────────────────────────────────
 
@@ -22,7 +19,7 @@ export default async function LangLayout({
 
   if (!VALID_LANGS.includes(lang)) redirect('/es')
 
-  const dir = (RTL_LANGS as readonly string[]).includes(lang) ? 'rtl' : 'ltr'
+  const dir = RTL_LANGS.has(lang) ? 'rtl' : 'ltr'
 
   return (
     <>
