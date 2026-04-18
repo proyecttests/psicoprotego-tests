@@ -80,13 +80,6 @@ const Footer: React.FC<FooterProps> = ({ showCrisisFooter = false, lang = 'es' }
                 {lang === 'en' ? 'About' : lang === 'pt' ? 'Sobre nós' : lang === 'ku' ? 'دەربارە' : 'Acerca de'}
               </Link>
               <Link
-                href={`/${lang}/blog`}
-                className="transition-colors hover:underline"
-                style={{ color: 'var(--color-accent)' }}
-              >
-                Blog
-              </Link>
-              <Link
                 href={`/${lang}/contacto`}
                 className="transition-colors hover:underline"
                 style={{ color: 'var(--color-accent)' }}

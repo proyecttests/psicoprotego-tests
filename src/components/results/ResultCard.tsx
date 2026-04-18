@@ -53,9 +53,6 @@ const COLOR_MAP: Record<string, {
 
 const HELP_ROUTES: Record<string, string> = {
   es: '/es/ayuda-urgente',
-  en: '/en/ayuda-urgente',
-  pt: '/pt/ayuda-urgente',
-  ku: '/ku/ayuda-urgente',
 }
 
 // ── UI strings ────────────────────────────────────────────────────────────────
@@ -87,48 +84,6 @@ const RESULT_UI: Record<string, {
     supportLink:    'Puedes pedir ayuda en estos recursos →',
     privacyNote:    'Esta información está solo en tu navegador y no la verá nadie si tú no la compartes.',
     emergencyNote:  'Si es una emergencia, llama al 112',
-  },
-  en: {
-    retry:          '↺ Try again',
-    recommendation: 'Recommendation',
-    disclaimer:     'These results are for educational and informational purposes only. They do not constitute a clinical diagnosis and do not replace the assessment of a mental health professional.',
-    shareResults:   'Share results',
-    copyLink:       'Copy link',
-    copied:         'Copied!',
-    scoreLabel:     'Score',
-    supportTitle:   'Some of your responses include aspects that may indicate you need support',
-    supportBody:    'We recommend consulting with a professional as soon as possible.',
-    supportLink:    'You can find help resources here →',
-    privacyNote:    'This information stays only in your browser — no one can see it unless you share it.',
-    emergencyNote:  'If this is an emergency, call 112',
-  },
-  pt: {
-    retry:          '↺ Tentar novamente',
-    recommendation: 'Recomendação',
-    disclaimer:     'Estes resultados têm fins exclusivamente educativos e orientativos. Não constituem um diagnóstico clínico nem substituem a avaliação de um profissional de saúde mental.',
-    shareResults:   'Compartilhar resultados',
-    copyLink:       'Copiar link',
-    copied:         'Copiado!',
-    scoreLabel:     'Pontuação',
-    supportTitle:   'Algumas das suas respostas incluem aspectos que podem indicar que você precisa de apoio',
-    supportBody:    'Recomendamos que consulte um profissional o quanto antes.',
-    supportLink:    'Você pode pedir ajuda nestes recursos →',
-    privacyNote:    'Estas informações ficam apenas no seu navegador e ninguém poderá vê-las se você não as compartilhar.',
-    emergencyNote:  'Se for uma emergência, ligue para o 112',
-  },
-  ku: {
-    retry:          '↺ دووبارە هەوڵبدەرەوە',
-    recommendation: 'پێشنیار',
-    disclaimer:     'ئەم ئەنجامانە بۆ مەبەستی پەروەردەیی و ڕابەریی تەنهان. نییەتە دیاریکردنی نەخۆشی کلینیکی و شوێنی ئەرزیابیکردنی پزیشکی تەندروستی دەروونی ناگرن.',
-    shareResults:   'ئەنجامەکان بڵاوبکەرەوە',
-    copyLink:       'لینکەکە کۆپی بکە',
-    copied:         'کۆپیکرا!',
-    scoreLabel:     'خاڵ',
-    supportTitle:   'هەندێک لە وەڵامەکانت ئاماژەیان دەدات کە دەبێت پشتگیریت پێ بکرێت',
-    supportBody:    'پێشنیارت دەکەین هەرچوانتر لەگەڵ پزیشکێک مشتومڕ بکەیت.',
-    supportLink:    'لێرەوە یارمەتی بدۆزەرەوە ←',
-    privacyNote:    'ئەم زانیارییە تەنها لە گەڕەکەکەی تۆدایە و کەس نایبینێت ئەگەر خۆت بڵاوی نەکەیتەوە.',
-    emergencyNote:  'ئەگەر ئەمەرجەنسییە، پەیوەندی بکە بە 112',
   },
 }
 

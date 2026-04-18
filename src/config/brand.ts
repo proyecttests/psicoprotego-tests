@@ -53,17 +53,14 @@ export const BRAND_DOMAIN  = 'psicoprotego.es'
 export const BRAND_EMAIL   = 'hola@psicoprotego.es'
 export const BRAND_TAGLINE = {
   es: 'Tests psicológicos gratuitos, privados y basados en evidencia',
-  en: 'Free, private and evidence-based psychological tests',
-  pt: 'Testes psicológicos gratuitos, privados e baseados em evidências',
-  ku: 'تاقیکردنەوەی پسیکۆلۆژیی بەخۆڕایی، تایبەت و بنەمایی زانستی',
 } as const
 
 // ── Supported languages ───────────────────────────────────────────────────────
 
-export const SUPPORTED_LANGS = ['es', 'en', 'pt', 'ku'] as const
+export const SUPPORTED_LANGS = ['es'] as const
 export type  SupportedLang   = typeof SUPPORTED_LANGS[number]
 
-export const RTL_LANGS = new Set(['ar', 'he', 'fa', 'ur', 'ku'])
+export const RTL_LANGS = new Set(['ar', 'he', 'fa', 'ur'])
 
 export const LANG_LABELS: Record<string, string> = {
   es: '🇪🇸 Español',

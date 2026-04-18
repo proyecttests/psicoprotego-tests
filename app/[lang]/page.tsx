@@ -1,13 +1,12 @@
 /**
  * @file app/[lang]/page.tsx
- * @description Homepage por idioma — hero, stats, category nav, test grid, blog preview, bottom CTA.
+ * @description Homepage por idioma — hero, stats, category nav, test grid, bottom CTA.
  */
 
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { loadTestCards, discoverLangs, discoverCategories } from '@/utils/discoverTests'
-import { getAllBlogPosts } from '@/utils/blog'
 import TestGrid from '@/components/common/TestGrid'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://psicoprotego.es'
@@ -30,10 +29,6 @@ const UI: Record<string, {
   questions:     string
   startBtn:      string
   empty:         string
-  // Blog preview
-  blogTitle:     string
-  blogReadMore:  string
-  blogMinRead:   string
   // Bottom CTA
   bottomCtaText: string
   bottomCtaBtn:  string
@@ -44,7 +39,7 @@ const UI: Record<string, {
   es: {
     heroHeadline:    'Entiende cómo funciona tu mente',
     heroSubtitle:    'Tests psicológicos gratuitos, validados y 100% privados',
-    heroCta:         'Empezar con el quiz de apego',
+    heroCta:         'Empezar con el GAD-7',
     statsTests:      'tests disponibles',
     statsFree:       'Gratuito',
     statsNoReg:      'Sin registro',
@@ -54,18 +49,15 @@ const UI: Record<string, {
     questions:       'preguntas',
     startBtn:        'Empezar test',
     empty:           'No hay tests disponibles.',
-    blogTitle:       'Del blog',
-    blogReadMore:    'Leer →',
-    blogMinRead:     'min',
     bottomCtaText:   '¿No sabes por dónde empezar?',
-    bottomCtaBtn:    'Empieza con el quiz de apego',
+    bottomCtaBtn:    'Empieza con el test de ansiedad (GAD-7)',
     metaTitle:       'Tests Psicológicos Gratuitos — Psicoprotego',
     metaDescription: 'Cuestionarios psicológicos validados: ansiedad, depresión, apego y más. Gratis, privado y sin registro.',
   },
   en: {
     heroHeadline:    'Understand how your mind works',
     heroSubtitle:    'Free, validated psychological tests — 100% private',
-    heroCta:         'Start with the attachment quiz',
+    heroCta:         'Start with GAD-7',
     statsTests:      'tests available',
     statsFree:       'Free',
     statsNoReg:      'No sign-up',
@@ -75,18 +67,15 @@ const UI: Record<string, {
     questions:       'questions',
     startBtn:        'Start test',
     empty:           'No tests available.',
-    blogTitle:       'From the blog',
-    blogReadMore:    'Read →',
-    blogMinRead:     'min',
     bottomCtaText:   'Not sure where to start?',
-    bottomCtaBtn:    'Start with the attachment quiz',
+    bottomCtaBtn:    'Start with the anxiety test (GAD-7)',
     metaTitle:       'Free Psychological Tests — Psicoprotego',
     metaDescription: 'Validated psychological questionnaires: anxiety, depression, attachment and more. Free, private, no sign-up.',
   },
   pt: {
     heroHeadline:    'Entenda como sua mente funciona',
     heroSubtitle:    'Testes psicológicos gratuitos, validados e 100% privados',
-    heroCta:         'Começar com o quiz de apego',
+    heroCta:         'Começar com o GAD-7',
     statsTests:      'testes disponíveis',
     statsFree:       'Gratuito',
     statsNoReg:      'Sem cadastro',
@@ -96,11 +85,8 @@ const UI: Record<string, {
     questions:       'perguntas',
     startBtn:        'Iniciar teste',
     empty:           'Não há testes disponíveis.',
-    blogTitle:       'Do blog',
-    blogReadMore:    'Ler →',
-    blogMinRead:     'min',
     bottomCtaText:   'Não sabe por onde começar?',
-    bottomCtaBtn:    'Comece com o quiz de apego',
+    bottomCtaBtn:    'Comece com o teste de ansiedade (GAD-7)',
     metaTitle:       'Testes Psicológicos Gratuitos — Psicoprotego',
     metaDescription: 'Questionários psicológicos validados: ansiedade, depressão, apego e mais. Gratuito, privado e sem cadastro.',
   },
@@ -128,7 +114,7 @@ export async function generateMetadata({
     description: ui.metaDescription,
     alternates: {
       canonical: `${SITE_URL}/${lang}`,
-      languages: { es: '/es', en: '/en', pt: '/pt' },
+      languages: { es: '/es' },
     },
     openGraph: {
       title:       ui.metaTitle,
@@ -151,10 +137,9 @@ export default async function LangHomePage({
   const ui = UI[lang]
   if (!ui) notFound()
 
-  const [tests, categories, blogPosts] = await Promise.all([
+  const [tests, categories] = await Promise.all([
     loadTestCards(lang),
     discoverCategories(),
-    Promise.resolve(getAllBlogPosts(lang).slice(0, 3)),
   ])
 
   return (
@@ -174,7 +159,7 @@ export default async function LangHomePage({
           </p>
           <div className="mt-8">
             <Link
-              href={`/${lang}/test/apego`}
+              href={`/${lang}/test/gad7`}
               className="inline-block rounded-xl px-8 py-3.5 text-base font-semibold text-white shadow-lg transition hover:scale-105 hover:shadow-xl"
               style={{ backgroundColor: 'var(--color-accent)' }}
             >
@@ -225,49 +210,6 @@ export default async function LangHomePage({
         {/* ── Test grid ────────────────────────────────────────────────── */}
         <TestGrid tests={tests} lang={lang} ui={ui} />
 
-        {/* ── Blog preview ─────────────────────────────────────────────── */}
-        {blogPosts.length > 0 && (
-          <section className="mt-16">
-            <div className="mb-6 flex items-center justify-between">
-              <h2
-                className="font-['Source_Serif_4',serif] text-2xl font-bold"
-                style={{ color: 'var(--color-primary)' }}
-              >
-                {ui.blogTitle}
-              </h2>
-              <Link
-                href={`/${lang}/blog`}
-                className="text-sm font-medium transition hover:underline"
-                style={{ color: 'var(--color-accent)' }}
-              >
-                {ui.blogReadMore}
-              </Link>
-            </div>
-            <ul className="grid gap-5 sm:grid-cols-3">
-              {blogPosts.map((post) => (
-                <li key={post.slug}>
-                  <Link
-                    href={`/${lang}/blog/${post.slug}`}
-                    className="group flex flex-col h-full rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm transition hover:shadow-md"
-                  >
-                    <h3
-                      className="mb-2 text-sm font-bold leading-snug group-hover:underline"
-                      style={{ color: 'var(--color-primary)' }}
-                    >
-                      {post.title}
-                    </h3>
-                    <p className="flex-1 text-xs text-neutral-500 leading-relaxed line-clamp-3">
-                      {post.description}
-                    </p>
-                    <p className="mt-3 text-xs text-neutral-400">
-                      {post.date} · {post.readTime} {ui.blogMinRead}
-                    </p>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
 
       </div>
 
@@ -281,7 +223,7 @@ export default async function LangHomePage({
             {ui.bottomCtaText}
           </p>
           <Link
-            href={`/${lang}/test/apego`}
+            href={`/${lang}/test/gad7`}
             className="inline-block rounded-xl bg-white px-8 py-3 text-sm font-bold transition hover:opacity-90"
             style={{ color: 'var(--color-primary)' }}
           >
