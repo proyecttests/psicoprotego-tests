@@ -6,8 +6,7 @@
  *
  * Contiene:
  * 1. Disclaimer clínico completo con teléfonos de crisis
- * 2. AdSlot pre-test (mayor valor publicitario)
- * 3. Botón "Entiendo y continuar" + enlace "Cancelar"
+ * 2. Botón "Entiendo y continuar" + enlace "Cancelar"
  *
  * No tiene contenido SEO (página funcional/transicional).
  *

@@ -41,11 +41,9 @@ const TIMEOUT_MS  = 8000
 const ROUTES = [
   '/',
   '/es',
-  '/es/test/apego',
   '/ku/acerca-de',
   '/es/privacidad',
   '/es/cookies',
-  '/api/shorten',   // POST — will get 405 Method Not Allowed but that means it's alive
 ]
 
 // ── HTTP helper ───────────────────────────────────────────────────────────────

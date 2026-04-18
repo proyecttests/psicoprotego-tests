@@ -356,7 +356,6 @@ const NormalResult: React.FC<{
       {/* ── Compartir + Descargar ────────────────────────────────────────── */}
       <div className="flex items-center justify-between flex-wrap gap-3">
         <ShareButtons lang={lang} onShare={onShare} />
-        {/* Group session button removed here — rendered below via GroupSession */}
         {!isCrisis && testCategory === 'quiz' && (
           <DownloadCard
             lang={lang}
