@@ -11,8 +11,6 @@
  */
 
 import React from 'react'
-import RemindMe from './RemindMe'
-import ScoreHistory from './ScoreHistory'
 import DownloadCard from './DownloadCard'
 import RelatedTests from './RelatedTests'
 import GroupSession from './GroupSession'
@@ -69,7 +67,6 @@ const RESULT_UI: Record<string, {
   recommendation: string
   disclaimer: string
   shareResults: string
-  remindMe: string
   copyLink: string
   copied: string
   scoreLabel: string
@@ -78,14 +75,12 @@ const RESULT_UI: Record<string, {
   supportLink: string
   privacyNote: string
   emergencyNote: string
-  groupResults?: string
 }> = {
   es: {
     retry:          '↺ Volver a intentar',
     recommendation: 'Recomendación',
     disclaimer:     'Estos resultados tienen fines exclusivamente educativos y orientativos. No constituyen un diagnóstico clínico ni sustituyen la valoración de un profesional de la salud mental.',
     shareResults:   'Compartir resultados',
-    remindMe:       'Recordarme para repetir el test',
     copyLink:       'Copiar enlace',
     copied:         '¡Copiado!',
     scoreLabel:     'Puntuación',
@@ -94,14 +89,12 @@ const RESULT_UI: Record<string, {
     supportLink:    'Puedes pedir ayuda en estos recursos →',
     privacyNote:    'Esta información está solo en tu navegador y no la verá nadie si tú no la compartes.',
     emergencyNote:  'Si es una emergencia, llama al 112',
-    groupResults:   'Ver resultados grupales →',
   },
   en: {
     retry:          '↺ Try again',
     recommendation: 'Recommendation',
     disclaimer:     'These results are for educational and informational purposes only. They do not constitute a clinical diagnosis and do not replace the assessment of a mental health professional.',
     shareResults:   'Share results',
-    remindMe:       'Remind me to retake',
     copyLink:       'Copy link',
     copied:         'Copied!',
     scoreLabel:     'Score',
@@ -110,14 +103,12 @@ const RESULT_UI: Record<string, {
     supportLink:    'You can find help resources here →',
     privacyNote:    'This information stays only in your browser — no one can see it unless you share it.',
     emergencyNote:  'If this is an emergency, call 112',
-    groupResults:   'See group results →',
   },
   pt: {
     retry:          '↺ Tentar novamente',
     recommendation: 'Recomendação',
     disclaimer:     'Estes resultados têm fins exclusivamente educativos e orientativos. Não constituem um diagnóstico clínico nem substituem a avaliação de um profissional de saúde mental.',
     shareResults:   'Compartilhar resultados',
-    remindMe:       'Lembrar de refazer',
     copyLink:       'Copiar link',
     copied:         'Copiado!',
     scoreLabel:     'Pontuação',
@@ -126,14 +117,12 @@ const RESULT_UI: Record<string, {
     supportLink:    'Você pode pedir ajuda nestes recursos →',
     privacyNote:    'Estas informações ficam apenas no seu navegador e ninguém poderá vê-las se você não as compartilhar.',
     emergencyNote:  'Se for uma emergência, ligue para o 112',
-    groupResults:   'Ver resultados grupais →',
   },
   ku: {
     retry:          '↺ دووبارە هەوڵبدەرەوە',
     recommendation: 'پێشنیار',
     disclaimer:     'ئەم ئەنجامانە بۆ مەبەستی پەروەردەیی و ڕابەریی تەنهان. نییەتە دیاریکردنی نەخۆشی کلینیکی و شوێنی ئەرزیابیکردنی پزیشکی تەندروستی دەروونی ناگرن.',
     shareResults:   'ئەنجامەکان بڵاوبکەرەوە',
-    remindMe:       'بیرم بهێنەوە بۆ دووبارەکردنەوە',
     copyLink:       'لینکەکە کۆپی بکە',
     copied:         'کۆپیکرا!',
     scoreLabel:     'خاڵ',
@@ -142,7 +131,6 @@ const RESULT_UI: Record<string, {
     supportLink:    'لێرەوە یارمەتی بدۆزەرەوە ←',
     privacyNote:    'ئەم زانیارییە تەنها لە گەڕەکەکەی تۆدایە و کەس نایبینێت ئەگەر خۆت بڵاوی نەکەیتەوە.',
     emergencyNote:  'ئەگەر ئەمەرجەنسییە، پەیوەندی بکە بە 112',
-    groupResults:   'ئەنجامە کۆمەڵایەتییەکان ببینە ←',
   },
 }
 
@@ -412,11 +400,6 @@ const NormalResult: React.FC<{
         </p>
       </div>
 
-      {/* ── Historial de puntuaciones ──────────────────────────────────── */}
-      {!isCrisis && (
-        <ScoreHistory testId={testId} currentScore={result.score ?? 0} lang={lang} />
-      )}
-
       {/* ── Compartir + Descargar ────────────────────────────────────────── */}
       <div className="flex items-center justify-between flex-wrap gap-3">
         <ShareButtons lang={lang} onShare={onShare} />
@@ -445,9 +428,6 @@ const NormalResult: React.FC<{
           availableLangs={availableLangs}
         />
       )}
-
-      {/* ── Recordatorio de repetición ──────────────────────────────────── */}
-      <RemindMe lang={lang} testId={testId} testCategory={testCategory} currentScore={result.score ?? 0} currentCategory={result.category?.label} />
 
       {/* ── Sesión grupal (solo quizzes) ─────────────────────────────────── */}
       {!isCrisis && testCategory === 'quiz' && answers && (
