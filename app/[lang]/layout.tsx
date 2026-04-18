@@ -7,7 +7,7 @@ import CookieBanner      from '@/components/common/CookieBanner'
 
 // ── Constantes ────────────────────────────────────────────────────────────────
 
-const RTL_LANGS = ['ar', 'he', 'ku'] as const
+const RTL_LANGS = ['ar', 'he'] as const
 
 // ── Layout ────────────────────────────────────────────────────────────────────
 

@@ -1,39 +1,5 @@
 [
   {
-    "testId": "apego",
-    "category": "quiz",
-    "topicCategory": "relaciones",
-    "tags": [
-      "relaciones",
-      "apego",
-      "pareja",
-      "personalidad",
-      "autoconocimiento",
-      "quiz"
-    ],
-    "availableLangs": [
-      "es",
-      "en",
-      "pt",
-      "ku"
-    ],
-    "validated": false,
-    "timeToComplete": "3-4 min",
-    "itemCount": 10,
-    "names": {
-      "es": "¿Cuál es tu estilo de apego?",
-      "en": "What is your attachment style?",
-      "pt": "Qual é o seu estilo de apego?",
-      "ku": "شێوازی دڵبەستایی تۆ چییە؟"
-    },
-    "hooks": {
-      "es": "Descubre cómo te vinculas en tus relaciones",
-      "en": "Discover how you bond in your relationships",
-      "pt": "Descubra como você se vincula nos seus relacionamentos",
-      "ku": "دەریبکەوە چۆن پەیوەندی داددەنێیت"
-    }
-  },
-  {
     "testId": "gad7",
     "category": "psychometric",
     "topicCategory": "ansiedad",
@@ -45,22 +11,16 @@
       "cribado"
     ],
     "availableLangs": [
-      "es",
-      "en",
-      "pt"
+      "es"
     ],
     "validated": true,
     "timeToComplete": "2-3 min",
     "itemCount": 7,
     "names": {
-      "es": "Test de Ansiedad Generalizada (GAD-7)",
-      "en": "Generalized Anxiety Disorder Scale (GAD-7)",
-      "pt": "Escala de Transtorno de Ansiedade Generalizada (GAD-7)"
+      "es": "Test de Ansiedad Generalizada (GAD-7)"
     },
     "hooks": {
-      "es": "",
-      "en": "",
-      "pt": ""
+      "es": ""
     }
   },
   {
@@ -75,22 +35,16 @@
       "cribado"
     ],
     "availableLangs": [
-      "es",
-      "en",
-      "pt"
+      "es"
     ],
     "validated": true,
     "timeToComplete": "3-5 min",
     "itemCount": 9,
     "names": {
-      "es": "Cuestionario de Salud del Paciente (PHQ-9)",
-      "en": "Patient Health Questionnaire (PHQ-9)",
-      "pt": "Questionário de Saúde do Paciente (PHQ-9)"
+      "es": "Cuestionario de Salud del Paciente (PHQ-9)"
     },
     "hooks": {
-      "es": "",
-      "en": "",
-      "pt": ""
+      "es": ""
     }
   }
 ]
