@@ -1,8 +1,27 @@
-# TestPsycho Suite — Context Document for Opus 4.7
+# TestPsycho Suite — Context Document for Opus 4.7 (v2)
 
 > **Purpose:** Complete context for an AI assistant starting from zero knowledge of this project.  
-> **Generated:** 2026-04-15 from live codebase audit.  
+> **Generated:** 2026-04-15. **Updated:** 2026-04-18 (Bloque B — clinical consolidation).  
 > **Do not commit** — this is an operational reference, not project documentation.
+
+---
+
+## 0. Architectural History (Critical)
+
+This project went through a major consolidation on 2026-04-18. Understanding this avoids confusion when reading git history.
+
+**Pre-consolidation (archive/v1-pre-consolidation branch):**  
+Multilingual platform (14 langs) + ad monetization + quizzes + group sessions + URL shortener + RemindMe + ScoreHistory + blog + apego quiz.
+
+**Post-consolidation (current, feat/consolidation-psicoprotego → main):**  
+ES-only clinical tool. All features above are **archived** in `/archive/` at repo root or removed. The data taxonomy changed: `topicCategory` → `condition`, `quiz` category → `screening`. New clinical data model added: `authors.json`, extended `metadata.json`, `es.content.json`.
+
+**What's in `/archive/`:** tests-deprecated/apego, blog components, RemindMe, ScoreHistory, group sessions, URL shortener, AdSlot, multi-language test files (en/pt/ku). These are git-tracked but excluded from tsc.
+
+**Consequences for new work:**
+- Only `es` lang is supported — do NOT add new langs without explicit instruction
+- No ads, no group sessions, no shortener, no quizzes — only psychometric/screening
+- All new tests get `metadata.json` + `es.json` + `es.content.json` (content placeholders) + `authors.json` reference
 
 ---
 
@@ -19,7 +38,9 @@
 
 ### Vision (not instructions — context only)
 
-Suite of 60+ psychological tools (30 psychometric + 30 quizzes) in 14 languages, monetized with ads, growing organically through shareable results and SEO. Future: percentile comparisons, OG image generation, embed codes, header bidding. **Do not build for these unless explicitly asked.**
+**Current direction (post-consolidation):** ES-only clinical tool embedded in psicoprotego.es/tests. Focus: validated psychometric instruments for anxiety, depression, and adjacent conditions. No ads, no multilingual quizzes. Priority: clinical quality, SEO E-E-A-T (authorship + validation references), and clean UX.
+
+**Previous vision (archived):** Suite of 60+ tools in 14 languages with ad monetization. Archived in branch archive/v1-pre-consolidation. Do not rebuild unless explicitly asked.
 
 ---
 
@@ -64,20 +85,19 @@ Suite of 60+ psychological tools (30 psychometric + 30 quizzes) in 14 languages,
 /:lang/test/:testId          → Landing page SSG (Server Component)
 /:lang/test/:testId/start    → Interstitial + disclaimer (Client Component)
 /:lang/test/:testId/play     → Interactive test (Client Component)
-/:lang/test/:testId/resultado → Results (inline in TestContainer)
-/:lang/grupo/:testId         → Group session results page
-/:lang/ayuda-urgente         → Emergency help page (localized)
-/:lang/blog/[slug]           → Blog articles
+/:lang/categoria/[categoria] → Category page (tests filtered by condition)
+/:lang/tag/[tag]             → Tag page
+/:lang/ayuda-urgente         → Emergency help (ES only, currently)
 /:lang/acerca-de             → About
 /:lang/contacto              → Contact
 /:lang/aviso-legal           → Legal notice
 /:lang/cookies               → Cookie policy
 /:lang/privacidad            → Privacy policy
-/app/api/group/              → Group session API (Upstash Redis)
-/app/api/shorten/            → URL shortener API
 ```
 
-**Valid lang codes:** es, en, pt, fr, de, it, ar, he, ku, tr, el, hi, ja, ko  
+**ARCHIVED routes (no longer active):** `/grupo/:testId`, `/blog/[slug]`, `/api/group/`, `/api/shorten/`
+
+**Active lang codes:** `es` only (post-consolidation).  
 **Fallback:** unknown lang → redirect to `/es/test/:testId`  
 **SSG:** `generateStaticParams()` auto-discovers tests from `/public/data/tests/`
 
@@ -90,13 +110,14 @@ Suite of 60+ psychological tools (30 psychometric + 30 quizzes) in 14 languages,
 | Field | Value |
 |-------|-------|
 | ID | `gad7` |
-| Category | `psychometric` (validated clinical instrument) |
-| Topic | `ansiedad` |
-| Languages | ES, EN, PT |
+| Category | `psychometric` |
+| Condition | `ansiedad` |
+| Languages | ES only (post-consolidation) |
 | Items | 7 Likert-4 questions (0–3 scale) |
 | Score range | 0–21 |
 | Time | 2–3 min |
 | Reference | Spitzer et al., 2006. Archives of Internal Medicine. doi:10.1001/archinte.166.10.1092 |
+| Author | Emmanuel (M-18523) · reviewed by Cristina (M-30745) |
 
 **Cutoffs:**
 - Minimal: 0–4
@@ -113,13 +134,14 @@ Suite of 60+ psychological tools (30 psychometric + 30 quizzes) in 14 languages,
 | Field | Value |
 |-------|-------|
 | ID | `phq9` |
-| Category | `psychometric` (validated clinical instrument) |
-| Topic | `depresion` |
-| Languages | ES, EN, PT |
+| Category | `psychometric` |
+| Condition | `depresion` |
+| Languages | ES only (post-consolidation) |
 | Items | 9 Likert-4 questions (0–3 scale) |
 | Score range | 0–27 |
 | Time | 3–5 min |
 | Reference | Kroenke et al., 2001. J General Internal Medicine. doi:10.1046/j.1525-1497.2001.016009606.x |
+| Author | Cristina (M-30745) · reviewed by Emmanuel (M-18523) |
 
 **Cutoffs:**
 - Minimal: 0–4
@@ -132,17 +154,9 @@ Suite of 60+ psychological tools (30 psychometric + 30 quizzes) in 14 languages,
 
 ---
 
-### 5.3 Apego — Attachment Style Quiz
+### 5.3 Apego — ARCHIVED
 
-| Field | Value |
-|-------|-------|
-| ID | `apego` |
-| Category | `quiz` (non-clinical, NOT validated) |
-| Topic | `relaciones` |
-| Languages | ES, EN, PT, KU (kurdo sorani — RTL) |
-| Items | 10 multipleChoice-4 questions |
-| Time | 3–4 min |
-| Validated | No — identity-affirming results, entertainment purposes |
+Moved to `archive/tests-deprecated/apego/`. No longer active. Was a `quiz` category, non-validated. Excluded from tsc and from public/data/tests/.
 
 ---
 
@@ -152,12 +166,13 @@ Suite of 60+ psychological tools (30 psychometric + 30 quizzes) in 14 languages,
 
 ```
 public/data/tests/<testId>/
-  metadata.json          ← Test config (langs, scoring, cutoffs, validation references)
-  es.json                ← Questions + scoring messages in Spanish
-  en.json                ← English
-  pt.json                ← Portuguese
-  ku.json                ← Kurdish Sorani (RTL)
+  metadata.json          ← Clinical taxonomy, authors, cutoffs, ICD-10, DOI validation refs
+  es.json                ← Questions + scoring + messages + landing in Spanish
+  es.content.json        ← Long-form landing content (hero, sections, FAQ) — separate from es.json
+public/data/authors.json ← Author registry (Emmanuel M-18523, Cristina M-30745)
 ```
+
+**Note:** `en.json`, `pt.json`, `ku.json` are archived — ES only going forward.
 
 ### 6.2 Test Language File Schema (es.json / en.json / etc.)
 
@@ -217,6 +232,40 @@ interface ScoringResult {
 
 **To add a new test:** Create data files + add scoring function. **NEVER modify `TestContainer.tsx` or `QuestionRenderer.tsx`** — the factory pattern makes them test-agnostic.
 
+### 6.4 Clinical Content Model (New in Bloque B)
+
+**`public/data/authors.json`** — Registry of clinical authors:
+```json
+{
+  "emmanuel": { "id": "emmanuel", "name": "Emmanuel [Apellido]", "collegeNumber": "M-18523", "college": "Colegio de Psicólogos de Madrid", ... },
+  "cristina":  { "id": "cristina",  "name": "Cristina [Apellidos pendiente]", "collegeNumber": "M-30745", ... }
+}
+```
+
+**`metadata.json` new required fields (post-B.2):**
+- `condition`: SEO silo for `/categoria/` routing (e.g., `"ansiedad"`, `"depresion"`)
+- `slug`: URL-friendly test identifier (e.g., `"gad-7"`)
+- `medicalCondition`: `{ icd10, name, schemaOrgUrl }` — for JSON-LD MedicalCondition
+- `validation`: `{ isValidated, references: [{ doi, authors, year, journal, ... }], spanishValidation }` — for JSON-LD/SEO E-E-A-T
+- `authorship`: `{ author: "<authorId>", reviewedBy: "<authorId>" }` — references authors.json
+
+**`es.content.json`** — Long-form landing content (kept separate from es.json for editorial workflow):
+```json
+{
+  "status": "draft-pending-clinical-review" | "clinically-approved",
+  "lastEditedBy": null, "clinicallyApprovedBy": null, "clinicallyApprovedAt": null,
+  "hero": { "title": "...", "subtitle": "...", "badges": [...] },
+  "whatItMeasures": { "heading": "...", "body": "..." },
+  "whoIsItFor": { "heading": "...", "body": "...", "indications": [], "limitations": [] },
+  "howItWorks": { "heading": "...", "body": "...", "steps": [] },
+  "validation": { "heading": "...", "body": "..." },
+  "interpretation": { "heading": "...", "body": "..." },
+  "faq": [{ "q": "...", "a": "..." }],
+  "privacy": { "heading": "...", "body": "..." }
+}
+```
+All `[PENDIENTE]` placeholders must be filled by a clinical reviewer before `status` can become `"clinically-approved"`.
+
 ---
 
 ## 7. Component Architecture
@@ -235,18 +284,15 @@ src/components/
 │   ├── ResultCard.tsx          ← Score display + SupportBlock for red flags
 │   ├── DownloadCard.tsx        ← Card-format share image
 │   ├── DownloadPDF.tsx         ← PDF results + blank test download
-│   ├── GroupSession.tsx        ← Group comparison (Upstash Redis)
-│   ├── RelatedTests.tsx
-│   ├── RemindMe.tsx
-│   └── ScoreHistory.tsx
-├── ads/
-│   └── AdSlot.tsx              ← Ad placeholder (position-based)
+│   └── RelatedTests.tsx        ← Related tests after result
 ├── common/
-│   ├── Footer.tsx              ← RTL-aware, crisis link in footer
+│   ├── Footer.tsx              ← Crisis link in footer
+│   ├── TestGrid.tsx            ← Grid of test cards
 │   └── CookieBanner.tsx        ← RGPD/GDPR consent
 ├── landing/                    ← Landing page components
-├── pdf/                        ← PDF generation components
-└── blog/                       ← Blog article components
+└── pdf/                        ← PDF generation components
+
+**ARCHIVED components:** GroupSession.tsx, RemindMe.tsx, ScoreHistory.tsx, AdSlot.tsx, blog/. Moved to archive/.
 
 src/views/
 ├── TestLandingPage.tsx         ← Server-safe landing view
@@ -292,49 +338,35 @@ app/
 - Blog with static generation
 
 ### 8.3 Sharing & Social
-- Story image sharing for Instagram and TikTok (card format)
 - WhatsApp, Twitter/X share buttons
 - Copy link button
-- Short URL via /api/shorten/
+- Story image sharing (DownloadCard) — card format
+- **ARCHIVED:** Short URL (/api/shorten/), Group sessions (/api/group/, GroupSession.tsx)
 
-### 8.4 Group Sessions (Upstash Redis)
-- Live group sessions for quizzes — participants see each other's scores
-- Session CRUD via /app/api/group/
-- Group results page: /[lang]/grupo/[testId]
-- Compare scores with group average
-- Button in ResultCard: "Ver resultados del grupo"
-- **Env vars required:** `KV_REST_API_URL` + `KV_REST_API_TOKEN` (Vercel KV naming)
-
-### 8.5 PDF Download
+### 8.4 PDF Download
 - Results PDF (score + breakdown + clinical disclaimer)
 - Blank test PDF (printable instrument)
 - RTL support in PDF for Arabic/Hebrew/Kurdish
 - Language selector on download
 - Print-optimized layout
 
-### 8.6 Monetization
-- AdSlot component: positions `intro`, `pre-test`, `leaderboard`
-- Empty divs with reserved dimensions (prevents CLS)
-- **RULE:** Never show ads during test-taking (between questions)
-- Cookie consent (RGPD/GDPR) with CookieBanner component
-- Cookie preferences button in footer
+### 8.5 Monetization
+- **ARCHIVED:** AdSlot component removed. No ads going forward.
+- Cookie consent (RGPD/GDPR) with CookieBanner component retained.
 
-### 8.7 Analytics
-- GTM + GA4 via `VITE_GTM_ID` / `VITE_GA4_ID`
+### 8.6 Analytics
+- GTM + GA4 — see docs/analytics-plan.md for event taxonomy
 - Vercel Analytics
-- Blog interaction tracking events
 
-### 8.8 Help Resources
-- `/[lang]/ayuda-urgente` — localized emergency help page
-- Emergency numbers per language: ES 024, USA 988, DE 0800-1110111, FR 3114
+### 8.7 Help Resources
+- `/es/ayuda-urgente` — ES-only emergency help page (others archived)
+- Emergency number: ES 024 · prominently displayed
 - HELP_ROUTES map in ResultCard.tsx
 
-### 8.9 Blog
-- Static blog at /[lang]/blog/[slug]
-- Content in /app/[lang]/blog/[slug]/ or content directory
-- Categories and tags pages
+### 8.8 Blog — ARCHIVED
+Static blog routes /[lang]/blog/[slug] removed. Components in archive/.
 
-### 8.10 Monitoring
+### 8.9 Monitoring
 - health-check.js + build-check.js scripts
 - Telegram notifications for build failures/health issues
 
@@ -521,25 +553,21 @@ fda8102 feat(content): traducción kurdo sorani (ku) del quiz apego
 
 ---
 
-## 18. Open Priorities (From CLAUDE.md)
+## 18. Open Priorities (Post-Consolidation, as of 2026-04-18)
 
-Ordered by priority in CLAUDE.md:
+**Bloque C (next):** Fill `[PENDIENTE]` content in `es.content.json` files for GAD-7 and PHQ-9. This requires clinical review by Emmanuel or Cristina before status → `"clinically-approved"`.
 
-1. **Shareable results with dynamic OG images**  
-   API route `/api/og?testId=&score=&lang=` using `@vercel/og`  
-   Dynamic title/description/image per result for social sharing.
+**After Bloque C:**
+1. **Shareable results with dynamic OG images** — API route `/api/og?testId=&score=&lang=` using `@vercel/og`. Dynamic result cards for WhatsApp/Twitter.
+2. **More psychometric tests** — validated ES instruments (PHQ-A for adolescentes, AUDIT, PCL-5, etc.). ES only.
+3. **Landing page upgrade** — wire `es.content.json` into `TestLandingPage.tsx` (currently hardcoded sections).
+4. **Production domain** — Apache reverse proxy + Cloudflare + DNS for `psicoprotego.es/tests`.
 
-2. **More tests**  
-   Quizzes: personality, wellbeing, attachment style variations, etc.  
-   Psychometric: additional validated instruments.
-
-3. **More languages**  
-   FR / DE / IT / AR — JSON test files + UI string translations + static pages.  
-   AR is RTL — add to `RTL_LANGS` in brand.ts.
-
-4. **Production domain**  
-   Configure Apache reverse proxy + Cloudflare + DNS for `psicoprotego.es/tests` or `testpsycho.com`.  
-   Current production is on tests.psicoprotego.vercel.app.
+**What NOT to build without explicit instruction:**
+- New languages (ES only for now)
+- Quizzes or non-clinical content
+- Ads or monetization
+- Group sessions
 
 ---
 

@@ -2,13 +2,14 @@
 
 ## Identity
 
-**testpsycho:** Suite of psychological tests (psychometric + quizzes).  
-**Owner:** Emmanuel, clinical psychologist, Psicoprotego practice (Madrid).  
+**Psicoprotego Tests:** Clinical psychometric tool suite — ES only, embedded in psicoprotego.es/tests.  
+**Owner:** Emmanuel (M-18523) + Cristina (M-30745), Psicoprotego practice, Pozuelo de Alarcón.  
 **Repo:** github.com/proyecttests/psicoprotego-tests  
 **Live:** tests.psicoprotego.vercel.app  
-**Destination:** testpsycho.com (future) or psicoprotego.es/tests (current)
+**Destination:** psicoprotego.es/tests
 
-> Original Psicoprotego child project, evolving into independent product with multilingual reach & ad monetization.
+> Post-consolidation direction: validated psychometric instruments in Spanish. No ads, no multilingual quizzes.  
+> See archive/v1-pre-consolidation branch for previous multilingual/ads architecture.
 
 ---
 
@@ -24,62 +25,49 @@
 
 ---
 
-## Vision (Context, Not Instructions)
+## Direction (Context, Not Instructions)
 
-Suite of 60+ psychological tools (30 psychometric + 30 quizzes) in 14 languages,
-monetized with ads, growing organically through shareable results and SEO.
-Future: percentile comparisons, OG image generation, embed codes, header bidding.
-Do not build for these unless explicitly asked.
+ES-only clinical tool with validated psychometric instruments (GAD-7, PHQ-9, and more to come).
+Priority: clinical quality + SEO E-E-A-T (authorship, DOI references, ICD-10) + clean UX.
+No ads. No multilingual quizzes. No group sessions. No URL shortener.
+Do not build any of those unless explicitly asked.
 
 ---
 
 
 ## ✅ Estado Actual
 
-### Funciona
+### Implementado y funcional
 
-- [x] GAD-7 — funcional en ES / EN / PT (landing + intersticial + test + resultados)
-- [x] PHQ-9 — funcional en ES / EN / PT
-- [x] Router multiidioma `/:lang/test/:testId` con subrutas `/start` y `/play`
+- [x] GAD-7 — ES only (landing + intersticial + test + resultados)
+- [x] PHQ-9 — ES only
+- [x] Router `/:lang/test/:testId` con `/start` y `/play`
 - [x] Protección acceso directo (sessionStorage token)
-- [x] Landing pages SEO con JSON-LD (FAQPage, BreadcrumbList, MedicalWebPage)
-- [x] TestInterstitial — disclaimer + AdSlot + enlace a ayuda (sin teléfonos alarmantes)
-- [x] HelpResourcesPage — `/es/ayuda-urgente`, `/en/urgent-help`, `/pt/ajuda-urgente`
-- [x] ResultCard — paleta brand en todos los estados, sin rojos ni naranjas
-- [x] SupportBlock — fondo crema, borde verde bosque, tono calmo
-- [x] Estado CRISIS — score card oculto (score null), muestra mensaje + SupportBlock
-- [x] Footer crisis — verde bosque, tono "Hay apoyo disponible" (no alarmante)
-- [x] Disclaimer — paleta brand (primary-*), sin red-*
-- [x] AdSlot — posiciones: intro, pre-test, leaderboard
+- [x] Landing pages SSG con JSON-LD (FAQPage, BreadcrumbList, MedicalWebPage)
+- [x] HelpResourcesPage — `/es/ayuda-urgente`
+- [x] ResultCard — paleta brand, crisis UI (score null + SupportBlock)
 - [x] ADHD-optimized UI (cards, animaciones, progress bar)
 - [x] Analytics GTM + GA4
+- [x] PDF descargable (resultados + test en blanco)
 
-### Completado (migración + deploy)
+### Completado en Bloque A + B (2026-04-18)
 
-- [x] Migración a Next.js (SSG, SSR, App Router)
-- [x] Landing pages con SSG + generateMetadata + JSON-LD server-side
-- [x] Homepage por idioma con listado de tests
-- [x] hreflang implementado vía generateMetadata alternates
-- [x] Deploy en Vercel funcionando (HTTP 200 en /es/test/gad7, /en/test/phq9)
-- [x] Fix: `postcss.config.js` y `tailwind.config.js` usan CommonJS (`module.exports`)
-- [x] Fix: `next.config.mjs` (ESM explícito sin `"type":"module"` en package.json)
-- [x] Fix: Vercel Production Overrides limpiados vía API (causaban builds de 108ms sin npm install)
-
-### También resuelto en sesión 7 (2026-03-19)
-
-- [x] Badge duración "3-5 min min" corregido (durationLabel no añade " min" si el JSON ya lo incluye)
-- [x] Cutoff `moderately_severe` traducido en ficha técnica (ES / EN / PT)
-- [x] Instrucciones exactas del instrumento validado mostradas encima de la primera pregunta
-- [x] ResultCard — paleta brand completa: eliminados todos los `gray-*` y `green-*` de Tailwind built-in
-- [x] COLOR_MAP.green (minimal) → `primary-*`; COLOR_MAP.red (severe) → `primary-*` más oscuro
+- [x] Bloque A: Archived ads, group sessions, URL shortener, RemindMe, ScoreHistory, blog, apego, non-ES langs
+- [x] Bloque A: Limpieza de referencias huérfanas, RTL_LANGS a fuente única (brand.ts)
+- [x] Bloque B.1: authors.json (Emmanuel M-18523, Cristina M-30745)
+- [x] Bloque B.2: metadata.json extendido — condition, slug, medicalCondition (ICD-10), validation (DOI), authorship
+- [x] Bloque B.3: es.content.json creado para GAD-7 y PHQ-9 (placeholders [PENDIENTE])
+- [x] Bloque B.4: Tipos TypeScript actualizados — topicCategory→condition, quiz→screening (tsc clean)
+- [x] Bloque B.5: CLAUDE.md + CONTEXT_OPUS.md actualizados
+- [x] Bloque B.6: docs/analytics-plan.md creado
 
 ---
 
 ## 📋 Próximas Prioridades
 
-1. **Shareable results con OG dinámicos** → API route `/api/og?testId=&score=&lang=` con @vercel/og
-2. **Más tests** → quizzes virales (personalidad, bienestar, estilo de apego…)
-3. **Más idiomas** → JSON de tests + páginas de ayuda en FR / DE / IT / AR
+1. **Bloque C** → Rellenar `[PENDIENTE]` en `es.content.json` (GAD-7 + PHQ-9) — revisión clínica requerida
+2. **Shareable results con OG dinámicos** → API route `/api/og?testId=&score=&lang=` con @vercel/og
+3. **Más tests psicométricos** → instrumentos validados en ES (PHQ-A, AUDIT, PCL-5…)
 4. **Dominio definitivo** → configurar reverse proxy Apache, Cloudflare y DNS para psicoprotego.es/tests
 
 ---
