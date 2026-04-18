@@ -12,6 +12,7 @@ import {
   StyleSheet,
 } from '@react-pdf/renderer'
 import type { TestLangFile } from '@/types/test'
+import { RTL_LANGS } from '@/config/brand'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -30,8 +31,6 @@ export interface TestBlankDocumentProps {
 }
 
 // ── Color palette ─────────────────────────────────────────────────────────────
-
-const RTL_LANGS = new Set(['ar', 'he', 'fa', 'ur', 'ku'])
 
 const COLORS = {
   primary:   '#2d4a3e',
