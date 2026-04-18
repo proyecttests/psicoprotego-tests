@@ -64,7 +64,7 @@ export default async function CategoriaPage({
   params: Promise<{ lang: string; categoria: string }>
 }) {
   const { lang, categoria } = await params
-  const tests = await loadTestCards(lang, { topicCategory: categoria })
+  const tests = await loadTestCards(lang, { condition: categoria })
   if (tests.length === 0) notFound()
 
   const ui = getUI(lang)

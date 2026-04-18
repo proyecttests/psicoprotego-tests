@@ -21,7 +21,7 @@ export interface TestCard {
   duration: string
   itemCount: number
   validated: boolean
-  topicCategory: string
+  condition: string
   tags: string[]
 }
 
@@ -69,13 +69,13 @@ export async function discoverLangs(): Promise<string[]> {
 
 // ── Categories & Tags ─────────────────────────────────────────────────────────
 
-/** Returns all unique topicCategory values across all tests. */
+/** Returns all unique condition values across all tests. */
 export async function discoverCategories(): Promise<string[]> {
   const cats = new Set<string>()
   const entries = await safeReaddir(TESTS_DIR)
   for (const testId of entries) {
     const meta = await readMeta(testId)
-    if (meta?.topicCategory) cats.add(meta.topicCategory)
+    if (meta?.condition) cats.add(meta.condition)
   }
   return [...cats]
 }
@@ -101,10 +101,10 @@ export async function discoverCategoryParams(): Promise<{ lang: string; categori
 
   for (const testId of entries) {
     const meta = await readMeta(testId)
-    if (!meta?.topicCategory) continue
+    if (!meta?.condition) continue
     for (const lang of meta.availableLangs) {
-      if (!pairs.has(meta.topicCategory)) pairs.set(meta.topicCategory, new Set())
-      pairs.get(meta.topicCategory)!.add(lang)
+      if (!pairs.has(meta.condition)) pairs.set(meta.condition, new Set())
+      pairs.get(meta.condition)!.add(lang)
     }
   }
 
@@ -144,7 +144,7 @@ export async function discoverTagParams(): Promise<{ lang: string; tag: string }
 
 export async function loadTestCards(
   lang: string,
-  filter?: { topicCategory?: string; tag?: string },
+  filter?: { condition?: string; tag?: string },
 ): Promise<TestCard[]> {
   const entries = await safeReaddir(TESTS_DIR)
   const cards: TestCard[] = []
@@ -154,7 +154,7 @@ export async function loadTestCards(
       const meta = await readMeta(testId)
       if (!meta) continue
       if (!meta.availableLangs.includes(lang)) continue
-      if (filter?.topicCategory && meta.topicCategory !== filter.topicCategory) continue
+      if (filter?.condition && meta.condition !== filter.condition) continue
       if (filter?.tag && !(meta.tags ?? []).includes(filter.tag)) continue
 
       const langRaw =
@@ -166,13 +166,13 @@ export async function loadTestCards(
 
       cards.push({
         testId,
-        name:          langData.name,
-        hook:          langData.landing.hook,
-        duration:      meta.timeToComplete,
-        itemCount:     meta.itemCount,
-        validated:     meta.validated,
-        topicCategory: meta.topicCategory ?? '',
-        tags:          meta.tags ?? [],
+        name:      langData.name,
+        hook:      langData.landing.hook,
+        duration:  meta.timeToComplete,
+        itemCount: meta.itemCount,
+        validated: meta.validated,
+        condition: meta.condition ?? '',
+        tags:      meta.tags ?? [],
       })
     } catch { /* skip */ }
   }

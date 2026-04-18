@@ -99,8 +99,8 @@ function buildJsonLd(
       medicalAudience: { '@type': 'MedicalAudience', audienceType: 'Patient' },
       citation:        `${orig.reference} — ${orig.journal}`,
       ...(orig.doi ? { sameAs: `https://doi.org/${orig.doi}` } : {}),
-      ...(metadata.topicCategory ? {
-        about: [{ '@type': 'MedicalCondition', name: metadata.topicCategory }],
+      ...(metadata.condition ? {
+        about: [{ '@type': 'MedicalCondition', name: metadata.condition }],
       } : {}),
       ...(metadata.tags?.length ? {
         keywords: metadata.tags.join(', '),

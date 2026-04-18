@@ -2,7 +2,7 @@
   {
     "testId": "gad7",
     "category": "psychometric",
-    "topicCategory": "ansiedad",
+    "condition": "ansiedad",
     "tags": [
       "validado-clinicamente",
       "adultos",
@@ -26,7 +26,7 @@
   {
     "testId": "phq9",
     "category": "psychometric",
-    "topicCategory": "depresion",
+    "condition": "depresion",
     "tags": [
       "validado-clinicamente",
       "adultos",

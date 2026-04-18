@@ -11,7 +11,7 @@ import Link from 'next/link'
 interface TestIndexEntry {
   testId:        string
   category:      string
-  topicCategory: string | null
+  condition:     string | null
   tags:          string[]
   availableLangs: string[]
   validated:     boolean
@@ -29,7 +29,7 @@ const UI: Record<string, { title: string; cta: string; ctaQuiz: string; validate
 
 function score(entry: TestIndexEntry, currentCategory: string | null, currentTags: string[]): number {
   let s = 0
-  if (currentCategory && entry.topicCategory === currentCategory) s += 3
+  if (currentCategory && entry.condition === currentCategory) s += 3
   const shared = entry.tags.filter(t => currentTags.includes(t)).length
   s += shared
   return s
@@ -92,7 +92,7 @@ const RelatedTests: React.FC<RelatedTestsProps> = ({
               </p>
             </div>
             <span className="text-xs font-medium ml-3 shrink-0" style={{ color: 'var(--color-accent)' }}>
-              {entry.category === 'quiz' ? ui.ctaQuiz : ui.cta}
+              {entry.category === 'screening' ? ui.ctaQuiz : ui.cta}
             </span>
           </Link>
         )

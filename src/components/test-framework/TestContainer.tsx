@@ -146,8 +146,8 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
 
   // Scoring function name loaded from JSON — stored in ref to avoid re-renders
   const scoringFnNameRef    = React.useRef<string>('scoreGAD7')
-  const testCategoryRef     = React.useRef<'psychometric' | 'quiz'>('psychometric')
-  const topicCategoryRef    = React.useRef<string | null>(null)
+  const testCategoryRef     = React.useRef<'psychometric' | 'screening'>('psychometric')
+  const conditionRef        = React.useRef<string | null>(null)
   const testTagsRef         = React.useRef<string[]>([])
   const availableLangsRef   = React.useRef<string[]>([])
   const testLangFileRef     = React.useRef<import('@/types/test').TestLangFile | null>(null)
@@ -166,7 +166,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
         // 1. Fetch metadata for availableLangs
         const metaRes = await fetch(`/data/tests/${testId}/metadata.json`)
         if (!metaRes.ok) throw new Error(`Test "${testId}" no encontrado.`)
-        const metadata = await metaRes.json() as { availableLangs: string[]; category?: 'psychometric' | 'quiz'; topicCategory?: string; tags?: string[] }
+        const metadata = await metaRes.json() as { availableLangs: string[]; category?: 'psychometric' | 'screening'; condition?: string; tags?: string[] }
 
         // 2. Fetch lang file, fall back to 'es' if lang not available
         const resolvedLang = metadata.availableLangs.includes(lang) ? lang : 'es'
@@ -194,8 +194,8 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
 
         if (!cancelled) {
           scoringFnNameRef.current = langData.scoringFunction ?? 'scoreGAD7'
-          testCategoryRef.current   = metadata.category ?? 'psychometric'
-          topicCategoryRef.current  = metadata.topicCategory ?? null
+          testCategoryRef.current  = metadata.category ?? 'psychometric'
+          conditionRef.current     = metadata.condition ?? null
           testTagsRef.current       = metadata.tags ?? []
           availableLangsRef.current = metadata.availableLangs ?? [resolvedLang]
           testLangFileRef.current   = langData
@@ -420,7 +420,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
             lang={lang}
             testId={testId}
             maxScore={maxScore}
-            topicCategory={topicCategoryRef.current}
+            condition={conditionRef.current}
             tags={testTagsRef.current}
             testCategory={testCategoryRef.current}
             answers={answers}
@@ -485,7 +485,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
               onAdvance={
                 currentQuestion.type === 'likert'
                   ? (isLastQuestion ? undefined : handleNext)
-                  : (testCategoryRef.current === 'quiz' && currentQuestion.type === 'multipleChoice')
+                  : (testCategoryRef.current === 'screening' && currentQuestion.type === 'multipleChoice')
                     ? handleNext
                     : undefined
               }
@@ -509,8 +509,8 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
             <div aria-hidden="true" />
           )}
 
-          {/* En quiz, el auto-avance maneja la siguiente pregunta — solo mostrar Next en la última */}
-          {(testCategoryRef.current !== 'quiz' || isLastQuestion) && (
+          {/* En screening, el auto-avance maneja la siguiente pregunta — solo mostrar Next en la última */}
+          {(testCategoryRef.current !== 'screening' || isLastQuestion) && (
             <button
               type="button"
               onClick={handleNext}
