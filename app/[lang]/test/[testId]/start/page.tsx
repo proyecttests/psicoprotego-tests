@@ -15,7 +15,6 @@ import React from 'react'
 import Link from 'next/link'
 import { useRouter, useParams } from 'next/navigation'
 import type { TestLangFile } from '@/types/test'
-import AdStrategy from '@/components/ads/AdStrategy'
 
 // ── Rutas de ayuda por idioma ─────────────────────────────────────────────────
 
@@ -230,12 +229,7 @@ export default function StartPage() {
             </div>
           </section>
 
-          {/* ── 2. AD SLOT (mayor valor: pre-test) ───────────────────────── */}
-          <div className="flex justify-center">
-            <AdStrategy category={testCategory} position="pre-test" />
-          </div>
-
-          {/* ── 3. BOTÓN + CANCELAR ──────────────────────────────────────── */}
+          {/* ── 2. BOTÓN + CANCELAR ──────────────────────────────────────── */}
           <div className="flex flex-col items-center gap-4">
             <button
               type="button"

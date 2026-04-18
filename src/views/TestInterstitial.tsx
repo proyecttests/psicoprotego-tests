@@ -27,8 +27,6 @@
 import React from 'react'
 import Link from 'next/link'
 import type { TestLangFile } from '@/types/test'
-import AdSlot  from '@/components/ads/AdSlot'
-
 // ── Mapa de rutas de ayuda por idioma ────────────────────────────────────────
 
 const HELP_ROUTES: Record<string, string> = {
@@ -250,12 +248,7 @@ const TestInterstitial: React.FC<TestInterstitialProps> = ({
             </div>
           </section>
 
-          {/* ── 2. AD SLOT (mayor valor: pre-test) ─────────────────────────── */}
-          <div className="flex justify-center">
-            <AdSlot position="pre-test" size="rectangle" />
-          </div>
-
-          {/* ── 3. BOTÓN + CANCELAR ────────────────────────────────────────── */}
+          {/* ── 2. BOTÓN + CANCELAR ────────────────────────────────────────── */}
           <div className="flex flex-col items-center gap-4">
             <button
               type="button"

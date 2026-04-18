@@ -11,8 +11,6 @@
 'use client'
 
 import React from 'react'
-import AdStrategy from '@/components/ads/AdStrategy'
-
 // ── UI strings ────────────────────────────────────────────────────────────────
 
 const STRINGS: Record<string, { title: string; subtitle: string }> = {
@@ -27,14 +25,13 @@ const STRINGS: Record<string, { title: string; subtitle: string }> = {
 interface CalculatingScreenProps {
   lang: string
   onDone: () => void
-  category?: 'psychometric' | 'quiz'
 }
 
 const DELAY_MS = 2500
 
 // ── Componente ────────────────────────────────────────────────────────────────
 
-const CalculatingScreen: React.FC<CalculatingScreenProps> = ({ lang, onDone, category = 'psychometric' }) => {
+const CalculatingScreen: React.FC<CalculatingScreenProps> = ({ lang, onDone }) => {
   const s = STRINGS[lang] ?? STRINGS['es']
 
   React.useEffect(() => {
@@ -61,8 +58,6 @@ const CalculatingScreen: React.FC<CalculatingScreenProps> = ({ lang, onDone, cat
         <p className="text-sm text-gray-500 font-sans">{s.subtitle}</p>
       </div>
 
-      {/* Slot publicitario pre-result (máximo valor) */}
-      <AdStrategy category={category} position="pre-result" />
     </div>
   )
 }

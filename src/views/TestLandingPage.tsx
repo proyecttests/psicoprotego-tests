@@ -9,7 +9,6 @@
 
 import Link from 'next/link'
 import type { TestLangFile, TestMetadata } from '@/types/test'
-import AdStrategy        from '@/components/ads/AdStrategy'
 import DownloadBlankLanding from '@/components/pdf/DownloadBlankLanding'
 import TestMetadataTable from '@/components/test-framework/TestMetadataTable'
 import { FaqAccordion }  from '@/components/landing/FaqAccordion'
@@ -191,12 +190,7 @@ export default function TestLandingPage({
           </div>
         </section>
 
-        {/* ── 2. AD SLOT ──────────────────────────────────────────────────── */}
-        <div className="w-full max-w-2xl mx-auto">
-          <AdStrategy category={metadata.category} position="test-intro" />
-        </div>
-
-        {/* ── 3. QUÉ MIDE ─────────────────────────────────────────────────── */}
+        {/* ── 2. QUÉ MIDE ─────────────────────────────────────────────────── */}
         <Section title={ui.whatItMeasuresTitle} id="que-mide">
           <div
             className="rounded-xl p-6 flex gap-4 items-start"

@@ -12,8 +12,6 @@
 'use client'
 
 import React from 'react'
-import AdStrategy from '@/components/ads/AdStrategy'
-import { buildShortShareUrl } from '@/utils/shareEncoding'
 import { trackEvent } from '@/config/analytics'
 import { generateStoryImage } from '@/utils/storyImage'
 
@@ -99,7 +97,6 @@ interface SharingScreenProps {
   lang: string
   shareUrl: string
   onDone: () => void
-  category?: 'psychometric' | 'quiz'
   testName?: string
   resultLabel?: string
   resultColor?: 'green' | 'yellow' | 'orange' | 'red'
@@ -111,35 +108,15 @@ const SharingScreen: React.FC<SharingScreenProps> = ({
   lang,
   shareUrl,
   onDone,
-  category = 'psychometric',
   testName = '',
   resultLabel = '',
   resultColor = 'green',
 }) => {
   const ui = UI[lang] ?? UI['es']
   const [copied, setCopied] = React.useState(false)
-  const [shortUrl, setShortUrl] = React.useState(shareUrl)
+  const [shortUrl] = React.useState(shareUrl)
   const [isGenerating, setIsGenerating] = React.useState(false)
   const hasNativeShare = typeof navigator !== 'undefined' && !!navigator.share
-
-  React.useEffect(() => {
-    buildShortShareUrl('', '', {}).catch(() => {})  // warm cache
-    // Shorten the URL asynchronously
-    fetch('/api/shorten', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ url: shareUrl }),
-    })
-      .then((r) => r.json())
-      .then((j: { slug?: string }) => {
-        if (j.slug) {
-          const origin = window.location.origin
-          setShortUrl(`${origin}/r/${j.slug}`)
-        }
-      })
-      .catch(() => { /* keep longUrl */ })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [shareUrl])
 
   // ── Handlers ───────────────────────────────────────────────────────────────
 
@@ -216,11 +193,6 @@ const SharingScreen: React.FC<SharingScreenProps> = ({
   return (
     <div className="flex flex-1 flex-col items-center justify-center px-4 py-8">
       <div className="w-full max-w-sm flex flex-col gap-6">
-
-        {/* Ad slot */}
-        <div className="flex justify-center">
-          <AdStrategy category={category} position="post-share" />
-        </div>
 
         {/* Header */}
         <div className="text-center">
