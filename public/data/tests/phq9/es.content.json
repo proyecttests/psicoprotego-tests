@@ -1,0 +1,50 @@
+{
+  "status": "draft-pending-clinical-review",
+  "lastEditedBy": null,
+  "clinicallyApprovedBy": null,
+  "clinicallyApprovedAt": null,
+  "hero": {
+    "title": "[PENDIENTE]",
+    "subtitle": "[PENDIENTE]",
+    "badges": [
+      "Instrumento validado",
+      "9 preguntas",
+      "3-5 min",
+      "Sin registro",
+      "Datos en tu navegador"
+    ]
+  },
+  "whatItMeasures": {
+    "heading": "¿Qué mide este test?",
+    "body": "[PENDIENTE]"
+  },
+  "whoIsItFor": {
+    "heading": "¿A quién está dirigido?",
+    "body": "[PENDIENTE]",
+    "indications": [],
+    "limitations": []
+  },
+  "howItWorks": {
+    "heading": "Cómo funciona",
+    "body": "[PENDIENTE]",
+    "steps": []
+  },
+  "validation": {
+    "heading": "Validación científica",
+    "body": "[PENDIENTE]"
+  },
+  "interpretation": {
+    "heading": "Qué hacer con tu resultado",
+    "body": "[PENDIENTE]"
+  },
+  "faq": [
+    { "q": "¿Es un diagnóstico?", "a": "[PENDIENTE]" },
+    { "q": "¿Quedan guardadas mis respuestas?", "a": "[PENDIENTE]" },
+    { "q": "¿Puedo compartirlo con mi psicólogo/a?", "a": "[PENDIENTE]" },
+    { "q": "¿Qué hago si el resultado es alto?", "a": "[PENDIENTE]" }
+  ],
+  "privacy": {
+    "heading": "Privacidad",
+    "body": "Tus respuestas no salen de tu dispositivo. No se envían a ningún servidor. Decides tú qué compartir y con quién."
+  }
+}
