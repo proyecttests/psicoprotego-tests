@@ -33,7 +33,6 @@ Suite of 60+ psychological tools (30 psychometric + 30 quizzes) in 14 languages,
 | **CDN** | Cloudflare (edge caching, DNS) |
 | **Proxy** | Apache on Hetzner (reverse proxy to Vercel) |
 | **DNS** | Piensa Solutions |
-| **Database** | Upstash Redis (serverless, for group sessions — KV_REST_API_URL + KV_REST_API_TOKEN) |
 | **Analytics** | GTM + GA4 + Vercel Analytics |
 | **CSS** | Tailwind CSS (CommonJS config: `module.exports` in tailwind.config.js and postcss.config.js) |
 | **Module system** | ESM explicit in next.config.mjs; no `"type":"module"` in package.json |
@@ -478,8 +477,6 @@ node scripts/add-language.js <lang> [--rtl]  # Add new language
 
 | Variable | Purpose |
 |----------|---------|
-| `KV_REST_API_URL` | Upstash Redis REST URL (group sessions) |
-| `KV_REST_API_TOKEN` | Upstash Redis REST token (group sessions) |
 | `NEXT_PUBLIC_SITE_URL` | Site URL for OG/canonical tags |
 | `VITE_GTM_ID` | Google Tag Manager ID |
 | `VITE_GA4_ID` | Google Analytics 4 ID |
