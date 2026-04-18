@@ -17,7 +17,6 @@ const UI: Record<string, {
   // Hero
   heroHeadline:  string
   heroSubtitle:  string
-  heroCta:       string
   // Stats
   statsTests:    string
   statsFree:     string
@@ -29,9 +28,6 @@ const UI: Record<string, {
   questions:     string
   startBtn:      string
   empty:         string
-  // Bottom CTA
-  bottomCtaText: string
-  bottomCtaBtn:  string
   // Meta
   metaTitle:       string
   metaDescription: string
@@ -39,7 +35,6 @@ const UI: Record<string, {
   es: {
     heroHeadline:    'Entiende cómo funciona tu mente',
     heroSubtitle:    'Tests psicológicos gratuitos, validados y 100% privados',
-    heroCta:         'Empezar con el GAD-7',
     statsTests:      'tests disponibles',
     statsFree:       'Gratuito',
     statsNoReg:      'Sin registro',
@@ -49,46 +44,8 @@ const UI: Record<string, {
     questions:       'preguntas',
     startBtn:        'Empezar test',
     empty:           'No hay tests disponibles.',
-    bottomCtaText:   '¿No sabes por dónde empezar?',
-    bottomCtaBtn:    'Empieza con el test de ansiedad (GAD-7)',
     metaTitle:       'Tests Psicológicos Gratuitos — Psicoprotego',
-    metaDescription: 'Cuestionarios psicológicos validados: ansiedad, depresión, apego y más. Gratis, privado y sin registro.',
-  },
-  en: {
-    heroHeadline:    'Understand how your mind works',
-    heroSubtitle:    'Free, validated psychological tests — 100% private',
-    heroCta:         'Start with GAD-7',
-    statsTests:      'tests available',
-    statsFree:       'Free',
-    statsNoReg:      'No sign-up',
-    statsPrivate:    'Private',
-    allLabel:        'All',
-    validated:       'Validated',
-    questions:       'questions',
-    startBtn:        'Start test',
-    empty:           'No tests available.',
-    bottomCtaText:   'Not sure where to start?',
-    bottomCtaBtn:    'Start with the anxiety test (GAD-7)',
-    metaTitle:       'Free Psychological Tests — Psicoprotego',
-    metaDescription: 'Validated psychological questionnaires: anxiety, depression, attachment and more. Free, private, no sign-up.',
-  },
-  pt: {
-    heroHeadline:    'Entenda como sua mente funciona',
-    heroSubtitle:    'Testes psicológicos gratuitos, validados e 100% privados',
-    heroCta:         'Começar com o GAD-7',
-    statsTests:      'testes disponíveis',
-    statsFree:       'Gratuito',
-    statsNoReg:      'Sem cadastro',
-    statsPrivate:    'Privado',
-    allLabel:        'Todos',
-    validated:       'Validado',
-    questions:       'perguntas',
-    startBtn:        'Iniciar teste',
-    empty:           'Não há testes disponíveis.',
-    bottomCtaText:   'Não sabe por onde começar?',
-    bottomCtaBtn:    'Comece com o teste de ansiedade (GAD-7)',
-    metaTitle:       'Testes Psicológicos Gratuitos — Psicoprotego',
-    metaDescription: 'Questionários psicológicos validados: ansiedade, depressão, apego e mais. Gratuito, privado e sem cadastro.',
+    metaDescription: 'Cuestionarios psicológicos validados: ansiedad y depresión. GAD-7 y PHQ-9 gratuitos, privados y sin registro.',
   },
 }
 
@@ -157,15 +114,6 @@ export default async function LangHomePage({
           <p className="mt-4 text-lg text-green-100 sm:text-xl">
             {ui.heroSubtitle}
           </p>
-          <div className="mt-8">
-            <Link
-              href={`/${lang}/test/gad7`}
-              className="inline-block rounded-xl px-8 py-3.5 text-base font-semibold text-white shadow-lg transition hover:scale-105 hover:shadow-xl"
-              style={{ backgroundColor: 'var(--color-accent)' }}
-            >
-              {ui.heroCta}
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -213,24 +161,6 @@ export default async function LangHomePage({
 
       </div>
 
-      {/* ── Bottom CTA ───────────────────────────────────────────────────── */}
-      <section
-        className="w-full py-12 px-4 text-center"
-        style={{ backgroundColor: 'var(--color-primary)' }}
-      >
-        <div className="mx-auto max-w-xl">
-          <p className="mb-5 font-['Source_Serif_4',serif] text-xl font-semibold text-white">
-            {ui.bottomCtaText}
-          </p>
-          <Link
-            href={`/${lang}/test/gad7`}
-            className="inline-block rounded-xl bg-white px-8 py-3 text-sm font-bold transition hover:opacity-90"
-            style={{ color: 'var(--color-primary)' }}
-          >
-            {ui.bottomCtaBtn}
-          </Link>
-        </div>
-      </section>
 
     </div>
   )
