@@ -126,7 +126,7 @@ export default function TestLandingPage({
   const { landing } = langData
   const isValidated = metadata.validated
   const startHref   = `/${lang}/test/${testId}/start`
-  const isQuiz      = metadata.category === 'quiz'
+  const isQuiz      = metadata.category === 'screening'
   const startLabel  = isQuiz
     ? ({ es: 'Empezar quiz', en: 'Start quiz', pt: 'Iniciar quiz', ku: 'کوێزەکە دەستپێبکە' } as Record<string,string>)[lang] ?? 'Empezar quiz'
     : ui.startButton

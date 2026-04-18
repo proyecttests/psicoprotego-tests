@@ -21,8 +21,8 @@ public/data/tests/<testId>/
 {
   "id": "<testId>",
   "availableLangs": ["es"],
-  "category": "quiz | psychometric | screening",
-  "topicCategory": "relaciones | ansiedad | depresion | autoestima | trauma",
+  "category": "psychometric | screening",
+  "condition": "relaciones | ansiedad | depresion | autoestima | trauma",
   "tags": ["tag1", "tag2"],
   "validated": false,
   "selfAdministrable": true,

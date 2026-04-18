@@ -30,9 +30,9 @@ interface ResultCardProps {
   lang: string
   testId: string
   maxScore: number
-  topicCategory?: string | null
+  condition?: string | null
   tags?: string[]
-  testCategory?: 'psychometric' | 'quiz'
+  testCategory?: 'psychometric' | 'screening'
   answers?: AnswersMap
   availableLangs?: string[]
   testLangFile?: TestLangFile
@@ -259,13 +259,13 @@ const NormalResult: React.FC<{
   lang: string
   testId: string
   maxScore: number
-  topicCategory?: string | null
+  condition?: string | null
   tags?: string[]
-  testCategory?: 'psychometric' | 'quiz'
+  testCategory?: 'psychometric' | 'screening'
   answers?: AnswersMap
   availableLangs?: string[]
   testLangFile?: TestLangFile
-}> = ({ result, onReset, onShare, lang, testId, maxScore, topicCategory, tags, testCategory, answers, availableLangs, testLangFile }) => {
+}> = ({ result, onReset, onShare, lang, testId, maxScore, condition, tags, testCategory, answers, availableLangs, testLangFile }) => {
   const visible      = useFadeIn()
   const isCrisis     = result.resultType === 'CRISIS'
   const displayScore = useCountUp(result.score ?? 0)
@@ -356,7 +356,7 @@ const NormalResult: React.FC<{
       {/* ── Compartir + Descargar ────────────────────────────────────────── */}
       <div className="flex items-center justify-between flex-wrap gap-3">
         <ShareButtons lang={lang} onShare={onShare} />
-        {!isCrisis && testCategory === 'quiz' && (
+        {!isCrisis && testCategory === 'screening' && (
           <DownloadCard
             lang={lang}
             testName={testId}
@@ -370,7 +370,7 @@ const NormalResult: React.FC<{
       </div>
 
       {/* ── PDF Download (psychometric tests only) ──────────────────────── */}
-      {!isCrisis && testCategory !== 'quiz' && answers && availableLangs && testLangFile && (
+      {!isCrisis && testCategory !== 'screening' && answers && availableLangs && testLangFile && (
         <DownloadPDF
           testData={testLangFile}
           answers={answers}
@@ -400,7 +400,7 @@ const NormalResult: React.FC<{
       <RelatedTests
         lang={lang}
         currentTestId={testId}
-        currentCategory={topicCategory ?? null}
+        currentCategory={condition ?? null}
         currentTags={tags ?? []}
       />
     </div>
@@ -409,7 +409,7 @@ const NormalResult: React.FC<{
 
 // ── Componente principal ──────────────────────────────────────────────────────
 
-const ResultCard: React.FC<ResultCardProps> = ({ result, onReset, onShare, lang, testId, maxScore, topicCategory, tags, testCategory, answers, availableLangs, testLangFile }) => {
+const ResultCard: React.FC<ResultCardProps> = ({ result, onReset, onShare, lang, testId, maxScore, condition, tags, testCategory, answers, availableLangs, testLangFile }) => {
   return (
     <NormalResult
       result={result}
@@ -418,7 +418,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ result, onReset, onShare, lang,
       lang={lang}
       testId={testId}
       maxScore={maxScore}
-      topicCategory={topicCategory}
+      condition={condition}
       tags={tags}
       testCategory={testCategory}
       answers={answers}
