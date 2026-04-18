@@ -2,12 +2,37 @@
   "id": "phq9",
   "availableLangs": ["es"],
   "category": "psychometric",
-  "topicCategory": "depresion",
+  "condition": "depresion",
+  "slug": "phq-9",
   "tags": ["validado-clinicamente", "adultos", "likert", "9-items", "cribado"],
   "originalInstrument": "PHQ-9",
   "use": ["clinical_screening"],
   "measures": ["depression"],
   "validated": true,
+  "medicalCondition": {
+    "icd10": "F32",
+    "name": "Episodio depresivo",
+    "schemaOrgUrl": "https://www.icd10data.com/ICD10CM/Codes/F01-F99/F30-F39/F32-"
+  },
+  "validation": {
+    "isValidated": true,
+    "references": [
+      {
+        "doi": "10.1046/j.1525-1497.2001.016009606.x",
+        "authors": "Kroenke K, Spitzer RL, Williams JBW",
+        "year": 2001,
+        "journal": "Journal of General Internal Medicine",
+        "volume": "16",
+        "issue": "9",
+        "pages": "606-613",
+        "title": "The PHQ-9: Validity of a Brief Depression Severity Measure"
+      }
+    ],
+    "spanishValidation": {
+      "available": true,
+      "note": "Validación española disponible; referencia exacta pendiente de completar manualmente."
+    }
+  },
   "validationDetails": {
     "original": {
       "lang": "en",
@@ -30,6 +55,10 @@
       "ja": { "validated": true, "reference": "Muramatsu et al., 2007" },
       "ko": { "validated": true, "reference": "Park et al., 2010" }
     }
+  },
+  "authorship": {
+    "author": "cristina",
+    "reviewedBy": "emmanuel"
   },
   "ageRange": { "min": 18, "max": null },
   "selfAdministrable": true,

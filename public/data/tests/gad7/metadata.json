@@ -2,12 +2,37 @@
   "id": "gad7",
   "availableLangs": ["es"],
   "category": "psychometric",
-  "topicCategory": "ansiedad",
+  "condition": "ansiedad",
+  "slug": "gad-7",
   "tags": ["validado-clinicamente", "adultos", "likert", "7-items", "cribado"],
   "originalInstrument": "GAD-7",
   "use": ["clinical_screening"],
   "measures": ["generalized_anxiety"],
   "validated": true,
+  "medicalCondition": {
+    "icd10": "F41.1",
+    "name": "Trastorno de ansiedad generalizada",
+    "schemaOrgUrl": "https://www.icd10data.com/ICD10CM/Codes/F01-F99/F40-F48/F41-/F41.1"
+  },
+  "validation": {
+    "isValidated": true,
+    "references": [
+      {
+        "doi": "10.1001/archinte.166.10.1092",
+        "authors": "Spitzer RL, Kroenke K, Williams JBW, Löwe B",
+        "year": 2006,
+        "journal": "Archives of Internal Medicine",
+        "volume": "166",
+        "issue": "10",
+        "pages": "1092-1097",
+        "title": "A Brief Measure for Assessing Generalized Anxiety Disorder: The GAD-7"
+      }
+    ],
+    "spanishValidation": {
+      "available": true,
+      "note": "Validación española disponible; referencia exacta pendiente de completar manualmente."
+    }
+  },
   "validationDetails": {
     "original": {
       "lang": "en",
@@ -31,6 +56,10 @@
       "ja": { "validated": true, "reference": "Muramatsu et al., 2009" },
       "ko": { "validated": true, "reference": "Seo & Park, 2015" }
     }
+  },
+  "authorship": {
+    "author": "emmanuel",
+    "reviewedBy": "cristina"
   },
   "ageRange": { "min": 18, "max": null },
   "selfAdministrable": true,
