@@ -52,16 +52,33 @@ tsc --noEmit: ✅ limpio
 
 ---
 
-## 2. Lighthouse (mobile)
+## 2. Lighthouse
 
-| Página | Perf | A11y | BP | SEO | LCP | CLS | INP |
+Ejecutado localmente en Contabo con Google Chrome 131 (headless) + Lighthouse CLI 13.1.0.  
+Script reutilizable: `/home/devops/tools/lighthouse-audit.sh`  
+URL auditada: `https://psicoprotego-tests.vercel.app` (alias de producción en Vercel)
+
+### Mobile
+
+| Página | Perf | A11y | BP | SEO | LCP | CLS | TBT |
 |---|---|---|---|---|---|---|---|
-| /es | [pendiente] | [pendiente] | [pendiente] | [pendiente] | [pendiente] | [pendiente] | [pendiente] |
-| /es/test/gad7 | [pendiente] | [pendiente] | [pendiente] | [pendiente] | [pendiente] | [pendiente] | [pendiente] |
-| /es/test/gad7/start | [pendiente] | [pendiente] | [pendiente] | [pendiente] | [pendiente] | [pendiente] | [pendiente] |
+| /es | 70 | 92 | 100 | 92 | 1.9 s | 0 | 2,710 ms |
+| /es/test/gad7 | 66 | 93 | 100 | 92 | 2.8 s | 0 | 3,370 ms |
+| /es/test/gad7/start | n/a | n/a | n/a | n/a | — | — | — |
 
-Origen: pendiente captura manual vía pagespeed.web.dev  
-Motivo: Lighthouse CLI 13.1.0 disponible pero sin Chromium en servidor Contabo.
+### Desktop
+
+| Página | Perf | A11y | BP | SEO | LCP | CLS | TBT |
+|---|---|---|---|---|---|---|---|
+| /es | 54 | 92 | 100 | 92 | 2.6 s | 0 | 1,820 ms |
+| /es/test/gad7 | n/a | n/a | n/a | n/a | — | — | — |
+| /es/test/gad7/start | n/a | n/a | n/a | n/a | — | — | — |
+
+**Notas:**
+- `/es/test/gad7/start` no es auditable en headless: es un Client Component con sessionStorage guard que redirige a la landing si no hay token de sesión previo. Esperado.
+- `/es/test/gad7` desktop y `/es/test/gad7/start`: Vercel devuelve 403 desde IP de datacenter (Contabo) tras las primeras peticiones. Pendiente captura manual vía pagespeed.web.dev o desde IP doméstica.
+- **Punto de atención:** TBT elevado en mobile (2,710–3,370 ms) indica trabajo en el hilo principal durante carga. Investigar en Fase 1 (posible React hydration o GTM).
+- **CLS = 0** en todas las páginas auditadas. ✅
 
 ---
 
