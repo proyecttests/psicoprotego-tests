@@ -196,16 +196,97 @@ export interface TestMetadataTranslation {
   note?: string
 }
 
+export interface MedicalCondition {
+  icd10: string
+  name: string
+  schemaOrgUrl: string
+}
+
+export interface ValidationReference {
+  doi: string
+  authors: string
+  year: number
+  journal: string
+  volume?: string
+  issue?: string
+  pages?: string
+  title: string
+}
+
+export interface TestValidation {
+  isValidated: boolean
+  references: ValidationReference[]
+  spanishValidation?: {
+    available: boolean
+    note: string
+  }
+}
+
+export interface TestAuthorship {
+  author: string
+  reviewedBy: string
+}
+
+export interface Author {
+  id: string
+  name: string
+  role: string
+  collegeNumber: string
+  college: string
+  education: string
+  profileUrl: string
+  photo: string
+  specialties: string[]
+  bio: string
+}
+
+export interface AuthorsRegistry {
+  [authorId: string]: Author
+}
+
+export interface TestContentSection {
+  heading: string
+  body: string
+}
+
+export interface TestContent {
+  status: 'draft-pending-clinical-review' | 'clinically-approved'
+  lastEditedBy: string | null
+  clinicallyApprovedBy: string | null
+  clinicallyApprovedAt: string | null
+  hero: {
+    title: string
+    subtitle: string
+    badges: string[]
+  }
+  whatItMeasures: TestContentSection
+  whoIsItFor: TestContentSection & {
+    indications: string[]
+    limitations: string[]
+  }
+  howItWorks: TestContentSection & {
+    steps: string[]
+  }
+  validation: TestContentSection
+  interpretation: TestContentSection
+  faq: { q: string; a: string }[]
+  privacy: TestContentSection
+}
+
 export interface TestMetadata {
   id: string
   availableLangs: string[]
-  category: 'psychometric' | 'quiz'
-  topicCategory: string
+  category: 'psychometric' | 'screening'
+  condition: string
+  slug: string
   tags: string[]
   originalInstrument: string
   use: string[]
   measures: string[]
   validated: boolean
+  medicalCondition: MedicalCondition
+  validation: TestValidation
+  authorship: TestAuthorship
   validationDetails: {
     original: {
       lang: string
