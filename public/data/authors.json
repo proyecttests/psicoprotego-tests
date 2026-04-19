@@ -1,7 +1,7 @@
 {
   "emmanuel": {
     "id": "emmanuel",
-    "name": "Emmanuel Rodríguez de Vera",
+    "name": "Emmanuel Rodríguez de Vera Ríos",
     "role": "Psicólogo General Sanitario",
     "collegeNumber": "M-18523",
     "college": "Colegio Oficial de la Psicología de Madrid",
@@ -13,13 +13,13 @@
   },
   "cristina": {
     "id": "cristina",
-    "name": "Cristina [APELLIDOS PENDIENTE]",
+    "name": "Cristina Domingo Gutiérrez",
     "role": "Psicóloga General Sanitaria",
     "collegeNumber": "M-30745",
     "college": "Colegio Oficial de la Psicología de Madrid",
     "education": "Licenciada en Psicología (UNED, 2009)",
-    "profileUrl": "https://psicoprotego.es/equipo/cristina-[PENDIENTE]/",
-    "photo": "/images/team/cristina.jpg",
+    "profileUrl": "https://psicoprotego.es/equipo/cristina-domingo/",
+    "photo": "/images/team/cristina.webp",
     "specialties": ["EMDR", "Trauma", "Adultos"],
     "bio": "Cofundadora de Psicólogos Protego. Psicóloga clínica con enfoque integrativo, especialista en EMDR."
   }
