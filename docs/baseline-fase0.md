@@ -1,11 +1,15 @@
 # Baseline técnica — cierre Fase 0
 
-Fecha: 2026-04-19  
-Rama: feat/consolidation-psicoprotego  
-Commit HEAD: 88c0d4507a17225c876e030c9c92f2dcf55b5628  
-Commits en Fase 0: 14 (Bloque A/A.7: 9 + Bloque B: 5 + este baseline: 15)
+**Fecha:** 2026-04-19  
+**Rama:** feat/consolidation-psicoprotego  
+**Commit HEAD:** 20f4aa3ba668364579fe8de6e1817142c33c72dc  
+**Commits Fase 0:** 18
 
 ```
+20f4aa3 feat(data): complete authors.json with real clinical credentials
+2f880f0 feat(assets): add clinical team photos for author bylines
+1e54516 fix(types): commit TestMetadata updates that were orphan in working tree
+3f26d76 docs: baseline metrics at end of Phase 0
 88c0d45 docs: update CLAUDE.md + CONTEXT_OPUS.md for consolidation; add analytics plan
 0db46c5 refactor(types): rename topicCategory→condition, quiz→screening across all consumers
 a949968 feat(data): add es.content.json placeholders for clinical landings
@@ -28,20 +32,23 @@ ab5eff7 refactor: deprecate group sessions, URL shortener, Upstash
 
 | Métrica | Valor |
 |---|---|
-| Páginas SSG generadas | 41 |
+| Páginas SSG | 41 |
 | Bundle total (shared JS) | 102 kB |
 | First Load JS (/es) | 106 kB |
 | First Load JS (/es/test/gad7) | 108 kB |
 | First Load JS (/es/test/gad7/start) | 108 kB (ƒ dynamic) |
 | First Load JS (/es/test/phq9) | 108 kB |
+| First Load JS (/es/test/phq9/start) | 108 kB (ƒ dynamic) |
 | node_modules | 546 MB |
-| .next | 151 MB |
+| .next | 121 MB |
+| public/images/team | 96 KB (emmanuel.jpg 28KB + cristina.webp 63KB + 5KB overhead) |
 
-Warnings: ninguno. tsc --noEmit: ✅ limpio.
+Warnings build: ninguno  
+tsc --noEmit: ✅ limpio
 
 **Notas:**
-- `/es/test/[testId]/start` y `/play` son rutas dinámicas (ƒ) — Client Components con sessionStorage guard. No aplica SSG.
-- Páginas estáticas en en/pt/ku (`acerca-de`, `aviso-legal`, etc.) se generan aún porque no se archivaron las rutas estáticas (solo el contenido de tests). Esto es correcto.
+- `/es/test/[testId]/start` y `/play` son rutas dinámicas (ƒ) — Client Components con sessionStorage guard.
+- Páginas estáticas en en/pt/ku (`acerca-de`, `aviso-legal`, etc.) se mantienen aunque el contenido de tests es ES-only.
 
 ---
 
@@ -53,42 +60,44 @@ Warnings: ninguno. tsc --noEmit: ✅ limpio.
 | /es/test/gad7 | [pendiente] | [pendiente] | [pendiente] | [pendiente] | [pendiente] | [pendiente] | [pendiente] |
 | /es/test/gad7/start | [pendiente] | [pendiente] | [pendiente] | [pendiente] | [pendiente] | [pendiente] | [pendiente] |
 
-Origen: [pendiente captura manual]  
-Motivo: Chrome/Chromium no instalado en el servidor Contabo. Ejecutar Lighthouse desde máquina local o PageSpeed Insights contra tests.psicoprotego.vercel.app una vez pusheada la rama.
+Origen: pendiente captura manual vía pagespeed.web.dev  
+Motivo: Lighthouse CLI 13.1.0 disponible pero sin Chromium en servidor Contabo.
 
 ---
 
 ## 3. Schema markup actual
 
 ### /es (homepage)
-Presentes: **ninguno** (0 bloques JSON-LD)  
-Faltan (objetivo Fase 3): ItemList de tests disponibles (opcional)
+Presente: **ninguno** (0 bloques JSON-LD)
 
 ### /es/test/gad7
-Presentes:
+Presente:
 - `BreadcrumbList` — Inicio → Tests → GAD-7
-- `FAQPage` — preguntas del landing (actualmente con FAQ del es.json)
-- `MedicalWebPage` — con `citation` (referencia Spitzer 2006 + DOI), `about: [{@type: MedicalCondition, name: "ansiedad"}]`
+- `FAQPage`
+- `MedicalWebPage` — `citation`: Spitzer RL et al. (2006) + DOI; `about`: `[{@type: MedicalCondition, name: "ansiedad"}]`
 
-Faltan (objetivo Fase 3):
-- `MedicalTest` schema (tipo específico para instrumentos psicométricos)
-- `Psychologist` como `author` + `reviewedBy` (authors.json existe pero no inyectado en JSON-LD)
-- `MedicalCondition` tipada con ICD-10: actualmente solo `{name: "ansiedad"}`, pendiente `{@type: MedicalCondition, name: "Trastorno de ansiedad generalizada", code: {codeValue: "F41.1", codingSystem: "ICD-10"}}`
-
-### /es/test/gad7/start (intersticial)
-Presentes: **ninguno** (0 bloques JSON-LD) — esperado, es un Client Component
+### /es/test/gad7/start
+Presente: **ninguno** (Client Component, esperado)
 
 ### /es/test/phq9
-Presentes:
+Presente:
 - `BreadcrumbList`
 - `FAQPage`
-- `MedicalWebPage` — `about: [{@type: MedicalCondition, name: "depresion"}]`, citation Kroenke 2001 + DOI
+- `MedicalWebPage` — citation: Kroenke K et al. (2001) + DOI; about: `[{@type: MedicalCondition, name: "depresion"}]`
 
-Faltan (objetivo Fase 3): mismos que GAD-7
+### Gap hacia objetivo Fase 3
+
+| Schema | Estado hoy | Datos disponibles |
+|---|---|---|
+| `MedicalTest` | ausente | pendiente implementar |
+| `Psychologist` author/reviewedBy con colegiación | ausente | ✅ en `authors.json` listo |
+| `MedicalCondition` tipada con ICD-10 | parcial (solo name) | ✅ en `metadata.medicalCondition` listo |
+| `FAQPage` | presente ✅ | — |
+| `BreadcrumbList` | presente ✅ | — |
 
 ---
 
-## 4. Dependencias finales (npm list --depth=0)
+## 4. Dependencias finales
 
 ```
 psicoprotego-tests@0.1.0
@@ -106,47 +115,70 @@ psicoprotego-tests@0.1.0
 └── typescript@5.9.3
 ```
 
-**Dependencias eliminadas en Fase 0:** `@upstash/redis`, `@vercel/kv`, `gray-matter`, `marked`
+Dependencias eliminadas en Fase 0: `gray-matter`, `marked`, `@upstash/redis`, `@vercel/kv`
 
 ---
 
-## 5. Delta Fase 0 vs inicio
+## 5. Delta Fase 0 vs estado inicial
 
-| Métrica | Antes | Ahora |
+| Métrica | Inicio Fase 0 | Cierre Fase 0 |
 |---|---|---|
-| Páginas SSG | 106 (14 idiomas × páginas) → ~41 post-Bloque A | 41 (ES + rutas estáticas en/pt/ku) |
-| Tests activos | 3 (GAD-7, PHQ-9, Apego) | 2 (GAD-7, PHQ-9 — Apego archivado) |
+| SSG pages | 106 (14 idiomas × rutas) | 41 (ES + páginas estáticas) |
+| Tests activos | 3 (GAD-7, PHQ-9, Apego) | 2 (GAD-7, PHQ-9; Apego archivado) |
 | Idiomas de tests | ES/EN/PT/KU | ES únicamente |
-| Archivado | — | archive/ con: ads, group sessions, URL shortener, RemindMe, ScoreHistory, blog, apego, en/pt/ku test files |
-| Dependencias eliminadas | — | @upstash/redis, @vercel/kv, gray-matter, marked |
-| Commits atómicos Fase 0 | — | 14 (+1 este baseline = 15) |
-| Schema markup | MedicalWebPage básico | MedicalWebPage + BreadcrumbList + FAQPage; authors.json listo para Fase 3 |
+| Archivado | — | archive/: ads, group sessions, URL shortener, RemindMe, ScoreHistory, blog, apego, en/pt/ku test files |
+| Deps removidas | — | gray-matter, marked, @upstash/redis, @vercel/kv |
+| Commits atómicos Fase 0 | — | 18 |
+| Schema markup | básico | BreadcrumbList + FAQPage + MedicalWebPage con DOI |
 | Modelo de datos | topicCategory, category:quiz | condition, category:psychometric\|screening; medicalCondition (ICD-10), validation (DOI), authorship |
+| Autoría clínica | — | authors.json completo: Emmanuel Rodríguez de Vera Ríos (M-18523) + Cristina Domingo Gutiérrez (M-30745) |
+| Fotos de equipo | — | public/images/team/: emmanuel.jpg (28KB) + cristina.webp (63KB) |
 
 ---
 
-## 6. Próxima fase: Fase 1 — Integración técnica
+## 6. Verificación F.1 — Exclusión archive/ en discoverTests
+
+**Mecanismo:** `TESTS_DIR = path.join(process.cwd(), 'public', 'data', 'tests')`
+
+`archive/` vive en la raíz del proyecto, fuera de `public/data/tests/`. La exclusión es **estructural** — `fs.readdir(TESTS_DIR)` nunca ve `archive/`. No se necesitó filtro explícito. Confirmado con build completo: 2 tests en tests-index.json (gad7, phq9).
+
+---
+
+## 7. Próxima fase: Fase 1 — Integración técnica
 
 Objetivos:
 1. Apache reverse proxy en Contabo: `psicoprotego.es/tests` → Vercel
 2. Next.js `basePath: '/tests'`
-3. Routing `/tests/:condition/:slug` (actualmente `/es/test/:testId`)
+3. Routing `/tests/:condition/:slug` (hoy `/es/test/:testId`)
 4. Cloudflare caching rules para `/tests/*`
 5. Sitemap unificado en `psicoprotego.es`
 6. Rediseño visual heredando look de `psicoprotego.es/servicios/*`
 
 ---
 
-## 7. Pendientes manuales (bloqueantes parciales para Fase 2+)
+## 8. Pendientes manuales
 
-| Pendiente | Propietario | Archivo |
-|---|---|---|
-| Apellidos exactos de Cristina | Cristina | `public/data/authors.json` → campo `name` |
-| Slug de perfil de Cristina | Cristina | `public/data/authors.json` → campo `profileUrl` |
-| Apellidos exactos de Emmanuel | Emmanuel | `public/data/authors.json` → campo `name` |
-| Foto de Cristina | Cristina | `public/images/team/cristina.jpg` (directorio no existe aún) |
-| Foto de Emmanuel | Emmanuel | `public/images/team/emmanuel.jpg` (directorio no existe aún) |
-| Referencia española exacta GAD-7 | Emmanuel | `public/data/tests/gad7/metadata.json` → `validation.spanishValidation.note` |
-| Referencia española exacta PHQ-9 | Emmanuel | `public/data/tests/phq9/metadata.json` → `validation.spanishValidation.note` |
-| Contenido `[PENDIENTE]` en es.content.json GAD-7 | Emmanuel + Cristina | `public/data/tests/gad7/es.content.json` |
-| Contenido `[PENDIENTE]` en es.content.json PHQ-9 | Emmanuel + Cristina | `public/data/tests/phq9/es.content.json` |
+### Resueltos durante cierre Fase 0
+- [x] Apellidos de Cristina: Cristina Domingo Gutiérrez
+- [x] Colegiación Cristina: M-30745
+- [x] Perfil Cristina: `/equipo/cristina-domingo/` (HTTP 200 verificado)
+- [x] Nombre completo Emmanuel: Emmanuel Rodríguez de Vera Ríos
+- [x] Fotos de equipo: `public/images/team/emmanuel.jpg` + `cristina.webp`
+- [x] Build Vercel en verde tras fix de tipos huérfanos (deploy DPrfMk3Y4, commit 1e54516)
+
+### Abiertos — no bloqueantes para Fase 1
+- [ ] Referencias españolas exactas de validación GAD-7 (`metadata.validation.spanishValidation`)
+- [ ] Referencias españolas exactas de validación PHQ-9
+- [ ] Lighthouse scores vía pagespeed.web.dev (captura manual)
+- [ ] Optimización de fotos de equipo si se considera necesario en Fase 1
+
+### Abiertos — Fase 2
+- [ ] Redacción clínica de `es.content.json` GAD-7 y PHQ-9 con skill `/clinical-landing-writer` + revisión Cristina + Emmanuel
+
+---
+
+## 9. Incidente registrado
+
+Durante Bloque B.4, `src/types/test.ts` quedó en working tree sin stagear mientras todos sus consumidores sí fueron commiteados. El build local con `tsc --noEmit` pasó (lee working tree) pero Vercel falló al construir desde el commit (donde `TestMetadata` aún tenía `topicCategory` y no `condition`). Resuelto en commit `1e54516`.
+
+**Lección aplicada:** tras cada bloque, validar explícitamente `git status` limpio y `git diff HEAD..origin/<rama> --stat` tras push. `tsc --noEmit` no es suficiente — lee el working tree, no el commit.
