@@ -151,3 +151,5 @@ CREDENTIALS.md                 ← CRÍTICO (tus tokens)
 .vscode/settings.json          ← Opcional (config personal VS Code)
 .DS_Store                       ← Opcional (archivos Mac)
 Thumbs.db                       ← Opcional (archivos Windows)
+# clinical-landing-writer intermediate artifacts
+public/data/tests/*/.dossier.json
