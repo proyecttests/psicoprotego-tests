@@ -12,6 +12,31 @@ SIN sustituir juicio clínico.
     rango y qué acción razonable corresponde (autocuidado,
     monitorización, consulta profesional, urgencia).
 
+## Datos de entrada: cutoffs
+
+El template lee los cutoffs desde dos fuentes, en orden de preferencia:
+
+1. `.dossier.json > cutoffs.standard` (preferido — contiene
+   `clinicalInterpretation` y `recommendedAction` ya redactados).
+2. `metadata.json > cutoffs` (fallback — solo rangos sin interpretación
+   clínica enriquecida).
+
+Para cada rango, el LLM debe producir un párrafo en el `body` que:
+
+- Mencione el rango por su **label** (no por sus números crudos).
+- Explique la interpretación clínica orientativa.
+- Sugiera la acción recomendada según `recommendedAction`.
+- Aplique las reglas de CTA calibrado según rango (ver sección
+  "CTA calibrado" más abajo).
+
+Ejemplo de párrafo esperado (rango moderate de GAD-7):
+
+> "Un resultado en el rango Moderado sugiere síntomas que, sin ser
+> incapacitantes, pueden estar afectando tu día a día. Es recomendable
+> una valoración profesional para entender mejor qué los sostiene.
+> Si no tienes un psicólogo de referencia, en Psicoprotego estamos
+> disponibles para acompañarte."
+
 ## Regla de crisis
 
 - Para rangos marcados como "severe" o con red flags, SIEMPRE
