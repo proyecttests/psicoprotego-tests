@@ -23,6 +23,22 @@ mal, el skill falla en su razón de ser.
 - Si el test tiene una validación limitada en español o en cierta
   población, mencionarlo.
 
+## Shape JSON esperado
+
+El LLM debe producir el siguiente objeto en `es.content.json.whoIsItFor`:
+
+```json
+{
+  "heading": "¿A quién está dirigido?",
+  "body": "<prosa de 2-3 párrafos>",
+  "indications": ["<item 1>", "<item 2>", "..."],
+  "limitations": ["<item 1>", "<item 2>", "..."]
+}
+```
+
+Tipo TypeScript de referencia (no modificar desde el skill):
+`src/types/test.ts` → `TestContent.whoIsItFor`
+
 ## Ejemplo de limitations esperado (GAD-7)
 
 ```json
