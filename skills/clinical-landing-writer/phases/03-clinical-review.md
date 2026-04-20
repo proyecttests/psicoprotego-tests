@@ -29,7 +29,7 @@ Aplicar también `eeat-signals.md` como checklist secundario.
 1. `es.content.json` final con:
    - Marcadores `[REVISAR: ...]` donde aplique.
    - Campo `auditedAt: <ISO-8601>` en metadata raíz.
-   - Status sigue siendo `"draft-for-clinical-review"`.
+   - Status sigue siendo `"draft-pending-clinical-review"`.
 
 2. `es.content.review.md`: markdown de prosa legible que muestra
    cada sección renderizada en un formato que Cristina o Emmanuel
@@ -42,7 +42,7 @@ Aplicar también `eeat-signals.md` como checklist secundario.
 ```markdown
 # Revisión clínica: <nombre del test>
 
-**Status:** draft-for-clinical-review
+**Status:** draft-pending-clinical-review
 **Borrador:** clinical-landing-writer-v1
 **Auditado:** <timestamp>
 **Autor firmante (pendiente):** <author name desde authors.json>

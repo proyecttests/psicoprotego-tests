@@ -13,7 +13,7 @@ clínica) y del patrón editorial establecido en las páginas
 - `public/data/tests/<testId>/es.content.review.md` (canal humano)
 - `public/data/tests/<testId>/.dossier.json` (intermedio, uso interno)
 
-**Status siempre:** `draft-for-clinical-review`. El cambio a
+**Status siempre:** `draft-pending-clinical-review`. El cambio a
 `clinically-approved` es manual tras revisión por Cristina y/o
 Emmanuel.
 
@@ -85,7 +85,7 @@ markdown espejo `es.content.review.md` para lectura humana cómoda.
 Output:
 - `es.content.json` final con flags `[REVISAR: ...]` donde proceda
   + campo metadata `drafted: "clinical-landing-writer-v1"` +
-  `status: "draft-for-clinical-review"` + `auditedAt: <timestamp>`.
+  `status: "draft-pending-clinical-review"` + `auditedAt: <timestamp>`.
 - `es.content.review.md` (markdown prosa legible por humanos).
 
 ## Firma clínica (manual, fuera del skill)
