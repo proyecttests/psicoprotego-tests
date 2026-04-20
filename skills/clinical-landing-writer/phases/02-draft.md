@@ -33,5 +33,5 @@ exactamente los templates y el patrón de voz documentado.
 ## Output
 `es.content.json` con la estructura exacta definida por el tipo
 `TestContent` de `src/types/test.ts`. El `status` debe ser
-`"draft-for-clinical-review"`. Añadir campo meta al nivel raíz:
+`"draft-pending-clinical-review"`. Añadir campo meta al nivel raíz:
 `"drafted": "clinical-landing-writer-v1"`.
