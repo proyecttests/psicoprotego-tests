@@ -1,26 +1,28 @@
 # Fase 1 — Research clínica
 
-> **Estado:** pendiente de integración con motor `clinical-research`
-> (ver `/home/devops/tools/clinical-research/`). Fase actualmente
-> no ejecutable.
-
 ## Objetivo
 Generar `.dossier.json` con contexto clínico actualizado y
 referenciado para el test indicado. No se redacta contenido de
 landing aún.
 
-## Input disponible
+## Input requerido
 
 - `public/data/tests/<testId>/metadata.json`
 - `public/data/authors.json`
-- Markdown generado por el motor `clinical-research`:
-  `public/data/tests/<testId>/.research/*.md`
-  (pendiente de construcción — ver G.3; hasta entonces, este prompt
-  NO se ejecuta en pipeline real.)
+- Markdown del motor `clinical-research`:
+  `public/data/tests/<testId>/.research/<testId>.md`
 
-**⚠️ NO EJECUTAR este prompt hasta que el motor clinical-research
-esté construido y haya generado markdown para el test. Una vez exista,
-este aviso se retira.**
+  Generar con:
+  ```bash
+  cd /home/devops/tools/clinical-research
+  source .venv/bin/activate
+  clinical-research search <testId> \
+    --instrument "<instrument_short>" \
+    --condition "<condition>" \
+    --condition-es "<condition_es>" \
+    --icd10 "<icd10>" \
+    --output /home/devops/projects/psicoprotego/psicoprotego-tests/public/data/tests/<testId>/.research/<testId>.md
+  ```
 
 ## Instrucciones para el LLM
 
