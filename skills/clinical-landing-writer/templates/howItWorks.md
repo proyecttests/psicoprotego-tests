@@ -18,6 +18,23 @@ cuánto tarda, cómo se puntúa, rango total, qué pasa después.
 - Si hay discrepancia entre lo que el LLM asume y lo que dice
   metadata, gana metadata.
 
+### Encuadre clínico
+
+El bloque `body` debe incluir UNA frase que sitúe el uso del test en
+flujo clínico. Ejemplos válidos:
+
+- "Esta herramienta se usa típicamente en el marco de un proceso
+  de evaluación o seguimiento. Si ya estás en consulta, tu
+  profesional puede decirte si te conviene completarlo; si todavía
+  no has consultado, el resultado puede servirte para llevar un
+  registro orientativo a una primera cita."
+
+- "Es una herramienta de apoyo clínico, no un diagnóstico
+  automatizado. La interpretación más útil siempre se hace junto
+  con un profesional que conozca tu contexto."
+
+Si el body actual no incluye esta idea, el LLM debe añadirla.
+
 ## Ejemplo de steps esperado (GAD-7)
 
 ```json
