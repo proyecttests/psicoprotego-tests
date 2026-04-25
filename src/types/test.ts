@@ -203,6 +203,7 @@ export interface MedicalCondition {
 }
 
 export interface ValidationReference {
+  id?: number
   doi: string
   authors: string
   year: number
@@ -211,6 +212,7 @@ export interface ValidationReference {
   issue?: string
   pages?: string
   title: string
+  url?: string
 }
 
 export interface TestValidation {
@@ -257,6 +259,7 @@ export interface TestContent {
   hero: {
     title: string
     subtitle: string
+    clinicalContext?: string
     badges: string[]
   }
   whatItMeasures: TestContentSection
@@ -267,7 +270,9 @@ export interface TestContent {
   howItWorks: TestContentSection & {
     steps: string[]
   }
-  validation: TestContentSection
+  validation: TestContentSection & {
+    references?: ValidationReference[]
+  }
   interpretation: TestContentSection
   faq: { q: string; a: string }[]
   privacy: TestContentSection
