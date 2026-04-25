@@ -7,6 +7,13 @@ mal, el skill falla en su razón de ser.
 
 ## Estructura obligatoria
 
+> **Encuadre crítico:** este bloque define para QUIÉN es útil la
+> herramienta. La regla es: los usuarios reales del test son personas
+> que YA están en proceso clínico, o que YA han decidido consultar,
+> o profesionales/estudiantes. NO son personas que "quieren saber
+> si tienen ansiedad sin haber consultado". Si una indicación
+> sugiere ese encuadre, está mal.
+
 - heading: fijo "¿A quién está dirigido?"
 - body (2-3 párrafos): población diana general.
 - indications (array de bullets, 3-5 items): perfiles concretos
@@ -38,6 +45,30 @@ El LLM debe producir el siguiente objeto en `es.content.json.whoIsItFor`:
 
 Tipo TypeScript de referencia (no modificar desde el skill):
 `src/types/test.ts` → `TestContent.whoIsItFor`
+
+## Ejemplo de indications esperado (encuadre correcto)
+
+```json
+[
+  "Personas en seguimiento por un profesional de salud mental que quieran apoyar la valoración o llevar un registro entre sesiones.",
+  "Personas que han decidido pedir ayuda y quieren llevar un registro orientativo a una primera consulta.",
+  "Personas con dudas sobre cómo se están sintiendo que quieren poner palabras a su experiencia antes de hablar con un profesional.",
+  "Profesionales clínicos, estudiantes de Psicología/Medicina o investigadores que quieren consultar la herramienta y su validación."
+]
+```
+
+## Ejemplo de indications INCORRECTO (autocribado)
+
+```json
+[
+  "Personas que quieren saber si tienen ansiedad generalizada.",
+  "Quien quiera comprobar su nivel de ansiedad.",
+  "Personas que se preguntan si necesitan ayuda profesional."
+]
+```
+
+(Estos tres ejemplos están MAL porque desplazan la decisión clínica
+al usuario y posicionan el test como sustituto de consulta.)
 
 ## Ejemplo de limitations esperado (GAD-7)
 
