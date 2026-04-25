@@ -1,13 +1,14 @@
 {
   "status": "draft-pending-clinical-review",
-  "drafted": "clinical-landing-writer-v1",
-  "draftedAt": "2026-04-23T00:00:00.000Z",
+  "drafted": "clinical-landing-writer-v2",
+  "draftedAt": "2026-04-22T00:00:00.000Z",
   "lastEditedBy": null,
   "clinicallyApprovedBy": null,
   "clinicallyApprovedAt": null,
   "hero": {
-    "title": "Test GAD-7: evaluación orientativa de ansiedad generalizada",
-    "subtitle": "Si vives con una tensión que no se va, preocupaciones que no puedes frenar o el pecho apretado sin motivo claro, este cuestionario puede ayudarte a ponerle palabras.",
+    "title": "Test GAD-7: cuestionario orientativo de síntomas de ansiedad generalizada",
+    "subtitle": "Si vives con una tensión que no se va, preocupaciones que no puedes frenar o el pecho apretado sin motivo claro, este cuestionario puede ayudarte a poner palabras a tu experiencia.",
+    "clinicalContext": "Es una herramienta clínica de apoyo. Está pensada para usarse junto con un profesional, o para llevar un registro orientativo a una primera consulta.",
     "badges": [
       "Instrumento validado",
       "7 preguntas",
@@ -22,16 +23,17 @@
   },
   "whoIsItFor": {
     "heading": "¿A quién está dirigido?",
-    "body": "Este cuestionario está pensado para personas adultas que quieran explorar si los síntomas que experimentan podrían corresponder a un patrón de ansiedad generalizada. No es necesario tener un diagnóstico previo ni acudir a una consulta para usarlo: es un punto de partida para entender mejor cómo uno se está encontrando.\n\nPuede ser especialmente útil para quienes llevan un tiempo con la sensación de que «algo no va bien» pero no saben si lo que sienten tiene nombre, o para quienes quieran llevar un seguimiento de sus síntomas a lo largo del tiempo.",
+    "body": "El GAD-7 es un instrumento de uso clínico diseñado para evaluar la presencia e intensidad de síntomas de ansiedad en adultos. Su uso más habitual tiene lugar dentro de un proceso de evaluación, seguimiento terapéutico o como registro previo a una primera consulta. No está concebido como un test de autocribado que reemplace el juicio profesional.\n\nResulta especialmente útil para quienes ya están en proceso clínico y quieren complementar la valoración de su profesional, o para quienes han tomado la decisión de pedir ayuda y quieren llegar a esa primera cita con un punto de partida estructurado. También lo utilizan profesionales clínicos y estudiantes de ciencias de la salud para familiarizarse con el instrumento.\n\nSi no has consultado nunca y tienes dudas sobre si lo que sientes merece atención profesional, lo más útil no es resolver esa pregunta con un test: es hablarlo directamente con un psicólogo/a, tu médico de cabecera o el servicio de salud mental más cercano.",
     "indications": [
-      "Adultos de 18 años o más que quieran explorar síntomas de ansiedad generalizada.",
-      "Personas en seguimiento por un profesional de salud mental que quieran complementar la valoración.",
-      "Quienes desean disponer de un registro orientativo antes de una primera consulta.",
-      "Profesionales de atención primaria o salud mental que lo usen como apoyo de cribado (instrumento de libre uso)."
+      "Personas en seguimiento por un profesional de salud mental que quieran apoyar la valoración o llevar un registro de síntomas entre sesiones.",
+      "Personas que han decidido pedir ayuda y quieren disponer de un registro orientativo para llevar a una primera consulta.",
+      "Personas con dudas sobre cómo se están sintiendo que quieren poner palabras a su experiencia antes de hablar con un profesional.",
+      "Profesionales clínicos, estudiantes de Psicología o Medicina e investigadores que quieran consultar el instrumento y su validación.",
+      "Pacientes de atención primaria que su médico de cabecera ha derivado o recomendado completar el cuestionario como parte de la valoración."
     ],
     "limitations": [
       "No es una herramienta diagnóstica. No sustituye la evaluación por parte de un profesional de la salud mental.",
-      "No es adecuado en episodios agudos de ansiedad o crisis. En esos casos, la prioridad es la intervención, no el cribado.",
+      "No es adecuado en episodios agudos de ansiedad o crisis: en esos casos, la prioridad es la intervención, no el cribado.",
       "En personas con comorbilidades psiquiátricas complejas, la puntuación debe interpretarse siempre con contexto clínico adicional.",
       "Los puntos de corte están establecidos en población adulta. En adolescentes la interpretación debe hacerse con cautela y con apoyo profesional.",
       "Síntomas físicos de enfermedades médicas pueden elevar la puntuación sin que corresponda a un cuadro de ansiedad (falsos positivos posibles en población con patología crónica)."
@@ -39,7 +41,7 @@
   },
   "howItWorks": {
     "heading": "Cómo funciona",
-    "body": "El test consta de 7 preguntas sobre cómo te has sentido durante las últimas dos semanas. Cada pregunta ofrece cuatro opciones de respuesta, desde «Nunca» hasta «Casi cada día». No hay respuestas correctas o incorrectas; solo describe lo que mejor se ajusta a tu experiencia.\n\nLa puntuación total oscila entre 0 y 21 puntos. El resultado se interpreta según rangos clínicos establecidos por la validación original del instrumento, con una orientación clara sobre qué puede indicar cada puntuación.",
+    "body": "El test consta de 7 preguntas sobre cómo te has sentido durante las últimas dos semanas. Cada pregunta ofrece cuatro opciones de respuesta, desde «Nunca» hasta «Casi cada día». No hay respuestas correctas o incorrectas; solo describe lo que mejor se ajusta a tu experiencia.\n\nLa puntuación total oscila entre 0 y 21 puntos. El resultado se interpreta según rangos clínicos establecidos por la validación original del instrumento, con una orientación clara sobre qué puede indicar cada puntuación.\n\nEsta herramienta se usa típicamente en el marco de un proceso de evaluación o seguimiento. Si ya estás en consulta, tu profesional puede decirte si te conviene completarlo; si todavía no has consultado, el resultado puede servirte para llevar un registro orientativo a una primera cita.",
     "steps": [
       "Respondes 7 preguntas sobre cómo te has sentido las últimas 2 semanas.",
       "Cada pregunta tiene 4 opciones (de 'Nunca' a 'Casi cada día').",
@@ -50,11 +52,71 @@
   },
   "validation": {
     "heading": "Validación científica",
-    "body": "El GAD-7 fue desarrollado y validado por [Spitzer, Kroenke, Williams y Löwe (2006)](https://doi.org/10.1001/archinte.166.10.1092) en una muestra de 2740 pacientes de atención primaria en Estados Unidos. El estudio demostró una sensibilidad del 89%, especificidad del 82% y alta consistencia interna (alfa de Cronbach = 0,92). Estos resultados posicionaron el GAD-7 como el instrumento de cribado de ansiedad generalizada con mayor respaldo empírico disponible.\n\nLa validez del instrumento en población general (no solo clínica) fue confirmada por [Löwe et al. (2008)](https://doi.org/10.1097/mlr.0b013e318160d093) en una encuesta nacional representativa alemana, que además generó datos normativos de referencia.\n\nLa versión en español fue adaptada culturalmente y validada por [García-Campayo et al. (2010)](https://doi.org/10.1186/1477-7525-8-8) en el contexto clínico y cultural español, confirmando la relevancia y adecuación de los ítems.\n\nUna revisión sistemática y metaanálisis diagnóstico de [Plummer et al. (2016)](https://doi.org/10.1016/j.genhosppsych.2015.11.005) analizó 12 estudios con 5215 participantes y confirmó que el GAD-7 mantiene alta precisión diagnóstica para detectar TAG y cualquier trastorno de ansiedad en entornos clínicos, consolidando su uso como herramienta de primera línea.\n\nEn 2025, la [Revisión Cochrane de Aktürk et al.](https://doi.org/10.1002/14651858.cd015455) reconfirmó que el GAD-7 y su versión abreviada (GAD-2) son los instrumentos de cribado de ansiedad más utilizados en adultos, con evidencia sólida sobre su precisión diagnóstica."
+    "body": "El GAD-7 fue desarrollado por Spitzer et al. (2006) en una muestra de 2740 pacientes de atención primaria en Estados Unidos, demostrando una sensibilidad del 89%, especificidad del 82% y alta consistencia interna (alfa de Cronbach = 0,92) [1]. La validez del instrumento en población general fue confirmada por Löwe et al. (2008) en una encuesta nacional representativa alemana, que también generó datos normativos de referencia [2].\n\nLa versión en español fue adaptada culturalmente y validada por García-Campayo et al. (2010) en el contexto clínico y cultural español, confirmando la adecuación de los ítems para su uso en población hispanohablante [3]. En 2016, Plummer et al. realizaron una revisión sistemática y metaanálisis diagnóstico sobre 12 estudios con 5215 participantes que confirmó la alta precisión del GAD-7 para detectar TAG y cualquier trastorno de ansiedad en entornos clínicos [4].\n\nEn 2025, una revisión Cochrane reconfirmó que el GAD-7 y su versión abreviada (GAD-2) son los instrumentos de cribado de ansiedad más utilizados en adultos, con evidencia sólida sobre su precisión diagnóstica [5].",
+    "references": [
+      {
+        "id": 1,
+        "authors": "Spitzer RL, Kroenke K, Williams JBW, Löwe B",
+        "year": 2006,
+        "title": "A Brief Measure for Assessing Generalized Anxiety Disorder: The GAD-7",
+        "journal": "Archives of Internal Medicine",
+        "volume": "166",
+        "issue": "10",
+        "pages": "1092-1097",
+        "doi": "10.1001/archinte.166.10.1092",
+        "url": "https://doi.org/10.1001/archinte.166.10.1092"
+      },
+      {
+        "id": 2,
+        "authors": "Löwe B, Decker O, Müller S, Brähler E, et al.",
+        "year": 2008,
+        "title": "Validation and Standardization of the Generalized Anxiety Disorder Screener (GAD-7) in the General Population",
+        "journal": "Medical Care",
+        "volume": "46",
+        "issue": "3",
+        "pages": "266-274",
+        "doi": "10.1097/mlr.0b013e318160d093",
+        "url": "https://doi.org/10.1097/mlr.0b013e318160d093"
+      },
+      {
+        "id": 3,
+        "authors": "García-Campayo J, Zamorano E, Ruíz MA, Pardo A, Pérez-Páramo M, et al.",
+        "year": 2010,
+        "title": "Cultural adaptation into Spanish of the generalized anxiety disorder 7 (GAD-7) scale as a screening tool",
+        "journal": "Health and Quality of Life Outcomes",
+        "volume": "8",
+        "issue": "1",
+        "pages": "8",
+        "doi": "10.1186/1477-7525-8-8",
+        "url": "https://doi.org/10.1186/1477-7525-8-8"
+      },
+      {
+        "id": 4,
+        "authors": "Plummer F, Manea L, Trepel D, McMillan D",
+        "year": 2016,
+        "title": "Screening for anxiety disorders with the GAD-7 and GAD-2: a systematic review and diagnostic metaanalysis",
+        "journal": "General Hospital Psychiatry",
+        "volume": "39",
+        "pages": "24-31",
+        "doi": "10.1016/j.genhosppsych.2015.11.005",
+        "url": "https://doi.org/10.1016/j.genhosppsych.2015.11.005"
+      },
+      {
+        "id": 5,
+        "authors": "Aktürk Z, Hapfelmeier A, et al.",
+        "year": 2025,
+        "title": "Generalized anxiety disorder screeners in adults: a systematic review and diagnostic test accuracy meta-analysis",
+        "journal": "Cochrane Database of Systematic Reviews",
+        "volume": "3",
+        "pages": "CD015455",
+        "doi": "10.1002/14651858.cd015455",
+        "url": "https://doi.org/10.1002/14651858.cd015455"
+      }
+    ]
   },
   "interpretation": {
     "heading": "Qué hacer con tu resultado",
-    "body": "Una puntuación en el rango Mínimo (0–4 puntos) sugiere ausencia o niveles muy bajos de síntomas de ansiedad generalizada. No indica ninguna acción específica; si tienes dudas puntuales, las estrategias de autocuidado y atención a tu bienestar general son la orientación habitual.\n\nUna puntuación en el rango Leve (5–9 puntos) puede reflejar síntomas presentes de forma intermitente. En muchos casos corresponde a periodos de estrés transitorio más que a un cuadro clínico establecido. Es razonable observar cómo evoluciona y valorar hábitos de autocuidado. Si los síntomas persisten varias semanas, podría tener sentido comentarlo con un profesional.\n\nUna puntuación en el rango Moderado (10–14 puntos) sugiere síntomas que, aunque no incapacitantes, pueden estar afectando el día a día de forma significativa. La literatura clínica señala este umbral como punto de referencia para recomendar una valoración profesional. Si quieres interpretar este resultado con apoyo, puedes compartirlo con tu psicólogo/a de referencia. Si no tienes uno, en Psicoprotego estamos disponibles para acompañarte.\n\nUna puntuación en el rango Grave (15–21 puntos) puede sugerir un nivel de malestar significativo que justifica buscar apoyo profesional de forma prioritaria. Es recomendable comentarlo con un profesional de salud mental. Si en este momento el malestar es muy intenso y no sabes a quién acudir, en España puedes llamar al 024 (línea de atención a la conducta suicida y crisis de salud mental, gratuita, 24 horas).\n\nLos rangos son orientativos y no diagnósticos. La misma puntuación puede tener significados clínicos diferentes según el contexto de cada persona. Este resultado no equivale a un diagnóstico de TAG; solo un/una profesional de la salud mental puede establecerlo tras una evaluación completa."
+    "body": "Una puntuación en el rango Mínimo (0–4 puntos) sugiere ausencia o niveles muy bajos de síntomas de ansiedad generalizada. No requiere ninguna acción específica. Si tienes un profesional de referencia, puedes comentarle el resultado en tu próxima consulta o seguimiento. Si en algún momento sientes que algo no encaja, puedes hablarlo con un profesional de salud mental aunque la puntuación sea baja.\n\nUna puntuación en el rango Leve (5–9 puntos) puede reflejar síntomas presentes de forma intermitente, a menudo asociados a periodos de estrés transitorio. Es razonable observar cómo evolucionan y atender al autocuidado. Si los síntomas persisten varias semanas o te generan malestar, puede tener sentido hablarlo con un profesional. Si ya estás en seguimiento, es información útil para comentar en tu próxima sesión.\n\nUna puntuación en el rango Moderado (10–14 puntos) es información útil para llevar a consulta. La literatura clínica señala este umbral como punto de referencia para recomendar valoración profesional. Si ya estás en seguimiento profesional, compártelo en tu próxima sesión. Si aún no tienes psicólogo/a de referencia y quieres comentar este resultado con alguien, en Psicoprotego podemos acompañarte a dar los primeros pasos.\n\nUna puntuación en el rango Grave (15–21 puntos) sugiere malestar significativo. Es recomendable hablar con un profesional sanitario —psicólogo/a, psiquiatra o médico/a de familia— para valorar tu situación con contexto. Si en este momento el malestar es muy intenso, en España puedes llamar al **024** (línea de atención a la conducta suicida y crisis de salud mental, gratuita, 24h).\n\nLos rangos son orientativos. Una misma puntuación puede tener significados clínicos distintos según el contexto vital de cada persona. Solo un/una profesional de salud mental puede establecer un diagnóstico tras una evaluación completa."
   },
   "faq": [
     {
@@ -71,15 +133,23 @@
     },
     {
       "q": "¿Qué hago si el resultado es alto?",
-      "a": "Un resultado elevado (especialmente en rango Moderado o Grave) sugiere que podría valer la pena hablar con un profesional de salud mental. Si el malestar es muy intenso ahora mismo, en España puedes llamar al 024, una línea gratuita de atención a la conducta suicida y crisis de salud mental, disponible las 24 horas."
+      "a": "Un resultado elevado —especialmente en rango Moderado o Grave— sugiere que podría valer la pena hablar con un profesional de salud mental. La decisión de consultar no la toma el test: la toma el malestar que sientes. Si ese malestar es muy intenso ahora mismo, en España puedes llamar al 024, línea gratuita de atención a la conducta suicida y crisis de salud mental, disponible las 24 horas."
+    },
+    {
+      "q": "¿Cuándo debería ver a un psicólogo, un psiquiatra o mi médico de cabecera?",
+      "a": "Como orientación general: el médico de cabecera es habitualmente el primer punto de contacto y puede derivar si lo considera necesario. El psicólogo/a es el profesional indicado para intervención psicológica (terapia, acompañamiento, estrategias de manejo). El psiquiatra entra en escena cuando puede ser necesaria una evaluación farmacológica o cuando hay comorbilidad compleja. Si tienes dudas sobre por dónde empezar, tu médico de familia puede orientarte. Lo que no debería decidir es el resultado de este test."
+    },
+    {
+      "q": "¿Este test puede decirme si necesito ayuda profesional?",
+      "a": "No está diseñado para eso. La decisión de pedir ayuda la toma cada persona a partir de cómo se siente, no de una puntuación. Lo que el test sí puede hacer es ayudarte a poner palabras a tu experiencia y llevar esa información como punto de partida a una consulta. Si tienes dudas, hablar con un profesional es siempre una opción válida, con independencia del resultado."
     },
     {
       "q": "¿Con qué frecuencia puedo repetirlo?",
-      "a": "El GAD-7 está diseñado para evaluar los síntomas de las últimas dos semanas. Repetirlo cada 2–4 semanas puede ser útil para observar si los síntomas cambian con el tiempo, especialmente si estás en proceso terapéutico. No tiene sentido repetirlo el mismo día o con pocos días de diferencia."
+      "a": "El GAD-7 evalúa los síntomas de las últimas dos semanas. Repetirlo cada 2–4 semanas puede ser útil para observar si los síntomas cambian con el tiempo, especialmente si estás en proceso terapéutico. Si lo usas para seguimiento, comentar la evolución con tu profesional de referencia le dará más sentido al registro."
     },
     {
       "q": "¿Es válido si tengo otras condiciones de salud?",
-      "a": "El GAD-7 fue validado en pacientes de atención primaria que pueden tener diversas condiciones de salud. Sin embargo, algunos síntomas físicos (fatiga, tensión muscular) propios de enfermedades médicas pueden elevar la puntuación sin que correspondan a ansiedad generalizada. En esos casos, los resultados se interpretan mejor junto a un profesional que conozca el contexto completo."
+      "a": "El GAD-7 fue validado en pacientes de atención primaria que pueden tener diversas condiciones de salud. Sin embargo, algunos síntomas físicos —fatiga, tensión muscular— propios de enfermedades médicas pueden elevar la puntuación sin que correspondan a ansiedad generalizada. En esos casos, los resultados se interpretan mejor junto a un profesional que conozca el contexto completo."
     }
   ],
   "privacy": {
