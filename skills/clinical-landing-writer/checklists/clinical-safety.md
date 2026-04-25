@@ -12,6 +12,12 @@ item:
 - [ ] No se usa "diagnóstico" como algo que el test produce.
 - [ ] Los rangos de cutoff se describen como orientativos, nunca
   como categorías diagnósticas rígidas.
+- [ ] El contenido NO sugiere que la persona se autodiagnostique
+  con el test ("comprueba tu nivel", "descubre si tienes...").
+- [ ] El contenido NO posiciona el test como sustituto de consulta
+  clínica.
+- [ ] El contenido NO traslada al usuario la decisión binaria de
+  "según el resultado pide o no pides ayuda".
 
 ## B. Alarmismo y emocionalidad
 
@@ -62,6 +68,25 @@ item:
   CTA comercial.
 - [ ] El CTA para rango moderate es texto enlazado, no botón.
 - [ ] El rango severe NO tiene CTA comercial alguno.
+
+## J. Encuadre clínico de la herramienta (no autocribado)
+
+- [ ] El hero menciona o implica que la herramienta está pensada
+  para uso en contexto clínico (acompañamiento profesional, registro
+  para consulta, etc.).
+- [ ] `whoIsItFor.indications` describe perfiles que YA están en
+  proceso clínico o YA han decidido consultar (no "personas que
+  quieren saber si tienen X").
+- [ ] `howItWorks` ubica el uso en un flujo clínico (apoyo a
+  evaluación, seguimiento entre sesiones, registro pre-consulta).
+- [ ] `interpretation` presenta los rangos como información **para
+  llevar al profesional**, no como sentencia que dispara una decisión
+  binaria.
+- [ ] La FAQ incluye al menos una pregunta orientativa sobre cuándo
+  acudir a psicólogo / psiquiatra / médico de cabecera.
+- [ ] El CTA en moderado evita lenguaje de venta directa; usa
+  lenguaje de proceso ("si quieres comentar este resultado en
+  consulta y no tienes psicólogo/a de referencia...").
 
 ## H. Firma clínica visible (metadata)
 
