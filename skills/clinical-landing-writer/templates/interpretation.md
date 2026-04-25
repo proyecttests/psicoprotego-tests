@@ -46,14 +46,46 @@ Ejemplo de párrafo esperado (rango moderate de GAD-7):
   motiva acción ("Un resultado en este rango sugiere malestar
   significativo; es recomendable consultar con un profesional").
 
-## CTA calibrado (regla fija)
+## CTA calibrado (regla fija) — encuadre herramienta clínica
 
-- Rango minimal/mild: no incluir CTA a consulta comercial. Solo
-  referencia general al autocuidado.
-- Rango moderate/moderately severe: nota al cierre tipo
-  "Si quieres interpretar este resultado con apoyo profesional,
-  puedes consultarlo con tu psicólogo/a de referencia. Si no
-  tienes uno, en Psicoprotego estamos disponibles." — SIN botón
-  destacado, solo enlace en texto.
-- Rango severe/crisis: NUNCA CTA comercial. Solo 024 + recursos
-  de emergencia.
+El CTA NUNCA debe sugerir que el resultado del test es lo que
+dispara la decisión de consultar. La decisión la dispara el
+sufrimiento, la duda o la sintomatología; el test ayuda a llevar
+esa duda al profesional con un punto de partida orientativo.
+
+### Por rango
+
+**Mínimo / Leve:** sin CTA comercial. Lenguaje neutro de proceso:
+- "Si tienes un profesional de referencia, puedes comentarle el
+  resultado en tu próxima consulta o seguimiento."
+- "Si en algún momento sientes que algo no encaja, puedes hablarlo
+  con un profesional de salud mental, aunque la puntuación sea baja."
+
+**Moderado:** CTA muy suave, en lenguaje de proceso clínico, no de
+venta. Plantilla recomendada:
+
+> "Un resultado en este rango es información útil para llevar a
+> consulta. Si ya estás en seguimiento profesional, compártelo en
+> tu próxima sesión. Si aún no tienes psicólogo/a de referencia y
+> quieres comentar este resultado con alguien, en Psicoprotego
+> podemos acompañarte a dar los primeros pasos."
+
+**Grave:** sin CTA comercial alguno. Información de derivación
+clínica neutra:
+
+> "Una puntuación en este rango sugiere malestar significativo. Es
+> recomendable hablar con un profesional sanitario (psicólogo/a,
+> psiquiatra o médico/a de familia) para valorar tu situación con
+> contexto. Si en este momento el malestar es muy intenso, en
+> España puedes llamar al **024** (línea de atención a la conducta
+> suicida y crisis de salud mental, gratuita, 24h)."
+
+### Texto de cierre del bloque (común a todos los rangos)
+
+Tras los párrafos por rango, el bloque debe cerrar con una idea de
+que el test orienta pero no diagnostica:
+
+> "Los rangos son orientativos. Una misma puntuación puede tener
+> significados clínicos distintos según el contexto vital de cada
+> persona. Solo un/una profesional de salud mental puede establecer
+> un diagnóstico tras una evaluación completa."
