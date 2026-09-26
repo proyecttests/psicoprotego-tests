@@ -1,3 +1,9 @@
+---
+name: branding
+description: Proceso para actualizar paleta de colores, fuentes, logos e identidad visual de Psicoprotego (brand.ts, globals.css, tailwind.config.js, PDFs).
+disable-model-invocation: true
+---
+
 # Skill: Branding (cambio de identidad visual)
 
 Proceso para actualizar la paleta de colores, fuentes e identidad visual de Psicoprotego.

@@ -7,7 +7,7 @@ TEST_ID="${1:?testId required (e.g. gad7)}"
 PHASE="${2:---all}"
 
 REPO_ROOT=$(git rev-parse --show-toplevel)
-SKILL_DIR="$REPO_ROOT/skills/clinical-landing-writer"
+SKILL_DIR="$REPO_ROOT/.claude/skills/clinical-landing-writer"
 TEST_DIR="$REPO_ROOT/public/data/tests/$TEST_ID"
 
 if [ ! -f "$TEST_DIR/metadata.json" ]; then

@@ -1,3 +1,9 @@
+---
+name: deprecate-feature
+description: Elimina o archiva ordenadamente una feature del proyecto sin romper builds ni dejar código huérfano (usado en la consolidación hacia psicoprotego.es/tests).
+disable-model-invocation: true
+---
+
 # Skill: /deprecate-feature
 
 ## Propósito

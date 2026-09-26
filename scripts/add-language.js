@@ -133,6 +133,6 @@ CHECKLIST MANUAL PENDIENTE para '${lang}'
 
 [ ] ${isRTL ? '7' : '6'}. git commit -m "feat(i18n): añadir idioma ${lang}"
 
-Lee skills/add-language/SKILL.md para instrucciones completas.
+Lee .claude/skills/add-language/SKILL.md para instrucciones completas.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 `)

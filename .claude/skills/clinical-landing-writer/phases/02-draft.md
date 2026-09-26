@@ -8,8 +8,8 @@ redactadas siguiendo templates, tono, y dossier.
 - `public/data/tests/<testId>/metadata.json`
 - `public/data/authors.json`
 - `public/data/tests/<testId>/.dossier.json` (generado en fase 1)
-- `skills/clinical-landing-writer/templates/*.md`
-- `skills/clinical-landing-writer/checklists/tone-voice.md`
+- `.claude/skills/clinical-landing-writer/templates/*.md`
+- `.claude/skills/clinical-landing-writer/checklists/tone-voice.md`
 
 ## Instrucciones para el LLM
 

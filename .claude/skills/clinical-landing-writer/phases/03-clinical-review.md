@@ -7,8 +7,8 @@ markdown espejo `es.content.review.md`.
 
 ## Input disponible
 - `es.content.json` preliminar (salida de fase 2)
-- `skills/clinical-landing-writer/checklists/clinical-safety.md`
-- `skills/clinical-landing-writer/checklists/eeat-signals.md`
+- `.claude/skills/clinical-landing-writer/checklists/clinical-safety.md`
+- `.claude/skills/clinical-landing-writer/checklists/eeat-signals.md`
 
 ## Instrucciones para el LLM
 

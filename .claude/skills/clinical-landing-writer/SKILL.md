@@ -1,3 +1,9 @@
+---
+name: clinical-landing-writer
+description: Genera borradores de contenido clínico (es.content.json) para landings de tests psicológicos, vía pipeline de 3 fases (research, redacción, auto-revisión) pendiente de firma clínica humana.
+disable-model-invocation: true
+---
+
 # Skill: `/clinical-landing-writer`
 
 ## Propósito
@@ -38,15 +44,15 @@ Emmanuel.
 
 ```bash
 # Pipeline completo (3 fases)
-./skills/clinical-landing-writer/scripts/run.sh <testId>
+./.claude/skills/clinical-landing-writer/scripts/run.sh <testId>
 
 # Fases individuales (para debugging)
-./skills/clinical-landing-writer/scripts/run.sh <testId> --phase=research
-./skills/clinical-landing-writer/scripts/run.sh <testId> --phase=draft
-./skills/clinical-landing-writer/scripts/run.sh <testId> --phase=review
+./.claude/skills/clinical-landing-writer/scripts/run.sh <testId> --phase=research
+./.claude/skills/clinical-landing-writer/scripts/run.sh <testId> --phase=draft
+./.claude/skills/clinical-landing-writer/scripts/run.sh <testId> --phase=review
 ```
 
-Ejemplo: `./skills/clinical-landing-writer/scripts/run.sh gad7`
+Ejemplo: `./.claude/skills/clinical-landing-writer/scripts/run.sh gad7`
 
 ## Arquitectura: pipeline de 3 fases
 
@@ -107,7 +113,7 @@ Tras revisión por Cristina y/o Emmanuel:
 
 ## Integración en el repo
 
-- Skill vive en `skills/clinical-landing-writer/`.
+- Skill vive en `.claude/skills/clinical-landing-writer/`.
 - No toca código fuente del app (solo data files).
 - Las referencias de metadata.json y authors.json son read-only:
   el skill no muta nunca esos ficheros.

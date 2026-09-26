@@ -1,3 +1,9 @@
+---
+name: add-language
+description: Proceso completo para incorporar un nuevo idioma a Psicoprotego (script scripts/add-language.js, stubs de traducción, RTL, rutas estáticas).
+disable-model-invocation: true
+---
+
 # Skill: Añadir idioma (add-language)
 
 Proceso completo para incorporar un nuevo idioma a Psicoprotego.

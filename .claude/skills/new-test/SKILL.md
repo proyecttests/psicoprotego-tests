@@ -1,3 +1,9 @@
+---
+name: new-test
+description: Proceso completo para añadir un nuevo test psicométrico a Psicoprotego (metadata.json, es.json, función de scoring, validación, índice).
+disable-model-invocation: true
+---
+
 # Skill: Nuevo test psicométrico (new-test)
 
 Proceso completo para añadir un test psicológico/psicométrico a Psicoprotego.
