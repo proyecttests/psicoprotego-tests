@@ -8,6 +8,8 @@
 **Live (Vercel):** tests.psicoprotego.vercel.app
 **Destino final:** psicoprotego.es/tests (pendiente de proxy — ver Infraestructura)
 
+@PENDIENTES.md
+
 ## Dirección (no negociable)
 
 Herramienta clínica solo en español, con instrumentos psicométricos validados (GAD-7, PHQ-9, y más
