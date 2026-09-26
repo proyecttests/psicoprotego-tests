@@ -227,6 +227,19 @@ const SupportBlock: React.FC<{ lang: string }> = ({ lang }) => {
       >
         {ui.supportBody}
       </p>
+      {lang === 'es' && (
+        <div className="mb-3 space-y-1.5">
+          <p className="text-sm font-medium leading-relaxed" style={{ color: 'var(--color-primary)' }}>
+            Si estás en peligro inmediato, llama al{' '}
+            <a href="tel:112" className="font-bold underline underline-offset-2">112</a>.
+          </p>
+          <p className="text-sm font-medium leading-relaxed" style={{ color: 'var(--color-primary)' }}>
+            Si tienes pensamientos de suicidio, llama al{' '}
+            <a href="tel:024" className="font-bold underline underline-offset-2">024</a>{' '}
+            (Línea de atención a la conducta suicida), gratuita y disponible las 24 horas.
+          </p>
+        </div>
+      )}
       <Link
         href={helpRoute}
         className="text-sm font-medium underline underline-offset-2 transition-opacity hover:opacity-70 focus:outline-none focus-visible:ring-2 rounded"
@@ -240,12 +253,14 @@ const SupportBlock: React.FC<{ lang: string }> = ({ lang }) => {
       >
         {ui.privacyNote}
       </p>
-      <p
-        className="mt-1 text-xs"
-        style={{ color: 'var(--color-primary)', opacity: 0.4 }}
-      >
-        {ui.emergencyNote}
-      </p>
+      {lang !== 'es' && (
+        <p
+          className="mt-1 text-xs"
+          style={{ color: 'var(--color-primary)', opacity: 0.4 }}
+        >
+          {ui.emergencyNote}
+        </p>
+      )}
     </div>
   )
 }
