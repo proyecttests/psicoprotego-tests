@@ -9,24 +9,18 @@
 
 Examples:
 /es/test/gad7
-/en/test/gad7
-/ar/test/gad7
-/pt/test/gad7
 ```
 
-**Validation:** Only accept es, en, pt, fr, de, it, ar, he, ku, tr, el, hi, ja, ko  
-**Fallback:** Unknown lang → redirect to `/es/test/:testId`  
+**Validation:** Only accept `es` (`SUPPORTED_LANGS` en `src/config/brand.ts`)
+**Fallback:** Unknown lang → redirect to `/es/test/:testId`
 **Default:** `/tests` → `/es/test/gad7`
-
-**RTL Languages:** ar, he, ku require `dir="rtl"` on root container  
-**SEO:** Include hreflang tags in `<head>` for all language variants
 
 ### Data Model (JSON-Driven)
 
 - **tests.json** — Test definitions (questions, metadata, scoring function reference)
-- **messages.json** — Result messages per language + category
-- **disclaimers/ folder** — Clinical disclaimers per country
-- **crisis-phones.json** — Emergency numbers per language/country
+- **messages.json** — Result messages per category
+- **disclaimers/ folder** — Clinical disclaimers (Spain)
+- **crisis-phones.json** — Emergency number (Spain: 024)
 
 Example test.json entry:
 
@@ -69,8 +63,6 @@ src/components/
 │  ├─ ResultCard.tsx
 │  ├─ ShareableResult.tsx (OG image + buttons)
 │  └─ PercentileBar.tsx (needs DB)
-├─ ads/ (TO BUILD)
-│  └─ AdSlot.tsx (reserve space, inject code)
 └─ pages/
    └─ TestPage.tsx
 ```
@@ -111,16 +103,6 @@ Never commit `.env.local` to git.
 
 ---
 
-### Ad Placements (Reserve Space From Day 1)
-
-- Pre-result interstitial: After last question, before results. Highest value.
-- Too after user actions: sharing, sending to friend, copying link. High value.
-- Test intro page: Below description. Medium value.
-- Results page: Between score and analysis. Medium value.
-- During questions: NEVER.
-- Component: <AdSlot position="pre-result" size="rectangle" network="adsense" />
-- Phase 1: Empty div with reserved dimensions (prevents CLS)
-
 ### Shareable Results
 
 - Unique result URL: /:lang/test/:testId/result?s=XX&t=category
@@ -128,4 +110,4 @@ Never commit `.env.local` to git.
 - Share buttons: WhatsApp (primary), Twitter/X, copy link
 - "Send to someone" button: viral loop mechanism
 
-**Status:** These rules define extensibility. Follow them or new tests/languages will break.
+**Status:** These rules define extensibility. Follow them or new tests will break.

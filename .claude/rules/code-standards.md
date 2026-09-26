@@ -64,10 +64,11 @@ git commit -m "docs: update README with deployment steps"
 
 ### What NOT To Do
 - NEVER hardcode strings (use JSON data files)
-- NEVER commit secrets (use .env.local)
+- NEVER commit `.env.local` (secrets live there, never in git)
 - NEVER import from parent directories (use @/ aliases)
 - NEVER mix styled-components with Tailwind
 - NEVER skip TypeScript types
+- NEVER add `"type": "module"` to `package.json` — rompe PostCSS/Tailwind con Next.js 15
 
 ---
 
