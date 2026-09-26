@@ -117,14 +117,14 @@
       "severe": {
         "title": "Ansiedad Grave",
         "body": "Tus síntomas de ansiedad son significativos y probablemente están afectando tu bienestar y funcionamiento diario. Buscar ayuda profesional es importante.",
-        "recommendation": "Te recomendamos que contactes con un profesional de salud mental lo antes posible. Puedes llamar al 024 (Teléfono de la Esperanza) para hablar con alguien."
+        "recommendation": "Te recomendamos que contactes con un profesional de salud mental lo antes posible. Puedes llamar al 024 (Línea de atención a la conducta suicida) para hablar con alguien."
       }
     },
     "crisis": {
       "title": "Necesitas hablar con alguien ahora",
       "body": "Algunas de tus respuestas indican que podrías estar pasando por un momento muy difícil. No tienes que afrontarlo solo/a. Hay personas disponibles ahora mismo para escucharte.",
       "phones": [
-        { "label": "Teléfono de la Esperanza", "number": "024" },
+        { "label": "Línea de atención a la conducta suicida", "number": "024" },
         { "label": "Emergencias", "number": "112" }
       ],
       "resources": [
