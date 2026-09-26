@@ -1,117 +1,98 @@
 # CLAUDE.md — TestPsycho Suite
 
-## Identity
+## Identidad
 
-**Psicoprotego Tests:** Clinical psychometric tool suite — ES only, embedded in psicoprotego.es/tests.  
-**Owner:** Emmanuel (M-18523) + Cristina (M-30745), Psicoprotego practice, Pozuelo de Alarcón.  
-**Repo:** github.com/proyecttests/psicoprotego-tests  
-**Live:** tests.psicoprotego.vercel.app  
-**Destination:** psicoprotego.es/tests
+**Psicoprotego Tests:** suite de tests psicométricos clínicos — solo español, embebida en psicoprotego.es/tests.
+**Propietarios:** Emmanuel (M-18523) y Cristina (M-30745), consulta Psicoprotego, Pozuelo de Alarcón.
+**Repo:** github.com/proyecttests/psicoprotego-tests
+**Live (Vercel):** tests.psicoprotego.vercel.app
+**Destino final:** psicoprotego.es/tests (pendiente de proxy — ver Infraestructura)
 
-> Post-consolidation direction: validated psychometric instruments in Spanish. No ads, no multilingual quizzes.  
-> See archive/v1-pre-consolidation branch for previous multilingual/ads architecture.
+## Dirección (no negociable)
 
----
+Herramienta clínica solo en español, con instrumentos psicométricos validados (GAD-7, PHQ-9, y más
+por venir). Sin anuncios, sin quizzes no clínicos, sin sesiones de grupo, sin acortador de URL.
+No construir nada de eso sin instrucción explícita de Emmanuel.
 
-## Stack (Current)
+`src/config/brand.ts` → `SUPPORTED_LANGS = ['es']` es la fuente de verdad de esta dirección.
+
+**Incidencia abierta (no es historial, es un bug activo):** `app/sitemap.ts` tiene hardcodeado
+`LANGS = ['es', 'en', 'pt', 'ku']` y sigue publicando en el sitemap real páginas estáticas
+(`acerca-de`, `contacto`, `privacidad`, `cookies`, `aviso-legal`) y `ayuda-urgente` en inglés/
+portugués/kurdo, generadas vía auto-discovery de `src/data/help-resources/{en,pt,ku}.json` en
+`app/[lang]/ayuda-urgente/page.tsx`. Esto contradice "solo español" y sigue indexándose en
+buscadores. Pendiente de decidir y arreglar como tarea de código aparte (no tocado aquí).
+
+## Estado actual de los tests
+
+- **GAD-7** — contenido clínico redactado (`clinical-landing-writer` v2), `status:
+  draft-pending-clinical-review`, pendiente de firma clínica de Emmanuel/Cristina.
+- **PHQ-9** — `es.content.json` todavía con placeholders `[PENDIENTE]`, pendiente de redacción y
+  revisión clínica.
+
+## Stack
 
 - **Frontend:** Next.js 15.5.13 + React 18 + TypeScript + Tailwind CSS
 - **Rendering:** Server Components (SSG) para SEO + Client Components para interactividad
-- **Hosting:** Vercel (detección automática Next.js; `vercel.json` solo define installCommand + buildCommand)
-- **CDN:** Cloudflare (edge caching, DNS)
-- **Proxy:** Apache on Hetzner (reverse proxy to Vercel)
-- **DNS:** Piensa Solutions
-- **Repo:** github.com/proyecttests/psicoprotego-tests
+- **Hosting:** Vercel (detección automática de Next.js; `vercel.json` solo define
+  `installCommand` + `buildCommand` — **si hay Production Overrides activos y vacíos en el panel
+  de Vercel, mandan sobre `vercel.json` y el build no ejecuta nada**, ver
+  `.claude/rules/deploy.md`)
 
----
+## Infraestructura
 
-## Direction (Context, Not Instructions)
+- **VPS:** Contabo (no Hetzner). Sirve `psicoprotego.es` (WordPress) vía Apache; la app de tests
+  no se sirve desde ahí, se despliega en Vercel.
+- **Destino `psicoprotego.es/tests`:** pendiente de configurar el reverse proxy en el Apache de
+  ese VPS hacia el deployment de Vercel.
+- **DNS:** Piensa Solutions — verificado (`dig NS psicoprotego.es` → `ns97/ns98.piensasolutions.com`).
+- **CDN/Cloudflare:** no verificado. `curl -sI https://psicoprotego.es` devuelve `Server: Apache`
+  sin cabeceras de Cloudflare — no parece estar delante del sitio hoy. Confirmar con Emmanuel
+  antes de dar por hecho ningún rol de Cloudflare.
 
-ES-only clinical tool with validated psychometric instruments (GAD-7, PHQ-9, and more to come).
-Priority: clinical quality + SEO E-E-A-T (authorship, DOI references, ICD-10) + clean UX.
-No ads. No multilingual quizzes. No group sessions. No URL shortener.
-Do not build any of those unless explicitly asked.
+## Comandos
 
----
+```bash
+npm run dev     # Next.js dev server (localhost:3000) — predev regenera el índice de tests
+npm run build   # Production build — prebuild regenera el índice de tests
+npm run start   # Sirve el build de producción
+npm run lint    # next lint
+```
 
+`prebuild`/`predev` ejecutan `scripts/generate-tests-index.js` (genera
+`public/data/tests-index.json` y `src/generated/validLangs.ts`). No hay `npm run preview`.
 
-## ✅ Estado Actual
+## Skills (`.claude/skills/`, invocación manual con `/nombre`)
 
-### Implementado y funcional
+- **`/new-test`** — proceso completo para añadir un test psicométrico nuevo.
+- **`/add-language`** — proceso para incorporar un idioma nuevo (usar solo con instrucción
+  explícita de Emmanuel; contradice la dirección actual de "solo español").
+- **`/branding`** — cambio de paleta, fuentes y logos.
+- **`/deprecate-feature`** — eliminar o archivar una feature ordenadamente.
+- **`/clinical-landing-writer`** — pipeline de 3 fases (research → redacción → auto-revisión) para
+  generar el borrador de `es.content.json` de un test, siempre pendiente de firma clínica humana.
 
-- [x] GAD-7 — ES only (landing + intersticial + test + resultados)
-- [x] PHQ-9 — ES only
-- [x] Router `/:lang/test/:testId` con `/start` y `/play`
-- [x] Protección acceso directo (sessionStorage token)
-- [x] Landing pages SSG con JSON-LD (FAQPage, BreadcrumbList, MedicalWebPage)
-- [x] HelpResourcesPage — `/es/ayuda-urgente`
-- [x] ResultCard — paleta brand, crisis UI (score null + SupportBlock)
-- [x] ADHD-optimized UI (cards, animaciones, progress bar)
-- [x] Analytics GTM + GA4
-- [x] PDF descargable (resultados + test en blanco)
-
-### Completado en Bloque A + B (2026-04-18)
-
-- [x] Bloque A: Archived ads, group sessions, URL shortener, RemindMe, ScoreHistory, blog, apego, non-ES langs
-- [x] Bloque A: Limpieza de referencias huérfanas, RTL_LANGS a fuente única (brand.ts)
-- [x] Bloque B.1: authors.json (Emmanuel M-18523, Cristina M-30745)
-- [x] Bloque B.2: metadata.json extendido — condition, slug, medicalCondition (ICD-10), validation (DOI), authorship
-- [x] Bloque B.3: es.content.json creado para GAD-7 y PHQ-9 (placeholders [PENDIENTE])
-- [x] Bloque B.4: Tipos TypeScript actualizados — topicCategory→condition, quiz→screening (tsc clean)
-- [x] Bloque B.5: CLAUDE.md + CONTEXT_OPUS.md actualizados
-- [x] Bloque B.6: docs/analytics-plan.md creado
-
----
-
-## 📋 Próximas Prioridades
-
-1. **Bloque C** → Rellenar `[PENDIENTE]` en `es.content.json` (GAD-7 + PHQ-9) — revisión clínica requerida
-2. **Shareable results con OG dinámicos** → API route `/api/og?testId=&score=&lang=` con @vercel/og
-3. **Más tests psicométricos** → instrumentos validados en ES (PHQ-A, AUDIT, PCL-5…)
-4. **Dominio definitivo** → configurar reverse proxy Apache, Cloudflare y DNS para psicoprotego.es/tests
-
----
-
-## 🔗 Reglas y Arquitectura
+## Reglas y arquitectura
 
 Ver `.claude/rules/`:
 
-- **ux-rules.md** → Diseño ADHD-optimizado (bloqueado)
-- **code-standards.md** → TypeScript, commits, patrones
-- **safety.md** → Crisis handling, disclaimers
-- **architecture.md** → Routing, modelo de datos, componentes
+- **ux-rules.md** → diseño ADHD-optimizado (bloqueado)
+- **code-standards.md** → TypeScript, commits, patrones, `.env.local`
+- **safety.md** → gestión de crisis, disclaimers clínicos
+- **architecture.md** → routing, modelo de datos, componentes
+- **deploy.md** → checklist antes de desplegar (build local, Production Overrides de Vercel)
 
----
-
-## 📂 Archivos Clave
+## Archivos clave
 
 - `src/components/test-framework/TestContainer.tsx`
 - `src/components/results/ResultCard.tsx` ← SupportBlock de red flags
-- `app/[lang]/test/[testId]/page.tsx` ← Landing page SSG (Server Component)
-- `app/[lang]/test/[testId]/start/page.tsx` ← Intersticial (Client Component)
-- `app/[lang]/test/[testId]/play/page.tsx` ← Test interactivo (Client Component)
-- `app/[lang]/page.tsx` ← Homepage por idioma (SSG)
-- `src/views/TestLandingPage.tsx` ← Vista de landing (Server-safe)
-- `src/views/HelpResourcesPage.tsx` ← Recursos de ayuda urgente
-- `src/data/help-resources/{es,en,pt}.json` ← Contenido páginas de ayuda
-- `public/data/tests/{testId}/{lang}.json` ← Contenido de cada test
-- `public/data/tests/{testId}/metadata.json` ← Ficha técnica
-- `src/utils/scoringFunctions.ts` ← Lógica de scoring (factory)
-- `src/index.css` ← Animaciones ADHD
-- `.env.local` ← Secrets (nunca commitear)
+- `app/[lang]/test/[testId]/page.tsx` ← landing SSG (Server Component)
+- `app/[lang]/test/[testId]/start/page.tsx` ← intersticial (Client Component)
+- `app/[lang]/test/[testId]/play/page.tsx` ← test interactivo (Client Component)
+- `src/utils/scoringFunctions.ts` ← lógica de scoring (factory)
+- `public/data/tests/{testId}/{lang}.json` ← contenido de cada test
+- `public/data/tests/{testId}/metadata.json` ← ficha técnica
+- `public/data/tests/{testId}/es.content.json` ← contenido clínico de landing (source of truth)
+- `.env.local` ← secrets (nunca commitear)
 
----
-
-## ⚡ Comandos Rápidos
-
-```bash
-npm run dev          # Next.js dev server (localhost:3000)
-npm run build        # Production build
-npm run preview      # Preview build locally
-git commit -m "..."  # Conventional commits
-```
-
----
-
-**Última actualización:** 2026-03-19 (sesión 7)
-**Foco:** Shareable results con OG dinámicos → Más tests → Más idiomas → Dominio definitivo
+Historial de sesiones, decisiones y progreso: `git log`, no este fichero.
