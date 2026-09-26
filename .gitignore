@@ -153,3 +153,4 @@ CREDENTIALS.md                 ← CRÍTICO (tus tokens)
 Thumbs.db                       ← Opcional (archivos Windows)
 # clinical-landing-writer intermediate artifacts
 public/data/tests/*/.dossier.json
+tmp/
