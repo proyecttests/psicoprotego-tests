@@ -105,6 +105,15 @@
           "available": "24 horas · Gratuito"
         },
         {
+          "type": "phone",
+          "number": "900 20 20 10",
+          "tel": "900202010",
+          "label": "ANAR",
+          "description": "Ayuda a niños, niñas y adolescentes en riesgo o dificultad.",
+          "scope": "España",
+          "available": "24 horas · Gratuito"
+        },
+        {
           "type": "link",
           "label": "Fundación Salud Mental España",
           "description": "Recursos, guías y directorio de profesionales en salud mental.",
