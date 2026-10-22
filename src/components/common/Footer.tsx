@@ -11,6 +11,12 @@ import React from 'react'
 import Link from 'next/link'
 import { CONSENT_KEY } from './CookieBanner'
 
+// ── Aviso de proyecto piloto (visible en todas las páginas) ─────────────────
+
+const PILOT_NOTICE: Record<string, string> = {
+  es: 'Proyecto piloto en desarrollo. Esta herramienta está en fase de pruebas y puede cambiar o contener errores: no la utilices como un producto final ni como sustituto de una valoración profesional.',
+}
+
 // ── Props ────────────────────────────────────────────────────────────────────
 
 interface FooterProps {
@@ -64,6 +70,12 @@ const Footer: React.FC<FooterProps> = ({ showCrisisFooter = false, lang = 'es' }
       style={{ backgroundColor: 'var(--color-cream)' }}
     >
       <div className="mx-auto max-w-3xl px-4 sm:px-6 font-sans text-sm">
+        <p
+          className="mb-4 rounded-lg border px-4 py-3 text-center text-xs leading-relaxed"
+          style={{ color: 'var(--color-primary)', borderColor: 'var(--color-accent)' }}
+        >
+          {PILOT_NOTICE[lang] ?? PILOT_NOTICE['es']}
+        </p>
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
           <p style={{ color: 'var(--color-primary)' }} className="font-medium">
             © Psicoprotego 2025

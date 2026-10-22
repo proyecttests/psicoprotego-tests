@@ -42,7 +42,7 @@ import { trackEvent } from '@/config/analytics'
 // ── Crisis bar (sticky bottom, solo cuando resultType === 'CRISIS') ───────────
 
 const CRISIS_STRINGS: Record<string, { message: string; phone1Label: string; phone1: string; phone2: string }> = {
-  es: { message: 'Hay apoyo disponible — no estás solo/a', phone1Label: '024 – Esperanza', phone1: '024', phone2: '112' },
+  es: { message: 'Hay apoyo disponible — no estás solo/a', phone1Label: '024 – Conducta suicida', phone1: '024', phone2: '112' },
 }
 
 const CrisisBar: React.FC<{ lang: string }> = ({ lang }) => {
