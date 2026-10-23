@@ -1,41 +1,62 @@
-<!-- Pendientes del proyecto. Se importa en CLAUDE.md. Al cerrar un pendiente, se borra en el mismo commit que lo cierra. -->
-
 # PENDIENTES
 
 ## Prioritario
 
-- **Arreglo `hotfix/gad7-024`** (717 003 717 en la recomendación de ansiedad grave del GAD-7;
-  112 y 024 visibles y con enlace `tel:` en el bloque de apoyo y de crisis): Emmanuel lo prueba
-  en la vista previa de Vercel de esa rama —
-  - PHQ-9 con el ítem 9 en "varios días" (o más) → debe aparecer el bloque de crisis con 112 y
-    024 escritos, que marquen al tocarlos en el móvil.
-  - GAD-7 con puntuación máxima (todas las respuestas en "casi todos los días") → debe aparecer
-    la recomendación con 717 003 717, sin bloque de crisis (GAD-7 no tiene pregunta red-flag).
+- **La landing no muestra el contenido clínico.** Ningún código lee `es.content.json` (verificado
+  por grep en `src/` y `app/` el 2026-10-23): la página de cada test se monta con el bloque
+  `landing` de `public/data/tests/{testId}/es.json` vía `src/views/TestLandingPage.tsx`. Hay que
+  conectar la landing a `es.content.json` (hero, qué mide, a quién va dirigido, cómo funciona,
+  validación con referencias, interpretación, FAQ, privacidad). Tarea de código aparte; sin esto,
+  la revisión clínica no llega a la web.
+- **Etiquetas de las opciones de respuesta.** Emmanuel: la redacción correcta del GAD-7 es
+  «Nunca», «Menos de la mitad de los días», «Más de la mitad de los días», «Casi todos los días».
+  La app muestra «Varios días» en la segunda opción (`src/components/test-framework/LikertScale.tsx:24`,
+  `DEFAULT_OPTION_LABELS`), que es compartido con el PHQ-9. Falta decidir si el PHQ-9 cambia igual o
+  conserva «Varios días»; si son distintas, las etiquetas tienen que pasar a ser por test (en
+  `es.json`) en vez de una lista común.
+- **PHQ-9:** `es.content.json` con 11 `[PENDIENTE]`. Pasar por `/clinical-landing-writer` y revisión
+  clínica.
 
-  Después de la prueba: `git merge --ff-only hotfix/gad7-024` a `main` y `git push origin main`
-  — esto publica en producción. Luego, comprobar producción.
+## Revisión clínica
+
+- **GAD-7:** primera pasada de Emmanuel aplicada (commit `382023a`). Decisiones cerradas: sin cifra
+  de prevalencia, la frase de Psicoprotego en el rango Moderado se queda, 024 en el rango Grave
+  (landing y pantalla de resultados). Falta la revisión de Cristina y la firma (`status:
+  "clinically-approved"`, `clinicallyApprovedBy`, `clinicallyApprovedAt`). Las secciones que
+  Emmanuel no tocó (indicaciones, limitaciones 1–4, rangos Leve/Moderado/Grave, resto de FAQ,
+  privacidad) siguen con el texto de la skill. La tabla de auditoría de `es.content.review.md` es
+  la original y no se ha repasado sobre el texto nuevo.
+- **No verificado** en el texto del GAD-7 (el resumen de PubMed no lo dice; mirar texto completo de
+  García-Campayo 2010): que la muestra española fuera de Madrid, Zaragoza y Barcelona, y que los
+  autores pidan estudiarla antes de usarla en otros países hispanohablantes.
 
 ## Producción
 
-- `psicoprotego-tests.vercel.app` publica `main`, que es la versión anterior a la consolidación
-  (en/pt/ku, test de apego, blog…). La rama nueva (`feat/clinical-landing-writer`) no puede pasar
-  a producción mientras tenga contenido clínico `[PENDIENTE]` sin revisar por Emmanuel y Cristina
-  (hoy: PHQ-9 — ver `public/data/tests/phq9/es.content.json`).
-- Al fusionar `feat/clinical-landing-writer` con `main`, habrá conflicto previsible en
-  `src/components/results/ResultCard.tsx` y `public/data/tests/gad7/es.json`: el mismo cambio de
-  `hotfix/gad7-024` se aplicó por separado en las dos ramas (commits `3b32752` en una,
-  `ec9492c` en la otra) — no verificado si git lo resuelve solo al ser el mismo diff exacto.
+- `psicoprotego-tests.vercel.app` publica `main` (commit `9ef6fff`, 2026-10-23): versión anterior
+  a la consolidación (en/pt/ku, test de apego, blog…) con el arreglo de teléfonos de crisis y el
+  aviso de proyecto piloto en el pie. `feat/clinical-landing-writer` no puede pasar a producción
+  mientras el contenido clínico no esté firmado y conectado a la landing (ver arriba).
+- Al fusionar `feat/clinical-landing-writer` con `main` habrá conflictos previsibles en
+  `src/components/results/ResultCard.tsx`, `src/components/common/Footer.tsx`,
+  `src/components/test-framework/TestContainer.tsx` y `public/data/tests/gad7/es.json`: los mismos
+  arreglos se aplicaron por separado en las dos ramas, y en `gad7/es.json` la rama nueva ya tiene
+  el 024 en la recomendación de «severe» mientras `main` tiene el 717 003 717. En caso de duda,
+  manda la versión de la rama nueva.
 - Proxy de `psicoprotego.es/tests` en el VPS Contabo: sin hacer.
+- `CLAUDE.md` da como «Live» `tests.psicoprotego.vercel.app`, que no responde (error TLS,
+  2026-10-23). La URL real es `psicoprotego-tests.vercel.app`. Corregir.
 
 ## Deuda
 
 - Los teléfonos de crisis están en dos fuentes: los campos `phones`/`resources` de
   `public/data/tests/{gad7,phq9}/es.json` no los lee ningún componente (verificado por grep); la
-  única fuente que se renderiza es `src/data/help-resources/es.json` más los números fijos ya
-  añadidos directamente en `ResultCard.tsx`. Unificar en una sola fuente antes de que un test
-  nuevo repita el mismo tipo de error de etiqueta que tenía GAD-7.
-- Rama remota `migration/nextjs`: sin revisar (no comprobado si diverge de `main` o si ya está
-  contenida en alguna otra rama).
+  única fuente que se renderiza es `src/data/help-resources/es.json` más los números fijos de
+  `ResultCard.tsx` y de `CrisisBar` en `TestContainer.tsx`. Unificar en una sola fuente antes de
+  que un test nuevo repita el mismo tipo de error de etiqueta que tenía GAD-7.
+- `Footer.tsx` conserva una rama `showCrisisFooter` que nadie activa (el layout siempre pasa
+  `false`) y que rotula el 024 como «Esperanza». Código muerto: eliminarlo.
+- Rama remota `migration/nextjs`: no tiene ningún commit que no esté en `main` (verificado
+  2026-10-23). Se puede archivar.
 - `app/sitemap.ts` sigue publicando páginas indexables en `en`/`pt`/`ku` (`LANGS` hardcodeado,
   línea 5) y `app/[lang]/ayuda-urgente/page.tsx` sigue generando esas rutas por auto-discovery de
   `src/data/help-resources/{en,pt,ku}.json` — contradice `SUPPORTED_LANGS = ['es']` de
