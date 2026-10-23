@@ -204,14 +204,12 @@ Tus respuestas no salen de tu dispositivo. No se envían a ningún servidor de P
 
 **~~[REVISAR: prevalencia TAG en España]~~ — resuelto.** El nuevo texto de «¿Qué mide este test?» no da cifra de prevalencia.
 
-**[REVISAR: CTA Moderado — "en Psicoprotego podemos acompañarte a dar los primeros pasos"]**
-Sin decidir. Confirmar si el tono y la mención explícita a Psicoprotego son adecuados para la página pública.
+**~~[REVISAR: CTA Moderado]~~ — resuelto.** Emmanuel: la frase «en Psicoprotego podemos acompañarte a dar los primeros pasos» se queda.
 
-**[REVISAR: teléfono en el rango Grave]**
-El rango Grave y la FAQ «¿Qué hago si el resultado es alto?» remiten al **024**. La pantalla de resultados del GAD-7 (`es.json`, recomendación de «severe», corregida en el hotfix de producción) remite al **717 003 717** (Teléfono de la Esperanza). Decidir cuál va en cada sitio para que la página y el resultado digan lo mismo.
+**~~[REVISAR: teléfono en el rango Grave]~~ — resuelto.** Emmanuel: 024 en el rango Grave. La recomendación de «severe» en `es.json` (pantalla de resultados) pasa también al 024, con la misma descripción que la landing.
 
-**[REVISAR: etiquetas de las opciones de respuesta]**
-El paso 2 de «Cómo funciona» nombra las opciones como «Nunca», «Menos de la mitad de los días», «Más de la mitad de los días» y «Casi todos los días». La app muestra hoy «Nunca», «**Varios días**», «Más de la mitad de los días» y «Casi todos los días» (`src/components/test-framework/LikertScale.tsx:24`, compartido con el PHQ-9). Decidir qué redacción es la correcta para la versión española validada y alinear las dos.
+**[PENDIENTE DE CÓDIGO: etiquetas de las opciones de respuesta]**
+Emmanuel: la redacción correcta es «Nunca», «Menos de la mitad de los días», «Más de la mitad de los días» y «Casi todos los días» (la del paso 2 de «Cómo funciona»). La app muestra todavía «Varios días» en la segunda opción (`src/components/test-framework/LikertScale.tsx:24`, compartido con el PHQ-9). Ver `PENDIENTES.md`.
 
 ---
 
