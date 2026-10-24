@@ -2,12 +2,14 @@
 
 ## Prioritario
 
-- **La landing no muestra el contenido clínico.** Ningún código lee `es.content.json` (verificado
-  por grep en `src/` y `app/` el 2026-10-23): la página de cada test se monta con el bloque
-  `landing` de `public/data/tests/{testId}/es.json` vía `src/views/TestLandingPage.tsx`. Hay que
-  conectar la landing a `es.content.json` (hero, qué mide, a quién va dirigido, cómo funciona,
-  validación con referencias, interpretación, FAQ, privacidad). Tarea de código aparte; sin esto,
-  la revisión clínica no llega a la web.
+- **Landing conectada a `es.content.json`** (2026-10-24): si el fichero está completo (sin
+  `[PENDIENTE]`), la landing, la descripción meta y el FAQ de JSON-LD salen de él; si no, se usa el
+  bloque `landing` de `es.json`. Mientras `status` no sea `clinically-approved` se muestra una franja
+  «Borrador pendiente de revisión clínica». Hoy: GAD-7 con contenido nuevo y franja; PHQ-9 con la
+  landing antigua hasta que se redacte.
+- **Ficha técnica vs. contenido:** `metadata.json` del GAD-7 rotula el rango 15–21 como «Severo» y
+  el contenido clínico como «Grave»; la ficha dice «Desde 18 años» y las limitaciones hablan de
+  adolescentes «con cautela». Unificar al firmar.
 - **PHQ-9:** `es.content.json` con 11 `[PENDIENTE]`. Pasar por `/clinical-landing-writer` y revisión
   clínica.
 

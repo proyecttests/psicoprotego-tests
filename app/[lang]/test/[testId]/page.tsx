@@ -12,7 +12,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import type { TestLangFile, TestMetadata } from '@/types/test'
+import type { TestContent, TestLangFile, TestMetadata } from '@/types/test'
 import TestLandingPage from '@/views/TestLandingPage'
 import { discoverTests } from '@/utils/discoverTests'
 
@@ -46,6 +46,22 @@ async function loadTestData(
   }
 }
 
+/**
+ * Contenido clínico de la landing (`es.content.json`). Solo se usa si está completo:
+ * con algún `[PENDIENTE]` se devuelve null y la landing sigue con el bloque `landing` de es.json.
+ */
+async function loadTestContent(testId: string, lang: string): Promise<TestContent | null> {
+  if (lang !== 'es') return null
+  const file = path.join(process.cwd(), 'public', 'data', 'tests', testId, 'es.content.json')
+  const raw = await fs.readFile(file, 'utf-8').catch(() => null)
+  if (!raw || raw.includes('[PENDIENTE]')) return null
+  try {
+    return JSON.parse(raw) as TestContent
+  } catch {
+    return null
+  }
+}
+
 const UI_BREADCRUMB: Record<string, { home: string; tests: string }> = {
   es: { home: 'Inicio',  tests: 'Tests' },
   en: { home: 'Home',   tests: 'Tests' },
@@ -57,8 +73,11 @@ function buildJsonLd(
   metadata: TestMetadata,
   lang: string,
   testId: string,
+  content: TestContent | null,
 ): object[] {
   const url = `${SITE_URL}/${lang}/test/${testId}`
+  const faq = content?.faq ?? langData.landing.faq
+  const description = content?.hero.subtitle ?? langData.landing.description
   const bc  = UI_BREADCRUMB[lang] ?? UI_BREADCRUMB['es']
   const schemas: object[] = []
 
@@ -74,11 +93,11 @@ function buildJsonLd(
   })
 
   // FAQPage
-  if (langData.landing.faq.length > 0) {
+  if (faq.length > 0) {
     schemas.push({
       '@context': 'https://schema.org',
       '@type':    'FAQPage',
-      mainEntity: langData.landing.faq.map((item) => ({
+      mainEntity: faq.map((item) => ({
         '@type':        'Question',
         name:           item.q,
         acceptedAnswer: { '@type': 'Answer', text: item.a },
@@ -93,7 +112,7 @@ function buildJsonLd(
       '@context':      'https://schema.org',
       '@type':         'MedicalWebPage',
       name:            langData.name,
-      description:     langData.landing.description,
+      description,
       url,
       audience:        { '@type': 'Patient' },
       medicalAudience: { '@type': 'MedicalAudience', audienceType: 'Patient' },
@@ -131,10 +150,12 @@ export async function generateMetadata({
 
   const { langData, metadata } = data
   const url = `${SITE_URL}/${lang}/test/${testId}`
+  const content = await loadTestContent(testId, lang)
+  const description = content?.hero.subtitle ?? langData.landing.description
 
   return {
     title:       `${langData.name} — TestPsycho`,
-    description: langData.landing.description,
+    description,
     alternates: {
       canonical: url,
       languages: Object.fromEntries(
@@ -143,7 +164,7 @@ export async function generateMetadata({
     },
     openGraph: {
       title:       langData.name,
-      description: langData.landing.description,
+      description,
       url,
       locale:      lang,
       type:        'website',
@@ -163,7 +184,8 @@ export default async function TestLandingRoute({
   if (!data) notFound()
 
   const { langData, metadata } = data
-  const schemas = buildJsonLd(langData, metadata, lang, testId)
+  const content = await loadTestContent(testId, lang)
+  const schemas = buildJsonLd(langData, metadata, lang, testId, content)
 
   return (
     <>
@@ -173,6 +195,7 @@ export default async function TestLandingRoute({
       />
       <TestLandingPage
         langData={langData}
+        content={content}
         metadata={metadata}
         lang={lang}
         testId={testId}
