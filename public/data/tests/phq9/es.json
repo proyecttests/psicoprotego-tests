@@ -102,6 +102,21 @@
       "scale": { "min": 0, "max": 3, "step": 1 },
       "isRedFlag": true,
       "redFlagValues": [1, 2, 3]
+    },
+    {
+      "id": "q10",
+      "type": "likert",
+      "text": "Si ha marcado alguno de los problemas de este cuestionario, ¿hasta qué punto estos problemas le han creado dificultades para hacer su trabajo, ocuparse de la casa o relacionarse con los demás?",
+      "instructions": "",
+      "scale": { "min": 0, "max": 3, "step": 1 },
+      "responseOptions": [
+        { "value": 0, "label": "Ninguna dificultad" },
+        { "value": 1, "label": "Algunas dificultades" },
+        { "value": 2, "label": "Muchas dificultades" },
+        { "value": 3, "label": "Muchísimas dificultades" }
+      ],
+      "scoring": { "method": "none" },
+      "showIf": { "questionId": "q9", "notIn": [1, 2, 3] }
     }
   ],
   "scoring": [

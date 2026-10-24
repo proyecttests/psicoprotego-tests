@@ -476,6 +476,20 @@ const SCORING_REGISTRY: Record<string, ScoringFunction> = {
 // ── Factory pública ───────────────────────────────────────────────────────────
 
 /**
+ * Puntuación máxima del instrumento: suma del máximo de cada pregunta Likert que puntúa.
+ * Incluye las de red flag (el ítem 9 del PHQ-9 forma parte del rango 0–27) y excluye
+ * las marcadas con `scoring.method: 'none'`.
+ *
+ * @param questions - Preguntas del test
+ * @returns Máximo teórico (GAD-7 = 21, PHQ-9 = 27)
+ */
+export function getMaxScore(questions: QuestionWithScoring[]): number {
+  return questions
+    .filter((q) => q.type === 'likert' && q.scoring?.method !== 'none')
+    .reduce((sum, q) => sum + (q.scale?.max ?? 3), 0)
+}
+
+/**
  * Devuelve la función de scoring registrada bajo el nombre dado.
  *
  * @param functionName - Nombre registrado en SCORING_REGISTRY (ej: 'scoreGAD7')

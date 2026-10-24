@@ -13,7 +13,7 @@
 import React from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { decodeAnswers, decodeAnswersWithKeys } from '@/utils/shareEncoding'
-import { getScoringFunction } from '@/utils/scoringFunctions'
+import { getScoringFunction, getMaxScore } from '@/utils/scoringFunctions'
 import type { TestLangFile } from '@/types/test'
 import type { TestDefinitionForScoring } from '@/utils/scoringFunctions'
 import ResultCard from '@/components/results/ResultCard'
@@ -112,7 +112,7 @@ export default function ResultadoClient({ lang, testId }: ResultadoClientProps) 
         const scoringFn = getScoringFunction(langData.scoringFunction ?? 'scoreStandard')
         const scored    = scoringFn(testDefForScoring, answers, messages, resolvedLang)
 
-        const max = langData.scoring.reduce((acc, r) => Math.max(acc, r.max ?? 0), 0)
+        const max = getMaxScore(testDefForScoring.questions)
 
         setTestDef(langData)
         setResult(scored)
