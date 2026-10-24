@@ -12,6 +12,7 @@ import {
   StyleSheet,
 } from '@react-pdf/renderer'
 import type { TestLangFile } from '@/types/test'
+import { getResponseOptions } from '@/utils/responseOptions'
 import { RTL_LANGS } from '@/config/brand'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -312,6 +313,11 @@ export const TestBlankDocument: React.FC<TestBlankDocumentProps> = ({
             </View>
           )}
 
+          {/* Enunciado validado: los ítems oficiales no se entienden sin él */}
+          {testData.instructions ? (
+            <Text style={[styles.questionText, { marginBottom: 8 }]}>{testData.instructions}</Text>
+          ) : null}
+
           {testData.questions.map((question, index) => (
             <View key={question.id} style={styles.questionItem} wrap={false}>
               <Text style={styles.questionNumber}>
@@ -334,26 +340,12 @@ export const TestBlankDocument: React.FC<TestBlankDocumentProps> = ({
               {/* Likert: show all scale values as empty circles */}
               {question.type === 'likert' && (
                 <View style={styles.optionsRow}>
-                  {Array.from(
-                    { length: (question.scale?.max ?? 3) - (question.scale?.min ?? 0) + 1 },
-                    (_, i) => (question.scale?.min ?? 0) + i
-                  ).map((val) => {
-                    const labelMin = question.labels?.min
-                    const labelMax = question.labels?.max
-                    const scaleMax = question.scale?.max ?? 3
-                    const scaleMin = question.scale?.min ?? 0
-                    const labelText = val === scaleMin && labelMin
-                      ? `${val} – ${labelMin}`
-                      : val === scaleMax && labelMax
-                      ? `${val} – ${labelMax}`
-                      : String(val)
-                    return (
-                      <View key={val} style={[styles.optionItem, isRTL ? { flexDirection: 'row-reverse' } : {}]}>
-                        <Text style={styles.optionBullet}>{' '}</Text>
-                        <Text style={styles.optionLabel}>{labelText}</Text>
-                      </View>
-                    )
-                  })}
+                  {getResponseOptions(question, testData.responseOptions).map((opt) => (
+                    <View key={opt.value} style={[styles.optionItem, isRTL ? { flexDirection: 'row-reverse' } : {}]}>
+                      <Text style={styles.optionBullet}>{' '}</Text>
+                      <Text style={styles.optionLabel}>{`${opt.value} – ${opt.label}`}</Text>
+                    </View>
+                  ))}
                 </View>
               )}
 

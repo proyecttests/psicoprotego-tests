@@ -12,7 +12,8 @@
  */
 
 import React from 'react'
-import type { Question, AnswersMap } from '@/types/test'
+import type { Question, AnswersMap, ResponseOption } from '@/types/test'
+import { getResponseOptions } from '@/utils/responseOptions'
 
 import LikertScale            from './LikertScale'
 import BooleanQuestion        from './BooleanQuestion'
@@ -34,8 +35,8 @@ interface QuestionRendererProps {
    * Pasar `undefined` desactiva el auto-avance (ej: última pregunta).
    */
   onAdvance?: () => void
-  /** Código de idioma para localizar labels por defecto */
-  lang?: string
+  /** Opciones Likert comunes del test; una pregunta puede definir las suyas */
+  testResponseOptions?: ResponseOption[]
 }
 
 // ── Componente ────────────────────────────────────────────────────────────────
@@ -57,25 +58,36 @@ const QuestionRenderer: React.FC<QuestionRendererProps> = ({
   answers,
   onChange,
   onAdvance,
-  lang = 'es',
+  testResponseOptions,
 }) => {
   const currentValue = answers[question.id]
 
   switch (question.type) {
 
-    // ── Likert (slider) ─────────────────────────────────────────────────────
-    case 'likert':
+    // ── Likert (cards) ──────────────────────────────────────────────────────
+    case 'likert': {
+      const options = getResponseOptions(question, testResponseOptions)
+      if (options.length === 0) {
+        return (
+          <div
+            role="alert"
+            className="rounded-lg border border-yellow-300 bg-yellow-50 px-4 py-3 text-sm text-yellow-800"
+          >
+            <strong>Pregunta Likert sin opciones de respuesta.</strong> Define{' '}
+            <code className="font-mono">responseOptions</code> en el JSON del test.
+          </div>
+        )
+      }
       return (
         <LikertScale
           question={question.text}
           value={currentValue as number | undefined}
           onChange={(val) => onChange(question.id, val)}
-          scale={question.scale}
-          labels={question.labels}
+          options={options}
           onAdvance={onAdvance}
-          lang={lang}
         />
       )
+    }
 
     // ── Boolean (sí/no) ─────────────────────────────────────────────────────
     case 'boolean':

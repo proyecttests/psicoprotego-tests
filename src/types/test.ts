@@ -15,6 +15,15 @@ export interface QuestionOption {
   label: string
 }
 
+/**
+ * Opción de respuesta de una escala Likert: texto literal del instrumento validado
+ * y puntos que suma. Cada test define las suyas (no hay etiquetas comunes).
+ */
+export interface ResponseOption {
+  value: number
+  label: string
+}
+
 /** Condición para mostrar una pregunta de forma condicional */
 export interface ShowIfCondition {
   /** ID de la pregunta que activa esta condición */
@@ -44,10 +53,10 @@ export interface Question {
   text: string
 
   // ── Likert ────────────────────────────────────────────────────────────────
-  /** Rango numérico del slider (por defecto 0–3) */
+  /** Rango numérico de la escala (por defecto 0–3) */
   scale?: { min: number; max: number; step?: number }
-  /** Etiquetas de los extremos del slider */
-  labels?: { min: string; max: string }
+  /** Opciones propias de esta pregunta; si falta, se usan las del test (`responseOptions`) */
+  responseOptions?: ResponseOption[]
 
   // ── Boolean ───────────────────────────────────────────────────────────────
   /** Textos personalizados para los botones Sí/No */
@@ -127,8 +136,10 @@ export interface TestDefinition {
   disclaimerBefore?: string
   /** Texto del disclaimer después del test */
   disclaimerAfter?: string
-  /** Instrucciones originales del instrumento validado. Se muestran encima de la primera pregunta. */
+  /** Instrucciones originales del instrumento validado. Se muestran encima de cada pregunta. */
   instructions?: string
+  /** Opciones de respuesta Likert del instrumento, comunes a todas sus preguntas */
+  responseOptions?: ResponseOption[]
 }
 
 // ── Mensajes de resultado ────────────────────────────────────────────────────
@@ -340,8 +351,10 @@ export interface TestLangFile {
   scoringFunction: string
   disclaimerBefore?: string
   disclaimerAfter?: string
-  /** Instrucciones originales del instrumento. Se muestran encima de la primera pregunta. */
+  /** Instrucciones originales del instrumento. Se muestran encima de cada pregunta. */
   instructions?: string
+  /** Opciones de respuesta Likert del instrumento, comunes a todas sus preguntas */
+  responseOptions?: ResponseOption[]
   landing: TestLanding
   questions: Question[]
   scoring: ScoringRule[]

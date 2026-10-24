@@ -5,6 +5,7 @@
  */
 
 import React from 'react'
+import type { ResponseOption } from '@/types/test'
 
 // ── Props ────────────────────────────────────────────────────────────────────
 
@@ -12,18 +13,9 @@ interface LikertScaleProps {
   question: string
   value: number | undefined
   onChange: (value: number) => void
-  scale?: { min: number; max: number; step?: number }
-  labels?: { min: string; max: string }
+  /** Opciones literales del instrumento, en orden (vienen del JSON del test) */
+  options: ResponseOption[]
   onAdvance?: () => void
-  lang?: string
-}
-
-// ── Labels por defecto por idioma (GAD-7 / PHQ-9 estándar) ───────────────
-
-const DEFAULT_OPTION_LABELS: Record<string, string[]> = {
-  es: ['Nunca', 'Varios días', 'Más de la mitad de los días', 'Casi todos los días'],
-  en: ['Not at all', 'Several days', 'More than half the days', 'Nearly every day'],
-  pt: ['Nunca', 'Vários dias', 'Mais de metade dos dias', 'Quase todos os dias'],
 }
 
 // ── Delays de stagger para entrada de cards ───────────────────────────────
@@ -36,11 +28,9 @@ const LikertScale: React.FC<LikertScaleProps> = ({
   question,
   value,
   onChange,
-  scale    = { min: 0, max: 3, step: 1 },
+  options,
   onAdvance,
-  lang = 'es',
 }) => {
-  const { min, max } = scale
   const hasValue = value !== undefined
 
   // ── Flotación suave si no responde en 2.8s ──────────────────────────────
@@ -75,14 +65,6 @@ const LikertScale: React.FC<LikertScaleProps> = ({
     }
   }
 
-  // ── Opciones generadas del rango ─────────────────────────────────────────
-
-  const optionLabels = DEFAULT_OPTION_LABELS[lang] ?? DEFAULT_OPTION_LABELS['es']
-  const options = Array.from({ length: max - min + 1 }, (_, i) => ({
-    value: i + min,
-    label: optionLabels[i] ?? String(i + min),
-  }))
-
   // ── Render ────────────────────────────────────────────────────────────────
 
   return (
@@ -108,7 +90,7 @@ const LikertScale: React.FC<LikertScaleProps> = ({
               backgroundColor: isSelected ? 'rgba(45,74,62,0.05)' : 'white',
             }}
             className="
-              flex items-center gap-4 w-full px-5 py-4 rounded-xl border-2 text-left
+              flex items-center gap-4 w-full px-5 py-3 sm:py-4 rounded-xl border-2 text-left
               transition-colors duration-150 cursor-pointer
               hover:border-gray-300 hover:bg-gray-50
               focus:outline-none focus:ring-2 focus:ring-offset-2

@@ -6,7 +6,13 @@
   "scoringFunction": "scoreGAD7",
   "disclaimerBefore": "Este cuestionario es solo educativo y NO es un diagnóstico clínico. Sus resultados son para reflexión personal. Si tienes dudas o síntomas graves, consulta con un profesional de la salud. Tus respuestas se guardan solo en tu navegador.",
   "disclaimerAfter": "Este test NO es diagnóstico clínico y NO reemplaza la evaluación de un profesional. Si tienes síntomas graves o persistentes, consulta con tu médico o psicólogo.",
-  "instructions": "Durante las últimas 2 semanas, ¿con qué frecuencia le han molestado los siguientes problemas?",
+  "instructions": "En los últimos 14 días, ¿con qué frecuencia le han supuesto una molestia los siguientes problemas?",
+  "responseOptions": [
+    { "value": 0, "label": "Nunca" },
+    { "value": 1, "label": "Varios días" },
+    { "value": 2, "label": "Más de la mitad de los días" },
+    { "value": 3, "label": "Casi cada día" }
+  ],
   "landing": {
     "hook": "¿Sientes que la ansiedad controla tu vida?",
     "description": "El GAD-7 es un cuestionario validado clínicamente que evalúa la frecuencia e intensidad de los síntomas de ansiedad generalizada durante las últimas dos semanas. Es uno de los instrumentos más utilizados en atención primaria en todo el mundo.",
@@ -44,51 +50,44 @@
     {
       "id": "q1",
       "type": "likert",
-      "text": "¿Con qué frecuencia te has sentido nervioso/a, ansioso/a o tenso/a?",
-      "scale": { "min": 0, "max": 3, "step": 1 },
-      "labels": { "min": "Nunca", "max": "Casi todos los días" }
+      "text": "Sentirse nervioso/a, angustiado/a o muy tenso/a",
+      "scale": { "min": 0, "max": 3, "step": 1 }
     },
     {
       "id": "q2",
       "type": "likert",
-      "text": "¿Con qué frecuencia no has podido dejar de preocuparte o controlar tus preocupaciones?",
-      "scale": { "min": 0, "max": 3, "step": 1 },
-      "labels": { "min": "Nunca", "max": "Casi todos los días" }
+      "text": "Ser incapaz de dejar de preocuparse o de controlar la preocupación",
+      "scale": { "min": 0, "max": 3, "step": 1 }
     },
     {
       "id": "q3",
       "type": "likert",
-      "text": "¿Con qué frecuencia te has preocupado demasiado por cosas diferentes?",
-      "scale": { "min": 0, "max": 3, "step": 1 },
-      "labels": { "min": "Nunca", "max": "Casi todos los días" }
+      "text": "Preocuparse demasiado por diferentes cuestiones",
+      "scale": { "min": 0, "max": 3, "step": 1 }
     },
     {
       "id": "q4",
       "type": "likert",
-      "text": "¿Con qué frecuencia has tenido dificultad para relajarte?",
-      "scale": { "min": 0, "max": 3, "step": 1 },
-      "labels": { "min": "Nunca", "max": "Casi todos los días" }
+      "text": "Tener problemas para relajarse",
+      "scale": { "min": 0, "max": 3, "step": 1 }
     },
     {
       "id": "q5",
       "type": "likert",
-      "text": "¿Con qué frecuencia te has sentido tan inquieto/a que te cuesta estar sentado/a?",
-      "scale": { "min": 0, "max": 3, "step": 1 },
-      "labels": { "min": "Nunca", "max": "Casi todos los días" }
+      "text": "Estar tan inquieto/a que le resulta difícil permanecer sentado/a",
+      "scale": { "min": 0, "max": 3, "step": 1 }
     },
     {
       "id": "q6",
       "type": "likert",
-      "text": "¿Con qué frecuencia te has irritado o molestado fácilmente?",
-      "scale": { "min": 0, "max": 3, "step": 1 },
-      "labels": { "min": "Nunca", "max": "Casi todos los días" }
+      "text": "Enfadarse o irritarse con facilidad",
+      "scale": { "min": 0, "max": 3, "step": 1 }
     },
     {
       "id": "q7",
       "type": "likert",
-      "text": "¿Con qué frecuencia has tenido miedo de que ocurra algo terrible?",
-      "scale": { "min": 0, "max": 3, "step": 1 },
-      "labels": { "min": "Nunca", "max": "Casi todos los días" }
+      "text": "Sentir miedo de que algo terrible pueda ocurrir",
+      "scale": { "min": 0, "max": 3, "step": 1 }
     }
   ],
   "scoring": [

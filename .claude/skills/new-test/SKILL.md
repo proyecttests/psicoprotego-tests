@@ -49,12 +49,22 @@ public/data/tests/<testId>/
   "name": "Nombre del test",
   "hook": "Subtítulo motivador en 1 línea",
   "scoringFunction": "score<TestId>",
-  "instructions": "Instrucciones para el usuario antes de empezar.",
+  "instructions": "Enunciado literal del instrumento validado (se muestra encima de cada pregunta).",
+  "responseOptions": [
+    { "value": 0, "label": "Texto literal de la opción 0" },
+    { "value": 1, "label": "Texto literal de la opción 1" }
+  ],
   "disclaimerBefore": "Este test es orientativo y no constituye un diagnóstico.",
   "disclaimerAfter": "Si los resultados te generan malestar, consulta un profesional.",
   "questions": [
     {
       "id": "q1",
+      "type": "likert",
+      "text": "Texto literal del ítem",
+      "scale": { "min": 0, "max": 3, "step": 1 }
+    },
+    {
+      "id": "q2",
       "type": "multipleChoice",
       "text": "Texto de la pregunta...",
       "options": [
@@ -93,6 +103,12 @@ public/data/tests/<testId>/
   ]
 }
 ```
+
+**Preguntas `likert`:** no hay etiquetas comunes entre tests. Cada test declara sus opciones en
+`responseOptions` (nivel de test); una pregunta concreta puede sobrescribirlas con su propio
+`responseOptions`. Enunciado, ítems y opciones se copian **literalmente** de la versión validada en
+España (fuente oficial del instrumento), no se parafrasean ni se pasan a tuteo. Sin
+`responseOptions`, la pregunta muestra un aviso en lugar de las opciones.
 
 ### 3. Implementar función de scoring
 

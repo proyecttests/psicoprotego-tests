@@ -8,12 +8,11 @@
   conectar la landing a `es.content.json` (hero, qué mide, a quién va dirigido, cómo funciona,
   validación con referencias, interpretación, FAQ, privacidad). Tarea de código aparte; sin esto,
   la revisión clínica no llega a la web.
-- **Etiquetas de las opciones de respuesta.** Emmanuel: la redacción correcta del GAD-7 es
-  «Nunca», «Menos de la mitad de los días», «Más de la mitad de los días», «Casi todos los días».
-  La app muestra «Varios días» en la segunda opción (`src/components/test-framework/LikertScale.tsx:24`,
-  `DEFAULT_OPTION_LABELS`), que es compartido con el PHQ-9. Falta decidir si el PHQ-9 cambia igual o
-  conserva «Varios días»; si son distintas, las etiquetas tienen que pasar a ser por test (en
-  `es.json`) en vez de una lista común.
+- **PHQ-9, pregunta de dificultad funcional.** La versión oficial (phqscreeners.com, «Spanish for
+  Spain») acaba con «Si ha marcado alguno de los problemas de este cuestionario, ¿hasta qué punto
+  estos problemas le han creado dificultades…?» (Ninguna / Algunas / Muchas / Muchísimas
+  dificultades). La app no la incluye. No puntúa: si se añade, tiene que quedar fuera de la suma
+  (hoy el scoring suma todas las respuestas). Decisión clínica de Emmanuel.
 - **PHQ-9:** `es.content.json` con 11 `[PENDIENTE]`. Pasar por `/clinical-landing-writer` y revisión
   clínica.
 
@@ -26,9 +25,12 @@
   Emmanuel no tocó (indicaciones, limitaciones 1–4, rangos Leve/Moderado/Grave, resto de FAQ,
   privacidad) siguen con el texto de la skill. La tabla de auditoría de `es.content.review.md` es
   la original y no se ha repasado sobre el texto nuevo.
-- **No verificado** en el texto del GAD-7 (el resumen de PubMed no lo dice; mirar texto completo de
-  García-Campayo 2010): que la muestra española fuera de Madrid, Zaragoza y Barcelona, y que los
-  autores pidan estudiarla antes de usarla en otros países hispanohablantes.
+- Texto del instrumento (enunciado, ítems y opciones) de GAD-7 y PHQ-9: copiado literal de
+  phqscreeners.com, «Spanish for Spain» (aportado por Emmanuel, 2026-10-24). Sustituye a la
+  redacción en tuteo que había y a «Menos de la mitad de los días», que no es la oficial.
+- Verificado en el texto completo de García-Campayo 2010 (PMC2831043): la muestra fue de Madrid,
+  Zaragoza y Barcelona, y los autores piden estudiar la escala antes de usarla en entornos
+  hispanohablantes culturalmente distintos de España.
 
 ## Producción
 
@@ -38,7 +40,8 @@
   mientras el contenido clínico no esté firmado y conectado a la landing (ver arriba).
 - Al fusionar `feat/clinical-landing-writer` con `main` habrá conflictos previsibles en
   `src/components/results/ResultCard.tsx`, `src/components/common/Footer.tsx`,
-  `src/components/test-framework/TestContainer.tsx` y `public/data/tests/gad7/es.json`: los mismos
+  `src/components/test-framework/TestContainer.tsx`, `LikertScale.tsx`, `src/types/test.ts` y
+  `public/data/tests/{gad7,phq9}/es.json` (texto oficial y `responseOptions`, solo en la rama nueva): los mismos
   arreglos se aplicaron por separado en las dos ramas, y en `gad7/es.json` la rama nueva ya tiene
   el 024 en la recomendación de «severe» mientras `main` tiene el 717 003 717. En caso de duda,
   manda la versión de la rama nueva.
@@ -62,6 +65,9 @@
   `src/data/help-resources/{en,pt,ku}.json` — contradice `SUPPORTED_LANGS = ['es']` de
   `src/config/brand.ts`. Decisión tomada en la sesión de documentación: no tocar código, solo
   dejarlo anotado (ver también la nota en `CLAUDE.md`). Sigue sin arreglarse.
+- `public/data/tests.json` conserva definiciones antiguas de GAD-7/PHQ-9 (con `labels` y textos
+  viejos) que ningún código carga (los tests se leen de `public/data/tests/{testId}/es.json`).
+  Archivar.
 - `src/data/help-resources/{en,pt,ku}.json`: se decidió no borrarlos (están vivos vía
   auto-discovery, ver punto anterior). Sigue pendiente decidir si se quiere seguir sirviendo
   contenido no-ES o desactivar esas rutas.
