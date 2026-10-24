@@ -34,9 +34,9 @@ import QuestionRenderer    from './QuestionRenderer'
 import ResultCard          from '@/components/results/ResultCard'
 import CalculatingScreen   from './CalculatingScreen'
 import SharingScreen       from './SharingScreen'
-import { getScoringFunction } from '@/utils/scoringFunctions'
+import { getScoringFunction, getMaxScore } from '@/utils/scoringFunctions'
 import { buildShareUrl } from '@/utils/shareEncoding'
-import type { ScoringResult, TestDefinitionForScoring } from '@/utils/scoringFunctions'
+import type { ScoringResult, TestDefinitionForScoring, QuestionWithScoring } from '@/utils/scoringFunctions'
 import { trackEvent } from '@/config/analytics'
 
 // ── Crisis bar (sticky bottom, solo cuando resultType === 'CRISIS') ───────────
@@ -126,7 +126,8 @@ interface TestContainerProps {
  */
 function shouldShowQuestion(question: Question, answers: AnswersMap): boolean {
   if (!question.showIf) return true
-  const { questionId, value } = question.showIf
+  const { questionId, value, notIn } = question.showIf
+  if (notIn) return !notIn.includes(answers[questionId])
   return answers[questionId] === value
 }
 
@@ -223,16 +224,25 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
     return testDef.questions.filter((q) => shouldShowQuestion(q, answers))
   }, [testDef, answers])
 
-  // Puntuación máxima teórica (suma de scale.max de preguntas Likert no redFlag)
-  const maxScore = React.useMemo(() => {
-    if (!testDef) return 0
-    return testDef.questions
-      .filter((q) => !q.isRedFlag && q.type === 'likert')
-      .reduce((sum, q) => sum + (q.scale?.max ?? 3), 0)
-  }, [testDef])
+  // Puntuación máxima teórica del instrumento
+  const maxScore = React.useMemo(
+    () => (testDef ? getMaxScore(testDef.questions as QuestionWithScoring[]) : 0),
+    [testDef],
+  )
 
   const currentQuestion = visibleQuestions[currentIdx] ?? null
   const isLastQuestion  = currentIdx === visibleQuestions.length - 1
+
+  // Si una respuesta oculta las preguntas que quedaban (ej. PHQ-9: ítem 9 ≠ 0 oculta el 10),
+  // el auto-avance deja el índice fuera de rango: se envía ya, sin retrasar el resultado de crisis.
+  React.useEffect(() => {
+    if (uiState !== 'answering' || isExiting || visibleQuestions.length === 0) return
+    if (currentIdx >= visibleQuestions.length) {
+      setCurrentIdx(visibleQuestions.length - 1)
+      handleSubmit({ ...answers })
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentIdx, visibleQuestions.length, uiState, isExiting])
 
   // ── Handlers ───────────────────────────────────────────────────────────────
 
@@ -459,13 +469,13 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
           className={`w-full max-w-2xl flex flex-col items-center gap-6 sm:gap-14 flex-1 justify-center py-2 sm:py-4${isExiting ? ' animate-slide-out-tiktok' : ''}`}
         >
           {/* Instrucciones validadas — en cada pregunta: los ítems oficiales no se entienden sin el enunciado */}
-          {testDef?.instructions && (
+          {(currentQuestion.instructions ?? testDef?.instructions) && (
             <p
               className="w-full max-w-md px-4 text-sm leading-relaxed text-center animate-fadeInQuestion"
               style={{ color: 'var(--color-primary)', opacity: 0.6 }}
               aria-label="Instrucciones del test"
             >
-              {testDef.instructions}
+              {currentQuestion.instructions ?? testDef?.instructions}
             </p>
           )}
 

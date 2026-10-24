@@ -29,7 +29,9 @@ export interface ShowIfCondition {
   /** ID de la pregunta que activa esta condición */
   questionId: string
   /** Valor que debe tener la pregunta para mostrar esta */
-  value: string | number | boolean
+  value?: string | number | boolean
+  /** Alternativa a `value`: se muestra salvo que la respuesta sea uno de estos valores (sin responder → se muestra) */
+  notIn?: Array<string | number | boolean>
 }
 
 /** Reglas de validación para preguntas de texto */
@@ -51,6 +53,14 @@ export interface Question {
   type: QuestionType
   /** Texto de la pregunta que ve el usuario */
   text: string
+  /** Enunciado propio de esta pregunta; si falta se usa el del test. Cadena vacía = sin enunciado */
+  instructions?: string
+  /** Cómo puntúa (si falta: likert suma directa; isRedFlag no suma). `none` = no puntúa */
+  scoring?: {
+    method: 'direct' | 'reverse' | 'redFlag' | 'text_analysis' | 'none'
+    redFlagSeverity?: 'high' | 'critical'
+    keywords?: string[]
+  }
 
   // ── Likert ────────────────────────────────────────────────────────────────
   /** Rango numérico de la escala (por defecto 0–3) */

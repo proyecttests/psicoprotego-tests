@@ -8,11 +8,6 @@
   conectar la landing a `es.content.json` (hero, qué mide, a quién va dirigido, cómo funciona,
   validación con referencias, interpretación, FAQ, privacidad). Tarea de código aparte; sin esto,
   la revisión clínica no llega a la web.
-- **PHQ-9, pregunta de dificultad funcional.** La versión oficial (phqscreeners.com, «Spanish for
-  Spain») acaba con «Si ha marcado alguno de los problemas de este cuestionario, ¿hasta qué punto
-  estos problemas le han creado dificultades…?» (Ninguna / Algunas / Muchas / Muchísimas
-  dificultades). La app no la incluye. No puntúa: si se añade, tiene que quedar fuera de la suma
-  (hoy el scoring suma todas las respuestas). Decisión clínica de Emmanuel.
 - **PHQ-9:** `es.content.json` con 11 `[PENDIENTE]`. Pasar por `/clinical-landing-writer` y revisión
   clínica.
 

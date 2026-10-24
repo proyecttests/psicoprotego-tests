@@ -111,9 +111,17 @@ for (const lang of langs) {
     }
   }
 
-  // Check itemCount matches
-  if (meta.itemCount && questions.length !== meta.itemCount) {
-    warn(`${lang}.json: ${questions.length} questions but metadata.itemCount=${meta.itemCount}`)
+  // Check itemCount matches (itemCount = ítems que puntúan; no cuenta scoring.method 'none')
+  const scoredCount = questions.filter((q) => !(q.scoring && q.scoring.method === 'none')).length
+  if (meta.itemCount && scoredCount !== meta.itemCount) {
+    warn(`${lang}.json: ${scoredCount} scored questions but metadata.itemCount=${meta.itemCount}`)
+  }
+
+  // Likert questions need response options (test-level or per question)
+  for (const q of questions) {
+    if (q.type === 'likert' && !(q.responseOptions || data.responseOptions)) {
+      err(`${lang}.json: question ${q.id} is likert but neither it nor the test defines responseOptions`)
+    }
   }
 
   // Scoring categories — supports two formats:
