@@ -15,6 +15,7 @@ import DownloadCard from './DownloadCard'
 import RelatedTests from './RelatedTests'
 import Link from 'next/link'
 import type { ScoringResult } from '@/utils/scoringFunctions'
+import { CRISIS_PHONES } from '@/config/crisisPhones'
 import type { TestDefinition, TestLangFile, AnswersMap } from '@/types/test'
 import dynamic from 'next/dynamic'
 
@@ -228,17 +229,15 @@ const SupportBlock: React.FC<{ lang: string }> = ({ lang }) => {
         {ui.supportBody}
       </p>
       {lang === 'es' && (
-        <div className="mb-3 space-y-1.5">
-          <p className="text-sm font-medium leading-relaxed" style={{ color: 'var(--color-primary)' }}>
-            Si estás en peligro inmediato, llama al{' '}
-            <a href="tel:112" className="font-bold underline underline-offset-2">112</a>.
-          </p>
-          <p className="text-sm font-medium leading-relaxed" style={{ color: 'var(--color-primary)' }}>
-            Si tienes pensamientos de suicidio, llama al{' '}
-            <a href="tel:024" className="font-bold underline underline-offset-2">024</a>{' '}
-            (Línea de atención a la conducta suicida), gratuita y disponible las 24 horas.
-          </p>
-        </div>
+        <ul className="mb-3 space-y-1.5" aria-label="Teléfonos de ayuda">
+          {CRISIS_PHONES.map((p) => (
+            <li key={p.tel} className="text-sm font-medium leading-relaxed" style={{ color: 'var(--color-primary)' }}>
+              {p.situation}:{' '}
+              <a href={`tel:${p.tel}`} className="font-bold underline underline-offset-2">{p.number}</a>
+              {' — '}{p.label}
+            </li>
+          ))}
+        </ul>
       )}
       <Link
         href={helpRoute}

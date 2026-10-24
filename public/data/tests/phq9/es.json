@@ -156,14 +156,7 @@
     },
     "crisis": {
       "title": "Necesitas apoyo ahora mismo",
-      "body": "Has indicado pensamientos de hacerte daño. Eso nos importa mucho. No tienes que estar solo/a con esto. Hay personas entrenadas para escucharte ahora mismo.",
-      "phones": [
-        { "label": "Línea de Atención a la Conducta Suicida", "number": "024" },
-        { "label": "Emergencias", "number": "112" }
-      ],
-      "resources": [
-        { "label": "Información sobre el 024 — Ministerio de Sanidad", "url": "https://www.sanidad.gob.es/linea024" }
-      ]
+      "body": "Has indicado pensamientos de hacerte daño. Eso nos importa mucho. No tienes que estar solo/a con esto. Hay personas entrenadas para escucharte ahora mismo."
     }
   }
 }
