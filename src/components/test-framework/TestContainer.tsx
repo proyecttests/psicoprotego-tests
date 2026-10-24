@@ -185,6 +185,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
           disclaimerBefore: langData.disclaimerBefore,
           disclaimerAfter:  langData.disclaimerAfter,
           instructions:     langData.instructions,
+          responseOptions:  langData.responseOptions,
         }
 
         // 4. Build messages map compatible with scoringFunctions format
@@ -455,10 +456,10 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
         {/* SECCIÓN CENTRAL: Pregunta + Opciones con transición TDAH */}
         <div
           key={currentIdx}
-          className={`w-full max-w-2xl flex flex-col items-center gap-14 flex-1 justify-center py-4${isExiting ? ' animate-slide-out-tiktok' : ''}`}
+          className={`w-full max-w-2xl flex flex-col items-center gap-6 sm:gap-14 flex-1 justify-center py-2 sm:py-4${isExiting ? ' animate-slide-out-tiktok' : ''}`}
         >
-          {/* Instrucciones validadas — solo en la primera pregunta */}
-          {currentIdx === 0 && testDef?.instructions && (
+          {/* Instrucciones validadas — en cada pregunta: los ítems oficiales no se entienden sin el enunciado */}
+          {testDef?.instructions && (
             <p
               className="w-full max-w-md px-4 text-sm leading-relaxed text-center animate-fadeInQuestion"
               style={{ color: 'var(--color-primary)', opacity: 0.6 }}
@@ -470,7 +471,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
 
           {/* Pregunta - Grande, fade suave, centrada */}
           <h2
-            className="text-2xl sm:text-3xl font-semibold leading-snug text-center px-4 animate-fadeInQuestion max-w-md pb-2"
+            className="text-xl sm:text-3xl font-semibold leading-snug text-center px-4 animate-fadeInQuestion max-w-md pb-2"
             style={{ color: 'var(--color-primary)' }}
           >
             {currentQuestion.text}
@@ -489,7 +490,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
                     ? handleNext
                     : undefined
               }
-              lang={lang}
+              testResponseOptions={testDef?.responseOptions}
             />
           </div>
         </div>

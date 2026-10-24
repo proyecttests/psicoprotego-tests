@@ -43,10 +43,10 @@
   },
   "howItWorks": {
     "heading": "Cómo funciona",
-    "body": "El test consta de 7 preguntas sobre cómo te has sentido durante las últimas dos semanas. Cada pregunta ofrece cuatro opciones de respuesta, desde «Nunca» hasta «Casi todos los días». No hay respuestas correctas o incorrectas; solo describe lo que mejor se ajusta a tu experiencia.\n\nLa puntuación total oscila entre 0 y 21 puntos. El resultado se interpreta según rangos clínicos establecidos por la validación original del instrumento, con una orientación clara sobre qué puede indicar cada puntuación.\n\nEsta herramienta se usa típicamente en el marco de un proceso de evaluación o seguimiento. Si ya estás en consulta, tu profesional puede decirte si te conviene completarlo; si todavía no has consultado, el resultado puede servirte para llevar un registro orientativo a una primera cita.",
+    "body": "El test consta de 7 preguntas sobre cómo te has sentido durante las últimas dos semanas. Cada pregunta ofrece cuatro opciones de respuesta, desde «Nunca» hasta «Casi cada día». No hay respuestas correctas o incorrectas; solo describe lo que mejor se ajusta a tu experiencia.\n\nLa puntuación total oscila entre 0 y 21 puntos. El resultado se interpreta según rangos clínicos establecidos por la validación original del instrumento, con una orientación clara sobre qué puede indicar cada puntuación.\n\nEsta herramienta se usa típicamente en el marco de un proceso de evaluación o seguimiento. Si ya estás en consulta, tu profesional puede decirte si te conviene completarlo; si todavía no has consultado, el resultado puede servirte para llevar un registro orientativo a una primera cita.",
     "steps": [
       "Respondes 7 preguntas sobre cómo te has sentido las últimas 2 semanas.",
-      "Cada pregunta tiene 4 opciones: «Nunca», «Menos de la mitad de los días», «Más de la mitad de los días» y «Casi todos los días».",
+      "Cada pregunta tiene 4 opciones: «Nunca», «Varios días», «Más de la mitad de los días» y «Casi cada día».",
       "Marcas la que mejor describe tu experiencia. Puedes ir atrás si lo necesitas.",
       "El sistema calcula automáticamente tu puntuación total (rango 0–21).",
       "Ves tu puntuación y qué suele indicar ese rango."

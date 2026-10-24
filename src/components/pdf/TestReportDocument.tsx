@@ -14,6 +14,7 @@ import {
 } from '@react-pdf/renderer'
 import type { TestLangFile, AnswersMap } from '@/types/test'
 import type { ScoringResult } from '@/utils/scoringFunctions'
+import { getResponseOptions } from '@/utils/responseOptions'
 import { RTL_LANGS } from '@/config/brand'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -543,27 +544,15 @@ export const TestReportDocument: React.FC<TestReportDocumentProps> = ({
                 {/* Likert scale: show selected value */}
                 {question.type === 'likert' && answer !== undefined && (
                   <View style={styles.optionsRow}>
-                    {Array.from(
-                      { length: (question.scale?.max ?? 3) - (question.scale?.min ?? 0) + 1 },
-                      (_, i) => (question.scale?.min ?? 0) + i
-                    ).map((val) => {
-                      const isSelected = Number(answer) === val
-                      const labelMin = question.labels?.min
-                      const labelMax = question.labels?.max
-                      const scaleMax = question.scale?.max ?? 3
-                      const scaleMin = question.scale?.min ?? 0
-                      const labelText = val === scaleMin && labelMin
-                        ? `${val} – ${labelMin}`
-                        : val === scaleMax && labelMax
-                        ? `${val} – ${labelMax}`
-                        : String(val)
+                    {getResponseOptions(question, testData.responseOptions).map((opt) => {
+                      const isSelected = Number(answer) === opt.value
                       return (
-                        <View key={val} style={[styles.optionItem, isRTL ? { flexDirection: 'row-reverse' } : {}]}>
+                        <View key={opt.value} style={[styles.optionItem, isRTL ? { flexDirection: 'row-reverse' } : {}]}>
                           <Text style={isSelected ? [styles.optionBullet, styles.optionBulletSelected] : styles.optionBullet}>
                             {isSelected ? '*' : '-'}
                           </Text>
                           <Text style={isSelected ? [styles.optionLabel, styles.optionLabelSelected] : styles.optionLabel}>
-                            {labelText}
+                            {`${opt.value} – ${opt.label}`}
                           </Text>
                         </View>
                       )
