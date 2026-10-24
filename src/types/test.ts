@@ -177,8 +177,10 @@ export interface CrisisResource {
 export interface CrisisMessage {
   title: string
   body: string
-  phones: CrisisPhone[]
-  resources: CrisisResource[]
+  /** Obsoleto: los teléfonos salen de src/config/crisisPhones.ts */
+  phones?: CrisisPhone[]
+  /** Obsoleto: no se renderiza */
+  resources?: CrisisResource[]
 }
 
 /** Mapa de mensajes por clave */

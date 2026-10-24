@@ -38,11 +38,17 @@ import { getScoringFunction, getMaxScore } from '@/utils/scoringFunctions'
 import { buildShareUrl } from '@/utils/shareEncoding'
 import type { ScoringResult, TestDefinitionForScoring, QuestionWithScoring } from '@/utils/scoringFunctions'
 import { trackEvent } from '@/config/analytics'
+import { getCrisisPhone } from '@/config/crisisPhones'
 
 // ── Crisis bar (sticky bottom, solo cuando resultType === 'CRISIS') ───────────
 
 const CRISIS_STRINGS: Record<string, { message: string; phone1Label: string; phone1: string; phone2: string }> = {
-  es: { message: 'Hay apoyo disponible — no estás solo/a', phone1Label: '024 – Conducta suicida', phone1: '024', phone2: '112' },
+  es: {
+    message:     'Hay apoyo disponible — no estás solo/a',
+    phone1Label: `${getCrisisPhone('024').number} – Conducta suicida`,
+    phone1:      getCrisisPhone('024').tel,
+    phone2:      getCrisisPhone('112').tel,
+  },
 }
 
 const CrisisBar: React.FC<{ lang: string }> = ({ lang }) => {

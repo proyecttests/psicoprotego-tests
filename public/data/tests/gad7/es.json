@@ -121,14 +121,7 @@
     },
     "crisis": {
       "title": "Necesitas hablar con alguien ahora",
-      "body": "Algunas de tus respuestas indican que podrías estar pasando por un momento muy difícil. No tienes que afrontarlo solo/a. Hay personas disponibles ahora mismo para escucharte.",
-      "phones": [
-        { "label": "Línea de atención a la conducta suicida", "number": "024" },
-        { "label": "Emergencias", "number": "112" }
-      ],
-      "resources": [
-        { "label": "Centro de Crisis Online — Ministerio de Sanidad", "url": "https://www.sanidad.gob.es/linea024" }
-      ]
+      "body": "Algunas de tus respuestas indican que podrías estar pasando por un momento muy difícil. No tienes que afrontarlo solo/a. Hay personas disponibles ahora mismo para escucharte."
     }
   }
 }

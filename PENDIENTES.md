@@ -13,11 +13,10 @@
 - **PHQ-9:** `es.content.json` con 11 `[PENDIENTE]`. Pasar por `/clinical-landing-writer` y revisión
   clínica.
 
-- **Crisis UI incumple `safety.md`** (visto 2026-10-24): el bloque de apoyo/crisis
-  (`SupportBlock` en `ResultCard.tsx`) y `CrisisBar` solo muestran 112 y 024; faltan 717 003 717
-  (Teléfono de la Esperanza) y 900 20 20 10 (ANAR). Propuesta: una sola fuente
-  (`src/config/crisisPhones.ts`) usada por los dos, y quitar `phones`/`resources` de
-  `results.crisis` en `gad7/es.json` y `phq9/es.json` (no los lee nadie). Sin empezar.
+- **Bloque de crisis en móvil:** con resultado de crisis, la barra fija muestra 024 y 112 desde el
+  primer momento, pero la lista completa de cuatro teléfonos (`SupportBlock`) queda debajo de
+  «Compartir resultados», fuera de la primera pantalla en 375×667. ¿Subirla justo debajo del
+  mensaje? Decisión de Emmanuel (orden de la UI de crisis).
 
 ## Revisión clínica
 
@@ -54,11 +53,6 @@
 
 ## Deuda
 
-- Los teléfonos de crisis están en dos fuentes: los campos `phones`/`resources` de
-  `public/data/tests/{gad7,phq9}/es.json` no los lee ningún componente (verificado por grep); la
-  única fuente que se renderiza es `src/data/help-resources/es.json` más los números fijos de
-  `ResultCard.tsx` y de `CrisisBar` en `TestContainer.tsx`. Unificar en una sola fuente antes de
-  que un test nuevo repita el mismo tipo de error de etiqueta que tenía GAD-7.
 - Rama remota `migration/nextjs`: no tiene ningún commit que no esté en `main` (verificado
   2026-10-23). Se puede archivar.
 - `app/sitemap.ts` sigue publicando páginas indexables en `en`/`pt`/`ku` (`LANGS` hardcodeado,
