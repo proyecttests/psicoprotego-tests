@@ -31,7 +31,7 @@ export default async function LangLayout({
         <main className="flex flex-1 flex-col">
           {children}
         </main>
-        <Footer showCrisisFooter={false} lang={lang} />
+        <Footer lang={lang} />
       </div>
       <CookieBanner lang={lang} gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
     </>

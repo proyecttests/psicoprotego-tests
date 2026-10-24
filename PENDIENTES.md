@@ -53,8 +53,6 @@
   única fuente que se renderiza es `src/data/help-resources/es.json` más los números fijos de
   `ResultCard.tsx` y de `CrisisBar` en `TestContainer.tsx`. Unificar en una sola fuente antes de
   que un test nuevo repita el mismo tipo de error de etiqueta que tenía GAD-7.
-- `Footer.tsx` conserva una rama `showCrisisFooter` que nadie activa (el layout siempre pasa
-  `false`) y que rotula el 024 como «Esperanza». Código muerto: eliminarlo.
 - Rama remota `migration/nextjs`: no tiene ningún commit que no esté en `main` (verificado
   2026-10-23). Se puede archivar.
 - `app/sitemap.ts` sigue publicando páginas indexables en `en`/`pt`/`ku` (`LANGS` hardcodeado,
