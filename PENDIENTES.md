@@ -13,6 +13,12 @@
 - **PHQ-9:** `es.content.json` con 11 `[PENDIENTE]`. Pasar por `/clinical-landing-writer` y revisión
   clínica.
 
+- **Crisis UI incumple `safety.md`** (visto 2026-10-24): el bloque de apoyo/crisis
+  (`SupportBlock` en `ResultCard.tsx`) y `CrisisBar` solo muestran 112 y 024; faltan 717 003 717
+  (Teléfono de la Esperanza) y 900 20 20 10 (ANAR). Propuesta: una sola fuente
+  (`src/config/crisisPhones.ts`) usada por los dos, y quitar `phones`/`resources` de
+  `results.crisis` en `gad7/es.json` y `phq9/es.json` (no los lee nadie). Sin empezar.
+
 ## Revisión clínica
 
 - **GAD-7:** primera pasada de Emmanuel aplicada (commit `382023a`). Decisiones cerradas: sin cifra
