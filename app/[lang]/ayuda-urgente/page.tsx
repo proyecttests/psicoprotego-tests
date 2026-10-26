@@ -2,8 +2,8 @@
  * @file app/[lang]/ayuda-urgente/page.tsx
  * @description Página de recursos de ayuda urgente — Server Component + SSG.
  *
- * generateStaticParams() auto-descubre langs desde /src/data/help-resources/.
- * Añadir un idioma nuevo = soltar fr.json en esa carpeta. Sin tocar código.
+ * generateStaticParams() auto-descubre langs desde /src/data/help-resources/, limitado a
+ * SUPPORTED_LANGS (src/config/brand.ts).
  */
 
 import fs from 'node:fs/promises'
@@ -12,6 +12,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import HelpResourcesPage, { type HelpData } from '@/views/HelpResourcesPage'
 import { getRobots } from '@/utils/siteConfig'
+import { SUPPORTED_LANGS } from '@/config/brand'
 
 // ── Constantes ────────────────────────────────────────────────────────────────
 
@@ -26,6 +27,7 @@ async function discoverHelpLangs(): Promise<string[]> {
     return files
       .filter((f) => f.endsWith('.json'))
       .map((f) => f.replace('.json', ''))
+      .filter((l) => (SUPPORTED_LANGS as readonly string[]).includes(l))
   } catch {
     return ['es']
   }
