@@ -1,14 +1,11 @@
 import type { MetadataRoute } from 'next'
 import testsIndex from '@/generated/testsIndex'
+import { SUPPORTED_LANGS } from '@/config/brand'
 
 const BASE   = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://psicoprotego.es'
-const LANGS  = ['es', 'en', 'pt', 'ku'] as const
+const LANGS: readonly string[] = SUPPORTED_LANGS
 
-// Static pages present for all langs
-const STATIC_PAGES = ['', 'acerca-de', 'contacto', 'privacidad', 'cookies', 'aviso-legal']
-
-// Static pages only for es/en/pt (not ku)
-const PARTIAL_PAGES = ['ayuda-urgente']
+const STATIC_PAGES = ['', 'acerca-de', 'contacto', 'privacidad', 'cookies', 'aviso-legal', 'ayuda-urgente']
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = []
@@ -23,25 +20,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
         url:             `${BASE}/${lang}${page ? `/${page}` : ''}`,
         lastModified:    new Date(),
         changeFrequency: page === '' ? 'weekly' : 'monthly',
-        priority:        page === '' ? 0.9 : 0.6,
+        priority:        page === '' ? 0.9 : page === 'ayuda-urgente' ? 0.5 : 0.6,
       })
-    }
-    // Partial pages (no ku)
-    if (lang !== 'ku') {
-      for (const page of PARTIAL_PAGES) {
-        entries.push({
-          url:             `${BASE}/${lang}/${page}`,
-          lastModified:    new Date(),
-          changeFrequency: 'monthly',
-          priority:        0.5,
-        })
-      }
     }
   }
 
   // Test landing pages
   for (const test of testsIndex) {
     for (const lang of test.availableLangs as string[]) {
+      if (!LANGS.includes(lang)) continue
       entries.push({
         url:             `${BASE}/${lang}/test/${test.testId}`,
         lastModified:    new Date(),

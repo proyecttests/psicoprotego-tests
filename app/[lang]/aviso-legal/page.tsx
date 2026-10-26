@@ -5,9 +5,10 @@
 
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { SUPPORTED_LANGS } from '@/config/brand'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://psicoprotego.es'
-const LANGS = ['es', 'en', 'pt', 'ku']
+const LANGS = SUPPORTED_LANGS
 
 const CONTENT: Record<string, { metaTitle: string; metaDescription: string; heading: string; sections: Array<{ title: string; body: string }> }> = {
   es: {
