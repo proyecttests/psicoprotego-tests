@@ -349,6 +349,13 @@ const NormalResult: React.FC<{
           {message?.body}
         </p>
 
+        {/* Avisos de interpretación (results.notes) */}
+        {message?.notes?.map((note) => (
+          <p key={note} className="text-sm leading-relaxed font-sans" style={{ color: 'var(--color-primary)', lineHeight: '1.6' }}>
+            {note}
+          </p>
+        ))}
+
         {/* Recomendación destacada — solo si existe */}
         {message?.recommendation && (
           <div className="rounded-lg border p-4" style={{ borderColor: 'var(--color-accent)', backgroundColor: 'var(--color-cream)' }}>

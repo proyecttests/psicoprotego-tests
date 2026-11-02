@@ -142,6 +142,8 @@ export interface ScoringResult {
     title: string
     body: string
     recommendation?: string
+    /** Avisos de interpretación que se cumplen (regla `results.notes` del JSON) */
+    notes?: string[]
     action?: string
     // Campos de CRISIS
     phones?: Array<{ label: string; number: string }>
@@ -162,7 +164,43 @@ export type ScoringFunction = (
   lang?: string,
 ) => ScoringResult
 
+/**
+ * Regla de aviso de interpretación (`results.notes` en {lang}.json).
+ * Se cumple si el score es ≥ minScore y todas las preguntas indicadas
+ * tienen una respuesta numérica por debajo de `allBelow.value`.
+ */
+export interface ResultNoteRule {
+  minScore?: number
+  allBelow: { questions: string[]; value: number }
+  text: string
+}
+
 // ── Helpers internos ──────────────────────────────────────────────────────────
+
+/**
+ * Devuelve los textos de las reglas de aviso que se cumplen.
+ *
+ * @param rules   - Reglas de `results.notes` (puede no haber)
+ * @param score   - Puntuación total
+ * @param answers - Mapa questionId → valor respondido
+ * @returns Textos de los avisos aplicables (vacío si ninguno)
+ */
+function resolveNotes(
+  rules: ResultNoteRule[] | undefined,
+  score: number,
+  answers: Record<string, number | string | boolean>,
+): string[] {
+  if (!rules?.length) return []
+  return rules
+    .filter((rule) =>
+      score >= (rule.minScore ?? 0) &&
+      rule.allBelow.questions.every((id) => {
+        const answer = answers[id]
+        return typeof answer === 'number' && answer < rule.allBelow.value
+      }),
+    )
+    .map((rule) => rule.text)
+}
 
 /**
  * Determina el método de scoring efectivo para una pregunta.
@@ -408,10 +446,16 @@ export function scoreGAD7(
     const resolved = normalMsgs?.[category.messageKey]
 
     if (resolved) {
+      const notes = resolveNotes(
+        langMessages?.['notes'] as ResultNoteRule[] | undefined,
+        totalScore,
+        answers,
+      )
       message = {
         title:          resolved.title,
         body:           resolved.body,
         recommendation: resolved.recommendation,
+        ...(notes.length > 0 && { notes }),
       }
     } else {
       console.warn(

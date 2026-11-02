@@ -91,30 +91,30 @@
     }
   ],
   "scoring": [
-    { "min": 0,  "max": 4,    "category": "Ansiedad Mínima",   "color": "green",  "messageKey": "minimal"  },
-    { "min": 5,  "max": 9,    "category": "Ansiedad Leve",     "color": "yellow", "messageKey": "mild"     },
-    { "min": 10, "max": 14,   "category": "Ansiedad Moderada", "color": "orange", "messageKey": "moderate" },
-    { "min": 15, "max": null, "category": "Ansiedad Grave",    "color": "red",    "messageKey": "severe"   }
+    { "min": 0,  "max": 4,    "category": "Puntuación en rango mínimo",   "color": "green",  "messageKey": "minimal"  },
+    { "min": 5,  "max": 9,    "category": "Puntuación en rango leve",     "color": "yellow", "messageKey": "mild"     },
+    { "min": 10, "max": 14,   "category": "Puntuación en rango moderado", "color": "orange", "messageKey": "moderate" },
+    { "min": 15, "max": null, "category": "Puntuación en rango grave",    "color": "red",    "messageKey": "severe"   }
   ],
   "results": {
     "normal": {
       "minimal": {
-        "title": "Ansiedad Mínima",
+        "title": "Puntuación en rango mínimo",
         "body": "En las dos últimas semanas has tenido pocos síntomas de ansiedad, o ninguno.",
         "recommendation": "Una puntuación baja no descarta un problema: si sientes que algo no va bien, puedes hablarlo con un profesional. Si ya tienes uno de referencia, puedes comentarle el resultado en tu próxima consulta."
       },
       "mild": {
-        "title": "Ansiedad Leve",
+        "title": "Puntuación en rango leve",
         "body": "Puede reflejar síntomas presentes de forma intermitente, a menudo ligados a periodos de estrés.",
         "recommendation": "Cuidar el descanso, la actividad física y los momentos de calma puede ayudar. Observa cómo evolucionan los síntomas: si persisten varias semanas o te generan malestar, puede tener sentido hablarlo con un profesional."
       },
       "moderate": {
-        "title": "Ansiedad Moderada",
+        "title": "Puntuación en rango moderado",
         "body": "Sugiere síntomas que probablemente están afectando a tu día a día (trabajo, relaciones, sueño). Es el umbral a partir del cual se suele recomendar una valoración profesional.",
         "recommendation": "Es recomendable comentarlo con un profesional: un psicólogo/a o tu médico/a de familia. Si ya estás en seguimiento, compártelo en tu próxima sesión."
       },
       "severe": {
-        "title": "Ansiedad Grave",
+        "title": "Puntuación en rango grave",
         "body": "Sugiere malestar significativo, que probablemente está afectando a tu bienestar y a tu funcionamiento diario.",
         "recommendation": "Es recomendable hablar cuanto antes con un profesional sanitario —psicólogo/a, psiquiatra o médico/a de familia—. Si en este momento el malestar es muy intenso, puedes llamar al 024 (línea de atención a la conducta suicida y crisis de salud mental, gratuita, 24 horas)."
       }
