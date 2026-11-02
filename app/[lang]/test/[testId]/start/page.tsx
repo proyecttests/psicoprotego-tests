@@ -64,10 +64,8 @@ export default function StartPage() {
   const { lang = 'es', testId = 'gad7' } = useParams<{ lang: string; testId: string }>()
   const ui                 = getUI(lang)
 
-  const [testName,       setTestName]       = React.useState('')
   const [disclaimerText, setDisclaimerText] = React.useState('')
   const [loadState,      setLoadState]      = React.useState<'loading' | 'loaded' | 'error'>('loading')
-  const [testCategory,   setTestCategory]   = React.useState<'psychometric' | 'quiz'>('psychometric')
   const [errorMsg,       setErrorMsg]       = React.useState('')
 
   // ── Fetch disclaimer del JSON del test ────────────────────────────────────
@@ -76,22 +74,14 @@ export default function StartPage() {
 
     const load = async () => {
       try {
-        const [metaRes, langRes] = await Promise.all([
-          fetch(`/data/tests/${testId}/metadata.json`),
-          fetch(`/data/tests/${testId}/${lang}.json`),
-        ])
+        const langRes = await fetch(`/data/tests/${testId}/${lang}.json`)
         const finalRes = langRes.ok ? langRes : await fetch(`/data/tests/${testId}/es.json`)
         if (!finalRes.ok) throw new Error(`Content for "${testId}" not found.`)
 
         const data = await finalRes.json() as TestLangFile
-        const meta = metaRes.ok
-          ? await metaRes.json() as { category?: 'psychometric' | 'quiz' }
-          : {}
 
         if (!cancelled) {
-          setTestName(data.name)
           setDisclaimerText(data.disclaimerBefore ?? getUI(lang).defaultText(data.name))
-          setTestCategory((meta as { category?: 'psychometric' | 'quiz' }).category ?? 'psychometric')
           setLoadState('loaded')
         }
       } catch (err) {

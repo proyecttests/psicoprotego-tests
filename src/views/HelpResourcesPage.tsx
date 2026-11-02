@@ -76,7 +76,6 @@ export interface HelpData {
 // ── Props ─────────────────────────────────────────────────────────────────────
 
 interface HelpResourcesPageProps {
-  lang: string
   data: HelpData
 }
 
@@ -188,7 +187,7 @@ const SectionHeading: React.FC<{ children: React.ReactNode }> = ({ children }) =
 
 // ── Componente principal ──────────────────────────────────────────────────────
 
-const HelpResourcesPage: React.FC<HelpResourcesPageProps> = ({ lang, data }) => {
+const HelpResourcesPage: React.FC<HelpResourcesPageProps> = ({ data }) => {
   const { page, sections } = data
 
   const [othersExpanded, setOthersExpanded] = React.useState(false)

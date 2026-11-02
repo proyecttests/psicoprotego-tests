@@ -18,10 +18,9 @@ const LABEL: Record<string, { btn: string; interstitial: string; countdown: stri
 interface DownloadBlankLandingProps {
   testId:   string
   lang:     string
-  testName: string
 }
 
-export default function DownloadBlankLanding({ testId, lang, testName }: DownloadBlankLandingProps) {
+export default function DownloadBlankLanding({ testId, lang }: DownloadBlankLandingProps) {
   const ui = LABEL[lang] ?? LABEL['es']
   const [state, setState]       = React.useState<'idle' | 'interstitial' | 'done'>('idle')
   const [validationDetails, setValidationDetails] = React.useState<{

@@ -33,6 +33,8 @@ const Header: React.FC<HeaderProps> = ({ testName, currentQuestion, totalQuestio
           className="flex items-center focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-md"
           aria-label="Psicoprotego — Inicio"
         >
+          {/* SVG: next/image no lo optimiza, así que <img> basta */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/oficial-horizontal-verde.svg"
             alt="Psicoprotego"

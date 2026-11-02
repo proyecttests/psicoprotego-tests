@@ -117,12 +117,11 @@ const TestInterstitial: React.FC<TestInterstitialProps> = ({
 }) => {
   const ui = getUI(lang)
 
-  const [testName,      setTestName]      = React.useState('')
   const [disclaimerText, setDisclaimerText] = React.useState('')
   const [loadState,     setLoadState]     = React.useState<'loading' | 'loaded' | 'error'>('loading')
   const [errorMsg,      setErrorMsg]      = React.useState('')
 
-  // ── Fetch testName + disclaimerBefore ─────────────────────────────────────
+  // ── Fetch disclaimerBefore ─────────────────────────────────────
   React.useEffect(() => {
     let cancelled = false
 
@@ -135,7 +134,6 @@ const TestInterstitial: React.FC<TestInterstitialProps> = ({
         const data = await finalRes.json() as TestLangFile
 
         if (!cancelled) {
-          setTestName(data.name)
           setDisclaimerText(data.disclaimerBefore ?? ui.defaultText(data.name))
           setLoadState('loaded')
         }

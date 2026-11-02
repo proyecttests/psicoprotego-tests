@@ -94,5 +94,5 @@ export default async function AyudaUrgenteRoute({
   const data = await loadHelpData(lang)
   if (!data) notFound()
 
-  return <HelpResourcesPage lang={lang} data={data as unknown as HelpData} />
+  return <HelpResourcesPage data={data as unknown as HelpData} />
 }

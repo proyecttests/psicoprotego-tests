@@ -250,9 +250,6 @@ export default function TestLandingPage({
   const isValidated = metadata.validated
   const startHref   = `/${lang}/test/${testId}/start`
   const isQuiz      = metadata.category === 'screening'
-  const startLabel  = isQuiz
-    ? ({ es: 'Empezar quiz', en: 'Start quiz', pt: 'Iniciar quiz', ku: 'کوێزەکە دەستپێبکە' } as Record<string,string>)[lang] ?? 'Empezar quiz'
-    : ui.startButton
   const isDraft     = content !== null && content.status !== 'clinically-approved'
 
   return (
@@ -328,7 +325,6 @@ export default function TestLandingPage({
               <DownloadBlankLanding
                 testId={testId}
                 lang={lang}
-                testName={langData.name}
               />
             )}
           </div>

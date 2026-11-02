@@ -67,7 +67,6 @@ const DownloadCard: React.FC<DownloadCardProps> = ({
   lang, testName, score, maxScore, categoryLabel, colorKey, testId,
 }) => {
   const ui     = UI[lang] ?? UI['es']
-  const colors = COLORS[colorKey] ?? COLORS['green']
   const [loading,   setLoading]   = React.useState(false)
   const [canShare,  setCanShare]  = React.useState(false)
 

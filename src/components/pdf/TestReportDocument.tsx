@@ -55,13 +55,6 @@ const COLORS = {
   red:       '#8b3a3a',
 }
 
-const CATEGORY_COLOR_MAP: Record<string, string> = {
-  green:  COLORS.green,
-  yellow: COLORS.yellow,
-  orange: COLORS.orange,
-  red:    COLORS.red,
-}
-
 // ── Styles ────────────────────────────────────────────────────────────────────
 
 const styles = StyleSheet.create({
@@ -350,10 +343,6 @@ function getQuestionsLabel(lang: string): string {
   return QUESTIONS_LABEL[lang] ?? QUESTIONS_LABEL['es']
 }
 
-const ANSWER_LABEL: Record<string, string> = {
-  es: 'Respuesta',
-}
-
 const SCORE_LABEL: Record<string, string> = {
   es: 'Puntuación',
 }
@@ -386,9 +375,6 @@ export const TestReportDocument: React.FC<TestReportDocumentProps> = ({
   const isRTL = RTL_LANGS.has(metadata.userLang)
   const isBilingual = viewLangData !== null && viewLangData !== undefined && viewLangData.lang !== testData.lang
   const displayData = isBilingual ? viewLangData! : testData
-  const categoryColor = result.category?.color
-    ? (CATEGORY_COLOR_MAP[result.category.color] ?? COLORS.primary)
-    : COLORS.primary
   const viewLang = metadata.viewLang
   const scoreLabel = SCORE_LABEL[viewLang] ?? SCORE_LABEL['es']
   const questionsLabel = getQuestionsLabel(viewLang)
