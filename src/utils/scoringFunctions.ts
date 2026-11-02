@@ -272,7 +272,7 @@ function findCategory(
  *  5. Si hay red flag crítico → resultType = 'CRISIS', score = null.
  *  6. Si no hay crisis → busca categoría y opcionalmente el mensaje.
  *
- * @param testData - Definición del test cargada desde tests.json
+ * @param testData - Definición del test cargada desde /data/tests/{testId}/
  * @param answers  - Mapa questionId → valor respondido
  * @param messages - (Opcional) Mapa de mensajes desde messages.json
  * @param lang     - (Opcional) Código de idioma, por defecto 'es'
@@ -381,7 +381,7 @@ export function scoreGAD7(
     // Score fuera de rango — devuelve resultado parcial sin categoría
     console.warn(
       `[scoreGAD7] No se encontró categoría para score ${totalScore}. ` +
-      `Revisa las reglas de scoring en tests.json.`,
+      `Revisa las reglas de scoring en {lang}.json del test.`,
     )
     return {
       score:      totalScore,

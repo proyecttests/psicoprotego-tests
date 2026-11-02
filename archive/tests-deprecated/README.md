@@ -2,6 +2,9 @@
 
 ## Qué se archivó
 - `apego/` — Test de estilos de apego adultos (ES/EN/PT/KU)
+- `tests.json` — definiciones antiguas de GAD-7/PHQ-9 (con `labels` y textos viejos), estaba en
+  `public/data/`. Ningún código lo cargaba: los tests se leen de `public/data/tests/{testId}/`.
+  Archivado el 2026-11-02; no hay que restaurarlo.
 
 ## Por qué se archivó
 Fecha: 2026-04-18. El test de apego es un quiz no-validado clínicamente.

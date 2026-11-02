@@ -3,7 +3,7 @@
  * @description Orquestador principal del framework de tests psicológicos.
  *
  * Responsabilidades:
- * 1. Cargar la definición del test desde /data/tests.json
+ * 1. Cargar la definición del test desde /data/tests/{testId}/ (metadata.json + {lang}.json)
  * 2. Cargar los mensajes desde /data/messages.json
  * 3. Gestionar el flujo de estados: loading → disclaimer-before → answering → result | error
  * 4. Filtrar preguntas condicionales (showIf)
@@ -119,7 +119,7 @@ function getUiStrings(lang: string) {
 // ── Props ────────────────────────────────────────────────────────────────────
 
 interface TestContainerProps {
-  /** Identificador del test a cargar (debe coincidir con el `id` en tests.json) */
+  /** Identificador del test a cargar (nombre de la carpeta en /data/tests/) */
   testId: string
   /** Código de idioma (debe coincidir con un `lang` en messages.json) */
   lang?: string

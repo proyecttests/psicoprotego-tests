@@ -123,7 +123,7 @@ export interface FollowUpTrigger {
 
 /**
  * Definición completa de un test psicológico.
- * Se carga desde /data/tests.json.
+ * Se carga desde /data/tests/{testId}/metadata.json y {lang}.json.
  */
 export interface TestDefinition {
   /** Identificador único del test (ej: "gad7") */
