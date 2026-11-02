@@ -130,28 +130,28 @@
     "normal": {
       "minimal": {
         "title": "Depresión Mínima",
-        "body": "Tus síntomas son mínimos. Es normal sentirse bajo de ánimo ocasionalmente.",
-        "recommendation": "Mantén buenos hábitos: sueño regular, actividad física, y conexiones sociales."
+        "body": "En las dos últimas semanas has tenido pocos síntomas depresivos, o ninguno.",
+        "recommendation": "Una puntuación baja no descarta un problema: si sientes que algo no va bien, puedes hablarlo con un profesional. Si ya tienes uno de referencia, puedes comentarle el resultado en tu próxima consulta."
       },
       "mild": {
         "title": "Depresión Leve",
-        "body": "Experimentas síntomas leves que podrían estar afectando tu día a día de forma ocasional.",
-        "recommendation": "Considera técnicas de autocuidado y, si los síntomas persisten más de 2 semanas, habla con tu médico."
+        "body": "Puede reflejar síntomas presentes de forma intermitente, a veces ligados a una mala racha o a un periodo de estrés.",
+        "recommendation": "Cuida el sueño, la actividad y el contacto con otras personas, y observa cómo evolucionan los síntomas. Si persisten varias semanas o te generan malestar, puede tener sentido hablarlo con un profesional."
       },
       "moderate": {
         "title": "Depresión Moderada",
-        "body": "Tus síntomas son moderados y probablemente están afectando tu bienestar en varias áreas de tu vida.",
-        "recommendation": "ES RECOMENDABLE que consultes con un psicólogo o médico. Un tratamiento a tiempo marca la diferencia."
+        "body": "Sugiere síntomas que probablemente están afectando a tu día a día. Es el umbral a partir del cual se suele recomendar una valoración profesional.",
+        "recommendation": "Es recomendable comentarlo con un profesional: un psicólogo/a o tu médico/a de familia. Si ya estás en seguimiento, compártelo en tu próxima sesión."
       },
       "moderately_severe": {
         "title": "Depresión Moderada-Grave",
-        "body": "Tus síntomas son significativos y seguramente están interfiriendo en tu trabajo, relaciones y bienestar.",
-        "recommendation": "ES IMPORTANTE que contactes con un profesional de salud mental a la brevedad posible."
+        "body": "Sugiere síntomas intensos que probablemente están interfiriendo en el trabajo, las relaciones o el descanso.",
+        "recommendation": "Es recomendable hablar pronto con un profesional sanitario —psicólogo/a, psiquiatra o médico/a de familia— para valorar tu situación con contexto."
       },
       "severe": {
         "title": "Depresión Grave",
-        "body": "Tus síntomas indican una depresión grave que requiere atención profesional urgente.",
-        "recommendation": "Contacta con tu médico o psicólogo HOY. Si no tienes uno, puedes llamar al 024 para orientación."
+        "body": "Sugiere malestar muy significativo, que probablemente está afectando a muchas áreas de tu vida.",
+        "recommendation": "Es recomendable hablar cuanto antes con un profesional sanitario —psicólogo/a, psiquiatra o médico/a de familia—. Si en este momento el malestar es muy intenso, puedes llamar al 024 (línea de atención a la conducta suicida y crisis de salud mental, gratuita, 24 horas)."
       }
     },
     "crisis": {

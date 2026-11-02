@@ -16,13 +16,13 @@
 
 ## ⚠️ Acciones pendientes de revisión humana
 
-1. **[Qué hacer con tu resultado]** **Rango Moderado-grave (15–19) sin 024.** La plantilla solo exige el 024 en «Grave». El GAD-7 no tiene este rango. ¿Se añade también aquí?
-2. **[Validación]** **Corte 12 en atención primaria española.** Muñoz-Navarro 2017 propone 12 para cribado en AP; la app usa 10 como inicio de «Moderado» (Kroenke 2001, Levis 2019). Los puntos de corte no se tocan; decidir si se mantiene la mención en el texto.
+1. ~~**[Qué hacer con tu resultado]** **Rango Moderado-grave (15–19) sin 024.** La plantilla solo exige el 024 en «Grave». El GAD-7 no tiene este rango. ¿Se añade también aquí?~~ — **resuelto (Emmanuel, 2026-11-02): no.** El 024 solo en «Grave», también en la pantalla de resultados.
+2. ~~**[Validación]** **Corte 12 en atención primaria española.** Muñoz-Navarro 2017 propone 12 para cribado en AP; la app usa 10 como inicio de «Moderado» (Kroenke 2001, Levis 2019). Los puntos de corte no se tocan; decidir si se mantiene la mención en el texto.~~ — **resuelto (Emmanuel, 2026-11-02): se mantiene.** El texto cita a Muñoz-Navarro 2017 y su propuesta de corte 12 en AP; la app sigue con los rangos de Kroenke 2001 (≥10 = Moderado), que no se tocan.
 3. **[Validación]** **Diez-Quevedo 2001 valida el PHQ completo**, en pacientes hospitalizados, no específicamente el PHQ-9 en consulta. Está dicho así en el texto; confirmar que la frase «tiene una versión validada en España» (¿Qué mide?) os parece justa con [2] y [3].
 4. **[Pregunta 9 (seguridad, para la auditoría)]** El texto explica el comportamiento real de la app (verificado en `scoringFunctions.ts:320`): cualquier respuesta distinta de «Nunca» en la pregunta 9 oculta la puntuación y muestra apoyo y teléfonos. Aparece en «Cómo funciona», en la limitación 2, en un párrafo de «Qué hacer con tu resultado» y en una FAQ nueva. Revisar redacción y tono en la auditoría de seguridad.
 5. **[¿A quién está dirigido? — limitaciones 4 y 6]** Sin cita: problemas médicos/fármacos/sueño que suben la puntuación (como en el GAD-7) y que el PHQ-9 no explora fases de ánimo elevado (bipolaridad). La segunda se deduce de los ítems; confirmar redacción.
 6. **[FAQ — frecuencia]** «Cada 2–4 semanas», sin cita, igual que en el GAD-7.
-7. **[Fuera de la skill: pantalla de resultados]** `es.json` → `results.normal` tiene textos que chocan con el tono de la landing: «ES RECOMENDABLE…», «ES IMPORTANTE…», «Tus síntomas indican una depresión grave…», «Contacta… HOY». No es parte de `es.content.json`; en el GAD-7 se ajustó el rango grave. Decidir si se revisa ahora o en la auditoría.
+7. ~~**[Fuera de la skill: pantalla de resultados]** `es.json` → `results.normal` tiene textos que chocan con el tono de la landing: «ES RECOMENDABLE…», «ES IMPORTANTE…», «Tus síntomas indican una depresión grave…», «Contacta… HOY». No es parte de `es.content.json`; en el GAD-7 se ajustó el rango grave. Decidir si se revisa ahora o en la auditoría.~~ — **resuelto (Emmanuel, 2026-11-02): se revisa ahora.** `body` y `recommendation` de los cinco rangos reescritos con el criterio de la landing: orientativo, sin mayúsculas ni lenguaje diagnóstico, sin CTA comercial, 024 solo en «Grave». Títulos de categoría y bloque `crisis` sin tocar (este último, para la auditoría).
 8. **[Fuera de la skill: metadata.json]** `validation.spanishValidation.note` dice «referencia exacta pendiente de completar manualmente». Se puede rellenar con Diez-Quevedo 2001 (doi 10.1097/00006842-200107000-00021). La skill no modifica metadata.
 
 ---
@@ -174,7 +174,7 @@ Tus respuestas no salen de tu dispositivo. No se envían a ningún servidor de P
 |---|---|
 | A. Lenguaje diagnóstico | ✅ Sin «tienes/padeces»; rangos como orientativos; el test no decide si consultar. |
 | B. Alarmismo | ✅ Hero descriptivo, sin apelación emocional. |
-| C. Crisis | ✅ 024 en Grave, sin CTA comercial; 024/112 en pregunta 9; «no es diagnóstico» en limitaciones. ⚠️ Moderado-grave: ver acción 1. |
+| C. Crisis | ✅ 024 en Grave, sin CTA comercial; 024/112 en pregunta 9; «no es diagnóstico» en limitaciones. Moderado-grave sin 024 (decidido). |
 | D. Referencias | ✅ Seis fuentes con DOI verificado en PubMed. Sin cifra de prevalencia ni de consistencia interna (no verificables). |
 | E. Limitaciones | ✅ 7 limitaciones; validación española y población adulta mencionadas. |
 | F. Privacidad | ✅ Redacción base, sin excepciones. |
