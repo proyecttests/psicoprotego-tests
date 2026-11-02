@@ -30,7 +30,7 @@
     ],
     "spanishValidation": {
       "available": true,
-      "note": "Validación española disponible; referencia exacta pendiente de completar manualmente."
+      "note": "Diez-Quevedo C, Rangil T, Sanchez-Planell L, Kroenke K, Spitzer RL (2001). Validation and utility of the patient health questionnaire in diagnosing mental disorders in 1003 general hospital Spanish inpatients. Psychosom Med 63(4):679–686. doi:10.1097/00006842-200107000-00021. Valida el PHQ completo en pacientes hospitalizados; en atención primaria española, ver Muñoz-Navarro et al. (2017)."
     }
   },
   "validationDetails": {
