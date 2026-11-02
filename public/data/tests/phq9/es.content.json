@@ -1,11 +1,11 @@
 {
-  "status": "draft-pending-clinical-review",
+  "status": "clinically-approved",
   "drafted": "clinical-landing-writer-v2",
   "draftedAt": "2026-11-02T00:00:00.000Z",
   "auditedAt": "2026-11-02T00:00:00.000Z",
-  "lastEditedBy": null,
-  "clinicallyApprovedBy": null,
-  "clinicallyApprovedAt": null,
+  "lastEditedBy": "emmanuel",
+  "clinicallyApprovedBy": "emmanuel, cristina",
+  "clinicallyApprovedAt": "2026-11-02T20:56:24.000Z",
   "hero": {
     "title": "Test PHQ-9: cuestionario orientativo de síntomas de depresión",
     "subtitle": "Nueve preguntas sobre el ánimo, el interés por las cosas, el sueño, la energía y otros síntomas de las dos últimas semanas. El resultado te sirve como punto de partida para hablarlo con un profesional.",
