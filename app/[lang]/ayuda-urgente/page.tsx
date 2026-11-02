@@ -54,8 +54,6 @@ export async function generateStaticParams() {
 
 const META_DESCRIPTION: Record<string, string> = {
   es: 'Recursos de crisis, líneas de ayuda y apoyo psicológico urgente disponibles 24 horas.',
-  en: 'Crisis resources, helplines and urgent psychological support. Available 24 hours.',
-  pt: 'Recursos de crise, linhas de apoio e suporte psicológico urgente. Disponíveis 24 horas.',
 }
 
 export async function generateMetadata({

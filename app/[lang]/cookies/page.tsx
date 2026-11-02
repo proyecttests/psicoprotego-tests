@@ -23,30 +23,6 @@ const CONTENT: Record<string, { metaTitle: string; metaDescription: string; head
       { title: 'Contacto', body: 'Para cualquier duda sobre nuestra política de cookies: hola@psicoprotego.es' },
     ],
   },
-  en: {
-    metaTitle:       'Cookie Policy — Psicoprotego',
-    metaDescription: 'Psicoprotego uses no tracking cookies. We only use localStorage to save your progress locally on your device.',
-    heading:         'Cookie Policy',
-    sections: [
-      { title: 'We use no cookies', body: 'Psicoprotego does NOT set any cookies in your browser. We use no analytics, advertising, session, or third-party cookies. For this reason, no cookie consent banner is required.' },
-      { title: 'What do we use instead?', body: 'To improve your experience, we use localStorage (browser local storage) to save: your progress within tests, your score history, and your language preferences. This storage is local to your device. No data is sent to our servers.' },
-      { title: 'No third-party trackers', body: 'We do not integrate third-party analytics tools (Google Analytics, Meta Pixel, etc.). There are no advertising scripts. We do not share data with third parties.' },
-      { title: 'How to clear local storage', body: 'You can clear localStorage from your browser settings at any time. This will delete your test history and saved preferences on this device.' },
-      { title: 'Contact', body: 'For any questions about our cookie policy: hola@psicoprotego.es' },
-    ],
-  },
-  pt: {
-    metaTitle:       'Política de Cookies — Psicoprotego',
-    metaDescription: 'O Psicoprotego não usa cookies de rastreamento. Usamos apenas localStorage para salvar seu progresso localmente.',
-    heading:         'Política de Cookies',
-    sections: [
-      { title: 'Não usamos cookies', body: 'O Psicoprotego NÃO define nenhum cookie no seu navegador. Não usamos cookies de análise, publicidade, sessão ou de terceiros. Por esse motivo, não é necessário aceitar nenhum banner de cookies.' },
-      { title: 'O que usamos em vez disso?', body: 'Para melhorar sua experiência, usamos localStorage (armazenamento local do navegador) para salvar: seu progresso nos testes, histórico de pontuações anteriores e preferências de idioma. Esse armazenamento é local no seu dispositivo. Nenhum dado é enviado aos nossos servidores.' },
-      { title: 'Sem rastreadores de terceiros', body: 'Não integramos ferramentas de análise de terceiros (Google Analytics, Meta Pixel, etc.). Não há scripts de publicidade. Não compartilhamos dados com terceiros.' },
-      { title: 'Como limpar o armazenamento local', body: 'Você pode limpar o localStorage nas configurações do navegador a qualquer momento. Isso excluirá seu histórico de testes e preferências salvas neste dispositivo.' },
-      { title: 'Contato', body: 'Para qualquer dúvida sobre nossa política de cookies: hola@psicoprotego.es' },
-    ],
-  },
 }
 
 export function generateStaticParams() {

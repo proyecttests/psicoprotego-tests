@@ -25,8 +25,6 @@ const UI: Record<string, {
   empty: string
 }> = {
   es: { prefix: 'Tests de',    validated: 'Validado', questions: 'preguntas', startBtn: 'Empezar test', empty: 'No hay tests en esta categoría.' },
-  en: { prefix: 'Tests:',      validated: 'Validated', questions: 'questions', startBtn: 'Start test',   empty: 'No tests in this category.' },
-  pt: { prefix: 'Testes de',   validated: 'Validado', questions: 'perguntas', startBtn: 'Iniciar teste', empty: 'Não há testes nesta categoria.' },
 }
 
 function getUI(lang: string) {

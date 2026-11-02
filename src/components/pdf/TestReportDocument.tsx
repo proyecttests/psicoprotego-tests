@@ -336,12 +336,6 @@ function formatDateDMY(isoString: string): string {
 
 const LANG_LABELS: Record<string, string> = {
   es: 'Español',
-  en: 'English',
-  pt: 'Português',
-  ar: 'العربية',
-  fr: 'Français',
-  de: 'Deutsch',
-  it: 'Italiano',
 }
 
 function getLangLabel(code: string): string {
@@ -350,9 +344,6 @@ function getLangLabel(code: string): string {
 
 const QUESTIONS_LABEL: Record<string, string> = {
   es: 'Preguntas y respuestas',
-  en: 'Questions and answers',
-  pt: 'Perguntas e respostas',
-  ar: 'الأسئلة والإجابات',
 }
 
 function getQuestionsLabel(lang: string): string {
@@ -361,16 +352,10 @@ function getQuestionsLabel(lang: string): string {
 
 const ANSWER_LABEL: Record<string, string> = {
   es: 'Respuesta',
-  en: 'Answer',
-  pt: 'Resposta',
-  ar: 'الإجابة',
 }
 
 const SCORE_LABEL: Record<string, string> = {
   es: 'Puntuación',
-  en: 'Score',
-  pt: 'Pontuação',
-  ar: 'النتيجة',
 }
 
 

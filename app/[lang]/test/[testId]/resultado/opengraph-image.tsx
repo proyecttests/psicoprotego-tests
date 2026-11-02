@@ -20,14 +20,10 @@ export const contentType = 'image/png'
 
 const SUBTITLES: Record<string, string> = {
   es: 'Mis resultados',
-  en: 'My results',
-  pt: 'Meus resultados',
 }
 
 const LABELS: Record<string, string> = {
   es: 'Test psicológico validado clínicamente',
-  en: 'Clinically validated psychological test',
-  pt: 'Teste psicológico validado clinicamente',
 }
 
 // ── Route handler ─────────────────────────────────────────────────────────────

@@ -64,8 +64,6 @@ async function loadTestContent(testId: string, lang: string): Promise<TestConten
 
 const UI_BREADCRUMB: Record<string, { home: string; tests: string }> = {
   es: { home: 'Inicio',  tests: 'Tests' },
-  en: { home: 'Home',   tests: 'Tests' },
-  pt: { home: 'Início', tests: 'Testes' },
 }
 
 function buildJsonLd(

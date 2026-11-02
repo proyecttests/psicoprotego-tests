@@ -15,9 +15,6 @@ import React from 'react'
 
 const STRINGS: Record<string, { title: string; subtitle: string }> = {
   es: { title: 'Calculando resultados…',        subtitle: 'Analizando tus respuestas' },
-  en: { title: 'Calculating results…',           subtitle: 'Analyzing your answers'    },
-  pt: { title: 'Calculando resultados…',         subtitle: 'Analisando suas respostas' },
-  ku: { title: 'ئەنجامەکان دەسەنجرێن…',          subtitle: 'وەڵامەکانت شیکاری دەکرێن' },
 }
 
 // ── Props ─────────────────────────────────────────────────────────────────────

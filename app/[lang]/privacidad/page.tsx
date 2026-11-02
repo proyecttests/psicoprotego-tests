@@ -25,34 +25,6 @@ const CONTENT: Record<string, { metaTitle: string; metaDescription: string; head
       { title: 'Actualización de esta política', body: 'Nos reservamos el derecho de actualizar esta política de privacidad. Los cambios significativos se comunicarán en esta misma página.' },
     ],
   },
-  en: {
-    metaTitle:       'Privacy Policy — Psicoprotego',
-    metaDescription: 'Psicoprotego collects no personal data. Your responses are stored only on your device. GDPR compliant.',
-    heading:         'Privacy Policy',
-    sections: [
-      { title: 'Data controller', body: 'Psicoprotego. Contact: hola@psicoprotego.es' },
-      { title: 'Data we do NOT collect', body: 'Psicoprotego does not collect, store or process personal data on our servers. There is no user registration, no accounts, no data collection forms. We never ask for your name, email, age, or any identifying information.' },
-      { title: 'Local storage', body: 'Your test responses and results are stored exclusively in your browser localStorage, on your own device. This data is never transmitted to our servers or to third parties. You have full control and can delete it at any time from your browser settings.' },
-      { title: 'No profiling or data selling', body: 'We do not create psychological or behavioral profiles. We do not sell, transfer, or share any data with third parties. We do not engage in targeted or personalized advertising.' },
-      { title: 'Your rights', body: 'Although we do not store personal data on our systems, if you have any questions about data processing or wish to exercise your GDPR rights (access, rectification, erasure, portability, objection), you can contact us at hola@psicoprotego.es.' },
-      { title: 'Regulatory compliance', body: 'This policy complies with the General Data Protection Regulation (GDPR, EU 2016/679) and applicable data protection legislation.' },
-      { title: 'Policy updates', body: 'We reserve the right to update this privacy policy. Significant changes will be communicated on this page.' },
-    ],
-  },
-  pt: {
-    metaTitle:       'Política de Privacidade — Psicoprotego',
-    metaDescription: 'O Psicoprotego não coleta dados pessoais. Suas respostas ficam apenas no seu dispositivo. Em conformidade com o RGPD.',
-    heading:         'Política de Privacidade',
-    sections: [
-      { title: 'Responsável pelo tratamento', body: 'Psicoprotego. Contato: hola@psicoprotego.es' },
-      { title: 'Dados que NÃO coletamos', body: 'O Psicoprotego não coleta, armazena nem processa dados pessoais em nossos servidores. Não há registro de usuários, não há contas, não há formulários de coleta de dados. Nunca pedimos seu nome, e-mail, idade ou qualquer dado identificativo.' },
-      { title: 'Armazenamento local', body: 'Suas respostas aos testes e seus resultados são armazenados exclusivamente no localStorage do seu navegador, no seu próprio dispositivo. Esses dados nunca são transmitidos aos nossos servidores ou a terceiros. Você tem controle total e pode apagá-los a qualquer momento nas configurações do navegador.' },
-      { title: 'Sem perfilamento ou venda de dados', body: 'Não criamos perfis psicológicos ou comportamentais. Não vendemos, cedemos nem compartilhamos dados com terceiros. Não realizamos publicidade direcionada ou personalizada.' },
-      { title: 'Seus direitos', body: 'Embora não armazenemos dados pessoais em nossos sistemas, se tiver alguma dúvida sobre o tratamento de dados ou desejar exercer seus direitos (acesso, retificação, exclusão, portabilidade, oposição), entre em contato: hola@psicoprotego.es.' },
-      { title: 'Conformidade regulatória', body: 'Esta política está em conformidade com o Regulamento Geral de Proteção de Dados (RGPD, UE 2016/679) e a legislação de proteção de dados aplicável.' },
-      { title: 'Atualizações desta política', body: 'Reservamo-nos o direito de atualizar esta política de privacidade. Mudanças significativas serão comunicadas nesta página.' },
-    ],
-  },
 }
 
 export function generateStaticParams() {

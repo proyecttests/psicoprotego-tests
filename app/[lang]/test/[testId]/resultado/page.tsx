@@ -36,8 +36,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         const langData = await langRes.json() as { name: string; description?: string }
         const titles: Record<string, string> = {
           es: `Mis resultados — ${langData.name}`,
-          en: `My results — ${langData.name}`,
-          pt: `Meus resultados — ${langData.name}`,
         }
         return {
           title: titles[lang] ?? titles["es"],

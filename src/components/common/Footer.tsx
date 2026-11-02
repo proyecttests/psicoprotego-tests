@@ -52,14 +52,14 @@ const Footer: React.FC<FooterProps> = ({ lang = 'es' }) => {
                 className="transition-colors hover:underline"
                 style={{ color: 'var(--color-accent)' }}
               >
-                {lang === 'en' ? 'About' : lang === 'pt' ? 'Sobre nós' : lang === 'ku' ? 'دەربارە' : 'Acerca de'}
+                Acerca de
               </Link>
               <Link
                 href={`/${lang}/contacto`}
                 className="transition-colors hover:underline"
                 style={{ color: 'var(--color-accent)' }}
               >
-                {lang === 'en' ? 'Contact' : lang === 'pt' ? 'Contato' : lang === 'ku' ? 'پەیوەندی' : 'Contacto'}
+                Contacto
               </Link>
             </div>
             {/* Row 2 */}
@@ -69,7 +69,7 @@ const Footer: React.FC<FooterProps> = ({ lang = 'es' }) => {
                 className="transition-colors hover:underline"
                 style={{ color: 'var(--color-accent)' }}
               >
-                {lang === 'en' ? 'Privacy' : lang === 'pt' ? 'Privacidade' : lang === 'ku' ? 'تایبەتمەندی' : 'Privacidad'}
+                Privacidad
               </Link>
               <Link
                 href={`/${lang}/cookies`}
@@ -83,7 +83,7 @@ const Footer: React.FC<FooterProps> = ({ lang = 'es' }) => {
                 className="transition-colors hover:underline"
                 style={{ color: 'var(--color-accent)' }}
               >
-                {lang === 'en' ? 'Legal notice' : lang === 'pt' ? 'Aviso legal' : lang === 'ku' ? 'ئاگاداری یاسایی' : 'Aviso legal'}
+                Aviso legal
               </Link>
               <button
                 type="button"
@@ -91,7 +91,7 @@ const Footer: React.FC<FooterProps> = ({ lang = 'es' }) => {
                 className="transition-colors hover:underline cursor-pointer bg-transparent border-0 p-0 text-xs"
                 style={{ color: 'var(--color-accent)' }}
               >
-                {lang === 'en' ? 'Cookie preferences' : lang === 'pt' ? 'Preferências de cookies' : lang === 'ku' ? 'ئەرجێندانی کوکیەکان' : 'Preferencias de cookies'}
+                Preferencias de cookies
               </button>
             </div>
           </nav>

@@ -23,8 +23,6 @@ interface TestIndexEntry {
 
 const UI: Record<string, { title: string; cta: string; ctaQuiz: string; validated: string }> = {
   es: { title: 'También podría interesarte', cta: 'Hacer el test →', ctaQuiz: 'Hacer el quiz →', validated: 'Validado clínicamente' },
-  en: { title: 'You might also like',        cta: 'Take the test →', ctaQuiz: 'Take the quiz →', validated: 'Clinically validated'  },
-  pt: { title: 'Você também pode gostar',    cta: 'Fazer o teste →', ctaQuiz: 'Fazer o quiz →',  validated: 'Validado clinicamente' },
 }
 
 function score(entry: TestIndexEntry, currentCategory: string | null, currentTags: string[]): number {

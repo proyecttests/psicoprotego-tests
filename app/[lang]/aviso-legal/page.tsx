@@ -24,32 +24,6 @@ const CONTENT: Record<string, { metaTitle: string; metaDescription: string; head
       { title: 'Contacto', body: 'Para cualquier cuestión relativa a este aviso legal: hola@psicoprotego.es' },
     ],
   },
-  en: {
-    metaTitle:       'Legal Notice — Psicoprotego',
-    metaDescription: 'Legal notice for Psicoprotego: responsible party, activity, terms of use, and applicable legislation.',
-    heading:         'Legal Notice',
-    sections: [
-      { title: 'Responsible party', body: 'Name: Psicoprotego. Email: hola@psicoprotego.es. Activity: online psychological self-assessment test platform.' },
-      { title: 'Purpose and activity', body: 'Psicoprotego offers psychological self-assessment tests for exclusively educational and informational purposes. The content of this platform does NOT constitute diagnosis, treatment, or provision of professional psychological services. For any mental health concern, please consult a qualified professional.' },
-      { title: 'Intellectual property', body: 'The contents of this website (texts, images, design, source code) are the property of Psicoprotego or their respective authors. Total or partial reproduction without express authorization is prohibited.' },
-      { title: 'Liability', body: 'Psicoprotego is not responsible for damages arising from misuse of this platform content, nor from incorrect interpretation of test results. Results are indicative and should not replace the opinion of a mental health professional.' },
-      { title: 'Applicable law', body: 'This legal notice is governed by applicable Spanish law, in particular Law 34/2002 on Information Society Services and Electronic Commerce, and the General Data Protection Regulation (GDPR).' },
-      { title: 'Contact', body: 'For any matter relating to this legal notice: hola@psicoprotego.es' },
-    ],
-  },
-  pt: {
-    metaTitle:       'Aviso Legal — Psicoprotego',
-    metaDescription: 'Aviso legal do Psicoprotego: responsável, atividade, condições de uso e legislação aplicável.',
-    heading:         'Aviso Legal',
-    sections: [
-      { title: 'Responsável', body: 'Denominação: Psicoprotego. E-mail: hola@psicoprotego.es. Atividade: plataforma online de testes psicológicos de autoavaliação.' },
-      { title: 'Objeto e atividade', body: 'O Psicoprotego oferece testes de autoavaliação psicológica com fins exclusivamente educativos e informativos. Os conteúdos desta plataforma NÃO constituem diagnóstico, tratamento ou prestação de serviços psicológicos profissionais. Para qualquer preocupação com saúde mental, recomenda-se consultar um profissional qualificado.' },
-      { title: 'Propriedade intelectual', body: 'Os conteúdos deste site (textos, imagens, design, código-fonte) são propriedade do Psicoprotego ou de seus respectivos autores. É proibida a reprodução total ou parcial sem autorização expressa.' },
-      { title: 'Responsabilidade', body: 'O Psicoprotego não se responsabiliza por danos decorrentes do uso indevido dos conteúdos desta plataforma, nem da interpretação incorreta dos resultados dos testes. Os resultados são orientativos e não devem substituir a opinião de um profissional de saúde mental.' },
-      { title: 'Legislação aplicável', body: 'Este aviso legal é regido pela legislação espanhola vigente, em particular a Lei 34/2002 de Serviços da Sociedade da Informação e do Comércio Eletrônico, e o Regulamento Geral de Proteção de Dados (RGPD/GDPR).' },
-      { title: 'Contato', body: 'Para qualquer questão relacionada a este aviso legal: hola@psicoprotego.es' },
-    ],
-  },
 }
 
 export function generateStaticParams() {

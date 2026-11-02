@@ -20,8 +20,6 @@ import type { TestLangFile } from '@/types/test'
 
 const HELP_ROUTES: Record<string, string> = {
   es: '/es/ayuda-urgente',
-  en: '/en/ayuda-urgente',
-  pt: '/pt/ayuda-urgente',
 }
 
 // ── UI strings ────────────────────────────────────────────────────────────────
@@ -40,34 +38,6 @@ const UI = {
     loading:        'Cargando…',
     errorTitle:     'No se pudo cargar el test',
     errorRetry:     'Recargar',
-  },
-  en: {
-    pageTitle:       'Before you start',
-    disclaimerTitle: 'Important notice before continuing',
-    defaultText:     (name: string) =>
-      `The **${name}** questionnaire is an orientative psychological assessment tool. ` +
-      `Its results are for educational purposes only. **They do not replace evaluation, diagnosis, ` +
-      `or treatment by a mental health professional.**`,
-    helpLink:       'Need help now? Available resources →',
-    continueButton: 'I understand, continue',
-    cancelLink:     'Cancel, go back',
-    loading:        'Loading…',
-    errorTitle:     'Could not load test',
-    errorRetry:     'Retry',
-  },
-  pt: {
-    pageTitle:       'Antes de começar',
-    disclaimerTitle: 'Aviso importante antes de continuar',
-    defaultText:     (name: string) =>
-      `O questionário **${name}** é uma ferramenta de avaliação psicológica orientativa. ` +
-      `Seus resultados têm caráter exclusivamente educativo. **Não substituem a avaliação, o diagnóstico ` +
-      `nem o tratamento por um profissional de saúde mental.**`,
-    helpLink:       'Precisa de ajuda agora? Recursos disponíveis →',
-    continueButton: 'Entendo e continuar',
-    cancelLink:     'Cancelar, voltar',
-    loading:        'Carregando…',
-    errorTitle:     'Não foi possível carregar o teste',
-    errorRetry:     'Recarregar',
   },
 } as const
 
