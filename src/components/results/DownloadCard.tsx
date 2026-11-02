@@ -184,7 +184,7 @@ const DownloadCard: React.FC<DownloadCardProps> = ({
       ctx.fillStyle = colors.circle
       ctx.globalAlpha = 0.2
       ctx.beginPath()
-      ;(ctx as CanvasRenderingContext2D & { roundRect: Function }).roundRect(pillX, pillY, pillW, pillH, pillH / 2)
+      ctx.roundRect(pillX, pillY, pillW, pillH, pillH / 2)
       ctx.fill()
       ctx.globalAlpha = 1
 
@@ -192,7 +192,7 @@ const DownloadCard: React.FC<DownloadCardProps> = ({
       ctx.strokeStyle = colors.circle
       ctx.lineWidth = 2
       ctx.beginPath()
-      ;(ctx as CanvasRenderingContext2D & { roundRect: Function }).roundRect(pillX, pillY, pillW, pillH, pillH / 2)
+      ctx.roundRect(pillX, pillY, pillW, pillH, pillH / 2)
       ctx.stroke()
 
       // Pill text

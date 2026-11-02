@@ -125,9 +125,9 @@ CHECKLIST MANUAL PENDIENTE para '${lang}'
 
 [ ] 3. Añadir strings UI (grep: grep -r "ku:" src/ --include="*.tsx" -l)
 
-[ ] 4. Añadir strings en CookieBanner.tsx (UI dict)${isRTL ? '''
+[ ] 4. Añadir strings en CookieBanner.tsx (UI dict)${isRTL ? `
 
-[ ] 5. Añadir \'''' + lang + '''\' a RTL_LANGS en src/config/brand.ts''' : ''}
+[ ] 5. Añadir '${lang}' a RTL_LANGS en src/config/brand.ts` : ''}
 
 [ ] ${isRTL ? '6' : '5'}. npm run build  →  verificar rutas SSG
 

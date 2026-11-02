@@ -134,7 +134,7 @@ const QuestionRenderer: React.FC<QuestionRendererProps> = ({
           className="rounded-lg border border-yellow-300 bg-yellow-50 px-4 py-3 text-sm text-yellow-800"
         >
           <strong>Tipo de pregunta no soportado:</strong>{' '}
-          <code className="font-mono">"{unknownType}"</code>. Revisa el JSON del test.
+          <code className="font-mono">&quot;{unknownType}&quot;</code>. Revisa el JSON del test.
         </div>
       )
     }
