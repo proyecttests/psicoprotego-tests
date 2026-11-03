@@ -103,7 +103,7 @@ export interface ScoringRule {
   category: string
   /** Color Tailwind para mostrar la categoría (ej: "green", "yellow", "red") */
   color: 'green' | 'yellow' | 'orange' | 'red'
-  /** Clave para buscar el mensaje en messages.json */
+  /** Clave para buscar el mensaje en `results.normal` de {lang}.json */
   messageKey: string
 }
 

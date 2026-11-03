@@ -107,7 +107,7 @@ export interface ScoringCategory {
   label: string
   /** Color Tailwind para UI (ej: "orange") */
   color: string
-  /** Clave para buscar el mensaje en messages.json */
+  /** Clave para buscar el mensaje en `results.normal` de {lang}.json */
   messageKey: string
 }
 
@@ -134,7 +134,7 @@ export interface ScoringResult {
   resultType: 'NORMAL' | 'CRISIS'
 
   /**
-   * Mensaje resuelto desde messages.json (si se pasó el mapa).
+   * Mensaje resuelto desde `results` de {lang}.json (si se pasó el mapa).
    * Opcional porque scoreXxx puede usarse sin messages (solo scoring puro).
    * Para CRISIS incluye phones y resources; para NORMAL incluye recommendation.
    */
@@ -312,7 +312,7 @@ function findCategory(
  *
  * @param testData - Definición del test cargada desde /data/tests/{testId}/
  * @param answers  - Mapa questionId → valor respondido
- * @param messages - (Opcional) Mapa de mensajes desde messages.json
+ * @param messages - (Opcional) Mapa de mensajes construido desde `results` de {lang}.json
  * @param lang     - (Opcional) Código de idioma, por defecto 'es'
  * @returns ScoringResult completo
  */

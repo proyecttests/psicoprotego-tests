@@ -5,6 +5,10 @@
 - `tests.json` — definiciones antiguas de GAD-7/PHQ-9 (con `labels` y textos viejos), estaba en
   `public/data/`. Ningún código lo cargaba: los tests se leen de `public/data/tests/{testId}/`.
   Archivado el 2026-11-02; no hay que restaurarlo.
+- `messages.json` — mensajes de resultado antiguos de GAD-7/PHQ-9 en es/en/pt, con los títulos
+  diagnósticos («Ansiedad Moderada», «Depresión Grave»…). Estaba en `public/data/`. Ningún código
+  lo cargaba: los mensajes salen de `results` en `public/data/tests/{testId}/{lang}.json`.
+  Archivado el 2026-11-03; no hay que restaurarlo.
 
 ## Por qué se archivó
 Fecha: 2026-04-18. El test de apego es un quiz no-validado clínicamente.

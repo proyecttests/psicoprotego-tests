@@ -4,7 +4,7 @@
  *
  * Responsabilidades:
  * 1. Cargar la definición del test desde /data/tests/{testId}/ (metadata.json + {lang}.json)
- * 2. Cargar los mensajes desde /data/messages.json
+ * 2. Construir el mapa de mensajes desde `results` de {lang}.json
  * 3. Gestionar el flujo de estados: loading → disclaimer-before → answering → result | error
  * 4. Filtrar preguntas condicionales (showIf)
  * 5. Detectar red flags durante las respuestas
@@ -121,7 +121,7 @@ function getUiStrings(lang: string) {
 interface TestContainerProps {
   /** Identificador del test a cargar (nombre de la carpeta en /data/tests/) */
   testId: string
-  /** Código de idioma (debe coincidir con un `lang` en messages.json) */
+  /** Código de idioma (debe existir /data/tests/{testId}/{lang}.json) */
   lang?: string
 }
 
