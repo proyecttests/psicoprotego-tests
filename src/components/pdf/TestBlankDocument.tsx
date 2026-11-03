@@ -286,7 +286,7 @@ export const TestBlankDocument: React.FC<TestBlankDocumentProps> = ({
           {metadata.validationDetails && (
             <View style={[{ marginBottom: 16, padding: 10, backgroundColor: '#ffffff', borderRadius: 4 }, isRTL ? { borderRightWidth: 3, borderRightColor: '#2d4a3e' } : { borderLeftWidth: 3, borderLeftColor: '#2d4a3e' }]}>
               <Text style={{ fontSize: 8, fontFamily: 'Helvetica-Bold', color: '#2d4a3e', marginBottom: 4 }}>
-                {'VALIDACION'}
+                {'VALIDACIÓN'}
               </Text>
               {metadata.validationDetails.validated ? (
                 <>
@@ -379,7 +379,7 @@ export const TestBlankDocument: React.FC<TestBlankDocumentProps> = ({
         {/* ── Disclaimer ───────────────────────────────────────────────────── */}
         <View style={[{ marginTop: 20, padding: 10, backgroundColor: '#ffffff', borderRadius: 4 }, isRTL ? { borderRightWidth: 3, borderRightColor: '#2d4a3e' } : { borderLeftWidth: 3, borderLeftColor: '#2d4a3e' }]}>
           <Text style={{ fontSize: 9, color: '#444444', lineHeight: 1.6 }}>
-            {'Este test tiene un caracter exclusivamente informativo y orientativo, y no constituye en ningun caso un instrumento diagnostico ni sustituye la evaluacion realizada por un profesional de la psicologia debidamente cualificado. Los resultados deben interpretarse con cautela, teniendo en cuenta que pueden estar influidos por multiples factores y que no reflejan necesariamente una situacion clinica real. Para una valoracion adecuada y un posible diagnostico, es imprescindible acudir a un psicologo colegiado que realice una evaluacion completa mediante entrevista clinica y, en su caso, instrumentos validados administrados correctamente. Al completar este test, usted reconoce haber sido informado de sus limitaciones y acepta su uso con fines meramente orientativos.'}
+            {'Este test tiene un carácter exclusivamente informativo y orientativo, y no constituye en ningún caso un instrumento diagnóstico ni sustituye la evaluación realizada por un profesional de la psicología debidamente cualificado. Los resultados deben interpretarse con cautela, teniendo en cuenta que pueden estar influidos por múltiples factores y que no reflejan necesariamente una situación clínica real. Para una valoración adecuada y un posible diagnóstico, es imprescindible acudir a un psicólogo colegiado que realice una evaluación completa mediante entrevista clínica y, en su caso, instrumentos validados administrados correctamente. Al completar este test, usted reconoce haber sido informado de sus limitaciones y acepta su uso con fines meramente orientativos.'}
           </Text>
         </View>
 
@@ -391,7 +391,7 @@ export const TestBlankDocument: React.FC<TestBlankDocumentProps> = ({
             {formatShortDate(metadata.generatedAt)}
           </Text>
           <Text style={styles.footerText}>
-            Herramienta de cribado · No sustituye evaluacion clinica profesional
+            Herramienta de cribado · No sustituye evaluación clínica profesional
           </Text>
         </View>
       </Page>

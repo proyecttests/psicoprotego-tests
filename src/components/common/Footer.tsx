@@ -3,7 +3,8 @@
 /**
  * @file components/common/Footer.tsx
  * @description Footer de Psicoprotego con navegación interna por idioma.
- * Ayuda urgente (112, 024 y enlace a /ayuda-urgente), aviso de piloto, copyright y links internos
+ * Ayuda urgente (112, 024 y enlace a /ayuda-urgente), aviso de que los tests no son un diagnóstico,
+ * aviso de piloto, copyright y links internos
  * (acerca-de, contacto, privacidad, cookies, aviso-legal).
  * Los bloques de crisis del resultado los muestran CrisisBar y ResultCard.
  */
@@ -26,6 +27,12 @@ const URGENT_HELP: Record<string, { question: string; call: string; or: string; 
 
 const EMERGENCY = getCrisisPhone('112')
 const SUICIDE   = getCrisisPhone('024')
+
+// ── Aviso de autodiagnóstico (visible en todas las páginas) ─────────────────
+
+const NOT_A_DIAGNOSIS: Record<string, string> = {
+  es: 'Los tests de esta web son herramientas de cribado orientativas: no son un diagnóstico ni sustituyen la valoración de un profesional de la salud mental.',
+}
 
 // ── Aviso de proyecto piloto (visible en todas las páginas) ─────────────────
 
@@ -67,6 +74,12 @@ const Footer: React.FC<FooterProps> = ({ lang = 'es' }) => {
           >
             {help.more}
           </Link>
+        </p>
+        <p
+          className="mb-3 text-center text-xs leading-relaxed"
+          style={{ color: 'var(--color-primary)' }}
+        >
+          {NOT_A_DIAGNOSIS[lang] ?? NOT_A_DIAGNOSIS['es']}
         </p>
         <p
           className="mb-4 rounded-lg border px-4 py-3 text-center text-xs leading-relaxed"
