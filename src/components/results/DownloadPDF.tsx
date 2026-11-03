@@ -2,7 +2,7 @@
  * @file components/results/DownloadPDF.tsx
  * @description Client component to configure and download test PDFs.
  *
- * Flow: idle → configure → interstitial (5s countdown + ad) → done → idle
+ * Flow: idle → configure → generating (hasta que el PDF está listo) → done → idle
  * Name is stored in sessionStorage only, never sent to analytics.
  */
 
@@ -24,7 +24,7 @@ export interface DownloadPDFProps {
   availableLangs: string[]
 }
 
-type Step = 'idle' | 'configure' | 'interstitial' | 'done'
+type Step = 'idle' | 'configure' | 'generating' | 'done'
 
 // ── UI strings ────────────────────────────────────────────────────────────────
 
@@ -40,9 +40,6 @@ const UI: Record<string, {
   generateButton: string
   cancelButton: string
   generating: string
-  downloadingIn: string
-  seconds: string
-  adPlaceholder: string
   done: string
 }> = {
   es: {
@@ -57,9 +54,6 @@ const UI: Record<string, {
     generateButton:      'Generar informe',
     cancelButton:        'Cancelar',
     generating:          'Generando tu informe...',
-    downloadingIn:       'Descargando en',
-    seconds:             'segundos...',
-    adPlaceholder:       'Publicidad',
     done:                '¡Descargado!',
   },
 }
@@ -91,10 +85,7 @@ export const DownloadPDF: React.FC<DownloadPDFProps> = ({
     validated: boolean; reference?: string; originalReference?: string; originalJournal?: string
   } | null>(null)
   const [loadingLang, setLoadingLang]   = React.useState(false)
-  const [countdown, setCountdown]   = React.useState(5)
-  const blobPromiseRef = React.useRef<Promise<Blob> | null>(null)
   const [nameConsent, setNameConsent]   = React.useState(false)
-  const [progress, setProgress]     = React.useState(0)
 
   const ui = getUi(lang)
 
@@ -139,33 +130,6 @@ export const DownloadPDF: React.FC<DownloadPDFProps> = ({
       .catch(() => setLoadingLang(false))
   }, [viewLang, lang, testId])
 
-  // ── Interstitial: countdown + progress bar ───────────────────────────────
-  React.useEffect(() => {
-    if (step !== 'interstitial') return
-    setCountdown(5)
-    setProgress(0)
-
-    const startTime = Date.now()
-    const duration  = 5000
-
-    const interval = setInterval(() => {
-      const elapsed = Date.now() - startTime
-      const pct     = Math.min(100, (elapsed / duration) * 100)
-      setProgress(pct)
-      setCountdown(Math.max(0, Math.ceil((duration - elapsed) / 1000)))
-
-      if (elapsed >= duration) {
-        clearInterval(interval)
-        void triggerDownload()
-        setStep('done')
-        setTimeout(() => setStep('idle'), 2000)
-      }
-    }, 100)
-
-    return () => clearInterval(interval)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [step])
-
   // ── Handlers ───────────────────────────────────────────────────────────
 
   const handleOpenConfigure = (blank: boolean) => {
@@ -182,10 +146,11 @@ export const DownloadPDF: React.FC<DownloadPDFProps> = ({
     } catch { /* ignore */ }
   }
 
-  const handleGenerate = () => {
-    // Start generating PDF immediately so it's ready when countdown ends
-    blobPromiseRef.current = buildBlob(isBlank)
-    setStep('interstitial')
+  const handleGenerate = async () => {
+    setStep('generating')
+    await triggerDownload()
+    setStep('done')
+    setTimeout(() => setStep('idle'), 2000)
   }
 
   const buildBlob = async (blank: boolean): Promise<Blob> => {
@@ -227,8 +192,7 @@ export const DownloadPDF: React.FC<DownloadPDFProps> = ({
 
   const triggerDownload = async () => {
     try {
-      const blob = await (blobPromiseRef.current ?? buildBlob(isBlank))
-      blobPromiseRef.current = null
+      const blob = await buildBlob(isBlank)
       const dateStr = new Date().toISOString().slice(0,10).replace(/-/g,'')
       const blankSuffix = isBlank ? '_blank' : ''
       downloadBlob(blob, `psicoprotego_${testId}${blankSuffix}_${dateStr}.pdf`)
@@ -394,8 +358,8 @@ export const DownloadPDF: React.FC<DownloadPDFProps> = ({
     )
   }
 
-  // ── Render: interstitial ──────────────────────────────────────────────────
-  if (step === 'interstitial') {
+  // ── Render: generating ────────────────────────────────────────────────────
+  if (step === 'generating') {
     return (
       <div
         className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-6 p-6"
@@ -412,44 +376,6 @@ export const DownloadPDF: React.FC<DownloadPDFProps> = ({
         />
 
         <p className="text-lg font-semibold text-white">{ui.generating}</p>
-
-        {/* Progress bar */}
-        <div className="w-full max-w-xs rounded-full bg-white/20 overflow-hidden h-2">
-          <div
-            className="h-full rounded-full transition-none"
-            style={{
-              width:           `${progress}%`,
-              backgroundColor: 'var(--color-accent, #c8a96e)',
-              transition:      'width 0.1s linear',
-            }}
-            role="progressbar"
-            aria-valuenow={Math.round(progress)}
-            aria-valuemin={0}
-            aria-valuemax={100}
-          />
-        </div>
-
-        {/* Ad placeholder */}
-        <div
-          className="flex items-center justify-center rounded-lg text-sm font-medium"
-          style={{
-            width:           300,
-            height:          250,
-            backgroundColor: '#2a2a2a',
-            border:          '1px dashed #555',
-            color:           '#666',
-          }}
-          aria-hidden="true"
-        >
-          {ui.adPlaceholder}
-        </div>
-
-        {/* Countdown */}
-        <p className="text-sm text-white/70">
-          {ui.downloadingIn}{' '}
-          <span className="font-bold text-white">{countdown}</span>{' '}
-          {ui.seconds}
-        </p>
       </div>
     )
   }

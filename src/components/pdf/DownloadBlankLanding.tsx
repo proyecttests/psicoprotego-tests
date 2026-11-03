@@ -2,17 +2,14 @@
 /**
  * @file components/pdf/DownloadBlankLanding.tsx
  * @description Button to download the blank test PDF from the landing page.
- * Uses the same interstitial + PDF generation flow as DownloadPDF.
+ * Genera el PDF en el navegador y lo descarga en cuanto está listo (como DownloadPDF).
  */
 import React from 'react'
 import { trackEvent } from '@/config/analytics'
 import type { TestLangFile } from '@/types/test'
 
-const LABEL: Record<string, { btn: string; interstitial: string; countdown: string; ad: string }> = {
-  es: { btn: 'Descargar test en blanco', interstitial: 'Preparando el test...', countdown: 'Descargando en', ad: 'Publicidad' },
-  en: { btn: 'Download blank test',      interstitial: 'Preparing the test...', countdown: 'Downloading in', ad: 'Advertisement' },
-  pt: { btn: 'Baixar teste em branco',   interstitial: 'Preparando o teste...', countdown: 'Baixando em',   ad: 'Publicidade' },
-  ku: { btn: 'کوێزی خاڵی داگرە',           interstitial: 'کوێزەکە ئامادەدەکرێت...', countdown: 'داگرتن لە',      ad: 'ڕیکلام' },
+const LABEL: Record<string, { btn: string; generating: string }> = {
+  es: { btn: 'Descargar test en blanco', generating: 'Preparando el test...' },
 }
 
 interface DownloadBlankLandingProps {
@@ -22,18 +19,14 @@ interface DownloadBlankLandingProps {
 
 export default function DownloadBlankLanding({ testId, lang }: DownloadBlankLandingProps) {
   const ui = LABEL[lang] ?? LABEL['es']
-  const [state, setState]       = React.useState<'idle' | 'interstitial' | 'done'>('idle')
+  const [state, setState]       = React.useState<'idle' | 'generating' | 'done'>('idle')
   const [validationDetails, setValidationDetails] = React.useState<{
     validated: boolean; reference?: string; originalReference?: string; originalJournal?: string
   } | null>(null)
-  const blobPromiseRef = React.useRef<Promise<Blob> | null>(null)
-  const [countdown, setCountdown] = React.useState(5)
 
   const handleClick = () => {
-    // Start building PDF immediately
-    blobPromiseRef.current = buildBlob()
-    setState('interstitial')
-    setCountdown(5)
+    setState('generating')
+    void triggerDownload()
   }
 
   React.useEffect(() => {
@@ -49,17 +42,6 @@ export default function DownloadBlankLanding({ testId, lang }: DownloadBlankLand
       })
       .catch(() => {/* silent */})
   }, [testId, lang])
-
-  React.useEffect(() => {
-    if (state !== 'interstitial') return
-    if (countdown <= 0) {
-      void triggerDownload()
-      return
-    }
-    const t = setTimeout(() => setCountdown(c => c - 1), 1000)
-    return () => clearTimeout(t)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state, countdown])
 
   const buildBlob = async (): Promise<Blob> => {
     const [{ pdf }, { TestBlankDocument }] = await Promise.all([
@@ -78,8 +60,7 @@ export default function DownloadBlankLanding({ testId, lang }: DownloadBlankLand
 
   const triggerDownload = async () => {
     try {
-      const blob = await (blobPromiseRef.current ?? buildBlob())
-      blobPromiseRef.current = null
+      const blob = await buildBlob()
       const url = URL.createObjectURL(blob)
       const a   = document.createElement('a')
       a.href    = url
@@ -107,11 +88,13 @@ export default function DownloadBlankLanding({ testId, lang }: DownloadBlankLand
         {ui.btn}
       </button>
 
-      {/* Interstitial overlay */}
-      {state === 'interstitial' && (
+      {/* Overlay mientras se genera el PDF */}
+      {state === 'generating' && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center"
           style={{ backgroundColor: 'rgba(0,0,0,0.7)' }}
+          role="status"
+          aria-live="polite"
         >
           <div className="bg-white rounded-2xl p-8 mx-4 max-w-sm w-full flex flex-col items-center gap-5 shadow-2xl">
             {/* Spinner */}
@@ -120,27 +103,7 @@ export default function DownloadBlankLanding({ testId, lang }: DownloadBlankLand
               style={{ borderTopColor: 'var(--color-primary)' }}
             />
             <p className="font-semibold text-lg text-center" style={{ color: 'var(--color-primary)' }}>
-              {ui.interstitial}
-            </p>
-            {/* Progress bar */}
-            <div className="w-full h-2 rounded-full bg-gray-100 overflow-hidden">
-              <div
-                className="h-full rounded-full transition-all duration-1000"
-                style={{
-                  width: `${((5 - countdown) / 5) * 100}%`,
-                  backgroundColor: 'var(--color-primary)',
-                }}
-              />
-            </div>
-            {/* Ad placeholder */}
-            <div
-              className="w-full flex items-center justify-center rounded-lg text-xs text-gray-400 font-sans"
-              style={{ height: 100, backgroundColor: '#f5f3ef', border: '1px dashed #ccc' }}
-            >
-              {ui.ad}
-            </div>
-            <p className="text-sm text-gray-500 font-sans">
-              {ui.countdown} {countdown}s…
+              {ui.generating}
             </p>
           </div>
         </div>
