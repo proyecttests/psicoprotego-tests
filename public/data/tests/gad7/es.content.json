@@ -1,10 +1,10 @@
 {
-  "status": "draft-pending-clinical-review",
+  "status": "clinically-approved",
   "drafted": "clinical-landing-writer-v2",
   "draftedAt": "2026-04-22T00:00:00.000Z",
   "lastEditedBy": "emmanuel",
-  "clinicallyApprovedBy": null,
-  "clinicallyApprovedAt": null,
+  "clinicallyApprovedBy": "emmanuel, cristina",
+  "clinicallyApprovedAt": "2026-11-03T15:29:07.000Z",
   "hero": {
     "title": "Test GAD-7: cuestionario orientativo de síntomas de ansiedad generalizada",
     "subtitle": "Siete preguntas sobre preocupación, nerviosismo, inquietud e irritabilidad en las dos últimas semanas. El resultado te sirve como punto de partida para hablarlo con un profesional.",
