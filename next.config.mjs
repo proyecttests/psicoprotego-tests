@@ -32,6 +32,8 @@ const SECURITY_HEADERS = [
   {
     // Content-Security-Policy
     // - script-src: self + GTM + inline (needed for Next.js hydration & GTM inline)
+    //   + 'wasm-unsafe-eval': @react-pdf/renderer compila WebAssembly para maquetar los PDF
+    //   (solo permite WebAssembly, no eval de JavaScript)
     // - style-src: self + unsafe-inline (Tailwind inline styles)
     // - img-src: self + data URIs (Canvas-generated story images)
     // - connect-src: self + GA4 analytics endpoint
@@ -39,7 +41,7 @@ const SECURITY_HEADERS = [
     key: 'Content-Security-Policy',
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
+      "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data: blob: https://www.googletagmanager.com",
