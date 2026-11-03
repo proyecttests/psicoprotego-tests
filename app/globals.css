@@ -140,3 +140,10 @@
     animation: slideOutUpTikTok 0.4s ease-in forwards;
   }
 }
+
+/* Nada tapa la información de crisis (.claude/rules/safety.md): con la barra de
+   crisis en pantalla, el banner de cookies no se muestra. Sin soporte de :has(),
+   la barra queda igualmente por encima (z-index mayor). */
+body:has([data-crisis-bar]) [data-cookie-banner] {
+  display: none;
+}

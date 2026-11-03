@@ -121,6 +121,7 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({ lang, gtmId }) => {
 
   return (
     <div
+      data-cookie-banner
       role="dialog"
       aria-label="Cookie consent"
       aria-live="polite"

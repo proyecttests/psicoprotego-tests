@@ -3,13 +3,29 @@
 /**
  * @file components/common/Footer.tsx
  * @description Footer de Psicoprotego con navegación interna por idioma.
- * Copyright, aviso de piloto y links internos (acerca-de, blog, contacto, privacidad, cookies, aviso-legal).
- * Los teléfonos de crisis no van aquí: los muestran CrisisBar y ResultCard.
+ * Ayuda urgente (112, 024 y enlace a /ayuda-urgente), aviso de piloto, copyright y links internos
+ * (acerca-de, contacto, privacidad, cookies, aviso-legal).
+ * Los bloques de crisis del resultado los muestran CrisisBar y ResultCard.
  */
 
 import React from 'react'
 import Link from 'next/link'
 import { CONSENT_KEY } from './CookieBanner'
+import { getCrisisPhone } from '@/config/crisisPhones'
+
+// ── Ayuda urgente (visible en todas las páginas) ─────────────────────────────
+
+const URGENT_HELP: Record<string, { question: string; call: string; or: string; more: string }> = {
+  es: {
+    question: '¿Necesitas ayuda urgente?',
+    call:     'Llama al',
+    or:       'o al',
+    more:     'Más recursos de ayuda',
+  },
+}
+
+const EMERGENCY = getCrisisPhone('112')
+const SUICIDE   = getCrisisPhone('024')
 
 // ── Aviso de proyecto piloto (visible en todas las páginas) ─────────────────
 
@@ -26,6 +42,7 @@ interface FooterProps {
 // ── Componente ────────────────────────────────────────────────────────────────
 
 const Footer: React.FC<FooterProps> = ({ lang = 'es' }) => {
+  const help = URGENT_HELP[lang] ?? URGENT_HELP['es']
   return (
     <footer
       role="contentinfo"
@@ -33,6 +50,24 @@ const Footer: React.FC<FooterProps> = ({ lang = 'es' }) => {
       style={{ backgroundColor: 'var(--color-cream)' }}
     >
       <div className="mx-auto max-w-3xl px-4 sm:px-6 font-sans text-sm">
+        <p
+          className="mb-4 text-center leading-relaxed"
+          style={{ color: 'var(--color-primary)' }}
+        >
+          <strong>{help.question}</strong>{' '}
+          {help.call}{' '}
+          <a href={`tel:${EMERGENCY.tel}`} className="font-semibold underline">{EMERGENCY.number}</a>
+          {` (${EMERGENCY.label.toLowerCase()}) ${help.or} `}
+          <a href={`tel:${SUICIDE.tel}`} className="font-semibold underline">{SUICIDE.number}</a>
+          {` (${SUICIDE.situation.toLowerCase()}). `}
+          <Link
+            href={`/${lang}/ayuda-urgente`}
+            className="font-semibold underline"
+            style={{ color: 'var(--color-accent)' }}
+          >
+            {help.more}
+          </Link>
+        </p>
         <p
           className="mb-4 rounded-lg border px-4 py-3 text-center text-xs leading-relaxed"
           style={{ color: 'var(--color-primary)', borderColor: 'var(--color-accent)' }}

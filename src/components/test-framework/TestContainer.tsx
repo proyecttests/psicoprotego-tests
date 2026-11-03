@@ -55,9 +55,10 @@ const CrisisBar: React.FC<{ lang: string }> = ({ lang }) => {
   const t = CRISIS_STRINGS[lang] ?? CRISIS_STRINGS['es']
   return (
     <div
+      data-crisis-bar
       role="complementary"
       aria-label="Recursos de ayuda inmediata"
-      className="fixed bottom-0 left-0 right-0 z-50 shadow-lg"
+      className="fixed bottom-0 left-0 right-0 z-[60] shadow-lg"
       style={{ backgroundColor: 'var(--color-primary)' }}
     >
       <div className="mx-auto max-w-3xl px-4 py-3 sm:px-6">
