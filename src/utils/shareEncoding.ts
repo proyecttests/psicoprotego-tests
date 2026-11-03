@@ -8,7 +8,10 @@
  * v2 es ~45% más corto. Requiere que el decoder conozca las claves
  * (disponibles en la definición del test, cargada en ResultadoClient).
  *
- * URL resultante: /[lang]/test/[testId]/resultado?d=TOKEN
+ * URL resultante: /[lang]/test/[testId]/resultado#d=TOKEN
+ * El token va en el fragmento (#): el navegador no lo envía al servidor, así que las
+ * respuestas no llegan a Vercel ni a sus registros. Los enlaces antiguos con ?d= siguen
+ * funcionando (readShareToken).
  */
 
 import type { AnswersMap } from '@/types/test'
@@ -90,11 +93,18 @@ export function decodeAnswersWithKeys(token: string, questionIds: string[]): Ans
   }
 }
 
-/** Construye la URL larga de resultado compartible. */
+/** Construye la URL larga de resultado compartible (token en el fragmento #d=). */
 export function buildShareUrl(lang: string, testId: string, answers: AnswersMap): string {
   const token  = encodeAnswers(answers)
   const origin = typeof window !== 'undefined' ? window.location.origin : ''
-  return `${origin}/${lang}/test/${testId}/resultado?d=${token}`
+  return `${origin}/${lang}/test/${testId}/resultado#d=${token}`
+}
+
+/** Lee el token de la URL actual: #d= (actual) o ?d= (enlaces antiguos). */
+export function readShareToken(): string | null {
+  if (typeof window === 'undefined') return null
+  const fromHash = new URLSearchParams(window.location.hash.slice(1)).get('d')
+  return fromHash ?? new URLSearchParams(window.location.search).get('d')
 }
 
 

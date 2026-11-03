@@ -3,7 +3,12 @@
  * @description GTM / GA4 analytics helpers para Psicoprotego.
  * Los eventos se envían al dataLayer de GTM (GTM-MN3QW7Q7),
  * que los reenvía automáticamente a GA4 (G-6H96S2FN53).
+ * GTM solo se carga si el usuario acepta las cookies (CookieBanner); sin eso no hay
+ * dataLayer y trackEvent no hace nada.
  */
+
+/** Contenedor de GTM (NEXT_PUBLIC_GTM_ID o el de Psicoprotego por defecto) */
+export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID ?? 'GTM-MN3QW7Q7'
 
 interface WindowWithDataLayer extends Window {
   dataLayer: Record<string, unknown>[]

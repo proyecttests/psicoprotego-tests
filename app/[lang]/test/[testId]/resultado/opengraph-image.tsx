@@ -2,7 +2,7 @@
  * @file app/[lang]/test/[testId]/resultado/opengraph-image.tsx
  * @description OG image per-test para la página de resultado compartido.
  *
- * Social crawlers no ejecutan JS y no pueden leer ?d=, por lo que se genera
+ * Social crawlers no ejecutan JS ni reciben el token (#d=), por lo que se genera
  * una imagen de marca del test (igual para todos los resultados de ese test).
  * Edge runtime: rápido, sin cold start en Vercel.
  */

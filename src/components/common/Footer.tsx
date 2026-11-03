@@ -75,8 +75,9 @@ const Footer: React.FC<FooterProps> = ({ lang = 'es' }) => {
           {PILOT_NOTICE[lang] ?? PILOT_NOTICE['es']}
         </p>
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
-          <p style={{ color: 'var(--color-primary)' }} className="font-medium">
-            © Psicoprotego 2025
+          {/* suppressHydrationWarning: el HTML estático lleva el año del build */}
+          <p style={{ color: 'var(--color-primary)' }} className="font-medium" suppressHydrationWarning>
+            © Psicoprotego {new Date().getFullYear()}
           </p>
 
           <nav aria-label="Footer navigation" className="flex flex-col items-center gap-2 sm:items-end">

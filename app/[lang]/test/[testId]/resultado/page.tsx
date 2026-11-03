@@ -2,7 +2,8 @@
  * @file app/[lang]/test/[testId]/resultado/page.tsx
  * @description Página de resultado compartido.
  *
- * El token ?d= contiene todas las respuestas en base64 URL-safe.
+ * El token #d= (o ?d= en enlaces antiguos) contiene todas las respuestas en base64 URL-safe;
+ * va en el fragmento, así que no llega al servidor.
  * La página decodifica, re-ejecuta el scoring y muestra ResultCard en modo lectura.
  *
  * noindex: el resultado es personal, no debe indexarse.

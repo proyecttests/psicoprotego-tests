@@ -5,6 +5,7 @@ import { VALID_LANGS } from '@/generated/validLangs'
 import { RTL_LANGS } from '@/config/brand'
 import { LangHtmlUpdater } from '../components/LangHtmlUpdater'
 import CookieBanner      from '@/components/common/CookieBanner'
+import { GTM_ID }      from '@/config/analytics'
 
 // ── Layout ────────────────────────────────────────────────────────────────────
 
@@ -33,7 +34,7 @@ export default async function LangLayout({
         </main>
         <Footer lang={lang} />
       </div>
-      <CookieBanner lang={lang} gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
+      <CookieBanner lang={lang} gtmId={GTM_ID} />
     </>
   )
 }

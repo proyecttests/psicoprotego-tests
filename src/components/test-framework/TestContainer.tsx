@@ -291,13 +291,6 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
     }
 
     setResult(scored)
-    // Save to history
-    try {
-      const hkey = `psico_history_${testId}`
-      const prev: Array<{score:number; categoryLabel:string; date:string}> = JSON.parse(localStorage.getItem(hkey) ?? '[]')
-      const entry = { score: scored.score ?? 0, categoryLabel: scored.category?.label ?? '', date: new Date().toISOString() }
-      localStorage.setItem(hkey, JSON.stringify([entry, ...prev].slice(0, 10)))
-    } catch { /* ignore */ }
     setUiState('calculating')
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }

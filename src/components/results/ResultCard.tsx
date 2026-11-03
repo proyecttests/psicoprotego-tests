@@ -7,7 +7,7 @@
  * - resultType === 'CRISIS': primero el aviso (results.crisis) y el bloque de apoyo,
  *   después score y categoría, y el PDF con resultados.
  *
- * Compartir: /:lang/test/:testId/resultado?d=TOKEN (src/utils/shareEncoding.ts).
+ * Compartir: /:lang/test/:testId/resultado#d=TOKEN (src/utils/shareEncoding.ts).
  */
 
 import React from 'react'

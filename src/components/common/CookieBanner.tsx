@@ -4,7 +4,7 @@
  *
  * - Primera visita: muestra el banner con opciones Aceptar/Solo esenciales.
  * - Guarda la elección en localStorage (clave: psico_cookie_consent).
- * - Solo activa GTM/GA4 si el usuario acepta analytics.
+ * - GTM/GA4 solo se carga aquí, y solo si el usuario acepta analytics (app/layout.tsx no lo carga).
  * - Se puede relanzar desde cualquier componente borrando la clave y recargando.
  */
 'use client'
@@ -34,8 +34,12 @@ function activateGTM(gtmId: string) {
     analytics_storage: 'granted',
     ad_storage: 'denied',
   })
-  // Inject GTM if not already present
+  // Inject GTM if not already present (mismo arranque que el snippet oficial: evento gtm.js)
   if (document.querySelector(`script[src*="${gtmId}"]`)) return
+  ;(window as unknown as { dataLayer: unknown[] }).dataLayer.push({
+    'gtm.start': new Date().getTime(),
+    event: 'gtm.js',
+  })
   const s = document.createElement('script')
   s.async = true
   s.src = `https://www.googletagmanager.com/gtm.js?id=${gtmId}`

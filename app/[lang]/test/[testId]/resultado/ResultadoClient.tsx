@@ -2,7 +2,7 @@
  * @file app/[lang]/test/[testId]/resultado/ResultadoClient.tsx
  * @description Muestra el resultado de un test compartido via URL.
  *
- * Decodifica el token ?d=BASE64, reconstruye las respuestas, ejecuta el scoring
+ * Decodifica el token #d=BASE64 (o ?d= en enlaces antiguos), reconstruye las respuestas, ejecuta el scoring
  * y renderiza un ResultCard en modo lectura (sin reset, sin re-share).
  *
  * Preserva todas las respuestas individuales para análisis externo / PDF.
@@ -11,8 +11,8 @@
 'use client'
 
 import React from 'react'
-import { useSearchParams, useRouter } from 'next/navigation'
-import { decodeAnswers, decodeAnswersWithKeys } from '@/utils/shareEncoding'
+import { useRouter } from 'next/navigation'
+import { decodeAnswers, decodeAnswersWithKeys, readShareToken } from '@/utils/shareEncoding'
 import { getScoringFunction, getMaxScore } from '@/utils/scoringFunctions'
 import type { TestLangFile } from '@/types/test'
 import type { TestDefinitionForScoring } from '@/utils/scoringFunctions'
@@ -62,7 +62,6 @@ const UI: Record<string, {
 }
 
 export default function ResultadoClient({ lang, testId }: ResultadoClientProps) {
-  const searchParams = useSearchParams()
   const router       = useRouter()
   const ui           = UI[lang] ?? UI['es']
 
@@ -76,7 +75,7 @@ export default function ResultadoClient({ lang, testId }: ResultadoClientProps) 
   const [testCategory, setTestCategory] = React.useState<string>('psychometric')
 
   React.useEffect(() => {
-    const token = searchParams.get('d')
+    const token = readShareToken()
     if (!token) {
       setErrorMsg(ui.errorInvalidLink)
       setState('error')
