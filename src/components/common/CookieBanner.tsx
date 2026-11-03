@@ -5,6 +5,7 @@
  * - Primera visita: muestra el banner con opciones Aceptar/Solo esenciales.
  * - Guarda la elección en localStorage (clave: psico_cookie_consent).
  * - GTM/GA4 solo se carga aquí, y solo si el usuario acepta analytics (app/layout.tsx no lo carga).
+ * - «Solo esenciales» borra las cookies de Google Analytics que quedaran de una aceptación anterior.
  * - Se puede relanzar desde cualquier componente borrando la clave y recargando.
  */
 'use client'
@@ -44,6 +45,27 @@ function activateGTM(gtmId: string) {
   s.async = true
   s.src = `https://www.googletagmanager.com/gtm.js?id=${gtmId}`
   document.head.appendChild(s)
+}
+
+// ── Borrado de cookies de Google Analytics (al retirar el consentimiento) ─────
+
+const GA_COOKIE = /^(_ga|_gid|_gat)/
+
+function clearAnalyticsCookies() {
+  if (typeof document === 'undefined') return
+  const names = document.cookie
+    .split(';')
+    .map((c) => c.split('=')[0].trim())
+    .filter((n) => GA_COOKIE.test(n))
+  // GA las guarda en el dominio más alto posible (ej. .psicoprotego.es): se prueba el host y
+  // cada dominio padre, sin llegar al TLD.
+  const parts   = location.hostname.split('.')
+  const domains = [''].concat(parts.slice(0, -1).map((_, i) => '.' + parts.slice(i).join('.')))
+  for (const name of names) {
+    for (const domain of domains) {
+      document.cookie = `${name}=; Max-Age=0; path=/${domain ? `; domain=${domain}` : ''}`
+    }
+  }
 }
 
 // ── UI strings ────────────────────────────────────────────────────────────────
@@ -118,6 +140,7 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({ lang, gtmId }) => {
 
   const handleEssential = () => {
     localStorage.setItem(CONSENT_KEY, 'essential')
+    clearAnalyticsCookies()
     setVisible(false)
   }
 
