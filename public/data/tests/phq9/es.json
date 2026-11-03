@@ -126,6 +126,7 @@
     { "min": 15, "max": 19,   "category": "Puntuación en rango moderado-grave", "color": "red",    "messageKey": "moderately_severe" },
     { "min": 20, "max": null, "category": "Puntuación en rango grave",          "color": "red",    "messageKey": "severe"            }
   ],
+  "crisisCriteria": { "categories": ["moderately_severe", "severe"] },
   "results": {
     "notes": [
       {

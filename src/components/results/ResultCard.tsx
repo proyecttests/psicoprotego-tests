@@ -2,12 +2,12 @@
  * @file components/results/ResultCard.tsx
  * @description Tarjeta de resultados del test psicológico.
  *
- * - Siempre muestra el resultado normal (score, categoría, recomendación).
- * - Si hay red flags, urgencia o resultType === 'CRISIS', añade un bloque
- *   de apoyo profesional calmado debajo del resultado (sin rojo, sin alarma).
+ * - Resultado normal: score, categoría, mensaje y recomendación.
+ * - Si hay red flags o urgencia, añade un bloque de apoyo con teléfonos debajo.
+ * - resultType === 'CRISIS': primero el aviso (results.crisis) y el bloque de apoyo,
+ *   después score y categoría, y el PDF con resultados.
  *
- * Compartir: la URL se ofusca con base64 para no exponer score ni categoría
- * en texto plano. Formato: /:lang/test/:testId/result?r=<btoa(score:categoryKey)>
+ * Compartir: /:lang/test/:testId/resultado?d=TOKEN (src/utils/shareEncoding.ts).
  */
 
 import React from 'react'
@@ -296,83 +296,95 @@ const NormalResult: React.FC<{
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [])
 
+  // ── Score + categoría ────────────────────────────────────────────────────
+  const scoreCard = (
+    <div className={`card text-center ${colors.bg} ${colors.border} border-2`}>
+      {maxScore > 0 ? (
+        /* Tests clínicos: círculo de score numérico */
+        <>
+          <div
+            aria-label={`${ui.scoreLabel}: ${result.score}`}
+            className={`mx-auto mb-3 flex h-24 w-24 items-center justify-center rounded-full border-4 ${colors.border} ${colors.bg}`}
+          >
+            <span className={`text-5xl font-extrabold ${colors.text}`}>
+              {displayScore}
+            </span>
+          </div>
+          <span className={`inline-block rounded-full px-4 py-1 text-sm font-semibold ${colors.badge}`}>
+            {result.category?.label}
+          </span>
+          <ScoreBar
+            score={result.score ?? 0}
+            maxScore={maxScore}
+            colorKey={colorKey}
+            lang={lang}
+          />
+        </>
+      ) : (
+        /* Quiz: solo categoría con emoji grande */
+        <div className="py-4">
+          <div
+            className={`mx-auto mb-4 flex h-28 w-28 items-center justify-center rounded-full border-4 ${colors.border} ${colors.bg}`}
+          >
+            <span className="text-5xl" role="img" aria-hidden="true">
+              {colorKey === 'green' ? '🌿' : colorKey === 'yellow' ? '💛' : colorKey === 'orange' ? '🍂' : '🌊'}
+            </span>
+          </div>
+          <span className={`inline-block rounded-full px-5 py-2 text-base font-bold ${colors.badge}`}>
+            {result.category?.label}
+          </span>
+        </div>
+      )}
+    </div>
+  )
+
+  // ── Mensaje de resultado (en CRISIS, el aviso de results.crisis) ──────────
+  const messageCard = (
+    <div className="card space-y-4">
+      <h1 className="text-xl">{message?.title}</h1>
+      {message?.body && (
+        <p className="text-sm leading-relaxed font-sans" style={{ color: '#666', lineHeight: '1.6' }}>
+          {message.body}
+        </p>
+      )}
+
+      {/* Avisos de interpretación (results.notes) */}
+      {message?.notes?.map((note) => (
+        <p key={note} className="text-sm leading-relaxed font-sans" style={{ color: 'var(--color-primary)', lineHeight: '1.6' }}>
+          {note}
+        </p>
+      ))}
+
+      {/* Recomendación destacada — solo si existe */}
+      {message?.recommendation && (
+        <div className="rounded-lg border p-4" style={{ borderColor: 'var(--color-accent)', backgroundColor: 'var(--color-cream)' }}>
+          <p className="mb-1 text-xs font-semibold uppercase tracking-wider font-sans" style={{ color: 'var(--color-accent)' }}>
+            {ui.recommendation}
+          </p>
+          <p className="text-sm font-medium leading-relaxed font-sans" style={{ color: 'var(--color-primary)' }}>
+            {message.recommendation}
+          </p>
+        </div>
+      )}
+
+      {/* Disclaimer obligatorio */}
+      <p className="border-t border-neutral-100 pt-3 text-xs italic text-neutral-400">
+        {ui.disclaimer}
+      </p>
+    </div>
+  )
+
   return (
     <div
       className={`w-full max-w-2xl space-y-4 px-4 py-6 sm:px-6 transition-opacity duration-300 ${visible ? 'opacity-100' : 'opacity-0'}`}
     >
-      {/* ── Score + categoría (oculto en CRISIS) ───────────────────────── */}
-      {!isCrisis && (
-      <div className={`card text-center ${colors.bg} ${colors.border} border-2`}>
-        {maxScore > 0 ? (
-          /* Tests clínicos: círculo de score numérico */
-          <>
-            <div
-              aria-label={`${ui.scoreLabel}: ${result.score}`}
-              className={`mx-auto mb-3 flex h-24 w-24 items-center justify-center rounded-full border-4 ${colors.border} ${colors.bg}`}
-            >
-              <span className={`text-5xl font-extrabold ${colors.text}`}>
-                {displayScore}
-              </span>
-            </div>
-            <span className={`inline-block rounded-full px-4 py-1 text-sm font-semibold ${colors.badge}`}>
-              {result.category?.label}
-            </span>
-            <ScoreBar
-              score={result.score ?? 0}
-              maxScore={maxScore}
-              colorKey={colorKey}
-              lang={lang}
-            />
-          </>
-        ) : (
-          /* Quiz: solo categoría con emoji grande */
-          <div className="py-4">
-            <div
-              className={`mx-auto mb-4 flex h-28 w-28 items-center justify-center rounded-full border-4 ${colors.border} ${colors.bg}`}
-            >
-              <span className="text-5xl" role="img" aria-hidden="true">
-                {colorKey === 'green' ? '🌿' : colorKey === 'yellow' ? '💛' : colorKey === 'orange' ? '🍂' : '🌊'}
-              </span>
-            </div>
-            <span className={`inline-block rounded-full px-5 py-2 text-base font-bold ${colors.badge}`}>
-              {result.category?.label}
-            </span>
-          </div>
-        )}
-      </div>
-      )}
+      {/* ── En CRISIS, primero el aviso y los teléfonos; después la puntuación ─ */}
+      {isCrisis && messageCard}
+      {isCrisis && <SupportBlock lang={lang} />}
 
-      {/* ── Mensaje de resultado ─────────────────────────────────────────── */}
-      <div className="card space-y-4">
-        <h1 className="text-xl">{message?.title}</h1>
-        <p className="text-sm leading-relaxed font-sans" style={{ color: '#666', lineHeight: '1.6' }}>
-          {message?.body}
-        </p>
+      {result.score !== null && scoreCard}
 
-        {/* Avisos de interpretación (results.notes) */}
-        {message?.notes?.map((note) => (
-          <p key={note} className="text-sm leading-relaxed font-sans" style={{ color: 'var(--color-primary)', lineHeight: '1.6' }}>
-            {note}
-          </p>
-        ))}
-
-        {/* Recomendación destacada — solo si existe */}
-        {message?.recommendation && (
-          <div className="rounded-lg border p-4" style={{ borderColor: 'var(--color-accent)', backgroundColor: 'var(--color-cream)' }}>
-            <p className="mb-1 text-xs font-semibold uppercase tracking-wider font-sans" style={{ color: 'var(--color-accent)' }}>
-              {ui.recommendation}
-            </p>
-            <p className="text-sm font-medium leading-relaxed font-sans" style={{ color: 'var(--color-primary)' }}>
-              {message.recommendation}
-            </p>
-          </div>
-        )}
-
-        {/* Disclaimer obligatorio */}
-        <p className="border-t border-neutral-100 pt-3 text-xs italic text-neutral-400">
-          {ui.disclaimer}
-        </p>
-      </div>
+      {!isCrisis && messageCard}
 
       {/* ── Compartir + Descargar ────────────────────────────────────────── */}
       <div className="flex items-center justify-between flex-wrap gap-3">
@@ -391,7 +403,7 @@ const NormalResult: React.FC<{
       </div>
 
       {/* ── PDF Download (psychometric tests only) ──────────────────────── */}
-      {!isCrisis && testCategory !== 'screening' && answers && availableLangs && testLangFile && (
+      {testCategory !== 'screening' && answers && availableLangs && testLangFile && (
         <DownloadPDF
           testData={testLangFile}
           answers={answers}
@@ -402,8 +414,8 @@ const NormalResult: React.FC<{
         />
       )}
 
-      {/* ── Bloque de apoyo profesional (solo si hay red flags / urgencia) ─ */}
-      {showSupport && <SupportBlock lang={lang} />}
+      {/* ── Bloque de apoyo (red flags / urgencia sin crisis; en CRISIS va arriba) ─ */}
+      {showSupport && !isCrisis && <SupportBlock lang={lang} />}
 
       {/* ── Reintentar ──────────────────────────────────────────────────── */}
       <div className="flex justify-start">

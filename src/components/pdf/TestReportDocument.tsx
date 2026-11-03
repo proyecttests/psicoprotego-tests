@@ -2,6 +2,7 @@
  * @file components/pdf/TestReportDocument.tsx
  * @description React-PDF document for completed test results.
  * Supports bilingual display (userLang for questions, viewLang for headers/metadata).
+ * Si el resultado es de crisis, añade bajo la puntuación los teléfonos de ayuda urgente.
  */
 
 import React from 'react'
@@ -16,6 +17,7 @@ import type { TestLangFile, AnswersMap } from '@/types/test'
 import type { ScoringResult } from '@/utils/scoringFunctions'
 import { getResponseOptions } from '@/utils/responseOptions'
 import { RTL_LANGS } from '@/config/brand'
+import { getCrisisPhone } from '@/config/crisisPhones'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -350,6 +352,12 @@ const SCORE_LABEL: Record<string, string> = {
 
 // ── Sub-components ────────────────────────────────────────────────────────────
 
+const EMERGENCY = getCrisisPhone('112')
+const SUICIDE   = getCrisisPhone('024')
+const URGENT_HELP_LINE =
+  `¿Necesitas ayuda urgente? Llama al ${EMERGENCY.number} (${EMERGENCY.label.toLowerCase()}) ` +
+  `o al ${SUICIDE.number} (${SUICIDE.situation.toLowerCase()}).`
+
 const PageFooter: React.FC<{ date: string }> = ({ date }) => (
   <View style={styles.footer} fixed>
     <Text style={styles.footerText}>
@@ -422,8 +430,8 @@ export const TestReportDocument: React.FC<TestReportDocumentProps> = ({
         {/* ── Body ─────────────────────────────────────────────────────────── */}
         <View style={styles.body}>
 
-          {/* ── Result summary line ───────────────────────────────────────── */}
-          {result.resultType === 'NORMAL' && result.category && (
+          {/* ── Result summary line (también en crisis) ─────────────────────── */}
+          {result.category && (
             <View style={{ marginBottom: 12, paddingVertical: 8, paddingHorizontal: 12, backgroundColor: '#ffffff', borderRadius: 4, borderWidth: 1, borderColor: '#d0ddd8' }}>
               <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: '#2d4a3e' }}>
                 {[
@@ -431,6 +439,11 @@ export const TestReportDocument: React.FC<TestReportDocumentProps> = ({
                   result.category.label,
                 ].filter(Boolean).join('  —  ')}
               </Text>
+              {result.resultType === 'CRISIS' && (
+                <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: '#2d4a3e', marginTop: 6 }}>
+                  {URGENT_HELP_LINE}
+                </Text>
+              )}
             </View>
           )}
 

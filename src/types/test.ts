@@ -150,6 +150,19 @@ export interface TestDefinition {
   instructions?: string
   /** Opciones de respuesta Likert del instrumento, comunes a todas sus preguntas */
   responseOptions?: ResponseOption[]
+  /** Si el test mide crisis y con qué criterios (sin este campo, nunca da crisis) */
+  crisisCriteria?: CrisisCriteria
+}
+
+/**
+ * Criterios de crisis de un test. Que el campo exista indica que el test mide crisis;
+ * entonces hay crisis si se cumple cualquiera de estos:
+ * - un ítem crítico: pregunta con `isRedFlag` (severidad 'critical') y respuesta en `redFlagValues`;
+ * - la categoría del score está en `categories` (claves `messageKey` de `scoring`).
+ * Decisión clínica de Emmanuel: no se cambia sin su instrucción.
+ */
+export interface CrisisCriteria {
+  categories?: string[]
 }
 
 // ── Mensajes de resultado ────────────────────────────────────────────────────
@@ -173,7 +186,10 @@ export interface CrisisResource {
   url?: string
 }
 
-/** Mensaje de crisis (tipo CRISIS) */
+/**
+ * Mensaje de crisis (tipo CRISIS). `title` es el aviso; `body` describe el ítem crítico
+ * y solo se muestra si la crisis la disparó un ítem, no la puntuación.
+ */
 export interface CrisisMessage {
   title: string
   body: string
@@ -203,7 +219,7 @@ export type AnswersMap = Record<string, string | number | boolean>
 
 /** Resultado calculado tras completar el test */
 export interface TestResult {
-  /** null en caso de crisis (no se muestra score) */
+  /** Puntuación total (también en crisis) */
   score: number | null
   type: 'NORMAL' | 'CRISIS'
   category?: string
@@ -370,6 +386,8 @@ export interface TestLangFile {
   landing: TestLanding
   questions: Question[]
   scoring: ScoringRule[]
+  /** Si el test mide crisis y con qué criterios (sin este campo, nunca da crisis) */
+  crisisCriteria?: CrisisCriteria
   results: {
     normal: Record<string, NormalMessage>
     crisis: CrisisMessage

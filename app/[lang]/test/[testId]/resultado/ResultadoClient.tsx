@@ -106,6 +106,7 @@ export default function ResultadoClient({ lang, testId }: ResultadoClientProps) 
           lang:     langData.lang,
           questions: langData.questions as import('@/utils/scoringFunctions').QuestionWithScoring[],
           scoring:  langData.scoring,
+          crisisCriteria: langData.crisisCriteria,
         }
 
         const messages = { [testId]: { [resolvedLang]: langData.results } }

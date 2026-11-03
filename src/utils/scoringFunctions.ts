@@ -22,6 +22,8 @@
  *  JSON actual de tests (que no tiene scoring.method por pregunta).
  */
 
+import type { CrisisCriteria } from '@/types/test'
+
 // ── Tipos internos extendidos ─────────────────────────────────────────────────
 
 /**
@@ -80,6 +82,8 @@ export interface TestDefinitionForScoring {
     messageKey: string
     typeKey?: string
   }>
+  /** Si el test mide crisis y con qué criterios (sin este campo, nunca da crisis) */
+  crisisCriteria?: CrisisCriteria
   [key: string]: unknown
 }
 
@@ -115,19 +119,16 @@ export interface ScoringCategory {
  * Resultado completo del cálculo de scoring de un test.
  */
 export interface ScoringResult {
-  /**
-   * Puntuación numérica total.
-   * null cuando resultType === 'CRISIS' (no se debe mostrar al usuario).
-   */
+  /** Puntuación numérica total (también en CRISIS: se muestra debajo del aviso) */
   score: number | null
 
-  /** Categoría que corresponde al score (null si es CRISIS sin categoría) */
+  /** Categoría que corresponde al score (null si el score queda fuera de rango) */
   category: ScoringCategory | null
 
   /** Lista de red flags detectados (puede estar vacía) */
   redFlags: RedFlag[]
 
-  /** Nivel de urgencia derivado de los red flags */
+  /** Nivel de urgencia derivado de los red flags ('critical' siempre en CRISIS) */
   urgency: 'none' | 'high' | 'critical'
 
   /** Tipo de resultado: flujo normal o flujo de crisis */
@@ -136,11 +137,12 @@ export interface ScoringResult {
   /**
    * Mensaje resuelto desde `results` de {lang}.json (si se pasó el mapa).
    * Opcional porque scoreXxx puede usarse sin messages (solo scoring puro).
-   * Para CRISIS incluye phones y resources; para NORMAL incluye recommendation.
+   * Para CRISIS es `results.crisis`: con `body` si lo disparó un ítem crítico, solo `title`
+   * si lo disparó la puntuación. Para NORMAL incluye recommendation.
    */
   message?: {
     title: string
-    body: string
+    body?: string
     recommendation?: string
     /** Avisos de interpretación que se cumplen (regla `results.notes` del JSON) */
     notes?: string[]
@@ -305,10 +307,12 @@ function findCategory(
  * Algoritmo:
  *  1. Itera cada pregunta visible.
  *  2. Aplica el método de scoring correspondiente (direct, reverse, redFlag…).
- *  3. Acumula la puntuación de preguntas 'direct' y 'reverse'.
+ *  3. Acumula la puntuación de preguntas 'direct', 'reverse' y 'redFlag' tipo likert.
  *  4. Registra red flags de preguntas 'redFlag' y 'text_analysis'.
- *  5. Si hay red flag crítico → resultType = 'CRISIS', score = null.
- *  6. Si no hay crisis → busca categoría y opcionalmente el mensaje.
+ *  5. Busca la categoría del score.
+ *  6. Si el test declara `crisisCriteria` y hay red flag crítico (ítem crítico) o la
+ *     categoría está en `crisisCriteria.categories` → resultType = 'CRISIS', con score.
+ *  7. Si no hay crisis → mensaje normal de la categoría (opcional).
  *
  * @param testData - Definición del test cargada desde /data/tests/{testId}/
  * @param answers  - Mapa questionId → valor respondido
@@ -347,8 +351,12 @@ export function scoreGAD7(
         break
       }
 
-      // ── redFlag: detecta crisis, NO suma ────────────────────────────────
+      // ── redFlag: detecta crisis; si es likert, también suma ─────────────
+      // (el ítem 9 del PHQ-9 forma parte del total 0–27)
       case 'redFlag': {
+        if (question.type === 'likert' && typeof answer === 'number') {
+          totalScore += answer
+        }
         const isTriggered =
           answer !== undefined &&
           question.redFlagValues !== undefined &&
@@ -388,23 +396,31 @@ export function scoreGAD7(
     }
   }
 
-  // ── Paso 2: resolver urgencia ─────────────────────────────────────────────
-  const urgency = resolveUrgency(redFlags)
+  // ── Paso 2: resolver urgencia y categoría ────────────────────────────────
+  const urgency  = resolveUrgency(redFlags)
+  const category = findCategory(totalScore, testData.scoring)
 
-  // ── Paso 3: si hay red flag crítico → CRISIS ──────────────────────────────
-  if (urgency === 'critical') {
+  // ── Paso 3: crisis (solo si el test declara que la mide) ──────────────────
+  const criteria      = testData.crisisCriteria
+  const crisisByItem  = !!criteria && urgency === 'critical'
+  const crisisByScore = !!criteria && !!category &&
+    (criteria.categories ?? []).includes(category.messageKey)
+
+  if (crisisByItem || crisisByScore) {
     let crisisMessage: ScoringResult['message'] | undefined
 
     if (messages) {
       const testMsgs = messages[testData.id] as
         | Record<string, Record<string, unknown>>
         | undefined
-      crisisMessage = testMsgs?.[lang]?.['crisis'] as ScoringResult['message'] | undefined
+      const crisis = testMsgs?.[lang]?.['crisis'] as { title: string; body: string } | undefined
+      // Ítem crítico: el texto describe lo indicado. Solo puntuación: solo el aviso (título).
+      if (crisis) crisisMessage = crisisByItem ? { title: crisis.title, body: crisis.body } : { title: crisis.title }
     }
 
     return {
-      score:      null,
-      category:   null,
+      score:      totalScore,
+      category,
       redFlags,
       urgency:    'critical',
       resultType: 'CRISIS',
@@ -412,9 +428,7 @@ export function scoreGAD7(
     }
   }
 
-  // ── Paso 4: buscar categoría para el score acumulado ─────────────────────
-  const category = findCategory(totalScore, testData.scoring)
-
+  // ── Paso 4: sin categoría para el score ───────────────────────────────────
   if (!category) {
     // Score fuera de rango — devuelve resultado parcial sin categoría
     console.warn(
