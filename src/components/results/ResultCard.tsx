@@ -410,7 +410,6 @@ const NormalResult: React.FC<{
           result={result}
           testId={testId}
           lang={lang}
-          availableLangs={availableLangs}
         />
       )}
 

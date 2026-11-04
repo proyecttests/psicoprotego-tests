@@ -6,7 +6,7 @@
  */
 import React from 'react'
 import { trackEvent } from '@/config/analytics'
-import type { TestLangFile } from '@/types/test'
+import { buildBlankPdf } from './buildPdf'
 
 const LABEL: Record<string, { btn: string; generating: string }> = {
   es: { btn: 'Descargar test en blanco', generating: 'Preparando el test...' },
@@ -20,52 +20,19 @@ interface DownloadBlankLandingProps {
 export default function DownloadBlankLanding({ testId, lang }: DownloadBlankLandingProps) {
   const ui = LABEL[lang] ?? LABEL['es']
   const [state, setState]       = React.useState<'idle' | 'generating' | 'done'>('idle')
-  const [validationDetails, setValidationDetails] = React.useState<{
-    validated: boolean; reference?: string; originalReference?: string; originalJournal?: string
-  } | null>(null)
 
   const handleClick = () => {
     setState('generating')
     void triggerDownload()
   }
 
-  React.useEffect(() => {
-    fetch(`/data/tests/${testId}/metadata.json`)
-      .then(r => r.json())
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      .then((meta: any) => {
-        const vd = meta?.validationDetails
-        if (!vd) return
-        const langV = vd.translations?.[lang]
-        const orig  = vd.original
-        setValidationDetails({ validated: langV?.validated ?? false, reference: langV?.reference, originalReference: orig?.reference, originalJournal: orig?.journal })
-      })
-      .catch(() => {/* silent */})
-  }, [testId, lang])
-
-  const buildBlob = async (): Promise<Blob> => {
-    const [{ pdf }, { TestBlankDocument }] = await Promise.all([
-      import('@react-pdf/renderer'),
-      import('@/components/pdf/TestBlankDocument'),
-    ])
-    const r = await fetch(`/data/tests/${testId}/${lang}.json`)
-    const testData = await r.json() as TestLangFile
-    const doc = React.createElement(TestBlankDocument, {
-      testData,
-      metadata: { generatedAt: new Date().toISOString(), testId, validationDetails: validationDetails ?? undefined },
-    })
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return pdf(doc as any).toBlob()
-  }
-
   const triggerDownload = async () => {
     try {
-      const blob = await buildBlob()
+      const blob = await buildBlankPdf(testId, lang)
       const url = URL.createObjectURL(blob)
       const a   = document.createElement('a')
       a.href    = url
-      const dateStr = new Date().toISOString().slice(0,10).replace(/-/g,'')
-      a.download = `psicoprotego_${testId}_blank_${dateStr}.pdf`
+      a.download = `psicoprotego-${testId}-en-blanco.pdf`
       a.click()
       URL.revokeObjectURL(url)
       trackEvent('pdf_download', { testId, isBlank: true, source: 'landing' })

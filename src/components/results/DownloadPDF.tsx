@@ -12,6 +12,7 @@ import React from 'react'
 import type { TestLangFile, AnswersMap } from '@/types/test'
 import type { ScoringResult } from '@/utils/scoringFunctions'
 import { trackEvent } from '@/config/analytics'
+import { buildBlankPdf, buildReportPdf } from '@/components/pdf/buildPdf'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -21,7 +22,6 @@ export interface DownloadPDFProps {
   result: ScoringResult
   testId: string
   lang: string
-  availableLangs: string[]
 }
 
 type Step = 'idle' | 'configure' | 'generating' | 'done'
@@ -35,7 +35,6 @@ const UI: Record<string, {
   nameLabel: string
   namePlaceholder: string
   nameDisclaimer: string
-  langLabel: string
   consentLabel: string
   consentLink: string
   consentAfter: string
@@ -51,7 +50,6 @@ const UI: Record<string, {
     nameLabel:           'Tu nombre (opcional)',
     namePlaceholder:     'Ej: Juan García',
     nameDisclaimer:      'Tu nombre solo se usa para generar este documento y no sale de tu navegador. No lo almacenamos ni lo procesamos. Eres responsable del uso y distribución de este informe.',
-    langLabel:           'Idioma del informe',
     consentLabel:        'He leído y acepto las',
     consentLink:         'condiciones de uso',
     consentAfter:        ' de este informe',
@@ -60,10 +58,6 @@ const UI: Record<string, {
     generating:          'Generando tu informe...',
     done:                '¡Descargado!',
   },
-}
-
-const LANG_FLAGS: Record<string, string> = {
-  es: '🇪🇸 Español',
 }
 
 function getUi(lang: string) {
@@ -78,17 +72,10 @@ export const DownloadPDF: React.FC<DownloadPDFProps> = ({
   result,
   testId,
   lang,
-  availableLangs,
 }) => {
   const [step, setStep]             = React.useState<Step>('idle')
   const [isBlank, setIsBlank]       = React.useState(false)
   const [userName, setUserName]     = React.useState('')
-  const [viewLang, setViewLang]     = React.useState(lang)
-  const [viewLangData, setViewLangData] = React.useState<TestLangFile | null>(null)
-  const [validationDetails, setValidationDetails] = React.useState<{
-    validated: boolean; reference?: string; originalReference?: string; originalJournal?: string
-  } | null>(null)
-  const [loadingLang, setLoadingLang]   = React.useState(false)
   const [nameConsent, setNameConsent]   = React.useState(false)
 
   const ui = getUi(lang)
@@ -99,40 +86,7 @@ export const DownloadPDF: React.FC<DownloadPDFProps> = ({
       const saved = sessionStorage.getItem('psico_pdf_name')
       if (saved) setUserName(saved)
     } catch { /* ignore */ }
-    // Load validation details for this test/lang
-    fetch(`/data/tests/${testId}/metadata.json`)
-      .then(r => r.json())
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      .then((meta: any) => {
-        const vd = meta?.validationDetails
-        if (!vd) return
-        const langV = vd.translations?.[lang]
-        const orig  = vd.original
-        setValidationDetails({
-          validated:         langV?.validated ?? false,
-          reference:         langV?.reference,
-          originalReference: orig?.reference,
-          originalJournal:   orig?.journal,
-        })
-      })
-      .catch(() => {/* silent */})
-  }, [testId, lang])
-
-  // ── Load viewLangData when viewLang changes ──────────────────────────────
-  React.useEffect(() => {
-    if (viewLang === lang) {
-      setViewLangData(null)
-      return
-    }
-    setLoadingLang(true)
-    fetch(`/data/tests/${testId}/${viewLang}.json`)
-      .then((r) => r.json() as Promise<TestLangFile>)
-      .then((data) => {
-        setViewLangData(data)
-        setLoadingLang(false)
-      })
-      .catch(() => setLoadingLang(false))
-  }, [viewLang, lang, testId])
+  }, [])
 
   // ── Handlers ───────────────────────────────────────────────────────────
 
@@ -157,50 +111,16 @@ export const DownloadPDF: React.FC<DownloadPDFProps> = ({
     setTimeout(() => setStep('idle'), 2000)
   }
 
-  const buildBlob = async (blank: boolean): Promise<Blob> => {
-    const now = new Date().toISOString()
-    if (blank) {
-      const { pdf } = await import('@react-pdf/renderer')
-      const { TestBlankDocument } = await import('@/components/pdf/TestBlankDocument')
-      const doc = React.createElement(TestBlankDocument, {
-        testData,
-        metadata: {
-          generatedAt: now,
-          testId,
-          validationDetails: validationDetails ?? undefined,
-        },
-      })
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return pdf(doc as any).toBlob()
-    } else {
-      const { pdf } = await import('@react-pdf/renderer')
-      const { TestReportDocument } = await import('@/components/pdf/TestReportDocument')
-      const doc = React.createElement(TestReportDocument, {
-        testData,
-        answers,
-        result,
-        metadata: {
-          completedAt: now,
-          userLang:    lang,
-          viewLang,
-          userName:    userName.trim() || undefined,
-          testId,
-          validationDetails: validationDetails ?? undefined,
-        },
-        viewLangData: viewLangData ?? undefined,
-      })
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return pdf(doc as any).toBlob()
-    }
-  }
+  const buildBlob = (blank: boolean): Promise<Blob> =>
+    blank
+      ? buildBlankPdf(testId, lang, testData)
+      : buildReportPdf({ testId, lang, testData, answers, result, userName: userName.trim() || undefined })
 
   const triggerDownload = async () => {
     try {
       const blob = await buildBlob(isBlank)
-      const dateStr = new Date().toISOString().slice(0,10).replace(/-/g,'')
-      const blankSuffix = isBlank ? '_blank' : ''
-      downloadBlob(blob, `psicoprotego_${testId}${blankSuffix}_${dateStr}.pdf`)
-      trackEvent('pdf_download', { testId, isBlank, viewLang })
+      downloadBlob(blob, `psicoprotego-${testId}-${isBlank ? 'en-blanco' : 'resultados'}.pdf`)
+      trackEvent('pdf_download', { testId, isBlank })
     } catch (err) {
       console.error('[DownloadPDF] Error generating PDF:', err)
     }
@@ -294,37 +214,6 @@ export const DownloadPDF: React.FC<DownloadPDFProps> = ({
             </div>
           )}
 
-          {/* Language selector */}
-          <div className="space-y-1">
-            <label
-              htmlFor="pdf-lang"
-              className="block text-sm font-medium"
-              style={{ color: 'var(--color-primary)' }}
-            >
-              {ui.langLabel}
-            </label>
-            <select
-              id="pdf-lang"
-              value={viewLang}
-              onChange={(e) => setViewLang(e.target.value)}
-              className="w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2"
-              style={{
-                borderColor:     'var(--color-accent, #c8a96e)',
-                backgroundColor: '#fff',
-                color:           '#1a1a1a',
-              }}
-            >
-              {availableLangs.map((l) => (
-                <option key={l} value={l}>
-                  {LANG_FLAGS[l] ?? l.toUpperCase()}
-                </option>
-              ))}
-            </select>
-            {loadingLang && (
-              <p className="text-xs" style={{ color: '#888' }}>Cargando idioma...</p>
-            )}
-          </div>
-
           {/* Consent checkbox */}
           <label className="flex items-start gap-3 cursor-pointer">
             <input
@@ -355,7 +244,7 @@ export const DownloadPDF: React.FC<DownloadPDFProps> = ({
             <button
               type="button"
               onClick={handleGenerate}
-              disabled={!nameConsent || loadingLang}
+              disabled={!nameConsent}
               className="btn-primary flex-1 text-sm disabled:opacity-40 disabled:cursor-not-allowed"
             >
               {ui.generateButton}
