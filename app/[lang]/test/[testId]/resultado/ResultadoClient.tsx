@@ -12,7 +12,7 @@
 
 import React from 'react'
 import { useRouter } from 'next/navigation'
-import { decodeAnswers, decodeAnswersWithKeys, readShareToken } from '@/utils/shareEncoding'
+import { decodeAnswers, decodeAnswersWithKeys, moveLegacyTokenToHash, readShareToken } from '@/utils/shareEncoding'
 import { getScoringFunction, getMaxScore } from '@/utils/scoringFunctions'
 import type { TestLangFile } from '@/types/test'
 import type { TestDefinitionForScoring } from '@/utils/scoringFunctions'
@@ -76,6 +76,7 @@ export default function ResultadoClient({ lang, testId }: ResultadoClientProps) 
 
   React.useEffect(() => {
     const token = readShareToken()
+    moveLegacyTokenToHash()
     if (!token) {
       setErrorMsg(ui.errorInvalidLink)
       setState('error')

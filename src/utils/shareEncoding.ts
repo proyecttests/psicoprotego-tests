@@ -11,7 +11,7 @@
  * URL resultante: /[lang]/test/[testId]/resultado#d=TOKEN
  * El token va en el fragmento (#): el navegador no lo envía al servidor, así que las
  * respuestas no llegan a Vercel ni a sus registros. Los enlaces antiguos con ?d= siguen
- * funcionando (readShareToken).
+ * funcionando (readShareToken), y moveLegacyTokenToHash los pasa a #d= al abrirlos.
  */
 
 import type { AnswersMap } from '@/types/test'
@@ -105,6 +105,20 @@ export function readShareToken(): string | null {
   if (typeof window === 'undefined') return null
   const fromHash = new URLSearchParams(window.location.hash.slice(1)).get('d')
   return fromHash ?? new URLSearchParams(window.location.search).get('d')
+}
+
+/**
+ * Enlaces antiguos (?d=): pasa el token al fragmento sin recargar, para que no siga
+ * viajando en el Referer de las peticiones siguientes.
+ */
+export function moveLegacyTokenToHash(): void {
+  if (typeof window === 'undefined') return
+  const url   = new URL(window.location.href)
+  const token = url.searchParams.get('d')
+  if (!token) return
+  url.searchParams.delete('d')
+  url.hash = `d=${token}`
+  window.history.replaceState(window.history.state, '', url.toString())
 }
 
 

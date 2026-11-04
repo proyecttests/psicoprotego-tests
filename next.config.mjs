@@ -62,6 +62,13 @@ const nextConfig = {
         source: '/(.*)',
         headers: SECURITY_HEADERS,
       },
+      {
+        // Resultado compartido: los enlaces antiguos llevan las respuestas en ?d=. Sin
+        // Referer, la URL no viaja en las peticiones que salen de la página (JS, prefetch,
+        // enlaces). Va después de la regla general para sustituir su Referrer-Policy.
+        source: '/:lang/test/:testId/resultado',
+        headers: [{ key: 'Referrer-Policy', value: 'no-referrer' }],
+      },
     ]
   },
 }
