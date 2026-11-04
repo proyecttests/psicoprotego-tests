@@ -154,3 +154,14 @@ Thumbs.db                       ← Opcional (archivos Windows)
 # clinical-landing-writer intermediate artifacts
 content-review/*/.dossier.json
 tmp/
+
+# Documentación interna: vive en el repo privado psicoprotego-tests-internal
+/CLAUDE.md
+/PENDIENTES.md
+/WORKLOG.md
+/SETUP.md
+/CREDENTIALS.md
+/.claude/
+/content-review/
+/docs/
+/.git-internal/
