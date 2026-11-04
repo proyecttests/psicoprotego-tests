@@ -44,7 +44,7 @@
   },
   "howItWorks": {
     "heading": "Cómo funciona",
-    "body": "El test consta de 9 preguntas sobre cómo te has sentido durante las últimas dos semanas. Cada pregunta ofrece cuatro opciones de respuesta, desde «Nunca» hasta «Casi cada día». No hay respuestas correctas o incorrectas; solo describe lo que mejor se ajusta a tu experiencia. Al final puede aparecer una pregunta más, sobre cuánto te han dificultado estos problemas el trabajo, la casa o las relaciones, que no suma a la puntuación.\n\nLa puntuación total oscila entre 0 y 27 puntos. El resultado se interpreta según los rangos establecidos en la validación original del instrumento. La novena pregunta trata sobre pensamientos de muerte o de hacerse daño: si marcas cualquier opción distinta de «Nunca», en lugar de la puntuación verás directamente información de apoyo y teléfonos de ayuda.\n\nEsta herramienta se usa típicamente en el marco de un proceso de evaluación o seguimiento. Si ya estás en consulta, tu profesional puede decirte si te conviene completarlo; si todavía no has consultado, el resultado puede servirte para llevar un registro orientativo a una primera cita.",
+    "body": "El test consta de 9 preguntas sobre cómo te has sentido durante las últimas dos semanas. Cada pregunta ofrece cuatro opciones de respuesta, desde «Nunca» hasta «Casi cada día». No hay respuestas correctas o incorrectas; solo describe lo que mejor se ajusta a tu experiencia. Al final puede aparecer una pregunta más, sobre cuánto te han dificultado estos problemas el trabajo, la casa o las relaciones, que no suma a la puntuación.\n\nLa puntuación total oscila entre 0 y 27 puntos. El resultado se interpreta según los rangos establecidos en la validación original del instrumento. La novena pregunta trata sobre pensamientos de muerte o de hacerse daño: si marcas cualquier opción distinta de «Nunca», o si la puntuación es de 15 o más, antes de la puntuación verás información de apoyo y teléfonos de ayuda.\n\nEsta herramienta se usa típicamente en el marco de un proceso de evaluación o seguimiento. Si ya estás en consulta, tu profesional puede decirte si te conviene completarlo; si todavía no has consultado, el resultado puede servirte para llevar un registro orientativo a una primera cita.",
     "steps": [
       "Respondes 9 preguntas sobre cómo te has sentido las últimas 2 semanas.",
       "Cada pregunta tiene 4 opciones: «Nunca», «Varios días», «Más de la mitad de los días» y «Casi cada día».",
@@ -152,7 +152,7 @@
     },
     {
       "q": "¿Por qué pregunta por pensamientos de muerte o de hacerse daño?",
-      "a": "Porque son uno de los síntomas con los que se define un episodio depresivo, y forman parte del cuestionario original. Si marcas cualquier opción distinta de «Nunca» en esa pregunta, el test no te muestra la puntuación, sino información de apoyo y teléfonos de ayuda. Si tienes esos pensamientos ahora, puedes llamar al 024, o al 112 si hay peligro inmediato."
+      "a": "Porque son uno de los síntomas con los que se define un episodio depresivo, y forman parte del cuestionario original. Si marcas cualquier opción distinta de «Nunca» en esa pregunta, antes de la puntuación verás información de apoyo y teléfonos de ayuda. Si tienes esos pensamientos ahora, puedes llamar al 024, o al 112 si hay peligro inmediato."
     },
     {
       "q": "¿Cuándo debería ver a un psicólogo, un psiquiatra o mi médico de cabecera?",
