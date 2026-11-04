@@ -5,7 +5,6 @@
   "version": "1.0",
   "scoringFunction": "scoreGAD7",
   "disclaimerBefore": "Este cuestionario es una herramienta de cribado orientativa. **No es un diagnóstico clínico ni sustituye la valoración de un profesional de la salud mental.** Si tienes dudas o síntomas que te preocupan, consulta con un profesional.",
-  "disclaimerAfter": "Este test NO es diagnóstico clínico y NO reemplaza la evaluación de un profesional. Si tienes síntomas graves o persistentes, consulta con tu médico o psicólogo.",
   "instructions": "En los últimos 14 días, ¿con qué frecuencia le han supuesto una molestia los siguientes problemas?",
   "responseOptions": [
     { "value": 0, "label": "Nunca" },

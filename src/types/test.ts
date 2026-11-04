@@ -144,8 +144,6 @@ export interface TestDefinition {
   followUpTriggers?: FollowUpTrigger[]
   /** Texto del disclaimer antes del test */
   disclaimerBefore?: string
-  /** Texto del disclaimer después del test */
-  disclaimerAfter?: string
   /** Instrucciones originales del instrumento validado. Se muestran encima de cada pregunta. */
   instructions?: string
   /** Opciones de respuesta Likert del instrumento, comunes a todas sus preguntas */
@@ -378,7 +376,6 @@ export interface TestLangFile {
   version: string
   scoringFunction: string
   disclaimerBefore?: string
-  disclaimerAfter?: string
   /** Instrucciones originales del instrumento. Se muestran encima de cada pregunta. */
   instructions?: string
   /** Opciones de respuesta Likert del instrumento, comunes a todas sus preguntas */

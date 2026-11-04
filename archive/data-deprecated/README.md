@@ -4,7 +4,8 @@
 - `crisis-phones.json` — teléfonos de crisis por idioma (es/en/pt). Ningún código lo cargaba: la UI
   de crisis usa `src/config/crisisPhones.ts`. Además llamaba «Teléfono de la Esperanza» al 024.
 - `disclaimers/` (es, en, pt) — avisos clínicos antiguos. Ningún código los cargaba: los avisos
-  salen de `disclaimerBefore`/`disclaimerAfter` en `public/data/tests/{testId}/{lang}.json`.
+  salen de `disclaimerBefore` en `public/data/tests/{testId}/{lang}.json` (antes del test) y de
+  `ResultCard.tsx` (resultado). `disclaimerAfter` se quitó el 2026-11-04: nada lo pintaba.
 
 ## Por qué se archivó
 Fecha: 2026-11-03. Datos de la época anterior a la consolidación (solo español). Al estar en

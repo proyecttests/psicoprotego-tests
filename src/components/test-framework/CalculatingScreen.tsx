@@ -3,7 +3,7 @@
  * @description Pantalla intermedia "Calculando resultados…"
  *
  * Se muestra tras pulsar "Ver resultados" durante ~2.5s antes de mostrar
- * el ResultCard. Contiene un slot publicitario pre-result de alto valor.
+ * el ResultCard.
  *
  * Llama a `onDone()` automáticamente cuando expira el delay.
  */

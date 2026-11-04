@@ -192,7 +192,6 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
           scoring:          langData.scoring,
           crisisCriteria:   langData.crisisCriteria,
           disclaimerBefore: langData.disclaimerBefore,
-          disclaimerAfter:  langData.disclaimerAfter,
           instructions:     langData.instructions,
           responseOptions:  langData.responseOptions,
         }
