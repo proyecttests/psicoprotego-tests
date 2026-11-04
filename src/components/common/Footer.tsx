@@ -5,7 +5,7 @@
  * @description Footer de Psicoprotego con navegación interna por idioma.
  * Ayuda urgente (112, 024 y enlace a /ayuda-urgente), aviso de que los tests no son un diagnóstico,
  * aviso de piloto, copyright y links internos
- * (acerca-de, contacto, privacidad, cookies, aviso-legal).
+ * (acerca-de, contacto, privacidad, cookies, aviso-legal, condiciones).
  * Los bloques de crisis del resultado los muestran CrisisBar y ResultCard.
  */
 
@@ -133,6 +133,13 @@ const Footer: React.FC<FooterProps> = ({ lang = 'es' }) => {
                 style={{ color: 'var(--color-accent)' }}
               >
                 Aviso legal
+              </Link>
+              <Link
+                href={`/${lang}/condiciones`}
+                className="transition-colors hover:underline"
+                style={{ color: 'var(--color-accent)' }}
+              >
+                Condiciones de uso
               </Link>
               <button
                 type="button"

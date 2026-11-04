@@ -5,7 +5,7 @@ import { SUPPORTED_LANGS } from '@/config/brand'
 const BASE   = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://psicoprotego.es'
 const LANGS: readonly string[] = SUPPORTED_LANGS
 
-const STATIC_PAGES = ['', 'acerca-de', 'contacto', 'privacidad', 'cookies', 'aviso-legal', 'ayuda-urgente']
+const STATIC_PAGES = ['', 'acerca-de', 'contacto', 'privacidad', 'cookies', 'aviso-legal', 'condiciones', 'ayuda-urgente']
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = []

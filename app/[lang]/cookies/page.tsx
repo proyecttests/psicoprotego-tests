@@ -1,26 +1,28 @@
 /**
  * @file app/[lang]/cookies/page.tsx
- * @description Cookie policy — no cookies used, localStorage only.
+ * @description Política de cookies de Psicoprotego Tests.
+ * Textos aprobados por Emmanuel (bloque D de la auditoría, 2026-11-04):
+ * content-review/legal/textos-legales.borrador.md. Render: src/components/legal/LegalPage.tsx.
  */
 
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { SUPPORTED_LANGS } from '@/config/brand'
+import LegalPage, { type LegalContent } from '@/components/legal/LegalPage'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://psicoprotego.es'
 const LANGS = SUPPORTED_LANGS
 
-const CONTENT: Record<string, { metaTitle: string; metaDescription: string; heading: string; sections: Array<{ title: string; body: string }> }> = {
+const CONTENT: Record<string, LegalContent> = {
   es: {
-    metaTitle:       'Política de Cookies — Psicoprotego',
-    metaDescription: 'Psicoprotego no utiliza cookies de seguimiento. Solo usamos localStorage para guardar tu progreso de forma local.',
-    heading:         'Política de Cookies',
+    metaTitle:       "Política de Cookies — Psicoprotego",
+    metaDescription: "Qué guarda Psicoprotego Tests en tu navegador: almacenamiento técnico y, solo si las aceptas, cookies de Google Analytics.",
+    heading:         "Política de Cookies",
+    updated:         "4 de noviembre de 2026",
     sections: [
-      { title: 'No utilizamos cookies', body: 'Psicoprotego NO establece ninguna cookie en tu navegador. No utilizamos cookies de análisis, publicidad, sesión ni de terceros. Por este motivo, no es necesario que aceptes ningún banner de cookies.' },
-      { title: '¿Qué usamos en su lugar?', body: 'Para mejorar tu experiencia, utilizamos localStorage (almacenamiento local del navegador) para guardar: el progreso en los tests, el historial de puntuaciones anteriores y tus preferencias de idioma. Este almacenamiento es local a tu dispositivo. Ningún dato se envía a nuestros servidores.' },
-      { title: 'Sin rastreadores de terceros', body: 'No integramos herramientas de analítica de terceros (Google Analytics, Meta Pixel, etc.). No hay scripts de publicidad. No compartimos datos con terceros.' },
-      { title: '¿Cómo borrar el almacenamiento local?', body: 'Puedes borrar el localStorage desde la configuración de tu navegador en cualquier momento. Esto eliminará tu historial de tests y preferencias guardadas en este dispositivo.' },
-      { title: 'Contacto', body: 'Para cualquier duda sobre nuestra política de cookies: hola@psicoprotego.es' },
+      { title: "Qué usamos", body: "Además del almacenamiento técnico necesario para que la web funcione, solo usamos cookies de Google Analytics si las aceptas. Vercel Web Analytics no usa cookies.",
+        table: {"head": ["Nombre", "Tipo", "Para qué", "Duración", "Necesita consentimiento"], "rows": [["psico_cookie_consent", "Almacenamiento local del navegador", "Recordar si aceptaste o rechazaste la analítica", "Hasta que lo borres", "No (técnica)"], ["test_access_granted", "Almacenamiento de la pestaña", "Comprobar que has visto el aviso antes de empezar el test", "Hasta cerrar la pestaña", "No (técnica)"], ["psico_pdf_name", "Almacenamiento de la pestaña", "Recordar el nombre que escribiste para el PDF", "Hasta cerrar la pestaña", "No (técnica)"], ["_ga, _ga_<ID>", "Cookies de Google Analytics", "Estadísticas de uso", "2 años", "**Sí**"]]} },
+      { title: "Cómo cambiar tu elección", body: "En «Preferencias de cookies», en el pie de cada página. Si eliges «Solo esenciales», dejamos de cargar Google Analytics y borramos sus cookies.\n\nMás información en la [Política de privacidad](/es/privacidad)." },
     ],
   },
 }
@@ -52,37 +54,5 @@ export default async function CookiesPage({
   const c = CONTENT[lang]
   if (!c) notFound()
 
-  return (
-    <div style={{ backgroundColor: 'var(--color-cream)' }} className="min-h-screen py-12">
-      <div className="mx-auto max-w-2xl px-4">
-        {/* No-cookie badge */}
-        <div className="mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-semibold"
-          style={{ backgroundColor: '#e8f5f0', color: 'var(--color-primary)' }}
-        >
-          <span>0 cookies</span>
-        </div>
-
-        <h1
-          className="font-['Source_Serif_4',serif] text-4xl font-bold mb-10"
-          style={{ color: 'var(--color-primary)' }}
-        >
-          {c.heading}
-        </h1>
-
-        <div className="flex flex-col gap-8">
-          {c.sections.map((s) => (
-            <section key={s.title}>
-              <h2
-                className="font-['Source_Serif_4',serif] text-xl font-semibold mb-2"
-                style={{ color: 'var(--color-primary)' }}
-              >
-                {s.title}
-              </h2>
-              <p className="text-neutral-700 leading-relaxed">{s.body}</p>
-            </section>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
+  return <LegalPage content={c} />
 }

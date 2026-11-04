@@ -1,27 +1,29 @@
 /**
  * @file app/[lang]/aviso-legal/page.tsx
  * @description Legal notice page — Spain/EU compliant.
+ * Textos aprobados por Emmanuel (bloque D de la auditoría, 2026-11-04):
+ * content-review/legal/textos-legales.borrador.md. Render: src/components/legal/LegalPage.tsx.
  */
 
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { SUPPORTED_LANGS } from '@/config/brand'
+import LegalPage, { type LegalContent } from '@/components/legal/LegalPage'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://psicoprotego.es'
 const LANGS = SUPPORTED_LANGS
 
-const CONTENT: Record<string, { metaTitle: string; metaDescription: string; heading: string; sections: Array<{ title: string; body: string }> }> = {
+const CONTENT: Record<string, LegalContent> = {
   es: {
-    metaTitle:       'Aviso Legal — Psicoprotego',
-    metaDescription: 'Aviso legal de Psicoprotego: información del responsable, actividad, condiciones de uso y legislación aplicable.',
-    heading:         'Aviso Legal',
+    metaTitle:       "Aviso Legal — Psicoprotego",
+    metaDescription: "Aviso legal de Psicoprotego Tests: titular, objeto del servicio, propiedad intelectual, responsabilidad y legislación aplicable.",
+    heading:         "Aviso Legal",
     sections: [
-      { title: 'Responsable', body: 'Denominación: Psicoprotego. Correo electrónico: hola@psicoprotego.es. Actividad: plataforma online de tests psicológicos de autoevaluación.' },
-      { title: 'Objeto y actividad', body: 'Psicoprotego ofrece tests de autoevaluación psicológica con fines exclusivamente educativos e informativos. Los contenidos de esta plataforma NO constituyen diagnóstico, tratamiento ni prestación de servicios psicológicos profesionales. Ante cualquier preocupación sobre salud mental, se recomienda consultar con un profesional cualificado.' },
-      { title: 'Propiedad intelectual', body: 'Los contenidos de esta web (textos, imágenes, diseño, código fuente) son propiedad de Psicoprotego o de sus respectivos autores. Queda prohibida su reproducción total o parcial sin autorización expresa.' },
-      { title: 'Responsabilidad', body: 'Psicoprotego no se hace responsable de los daños derivados del uso indebido de los contenidos de esta plataforma, ni de la interpretación incorrecta de los resultados de los tests. Los resultados son orientativos y no deben reemplazar la opinión de un profesional de la salud mental.' },
-      { title: 'Legislación aplicable', body: 'Este aviso legal se rige por la legislación española vigente, en particular la Ley 34/2002, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), y el Reglamento General de Protección de Datos (RGPD/GDPR).' },
-      { title: 'Contacto', body: 'Para cualquier cuestión relativa a este aviso legal: hola@psicoprotego.es' },
+      { title: "Titular", body: "Psicoprotego Tests es un servicio de Psicólogos Protego (Psicoprotego). Los datos de identificación del titular, de colegiación profesional y de autorización sanitaria están en el [aviso legal de psicoprotego.es](https://psicoprotego.es/aviso-legal/).\n\nContacto: hola@psicoprotego.es." },
+      { title: "Objeto", body: "Psicoprotego Tests es una herramienta gratuita de cribado psicológico con cuestionarios validados. No es un servicio de atención psicológica, diagnóstico ni tratamiento, ni un servicio de urgencias. Su uso se rige por las [Condiciones de uso](/es/condiciones)." },
+      { title: "Propiedad intelectual", body: "Los textos, el diseño y el código de esta web son de Psicoprotego o se usan con autorización. Los cuestionarios (GAD-7, PHQ-9) pertenecen a sus autores y se usan según sus condiciones de uso libre: ver [Condiciones de uso](/es/condiciones), apartado «Instrumentos»." },
+      { title: "Responsabilidad", body: "Los resultados son orientativos y no sustituyen la valoración de un profesional. Psicoprotego no responde del uso que se haga de los resultados, los PDF o los enlaces compartidos, ni del contenido de webs externas enlazadas." },
+      { title: "Legislación aplicable", body: "Legislación española, en particular la Ley 34/2002, de servicios de la sociedad de la información y de comercio electrónico (LSSI-CE)." },
     ],
   },
 }
@@ -53,30 +55,5 @@ export default async function AvisoLegalPage({
   const c = CONTENT[lang]
   if (!c) notFound()
 
-  return (
-    <div style={{ backgroundColor: 'var(--color-cream)' }} className="min-h-screen py-12">
-      <div className="mx-auto max-w-2xl px-4">
-        <h1
-          className="font-['Source_Serif_4',serif] text-4xl font-bold mb-10"
-          style={{ color: 'var(--color-primary)' }}
-        >
-          {c.heading}
-        </h1>
-
-        <div className="flex flex-col gap-8">
-          {c.sections.map((s) => (
-            <section key={s.title}>
-              <h2
-                className="font-['Source_Serif_4',serif] text-xl font-semibold mb-2"
-                style={{ color: 'var(--color-primary)' }}
-              >
-                {s.title}
-              </h2>
-              <p className="text-neutral-700 leading-relaxed">{s.body}</p>
-            </section>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
+  return <LegalPage content={c} />
 }

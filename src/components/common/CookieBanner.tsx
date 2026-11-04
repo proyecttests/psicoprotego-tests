@@ -79,8 +79,8 @@ const UI: Record<string, {
   cookiesLink: string
 }> = {
   es: {
-    message:     'Usamos cookies analíticas para mejorar la plataforma. No almacenamos datos personales. Puedes aceptar solo las cookies esenciales.',
-    accept:      'Aceptar todo',
+    message:     'Usamos cookies de analítica (Google Analytics) solo si las aceptas. Si las aceptas, enviamos, sin tu nombre ni datos que te identifiquen, qué test haces, tus respuestas y tu resultado, para elaborar estadísticas de uso. Puedes cambiar tu elección cuando quieras en «Preferencias de cookies».',
+    accept:      'Aceptar',
     essential:   'Solo esenciales',
     learnMore:   'Más información',
     privacyLink: 'Privacidad',
@@ -173,10 +173,12 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({ lang, gtmId }) => {
           </Link>
         </p>
         <div className="flex gap-2 shrink-0">
+          {/* Rechazar igual de visible que aceptar (criterio de la AEPD): mismo estilo */}
           <button
             type="button"
             onClick={handleEssential}
-            className="rounded-lg border border-white/40 px-4 py-2 text-sm text-white hover:bg-white/10 transition"
+            className="rounded-lg bg-white px-4 py-2 text-sm font-semibold transition hover:bg-white/90"
+            style={{ color: 'var(--color-primary)' }}
           >
             {ui.essential}
           </button>

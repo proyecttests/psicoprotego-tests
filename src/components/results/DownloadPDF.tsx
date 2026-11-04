@@ -37,6 +37,8 @@ const UI: Record<string, {
   nameDisclaimer: string
   langLabel: string
   consentLabel: string
+  consentLink: string
+  consentAfter: string
   generateButton: string
   cancelButton: string
   generating: string
@@ -50,7 +52,9 @@ const UI: Record<string, {
     namePlaceholder:     'Ej: Juan García',
     nameDisclaimer:      'Tu nombre solo se usa para generar este documento y no sale de tu navegador. No lo almacenamos ni lo procesamos. Eres responsable del uso y distribución de este informe.',
     langLabel:           'Idioma del informe',
-    consentLabel:        'He leído y acepto las condiciones de uso de este informe',
+    consentLabel:        'He leído y acepto las',
+    consentLink:         'condiciones de uso',
+    consentAfter:        ' de este informe',
     generateButton:      'Generar informe',
     cancelButton:        'Cancelar',
     generating:          'Generando tu informe...',
@@ -331,7 +335,18 @@ export const DownloadPDF: React.FC<DownloadPDFProps> = ({
               style={{ accentColor: 'var(--color-primary)' }}
             />
             <span className="text-sm leading-relaxed" style={{ color: '#444' }}>
-              {ui.consentLabel}
+              {ui.consentLabel}{' '}
+              {/* Pestaña nueva: navegar aquí perdería el resultado, que solo vive en esta página */}
+              <a
+                href={`/${lang}/condiciones`}
+                target="_blank"
+                rel="noopener"
+                className="underline underline-offset-2"
+                style={{ color: 'var(--color-accent)' }}
+              >
+                {ui.consentLink}
+              </a>
+              {ui.consentAfter}
             </span>
           </label>
 

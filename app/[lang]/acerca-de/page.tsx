@@ -1,48 +1,29 @@
 /**
  * @file app/[lang]/acerca-de/page.tsx
- * @description About page — Psicoprotego platform info, team and contact.
+ * @description Página «Acerca de» de Psicoprotego Tests.
+ * Textos aprobados por Emmanuel (bloque D de la auditoría, 2026-11-04):
+ * content-review/legal/textos-legales.borrador.md. Render: src/components/legal/LegalPage.tsx.
  */
 
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { SUPPORTED_LANGS } from '@/config/brand'
+import LegalPage, { type LegalContent } from '@/components/legal/LegalPage'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://psicoprotego.es'
 const LANGS = SUPPORTED_LANGS
 
-type LangContent = {
-  metaTitle: string
-  metaDescription: string
-  heading: string
-  sections: Array<{ title: string; body: string }>
-}
-
-const CONTENT: Record<string, LangContent> = {
+const CONTENT: Record<string, LegalContent> = {
   es: {
-    metaTitle:       'Acerca de — Psicoprotego',
-    metaDescription: 'Psicoprotego es una plataforma de autoevaluación psicológica gratuita, basada en evidencia y 100% privada.',
-    heading:         'Acerca de Psicoprotego',
+    metaTitle:       "Acerca de — Psicoprotego",
+    metaDescription: "Psicoprotego Tests: cuestionarios psicológicos validados en España, gratuitos y sin publicidad, del equipo de la consulta Psicoprotego.",
+    heading:         "Acerca de Psicoprotego Tests",
     sections: [
-      {
-        title: 'Nuestra misión',
-        body:  'Psicoprotego es una plataforma de autoevaluación psicológica gratuita, validada científicamente y completamente privada. Creemos en la democratización del acceso a herramientas psicológicas de calidad para cualquier persona, sin importar su situación económica o geográfica.',
-      },
-      {
-        title: 'Privacidad ante todo',
-        body:  'No almacenamos ningún dato personal en nuestros servidores. Tus respuestas y resultados se guardan únicamente en tu dispositivo (localStorage). Ningún dato abandona tu navegador. No hay registro, no hay cuenta, no hay rastreo.',
-      },
-      {
-        title: 'Tests basados en evidencia',
-        body:  'Todos nuestros tests están basados en instrumentos psicológicos validados y ampliamente utilizados en la investigación científica (GAD-7, PHQ-9, ECR-R y otros). Cada test incluye información sobre su base científica y sus limitaciones.',
-      },
-      {
-        title: 'Quiénes somos',
-        body:  'Somos un equipo interdisciplinar formado por psicólogos clínicos e ingenieros de software con un objetivo en común: acercar la psicología de calidad a cualquier persona. Combinamos rigor científico con una experiencia de usuario sencilla y accesible.',
-      },
-      {
-        title: 'Contacto',
-        body:  'Para consultas, sugerencias o colaboraciones: hola@psicoprotego.es',
-      },
+      { title: "Qué es", body: "Psicoprotego Tests es una herramienta gratuita y sin publicidad para responder cuestionarios psicológicos validados en España y obtener una orientación sobre el resultado, que puedes llevar a un profesional." },
+      { title: "Quiénes somos", body: "El equipo de psicólogos de la consulta Psicoprotego, en Pozuelo de Alarcón ([psicoprotego.es](https://psicoprotego.es/))." },
+      { title: "Tests basados en evidencia", body: "Hoy: GAD-7 (ansiedad) y PHQ-9 (depresión). Cada test indica su validación en población española y sus limitaciones." },
+      { title: "Privacidad", body: "Tus respuestas se calculan en tu navegador y no se guardan en nuestros servidores. Detalle en la [Política de privacidad](/es/privacidad)." },
+      { title: "Contacto", body: "hola@psicoprotego.es" },
     ],
   },
 }
@@ -74,30 +55,5 @@ export default async function AcercaDePage({
   const c = CONTENT[lang]
   if (!c) notFound()
 
-  return (
-    <div style={{ backgroundColor: 'var(--color-cream)' }} className="min-h-screen py-12">
-      <div className="mx-auto max-w-2xl px-4">
-        <h1
-          className="font-['Source_Serif_4',serif] text-4xl font-bold mb-10"
-          style={{ color: 'var(--color-primary)' }}
-        >
-          {c.heading}
-        </h1>
-
-        <div className="flex flex-col gap-8">
-          {c.sections.map((s) => (
-            <section key={s.title}>
-              <h2
-                className="font-['Source_Serif_4',serif] text-xl font-semibold mb-2"
-                style={{ color: 'var(--color-primary)' }}
-              >
-                {s.title}
-              </h2>
-              <p className="text-neutral-700 leading-relaxed">{s.body}</p>
-            </section>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
+  return <LegalPage content={c} />
 }
