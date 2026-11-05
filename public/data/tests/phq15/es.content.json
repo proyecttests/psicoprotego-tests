@@ -1,0 +1,169 @@
+{
+  "status": "draft-pending-clinical-review",
+  "drafted": "clinical-landing-writer-v2",
+  "draftedAt": "2026-11-05T00:26:12.459Z",
+  "auditedAt": "2026-11-05T00:26:12.459Z",
+  "lastEditedBy": null,
+  "clinicallyApprovedBy": null,
+  "clinicallyApprovedAt": null,
+  "hero": {
+    "title": "Test PHQ-15: cuestionario orientativo de síntomas físicos",
+    "subtitle": "Quince preguntas sobre molestias físicas de las cuatro últimas semanas: dolores, mareos, palpitaciones, falta de aire, molestias digestivas, cansancio o problemas de sueño. El resultado te sirve como punto de partida para hablarlo con tu médico/a o con tu psicólogo/a.",
+    "clinicalContext": "Es una herramienta clínica de apoyo. Está pensada para usarse junto con un profesional, o para llevar un registro orientativo a una primera consulta.",
+    "badges": [
+      "Instrumento validado",
+      "15 preguntas",
+      "3-5 min",
+      "Sin registro",
+      "Datos en tu navegador"
+    ]
+  },
+  "whatItMeasures": {
+    "heading": "¿Qué mide este test?",
+    "body": "El PHQ-15 es un cuestionario de quince preguntas sobre cuánto te han molestado, en las cuatro últimas semanas, algunos de los síntomas físicos más frecuentes en las consultas: dolor de estómago, de espalda, de brazos, piernas o articulaciones, de cabeza o en el pecho; dolores menstruales; dolor o problemas en las relaciones sexuales; mareos y desmayos; palpitaciones; falta de aire; estreñimiento, diarrea, náuseas, gases o indigestión; cansancio o poca energía, y problemas de sueño.\n\nEstos síntomas pueden deberse a una enfermedad médica, y también aparecen o se intensifican con el estrés, la ansiedad o el ánimo bajo. A menudo se dan a la vez: en atención primaria, la depresión, la ansiedad y los síntomas físicos sin una causa médica clara son de los problemas más frecuentes, y es habitual que coincidan. El PHQ-15 no distingue entre esas causas. Mide cuánto te molestan los síntomas en conjunto, no de dónde vienen.\n\nLo desarrollaron Kroenke, Spitzer y Williams en 2002 como el módulo de síntomas físicos del Patient Health Questionnaire (PHQ), el mismo cuestionario del que forman parte el PHQ-9 y el GAD-7. Tiene una versión validada en España."
+  },
+  "whoIsItFor": {
+    "heading": "¿A quién está dirigido?",
+    "body": "El PHQ-15 es un cuestionario que responde la propia persona. Se creó para valorar la intensidad de los síntomas físicos en atención primaria y hoy también se usa para seguir su evolución en consulta. Su resultado no es un diagnóstico: indica cuánta carga de síntomas físicos hay, no su causa.\n\nResulta especialmente útil para quienes ya están en seguimiento, médico o psicológico, y quieren llevar un registro de cómo evolucionan sus síntomas, o para quienes han decidido consultar y quieren llegar a esa cita con un punto de partida ordenado. También lo utilizan profesionales clínicos y estudiantes de ciencias de la salud para familiarizarse con el instrumento.\n\nSi tienes síntomas físicos que te preocupan, el primer paso es que tu médico/a de familia los valore. El cuestionario puede ayudarte a ordenarlos, pero no sustituye esa consulta.",
+    "indications": [
+      "Personas en seguimiento por un profesional sanitario que quieran llevar un registro de sus síntomas físicos entre consultas.",
+      "Personas con síntomas físicos que les preocupan y que han decidido consultar, para llevar un registro orientativo a la cita.",
+      "Personas en proceso psicológico cuyo malestar se acompaña de síntomas físicos (tensión, problemas digestivos, cansancio, sueño) y quieren comentarlos con su profesional.",
+      "Profesionales clínicos, estudiantes de Psicología o Medicina e investigadores que quieran consultar el instrumento y su validación.",
+      "Pacientes de atención primaria o de salud mental a quienes su profesional ha recomendado completar el cuestionario como parte de la valoración."
+    ],
+    "limitations": [
+      "No es una herramienta diagnóstica. No sustituye la valoración de un médico/a ni de un profesional de la salud mental.",
+      "No indica la causa de los síntomas: una enfermedad médica sube la puntuación igual que el estrés o la ansiedad. Por eso, cualquier síntoma que te preocupe debe valorarlo tu médico/a.",
+      "No es adecuado ante síntomas agudos: si ahora mismo tienes dolor fuerte en el pecho, mucha falta de aire o te has desmayado, no rellenes un cuestionario. Llama al 112.",
+      "Está pensado para mayores de 18 años: esta versión y sus puntos de corte se refieren a población adulta.",
+      "En población general, las mujeres y las personas más jóvenes suelen puntuar más alto, así que la misma puntuación puede significar cosas distintas según la persona.",
+      "Una puntuación baja no descarta un problema de salud.",
+      "La versión española se validó en pacientes de consultas de psiquiatría con depresión o ansiedad; en población general española hay datos desde 2024. Los puntos de corte proceden del estudio original, hecho en Estados Unidos."
+    ]
+  },
+  "howItWorks": {
+    "heading": "Cómo funciona",
+    "body": "El test consta de 15 preguntas sobre cuánto te han molestado distintos síntomas físicos durante las cuatro últimas semanas. Cada pregunta tiene tres opciones de respuesta: «Nada», «Un poco» y «Mucho». No hay respuestas correctas o incorrectas; solo describe lo que mejor se ajusta a tu experiencia. La pregunta sobre la menstruación es solo para mujeres: si eres hombre, marca «Nada», y la puntuación será la misma que en la versión original.\n\nLa puntuación total oscila entre 0 y 30 puntos. El resultado se interpreta según los rangos del estudio original del instrumento.\n\nEsta herramienta se usa típicamente en el marco de una valoración o un seguimiento. Si ya estás en consulta, tu profesional puede decirte si te conviene completarlo; si todavía no has consultado, el resultado puede servirte para llevar un registro orientativo a una primera cita.",
+    "steps": [
+      "Respondes 15 preguntas sobre síntomas físicos de las últimas 4 semanas.",
+      "Cada pregunta tiene 3 opciones: «Nada», «Un poco» y «Mucho».",
+      "Marcas la que mejor describe tu experiencia. Puedes ir atrás si lo necesitas.",
+      "El sistema calcula automáticamente tu puntuación total (rango 0–30).",
+      "Ves tu puntuación y qué suele indicar ese rango."
+    ]
+  },
+  "validation": {
+    "heading": "Validación científica",
+    "body": "El PHQ-15 lo presentaron Kroenke, Spitzer y Williams en 2002 a partir de 6.000 pacientes de ocho consultas de medicina interna y medicina de familia y siete de obstetricia y ginecología. Cada síntoma puntúa de 0 («no me ha molestado») a 2 («me ha molestado mucho»). A medida que subía la puntuación, empeoraba de forma escalonada el funcionamiento en la vida diaria y aumentaban los días de baja y las visitas médicas. El estudio propuso los puntos 5, 10 y 15 como límites de gravedad baja, media y alta de los síntomas físicos [1]. Una revisión sistemática de los mismos autores (2010) concluyó que el PHQ-15 es igual o mejor que otras medidas breves de síntomas físicos, y que su utilidad para seguir los cambios a lo largo del tiempo es prometedora, aunque todavía no definitiva [2].\n\nLa versión española la validaron Ros Montalbán y colaboradores en 2010 con 3.362 pacientes de consultas externas de psiquiatría con depresión o ansiedad. El cuestionario mostró una fiabilidad aceptable (alfa de Cronbach de 0,78) y se relacionó, de forma moderada o alta, con la gravedad de la depresión medida por un clínico [3]. En población general española, Robles y colaboradores (2024) lo estudiaron en 1.495 personas: confirmaron que mide un factor general de síntomas físicos, publicaron datos de referencia y observaron más síntomas en mujeres y en personas jóvenes, así como su relación con la depresión y la ansiedad [4].\n\nLos estudios en población general de Alemania, con más de 5.000 y más de 9.000 personas, muestran el mismo patrón: las mujeres puntúan algo más que los hombres, y una puntuación más alta se acompaña de peor calidad de vida física, más cansancio, más ansiedad y más problemas de sueño [5, 6]. Por eso el PHQ-15 sirve para orientar y para seguir la evolución, no para diagnosticar.",
+    "references": [
+      {
+        "id": 1,
+        "authors": "Kroenke K, Spitzer RL, Williams JBW",
+        "year": 2002,
+        "title": "The PHQ-15: validity of a new measure for evaluating the severity of somatic symptoms",
+        "journal": "Psychosom Med",
+        "volume": "64",
+        "issue": "2",
+        "pages": "258–266",
+        "doi": "10.1097/00006842-200203000-00008",
+        "url": "https://doi.org/10.1097/00006842-200203000-00008"
+      },
+      {
+        "id": 2,
+        "authors": "Kroenke K, Spitzer RL, Williams JBW, Löwe B",
+        "year": 2010,
+        "title": "The Patient Health Questionnaire Somatic, Anxiety, and Depressive Symptom Scales: a systematic review",
+        "journal": "Gen Hosp Psychiatry",
+        "volume": "32",
+        "issue": "4",
+        "pages": "345–359",
+        "doi": "10.1016/j.genhosppsych.2010.03.006",
+        "url": "https://doi.org/10.1016/j.genhosppsych.2010.03.006"
+      },
+      {
+        "id": 3,
+        "authors": "Ros Montalbán S, Comas Vives A, Garcia-Garcia M",
+        "year": 2010,
+        "title": "Validation of the Spanish version of the PHQ-15 questionnaire for the evaluation of physical symptoms in patients with depression and/or anxiety disorders: DEPRE-SOMA study",
+        "journal": "Actas Esp Psiquiatr",
+        "volume": "38",
+        "issue": "6",
+        "pages": "345–357",
+        "doi": "",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21188674/"
+      },
+      {
+        "id": 4,
+        "authors": "Robles E, Angelone C, Ondé D, Vázquez C",
+        "year": 2024,
+        "title": "Somatic symptoms in the general population of Spain: Validation and normative data of the Patient Health Questionnaire-15 (PHQ-15)",
+        "journal": "J Affect Disord",
+        "volume": "362",
+        "pages": "762–771",
+        "doi": "10.1016/j.jad.2024.07.087",
+        "url": "https://doi.org/10.1016/j.jad.2024.07.087"
+      },
+      {
+        "id": 5,
+        "authors": "Kocalevent RD, Hinz A, Brähler E",
+        "year": 2013,
+        "title": "Standardization of a screening instrument (PHQ-15) for somatization syndromes in the general population",
+        "journal": "BMC Psychiatry",
+        "volume": "13",
+        "pages": "91",
+        "doi": "10.1186/1471-244X-13-91",
+        "url": "https://doi.org/10.1186/1471-244X-13-91"
+      },
+      {
+        "id": 6,
+        "authors": "Hinz A, Ernst J, Glaesmer H, et al.",
+        "year": 2017,
+        "title": "Frequency of somatic symptoms in the general population: Normative values for the Patient Health Questionnaire-15 (PHQ-15)",
+        "journal": "J Psychosom Res",
+        "volume": "96",
+        "pages": "27–31",
+        "doi": "10.1016/j.jpsychores.2016.12.017",
+        "url": "https://doi.org/10.1016/j.jpsychores.2016.12.017"
+      }
+    ]
+  },
+  "interpretation": {
+    "heading": "Qué hacer con tu resultado",
+    "body": "Una puntuación en el rango Mínimo (0–4 puntos) indica que en las cuatro últimas semanas te han molestado pocos síntomas físicos, o ninguno. Aun así, una puntuación baja no descarta un problema: si algún síntoma te preocupa, consúltalo con tu médico/a de familia.\n\nUna puntuación en el rango Bajo (5–9 puntos) indica que algunos síntomas físicos te han molestado. Es frecuente en periodos de estrés, aunque pueden tener muchas causas. Si algún síntoma persiste o te preocupa, consúltalo con tu médico/a de familia. Si ya estás en seguimiento, es información útil para comentar en tu próxima consulta.\n\nUna puntuación en el rango Medio (10–14 puntos) sugiere síntomas físicos que probablemente están afectando a tu día a día. Es información útil para llevar a consulta: lo recomendable es que tu médico/a de familia valore estos síntomas para descartar una causa física. Si no la hay, o si también hay malestar emocional, puede ayudarte hablarlo con un psicólogo/a. Si aún no tienes psicólogo/a de referencia y quieres comentarlo con alguien, en Psicoprotego podemos acompañarte a dar los primeros pasos. [REVISAR: invitación a Psicoprotego en el rango medio, como en el PHQ-9; aquí el primer paso es el médico/a: ¿la mantenemos?]\n\nUna puntuación en el rango Alto (15–30 puntos) sugiere muchos síntomas físicos molestos, que probablemente están afectando a tu bienestar y a tu funcionamiento diario. Es recomendable que tu médico/a de familia los valore cuanto antes, para descartar una causa física. Un psicólogo/a puede ayudarte con el malestar que generan y con su relación con el estrés o el estado de ánimo.\n\nCon independencia de la puntuación, si ahora mismo tienes dolor fuerte en el pecho, mucha falta de aire o te has desmayado, no esperes a tener un resultado: llama al **112**. [REVISAR: aviso de síntomas agudos con el 112. No se menciona el 024 porque el PHQ-15 no pregunta por riesgo suicida; confirmar.]\n\nLos rangos son orientativos. Una misma puntuación puede tener significados distintos según la salud física, la edad y el momento vital de cada persona. Solo un profesional sanitario puede valorar la causa de los síntomas tras una evaluación completa."
+  },
+  "faq": [
+    {
+      "q": "¿Es un diagnóstico?",
+      "a": "No. El PHQ-15 es un instrumento de cribado orientativo, no una herramienta diagnóstica. Una puntuación alta indica muchos síntomas físicos molestos, pero no dice de dónde vienen: para eso hace falta la valoración de un profesional sanitario."
+    },
+    {
+      "q": "Si la puntuación es alta, ¿quiere decir que mis síntomas son psicológicos?",
+      "a": "No. El cuestionario mide cuánto te molestan los síntomas, no su causa. Pueden deberse a una enfermedad médica, al estrés, a la ansiedad o al ánimo bajo, y a menudo a varias cosas a la vez. Tus síntomas son reales sea cual sea su causa. Por eso lo primero es que tu médico/a los valore."
+    },
+    {
+      "q": "¿Quedan guardadas mis respuestas?",
+      "a": "No en nuestros servidores. Tus respuestas se procesan en tu navegador y no las guardamos. Si aceptas las cookies de analítica, se envían a Google Analytics, sin tu nombre ni datos que te identifiquen, para elaborar estadísticas. Solo tú decides qué hacer con el resultado."
+    },
+    {
+      "q": "Soy hombre, ¿qué respondo en la pregunta sobre la menstruación?",
+      "a": "Marca «Nada». En la versión original, los hombres no responden esa pregunta; marcando «Nada», la puntuación es la misma."
+    },
+    {
+      "q": "¿Puedo compartirlo con mi médico/a o mi psicólogo/a?",
+      "a": "Sí. Puedes descargar el resultado en PDF y llevarlo a tu consulta. Es una forma práctica de aportar contexto inicial, aunque el/la profesional hará su propia valoración."
+    },
+    {
+      "q": "¿Debo ir al médico de cabecera o al psicólogo?",
+      "a": "Ante síntomas físicos, el primer paso suele ser el médico/a de familia, que puede valorar si hay una causa física y derivar si lo considera necesario. El psicólogo/a es el profesional indicado cuando los síntomas se relacionan con el estrés, la ansiedad o el ánimo, o cuando el malestar que generan pesa en tu día a día. Muchas veces lo que mejor funciona es combinar los dos. Lo que no debería decidirlo es el resultado de este test."
+    },
+    {
+      "q": "¿Con qué frecuencia puedo repetirlo?",
+      "a": "El PHQ-15 pregunta por las cuatro últimas semanas. Repetirlo cada mes puede ayudarte a ver si los síntomas cambian con el tiempo, sobre todo si estás en tratamiento. Si lo usas para seguimiento, comentar la evolución con tu profesional de referencia le dará más sentido al registro."
+    }
+  ],
+  "privacy": {
+    "heading": "Privacidad",
+    "body": "Tus respuestas se calculan en tu navegador: no se envían a nuestros servidores ni se guardan. Solo si aceptas las cookies de analítica se envían a Google Analytics, sin tu nombre ni datos que te identifiquen, para elaborar estadísticas. Decides tú qué compartir y con quién: puedes descargar un PDF del resultado para llevarlo a tu terapeuta, o simplemente cerrar la pestaña."
+  }
+}
