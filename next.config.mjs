@@ -55,12 +55,22 @@ const SECURITY_HEADERS = [
   },
 ]
 
+// ── Indexación ────────────────────────────────────────────────────────────────
+// Misma regla que SITE_INDEXABLE (src/config/site.ts): en el dominio de Vercel, X-Robots-Tag
+// noindex en todo, también en lo que no es HTML (JSON de datos, imágenes). Se quita sola al
+// definir NEXT_PUBLIC_SITE_URL con la dirección definitiva.
+
+const SITE_URL       = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://psicoprotego-tests.vercel.app'
+const SITE_INDEXABLE = !new URL(SITE_URL).hostname.endsWith('.vercel.app')
+
 const nextConfig = {
   async headers() {
     return [
       {
         source: '/(.*)',
-        headers: SECURITY_HEADERS,
+        headers: SITE_INDEXABLE
+          ? SECURITY_HEADERS
+          : [...SECURITY_HEADERS, { key: 'X-Robots-Tag', value: 'noindex, follow' }],
       },
       {
         // Resultado compartido: los enlaces antiguos llevan las respuestas en ?d=. Sin

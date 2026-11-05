@@ -6,6 +6,7 @@
 
 import fs from 'node:fs/promises'
 import path from 'node:path'
+import { SITE_INDEXABLE } from '@/config/site'
 
 interface SiteConfig {
   indexing: Record<string, boolean>
@@ -30,6 +31,6 @@ export async function getSiteConfig(): Promise<SiteConfig> {
 /** Returns Next.js robots metadata for a given page type key. */
 export async function getRobots(pageType: string) {
   const cfg = await getSiteConfig()
-  const shouldIndex = cfg.indexing[pageType] ?? true
+  const shouldIndex = SITE_INDEXABLE && (cfg.indexing[pageType] ?? true)
   return { index: shouldIndex, follow: true }
 }

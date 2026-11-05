@@ -9,6 +9,13 @@
 
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://psicoprotego-tests.vercel.app').replace(/\/+$/, '')
 
+/**
+ * Indexable solo en su dirección definitiva. En el dominio de Vercel (sin NEXT_PUBLIC_SITE_URL)
+ * todo va con noindex, follow: evita que Google indexe una copia que luego habría que mover.
+ * El mismo cambio de variable que mueve las canónicas activa la indexación.
+ */
+export const SITE_INDEXABLE = !new URL(SITE_URL).hostname.endsWith('.vercel.app')
+
 /** Dominio visible de la app, sin protocolo (imágenes para compartir) */
 export const SITE_HOST = SITE_URL.replace(/^https?:\/\//, '')
 
