@@ -9,13 +9,13 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { SUPPORTED_LANGS } from '@/config/brand'
 import LegalPage, { type LegalContent } from '@/components/legal/LegalPage'
+import { SITE_URL } from '@/config/site'
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://psicoprotego.es'
 const LANGS = SUPPORTED_LANGS
 
 const CONTENT: Record<string, LegalContent> = {
   es: {
-    metaTitle:       "Aviso Legal — Psicoprotego",
+    metaTitle:       "Aviso Legal",
     metaDescription: "Aviso legal de Psicoprotego Tests: titular, objeto del servicio, propiedad intelectual, responsabilidad y legislación aplicable.",
     heading:         "Aviso Legal",
     sections: [

@@ -8,8 +8,8 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { loadTestCards, discoverLangs, discoverCategories } from '@/utils/discoverTests'
 import TestGrid from '@/components/common/TestGrid'
+import { SITE_URL, conditionLabel } from '@/config/site'
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://psicoprotego.es'
 
 // ── UI strings ────────────────────────────────────────────────────────────────
 
@@ -44,7 +44,7 @@ const UI: Record<string, {
     questions:       'preguntas',
     startBtn:        'Empezar test',
     empty:           'No hay tests disponibles.',
-    metaTitle:       'Tests Psicológicos Gratuitos — Psicoprotego',
+    metaTitle:       'Tests Psicológicos Gratuitos',
     metaDescription: 'Cuestionarios psicológicos validados: ansiedad, depresión y síntomas físicos. GAD-7, PHQ-9 y PHQ-15 gratuitos, privados y sin registro.',
   },
 }
@@ -149,7 +149,7 @@ export default async function LangHomePage({
                 href={`/${lang}/categoria/${cat}`}
                 className="rounded-full border border-primary-300 px-4 py-1.5 text-sm font-medium text-primary-700 hover:bg-primary-50 transition capitalize"
               >
-                {cat}
+                {conditionLabel(cat)}
               </Link>
             ))}
           </nav>

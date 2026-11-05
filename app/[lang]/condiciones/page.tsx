@@ -9,13 +9,13 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { SUPPORTED_LANGS } from '@/config/brand'
 import LegalPage, { type LegalContent } from '@/components/legal/LegalPage'
+import { SITE_URL } from '@/config/site'
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://psicoprotego.es'
 const LANGS = SUPPORTED_LANGS
 
 const CONTENT: Record<string, LegalContent> = {
   es: {
-    metaTitle:       "Condiciones de uso — Psicoprotego",
+    metaTitle:       "Condiciones de uso",
     metaDescription: "Condiciones de uso de Psicoprotego Tests: herramienta gratuita y sin publicidad, no es un diagnóstico, responsabilidad sobre descargas y enlaces, e instrumentos de uso libre.",
     heading:         "Condiciones de uso",
     updated:         "4 de noviembre de 2026",

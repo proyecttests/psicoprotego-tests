@@ -12,8 +12,8 @@ import type { Metadata } from 'next'
 import { discoverTagParams, loadTestCards } from '@/utils/discoverTests'
 import { getRobots } from '@/utils/siteConfig'
 import TestGrid from '@/components/common/TestGrid'
+import { SITE_URL } from '@/config/site'
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://testpsycho.com'
 
 // ── UI strings ────────────────────────────────────────────────────────────────
 
@@ -49,7 +49,7 @@ export async function generateMetadata({
 
   const robots = await getRobots('tag')
   return {
-    title:   `${ui.prefix} ${tag} — Psicoprotego`,
+    title:   `${ui.prefix} ${tag}`,
     robots,
   }
 }

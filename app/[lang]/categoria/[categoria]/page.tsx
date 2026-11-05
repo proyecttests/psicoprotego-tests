@@ -12,8 +12,8 @@ import type { Metadata } from 'next'
 import { discoverCategoryParams, loadTestCards } from '@/utils/discoverTests'
 import { getRobots } from '@/utils/siteConfig'
 import TestGrid from '@/components/common/TestGrid'
+import { SITE_URL, conditionLabel } from '@/config/site'
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://testpsycho.com'
 
 // ── UI strings ────────────────────────────────────────────────────────────────
 
@@ -29,16 +29,6 @@ const UI: Record<string, {
 
 function getUI(lang: string) {
   return UI[lang] ?? UI['es']
-}
-
-/** Nombre visible de cada `condition` de metadata.json (el slug no lleva tildes ni espacios). */
-const CONDITION_LABELS: Record<string, string> = {
-  depresion:          'depresión',
-  'sintomas-fisicos': 'síntomas físicos',
-}
-
-function conditionLabel(categoria: string) {
-  return CONDITION_LABELS[categoria] ?? categoria
 }
 
 // ── generateStaticParams ──────────────────────────────────────────────────────
@@ -59,7 +49,7 @@ export async function generateMetadata({
 
   const robots = await getRobots('categoria')
   return {
-    title:   `${ui.prefix} ${conditionLabel(categoria)} — Psicoprotego`,
+    title:   `${ui.prefix} ${conditionLabel(categoria)}`,
     robots,
   }
 }

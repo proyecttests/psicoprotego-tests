@@ -1,15 +1,16 @@
 import type { MetadataRoute } from 'next'
+import { SITE_URL } from '@/config/site'
 
+// /_next/ no se bloquea: Google necesita su JS y su CSS para renderizar las páginas.
 export default function robots(): MetadataRoute.Robots {
-  const base = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://psicoprotego.es'
   return {
     rules: [
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/_next/'],
+        disallow: ['/api/'],
       },
     ],
-    sitemap: `${base}/sitemap.xml`,
+    sitemap: `${SITE_URL}/sitemap.xml`,
   }
 }

@@ -9,13 +9,13 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { SUPPORTED_LANGS } from '@/config/brand'
 import LegalPage, { type LegalContent } from '@/components/legal/LegalPage'
+import { SITE_URL } from '@/config/site'
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://psicoprotego.es'
 const LANGS = SUPPORTED_LANGS
 
 const CONTENT: Record<string, LegalContent> = {
   es: {
-    metaTitle:       "Acerca de — Psicoprotego",
+    metaTitle:       "Acerca de",
     metaDescription: "Psicoprotego Tests: cuestionarios psicológicos validados en España, gratuitos y sin publicidad, del equipo de la consulta Psicoprotego.",
     heading:         "Acerca de Psicoprotego Tests",
     sections: [

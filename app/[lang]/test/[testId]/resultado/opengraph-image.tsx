@@ -10,6 +10,7 @@
 import { ImageResponse } from 'next/og'
 import fs from 'node:fs/promises'
 import path from 'node:path'
+import { SITE_HOST } from '@/config/site'
 
 export const runtime = 'nodejs'
 
@@ -147,7 +148,7 @@ export default async function Image({
 
         {/* Domain */}
         <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '20px', letterSpacing: '0.08em', margin: 0 }}>
-          testpsycho.com
+          {SITE_HOST}
         </p>
       </div>
     ),

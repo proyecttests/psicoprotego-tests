@@ -9,13 +9,13 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { SUPPORTED_LANGS } from '@/config/brand'
 import LegalPage, { type LegalContent } from '@/components/legal/LegalPage'
+import { SITE_URL } from '@/config/site'
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://psicoprotego.es'
 const LANGS = SUPPORTED_LANGS
 
 const CONTENT: Record<string, LegalContent> = {
   es: {
-    metaTitle:       "Política de Privacidad — Psicoprotego",
+    metaTitle:       "Política de Privacidad",
     metaDescription: "Tus respuestas se calculan en tu navegador y no se guardan en nuestros servidores. Analítica de Google solo si aceptas las cookies.",
     heading:         "Política de Privacidad",
     updated:         "4 de noviembre de 2026",

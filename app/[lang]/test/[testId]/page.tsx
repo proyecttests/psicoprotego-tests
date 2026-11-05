@@ -12,13 +12,13 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import type { TestContent, TestLangFile, TestMetadata } from '@/types/test'
+import type { Author, AuthorsRegistry, TestContent, TestLangFile, TestMetadata } from '@/types/test'
 import TestLandingPage from '@/views/TestLandingPage'
 import { discoverTests } from '@/utils/discoverTests'
+import { SITE_URL, conditionLabel } from '@/config/site'
 
 // ── Constantes ────────────────────────────────────────────────────────────────
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://testpsycho.com'
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -62,8 +62,26 @@ async function loadTestContent(testId: string, lang: string): Promise<TestConten
   }
 }
 
-const UI_BREADCRUMB: Record<string, { home: string; tests: string }> = {
-  es: { home: 'Inicio',  tests: 'Tests' },
+/** Autor y revisor del contenido clínico (`metadata.authorship`, ids de authors.json). */
+async function loadAuthors(metadata: TestMetadata): Promise<{ author: Author | null; reviewer: Author | null }> {
+  const raw = await fs.readFile(path.join(process.cwd(), 'public', 'data', 'authors.json'), 'utf-8').catch(() => null)
+  if (!raw) return { author: null, reviewer: null }
+  const registry = JSON.parse(raw) as AuthorsRegistry
+  return {
+    author:   registry[metadata.authorship?.author] ?? null,
+    reviewer: registry[metadata.authorship?.reviewedBy] ?? null,
+  }
+}
+
+const personLd = (a: Author) => ({
+  '@type':  'Person',
+  name:     a.name,
+  jobTitle: a.role,
+  url:      a.profileUrl,
+})
+
+const UI_BREADCRUMB: Record<string, { home: string }> = {
+  es: { home: 'Inicio' },
 }
 
 function buildJsonLd(
@@ -72,6 +90,7 @@ function buildJsonLd(
   lang: string,
   testId: string,
   content: TestContent | null,
+  authors: { author: Author | null; reviewer: Author | null },
 ): object[] {
   const url = `${SITE_URL}/${lang}/test/${testId}`
   const faq = content?.faq ?? langData.landing.faq
@@ -84,9 +103,8 @@ function buildJsonLd(
     '@context':      'https://schema.org',
     '@type':         'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: bc.home,        item: SITE_URL },
-      { '@type': 'ListItem', position: 2, name: bc.tests,       item: `${SITE_URL}/${lang}/test` },
-      { '@type': 'ListItem', position: 3, name: langData.name,  item: url },
+      { '@type': 'ListItem', position: 1, name: bc.home,        item: `${SITE_URL}/${lang}` },
+      { '@type': 'ListItem', position: 2, name: langData.name,  item: url },
     ],
   })
 
@@ -117,8 +135,13 @@ function buildJsonLd(
       citation:        `${orig.reference} — ${orig.journal}`,
       ...(orig.doi ? { sameAs: `https://doi.org/${orig.doi}` } : {}),
       ...(metadata.condition ? {
-        about: [{ '@type': 'MedicalCondition', name: metadata.condition }],
+        about: [{ '@type': 'MedicalCondition', name: conditionLabel(metadata.condition) }],
       } : {}),
+      ...(authors.author   ? { author:     personLd(authors.author) }   : {}),
+      ...(authors.reviewer ? { reviewedBy: personLd(authors.reviewer) } : {}),
+      ...(content?.status === 'clinically-approved' && content.clinicallyApprovedAt
+        ? { lastReviewed: content.clinicallyApprovedAt.slice(0, 10) }
+        : {}),
       ...(metadata.tags?.length ? {
         keywords: metadata.tags.join(', '),
       } : {}),
@@ -144,7 +167,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { lang, testId } = await params
   const data = await loadTestData(testId, lang)
-  if (!data) return { title: 'Test — Psicoprotego' }
+  if (!data) return { title: 'Test' }
 
   const { langData, metadata } = data
   const url = `${SITE_URL}/${lang}/test/${testId}`
@@ -152,7 +175,7 @@ export async function generateMetadata({
   const description = content?.hero.subtitle ?? langData.landing.description
 
   return {
-    title:       `${langData.name} — TestPsycho`,
+    title:       langData.name,
     description,
     alternates: {
       canonical: url,
@@ -183,7 +206,8 @@ export default async function TestLandingRoute({
 
   const { langData, metadata } = data
   const content = await loadTestContent(testId, lang)
-  const schemas = buildJsonLd(langData, metadata, lang, testId, content)
+  const authors = await loadAuthors(metadata)
+  const schemas = buildJsonLd(langData, metadata, lang, testId, content, authors)
 
   return (
     <>
@@ -197,6 +221,8 @@ export default async function TestLandingRoute({
         metadata={metadata}
         lang={lang}
         testId={testId}
+        author={authors.author}
+        reviewer={authors.reviewer}
       />
     </>
   )

@@ -13,10 +13,10 @@ import type { Metadata } from 'next'
 import HelpResourcesPage, { type HelpData } from '@/views/HelpResourcesPage'
 import { getRobots } from '@/utils/siteConfig'
 import { SUPPORTED_LANGS } from '@/config/brand'
+import { SITE_URL } from '@/config/site'
 
 // ── Constantes ────────────────────────────────────────────────────────────────
 
-const SITE_URL      = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://testpsycho.com'
 const HELP_DATA_DIR = path.join(process.cwd(), 'src', 'data', 'help-resources')
 
 // ── Auto-discovery ────────────────────────────────────────────────────────────
@@ -63,14 +63,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { lang } = await params
   const data = await loadHelpData(lang)
-  if (!data) return { title: 'Ayuda — Psicoprotego' }
+  if (!data) return { title: 'Ayuda' }
 
   const page = (data as { page?: { title?: string } }).page
   const url  = `${SITE_URL}/${lang}/ayuda-urgente`
   const langs = await discoverHelpLangs()
 
   return {
-    title:       `${page?.title ?? 'Ayuda urgente'} — Psicoprotego`,
+    title:       page?.title ?? 'Ayuda urgente',
     description: META_DESCRIPTION[lang] ?? META_DESCRIPTION['es'],
     robots:      await getRobots('ayuda-urgente'),
     alternates: {

@@ -5,7 +5,8 @@
  * @description Footer de Psicoprotego con navegación interna por idioma.
  * Ayuda urgente (112, 024 y enlace a /ayuda-urgente), aviso de que los tests no son un diagnóstico,
  * aviso de piloto, copyright y links internos
- * (acerca-de, contacto, privacidad, cookies, aviso-legal, condiciones).
+ * (acerca-de, contacto, privacidad, cookies, aviso-legal, condiciones) y enlaces a la web
+ * y al blog de Psicoprotego.
  * Los bloques de crisis del resultado los muestran CrisisBar y ResultCard.
  */
 
@@ -13,6 +14,7 @@ import React from 'react'
 import Link from 'next/link'
 import { CONSENT_KEY } from './CookieBanner'
 import { getCrisisPhone } from '@/config/crisisPhones'
+import { BLOG_URL, MAIN_SITE_URL } from '@/config/site'
 
 // ── Ayuda urgente (visible en todas las páginas) ─────────────────────────────
 
@@ -96,6 +98,20 @@ const Footer: React.FC<FooterProps> = ({ lang = 'es' }) => {
           <nav aria-label="Footer navigation" className="flex flex-col items-center gap-2 sm:items-end">
             {/* Row 1 */}
             <div className="flex flex-wrap justify-center gap-x-4 gap-y-1">
+              <a
+                href={MAIN_SITE_URL}
+                className="transition-colors hover:underline"
+                style={{ color: 'var(--color-accent)' }}
+              >
+                Web de Psicoprotego
+              </a>
+              <a
+                href={BLOG_URL}
+                className="transition-colors hover:underline"
+                style={{ color: 'var(--color-accent)' }}
+              >
+                Artículos
+              </a>
               <Link
                 href={`/${lang}/acerca-de`}
                 className="transition-colors hover:underline"

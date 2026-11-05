@@ -1,26 +1,23 @@
 import type { MetadataRoute } from 'next'
 import testsIndex from '@/generated/testsIndex'
 import { SUPPORTED_LANGS } from '@/config/brand'
+import { SITE_URL } from '@/config/site'
 
-const BASE   = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://psicoprotego.es'
 const LANGS: readonly string[] = SUPPORTED_LANGS
 
-const STATIC_PAGES = ['', 'acerca-de', 'contacto', 'privacidad', 'cookies', 'aviso-legal', 'condiciones', 'ayuda-urgente']
+// Solo URL indexables y sin redirección: ni la raíz (redirige a /es) ni /ayuda-urgente (noindex).
+const STATIC_PAGES = ['', 'acerca-de', 'contacto', 'privacidad', 'cookies', 'aviso-legal', 'condiciones']
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = []
-
-  // Root redirect
-  entries.push({ url: BASE, lastModified: new Date(), changeFrequency: 'weekly', priority: 1 })
 
   // Static pages
   for (const lang of LANGS) {
     for (const page of STATIC_PAGES) {
       entries.push({
-        url:             `${BASE}/${lang}${page ? `/${page}` : ''}`,
-        lastModified:    new Date(),
+        url:             `${SITE_URL}/${lang}${page ? `/${page}` : ''}`,
         changeFrequency: page === '' ? 'weekly' : 'monthly',
-        priority:        page === '' ? 0.9 : page === 'ayuda-urgente' ? 0.5 : 0.6,
+        priority:        page === '' ? 0.9 : 0.6,
       })
     }
   }
@@ -30,8 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const lang of test.availableLangs as string[]) {
       if (!LANGS.includes(lang)) continue
       entries.push({
-        url:             `${BASE}/${lang}/test/${test.testId}`,
-        lastModified:    new Date(),
+        url:             `${SITE_URL}/${lang}/test/${test.testId}`,
         changeFrequency: 'monthly',
         priority:        0.8,
       })

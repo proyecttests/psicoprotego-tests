@@ -6,8 +6,8 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { SUPPORTED_LANGS } from '@/config/brand'
+import { SITE_URL } from '@/config/site'
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://psicoprotego.es'
 const LANGS = SUPPORTED_LANGS
 
 const CONTENT: Record<string, {
@@ -25,7 +25,7 @@ const CONTENT: Record<string, {
   crisisBody: string
 }> = {
   es: {
-    metaTitle:       'Contacto — Psicoprotego',
+    metaTitle:       'Contacto',
     metaDescription: 'Contacta con Psicoprotego para consultas, sugerencias o colaboraciones. hola@psicoprotego.es',
     heading:         'Contacto',
     intro:           '¿Tienes alguna pregunta, sugerencia o propuesta de colaboración? Escríbenos.',

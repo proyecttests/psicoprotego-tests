@@ -136,7 +136,7 @@ export async function generateStoryImage(opts: StoryImageOptions): Promise<Blob 
   // ── Bottom branding ───────────────────────────────────────────────────────
   ctx.fillStyle = 'rgba(255,255,255,0.3)'
   ctx.font = '44px system-ui, sans-serif'
-  ctx.fillText('testpsycho.com', 80, H - 100)
+  ctx.fillText(window.location.host, 80, H - 100)
 
   return new Promise((resolve) => {
     canvas.toBlob((blob) => resolve(blob), 'image/png')

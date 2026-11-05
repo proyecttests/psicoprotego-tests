@@ -11,11 +11,12 @@
  */
 
 import Link from 'next/link'
-import type { TestContent, TestLangFile, TestMetadata } from '@/types/test'
+import type { Author, TestContent, TestLangFile, TestMetadata } from '@/types/test'
 import DownloadBlankLanding from '@/components/pdf/DownloadBlankLanding'
 import RichText from '@/components/landing/RichText'
 import TestMetadataTable from '@/components/test-framework/TestMetadataTable'
 import { FaqAccordion }  from '@/components/landing/FaqAccordion'
+import { BLOG_URL } from '@/config/site'
 
 // ── UI strings ────────────────────────────────────────────────────────────────
 
@@ -84,6 +85,17 @@ const CONTENT_UI = {
   limitationsTitle: 'Limitaciones',
   referencesTitle:  'Referencias',
   draftBanner:      'Borrador pendiente de revisión clínica. Este contenido aún no está firmado por un profesional.',
+} as const
+
+/** Autoría clínica y enlace al blog (bloque final de la landing, solo en español) */
+const AUTHORSHIP_UI = {
+  title:        'Autoría clínica',
+  author:       'Contenido clínico',
+  reviewer:     'Revisión clínica',
+  college:      (a: Author) => `Nº de colegiación ${a.collegeNumber}, ${a.college}`,
+  lastReviewed: (date: string) => `Última revisión: ${new Date(date).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}`,
+  blogLead:     'Para seguir leyendo:',
+  blogLink:     'artículos de Psicoprotego sobre psicología y salud mental',
 } as const
 
 type SupportedLang = keyof typeof UI
@@ -238,12 +250,15 @@ interface TestLandingPageProps {
   metadata:  TestMetadata
   lang:      string
   testId:    string
+  /** Autor y revisor del contenido (authors.json), si existen */
+  author?:   Author | null
+  reviewer?: Author | null
 }
 
 // ── Componente ────────────────────────────────────────────────────────────────
 
 export default function TestLandingPage({
-  langData, content = null, metadata, lang, testId,
+  langData, content = null, metadata, lang, testId, author = null, reviewer = null,
 }: TestLandingPageProps) {
   const ui        = getUI(lang)
   const { landing } = langData
@@ -407,6 +422,35 @@ export default function TestLandingPage({
         {content && (
           <Section title={content.privacy.heading} id="privacidad">
             <Card><RichText text={content.privacy.body} /></Card>
+          </Section>
+        )}
+
+        {/* ── Autoría clínica y enlace al blog ─────────────────────────────── */}
+        {lang === 'es' && (author || reviewer) && (
+          <Section title={AUTHORSHIP_UI.title} id="autoria">
+            <Card>
+              {([[AUTHORSHIP_UI.author, author], [AUTHORSHIP_UI.reviewer, reviewer]] as const).map(([label, a]) => a && (
+                <p key={label} className="text-sm leading-relaxed" style={{ color: 'var(--color-primary)' }}>
+                  <span className="font-semibold">{label}:</span>{' '}
+                  <a href={a.profileUrl} className="underline font-semibold" style={{ color: 'var(--color-accent)' }}>
+                    {a.name}
+                  </a>
+                  , {a.role}. {AUTHORSHIP_UI.college(a)}.
+                </p>
+              ))}
+              {content?.status === 'clinically-approved' && content.clinicallyApprovedAt && (
+                <p className="text-xs" style={{ color: 'var(--color-primary)', opacity: 0.7 }}>
+                  {AUTHORSHIP_UI.lastReviewed(content.clinicallyApprovedAt)}
+                </p>
+              )}
+            </Card>
+            <p className="text-sm" style={{ color: 'var(--color-primary)' }}>
+              {AUTHORSHIP_UI.blogLead}{' '}
+              <a href={BLOG_URL} className="underline font-semibold" style={{ color: 'var(--color-accent)' }}>
+                {AUTHORSHIP_UI.blogLink}
+              </a>
+              .
+            </p>
           </Section>
         )}
 

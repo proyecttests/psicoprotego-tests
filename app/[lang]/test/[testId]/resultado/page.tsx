@@ -12,6 +12,7 @@
 import { Suspense } from "react"
 import type { Metadata } from "next"
 import ResultadoClient from "./ResultadoClient"
+import { getTestName } from "@/utils/testName"
 
 interface PageProps {
   params: Promise<{ lang: string; testId: string }>
@@ -19,38 +20,9 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang, testId } = await params
-
-  try {
-    const metaRes = await fetch(
-      `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://psicoprotego.es"}/data/tests/${testId}/metadata.json`,
-      { next: { revalidate: 3600 } }
-    )
-    if (metaRes.ok) {
-      const meta = await metaRes.json() as { availableLangs: string[] }
-      const resolvedLang = meta.availableLangs.includes(lang) ? lang : "es"
-
-      const langRes = await fetch(
-        `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://psicoprotego.es"}/data/tests/${testId}/${resolvedLang}.json`,
-        { next: { revalidate: 3600 } }
-      )
-      if (langRes.ok) {
-        const langData = await langRes.json() as { name: string; description?: string }
-        const titles: Record<string, string> = {
-          es: `Mis resultados — ${langData.name}`,
-        }
-        return {
-          title: titles[lang] ?? titles["es"],
-          description: langData.description,
-          robots: { index: false, follow: false },
-        }
-      }
-    }
-  } catch {
-    // fallback below
-  }
-
+  const name = await getTestName(testId, lang)
   return {
-    title: "Resultado — Psicoprotego",
+    title:  name ? `Mis resultados — ${name}` : "Resultado",
     robots: { index: false, follow: false },
   }
 }

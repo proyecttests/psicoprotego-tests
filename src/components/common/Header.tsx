@@ -1,10 +1,12 @@
 /**
  * @file components/common/Header.tsx
- * @description Cabecera principal de Psicoprotego con logo SVG y breadcrumb dinámico.
+ * @description Cabecera principal de Psicoprotego con logo SVG, enlaces al blog y a la web
+ * (HeaderNav, ocultos durante el test) y breadcrumb dinámico.
  */
 
 import React from 'react'
 import Link from 'next/link'
+import HeaderNav from './HeaderNav'
 
 // ── Props ────────────────────────────────────────────────────────────────────
 
@@ -42,6 +44,9 @@ const Header: React.FC<HeaderProps> = ({ testName, currentQuestion, totalQuestio
             loading="eager"
           />
         </Link>
+
+        {/* ── Enlaces al blog y a la web (sin breadcrumb) ──────────────────── */}
+        {!showBreadcrumb && <HeaderNav />}
 
         {/* ── Breadcrumb dinámico ───────────────────────────────────────────── */}
         {showBreadcrumb && (
