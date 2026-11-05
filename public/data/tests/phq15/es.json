@@ -1,0 +1,262 @@
+{
+  "id": "phq15",
+  "lang": "es",
+  "name": "Cuestionario de Síntomas Físicos (PHQ-15)",
+  "version": "1.0",
+  "scoringFunction": "scoreStandard",
+  "disclaimerBefore": "Este cuestionario es una herramienta de cribado orientativa. **No es un diagnóstico clínico ni sustituye la valoración de un profesional de la salud mental.** Si tienes dudas o síntomas que te preocupan, consulta con un profesional.",
+  "instructions": "Durante las 4 últimas semanas, ¿hasta qué punto le HAN MOLESTADO cada uno de los siguientes problemas?",
+  "responseOptions": [
+    {
+      "value": 0,
+      "label": "Nada"
+    },
+    {
+      "value": 1,
+      "label": "Un poco"
+    },
+    {
+      "value": 2,
+      "label": "Mucho"
+    }
+  ],
+  "landing": {
+    "hook": "¿Te han molestado síntomas físicos en las últimas semanas?",
+    "description": "El PHQ-15 es un cuestionario validado que evalúa cuánto te han molestado 15 síntomas físicos frecuentes durante las últimas cuatro semanas. Se usa en atención primaria y en salud mental para valorar la carga de síntomas físicos y su seguimiento.",
+    "whatItMeasures": "Mide cuánto te han molestado 15 síntomas físicos: dolores (estómago, espalda, articulaciones, cabeza, pecho, menstruales y en las relaciones sexuales), mareos, desmayos, palpitaciones, falta de aire, molestias digestivas, cansancio y problemas de sueño. No indica la causa de los síntomas.",
+    "whoIsItFor": "Adultos (+18 años) que quieran valorar cuánto les afectan sus síntomas físicos, o llevar un registro para comentarlo con su médico/a o psicólogo/a.",
+    "howItWorks": [
+      "Responde 15 preguntas sobre las últimas 4 semanas",
+      "Obtén tu puntuación y qué rango indica",
+      "Comparte el resultado con tu médico/a o psicólogo/a si lo necesitas"
+    ],
+    "faq": [
+      {
+        "q": "¿Es esto un diagnóstico?",
+        "a": "No. El PHQ-15 es una herramienta de cribado, no un diagnóstico. No indica la causa de los síntomas: para eso hace falta la valoración de un profesional sanitario."
+      },
+      {
+        "q": "¿Quedan guardadas mis respuestas?",
+        "a": "No en nuestros servidores. Tus respuestas se procesan en tu navegador y no las guardamos. Si aceptas las cookies de analítica, se envían a Google Analytics, sin tu nombre ni datos que te identifiquen, para elaborar estadísticas. Solo tú decides qué hacer con el resultado."
+      },
+      {
+        "q": "¿Qué hago si obtengo una puntuación alta?",
+        "a": "Te recomendamos que tu médico/a de familia valore los síntomas para descartar una causa física. Si no la hay, o si también hay malestar emocional, un psicólogo/a puede ayudarte."
+      },
+      {
+        "q": "Soy hombre, ¿qué respondo en la pregunta sobre la menstruación?",
+        "a": "Marca «Nada». Así la puntuación es la misma que en la versión original, en la que los hombres no responden esa pregunta."
+      },
+      {
+        "q": "¿Cuánto tiempo lleva completarlo?",
+        "a": "Entre 3 y 5 minutos. Son 15 preguntas con 3 opciones de respuesta cada una."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "likert",
+      "text": "Dolor de estómago",
+      "scale": {
+        "min": 0,
+        "max": 2,
+        "step": 1
+      }
+    },
+    {
+      "id": "q2",
+      "type": "likert",
+      "text": "Dolor de espalda",
+      "scale": {
+        "min": 0,
+        "max": 2,
+        "step": 1
+      }
+    },
+    {
+      "id": "q3",
+      "type": "likert",
+      "text": "Dolor en sus brazos, piernas o articulaciones (rodillas, caderas, etc.)",
+      "scale": {
+        "min": 0,
+        "max": 2,
+        "step": 1
+      }
+    },
+    {
+      "id": "q4",
+      "type": "likert",
+      "text": "Dolores menstruales u otras molestias asociadas a la menstruación (sólo mujeres)",
+      "scale": {
+        "min": 0,
+        "max": 2,
+        "step": 1
+      }
+    },
+    {
+      "id": "q5",
+      "type": "likert",
+      "text": "Dolores de cabeza",
+      "scale": {
+        "min": 0,
+        "max": 2,
+        "step": 1
+      }
+    },
+    {
+      "id": "q6",
+      "type": "likert",
+      "text": "Dolor torácico (zona del pecho)",
+      "scale": {
+        "min": 0,
+        "max": 2,
+        "step": 1
+      }
+    },
+    {
+      "id": "q7",
+      "type": "likert",
+      "text": "Mareos",
+      "scale": {
+        "min": 0,
+        "max": 2,
+        "step": 1
+      }
+    },
+    {
+      "id": "q8",
+      "type": "likert",
+      "text": "Desmayos",
+      "scale": {
+        "min": 0,
+        "max": 2,
+        "step": 1
+      }
+    },
+    {
+      "id": "q9",
+      "type": "likert",
+      "text": "Palpitaciones o sentir el corazón acelerado",
+      "scale": {
+        "min": 0,
+        "max": 2,
+        "step": 1
+      }
+    },
+    {
+      "id": "q10",
+      "type": "likert",
+      "text": "Falta de respiración",
+      "scale": {
+        "min": 0,
+        "max": 2,
+        "step": 1
+      }
+    },
+    {
+      "id": "q11",
+      "type": "likert",
+      "text": "Dolor o problemas durante sus relaciones sexuales",
+      "scale": {
+        "min": 0,
+        "max": 2,
+        "step": 1
+      }
+    },
+    {
+      "id": "q12",
+      "type": "likert",
+      "text": "Estreñimiento, ir suelto de vientre o diarrea",
+      "scale": {
+        "min": 0,
+        "max": 2,
+        "step": 1
+      }
+    },
+    {
+      "id": "q13",
+      "type": "likert",
+      "text": "Náuseas, gases o indigestión",
+      "scale": {
+        "min": 0,
+        "max": 2,
+        "step": 1
+      }
+    },
+    {
+      "id": "q14",
+      "type": "likert",
+      "text": "Sentirse cansado o con pocas energías",
+      "scale": {
+        "min": 0,
+        "max": 2,
+        "step": 1
+      }
+    },
+    {
+      "id": "q15",
+      "type": "likert",
+      "text": "Problemas de sueño",
+      "scale": {
+        "min": 0,
+        "max": 2,
+        "step": 1
+      }
+    }
+  ],
+  "scoring": [
+    {
+      "min": 0,
+      "max": 4,
+      "category": "Puntuación en rango mínimo",
+      "color": "green",
+      "messageKey": "minimal"
+    },
+    {
+      "min": 5,
+      "max": 9,
+      "category": "Puntuación en rango bajo",
+      "color": "yellow",
+      "messageKey": "low"
+    },
+    {
+      "min": 10,
+      "max": 14,
+      "category": "Puntuación en rango medio",
+      "color": "orange",
+      "messageKey": "medium"
+    },
+    {
+      "min": 15,
+      "max": null,
+      "category": "Puntuación en rango alto",
+      "color": "red",
+      "messageKey": "high"
+    }
+  ],
+  "results": {
+    "normal": {
+      "minimal": {
+        "title": "Puntuación en rango mínimo",
+        "body": "En las cuatro últimas semanas te han molestado pocos síntomas físicos, o ninguno.",
+        "recommendation": "Una puntuación baja no descarta un problema: si algún síntoma te preocupa, consúltalo con tu médico/a de familia."
+      },
+      "low": {
+        "title": "Puntuación en rango bajo",
+        "body": "Algunos síntomas físicos te han molestado en las cuatro últimas semanas. Es frecuente en periodos de estrés, aunque pueden tener muchas causas.",
+        "recommendation": "Si algún síntoma persiste o te preocupa, consúltalo con tu médico/a de familia. Cuidar el descanso, la actividad física y los momentos de calma puede ayudar."
+      },
+      "medium": {
+        "title": "Puntuación en rango medio",
+        "body": "Sugiere síntomas físicos que probablemente están afectando a tu día a día.",
+        "recommendation": "Es recomendable que tu médico/a de familia valore estos síntomas para descartar una causa física. Si no la hay, o si también hay malestar emocional, puede ayudarte hablarlo con un psicólogo/a."
+      },
+      "high": {
+        "title": "Puntuación en rango alto",
+        "body": "Sugiere muchos síntomas físicos molestos, que probablemente están afectando a tu bienestar y a tu funcionamiento diario.",
+        "recommendation": "Es recomendable que tu médico/a de familia valore estos síntomas cuanto antes, para descartar una causa física. Un psicólogo/a puede ayudarte con el malestar que generan y con su relación con el estrés o el estado de ánimo."
+      }
+    }
+  }
+}

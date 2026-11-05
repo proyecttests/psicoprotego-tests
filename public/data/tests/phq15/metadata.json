@@ -1,0 +1,66 @@
+{
+  "id": "phq15",
+  "availableLangs": ["es"],
+  "category": "psychometric",
+  "condition": "sintomas-fisicos",
+  "slug": "phq-15",
+  "tags": ["validado-clinicamente", "adultos", "likert", "15-items", "cribado"],
+  "originalInstrument": "PHQ-15",
+  "use": ["clinical_screening"],
+  "measures": ["somatic_symptom_severity"],
+  "validated": true,
+  "medicalCondition": {
+    "icd10": "F45",
+    "name": "Trastornos somatomorfos",
+    "schemaOrgUrl": "https://www.icd10data.com/ICD10CM/Codes/F01-F99/F40-F48/F45-"
+  },
+  "validation": {
+    "isValidated": true,
+    "references": [
+      {
+        "doi": "10.1097/00006842-200203000-00008",
+        "authors": "Kroenke K, Spitzer RL, Williams JBW",
+        "year": 2002,
+        "journal": "Psychosomatic Medicine",
+        "volume": "64",
+        "issue": "2",
+        "pages": "258-266",
+        "title": "The PHQ-15: validity of a new measure for evaluating the severity of somatic symptoms"
+      }
+    ],
+    "spanishValidation": {
+      "available": true,
+      "note": "Ros Montalbán S, Comas Vives A, Garcia-Garcia M (2010). Validation of the Spanish version of the PHQ-15 questionnaire for the evaluation of physical symptoms in patients with depression and/or anxiety disorders: DEPRE-SOMA study. Actas Esp Psiquiatr 38(6):345-357. PMID 21188674. 3362 pacientes de consultas de psiquiatría con depresión o ansiedad; alfa de Cronbach 0,78. Población general española: Robles E, Angelone C, Ondé D, Vázquez C (2024). J Affect Disord 362:762-771. doi:10.1016/j.jad.2024.07.087 (1495 personas, datos normativos)."
+    }
+  },
+  "validationDetails": {
+    "original": {
+      "lang": "en",
+      "reference": "Kroenke K, Spitzer RL, Williams JBW (2002)",
+      "journal": "Psychosomatic Medicine, 64(2), 258-266",
+      "doi": "10.1097/00006842-200203000-00008",
+      "sample": "6000 patients"
+    },
+    "translations": {
+      "es": { "validated": true, "reference": "Ros Montalbán et al., 2010" },
+      "en": { "validated": true, "reference": "Original instrument" }
+    }
+  },
+  "authorship": {
+    "author": "emmanuel",
+    "reviewedBy": "cristina"
+  },
+  "ageRange": { "min": 18, "max": null },
+  "selfAdministrable": true,
+  "timeToComplete": "3-5 min",
+  "itemCount": 15,
+  "itemType": "likert_3",
+  "scoringRange": { "min": 0, "max": 30 },
+  "cutoffs": {
+    "minimal": [0, 4],
+    "low": [5, 9],
+    "medium": [10, 14],
+    "high": [15, 30]
+  },
+  "copyright": "free_use"
+}

@@ -31,6 +31,16 @@ function getUI(lang: string) {
   return UI[lang] ?? UI['es']
 }
 
+/** Nombre visible de cada `condition` de metadata.json (el slug no lleva tildes ni espacios). */
+const CONDITION_LABELS: Record<string, string> = {
+  depresion:          'depresión',
+  'sintomas-fisicos': 'síntomas físicos',
+}
+
+function conditionLabel(categoria: string) {
+  return CONDITION_LABELS[categoria] ?? categoria
+}
+
 // ── generateStaticParams ──────────────────────────────────────────────────────
 
 export async function generateStaticParams() {
@@ -49,7 +59,7 @@ export async function generateMetadata({
 
   const robots = await getRobots('categoria')
   return {
-    title:   `${ui.prefix} ${categoria} — Psicoprotego`,
+    title:   `${ui.prefix} ${conditionLabel(categoria)} — Psicoprotego`,
     robots,
   }
 }
@@ -71,7 +81,7 @@ export default async function CategoriaPage({
   const schema = {
     '@context':    'https://schema.org',
     '@type':       'ItemList',
-    name:          `${ui.prefix} ${categoria}`,
+    name:          `${ui.prefix} ${conditionLabel(categoria)}`,
     numberOfItems: tests.length,
     itemListElement: tests.map((t, i) => ({
       '@type':   'ListItem',
@@ -90,7 +100,7 @@ export default async function CategoriaPage({
       <div className="mx-auto w-full max-w-4xl px-4 py-12">
         <div className="mb-10 text-center">
           <h1 className="font-serif text-3xl font-bold text-primary-800 sm:text-4xl capitalize">
-            {ui.prefix} {categoria}
+            {ui.prefix} {conditionLabel(categoria)}
           </h1>
         </div>
         <TestGrid tests={tests} lang={lang} ui={ui} />

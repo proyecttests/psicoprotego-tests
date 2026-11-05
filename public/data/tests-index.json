@@ -24,6 +24,30 @@
     }
   },
   {
+    "testId": "phq15",
+    "category": "psychometric",
+    "condition": "sintomas-fisicos",
+    "tags": [
+      "validado-clinicamente",
+      "adultos",
+      "likert",
+      "15-items",
+      "cribado"
+    ],
+    "availableLangs": [
+      "es"
+    ],
+    "validated": true,
+    "timeToComplete": "3-5 min",
+    "itemCount": 15,
+    "names": {
+      "es": "Cuestionario de Síntomas Físicos (PHQ-15)"
+    },
+    "hooks": {
+      "es": ""
+    }
+  },
+  {
     "testId": "phq9",
     "category": "psychometric",
     "condition": "depresion",
