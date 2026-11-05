@@ -1,11 +1,11 @@
 {
-  "status": "draft-pending-clinical-review",
+  "status": "clinically-approved",
   "drafted": "clinical-landing-writer-v2",
   "draftedAt": "2026-11-05T00:26:12.459Z",
   "auditedAt": "2026-11-05T00:26:12.459Z",
-  "lastEditedBy": null,
-  "clinicallyApprovedBy": null,
-  "clinicallyApprovedAt": null,
+  "lastEditedBy": "emmanuel",
+  "clinicallyApprovedBy": "emmanuel, cristina",
+  "clinicallyApprovedAt": "2026-11-05T00:37:03.331Z",
   "hero": {
     "title": "Test PHQ-15: cuestionario orientativo de síntomas físicos",
     "subtitle": "Quince preguntas sobre molestias físicas de las cuatro últimas semanas: dolores, mareos, palpitaciones, falta de aire, molestias digestivas, cansancio o problemas de sueño. El resultado te sirve como punto de partida para hablarlo con tu médico/a o con tu psicólogo/a.",
@@ -130,7 +130,7 @@
   },
   "interpretation": {
     "heading": "Qué hacer con tu resultado",
-    "body": "Una puntuación en el rango Mínimo (0–4 puntos) indica que en las cuatro últimas semanas te han molestado pocos síntomas físicos, o ninguno. Aun así, una puntuación baja no descarta un problema: si algún síntoma te preocupa, consúltalo con tu médico/a de familia.\n\nUna puntuación en el rango Bajo (5–9 puntos) indica que algunos síntomas físicos te han molestado. Es frecuente en periodos de estrés, aunque pueden tener muchas causas. Si algún síntoma persiste o te preocupa, consúltalo con tu médico/a de familia. Si ya estás en seguimiento, es información útil para comentar en tu próxima consulta.\n\nUna puntuación en el rango Medio (10–14 puntos) sugiere síntomas físicos que probablemente están afectando a tu día a día. Es información útil para llevar a consulta: lo recomendable es que tu médico/a de familia valore estos síntomas para descartar una causa física. Si no la hay, o si también hay malestar emocional, puede ayudarte hablarlo con un psicólogo/a. Si aún no tienes psicólogo/a de referencia y quieres comentarlo con alguien, en Psicoprotego podemos acompañarte a dar los primeros pasos. [REVISAR: invitación a Psicoprotego en el rango medio, como en el PHQ-9; aquí el primer paso es el médico/a: ¿la mantenemos?]\n\nUna puntuación en el rango Alto (15–30 puntos) sugiere muchos síntomas físicos molestos, que probablemente están afectando a tu bienestar y a tu funcionamiento diario. Es recomendable que tu médico/a de familia los valore cuanto antes, para descartar una causa física. Un psicólogo/a puede ayudarte con el malestar que generan y con su relación con el estrés o el estado de ánimo.\n\nLos rangos son orientativos. Una misma puntuación puede tener significados distintos según la salud física, la edad y el momento vital de cada persona. Solo un profesional sanitario puede valorar la causa de los síntomas tras una evaluación completa."
+    "body": "Una puntuación en el rango Mínimo (0–4 puntos) indica que en las cuatro últimas semanas te han molestado pocos síntomas físicos, o ninguno. Aun así, una puntuación baja no descarta un problema: si algún síntoma te preocupa, consúltalo con tu médico/a de familia.\n\nUna puntuación en el rango Bajo (5–9 puntos) indica que algunos síntomas físicos te han molestado. Es frecuente en periodos de estrés, aunque pueden tener muchas causas. Si algún síntoma persiste o te preocupa, consúltalo con tu médico/a de familia. Si ya estás en seguimiento, es información útil para comentar en tu próxima consulta.\n\nUna puntuación en el rango Medio (10–14 puntos) sugiere síntomas físicos que probablemente están afectando a tu día a día. Es información útil para llevar a consulta: lo recomendable es que tu médico/a de familia valore estos síntomas para descartar una causa física. Si no la hay, o si también hay malestar emocional, puede ayudarte hablarlo con un psicólogo/a. Si aún no tienes psicólogo/a de referencia y quieres comentarlo con alguien, en Psicoprotego podemos acompañarte a dar los primeros pasos.\n\nUna puntuación en el rango Alto (15–30 puntos) sugiere muchos síntomas físicos molestos, que probablemente están afectando a tu bienestar y a tu funcionamiento diario. Es recomendable que tu médico/a de familia los valore cuanto antes, para descartar una causa física. Un psicólogo/a puede ayudarte con el malestar que generan y con su relación con el estrés o el estado de ánimo.\n\nLos rangos son orientativos. Una misma puntuación puede tener significados distintos según la salud física, la edad y el momento vital de cada persona. Solo un profesional sanitario puede valorar la causa de los síntomas tras una evaluación completa."
   },
   "faq": [
     {
