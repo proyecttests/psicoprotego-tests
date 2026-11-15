@@ -37,6 +37,9 @@ const SECURITY_HEADERS = [
     // - style-src: self + unsafe-inline (Tailwind inline styles)
     // - img-src: self + data URIs (Canvas-generated story images)
     // - connect-src: self + GA4 analytics endpoint
+    //   + data: yoga-layout (maquetación de react-pdf) lleva su WebAssembly en una URI data: y la
+    //   pide con fetch; sin esto lo decodifica por otra vía, pero deja un error de CSP en consola.
+    //   Un fetch a data: no sale del navegador.
     // TODO: replace 'unsafe-inline' in script-src with nonces (requires Next.js middleware)
     key: 'Content-Security-Policy',
     value: [
@@ -45,7 +48,7 @@ const SECURITY_HEADERS = [
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data: blob: https://www.googletagmanager.com",
-      "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com",
+      "connect-src 'self' data: https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com",
       "frame-src https://www.googletagmanager.com",
       "object-src 'none'",
       "base-uri 'self'",
