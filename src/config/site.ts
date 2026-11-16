@@ -27,6 +27,7 @@ export const BLOG_URL      = 'https://psicoprotego.es/articulos/'
 const CONDITION_LABELS: Record<string, string> = {
   depresion:          'depresión',
   'sintomas-fisicos': 'síntomas físicos',
+  tdah:               'TDAH',
 }
 
 export function conditionLabel(condition: string) {

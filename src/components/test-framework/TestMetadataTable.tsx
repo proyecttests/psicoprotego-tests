@@ -76,6 +76,8 @@ const STRINGS = {
       moderately_severe:  'Moderado-grave',
       severe:             'Grave',
       crisis:             'Crisis',
+      below_cutoff:       'Por debajo del corte',
+      above_cutoff:       'A partir del corte',
     } as Record<string, string>,
   },
 } as const
@@ -95,6 +97,8 @@ const CUTOFF_COLORS: Record<string, { bg: string; text: string }> = {
   moderately_severe: { bg: '#fed7aa', text: '#7c2d12' },
   severe:            { bg: '#fee2e2', text: '#7f1d1d' },
   crisis:            { bg: '#fce7f3', text: '#831843' },
+  below_cutoff:      { bg: '#d1fae5', text: '#065f46' },
+  above_cutoff:      { bg: '#ffedd5', text: '#7c2d12' },
 }
 
 function getCutoffColor(key: string) {

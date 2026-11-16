@@ -1,0 +1,73 @@
+{
+  "id": "asrs6",
+  "availableLangs": ["es"],
+  "category": "psychometric",
+  "condition": "tdah",
+  "slug": "asrs-v1-1",
+  "tags": ["validado-clinicamente", "adultos", "likert", "6-items", "cribado"],
+  "originalInstrument": "ASRS v1.1 Screener",
+  "use": ["clinical_screening"],
+  "measures": ["adhd"],
+  "validated": true,
+  "medicalCondition": {
+    "icd10": "F90",
+    "name": "Trastorno por déficit de atención con hiperactividad",
+    "schemaOrgUrl": "https://www.icd10data.com/ICD10CM/Codes/F01-F99/F90-F98/F90-"
+  },
+  "validation": {
+    "isValidated": true,
+    "references": [
+      {
+        "doi": "10.1017/s0033291704002892",
+        "authors": "Kessler RC, Adler L, Ames M, Demler O, Faraone S, Hiripi E, Howes MJ, Jin R, Secnik K, Spencer T, Ustun TB, Walters EE",
+        "year": 2005,
+        "journal": "Psychological Medicine",
+        "volume": "35",
+        "issue": "2",
+        "pages": "245-256",
+        "title": "The World Health Organization Adult ADHD Self-Report Scale (ASRS): a short screening scale for use in the general population"
+      },
+      {
+        "doi": "10.1002/mpr.208",
+        "authors": "Kessler RC, Adler LA, Gruber MJ, Sarawate CA, Spencer T, Van Brunt DL",
+        "year": 2007,
+        "journal": "International Journal of Methods in Psychiatric Research",
+        "volume": "16",
+        "issue": "2",
+        "pages": "52-65",
+        "title": "Validity of the World Health Organization Adult ADHD Self-Report Scale (ASRS) Screener in a representative sample of health plan members"
+      }
+    ],
+    "spanishValidation": {
+      "available": true,
+      "note": "Ramos-Quiroga JA, Daigre C, Valero S, Bosch R, Gómez-Barros N, Nogueira M, Palomar G, Roncero C, Casas M (2009). Validación al español de la escala de cribado del trastorno por déficit de atención/hiperactividad en adultos (ASRS v. 1.1): una nueva estrategia de puntuación. Revista de Neurología 48(9):449-452. 90 pacientes con TDAH y 90 controles de consultas externas (Hospital Universitari Vall d'Hebron, Barcelona). Puntuación de 0 a 24; punto de corte 12: sensibilidad 96,7%, especificidad 91,1%."
+    }
+  },
+  "validationDetails": {
+    "original": {
+      "lang": "en",
+      "reference": "Kessler RC et al. (2005)",
+      "journal": "Psychological Medicine, 35(2), 245-256",
+      "doi": "10.1017/s0033291704002892"
+    },
+    "translations": {
+      "es": { "validated": true, "reference": "Ramos-Quiroga et al., 2009" },
+      "en": { "validated": true, "reference": "Original instrument" }
+    }
+  },
+  "authorship": {
+    "author": "emmanuel",
+    "reviewedBy": "cristina"
+  },
+  "ageRange": { "min": 18, "max": null },
+  "selfAdministrable": true,
+  "timeToComplete": "1-2 min",
+  "itemCount": 6,
+  "itemType": "likert_5",
+  "scoringRange": { "min": 0, "max": 24 },
+  "cutoffs": {
+    "below_cutoff": [0, 11],
+    "above_cutoff": [12, 24]
+  },
+  "copyright": "free_use"
+}

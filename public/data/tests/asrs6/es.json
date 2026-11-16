@@ -1,0 +1,109 @@
+{
+  "id": "asrs6",
+  "lang": "es",
+  "name": "Cuestionario autoinformado de cribado del TDAH en adultos (ASRS v1.1, 6 preguntas)",
+  "version": "1.0",
+  "scoringFunction": "scoreStandard",
+  "disclaimerBefore": "Este cuestionario es una herramienta de cribado orientativa. **No es un diagnóstico clínico ni sustituye la valoración de un profesional de la salud mental.** Si tienes dudas o síntomas que te preocupan, consulta con un profesional.",
+  "instructions": "Marque la casilla que mejor describe la manera en que se ha sentido y comportado en los últimos 6 meses.",
+  "responseOptions": [
+    { "value": 0, "label": "Nunca" },
+    { "value": 1, "label": "Rara vez" },
+    { "value": 2, "label": "A veces" },
+    { "value": 3, "label": "A menudo" },
+    { "value": 4, "label": "Muy a menudo" }
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "type": "likert",
+      "text": "¿Con qué frecuencia tiene usted dificultad para acabar los detalles finales de un proyecto, una vez que ha terminado con las partes difíciles?",
+      "scale": { "min": 0, "max": 4, "step": 1 }
+    },
+    {
+      "id": "q2",
+      "type": "likert",
+      "text": "¿Con qué frecuencia tiene usted dificultad para ordenar las cosas cuando está realizando una tarea que requiere organización?",
+      "scale": { "min": 0, "max": 4, "step": 1 }
+    },
+    {
+      "id": "q3",
+      "type": "likert",
+      "text": "¿Con qué frecuencia tiene usted problemas para recordar citas u obligaciones?",
+      "scale": { "min": 0, "max": 4, "step": 1 }
+    },
+    {
+      "id": "q4",
+      "type": "likert",
+      "text": "Cuando tiene que realizar una tarea que requiere pensar mucho, ¿con qué frecuencia evita o retrasa empezarla?",
+      "scale": { "min": 0, "max": 4, "step": 1 }
+    },
+    {
+      "id": "q5",
+      "type": "likert",
+      "text": "¿Con qué frecuencia mueve continuamente o retuerce las manos o los pies cuando tiene que permanecer sentado por mucho tiempo?",
+      "scale": { "min": 0, "max": 4, "step": 1 }
+    },
+    {
+      "id": "q6",
+      "type": "likert",
+      "text": "¿Con qué frecuencia se siente demasiado activo e impulsado a hacer cosas, como si lo empujase un motor?",
+      "scale": { "min": 0, "max": 4, "step": 1 }
+    }
+  ],
+  "scoring": [
+    {
+      "min": 0,
+      "max": 11,
+      "category": "Puntuación por debajo del punto de corte",
+      "color": "green",
+      "messageKey": "below_cutoff"
+    },
+    {
+      "min": 12,
+      "max": null,
+      "category": "Puntuación a partir del punto de corte",
+      "color": "orange",
+      "messageKey": "above_cutoff"
+    }
+  ],
+  "results": {
+    "normal": {
+      "below_cutoff": {
+        "title": "Puntuación por debajo del punto de corte",
+        "body": "Tus respuestas no llegan a 12 puntos, el valor a partir del cual la versión española del ASRS recomienda valorar un posible TDAH.",
+        "recommendation": "El cuestionario solo recoge seis síntomas. Si las dificultades de atención, de organización o la inquietud te están afectando en el trabajo, en los estudios o en casa, coméntalo con un profesional."
+      },
+      "above_cutoff": {
+        "title": "Puntuación a partir del punto de corte",
+        "body": "Tus respuestas llegan a 12 puntos o más: el rango en el que la versión española del ASRS recomienda una valoración profesional de un posible TDAH. No es un diagnóstico. La ansiedad, la depresión, la falta de sueño o el consumo de sustancias también pueden dar puntuaciones altas.",
+        "recommendation": "Pide una valoración a un profesional de la salud mental con experiencia en TDAH en adultos. El diagnóstico requiere una entrevista clínica que revise también cómo eras de niño/a y cuánto te afecta en tu vida."
+      }
+    }
+  },
+  "landing": {
+    "hook": "¿Te cuesta terminar lo que empiezas o mantener el orden?",
+    "description": "El ASRS v1.1 es un cuestionario breve de la Organización Mundial de la Salud, validado en España, para el cribado del TDAH en adultos. Son 6 preguntas sobre los últimos 6 meses.",
+    "whatItMeasures": "Mide con qué frecuencia aparecen seis síntomas del TDAH en adultos: cuatro de falta de atención (terminar tareas, organizarse, recordar citas, empezar tareas que exigen esfuerzo mental) y dos de hiperactividad (inquietud y sensación de no poder parar).",
+    "whoIsItFor": "Adultos que se preguntan si sus dificultades de atención, organización o inquietud pueden deberse a un TDAH. No sirve para niños ni adolescentes.",
+    "howItWorks": [
+      "Responde 6 preguntas sobre los últimos 6 meses",
+      "Obtén tu puntuación, de 0 a 24, y si llega al punto de corte",
+      "Comparte el resultado con tu médico/a o psicólogo/a si lo necesitas"
+    ],
+    "faq": [
+      {
+        "q": "¿Es esto un diagnóstico?",
+        "a": "No. El ASRS es una herramienta de cribado. Una puntuación de 12 o más indica que conviene una valoración profesional; el diagnóstico de TDAH solo puede hacerlo un profesional con una entrevista clínica."
+      },
+      {
+        "q": "¿Quedan guardadas mis respuestas?",
+        "a": "No en nuestros servidores. Tus respuestas se procesan en tu navegador y no las guardamos. Si aceptas las cookies de analítica, se envían a Google Analytics, sin tu nombre ni datos que te identifiquen, para elaborar estadísticas. Solo tú decides qué hacer con el resultado."
+      },
+      {
+        "q": "¿Cuánto tiempo lleva completarlo?",
+        "a": "Menos de dos minutos. Son 6 preguntas con cinco opciones de respuesta."
+      }
+    ]
+  }
+}

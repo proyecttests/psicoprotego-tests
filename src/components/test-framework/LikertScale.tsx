@@ -20,7 +20,7 @@ interface LikertScaleProps {
 
 // ── Delays de stagger para entrada de cards ───────────────────────────────
 
-const STAGGER_DELAYS = ['1.15s', '1.3s', '1.45s', '1.6s']
+const STAGGER_DELAYS = ['1.15s', '1.3s', '1.45s', '1.6s', '1.75s']
 
 // ── Componente ────────────────────────────────────────────────────────────────
 

@@ -1,5 +1,29 @@
 [
   {
+    "testId": "asrs6",
+    "category": "psychometric",
+    "condition": "tdah",
+    "tags": [
+      "validado-clinicamente",
+      "adultos",
+      "likert",
+      "6-items",
+      "cribado"
+    ],
+    "availableLangs": [
+      "es"
+    ],
+    "validated": true,
+    "timeToComplete": "1-2 min",
+    "itemCount": 6,
+    "names": {
+      "es": "Cuestionario autoinformado de cribado del TDAH en adultos (ASRS v1.1, 6 preguntas)"
+    },
+    "hooks": {
+      "es": ""
+    }
+  },
+  {
     "testId": "gad7",
     "category": "psychometric",
     "condition": "ansiedad",
