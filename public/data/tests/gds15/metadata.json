@@ -1,0 +1,75 @@
+{
+  "id": "gds15",
+  "availableLangs": ["es"],
+  "category": "psychometric",
+  "condition": "depresion",
+  "slug": "gds-15",
+  "tags": ["validado-clinicamente", "mayores-65", "si-no", "15-items", "cribado"],
+  "originalInstrument": "GDS-15",
+  "use": ["clinical_screening"],
+  "measures": ["depression"],
+  "validated": true,
+  "medicalCondition": {
+    "icd10": "F32",
+    "name": "Episodio depresivo",
+    "schemaOrgUrl": "https://www.icd10data.com/ICD10CM/Codes/F01-F99/F30-F39/F32-"
+  },
+  "validation": {
+    "isValidated": true,
+    "references": [
+      {
+        "doi": "10.1300/J018v05n01_09",
+        "authors": "Sheikh JI, Yesavage JA",
+        "year": 1986,
+        "journal": "Clinical Gerontologist",
+        "volume": "5",
+        "issue": "1-2",
+        "pages": "165-173",
+        "title": "Geriatric Depression Scale (GDS): recent evidence and development of a shorter version"
+      },
+      {
+        "doi": "10.1016/0022-3956(82)90033-4",
+        "authors": "Yesavage JA, Brink TL, Rose TL, Lum O, Huang V, Adey M, Leirer VO",
+        "year": 1983,
+        "journal": "Journal of Psychiatric Research",
+        "volume": "17",
+        "issue": "1",
+        "pages": "37-49",
+        "title": "Development and validation of a geriatric depression screening scale: a preliminary report"
+      }
+    ],
+    "spanishValidation": {
+      "available": true,
+      "note": "Martínez de la Iglesia J, Onís Vilches MC, Dueñas Herrero R, Albert Colomer C, Aguado Taberné C, Luque Luque R (2002). Versión española del cuestionario de Yesavage abreviado (GDS) para el despistaje de depresión en mayores de 65 años: adaptación y validación. Medifam 12(10):620-630. 249 personas mayores de 65 años de atención primaria; punto de corte recomendado: 5 o más. Ortega Orcos R et al. (2007). Rev Clin Esp 207(11):559-562. doi:10.1016/s0014-2565(07)73477-x (atención primaria). Datos normativos españoles: Delgado-Losada ML et al. (2021). Psicothema 33(1):70-76 (50 a 88 años). Evaluación del Consejo General de la Psicología (CET-R, 2021)."
+    }
+  },
+  "validationDetails": {
+    "original": {
+      "lang": "en",
+      "reference": "Sheikh JI, Yesavage JA (1986)",
+      "journal": "Clinical Gerontologist, 5(1-2), 165-173",
+      "doi": "10.1300/J018v05n01_09"
+    },
+    "translations": {
+      "es": { "validated": true, "reference": "Martínez de la Iglesia et al., 2002" },
+      "en": { "validated": true, "reference": "Original instrument" }
+    }
+  },
+  "authorship": {
+    "author": "emmanuel",
+    "reviewedBy": "cristina"
+  },
+  "ageRange": { "min": 65, "max": null },
+  "selfAdministrable": true,
+  "timeToComplete": "2-5 min",
+  "itemCount": 15,
+  "itemType": "boolean",
+  "scoringRange": { "min": 0, "max": 15 },
+  "cutoffs": {
+    "minimal": [0, 4],
+    "mild": [5, 8],
+    "moderate": [9, 11],
+    "severe": [12, 15]
+  },
+  "copyright": "free_use"
+}

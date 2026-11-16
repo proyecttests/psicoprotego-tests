@@ -45,7 +45,7 @@ const UI: Record<string, {
     startBtn:        'Empezar test',
     empty:           'No hay tests disponibles.',
     metaTitle:       'Tests Psicológicos Gratuitos',
-    metaDescription: 'Cuestionarios psicológicos validados: ansiedad, depresión y síntomas físicos. GAD-7, PHQ-9 y PHQ-15 gratuitos, privados y sin registro.',
+    metaDescription: 'Cuestionarios psicológicos validados: ansiedad, depresión y síntomas físicos. GAD-7, PHQ-9, PHQ-15 y GDS-15 gratuitos, privados y sin registro.',
   },
 }
 

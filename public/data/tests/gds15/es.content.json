@@ -1,0 +1,200 @@
+{
+  "status": "draft-pending-clinical-review",
+  "drafted": "clinical-landing-writer-v2",
+  "draftedAt": "2026-11-16T00:59:06.000Z",
+  "auditedAt": "2026-11-16T00:59:06.000Z",
+  "hero": {
+    "title": "Test GDS-15: cuestionario orientativo de ánimo en personas mayores",
+    "subtitle": "Quince preguntas de sí o no sobre cómo te has sentido la última semana: si estás a gusto con tu vida, si te cuesta hacer cosas, si notas el día vacío o te falta energía. El resultado te sirve como punto de partida para hablarlo con tu médico/a o con tu psicólogo/a.",
+    "clinicalContext": "Es una herramienta clínica de apoyo. Está pensada para usarse junto con un profesional, o para llevar un registro orientativo a una primera consulta.",
+    "badges": [
+      "Instrumento validado",
+      "15 preguntas",
+      "2-5 min",
+      "Sin registro",
+      "Datos en tu navegador"
+    ]
+  },
+  "whatItMeasures": {
+    "heading": "¿Qué mide este test?",
+    "body": "La GDS-15 (Geriatric Depression Scale, versión abreviada) es un cuestionario de quince preguntas de respuesta sí o no sobre cómo se ha sentido la persona durante la última semana. Explora la satisfacción con la vida, el ánimo, el interés por las actividades, la energía, la esperanza, el aburrimiento, el miedo a que pase algo malo y la sensación de estar peor que los demás. Incluye una pregunta sobre la memoria.\n\nEstá pensada para personas mayores. Deja fuera a propósito síntomas físicos como el sueño, el apetito o los dolores, que en la vejez pueden deberse a enfermedades o al propio envejecimiento y confundir el resultado. Por eso se responde con un sí o un no, sin escalas de frecuencia: es más sencilla de contestar, también con ayuda.\n\nLa escala original, de 30 preguntas, la publicaron Yesavage y colaboradores en 1983; la versión de 15 preguntas, Sheikh y Yesavage en 1986. Es de dominio público. La versión española la adaptaron y validaron Martínez de la Iglesia y colaboradores en 2002, en consultas de atención primaria."
+  },
+  "whoIsItFor": {
+    "heading": "¿A quién está dirigido?",
+    "body": "La GDS-15 está dirigida a personas mayores de 65 años. Se usa en atención primaria, en geriatría y en residencias para el cribado de síntomas depresivos, y en consulta para seguir su evolución. Su resultado no es un diagnóstico: indica si conviene valorar el estado de ánimo con más detalle.\n\nPuede responderla la propia persona o, si le resulta más cómodo, con un familiar o cuidador que le lea las preguntas y marque lo que conteste. Las respuestas tienen que ser suyas: cómo se ha sentido ella, no lo que vea quien le ayuda.\n\nResulta especialmente útil para quienes ya están en seguimiento y quieren llevar un registro de su ánimo, o para quienes han decidido consultar y quieren llegar a esa cita con un punto de partida ordenado. También la utilizan profesionales clínicos y estudiantes de ciencias de la salud para familiarizarse con el instrumento.",
+    "indications": [
+      "Personas mayores de 65 años en seguimiento por un profesional sanitario que quieran llevar un registro de su estado de ánimo entre consultas.",
+      "Personas mayores que han notado cambios en su ánimo y han decidido consultar, para llevar un registro orientativo a la cita.",
+      "Familiares o cuidadores que acompañan a una persona mayor a responderlo, leyéndole las preguntas, antes de hablar con su médico/a.",
+      "Profesionales clínicos, estudiantes de Psicología o Medicina e investigadores que quieran consultar el instrumento y su validación."
+    ],
+    "limitations": [
+      "No es una herramienta diagnóstica. No sustituye la valoración de un médico/a ni de un profesional de la salud mental.",
+      "No se aconseja con deterioro cognitivo grave. Con deterioro leve o moderado hay estudios que apoyan su uso, pero la interpretación necesita contexto clínico.",
+      "Está pensada para mayores de 65 años: los puntos de corte de la versión española se establecieron en esa población.",
+      "En la validación española las preguntas las leía un profesional; aquí se responden en pantalla, solo o con ayuda.",
+      "La versión española solo establece un punto de corte (5 o más). Los rangos leve, moderado y grave son una interpretación habitual, no del estudio español. [REVISAR: decidir si se mantienen los cuatro rangos o solo «por debajo / a partir de 5»]",
+      "Una puntuación baja no descarta un problema, y una alta puede deberse a otras causas: la especificidad del cuestionario es moderada."
+    ]
+  },
+  "howItWorks": {
+    "heading": "Cómo funciona",
+    "body": "El test consta de 15 preguntas sobre cómo te has sentido durante la última semana. Cada una se responde con «Sí» o «No». No hay respuestas correctas o incorrectas; solo marca lo que mejor se ajusta a tu experiencia.\n\nCada respuesta que suele acompañar a los síntomas depresivos suma 1 punto. En diez preguntas es el «Sí» y en cinco, las que preguntan por algo positivo (estar satisfecho/a con la vida, de buen humor, feliz, con energía o pensar que es estupendo estar vivo), es el «No». La puntuación total va de 0 a 15 puntos.\n\nEsta herramienta se usa típicamente en el marco de una valoración o un seguimiento. Si ya estás en consulta, tu profesional puede decirte si te conviene completarla; si todavía no has consultado, el resultado puede servirte para llevar un registro orientativo a una primera cita.",
+    "steps": [
+      "Respondes 15 preguntas sobre cómo te has sentido la última semana.",
+      "Cada pregunta se responde con «Sí» o «No».",
+      "Marcas la que mejor describe tu experiencia. Puedes ir atrás si lo necesitas.",
+      "El sistema calcula automáticamente tu puntuación total (rango 0–15).",
+      "Ves tu puntuación y qué suele indicar ese rango."
+    ]
+  },
+  "validation": {
+    "heading": "Validación científica",
+    "body": "La Geriatric Depression Scale la desarrollaron Yesavage y colaboradores en 1983 como un cuestionario de 30 preguntas de sí o no, pensado para personas mayores y sin síntomas físicos [1]. En 1986, Sheikh y Yesavage propusieron la versión abreviada de 15 preguntas [2].\n\nLa versión española la adaptaron y validaron Martínez de la Iglesia y colaboradores en 2002 con 249 personas mayores de 65 años de consultas de atención primaria, con una edad media de 74 años, comparando el cuestionario con una entrevista clínica. Recomendaron el punto de corte de 5 o más para considerar una posible depresión [3, 4]. En otro centro de salud de Madrid, Ortega Orcos y colaboradores (2007) la estudiaron en 301 personas mayores de 64 años elegidas al azar: la sensibilidad fue del 82% y la especificidad, del 98% [5]. Desde 2021 hay datos de referencia españoles de 2.030 personas de 50 a 88 años sin deterioro cognitivo [6]. La evaluación de tests del Consejo General de la Psicología (2021) valora su adaptación española y su fundamentación como buenas o excelentes [7].\n\nDos metaanálisis de Mitchell y colaboradores (2010) reunieron los estudios que comparan la GDS-15 con una entrevista psiquiátrica. En atención primaria (10 estudios), la sensibilidad fue del 81% y la especificidad, del 78%, y los autores la recomiendan para el cribado [8]. En hospitales y residencias (12 estudios), del 84% y el 74%, sin diferencias importantes en personas con demencia [9]. Que la especificidad sea moderada significa que hay falsos positivos: por eso la GDS-15 sirve para orientar y para seguir la evolución, no para diagnosticar.",
+    "references": [
+      {
+        "id": 1,
+        "authors": "Yesavage JA, Brink TL, Rose TL, Lum O, Huang V, Adey M, Leirer VO",
+        "year": 1983,
+        "title": "Development and validation of a geriatric depression screening scale: a preliminary report",
+        "journal": "J Psychiatr Res",
+        "volume": "17",
+        "issue": "1",
+        "pages": "37–49",
+        "doi": "10.1016/0022-3956(82)90033-4",
+        "url": "https://doi.org/10.1016/0022-3956(82)90033-4"
+      },
+      {
+        "id": 2,
+        "authors": "Sheikh JI, Yesavage JA",
+        "year": 1986,
+        "title": "Geriatric Depression Scale (GDS): recent evidence and development of a shorter version",
+        "journal": "Clin Gerontol",
+        "volume": "5",
+        "issue": "1-2",
+        "pages": "165–173",
+        "doi": "10.1300/J018v05n01_09",
+        "url": "https://doi.org/10.1300/J018v05n01_09"
+      },
+      {
+        "id": 3,
+        "authors": "Martínez de la Iglesia J, Onís Vilches MC, Dueñas Herrero R, Albert Colomer C, Aguado Taberné C, Luque Luque R",
+        "year": 2002,
+        "title": "Versión española del cuestionario de Yesavage abreviado (GDS) para el despistaje de depresión en mayores de 65 años: adaptación y validación",
+        "journal": "Medifam",
+        "volume": "12",
+        "issue": "10",
+        "pages": "620–630",
+        "doi": "",
+        "url": "https://scielo.isciii.es/pdf/medif/v12n10/original2.pdf"
+      },
+      {
+        "id": 4,
+        "authors": "Martínez de la Iglesia J, Onís Vilches MC, Dueñas Herrero R, Aguado Taberné C, Albert Colomer C, Arias Blanco MC",
+        "year": 2005,
+        "title": "Abreviar lo breve. Aproximación a versiones ultracortas del cuestionario de Yesavage para el cribado de la depresión",
+        "journal": "Aten Primaria",
+        "volume": "35",
+        "issue": "1",
+        "pages": "14–21",
+        "doi": "10.1157/13071040",
+        "url": "https://doi.org/10.1157/13071040"
+      },
+      {
+        "id": 5,
+        "authors": "Ortega Orcos R, Salinero Fort MA, Kazemzadeh Khajoui A, Vidal Aparicio S, de Dios del Valle R",
+        "year": 2007,
+        "title": "Validación de la versión española de 5 y 15 ítems de la Escala de Depresión Geriátrica en personas mayores en Atención Primaria",
+        "journal": "Rev Clin Esp",
+        "volume": "207",
+        "issue": "11",
+        "pages": "559–562",
+        "doi": "10.1016/s0014-2565(07)73477-x",
+        "url": "https://doi.org/10.1016/s0014-2565(07)73477-x"
+      },
+      {
+        "id": 6,
+        "authors": "Delgado-Losada ML, López-Higes R, Rubio-Valdehita S, Facal D, Lojo-Seoane C, Montenegro-Peña M, Frades-Payo B, Fernández-Blázquez MA",
+        "year": 2021,
+        "title": "Spanish Consortium for Ageing Normative Data (SCAND): Screening Tests (MMSE, GDS-15 and MFE)",
+        "journal": "Psicothema",
+        "volume": "33",
+        "issue": "1",
+        "pages": "70–76",
+        "doi": "10.7334/psicothema2020.304",
+        "url": "https://doi.org/10.7334/psicothema2020.304"
+      },
+      {
+        "id": 7,
+        "authors": "Consejo General de la Psicología de España",
+        "year": 2021,
+        "title": "Evaluación de la Escala de depresión geriátrica GDS (CET-R)",
+        "journal": "Comisión de Test",
+        "doi": "",
+        "url": "https://www.cop.es/uploads/PDF/2021/GDS_evaluacion_COP.pdf"
+      },
+      {
+        "id": 8,
+        "authors": "Mitchell AJ, Bird V, Rizzo M, Meader N",
+        "year": 2010,
+        "title": "Diagnostic validity and added value of the Geriatric Depression Scale for depression in primary care: a meta-analysis of GDS30 and GDS15",
+        "journal": "J Affect Disord",
+        "volume": "125",
+        "issue": "1-3",
+        "pages": "10–17",
+        "doi": "10.1016/j.jad.2009.08.019",
+        "url": "https://doi.org/10.1016/j.jad.2009.08.019"
+      },
+      {
+        "id": 9,
+        "authors": "Mitchell AJ, Bird V, Rizzo M, Meader N",
+        "year": 2010,
+        "title": "Which version of the geriatric depression scale is most useful in medical settings and nursing homes? Diagnostic validity meta-analysis",
+        "journal": "Am J Geriatr Psychiatry",
+        "volume": "18",
+        "issue": "12",
+        "pages": "1066–1077",
+        "doi": "10.1097/jgp.0b013e3181f60f81",
+        "url": "https://doi.org/10.1097/jgp.0b013e3181f60f81"
+      }
+    ]
+  },
+  "interpretation": {
+    "heading": "Qué hacer con tu resultado",
+    "body": "Una puntuación en el rango Mínimo (0–4 puntos) está por debajo del punto de corte de la versión española: tus respuestas no muestran síntomas depresivos destacables en la última semana. Aun así, una puntuación baja no descarta un problema: si notas cambios en tu ánimo, en tus ganas de hacer cosas o en tu memoria, coméntalo con tu médico/a de familia.\n\nUna puntuación en el rango Leve (5–8 puntos) sugiere algunos síntomas depresivos. A partir de 5 puntos, la versión española recomienda valorar el estado de ánimo con más detalle. Si tienes un profesional de referencia, coméntale el resultado en tu próxima consulta; si no, tu médico/a de familia es un buen primer paso.\n\nUna puntuación en el rango Moderado (9–11 puntos) sugiere síntomas depresivos que probablemente están afectando a tu día a día. Es información útil para llevar a consulta: lo recomendable es que un profesional valore tu estado de ánimo, sea tu médico/a de familia o un psicólogo/a. Si aún no tienes psicólogo/a de referencia y quieres comentarlo con alguien, en Psicoprotego podemos acompañarte a dar los primeros pasos.\n\nUna puntuación en el rango Grave (12–15 puntos) sugiere síntomas depresivos intensos. Es recomendable hablar cuanto antes con un profesional sanitario (médico/a de familia, psicólogo/a o psiquiatra) para valorar tu situación con contexto. Si en algún momento piensas en hacerte daño, en España puedes llamar al **024** (línea de atención a la conducta suicida, gratuita, 24 horas) o, si estás en peligro, al **112**.\n\nLos rangos son orientativos. Una misma puntuación puede tener significados distintos según la salud física, la memoria y el momento vital de cada persona. Solo un profesional sanitario puede establecer un diagnóstico tras una evaluación completa."
+  },
+  "faq": [
+    {
+      "q": "¿Es un diagnóstico?",
+      "a": "No. La GDS-15 es un instrumento de cribado orientativo, no una herramienta diagnóstica. Una puntuación de 5 o más indica que conviene que un profesional valore el estado de ánimo, no que haya una depresión."
+    },
+    {
+      "q": "¿Puede ayudarme un familiar a responderlo?",
+      "a": "Sí. Puede leerte las preguntas y marcar lo que contestes. Lo importante es que las respuestas sean tuyas: cómo te has sentido tú durante la última semana, no lo que vea quien te ayuda."
+    },
+    {
+      "q": "Una pregunta habla de la memoria. ¿El test mide si tengo problemas de memoria?",
+      "a": "No. La pregunta forma parte del cuestionario porque la queja de memoria se asocia con el ánimo bajo, pero el test no valora la memoria. Si te preocupa, coméntalo con tu médico/a de familia, que puede valorarla con pruebas específicas."
+    },
+    {
+      "q": "¿Quedan guardadas mis respuestas?",
+      "a": "No en nuestros servidores. Tus respuestas se procesan en tu navegador y no las guardamos. Si aceptas las cookies de analítica, se envían a Google Analytics, sin tu nombre ni datos que te identifiquen, para elaborar estadísticas. Solo tú decides qué hacer con el resultado."
+    },
+    {
+      "q": "¿Puedo compartirlo con mi médico/a o mi psicólogo/a?",
+      "a": "Sí. Puedes descargar el resultado en PDF y llevarlo a tu consulta. Es una forma práctica de aportar contexto inicial, aunque el/la profesional hará su propia valoración."
+    },
+    {
+      "q": "¿Debo ir al médico de cabecera, al psicólogo o al psiquiatra?",
+      "a": "El médico/a de familia suele ser el primer paso: conoce tu salud, puede descartar causas físicas o de la medicación y derivar si hace falta. El psicólogo/a es el profesional indicado para trabajar el ánimo, la soledad o los cambios de esta etapa, y el psiquiatra, cuando puede necesitarse medicación o el cuadro es complejo. Lo que no debería decidirlo es el resultado de este test."
+    },
+    {
+      "q": "¿Con qué frecuencia puedo repetirlo?",
+      "a": "La GDS-15 pregunta por la última semana. Si estás en seguimiento, repetirla cada pocas semanas puede ayudarte a ver cómo evoluciona tu ánimo; comentar la evolución con tu profesional de referencia le dará más sentido al registro."
+    }
+  ],
+  "privacy": {
+    "heading": "Privacidad",
+    "body": "Tus respuestas se calculan en tu navegador: no se envían a nuestros servidores ni se guardan. Solo si aceptas las cookies de analítica se envían a Google Analytics, sin tu nombre ni datos que te identifiquen, para elaborar estadísticas. Decides tú qué compartir y con quién: puedes descargar un PDF del resultado para llevarlo a tu médico/a o terapeuta, o simplemente cerrar la pestaña."
+  }
+}

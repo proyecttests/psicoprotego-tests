@@ -1,0 +1,304 @@
+{
+  "id": "gds15",
+  "lang": "es",
+  "name": "Escala de Depresión Geriátrica de Yesavage, versión abreviada (GDS-15)",
+  "version": "1.0",
+  "scoringFunction": "scoreStandard",
+  "disclaimerBefore": "Este cuestionario es una herramienta de cribado orientativa. **No es un diagnóstico clínico ni sustituye la valoración de un profesional de la salud mental.** Si tienes dudas o síntomas que te preocupan, consulta con un profesional.",
+  "instructions": "Elija la respuesta que mejor describa cómo se ha sentido durante la última semana.",
+  "responseOptions": [
+    {
+      "value": 1,
+      "label": "Sí"
+    },
+    {
+      "value": 0,
+      "label": "No"
+    }
+  ],
+  "landing": {
+    "hook": "¿Cómo está tu ánimo últimamente?",
+    "description": "La GDS-15 es un cuestionario validado en España para el cribado de síntomas depresivos en personas mayores de 65 años. Son 15 preguntas de respuesta sí o no sobre la última semana.",
+    "whatItMeasures": "Mide síntomas depresivos frecuentes en la edad avanzada: satisfacción con la vida, ánimo, interés por las actividades, energía, esperanza y preocupaciones. Deja fuera a propósito los síntomas físicos, que en la vejez pueden deberse a otras causas.",
+    "whoIsItFor": "Personas mayores de 65 años, que pueden responderlo solas o con un familiar que les lea las preguntas. No está indicado si hay un deterioro cognitivo grave.",
+    "howItWorks": [
+      "Responde 15 preguntas de sí o no sobre la última semana",
+      "Obtén tu puntuación y qué rango indica",
+      "Comparte el resultado con tu médico/a o psicólogo/a si lo necesitas"
+    ],
+    "faq": [
+      {
+        "q": "¿Es esto un diagnóstico?",
+        "a": "No. La GDS-15 es una herramienta de cribado, no un diagnóstico. Una puntuación de 5 o más indica que conviene que un profesional valore el estado de ánimo."
+      },
+      {
+        "q": "¿Quedan guardadas mis respuestas?",
+        "a": "No en nuestros servidores. Tus respuestas se procesan en tu navegador y no las guardamos. Si aceptas las cookies de analítica, se envían a Google Analytics, sin tu nombre ni datos que te identifiquen, para elaborar estadísticas. Solo tú decides qué hacer con el resultado."
+      },
+      {
+        "q": "¿Puede ayudarme un familiar a responderlo?",
+        "a": "Sí. Puede leerte las preguntas y marcar lo que contestes, pero las respuestas tienen que ser tuyas: cómo te has sentido tú durante la última semana."
+      },
+      {
+        "q": "¿Cuánto tiempo lleva completarlo?",
+        "a": "Entre 2 y 5 minutos. Son 15 preguntas de sí o no."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "likert",
+      "text": "¿En general, está satisfecho/a con su vida?",
+      "scale": {
+        "min": 0,
+        "max": 1,
+        "step": 1
+      },
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "Sí"
+        },
+        {
+          "value": 1,
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "likert",
+      "text": "¿Ha abandonado muchas de sus tareas habituales y aficiones?",
+      "scale": {
+        "min": 0,
+        "max": 1,
+        "step": 1
+      }
+    },
+    {
+      "id": "q3",
+      "type": "likert",
+      "text": "¿Siente que su vida está vacía?",
+      "scale": {
+        "min": 0,
+        "max": 1,
+        "step": 1
+      }
+    },
+    {
+      "id": "q4",
+      "type": "likert",
+      "text": "¿Se siente con frecuencia aburrido/a?",
+      "scale": {
+        "min": 0,
+        "max": 1,
+        "step": 1
+      }
+    },
+    {
+      "id": "q5",
+      "type": "likert",
+      "text": "¿Se encuentra de buen humor la mayor parte del tiempo?",
+      "scale": {
+        "min": 0,
+        "max": 1,
+        "step": 1
+      },
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "Sí"
+        },
+        {
+          "value": 1,
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "type": "likert",
+      "text": "¿Teme que algo malo pueda ocurrirle?",
+      "scale": {
+        "min": 0,
+        "max": 1,
+        "step": 1
+      }
+    },
+    {
+      "id": "q7",
+      "type": "likert",
+      "text": "¿Se siente feliz la mayor parte del tiempo?",
+      "scale": {
+        "min": 0,
+        "max": 1,
+        "step": 1
+      },
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "Sí"
+        },
+        {
+          "value": 1,
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "type": "likert",
+      "text": "¿Con frecuencia se siente desamparado/a, desprotegido/a?",
+      "scale": {
+        "min": 0,
+        "max": 1,
+        "step": 1
+      }
+    },
+    {
+      "id": "q9",
+      "type": "likert",
+      "text": "¿Prefiere usted quedarse en casa, más que salir y hacer cosas nuevas?",
+      "scale": {
+        "min": 0,
+        "max": 1,
+        "step": 1
+      }
+    },
+    {
+      "id": "q10",
+      "type": "likert",
+      "text": "¿Cree que tiene más problemas de memoria que la mayoría de la gente?",
+      "scale": {
+        "min": 0,
+        "max": 1,
+        "step": 1
+      }
+    },
+    {
+      "id": "q11",
+      "type": "likert",
+      "text": "¿En estos momentos, piensa que es estupendo estar vivo?",
+      "scale": {
+        "min": 0,
+        "max": 1,
+        "step": 1
+      },
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "Sí"
+        },
+        {
+          "value": 1,
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "id": "q12",
+      "type": "likert",
+      "text": "¿Actualmente se siente un/a inútil?",
+      "scale": {
+        "min": 0,
+        "max": 1,
+        "step": 1
+      }
+    },
+    {
+      "id": "q13",
+      "type": "likert",
+      "text": "¿Se siente lleno/a de energía?",
+      "scale": {
+        "min": 0,
+        "max": 1,
+        "step": 1
+      },
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "Sí"
+        },
+        {
+          "value": 1,
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "id": "q14",
+      "type": "likert",
+      "text": "¿Se siente sin esperanza en este momento?",
+      "scale": {
+        "min": 0,
+        "max": 1,
+        "step": 1
+      }
+    },
+    {
+      "id": "q15",
+      "type": "likert",
+      "text": "¿Piensa que la mayoría de la gente está en mejor situación que usted?",
+      "scale": {
+        "min": 0,
+        "max": 1,
+        "step": 1
+      }
+    }
+  ],
+  "scoring": [
+    {
+      "min": 0,
+      "max": 4,
+      "category": "Puntuación en rango mínimo",
+      "color": "green",
+      "messageKey": "minimal"
+    },
+    {
+      "min": 5,
+      "max": 8,
+      "category": "Puntuación en rango leve",
+      "color": "yellow",
+      "messageKey": "mild"
+    },
+    {
+      "min": 9,
+      "max": 11,
+      "category": "Puntuación en rango moderado",
+      "color": "orange",
+      "messageKey": "moderate"
+    },
+    {
+      "min": 12,
+      "max": null,
+      "category": "Puntuación en rango grave",
+      "color": "red",
+      "messageKey": "severe"
+    }
+  ],
+  "results": {
+    "normal": {
+      "minimal": {
+        "title": "Puntuación en rango mínimo",
+        "body": "Tus respuestas no muestran síntomas depresivos destacables durante la última semana.",
+        "recommendation": "Una puntuación baja no descarta un problema: si notas cambios en tu ánimo, en tus ganas de hacer cosas o en tu memoria, coméntalo con tu médico/a de familia."
+      },
+      "mild": {
+        "title": "Puntuación en rango leve",
+        "body": "Sugiere algunos síntomas depresivos. A partir de 5 puntos, la versión española del cuestionario recomienda valorar el estado de ánimo con más detalle.",
+        "recommendation": "Es recomendable comentarlo con tu médico/a de familia o con un psicólogo/a, que pueden valorar si es algo pasajero o necesita atención."
+      },
+      "moderate": {
+        "title": "Puntuación en rango moderado",
+        "body": "Sugiere síntomas depresivos que probablemente están afectando a tu día a día.",
+        "recommendation": "Es recomendable que un profesional valore tu estado de ánimo: tu médico/a de familia o un psicólogo/a. La depresión en personas mayores tiene tratamiento."
+      },
+      "severe": {
+        "title": "Puntuación en rango grave",
+        "body": "Sugiere síntomas depresivos intensos, que probablemente están afectando a tu bienestar y a tu vida diaria.",
+        "recommendation": "Es recomendable que consultes con un profesional cuanto antes: tu médico/a de familia, un psicólogo/a o un psiquiatra. Si en algún momento piensas en hacerte daño, llama al 024 o, si estás en peligro, al 112."
+      }
+    }
+  }
+}

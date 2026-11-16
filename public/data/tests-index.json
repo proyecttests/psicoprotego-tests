@@ -24,6 +24,30 @@
     }
   },
   {
+    "testId": "gds15",
+    "category": "psychometric",
+    "condition": "depresion",
+    "tags": [
+      "validado-clinicamente",
+      "mayores-65",
+      "si-no",
+      "15-items",
+      "cribado"
+    ],
+    "availableLangs": [
+      "es"
+    ],
+    "validated": true,
+    "timeToComplete": "2-5 min",
+    "itemCount": 15,
+    "names": {
+      "es": "Escala de Depresión Geriátrica de Yesavage, versión abreviada (GDS-15)"
+    },
+    "hooks": {
+      "es": ""
+    }
+  },
+  {
     "testId": "phq15",
     "category": "psychometric",
     "condition": "sintomas-fisicos",
