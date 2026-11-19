@@ -21,6 +21,8 @@ import {
 } from '@react-pdf/renderer'
 import type { Question, ResponseOption, ScoringRule, TestLangFile } from '@/types/test'
 import { getResponseOptions } from '@/utils/responseOptions'
+import { itemNumber, type ExampleEntry } from '@/utils/questionVisibility'
+import { formatScore } from '@/utils/scoringFunctions'
 
 // ── Fuentes (TTF de Fontsource, licencia OFL: public/fonts/) ──────────────────
 
@@ -77,6 +79,9 @@ export interface PdfValidation {
 // ── Estilos ───────────────────────────────────────────────────────────────────
 
 const OPTION_COL = 58
+/** Con muchas opciones (DES-II: 11) las columnas se estrechan para que quepan en A4 */
+const OPTION_COL_NARROW = 27
+const optionCol = (n: number) => (n > 5 ? OPTION_COL_NARROW : OPTION_COL)
 
 export const styles = StyleSheet.create({
   page: {
@@ -139,6 +144,11 @@ export const styles = StyleSheet.create({
 
   disclaimer: { marginTop: 8, fontSize: 6.5, color: COLORS.muted, lineHeight: 1.35 },
 
+  example: { paddingVertical: 5, borderBottomWidth: 0.5, borderBottomColor: COLORS.line },
+  exampleItem: { fontSize: 7.5, color: COLORS.muted },
+  exampleText: { fontSize: 9, marginTop: 2 },
+  examplesBox: { height: 150, borderWidth: 1, borderColor: COLORS.primary, borderRadius: 3, padding: 4 },
+
   // Con `top` y no `bottom`: un elemento fijo sin alto conocido (número de página) acaba fuera de
   // la página si se ancla abajo. A4 = 841,89 pt de alto.
   footer: {
@@ -196,14 +206,17 @@ export const NameDateFields: React.FC<{ name?: string; date?: string }> = ({ nam
   </View>
 )
 
-/** Bloques consecutivos de preguntas con las mismas opciones de respuesta */
+/**
+ * Bloques consecutivos de preguntas con las mismas opciones de respuesta. Las preguntas de texto
+ * (ejemplos de la DES-II comentada) no van en la tabla ni cuentan en la numeración.
+ */
 function groupByOptions(testData: TestLangFile, questions: Question[]) {
   const groups: Array<{ options: ResponseOption[]; items: Array<{ q: Question; n: number }> }> = []
-  questions.forEach((q) => {
+  questions.filter((q) => q.type !== 'text').forEach((q) => {
     const options = getResponseOptions(q, testData.responseOptions)
     const key = JSON.stringify(options)
     const last = groups[groups.length - 1]
-    const n = testData.questions.indexOf(q) + 1
+    const n = itemNumber(testData.questions, q)
     if (last && JSON.stringify(last.options) === key) last.items.push({ q, n })
     else groups.push({ options, items: [{ q, n }] })
   })
@@ -232,7 +245,7 @@ export const ItemsTable: React.FC<{
                 {noScore && <Text style={styles.rowNote}>No suma a la puntuación.</Text>}
               </View>
               {group.options.map((o) => (
-                <View key={o.value} style={styles.cell}>
+                <View key={o.value} style={[styles.cell, { width: optionCol(group.options.length) }]}>
                   {answers
                     ? <View style={Number(answers[q.id]) === o.value && answers[q.id] !== undefined ? [styles.mark, styles.markOn] : styles.mark} />
                     : (
@@ -253,7 +266,10 @@ export const ItemsTable: React.FC<{
               <View style={styles.tableHead}>
                 <Text style={styles.headItem}>{gi === 0 ? 'PREGUNTA' : ''}</Text>
                 {group.options.map((o) => (
-                  <Text key={o.value} style={styles.headOption}>{`${o.label} (${o.value})`}</Text>
+                  // Con muchas opciones la etiqueta ya es el valor («30 %»)
+                  <Text key={o.value} style={[styles.headOption, { width: optionCol(group.options.length) }]}>
+                    {group.options.length > 5 ? o.label : `${o.label} (${o.value})`}
+                  </Text>
                 ))}
               </View>
               {row}
@@ -265,13 +281,13 @@ export const ItemsTable: React.FC<{
   </View>
 )
 
-/** Casilla editable para la suma (PDF en blanco: el PDF no suma solo) */
-export const TotalField: React.FC<{ max: number }> = ({ max }) => (
+/** Casilla editable para la suma o la media (PDF en blanco: el PDF no calcula solo) */
+export const TotalField: React.FC<{ max: number; mean?: boolean }> = ({ max, mean }) => (
   <View style={styles.totalRow} wrap={false}>
-    <Text style={styles.totalLabel}>{`Puntuación total (0–${max})`}</Text>
+    <Text style={styles.totalLabel}>{mean ? `Puntuación (media de los ítems, 0–${max})` : `Puntuación total (0–${max})`}</Text>
     <View style={styles.totalBox}>
       <FieldFont />
-      <TextInput name="puntuacion_total" align="center" maxLength={3} style={{ height: 16, marginTop: 3 }} />
+      <TextInput name="puntuacion_total" align="center" maxLength={5} style={{ height: 16, marginTop: 3 }} />
     </View>
   </View>
 )
@@ -282,7 +298,7 @@ export const RangesTable: React.FC<{ scoring: ScoringRule[]; current?: string }>
     <Text style={styles.sectionTitle}>Interpretación orientativa</Text>
     {scoring.map((r) => (
       <View key={r.messageKey} style={r.messageKey === current ? [styles.rangeRow, styles.rangeOn] : styles.rangeRow}>
-        <Text style={styles.rangeScore}>{r.max === null ? `${r.min} o más` : `${r.min}–${r.max}`}</Text>
+        <Text style={styles.rangeScore}>{r.max === null ? `${formatScore(r.min)} o más` : `${formatScore(r.min)}–${formatScore(r.max)}`}</Text>
         <Text style={styles.rangeLabel}>{r.category}</Text>
       </View>
     ))}
@@ -318,6 +334,31 @@ export const AboutBlock: React.FC<{ validation?: PdfValidation; links: PdfLinks 
         <Text style={styles.qrCaption}>Ficha del test</Text>
       </Link>
     )}
+  </View>
+)
+
+/**
+ * Ejemplos escritos (DES-II comentada). Con `examples`, los del informe; sin ellos, un recuadro
+ * editable para el PDF en blanco.
+ */
+export const ExamplesBlock: React.FC<{ examples?: ExampleEntry[]; hint?: string }> = ({ examples, hint }) => (
+  // En blanco, título, indicación y recuadro van juntos en la misma página
+  <View wrap={!!examples}>
+    <Text style={styles.sectionTitle}>Ejemplos</Text>
+    {hint ? <Text style={styles.instructions}>{hint}</Text> : null}
+    {examples
+      ? examples.map((e) => (
+        <View key={e.n} style={styles.example} wrap={false}>
+          <Text style={styles.exampleItem}>{`${e.n}. ${e.item} (${e.answerLabel})`}</Text>
+          <Text style={styles.exampleText}>{e.text}</Text>
+        </View>
+      ))
+      : (
+        <View style={styles.examplesBox}>
+          <FieldFont />
+          <TextInput name="ejemplos" multiline fontSize={9} style={{ height: 140 }} />
+        </View>
+      )}
   </View>
 )
 

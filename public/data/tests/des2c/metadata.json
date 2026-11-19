@@ -1,0 +1,103 @@
+{
+  "id": "des2c",
+  "availableLangs": [
+    "es"
+  ],
+  "category": "psychometric",
+  "condition": "disociacion",
+  "slug": "des-ii-comentada",
+  "tags": [
+    "validado-clinicamente",
+    "adultos",
+    "28-items",
+    "cribado",
+    "con-ejemplos"
+  ],
+  "originalInstrument": "Dissociative Experiences Scale II (DES-II)",
+  "use": [
+    "clinical_screening"
+  ],
+  "measures": [
+    "dissociation"
+  ],
+  "validated": true,
+  "medicalCondition": {
+    "icd10": "F44",
+    "name": "Trastornos disociativos",
+    "schemaOrgUrl": "https://www.icd10data.com/ICD10CM/Codes/F01-F99/F40-F48/F44-"
+  },
+  "validation": {
+    "isValidated": true,
+    "references": [
+      {
+        "doi": "10.1097/00005053-198612000-00004",
+        "authors": "Bernstein EM, Putnam FW",
+        "year": 1986,
+        "journal": "The Journal of Nervous and Mental Disease",
+        "volume": "174",
+        "issue": "12",
+        "pages": "727-735",
+        "title": "Development, reliability, and validity of a dissociation scale"
+      },
+      {
+        "doi": "10.1176/ajp.150.7.1030",
+        "authors": "Carlson EB, Putnam FW, Ross CA, Torem M, Coons P, Dill DL, Loewenstein RJ, Braun BG",
+        "year": 1993,
+        "journal": "The American Journal of Psychiatry",
+        "volume": "150",
+        "issue": "7",
+        "pages": "1030-1036",
+        "title": "Validity of the Dissociative Experiences Scale in screening for multiple personality disorder: a multicenter study"
+      }
+    ],
+    "spanishValidation": {
+      "available": true,
+      "note": "Icarán E, Colom R, Orengo-García F (1996). Estudio de validación de la escala de experiencias disociativas con muestra de población española. Actas Luso-Españolas de Neurología, Psiquiatría y Ciencias Afines 24(1):7-10 (PMID 8900971). También: Icarán E, Colom R, Orengo F (1996). Experiencias disociativas: una escala de medida. Anuario de Psicología 70:69-84. Los pacientes españoles tuvieron dificultad con la idea de «porcentaje del tiempo». Punto de corte de 30: Carlson et al. (1993), en población estadounidense."
+    }
+  },
+  "validationDetails": {
+    "original": {
+      "lang": "en",
+      "reference": "Carlson EB y Putnam FW (1993)",
+      "journal": "Dissociation, 6(1), 16-27 (DES-II); validez: Am J Psychiatry 150(7):1030-1036",
+      "doi": "10.1176/ajp.150.7.1030"
+    },
+    "translations": {
+      "es": {
+        "validated": true,
+        "reference": "Icarán et al., 1996"
+      },
+      "en": {
+        "validated": true,
+        "reference": "Original instrument"
+      }
+    }
+  },
+  "authorship": {
+    "author": "emmanuel",
+    "reviewedBy": "cristina"
+  },
+  "ageRange": {
+    "min": 18,
+    "max": null
+  },
+  "selfAdministrable": true,
+  "itemCount": 28,
+  "itemType": "percent_11",
+  "scoringRange": {
+    "min": 0,
+    "max": 100
+  },
+  "cutoffs": {
+    "below_cutoff": [
+      0,
+      29.9
+    ],
+    "above_cutoff": [
+      30,
+      100
+    ]
+  },
+  "copyright": "research_clinical_use",
+  "timeToComplete": "10-15 min"
+}

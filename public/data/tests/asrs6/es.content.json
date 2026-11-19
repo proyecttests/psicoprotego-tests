@@ -1,0 +1,142 @@
+{
+  "status": "draft-pending-clinical-review",
+  "drafted": "clinical-landing-writer-v2",
+  "draftedAt": "2026-11-20T10:00:00.000Z",
+  "auditedAt": "2026-11-20T10:00:00.000Z",
+  "lastEditedBy": null,
+  "clinicallyApprovedBy": null,
+  "clinicallyApprovedAt": null,
+  "hero": {
+    "title": "Test ASRS v1.1: cuestionario orientativo de TDAH en adultos",
+    "subtitle": "Seis preguntas sobre los últimos seis meses: si te cuesta rematar lo que empiezas, organizarte, acordarte de citas, ponerte con tareas que exigen concentración o estarte quieto/a. El resultado te sirve como punto de partida para hablarlo con tu psicólogo/a o tu médico/a.",
+    "clinicalContext": "Es una herramienta clínica de apoyo. Está pensada para usarse junto con un profesional, o para llevar un registro orientativo a una primera consulta.",
+    "badges": [
+      "Instrumento validado",
+      "6 preguntas",
+      "1-2 min",
+      "Sin registro",
+      "Datos en tu navegador"
+    ]
+  },
+  "whatItMeasures": {
+    "heading": "¿Qué mide este test?",
+    "body": "El ASRS v1.1 (Adult ADHD Self-Report Scale, versión de cribado) es un cuestionario de seis preguntas sobre la frecuencia, en los últimos seis meses, de síntomas del trastorno por déficit de atención con hiperactividad (TDAH) en adultos. Cuatro preguntas exploran la falta de atención y la organización (rematar los detalles de un proyecto, ordenar una tarea, recordar citas y evitar o retrasar tareas que exigen pensar mucho) y dos, la hiperactividad (mover las manos o los pies sin parar y sentirse impulsado/a «como por un motor»).\n\nSe responde con cinco opciones, de «Nunca» a «Muy a menudo». Lo desarrollaron la Organización Mundial de la Salud y el equipo de Ronald Kessler en la Universidad de Harvard: las seis preguntas se eligieron entre las 18 del cuestionario completo porque eran las que mejor coincidían con el diagnóstico clínico. La versión española la validaron Ramos-Quiroga y colaboradores en 2009.\n\nEl cuestionario recoge síntomas actuales. No pregunta por la infancia ni por cuánto afectan esos síntomas a la vida diaria, dos cosas imprescindibles para el diagnóstico de TDAH."
+  },
+  "whoIsItFor": {
+    "heading": "¿A quién está dirigido?",
+    "body": "El ASRS v1.1 está dirigido a personas adultas. Se usa en consultas de salud mental y de atención primaria como cribado: indica si conviene valorar un posible TDAH con más detalle, no si la persona lo tiene.\n\nResulta especialmente útil para quienes ya están en seguimiento y quieren aportar a su profesional un registro ordenado de estas dificultades, o para quienes han decidido consultar por problemas de atención, de organización o de inquietud y quieren llegar a esa cita con un punto de partida. También lo utilizan profesionales clínicos y estudiantes de ciencias de la salud para familiarizarse con el instrumento.",
+    "indications": [
+      "Personas adultas en seguimiento por un profesional de la salud mental que quieran registrar sus dificultades de atención, organización o inquietud entre consultas.",
+      "Personas adultas que han decidido consultar por estas dificultades y quieren llevar un registro orientativo a la primera cita.",
+      "Personas que ya tienen un diagnóstico de TDAH y quieren seguir la evolución de los síntomas junto con su profesional.",
+      "Profesionales clínicos, estudiantes de Psicología o Medicina e investigadores que quieran consultar el instrumento y su validación."
+    ],
+    "limitations": [
+      "No es una herramienta diagnóstica. No sustituye la valoración de un psicólogo/a, psiquiatra o médico/a.",
+      "Solo recoge seis síntomas de los últimos seis meses. El diagnóstico de TDAH exige que los síntomas vengan de la infancia y que interfieran en la vida diaria, y eso solo se valora en una entrevista clínica.",
+      "La ansiedad, la depresión, la falta de sueño, el consumo de sustancias y otros problemas de salud pueden dar puntuaciones altas sin que haya TDAH.",
+      "La validación española se hizo en un programa hospitalario de TDAH en adultos, comparando a pacientes ya diagnosticados con personas sin el trastorno. En la población general es probable que acierte menos de lo que indican sus cifras.",
+      "La puntuación de 0 a 24 con corte en 12 es la de la validación española. El material original de la OMS usa otra corrección (cuenta las respuestas que caen en las casillas sombreadas). [REVISAR: confirmar con la licencia que se puede usar la puntuación española]",
+      "No está pensado para niños ni adolescentes."
+    ]
+  },
+  "howItWorks": {
+    "heading": "Cómo funciona",
+    "body": "El test consta de 6 preguntas sobre cómo te has sentido y comportado en los últimos 6 meses. Cada una se responde con una de cinco opciones: «Nunca», «Rara vez», «A veces», «A menudo» o «Muy a menudo». No hay respuestas correctas o incorrectas; solo marca lo que mejor se ajusta a tu experiencia.\n\nCada respuesta suma de 0 («Nunca») a 4 puntos («Muy a menudo»), así que la puntuación total va de 0 a 24. Es la forma de puntuar de la validación española, que fijó el punto de corte en 12.\n\nEsta herramienta se usa típicamente en el marco de una valoración o un seguimiento. Si ya estás en consulta, tu profesional puede decirte si te conviene completarla; si todavía no has consultado, el resultado puede servirte para llevar un registro orientativo a una primera cita.",
+    "steps": [
+      "Respondes 6 preguntas sobre los últimos 6 meses.",
+      "Cada pregunta tiene cinco opciones, de «Nunca» a «Muy a menudo».",
+      "Marcas la que mejor describe tu experiencia. Puedes ir atrás si lo necesitas.",
+      "El sistema calcula automáticamente tu puntuación total (rango 0–24).",
+      "Ves tu puntuación y si llega al punto de corte de la versión española."
+    ]
+  },
+  "validation": {
+    "heading": "Validación científica",
+    "body": "La escala ASRS la desarrollaron la Organización Mundial de la Salud y el equipo de Kessler junto con la revisión de la entrevista diagnóstica CIDI. La escala completa tiene 18 preguntas, una por cada síntoma del criterio A del TDAH en el DSM-IV. En 2005, Kessler y colaboradores compararon las respuestas con el diagnóstico clínico, hecho sin conocerlas, en 154 adultos de la encuesta nacional de comorbilidad de Estados Unidos. Las seis preguntas del cribado, elegidas por ser las que mejor coincidían con ese diagnóstico, funcionaron mejor que las 18: sensibilidad del 68,7% y especificidad del 99,5% [1]. En 2007, en 668 afiliados a un seguro de salud estadounidense, el cribado mostró una buena concordancia con el diagnóstico clínico (área bajo la curva de 0,90) [2].\n\nLa versión española la validaron Ramos-Quiroga y colaboradores en 2009 en el Hospital Universitari Vall d'Hebron (Barcelona), con 90 pacientes de un programa de TDAH en adultos y 90 personas sin el trastorno, comparando el cuestionario con una entrevista diagnóstica estructurada (CAADID). La mejor forma de puntuarlo fue sumar las respuestas de 0 a 24, con el punto de corte en 12: la sensibilidad fue del 96,7% y la especificidad, del 91,1% [3]. Son cifras obtenidas en un contexto clínico especializado; en la población general, donde el TDAH es menos frecuente y otros problemas pueden parecerse, el cuestionario acierta menos.\n\nEn 2024, un estudio con más de 72.000 personas de 42 países encontró una buena fiabilidad y validez del cribado, aunque sus resultados no son del todo equivalentes entre países [4].",
+    "references": [
+      {
+        "id": 1,
+        "authors": "Kessler RC, Adler L, Ames M, Demler O, Faraone S, Hiripi E, Howes MJ, Jin R, Secnik K, Spencer T, Ustun TB, Walters EE",
+        "year": 2005,
+        "title": "The World Health Organization Adult ADHD Self-Report Scale (ASRS): a short screening scale for use in the general population",
+        "journal": "Psychol Med",
+        "volume": "35",
+        "issue": "2",
+        "pages": "245–256",
+        "doi": "10.1017/s0033291704002892",
+        "url": "https://doi.org/10.1017/s0033291704002892"
+      },
+      {
+        "id": 2,
+        "authors": "Kessler RC, Adler LA, Gruber MJ, Sarawate CA, Spencer T, Van Brunt DL",
+        "year": 2007,
+        "title": "Validity of the World Health Organization Adult ADHD Self-Report Scale (ASRS) Screener in a representative sample of health plan members",
+        "journal": "Int J Methods Psychiatr Res",
+        "volume": "16",
+        "issue": "2",
+        "pages": "52–65",
+        "doi": "10.1002/mpr.208",
+        "url": "https://doi.org/10.1002/mpr.208"
+      },
+      {
+        "id": 3,
+        "authors": "Ramos-Quiroga JA, Daigre C, Valero S, Bosch R, Gómez-Barros N, Nogueira M, Palomar G, Roncero C, Casas M",
+        "year": 2009,
+        "title": "Validación al español de la escala de cribado del trastorno por déficit de atención/hiperactividad en adultos (ASRS v. 1.1): una nueva estrategia de puntuación",
+        "journal": "Rev Neurol",
+        "volume": "48",
+        "issue": "9",
+        "pages": "449–452",
+        "doi": "10.33588/rn.4809.2008677",
+        "url": "https://doi.org/10.33588/rn.4809.2008677"
+      },
+      {
+        "id": 4,
+        "authors": "Lewczuk K, Marcowski P, Wizła M, Gola M, Nagy L, et al.",
+        "year": 2024,
+        "title": "Cross-Cultural Adult ADHD Assessment in 42 Countries Using the Adult ADHD Self-Report Scale Screener",
+        "journal": "J Atten Disord",
+        "volume": "28",
+        "issue": "4",
+        "pages": "512–530",
+        "doi": "10.1177/10870547231215518",
+        "url": "https://doi.org/10.1177/10870547231215518"
+      }
+    ]
+  },
+  "interpretation": {
+    "heading": "Qué hacer con tu resultado",
+    "body": "Una puntuación por debajo del punto de corte (0–11 puntos) significa que tus respuestas no llegan al valor a partir del cual la versión española recomienda valorar un posible TDAH. Aun así, el cuestionario solo recoge seis síntomas: si las dificultades de atención, de organización o la inquietud te están afectando en el trabajo, en los estudios o en casa, coméntalo con tu profesional de referencia o con tu médico/a de familia.\n\nUna puntuación a partir del punto de corte (12–24 puntos) significa que tus respuestas están en el rango en el que se recomienda una valoración profesional. No indica que tengas TDAH: la ansiedad, el estado de ánimo, el sueño o el consumo de sustancias pueden dar puntuaciones parecidas. Es información útil para llevar a consulta: un psicólogo/a o psiquiatra con experiencia en TDAH en adultos puede valorar, en una entrevista, cómo eras de niño/a y cuánto te afecta hoy. Si quieres comentar este resultado en consulta y no tienes psicólogo/a de referencia, en Psicoprotego podemos ayudarte a empezar.\n\nLos rangos son orientativos. Una misma puntuación puede tener significados distintos según el momento vital, la salud y las circunstancias de cada persona. Solo un profesional sanitario puede establecer un diagnóstico tras una evaluación completa."
+  },
+  "faq": [
+    {
+      "q": "¿Es un diagnóstico?",
+      "a": "No. El ASRS v1.1 es un cuestionario de cribado orientativo, no una herramienta diagnóstica. Una puntuación de 12 o más indica que conviene una valoración profesional, no que haya un TDAH."
+    },
+    {
+      "q": "¿Por qué pregunta solo por los últimos seis meses si el TDAH empieza en la infancia?",
+      "a": "Porque el cuestionario mide cómo estás ahora. La historia desde la infancia es imprescindible para el diagnóstico, pero se valora en la entrevista con el profesional, no en este test."
+    },
+    {
+      "q": "Tengo mucha ansiedad o duermo mal. ¿Puede influir en el resultado?",
+      "a": "Sí. Las dificultades para concentrarse, organizarse o estarse quieto/a aparecen también con la ansiedad, la depresión, la falta de sueño o el consumo de sustancias. Por eso una puntuación alta necesita la valoración de un profesional, que pueda distinguir unas causas de otras."
+    },
+    {
+      "q": "¿Quedan guardadas mis respuestas?",
+      "a": "No en nuestros servidores. Tus respuestas se procesan en tu navegador y no las guardamos. Si aceptas las cookies de analítica, se envían a Google Analytics, sin tu nombre ni datos que te identifiquen, para elaborar estadísticas. Solo tú decides qué hacer con el resultado."
+    },
+    {
+      "q": "¿Puedo compartirlo con mi psicólogo/a o mi médico/a?",
+      "a": "Sí. Puedes descargar el resultado en PDF y llevarlo a tu consulta. Es una forma práctica de aportar contexto inicial, aunque el/la profesional hará su propia valoración."
+    },
+    {
+      "q": "¿Debo ir al médico de cabecera, al psicólogo o al psiquiatra?",
+      "a": "Para valorar un posible TDAH en adultos lo habitual es un psicólogo/a clínico/a o un psiquiatra con experiencia en el trastorno. El médico/a de familia puede ser el primer paso: conoce tu salud, puede descartar otras causas y derivarte. Si se plantea medicación, la valoración y el seguimiento corresponden al psiquiatra. Lo que no debería decidirlo es el resultado de este test."
+    }
+  ],
+  "privacy": {
+    "heading": "Privacidad",
+    "body": "Tus respuestas se calculan en tu navegador: no se envían a nuestros servidores ni se guardan. Solo si aceptas las cookies de analítica se envían a Google Analytics, sin tu nombre ni datos que te identifiquen, para elaborar estadísticas. Decides tú qué compartir y con quién: puedes descargar un PDF del resultado para llevarlo a tu médico/a o terapeuta, o simplemente cerrar la pestaña."
+  }
+}

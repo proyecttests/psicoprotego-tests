@@ -8,7 +8,8 @@
 import React from 'react'
 import { Document, Page, View, Text, StyleSheet } from '@react-pdf/renderer'
 import type { TestLangFile, AnswersMap } from '@/types/test'
-import { getMaxScore, type QuestionWithScoring, type ScoringResult } from '@/utils/scoringFunctions'
+import { formatScore, getMaxScore, type QuestionWithScoring, type ScoringResult } from '@/utils/scoringFunctions'
+import { getExamples } from '@/utils/questionVisibility'
 import { getCrisisPhone } from '@/config/crisisPhones'
 import {
   COLORS,
@@ -17,6 +18,7 @@ import {
   NameDateFields,
   ItemsTable,
   RangesTable,
+  ExamplesBlock,
   AboutBlock,
   Disclaimer,
   PdfFooter,
@@ -69,7 +71,8 @@ export const TestReportDocument: React.FC<TestReportDocumentProps> = ({
   links,
 }) => {
   const answered = testData.questions.filter((q) => answers[q.id] !== undefined)
-  const maxScore = getMaxScore(testData.questions as QuestionWithScoring[])
+  const maxScore = getMaxScore(testData.questions as QuestionWithScoring[], testData.scoringFunction)
+  const examples = getExamples(testData.questions, answers, testData.responseOptions)
 
   return (
     <Document
@@ -91,7 +94,7 @@ export const TestReportDocument: React.FC<TestReportDocumentProps> = ({
         {result.score !== null && (
           <View style={local.result} wrap={false}>
             <View style={local.scoreCol}>
-              <Text style={local.score}>{result.score}</Text>
+              <Text style={local.score}>{formatScore(result.score)}</Text>
               <Text style={local.scoreMax}>{`de ${maxScore}`}</Text>
             </View>
             <View style={{ flex: 1 }}>
@@ -104,6 +107,7 @@ export const TestReportDocument: React.FC<TestReportDocumentProps> = ({
         <Text style={styles.sectionTitle}>Respuestas</Text>
         {testData.instructions ? <Text style={styles.instructions}>{testData.instructions}</Text> : null}
         <ItemsTable testData={testData} questions={answered} answers={answers} />
+        {examples.length > 0 && <ExamplesBlock examples={examples} />}
 
         <RangesTable scoring={testData.scoring} current={result.category?.messageKey} />
         <AboutBlock validation={validation} links={links} />

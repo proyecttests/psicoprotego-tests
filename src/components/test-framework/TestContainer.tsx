@@ -26,7 +26,6 @@ import type {
   MessagesMap,
   TestState,
   AnswersMap,
-  Question,
 } from '@/types/test'
 
 import ProgressBar         from './ProgressBar'
@@ -35,7 +34,8 @@ import ResultCard          from '@/components/results/ResultCard'
 import CalculatingScreen   from './CalculatingScreen'
 import SharingScreen       from './SharingScreen'
 import { getScoringFunction, getMaxScore } from '@/utils/scoringFunctions'
-import { buildShareUrl } from '@/utils/shareEncoding'
+import { buildShareUrl, shareableAnswers } from '@/utils/shareEncoding'
+import { shouldShowQuestion } from '@/utils/questionVisibility'
 import type { ScoringResult, TestDefinitionForScoring, QuestionWithScoring } from '@/utils/scoringFunctions'
 import { trackEvent } from '@/config/analytics'
 import { getCrisisPhone } from '@/config/crisisPhones'
@@ -101,6 +101,7 @@ const UI_STRINGS: Record<string, {
   next: string
   finish: string
   selectAnswer: string
+  writeAnswer: string
 }> = {
   es: {
     loading:      'Cargando cuestionario…',
@@ -110,6 +111,7 @@ const UI_STRINGS: Record<string, {
     next:         'Siguiente →',
     finish:       'Ver resultados →',
     selectAnswer: 'Selecciona una respuesta para continuar',
+    writeAnswer:  'Escribe tu respuesta para continuar',
   },
 }
 
@@ -124,18 +126,6 @@ interface TestContainerProps {
   testId: string
   /** Código de idioma (debe existir /data/tests/{testId}/{lang}.json) */
   lang?: string
-}
-
-// ── Helpers ───────────────────────────────────────────────────────────────────
-
-/**
- * Evalúa si una pregunta debe mostrarse según su condición `showIf`.
- */
-function shouldShowQuestion(question: Question, answers: AnswersMap): boolean {
-  if (!question.showIf) return true
-  const { questionId, value, notIn } = question.showIf
-  if (notIn) return !notIn.includes(answers[questionId])
-  return answers[questionId] === value
 }
 
 // ── Componente ────────────────────────────────────────────────────────────────
@@ -233,7 +223,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
 
   // Puntuación máxima teórica del instrumento
   const maxScore = React.useMemo(
-    () => (testDef ? getMaxScore(testDef.questions as QuestionWithScoring[]) : 0),
+    () => (testDef ? getMaxScore(testDef.questions as QuestionWithScoring[], scoringFnNameRef.current) : 0),
     [testDef],
   )
 
@@ -255,7 +245,9 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
 
   const handleAnswer = (questionId: string, value: string | number | boolean) => {
     setAnswers((prev) => ({ ...prev, [questionId]: value }))
-    trackEvent('question_answered', { testId, questionId, answer: value })
+    // El texto libre (ejemplos) no sale del navegador: ni a la analítica ni al enlace compartido
+    const isText = testDef?.questions.find((q) => q.id === questionId)?.type === 'text'
+    if (!isText) trackEvent('question_answered', { testId, questionId, answer: value })
   }
 
   const handleSubmit = (finalAnswers: AnswersMap) => {
@@ -337,7 +329,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
   }
 
   const handleShare = () => {
-    const url = buildShareUrl(lang, testId, answers)
+    const url = buildShareUrl(lang, testId, shareableAnswers(testDef?.questions ?? [], answers))
     trackEvent('share_open', { testId })
     setPendingShareUrl(url)
     setUiState('sharing')
@@ -346,9 +338,14 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
 
   // ── Helpers de render ──────────────────────────────────────────────────────
 
-  const currentAnswered = currentQuestion
-    ? answers[currentQuestion.id] !== undefined
-    : false
+  // Texto obligatorio: no basta con haber escrito y borrado, tiene que quedar algo
+  const currentValue    = currentQuestion ? answers[currentQuestion.id] : undefined
+  const currentAnswered = currentQuestion?.type === 'text' && currentQuestion.validation?.required
+    ? typeof currentValue === 'string' && currentValue.trim().length > 0
+    : currentValue !== undefined
+  // Más de 4 opciones (ASRS-6, DES-II): enunciado e ítem algo más pequeños para que quepan
+  const manyOptions = (currentQuestion?.responseOptions ?? testDef?.responseOptions ?? []).length > 4
+    && currentQuestion?.type === 'likert'
 
   const showCrisisFooter = result?.resultType === 'CRISIS'
 
@@ -466,12 +463,12 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
         {/* SECCIÓN CENTRAL: Pregunta + Opciones con transición TDAH */}
         <div
           key={currentIdx}
-          className={`w-full max-w-2xl flex flex-col items-center gap-6 sm:gap-14 flex-1 justify-center py-2 sm:py-4${isExiting ? ' animate-slide-out-tiktok' : ''}`}
+          className={`w-full max-w-2xl flex flex-col items-center ${manyOptions ? 'gap-3' : 'gap-6'} sm:gap-14 flex-1 justify-center py-2 sm:py-4${isExiting ? ' animate-slide-out-tiktok' : ''}`}
         >
           {/* Instrucciones validadas — en cada pregunta: los ítems oficiales no se entienden sin el enunciado */}
           {(currentQuestion.instructions ?? testDef?.instructions) && (
             <p
-              className="w-full max-w-md px-4 text-sm leading-relaxed text-center animate-fadeInQuestion"
+              className={`w-full max-w-md px-4 ${manyOptions ? 'text-xs sm:text-sm' : 'text-sm'} leading-relaxed text-center animate-fadeInQuestion`}
               style={{ color: 'var(--color-primary)', opacity: 0.6 }}
               aria-label="Instrucciones del test"
             >
@@ -481,7 +478,8 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
 
           {/* Pregunta - Grande, fade suave, centrada */}
           <h2
-            className="text-xl sm:text-3xl font-semibold leading-snug text-center px-4 animate-fadeInQuestion max-w-md pb-2"
+            /* Las opciones suben hasta 30 px (riseUp 20 + flotación 10): el hueco bajo el ítem no baja de 32 */
+            className={`${manyOptions ? 'text-lg pb-5' : 'text-xl pb-2'} sm:text-3xl font-semibold leading-snug text-center px-4 animate-fadeInQuestion max-w-md`}
             style={{ color: 'var(--color-primary)' }}
           >
             {currentQuestion.text}
@@ -536,7 +534,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
 
         {!currentAnswered && (
           <p aria-live="polite" className="text-center text-xs text-gray-400 mt-2">
-            {ui.selectAnswer}
+            {currentQuestion.type === 'text' ? ui.writeAnswer : ui.selectAnswer}
           </p>
         )}
       </main>

@@ -13,6 +13,7 @@
 
 import React from 'react'
 import type { TestMetadata } from '@/types/test'
+import { formatScore } from '@/utils/scoringFunctions'
 
 // ── UI strings ────────────────────────────────────────────────────────────────
 
@@ -61,6 +62,7 @@ const STRINGS = {
     itemTypeLabels: {
       likert_4:        'Likert (4 opciones, 0–3)',
       likert_5:        'Likert (5 opciones, 0–4)',
+      percent_11:      'Porcentaje del tiempo (11 opciones, 0–100 %)',
       boolean:         'Sí / No',
       multiple_choice: 'Opción múltiple',
     } as Record<string, string>,
@@ -68,6 +70,8 @@ const STRINGS = {
       free_use:        'Uso libre / dominio público',
       proprietary:     'Instrumento propietario',
       creative_commons:'Creative Commons',
+      free_use_with_conditions: 'Uso libre con condiciones (cita y aviso de copyright)',
+      research_clinical_use:    'Uso clínico y de investigación (permiso de los autores)',
     } as Record<string, string>,
     cutoffLabels: {
       minimal:            'Mínimo',
@@ -314,7 +318,7 @@ const TestMetadataTable: React.FC<TestMetadataTableProps> = ({ metadata, lang })
                   className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1 text-xs font-medium"
                   style={{ backgroundColor: colors.bg, color: colors.text }}
                 >
-                  <span className="font-mono font-bold">{range[0]}–{range[1]}</span>
+                  <span className="font-mono font-bold">{formatScore(range[0])}–{formatScore(range[1])}</span>
                   <span>{label}</span>
                 </span>
               )

@@ -1,0 +1,150 @@
+{
+  "status": "draft-pending-clinical-review",
+  "drafted": "clinical-landing-writer-v2",
+  "draftedAt": "2026-11-20T10:00:00.000Z",
+  "auditedAt": "2026-11-20T10:00:00.000Z",
+  "lastEditedBy": null,
+  "clinicallyApprovedBy": null,
+  "clinicallyApprovedAt": null,
+  "hero": {
+    "title": "Test DES-II: cuestionario orientativo de experiencias disociativas",
+    "subtitle": "Veintiocho preguntas sobre experiencias que muchas personas tienen alguna vez: quedarte tan metido/a en algo que pierdes la noción de lo demás, tener lagunas de memoria o sentir que el mundo, o tú mismo/a, no parece del todo real. Para cada una marcas en qué porcentaje del tiempo te ocurre. El resultado te sirve como punto de partida para hablarlo con tu psicólogo/a o psiquiatra.",
+    "clinicalContext": "Es una herramienta clínica de apoyo. Está pensada para usarse junto con un profesional, o para llevar un registro orientativo a una primera consulta.",
+    "badges": [
+      "Instrumento validado",
+      "28 preguntas",
+      "8-10 min",
+      "Sin registro",
+      "Datos en tu navegador"
+    ]
+  },
+  "whatItMeasures": {
+    "heading": "¿Qué mide este test?",
+    "body": "La DES-II (Dissociative Experiences Scale, segunda versión) es un cuestionario de 28 preguntas sobre experiencias disociativas en la vida diaria. Cada pregunta describe una experiencia y se responde marcando en qué porcentaje del tiempo le ocurre a la persona, de 0 % a 100 % en pasos de 10, sin contar los momentos bajo los efectos del alcohol o las drogas.\n\nExplora tres tipos de experiencias. La absorción: quedarse tan metido/a en una película, una fantasía o un pensamiento que se pierde la noción de lo que pasa alrededor; es la más frecuente y muchas veces no tiene nada de patológico. La amnesia: no recordar cosas que uno ha hecho o encontrar pruebas de ellas. Y la despersonalización y la desrealización: sentir que el propio cuerpo no es de uno o que el mundo no es real.\n\nLa puntuación es la media de las 28 respuestas, de 0 a 100. La escala original la publicaron Bernstein y Putnam en 1986; la segunda versión, con las respuestas en porcentajes, Carlson y Putnam en 1993. La validaron en España Icarán, Colom y Orengo-García en 1996."
+  },
+  "whoIsItFor": {
+    "heading": "¿A quién está dirigido?",
+    "body": "La DES-II está dirigida a personas adultas. Se usa en consultas de salud mental, sobre todo en la atención al trauma, como cribado: indica si conviene explorar las experiencias disociativas con más detalle, no si hay un trastorno.\n\nResulta especialmente útil para quienes ya están en terapia y quieren aportar a su profesional un registro ordenado de estas experiencias, que a menudo cuesta poner en palabras, o para quienes han decidido consultar y quieren llegar a la primera cita con un punto de partida. También la utilizan profesionales clínicos y estudiantes de ciencias de la salud para familiarizarse con el instrumento.",
+    "indications": [
+      "Personas adultas en terapia, por ejemplo por experiencias traumáticas, que quieran registrar con su profesional experiencias de desconexión, lagunas de memoria o irrealidad.",
+      "Personas adultas que han decidido consultar por estas experiencias y quieren llevar un registro orientativo a la primera cita.",
+      "Personas en seguimiento que quieran ver cómo cambian estas experiencias a lo largo del tratamiento, junto con su profesional.",
+      "Profesionales clínicos, estudiantes de Psicología o Medicina e investigadores que quieran consultar el instrumento y su validación."
+    ],
+    "limitations": [
+      "No es una herramienta diagnóstica. No sustituye la valoración de un psicólogo/a o psiquiatra.",
+      "Mide experiencias disociativas, no un trastorno concreto. Una puntuación alta aparece en los trastornos disociativos, pero también en el trastorno de estrés postraumático, en otros problemas de salud mental y, a veces, en personas sin ningún trastorno.",
+      "El punto de corte de 30 se estableció en Estados Unidos para detectar el trastorno de identidad disociativo. La validación española no fija un punto de corte propio. [REVISAR: confirmar el punto de corte con el artículo de Icarán et al. (1996)]",
+      "En la validación española, a los pacientes les costó responder en «porcentaje del tiempo». Si dudas entre dos valores, marca el que más se acerque.",
+      "Las experiencias de absorción son frecuentes en la población general, sobre todo en jóvenes; puntúan sin que haya un problema.",
+      "No está pensado para menores de edad."
+    ]
+  },
+  "howItWorks": {
+    "heading": "Cómo funciona",
+    "body": "El test consta de 28 preguntas. Cada una describe una experiencia que algunas personas tienen, y tú marcas en qué porcentaje del tiempo te ocurre a ti, de 0 % (nunca) a 100 % (siempre), en pasos de 10. Piensa en cómo te ocurre cuando no estás bajo los efectos del alcohol o las drogas. No hay respuestas correctas o incorrectas, y es normal que muchas experiencias no te ocurran nunca.\n\nLa puntuación es la media de tus 28 respuestas, de 0 a 100. A partir de 30 se suele recomendar una valoración más detallada.\n\nEsta herramienta se usa típicamente en el marco de una valoración o un seguimiento. Si ya estás en consulta, tu profesional puede decirte si te conviene completarla; si todavía no has consultado, el resultado puede servirte para llevar un registro orientativo a una primera cita.",
+    "steps": [
+      "Respondes 28 preguntas sobre experiencias de la vida diaria.",
+      "Para cada una marcas el porcentaje del tiempo en que te ocurre, de 0 % a 100 %.",
+      "Puedes ir atrás si lo necesitas.",
+      "El sistema calcula automáticamente la media de tus respuestas (rango 0–100).",
+      "Ves tu puntuación y si llega al punto de corte."
+    ]
+  },
+  "validation": {
+    "heading": "Validación científica",
+    "body": "La Dissociative Experiences Scale la publicaron Bernstein y Putnam en 1986 como un cuestionario de 28 preguntas que se respondían marcando una línea de 100 milímetros; la media de las respuestas, de 0 a 100, es la puntuación. Mostró buena fiabilidad y diferenciaba entre grupos de población general, estudiantes y personas con distintos trastornos [1]. En 1993, Carlson y Putnam publicaron la segunda versión (DES-II), que cambia la línea por once opciones, de 0 % a 100 % en pasos de 10, más fáciles de corregir [2].\n\nEse mismo año, un estudio multicéntrico con 1.051 personas comprobó su utilidad como cribado del trastorno de identidad disociativo. Con el punto de corte de 30, la sensibilidad y la especificidad fueron del 76%; en un subgrupo más parecido a los pacientes de un servicio de psiquiatría, del 76% y el 85%. Solo el 17% de quienes puntuaban 30 o más tenían ese trastorno, y el 99% de quienes puntuaban menos de 30 no lo tenían [3]. Por eso una puntuación alta indica que conviene valorar, no que haya un trastorno.\n\nLa validaron en España Icarán, Colom y Orengo-García en 1996, con estudiantes y pacientes. Los resultados fueron parecidos a los de los estudios estadounidenses y europeos, aunque a los pacientes españoles les costaba manejar la idea de «porcentaje del tiempo» [4, 5]. [REVISAR: completar con los datos del artículo del Anuario de Psicología, que no se ha podido descargar]",
+    "references": [
+      {
+        "id": 1,
+        "authors": "Bernstein EM, Putnam FW",
+        "year": 1986,
+        "title": "Development, reliability, and validity of a dissociation scale",
+        "journal": "J Nerv Ment Dis",
+        "volume": "174",
+        "issue": "12",
+        "pages": "727–735",
+        "doi": "10.1097/00005053-198612000-00004",
+        "url": "https://doi.org/10.1097/00005053-198612000-00004"
+      },
+      {
+        "id": 2,
+        "authors": "Carlson EB, Putnam FW",
+        "year": 1993,
+        "title": "An update on the Dissociative Experiences Scale",
+        "journal": "Dissociation",
+        "volume": "6",
+        "issue": "1",
+        "pages": "16–27",
+        "doi": "",
+        "url": ""
+      },
+      {
+        "id": 3,
+        "authors": "Carlson EB, Putnam FW, Ross CA, Torem M, Coons P, Dill DL, Loewenstein RJ, Braun BG",
+        "year": 1993,
+        "title": "Validity of the Dissociative Experiences Scale in screening for multiple personality disorder: a multicenter study",
+        "journal": "Am J Psychiatry",
+        "volume": "150",
+        "issue": "7",
+        "pages": "1030–1036",
+        "doi": "10.1176/ajp.150.7.1030",
+        "url": "https://doi.org/10.1176/ajp.150.7.1030"
+      },
+      {
+        "id": 4,
+        "authors": "Icarán E, Colom R, Orengo-García F",
+        "year": 1996,
+        "title": "Estudio de validación de la escala de experiencias disociativas con muestra de población española",
+        "journal": "Actas Luso Esp Neurol Psiquiatr Cienc Afines",
+        "volume": "24",
+        "issue": "1",
+        "pages": "7–10",
+        "doi": "",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/8900971/"
+      },
+      {
+        "id": 5,
+        "authors": "Icarán E, Colom R, Orengo F",
+        "year": 1996,
+        "title": "Experiencias disociativas: una escala de medida",
+        "journal": "Anuario de Psicología",
+        "volume": "70",
+        "issue": "",
+        "pages": "69–84",
+        "doi": "",
+        "url": "https://www.raco.cat/index.php/AnuarioPsicologia/article/view/61330"
+      }
+    ]
+  },
+  "interpretation": {
+    "heading": "Qué hacer con tu resultado",
+    "body": "Una puntuación por debajo del punto de corte (menos de 30) significa que la media de tus respuestas no llega al valor a partir del cual se suele recomendar una valoración más detallada. Casi todo el mundo tiene alguna de estas experiencias de vez en cuando. Aun así, una puntuación baja no descarta un problema: si alguna experiencia concreta te preocupa o te ocurre a menudo, coméntala con tu profesional de referencia.\n\nUna puntuación a partir del punto de corte (30 o más) significa que tus respuestas están en el rango en el que se recomienda que un profesional las valore con más detalle. No indica que tengas un trastorno: puede aparecer con estrés intenso, ansiedad, falta de sueño, consumo de sustancias o después de experiencias traumáticas. Es información útil para llevar a consulta: un psicólogo/a o psiquiatra con experiencia en trauma y disociación puede ayudarte a entender qué te ocurre. Si quieres comentar este resultado en consulta y no tienes psicólogo/a de referencia, en Psicoprotego podemos ayudarte a empezar.\n\nSi en algún momento sientes que no puedes mantenerte a salvo o piensas en hacerte daño, en España puedes llamar al **024** (línea de atención a la conducta suicida, gratuita, 24 horas) o, si estás en peligro, al **112**.\n\nLos rangos son orientativos. Una misma puntuación puede tener significados distintos según el momento vital, la salud y las circunstancias de cada persona. Solo un profesional sanitario puede establecer un diagnóstico tras una evaluación completa."
+  },
+  "faq": [
+    {
+      "q": "¿Es un diagnóstico?",
+      "a": "No. La DES-II es un cuestionario de cribado orientativo, no una herramienta diagnóstica. Una media de 30 o más indica que conviene una valoración profesional, no que haya un trastorno disociativo."
+    },
+    {
+      "q": "¿Es raro tener estas experiencias?",
+      "a": "No. Algunas, como quedarse absorto/a en una película o en una ensoñación, son muy frecuentes. Lo que el cuestionario recoge es con qué frecuencia te ocurren y de qué tipo son; interpretar eso es tarea de un profesional."
+    },
+    {
+      "q": "¿Quedan guardadas mis respuestas?",
+      "a": "No en nuestros servidores. Tus respuestas se procesan en tu navegador y no las guardamos. Si aceptas las cookies de analítica, las respuestas marcadas se envían a Google Analytics, sin tu nombre ni datos que te identifiquen, para elaborar estadísticas. Solo tú decides qué hacer con el resultado."
+    },
+    {
+      "q": "¿Puedo compartirlo con mi psicólogo/a o mi psiquiatra?",
+      "a": "Sí. Puedes descargar el resultado en PDF y llevarlo a tu consulta. Es una forma práctica de aportar contexto, aunque el/la profesional hará su propia valoración."
+    },
+    {
+      "q": "¿Debo ir al médico de cabecera, al psicólogo o al psiquiatra?",
+      "a": "Para valorar experiencias disociativas lo indicado es un psicólogo/a clínico/a o un psiquiatra, mejor con experiencia en trauma. El médico/a de familia puede ser el primer paso: puede descartar causas físicas, de la medicación o del sueño, y derivarte. Lo que no debería decidirlo es el resultado de este test."
+    }
+  ],
+  "privacy": {
+    "heading": "Privacidad",
+    "body": "Tus respuestas se calculan en tu navegador: no se envían a nuestros servidores ni se guardan. Solo si aceptas las cookies de analítica se envían a Google Analytics, sin tu nombre ni datos que te identifiquen, para elaborar estadísticas. Decides tú qué compartir y con quién: puedes descargar un PDF del resultado para llevarlo a tu médico/a o terapeuta, o simplemente cerrar la pestaña."
+  }
+}

@@ -2,6 +2,10 @@
  * @file components/test-framework/LikertScale.tsx
  * @description Escala Likert TDAH-optimizada: 4 cards táctiles, stagger entrada,
  * float hint si no responde en 2.8s, auto-avance 200ms tras selección.
+ *
+ * Excepciones a la regla de 4 opciones (decisión de Emmanuel, 2026-11-19; ver ux-rules.md):
+ * - 5 opciones (ASRS-6): las mismas cards, más bajas y más juntas, para que quepan en móviles pequeños.
+ * - Más de 5 (DES-II, 0–100 % en 11 pasos): rejilla de botones de 6 columnas, en orden de lectura.
  */
 
 import React from 'react'
@@ -55,6 +59,8 @@ const LikertScale: React.FC<LikertScaleProps> = ({
 
   // ── Selección + auto-avance ──────────────────────────────────────────────
 
+  const compact = options.length === 5
+
   const handleSelect = (newValue: number) => {
     if (advanceTimer.current) clearTimeout(advanceTimer.current)
     onChange(newValue)
@@ -67,9 +73,46 @@ const LikertScale: React.FC<LikertScaleProps> = ({
 
   // ── Render ────────────────────────────────────────────────────────────────
 
+  if (options.length > 5) {
+    return (
+      <div
+        className={`w-full grid grid-cols-6 gap-2${showFloat ? ' animate-floatUp' : ''}`}
+        role="radiogroup"
+        aria-label={question}
+      >
+        {options.map((option, idx) => {
+          const isSelected = value === option.value
+          return (
+            <button
+              key={option.value}
+              type="button"
+              role="radio"
+              aria-checked={isSelected}
+              onClick={() => handleSelect(option.value)}
+              style={{
+                animation: `fadeInContent 0.5s ease-out ${(1.15 + idx * 0.05).toFixed(2)}s both`,
+                borderColor: isSelected ? 'var(--color-primary)' : '#E5E7EB',
+                backgroundColor: isSelected ? 'var(--color-primary)' : 'white',
+                color: isSelected ? 'white' : '#374151',
+              }}
+              className="
+                flex h-12 items-center justify-center rounded-xl border-2 px-1 text-sm font-semibold tabular-nums
+                whitespace-nowrap transition-colors duration-150 cursor-pointer
+                hover:border-gray-300 hover:bg-gray-50
+                focus:outline-none focus:ring-2 focus:ring-offset-2
+              "
+            >
+              {option.label}
+            </button>
+          )
+        })}
+      </div>
+    )
+  }
+
   return (
     <div
-      className={`w-full flex flex-col gap-3${showFloat ? ' animate-floatUp' : ''}`}
+      className={`w-full flex flex-col ${compact ? 'gap-2' : 'gap-3'}${showFloat ? ' animate-floatUp' : ''}`}
       role="radiogroup"
       aria-label={question}
     >
@@ -89,12 +132,12 @@ const LikertScale: React.FC<LikertScaleProps> = ({
               borderColor: isSelected ? 'var(--color-primary)' : '#E5E7EB',
               backgroundColor: isSelected ? 'rgba(45,74,62,0.05)' : 'white',
             }}
-            className="
-              flex items-center gap-4 w-full px-5 py-3 sm:py-4 rounded-xl border-2 text-left
+            className={`
+              flex items-center gap-4 w-full px-5 ${compact ? 'py-2.5' : 'py-3'} sm:py-4 rounded-xl border-2 text-left
               transition-colors duration-150 cursor-pointer
               hover:border-gray-300 hover:bg-gray-50
               focus:outline-none focus:ring-2 focus:ring-offset-2
-            "
+            `}
           >
             {/* Radio indicator */}
             <div

@@ -24,6 +24,53 @@
     }
   },
   {
+    "testId": "des2",
+    "category": "psychometric",
+    "condition": "disociacion",
+    "tags": [
+      "validado-clinicamente",
+      "adultos",
+      "28-items",
+      "cribado"
+    ],
+    "availableLangs": [
+      "es"
+    ],
+    "validated": true,
+    "timeToComplete": "8-10 min",
+    "itemCount": 28,
+    "names": {
+      "es": "Escala de experiencias disociativas (DES-II)"
+    },
+    "hooks": {
+      "es": ""
+    }
+  },
+  {
+    "testId": "des2c",
+    "category": "psychometric",
+    "condition": "disociacion",
+    "tags": [
+      "validado-clinicamente",
+      "adultos",
+      "28-items",
+      "cribado",
+      "con-ejemplos"
+    ],
+    "availableLangs": [
+      "es"
+    ],
+    "validated": true,
+    "timeToComplete": "10-15 min",
+    "itemCount": 28,
+    "names": {
+      "es": "Escala de experiencias disociativas comentada (DES-II con ejemplos)"
+    },
+    "hooks": {
+      "es": ""
+    }
+  },
+  {
     "testId": "gad7",
     "category": "psychometric",
     "condition": "ansiedad",

@@ -32,6 +32,8 @@ export interface ShowIfCondition {
   value?: string | number | boolean
   /** Alternativa a `value`: se muestra salvo que la respuesta sea uno de estos valores (sin responder → se muestra) */
   notIn?: Array<string | number | boolean>
+  /** Alternativa a `value`: se muestra si la respuesta es un número igual o mayor (DES-II comentada: ≥ 30 %) */
+  minValue?: number
 }
 
 /** Reglas de validación para preguntas de texto */
@@ -385,6 +387,8 @@ export interface TestLangFile {
   scoring: ScoringRule[]
   /** Si el test mide crisis y con qué criterios (sin este campo, nunca da crisis) */
   crisisCriteria?: CrisisCriteria
+  /** Tests con ejemplos escritos (DES-II comentada): indicación del recuadro del PDF en blanco */
+  examplesHint?: string
   results: {
     normal: Record<string, NormalMessage>
     crisis: CrisisMessage

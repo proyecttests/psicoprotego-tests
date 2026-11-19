@@ -14,7 +14,16 @@
  * funcionando (readShareToken), y moveLegacyTokenToHash los pasa a #d= al abrirlos.
  */
 
-import type { AnswersMap } from '@/types/test'
+import type { AnswersMap, Question } from '@/types/test'
+
+/**
+ * Respuestas que viajan en el enlace: sin las de texto libre (ejemplos de la DES-II comentada),
+ * que solo se ven en pantalla y en el PDF.
+ */
+export function shareableAnswers(questions: Question[], answers: AnswersMap): AnswersMap {
+  const textIds = new Set(questions.filter((q) => q.type === 'text').map((q) => q.id))
+  return Object.fromEntries(Object.entries(answers).filter(([id]) => !textIds.has(id)))
+}
 
 /** Ordena claves de pregunta numéricamente: q1, q2, ..., q10 */
 function sortKeys(keys: string[]): string[] {

@@ -95,8 +95,9 @@ export default function ResultadoClient({ lang, testId }: ResultadoClientProps) 
         if (!langRes.ok) throw new Error(ui.errorTestNotFound)
         const langData = await langRes.json() as TestLangFile
 
-        // Decode token after loading question IDs (supports both v1 and v2)
-        const questionIds = langData.questions.map((q) => q.id)
+        // Decode token after loading question IDs (supports both v1 and v2). El texto libre no
+        // va en el enlace (shareableAnswers), así que sus preguntas no cuentan.
+        const questionIds = langData.questions.filter((q) => q.type !== 'text').map((q) => q.id)
         const answers = decodeAnswersWithKeys(token, questionIds) ?? decodeAnswers(token)
         if (!answers) throw new Error(ui.errorInvalidLink)
 
@@ -113,7 +114,7 @@ export default function ResultadoClient({ lang, testId }: ResultadoClientProps) 
         const scoringFn = getScoringFunction(langData.scoringFunction ?? 'scoreStandard')
         const scored    = scoringFn(testDefForScoring, answers, messages, resolvedLang)
 
-        const max = getMaxScore(testDefForScoring.questions)
+        const max = getMaxScore(testDefForScoring.questions, langData.scoringFunction)
 
         setTestDef(langData)
         setResult(scored)

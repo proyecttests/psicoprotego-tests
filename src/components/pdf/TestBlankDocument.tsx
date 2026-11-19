@@ -15,6 +15,7 @@ import {
   ItemsTable,
   TotalField,
   RangesTable,
+  ExamplesBlock,
   AboutBlock,
   Disclaimer,
   PdfFooter,
@@ -42,7 +43,11 @@ export const TestBlankDocument: React.FC<TestBlankDocumentProps> = ({ testData, 
       <Text style={styles.sectionTitle}>Preguntas</Text>
       {testData.instructions ? <Text style={styles.instructions}>{testData.instructions}</Text> : null}
       <ItemsTable testData={testData} questions={testData.questions} />
-      <TotalField max={getMaxScore(testData.questions as QuestionWithScoring[])} />
+      <TotalField
+        max={getMaxScore(testData.questions as QuestionWithScoring[], testData.scoringFunction)}
+        mean={testData.scoringFunction === 'scoreMean'}
+      />
+      {testData.examplesHint && <ExamplesBlock hint={testData.examplesHint} />}
 
       <RangesTable scoring={testData.scoring} />
       <AboutBlock validation={validation} links={links} />

@@ -14,7 +14,8 @@ import React from 'react'
 import DownloadCard from './DownloadCard'
 import RelatedTests from './RelatedTests'
 import Link from 'next/link'
-import type { ScoringResult } from '@/utils/scoringFunctions'
+import { formatScore, type ScoringResult } from '@/utils/scoringFunctions'
+import { getExamples } from '@/utils/questionVisibility'
 import { CRISIS_PHONES } from '@/config/crisisPhones'
 import type { TestDefinition, TestLangFile, AnswersMap } from '@/types/test'
 import dynamic from 'next/dynamic'
@@ -71,6 +72,8 @@ const RESULT_UI: Record<string, {
   supportLink: string
   privacyNote: string
   emergencyNote: string
+  examplesTitle: string
+  examplesNote: string
 }> = {
   es: {
     retry:          '↺ Volver a intentar',
@@ -85,6 +88,8 @@ const RESULT_UI: Record<string, {
     supportLink:    'Puedes pedir ayuda en estos recursos →',
     privacyNote:    'Esta información está solo en tu navegador y no la verá nadie si tú no la compartes.',
     emergencyNote:  'Si es una emergencia, llama al 112',
+    examplesTitle:  'Tus ejemplos',
+    examplesNote:   'Solo están en tu navegador: no se guardan ni van en el enlace para compartir. Se incluyen en el PDF con resultados.',
   },
 }
 
@@ -150,10 +155,10 @@ const ScoreBar: React.FC<{
   }, [pct])
 
   return (
-    <div className="w-full mt-4" aria-label={`${ui.scoreLabel}: ${score} de ${maxScore}`}>
+    <div className="w-full mt-4" aria-label={`${ui.scoreLabel}: ${formatScore(score)} de ${maxScore}`}>
       <div className="flex justify-between text-xs text-neutral-500 mb-1 font-sans">
         <span>0</span>
-        <span className={`font-semibold ${colors.text}`}>{score} / {maxScore}</span>
+        <span className={`font-semibold ${colors.text}`}>{formatScore(score)} / {maxScore}</span>
         <span>{maxScore}</span>
       </div>
       <div className="h-3 w-full rounded-full bg-neutral-200 overflow-hidden">
@@ -287,6 +292,9 @@ const NormalResult: React.FC<{
   const colors       = COLOR_MAP[colorKey] ?? COLOR_MAP['green']
   const message      = result.message
   const ui           = getUi(lang)
+  const examples     = testLangFile && answers
+    ? getExamples(testLangFile.questions, answers, testLangFile.responseOptions)
+    : []
   const showSupport =
     isCrisis ||
     (result.redFlags?.length ?? 0) > 0 ||
@@ -303,11 +311,12 @@ const NormalResult: React.FC<{
         /* Tests clínicos: círculo de score numérico */
         <>
           <div
-            aria-label={`${ui.scoreLabel}: ${result.score}`}
+            aria-label={`${ui.scoreLabel}: ${formatScore(result.score ?? 0)}`}
             className={`mx-auto mb-3 flex h-24 w-24 items-center justify-center rounded-full border-4 ${colors.border} ${colors.bg}`}
           >
-            <span className={`text-5xl font-extrabold ${colors.text}`}>
-              {displayScore}
+            {/* Con decimal (media de la DES-II) no cabe a text-5xl */}
+            <span className={`${Number.isInteger(result.score ?? 0) ? 'text-5xl' : 'text-3xl'} font-extrabold ${colors.text}`}>
+              {formatScore(displayScore)}
             </span>
           </div>
           <span className={`inline-block rounded-full px-4 py-1 text-sm font-semibold ${colors.badge}`}>
@@ -385,6 +394,25 @@ const NormalResult: React.FC<{
       {result.score !== null && scoreCard}
 
       {!isCrisis && messageCard}
+
+      {/* ── Ejemplos escritos (DES-II comentada): solo en pantalla y en el PDF ── */}
+      {examples.length > 0 && (
+        <div className="card space-y-3">
+          <h2 className="text-lg">{ui.examplesTitle}</h2>
+          <ul className="space-y-3">
+            {examples.map((e) => (
+              <li key={e.n} className="border-t border-neutral-100 pt-3 font-sans">
+                <p className="text-xs" style={{ color: '#666' }}>
+                  <span className="font-semibold" style={{ color: 'var(--color-accent)' }}>{e.n}.</span>{' '}
+                  {e.item} <span className="font-semibold">({e.answerLabel})</span>
+                </p>
+                <p className="mt-1 text-sm whitespace-pre-line" style={{ color: 'var(--color-primary)' }}>{e.text}</p>
+              </li>
+            ))}
+          </ul>
+          <p className="text-xs italic text-neutral-400">{ui.examplesNote}</p>
+        </div>
+      )}
 
       {/* ── Compartir + Descargar ────────────────────────────────────────── */}
       <div className="flex items-center justify-between flex-wrap gap-3">

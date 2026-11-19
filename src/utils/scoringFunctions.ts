@@ -326,7 +326,21 @@ export function scoreGAD7(
   messages?: Record<string, Record<string, unknown>>,
   lang = 'es',
 ): ScoringResult {
-  let totalScore = 0
+  return scoreWith(testData, answers, messages, lang, (sum) => sum)
+}
+
+/**
+ * Núcleo común: recorre las preguntas, suma y detecta red flags; `aggregate` convierte la suma
+ * en la puntuación final (la suma tal cual o la media, según el test).
+ */
+function scoreWith(
+  testData: TestDefinitionForScoring,
+  answers: Record<string, number | string | boolean>,
+  messages: Record<string, Record<string, unknown>> | undefined,
+  lang: string,
+  aggregate: (sum: number, scoredItems: number) => number,
+): ScoringResult {
+  let sum = 0
   const redFlags: RedFlag[] = []
 
   // ── Paso 1: iterar preguntas y acumular score / detectar red flags ─────────
@@ -338,7 +352,7 @@ export function scoreGAD7(
       // ── direct: suma la respuesta tal cual ──────────────────────────────
       case 'direct': {
         if (typeof answer === 'number') {
-          totalScore += answer
+          sum += answer
         }
         break
       }
@@ -346,7 +360,7 @@ export function scoreGAD7(
       // ── reverse: invierte la escala antes de sumar ──────────────────────
       case 'reverse': {
         if (typeof answer === 'number') {
-          totalScore += reverseScore(answer, question)
+          sum += reverseScore(answer, question)
         }
         break
       }
@@ -355,7 +369,7 @@ export function scoreGAD7(
       // (el ítem 9 del PHQ-9 forma parte del total 0–27)
       case 'redFlag': {
         if (question.type === 'likert' && typeof answer === 'number') {
-          totalScore += answer
+          sum += answer
         }
         const isTriggered =
           answer !== undefined &&
@@ -396,7 +410,8 @@ export function scoreGAD7(
     }
   }
 
-  // ── Paso 2: resolver urgencia y categoría ────────────────────────────────
+  // ── Paso 2: puntuación final, urgencia y categoría ───────────────────────
+  const totalScore = aggregate(sum, scoredQuestions(testData.questions).length)
   const urgency  = resolveUrgency(redFlags)
   const category = findCategory(totalScore, testData.scoring)
 
@@ -511,6 +526,14 @@ export const scorePHQ9: ScoringFunction = scoreGAD7
  */
 export const scoreStandard: ScoringFunction = scoreGAD7
 
+/**
+ * Media de los ítems en lugar de suma (DES-II: 28 ítems de 0 a 100 %, puntuación 0–100).
+ * Se redondea hacia abajo a un decimal: así nunca sube por encima de un punto de corte entero
+ * (29,96 se queda en 29,9, por debajo de 30).
+ */
+export const scoreMean: ScoringFunction = (testData, answers, messages, lang = 'es') =>
+  scoreWith(testData, answers, messages, lang, (sum, n) => (n > 0 ? Math.floor((sum / n) * 10) / 10 : 0))
+
 
 // ── Registry de funciones de scoring ─────────────────────────────────────────
 
@@ -528,6 +551,7 @@ const SCORING_REGISTRY: Record<string, ScoringFunction> = {
   scoreStandard,
   scoreGAD7,
   scorePHQ9,
+  scoreMean,
   // scorePSS10: scorePSS10,  ← ejemplo para test con lógica especial
 }
 
@@ -539,12 +563,23 @@ const SCORING_REGISTRY: Record<string, ScoringFunction> = {
  * las marcadas con `scoring.method: 'none'`.
  *
  * @param questions - Preguntas del test
+ * @param scoringFunction - Con `scoreMean`, el máximo es el de un ítem (DES-II = 100)
  * @returns Máximo teórico (GAD-7 = 21, PHQ-9 = 27)
  */
-export function getMaxScore(questions: QuestionWithScoring[]): number {
-  return questions
-    .filter((q) => q.type === 'likert' && q.scoring?.method !== 'none')
-    .reduce((sum, q) => sum + (q.scale?.max ?? 3), 0)
+export function getMaxScore(questions: QuestionWithScoring[], scoringFunction?: string): number {
+  const scored = scoredQuestions(questions)
+  if (scoringFunction === 'scoreMean') return Math.max(0, ...scored.map((q) => q.scale?.max ?? 3))
+  return scored.reduce((sum, q) => sum + (q.scale?.max ?? 3), 0)
+}
+
+/** Preguntas Likert que puntúan (excluye `scoring.method: 'none'`) */
+function scoredQuestions(questions: QuestionWithScoring[]): QuestionWithScoring[] {
+  return questions.filter((q) => q.type === 'likert' && q.scoring?.method !== 'none')
+}
+
+/** Puntuación para mostrar: con coma decimal si la hay (medias como la DES-II) */
+export function formatScore(score: number): string {
+  return score.toLocaleString('es-ES', { maximumFractionDigits: 1 })
 }
 
 /**
