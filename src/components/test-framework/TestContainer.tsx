@@ -487,7 +487,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
     <>
       {/* div, no main: el layout ya pone el <main> de la página. pb-12: la línea de ayuda urgente */}
       <div
-        className={`flex flex-1 flex-col items-center justify-between px-4 pb-9 ${longContent ? 'pt-1 tall:pt-3' : 'pt-1 tall:pt-5'} sm:px-6 sm:pt-6`}
+        className={`flex flex-1 flex-col items-center justify-between px-4 pb-9 sm:pb-12 ${longContent ? 'pt-1 tall:pt-3' : 'pt-1 tall:pt-5'} sm:px-6 sm:pt-6`}
         aria-live="polite"
       >
         {/* SECCIÓN SUPERIOR: Barra de progreso */}
@@ -501,12 +501,12 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
         {/* SECCIÓN CENTRAL: Pregunta + Opciones con transición TDAH */}
         <div
           key={currentIdx}
-          className={`w-full max-w-2xl flex flex-col items-center ${longContent ? 'gap-1.5 tall:gap-2' : manyOptions ? 'gap-3' : 'gap-3 tall:gap-6'} sm:gap-14 flex-1 justify-center py-1 tall:py-2 sm:py-4${isExiting ? ' animate-slide-out-tiktok' : ''}`}
+          className={`w-full max-w-2xl flex flex-col items-center ${longContent ? 'gap-1.5 tall:gap-2' : manyOptions ? 'gap-3' : 'gap-3 tall:gap-6'} sm:gap-8 flex-1 justify-center py-1 tall:py-2 sm:py-4${isExiting ? ' animate-slide-out-tiktok' : ''}`}
         >
           {/* Instrucciones validadas — en cada pregunta: los ítems oficiales no se entienden sin el enunciado */}
           {(currentQuestion.instructions ?? testDef?.instructions) && (
             <p
-              className={`w-full max-w-md px-2 ${manyOptions ? 'text-xs tall:text-sm' : 'text-sm tall:text-base'} leading-relaxed text-center animate-fadeInQuestion`}
+              className={`w-full max-w-md px-2 ${manyOptions ? 'text-xs tall:text-sm xtall:text-base' : 'text-sm tall:text-base xtall:text-lg'} sm:text-base leading-relaxed text-center animate-fadeInQuestion sm:max-w-xl`}
               style={{ color: 'var(--color-primary)', opacity: 0.85 }}
               aria-label="Instrucciones del test"
             >
@@ -518,14 +518,14 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
               las guías de dislexia piden letra sin serifa para lo que más se lee (Emmanuel, 2026-11-20) */}
           <h2
             /* Las opciones suben hasta 30 px (riseUp 20 + flotación 10): el hueco bajo el ítem no baja de 32 */
-            className={`${longContent ? 'text-base tall:text-lg pb-6' : manyOptions ? (longItem ? 'text-base tall:text-xl pb-5' : 'text-lg tall:text-xl pb-5') : longItem ? 'text-lg tall:text-xl pb-3' : 'text-xl tall:text-2xl pb-5 tall:pb-3'} sm:text-3xl font-semibold leading-snug text-center px-2 animate-fadeInQuestion max-w-md [font-family:var(--font-sans)]`}
+            className={`${longContent ? 'text-base tall:text-lg xtall:text-xl pb-6' : manyOptions ? (longItem ? 'text-base tall:text-xl xtall:text-2xl pb-5' : 'text-lg tall:text-xl xtall:text-2xl pb-5') : longItem ? 'text-lg tall:text-xl pb-3' : 'text-xl tall:text-2xl xtall:text-[1.75rem] pb-5 tall:pb-3'} sm:text-3xl font-semibold leading-snug text-center px-2 animate-fadeInQuestion max-w-md sm:max-w-2xl [font-family:var(--font-sans)]`}
             style={{ color: 'var(--color-primary)' }}
           >
             {currentQuestion.text}
           </h2>
 
           {/* Opciones - Cards con animación de subida */}
-          <div className="w-full max-w-md animate-riseUpAfter">
+          <div className="w-full max-w-md sm:max-w-lg animate-riseUpAfter">
             <QuestionRenderer
               question={currentQuestion}
               answers={answers}
@@ -573,8 +573,8 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
         </div>
 
         {!currentAnswered && (
-          /* En pantallas bajas con ítem largo no cabe: el botón desactivado ya lo indica */
-          <p aria-live="polite" className={`text-center text-sm text-gray-600 mt-2${longContent ? ' hidden tall:block' : ''}`}>
+          /* Con ítem largo, en móviles bajos y en escritorio no cabe: el botón desactivado ya lo indica */
+          <p aria-live="polite" className={`text-center text-sm text-gray-600 mt-2${longContent || longItem ? ' hidden tall:block' : ''}`}>
             {currentQuestion.type === 'text' ? ui.writeAnswer : ui.selectAnswer}
           </p>
         )}

@@ -284,7 +284,7 @@ export default function TestLandingPage({
         {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
         <section
           aria-label="Introducción al test"
-          className="w-full max-w-2xl mx-auto flex flex-col items-center text-center gap-6"
+          className="w-full max-w-2xl lg:max-w-4xl mx-auto flex flex-col items-center text-center gap-6"
         >
           <h1
             className="text-3xl sm:text-4xl font-bold leading-tight"
@@ -294,7 +294,7 @@ export default function TestLandingPage({
           </h1>
 
           <p
-            className="text-xl sm:text-2xl font-medium leading-snug max-w-xl"
+            className="text-xl sm:text-2xl font-medium leading-snug max-w-xl lg:max-w-3xl"
             style={{ color: 'var(--color-accent)' }}
           >
             {content?.hero.subtitle ?? landing.hook}
@@ -302,7 +302,7 @@ export default function TestLandingPage({
 
           {(content ? content.hero.clinicalContext : landing.description) && (
             <p
-              className="text-base leading-relaxed max-w-xl"
+              className="text-base leading-relaxed max-w-xl lg:max-w-2xl"
               style={{ color: 'var(--color-primary)', opacity: 0.8 }}
             >
               {content ? content.hero.clinicalContext : landing.description}

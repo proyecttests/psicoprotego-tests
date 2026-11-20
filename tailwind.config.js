@@ -6,9 +6,12 @@ module.exports = {
   ],
   theme: {
     extend: {
-      // Pantallas con al menos 700 px de alto: el test usa letra más grande (en las bajas, la de antes)
+      // Móviles (< 640 px de ancho; en escritorio mandan los sm:) con al menos 700 px de alto: el test usa letra
+      // más grande (en los bajos, la de antes)
       screens: {
-        tall: { raw: '(min-height: 700px)' },
+        tall: { raw: '(min-height: 700px) and (max-width: 639px)' },
+        // Móviles grandes (≥ 780 px de alto útil): un paso más de letra en el test
+        xtall: { raw: '(min-height: 780px) and (max-width: 639px)' },
       },
       colors: {
         primary: {
