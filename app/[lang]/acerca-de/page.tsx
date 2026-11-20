@@ -22,7 +22,7 @@ const CONTENT: Record<string, LegalContent> = {
       { title: "Qué es", body: "Psicoprotego Tests es una herramienta gratuita y sin publicidad para responder cuestionarios psicológicos validados en España y obtener una orientación sobre el resultado, que puedes llevar a un profesional." },
       { title: "Quiénes somos", body: "El equipo de psicólogos de la consulta Psicoprotego, en Pozuelo de Alarcón ([psicoprotego.es](https://psicoprotego.es/))." },
       { title: "Tests basados en evidencia", body: "Hoy: GAD-7 (ansiedad), PHQ-9 (depresión), PHQ-15 (síntomas físicos) y GDS-15 (ánimo en personas mayores). Cada test indica su validación en población española y sus limitaciones." },
-      { title: "Privacidad", body: "Tus respuestas se calculan en tu navegador y no se guardan en nuestros servidores. Detalle en la [Política de privacidad](/es/privacidad)." },
+      { title: "Privacidad", body: "Tus respuestas son confidenciales: se calculan en tu navegador y no salen de él. Detalle en la [Política de privacidad](/es/privacidad)." },
       { title: "Contacto", body: "hola@psicoprotego.es" },
     ],
   },

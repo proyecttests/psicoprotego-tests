@@ -1,0 +1,131 @@
+{
+  "status": "draft-pending-clinical-review",
+  "drafted": "clinical-landing-writer-v2",
+  "draftedAt": "2026-11-20T21:00:00.000Z",
+  "auditedAt": "2026-11-20T21:00:00.000Z",
+  "lastEditedBy": null,
+  "clinicallyApprovedBy": null,
+  "clinicallyApprovedAt": null,
+  "hero": {
+    "title": "Test AUDIT: cuestionario orientativo sobre el consumo de alcohol",
+    "subtitle": "Diez preguntas de la Organización Mundial de la Salud sobre tu consumo de alcohol: cuánto y con qué frecuencia bebes, si te cuesta parar y si el alcohol te ha causado problemas. El resultado te sirve como punto de partida para hablarlo con tu médico/a o tu psicólogo/a.",
+    "clinicalContext": "Es una herramienta clínica de apoyo. Está pensada para usarse junto con un profesional, o para llevar un registro orientativo a una primera consulta.",
+    "badges": [
+      "Instrumento de la OMS",
+      "10 preguntas",
+      "3 min",
+      "Sin registro",
+      "Datos en tu navegador"
+    ]
+  },
+  "whatItMeasures": {
+    "heading": "¿Qué mide este test?",
+    "body": "El AUDIT (Alcohol Use Disorders Identification Test) es el cuestionario de la Organización Mundial de la Salud para detectar el consumo de riesgo y perjudicial de alcohol y una posible dependencia. Tiene 10 preguntas en tres bloques: el consumo (frecuencia, cantidad y días de consumo intensivo), los signos de dependencia (no poder parar, no cumplir con lo esperado, beber en ayunas) y los problemas causados por el alcohol (culpa, olvidos, lesiones y preocupación de otras personas).\n\nCada respuesta puntúa de 0 a 4, así que el total va de 0 a 40. La OMS distingue cuatro zonas de riesgo. Si nunca bebes, el cuestionario salta directamente a las dos últimas preguntas, que también preguntan por el pasado.\n\nLo desarrolló la OMS en un estudio en seis países (Saunders y colaboradores, 1993). Usamos la traducción española del manual de la OMS, y la validaron en atención primaria española Rubio y colaboradores en 1998."
+  },
+  "whoIsItFor": {
+    "heading": "¿A quién está dirigido?",
+    "body": "Está dirigido a personas adultas. Se usa sobre todo en atención primaria, y también en consultas de salud mental y de adicciones, para detectar a tiempo un consumo de riesgo y para seguir su evolución.\n\nResulta especialmente útil para quienes quieren revisar su consumo con datos, para quienes ya están en seguimiento y quieren registrar cómo cambia, o para quienes han decidido consultar y quieren llegar a la cita con un punto de partida. También lo utilizan profesionales clínicos y estudiantes de ciencias de la salud.",
+    "indications": [
+      "Personas adultas que quieren revisar su consumo de alcohol y llevar el resultado a su médico/a o psicólogo/a.",
+      "Personas en tratamiento por su consumo que quieran registrar con su profesional cómo evoluciona.",
+      "Familiares que acompañan a alguien a revisarlo, siempre que las respuestas sean de la propia persona.",
+      "Profesionales clínicos, estudiantes de Psicología o Medicina e investigadores que quieran consultar el instrumento y su validación."
+    ],
+    "limitations": [
+      "No es una herramienta diagnóstica. No sustituye la valoración de un médico/a o de un profesional de las adicciones.",
+      "Depende de la sinceridad de las respuestas: el consumo de alcohol tiende a infravalorarse.",
+      "Las zonas son las de la OMS. Para la zona de riesgo usamos el corte de la validación española: 8 en general, 6 en mujeres y 5 en mayores de 60 años. Por eso, al final, preguntamos (de forma opcional) sexo y edad. [REVISAR: con mujer y más de 60 años aplicamos 5, el más bajo]",
+      "Hemos añadido qué es una consumición estándar en España (unos 10 g de alcohol), con las equivalencias del Ministerio de Sanidad, como recomienda el manual de la OMS.",
+      "No está pensado para menores de edad."
+    ]
+  },
+  "howItWorks": {
+    "heading": "Cómo funciona",
+    "body": "El test consta de 10 preguntas sobre tu consumo de alcohol. Las tres primeras preguntan cuánto y con qué frecuencia bebes; las demás, por lo ocurrido en el último año y alguna en cualquier momento. Si en la primera respondes «Nunca», pasas directamente a las dos últimas.\n\nCada respuesta puntúa de 0 a 4 (las dos últimas, 0, 2 o 4), así que la puntuación va de 0 a 40. Al final te preguntamos, de forma opcional, sexo y edad: no puntúan, solo sirven para aplicar el punto de corte de la validación española, y como el resto de respuestas no salen de tu navegador.\n\nEsta herramienta se usa típicamente en el marco de una valoración o un seguimiento. Si ya estás en consulta, tu profesional puede decirte si te conviene completarla; si todavía no has consultado, el resultado puede servirte para llevar un registro orientativo a una primera cita.",
+    "steps": [
+      "Respondes hasta 10 preguntas sobre tu consumo de alcohol.",
+      "Si no bebes nunca, solo respondes tres.",
+      "Al final, si quieres, indicas sexo y edad.",
+      "Puedes ir atrás si lo necesitas.",
+      "El sistema calcula tu puntuación (rango 0–40).",
+      "Ves en qué zona de riesgo de la OMS está tu puntuación."
+    ]
+  },
+  "validation": {
+    "heading": "Validación científica",
+    "body": "El AUDIT surgió de un proyecto de la OMS en seis países. Saunders y colaboradores eligieron sus 10 preguntas entre 150, aplicadas a 1.888 personas de centros de atención primaria. De quienes tenían un consumo de riesgo o perjudicial, el 92 % puntuó 8 o más; y de quienes no lo tenían, el 94 % puntuó menos de 8 [1]. La OMS publicó después un manual con las pautas de uso y las cuatro zonas de riesgo [2].\n\nEn España, Rubio y colaboradores lo validaron en 1998 con 326 pacientes de dos centros de salud, comparándolo con una entrevista diagnóstica estructurada. La consistencia interna fue buena (alfa de 0,86) y la fiabilidad test-retest, de 0,90. El corte más eficaz fue 8, con una sensibilidad y una especificidad del 90 %; en mujeres, 6, y en mayores de 60 años, 5 [3].",
+    "references": [
+      {
+        "id": 1,
+        "authors": "Saunders JB, Aasland OG, Babor TF, de la Fuente JR, Grant M",
+        "year": 1993,
+        "title": "Development of the Alcohol Use Disorders Identification Test (AUDIT): WHO Collaborative Project on Early Detection of Persons with Harmful Alcohol Consumption—II",
+        "journal": "Addiction",
+        "volume": "88",
+        "issue": "6",
+        "pages": "791–804",
+        "doi": "10.1111/j.1360-0443.1993.tb02093.x",
+        "url": "https://doi.org/10.1111/j.1360-0443.1993.tb02093.x"
+      },
+      {
+        "id": 2,
+        "authors": "Babor TF, Higgins-Biddle JC, Saunders JB, Monteiro MG (Organización Mundial de la Salud)",
+        "year": 2001,
+        "title": "AUDIT. Cuestionario de Identificación de los Trastornos debidos al Consumo de Alcohol. Pautas para su utilización en Atención Primaria",
+        "journal": "OMS (traducción al español, Ministerio de Sanidad)",
+        "doi": "",
+        "url": "https://www.sanidad.gob.es/areas/promocionPrevencion/alcohol/internacional/oms/docs/AUDIT.pdf"
+      },
+      {
+        "id": 3,
+        "authors": "Rubio Valladolid G, Bermejo Vicedo J, Caballero Sánchez-Serrano MC, Santo-Domingo Carrasco J",
+        "year": 1998,
+        "title": "Validación de la prueba para la identificación de trastornos por uso de alcohol (AUDIT) en Atención Primaria",
+        "journal": "Rev Clin Esp",
+        "volume": "198",
+        "issue": "1",
+        "pages": "11–14",
+        "doi": "",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9534342/"
+      }
+    ]
+  },
+  "interpretation": {
+    "heading": "Qué hacer con tu resultado",
+    "body": "En la zona I (0–7) tu consumo se considera de bajo riesgo. Si eres mujer o tienes más de 60 años, la validación española propone cortes más bajos (6 y 5): si nos lo indicas al final, el resultado los aplica.\n\nEn la zona II (8–15) el consumo es de riesgo. En la zona III (16–19) probablemente ya está causando daños. Es información útil para llevar a consulta: tu médico/a de familia o un profesional de las adicciones puede ayudarte a reducirlo. Si quieres comentarlo con un psicólogo/a y no tienes uno de referencia, en Psicoprotego podemos ayudarte a empezar.\n\nEn la zona IV (20–40) la OMS recomienda una evaluación diagnóstica más amplia de una posible dependencia. Pide una valoración a tu médico/a de familia o en un centro de atención a las adicciones. Con un consumo alto y diario, dejar de beber de golpe puede ser perjudicial para la salud; los profesionales sanitarios pueden acompañar ese proceso. Si en algún momento piensas en hacerte daño, en España puedes llamar al **024** (gratuito, 24 horas) o, si estás en peligro, al **112**.\n\nLos rangos son orientativos. Una misma puntuación puede tener significados distintos según el momento vital, la salud y las circunstancias de cada persona. Solo un profesional sanitario puede establecer un diagnóstico tras una evaluación completa."
+  },
+  "faq": [
+    {
+      "q": "¿Es un diagnóstico?",
+      "a": "No. El AUDIT es un cribado de la OMS: indica el nivel de riesgo de tu consumo, no si hay un trastorno."
+    },
+    {
+      "q": "¿Qué es una consumición estándar?",
+      "a": "Una cantidad de bebida con unos 10 gramos de alcohol. Según el Ministerio de Sanidad: una caña de cerveza (250 ml), media copa de vino (125 ml) o un chupito de licor (30 ml). Un combinado o cubata suele equivaler a dos."
+    },
+    {
+      "q": "¿Por qué me pregunta el sexo y la edad?",
+      "a": "Porque la validación española del AUDIT propone puntos de corte más bajos para mujeres (6) y para mayores de 60 años (5) que el general (8). Las dos preguntas son opcionales, no puntúan y, como el resto de respuestas, no salen de tu navegador."
+    },
+    {
+      "q": "Si no bebo nunca, ¿por qué me pregunta por el pasado?",
+      "a": "Las dos últimas preguntas recogen si el alcohol causó problemas antes, aunque ya no bebas. Es útil para tu profesional."
+    },
+    {
+      "q": "¿Quedan guardadas mis respuestas?",
+      "a": "No. Tus respuestas se procesan en tu navegador y no salen de él: no llegan a nuestros servidores ni a Google Analytics. Desaparecen al cerrar la pestaña, y puedes borrarlas antes con «Borrar mis respuestas». Solo tú decides qué hacer con el resultado."
+    },
+    {
+      "q": "¿Puedo compartirlo con mi médico/a o mi psicólogo/a?",
+      "a": "Sí. Puedes descargar el resultado en PDF y llevarlo a tu consulta. Es una forma práctica de aportar contexto, aunque el/la profesional hará su propia valoración."
+    },
+    {
+      "q": "¿A quién acudo si me preocupa mi consumo?",
+      "a": "El médico/a de familia es un buen primer paso: puede valorar tu salud y derivarte. En España hay centros públicos de atención a las adicciones. Un psicólogo/a puede ayudarte a cambiar el consumo y lo que hay detrás. Con un consumo alto y diario, dejar de beber de golpe puede ser perjudicial para la salud; los profesionales sanitarios pueden acompañar ese proceso."
+    }
+  ],
+  "privacy": {
+    "heading": "Privacidad",
+    "body": "Tus respuestas son confidenciales: se calculan en tu navegador y no salen de él. No se envían a nuestros servidores ni a Google Analytics, y desaparecen al cerrar la pestaña o al pulsar «Borrar mis respuestas». Decides tú qué hacer con el resultado: puedes descargar un PDF para llevarlo a tu médico/a o terapeuta, o simplemente cerrar la pestaña."
+  }
+}

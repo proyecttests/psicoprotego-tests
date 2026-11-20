@@ -4,6 +4,8 @@
  *
  * Decodifica el token #d=BASE64 (o ?d= en enlaces antiguos), reconstruye las respuestas, ejecuta el scoring
  * y renderiza un ResultCard en modo lectura (sin reset, sin re-share).
+ * Desde el 2026-11-20 la app ya no crea estos enlaces (se comparte solo el test); la página sigue
+ * para los que ya circulan, sin analítica (CookieBanner no carga GTM aquí) y con «Borrar».
  *
  * Preserva todas las respuestas individuales para análisis externo / PDF.
  */
@@ -17,6 +19,7 @@ import { getScoringFunction, getMaxScore } from '@/utils/scoringFunctions'
 import type { TestLangFile } from '@/types/test'
 import type { TestDefinitionForScoring } from '@/utils/scoringFunctions'
 import ResultCard from '@/components/results/ResultCard'
+import { eraseLocalData } from '@/utils/localData'
 
 interface ResultadoClientProps {
   lang: string
@@ -190,6 +193,11 @@ export default function ResultadoClient({ lang, testId }: ResultadoClientProps) 
           result={result}
           testData={mockTestData as Parameters<typeof ResultCard>[0]['testData']}
           onReset={() => router.push(`/${lang}/test/${testId}`)}
+          onErase={() => {
+            // Quita el token de la dirección y del historial y recarga la landing: no queda nada en memoria
+            eraseLocalData()
+            window.location.replace(`/${lang}/test/${testId}`)
+          }}
           lang={lang}
           testId={testId}
           maxScore={maxScore}

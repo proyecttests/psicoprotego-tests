@@ -5,6 +5,7 @@
  * - Primera visita: muestra el banner con opciones Aceptar/Solo esenciales.
  * - Guarda la elección en localStorage (clave: psico_cookie_consent).
  * - GTM/GA4 solo se carga aquí, y solo si el usuario acepta analytics (app/layout.tsx no lo carga).
+ * - Nunca en /resultado (enlaces antiguos con las respuestas en la dirección).
  * - «Solo esenciales» borra las cookies de Google Analytics que quedaran de una aceptación anterior.
  * - Se puede relanzar desde cualquier componente borrando la clave y recargando.
  */
@@ -25,8 +26,14 @@ export function getConsent(): ConsentValue | null {
 
 // ── GTM initializer (called after accept) ─────────────────────────────────────
 
+// /resultado lleva las respuestas en la dirección (#d=, ?d= antiguo): ahí no se carga GTM, para que
+// Google no reciba la URL completa
+function analyticsAllowedHere(): boolean {
+  return !/\/resultado(\/|$)/.test(window.location.pathname)
+}
+
 function activateGTM(gtmId: string) {
-  if (typeof window === 'undefined') return
+  if (typeof window === 'undefined' || !analyticsAllowedHere()) return
   // Push consent update to dataLayer if it exists
   ;(window as unknown as { dataLayer?: unknown[] }).dataLayer =
     (window as unknown as { dataLayer?: unknown[] }).dataLayer ?? []
@@ -79,7 +86,7 @@ const UI: Record<string, {
   cookiesLink: string
 }> = {
   es: {
-    message:     'Usamos cookies de analítica (Google Analytics) solo si las aceptas. Si las aceptas, enviamos, sin tu nombre ni datos que te identifiquen, qué test haces, tus respuestas y tu resultado, para elaborar estadísticas de uso. Puedes cambiar tu elección cuando quieras en «Preferencias de cookies».',
+    message:     'Usamos cookies de analítica (Google Analytics) solo si las aceptas. Si las aceptas, contamos las visitas y cuántas veces se termina cada test, sin tu nombre ni datos que te identifiquen. Tus respuestas y tu resultado nunca salen de tu navegador. Puedes cambiar tu elección cuando quieras en «Preferencias de cookies».',
     accept:      'Aceptar',
     essential:   'Solo esenciales',
     learnMore:   'Más información',

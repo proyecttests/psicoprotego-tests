@@ -29,6 +29,7 @@ const CONDITION_LABELS: Record<string, string> = {
   'sintomas-fisicos': 'síntomas físicos',
   tdah:               'TDAH',
   disociacion:        'disociación',
+  alcohol:            'alcohol',
 }
 
 export function conditionLabel(condition: string) {

@@ -1,0 +1,507 @@
+{
+  "id": "audit",
+  "lang": "es",
+  "name": "Test de identificación de trastornos por consumo de alcohol (AUDIT)",
+  "version": "1.0",
+  "scoringFunction": "scoreAUDIT",
+  "disclaimerBefore": "Este cuestionario es una herramienta de cribado orientativa. **No es un diagnóstico clínico ni sustituye la valoración de un profesional de la salud mental.** Si tienes dudas o síntomas que te preocupan, consulta con un profesional.",
+  "instructions": "Debido a que el uso del alcohol puede afectar su salud e interferir con ciertos medicamentos y tratamientos, es importante que le hagamos algunas preguntas sobre su uso del alcohol. Sus respuestas serán confidenciales, así que sea honesto por favor. Marque la opción que mejor describa su respuesta a cada pregunta.",
+  "landing": {
+    "hook": "¿Te preguntas si bebes más de la cuenta?",
+    "description": "El AUDIT es el cuestionario de la Organización Mundial de la Salud para detectar el consumo de riesgo de alcohol, validado en España.",
+    "whatItMeasures": "Explora cuánto y con qué frecuencia bebes, si te cuesta controlarlo y si el alcohol te está causando problemas a ti o a otras personas.",
+    "whoIsItFor": "Adultos que quieren revisar su consumo de alcohol. No sirve para menores de edad.",
+    "howItWorks": [
+      "Responde 10 preguntas sobre tu consumo",
+      "Si nunca bebes, solo verás tres",
+      "Al final, sexo y edad (opcionales) para ajustar el punto de corte",
+      "Ves tu puntuación, de 0 a 40, y su nivel de riesgo"
+    ],
+    "faq": [
+      {
+        "q": "¿Es esto un diagnóstico?",
+        "a": "No. El AUDIT es un cribado; el diagnóstico solo puede hacerlo un profesional."
+      },
+      {
+        "q": "¿Quedan guardadas mis respuestas?",
+        "a": "No. Tus respuestas se procesan en tu navegador y no salen de él: no llegan a nuestros servidores ni a Google Analytics. Desaparecen al cerrar la pestaña, y puedes borrarlas antes con «Borrar mis respuestas». Solo tú decides qué hacer con el resultado."
+      },
+      {
+        "q": "¿Cuánto tiempo lleva completarlo?",
+        "a": "Unos 3 minutos."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "likert",
+      "text": "¿Con qué frecuencia consume alguna bebida alcohólica?",
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "Nunca"
+        },
+        {
+          "value": 1,
+          "label": "Una o menos veces al mes"
+        },
+        {
+          "value": 2,
+          "label": "De 2 a 4 veces al mes"
+        },
+        {
+          "value": 3,
+          "label": "De 2 a 3 veces a la semana"
+        },
+        {
+          "value": 4,
+          "label": "4 o más veces a la semana"
+        }
+      ],
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      },
+      "instructions": "Debido a que el uso del alcohol puede afectar su salud e interferir con ciertos medicamentos y tratamientos, es importante que le hagamos algunas preguntas sobre su uso del alcohol. Sus respuestas serán confidenciales, así que sea honesto por favor. Marque la opción que mejor describa su respuesta a cada pregunta."
+    },
+    {
+      "id": "q2",
+      "type": "likert",
+      "text": "¿Cuantas consumiciones de bebidas alcohólicas suele realizar en un día de consumo normal?",
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "1 o 2"
+        },
+        {
+          "value": 1,
+          "label": "3 o 4"
+        },
+        {
+          "value": 2,
+          "label": "5 o 6"
+        },
+        {
+          "value": 3,
+          "label": "De 7 a 9"
+        },
+        {
+          "value": 4,
+          "label": "10 o más"
+        }
+      ],
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      },
+      "instructions": "Una consumición estándar son unos 10 gramos de alcohol: una caña de cerveza, media copa de vino o un chupito de licor. Un combinado o cubata suele equivaler a dos.",
+      "showIf": {
+        "questionId": "q1",
+        "notIn": [
+          0
+        ]
+      }
+    },
+    {
+      "id": "q3",
+      "type": "likert",
+      "text": "¿Con qué frecuencia toma 6 o más bebidas alcohólicas en un solo día?",
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "Nunca"
+        },
+        {
+          "value": 1,
+          "label": "Menos de una vez al mes"
+        },
+        {
+          "value": 2,
+          "label": "Mensualmente"
+        },
+        {
+          "value": 3,
+          "label": "Semanalmente"
+        },
+        {
+          "value": 4,
+          "label": "A diario o casi a diario"
+        }
+      ],
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      },
+      "instructions": "Una consumición estándar son unos 10 gramos de alcohol: una caña de cerveza, media copa de vino o un chupito de licor. Un combinado o cubata suele equivaler a dos.",
+      "showIf": {
+        "questionId": "q1",
+        "notIn": [
+          0
+        ]
+      }
+    },
+    {
+      "id": "q4",
+      "type": "likert",
+      "text": "¿Con qué frecuencia en el curso del último año ha sido incapaz de parar de beber una vez había empezado?",
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "Nunca"
+        },
+        {
+          "value": 1,
+          "label": "Menos de una vez al mes"
+        },
+        {
+          "value": 2,
+          "label": "Mensualmente"
+        },
+        {
+          "value": 3,
+          "label": "Semanalmente"
+        },
+        {
+          "value": 4,
+          "label": "A diario o casi a diario"
+        }
+      ],
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      },
+      "instructions": "",
+      "showIf": {
+        "questionId": "q1",
+        "notIn": [
+          0
+        ]
+      }
+    },
+    {
+      "id": "q5",
+      "type": "likert",
+      "text": "¿Con qué frecuencia en el curso del último año no pudo hacer lo que se esperaba de usted porque había bebido?",
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "Nunca"
+        },
+        {
+          "value": 1,
+          "label": "Menos de una vez al mes"
+        },
+        {
+          "value": 2,
+          "label": "Mensualmente"
+        },
+        {
+          "value": 3,
+          "label": "Semanalmente"
+        },
+        {
+          "value": 4,
+          "label": "A diario o casi a diario"
+        }
+      ],
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      },
+      "instructions": "",
+      "showIf": {
+        "questionId": "q1",
+        "notIn": [
+          0
+        ]
+      }
+    },
+    {
+      "id": "q6",
+      "type": "likert",
+      "text": "¿Con qué frecuencia en el curso del último año ha necesitado beber en ayunas para recuperarse después de haber bebido mucho el día anterior?",
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "Nunca"
+        },
+        {
+          "value": 1,
+          "label": "Menos de una vez al mes"
+        },
+        {
+          "value": 2,
+          "label": "Mensualmente"
+        },
+        {
+          "value": 3,
+          "label": "Semanalmente"
+        },
+        {
+          "value": 4,
+          "label": "A diario o casi a diario"
+        }
+      ],
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      },
+      "instructions": "",
+      "showIf": {
+        "questionId": "q1",
+        "notIn": [
+          0
+        ]
+      }
+    },
+    {
+      "id": "q7",
+      "type": "likert",
+      "text": "¿Con qué frecuencia en el curso del último año ha tenido remordimientos o sentimientos de culpa después de haber bebido?",
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "Nunca"
+        },
+        {
+          "value": 1,
+          "label": "Menos de una vez al mes"
+        },
+        {
+          "value": 2,
+          "label": "Mensualmente"
+        },
+        {
+          "value": 3,
+          "label": "Semanalmente"
+        },
+        {
+          "value": 4,
+          "label": "A diario o casi a diario"
+        }
+      ],
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      },
+      "instructions": "",
+      "showIf": {
+        "questionId": "q1",
+        "notIn": [
+          0
+        ]
+      }
+    },
+    {
+      "id": "q8",
+      "type": "likert",
+      "text": "¿Con qué frecuencia en el curso del último año no ha podido recordar lo que sucedió la noche anterior porque había estado bebiendo?",
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "Nunca"
+        },
+        {
+          "value": 1,
+          "label": "Menos de una vez al mes"
+        },
+        {
+          "value": 2,
+          "label": "Mensualmente"
+        },
+        {
+          "value": 3,
+          "label": "Semanalmente"
+        },
+        {
+          "value": 4,
+          "label": "A diario o casi a diario"
+        }
+      ],
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      },
+      "instructions": "",
+      "showIf": {
+        "questionId": "q1",
+        "notIn": [
+          0
+        ]
+      }
+    },
+    {
+      "id": "q9",
+      "type": "likert",
+      "text": "¿Usted o alguna otra persona ha resultado herido porque usted había bebido?",
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "No"
+        },
+        {
+          "value": 2,
+          "label": "Sí, pero no en el curso del último año"
+        },
+        {
+          "value": 4,
+          "label": "Sí, el último año"
+        }
+      ],
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      },
+      "instructions": ""
+    },
+    {
+      "id": "q10",
+      "type": "likert",
+      "text": "¿Algún familiar, amigo, médico o profesional sanitario ha mostrado preocupación por su consumo de bebidas alcohólicas o le ha sugerido que deje de beber?",
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "No"
+        },
+        {
+          "value": 2,
+          "label": "Sí, pero no en el curso del último año"
+        },
+        {
+          "value": 4,
+          "label": "Sí, el último año"
+        }
+      ],
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      },
+      "instructions": ""
+    },
+    {
+      "id": "q11",
+      "type": "likert",
+      "text": "¿Cuál es su sexo?",
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "Mujer"
+        },
+        {
+          "value": 1,
+          "label": "Hombre"
+        },
+        {
+          "value": 2,
+          "label": "Prefiero no responder"
+        }
+      ],
+      "scale": {
+        "min": 0,
+        "max": 2,
+        "step": 1
+      },
+      "scoring": {
+        "method": "none"
+      },
+      "instructions": "Dos preguntas más, para aplicar los puntos de corte de la validación española, que son distintos según el sexo y la edad. Como el resto, no salen de este navegador. Si prefiere no responder, se usa el corte general."
+    },
+    {
+      "id": "q12",
+      "type": "likert",
+      "text": "¿Qué edad tiene?",
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "60 años o menos"
+        },
+        {
+          "value": 1,
+          "label": "Más de 60 años"
+        },
+        {
+          "value": 2,
+          "label": "Prefiero no responder"
+        }
+      ],
+      "scale": {
+        "min": 0,
+        "max": 2,
+        "step": 1
+      },
+      "scoring": {
+        "method": "none"
+      },
+      "instructions": ""
+    }
+  ],
+  "scoring": [
+    {
+      "min": 0,
+      "max": 7,
+      "category": "Puntuación en zona I: consumo de bajo riesgo",
+      "color": "green",
+      "messageKey": "zone1"
+    },
+    {
+      "min": 8,
+      "max": 15,
+      "category": "Puntuación en zona II: consumo de riesgo",
+      "color": "yellow",
+      "messageKey": "zone2"
+    },
+    {
+      "min": 16,
+      "max": 19,
+      "category": "Puntuación en zona III: consumo perjudicial",
+      "color": "orange",
+      "messageKey": "zone3"
+    },
+    {
+      "min": 20,
+      "max": null,
+      "category": "Puntuación en zona IV: posible dependencia",
+      "color": "red",
+      "messageKey": "zone4"
+    }
+  ],
+  "results": {
+    "normal": {
+      "zone1": {
+        "title": "Puntuación en zona I: consumo de bajo riesgo",
+        "body": "Tu puntuación está por debajo del punto de corte que se aplica en tu caso: 8 en general, 6 en mujeres y 5 en mayores de 60 años, según la validación española.",
+        "recommendation": "Menos alcohol siempre es mejor para la salud. Si te preocupa tu consumo, coméntalo con tu médico/a de familia."
+      },
+      "zone2": {
+        "title": "Puntuación en zona II: consumo de riesgo",
+        "body": "Tu puntuación está en la zona de consumo de riesgo, hasta 15 puntos: un consumo que aumenta el riesgo de problemas de salud y de otro tipo. La OMS recomienda en esta zona un consejo para reducir el consumo.",
+        "recommendation": "Coméntalo con tu médico/a de familia o con un profesional: reducir el consumo ahora evita problemas después."
+      },
+      "zone3": {
+        "title": "Puntuación en zona III: consumo perjudicial",
+        "body": "Tu puntuación está entre 16 y 19: un consumo que probablemente ya te está causando daños. La OMS recomienda en esta zona una intervención breve y un seguimiento.",
+        "recommendation": "Pide cita con tu médico/a de familia o con un profesional de las adicciones. Puedes llevar el resultado en PDF."
+      },
+      "zone4": {
+        "title": "Puntuación en zona IV: posible dependencia",
+        "body": "Tu puntuación es de 20 o más: la OMS recomienda en esta zona una evaluación diagnóstica más amplia de una posible dependencia del alcohol. No es un diagnóstico.",
+        "recommendation": "Pide una valoración a tu médico/a de familia o en un centro de atención a las adicciones. Con un consumo alto y diario, dejar de beber de golpe puede ser perjudicial para la salud; los profesionales sanitarios pueden acompañar ese proceso."
+      }
+    },
+    "notesByCut": {
+      "lowered": "Con el corte general de la OMS (8) estarías en la zona I; con el de la validación española para {who} ({cut}), tu puntuación entra en la zona de consumo de riesgo.",
+      "unknown": "Si eres mujer o tienes más de 60 años, la validación española propone cortes más bajos (6 y 5): si llegas a ellos, conviene revisar tu consumo."
+    }
+  }
+}

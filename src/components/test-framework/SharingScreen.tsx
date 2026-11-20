@@ -1,10 +1,11 @@
 /**
  * @file components/test-framework/SharingScreen.tsx
- * @description Panel de compartir resultados.
+ * @description Panel de compartir el test: solo el enlace a la landing, nunca las respuestas ni el
+ * resultado (decisión de Emmanuel, 2026-11-20: las respuestas son confidenciales).
  *
  * Botones primarios: WhatsApp, TikTok, Instagram.
- * TikTok e Instagram generan una imagen story 9:16 y la comparten vía
- * Web Share API con files (abre el selector nativo del OS → Story directa).
+ * TikTok e Instagram comparten el enlace con el selector nativo del sistema (la imagen story
+ * solo se genera si se pasa resultLabel, y TestContainer ya no lo pasa).
  * En escritorio sin soporte: copia enlace al portapapeles.
  * Botones secundarios: Twitter/X, Copiar enlace.
  */
@@ -31,16 +32,16 @@ const UI: Record<string, {
   mobileHint: string
 }> = {
   es: {
-    title:      'Compartir resultados',
-    subtitle:   'Elige cómo quieres compartir tu resultado',
-    shareText:  'Acabo de completar este test psicológico. ¿Lo intentas tú también?',
+    title:      'Compartir el test',
+    subtitle:   'Se comparte solo el enlace al test: nunca tus respuestas ni tu resultado.',
+    shareText:  'He encontrado este test psicológico validado. Por si te sirve:',
     whatsapp:   'WhatsApp',
     tiktok:     'TikTok',
     instagram:  'Instagram',
     twitter:    'Twitter / X',
     copy:       'Copiar enlace',
     copied:     '¡Copiado!',
-    back:       'Volver a resultados',
+    back:       'Volver a mi resultado',
     mobileHint: 'Se abrirá el selector de apps',
   },
   en: {
@@ -122,18 +123,18 @@ const SharingScreen: React.FC<SharingScreenProps> = ({
 
   const handleWhatsApp = () => {
     const url = `https://wa.me/?text=${encodeURIComponent(`${ui.shareText} ${shortUrl}`)}`
-    trackEvent('share_whatsapp', { shareUrl: shortUrl })
+    trackEvent('share_whatsapp')
     window.open(url, '_blank', 'noopener,noreferrer')
   }
 
   const handleTwitter = () => {
     const url = `https://x.com/intent/tweet?text=${encodeURIComponent(`${ui.shareText} ${shortUrl}`)}`
-    trackEvent('share_twitter', { shareUrl: shortUrl })
+    trackEvent('share_twitter')
     window.open(url, '_blank', 'noopener,noreferrer')
   }
 
   const handleStory = async (platform: 'tiktok' | 'instagram') => {
-    trackEvent(`share_${platform}_story`, { shareUrl: shortUrl })
+    trackEvent(`share_${platform}_story`)
 
     // Try to generate + share a story image (file share → native app selector → Story)
     if (hasNativeShare && resultLabel) {
@@ -182,7 +183,7 @@ const SharingScreen: React.FC<SharingScreenProps> = ({
   const handleCopy = async (silent = false) => {
     try {
       await navigator.clipboard.writeText(shortUrl)
-      trackEvent('share_copy', { shareUrl: shortUrl })
+      trackEvent('share_copy')
       if (!silent) {
         setCopied(true)
         setTimeout(() => setCopied(false), 2000)

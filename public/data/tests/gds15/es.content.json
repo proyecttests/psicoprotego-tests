@@ -178,7 +178,7 @@
     },
     {
       "q": "¿Quedan guardadas mis respuestas?",
-      "a": "No en nuestros servidores. Tus respuestas se procesan en tu navegador y no las guardamos. Si aceptas las cookies de analítica, se envían a Google Analytics, sin tu nombre ni datos que te identifiquen, para elaborar estadísticas. Solo tú decides qué hacer con el resultado."
+      "a": "No. Tus respuestas se procesan en tu navegador y no salen de él: no llegan a nuestros servidores ni a Google Analytics. Desaparecen al cerrar la pestaña, y puedes borrarlas antes con «Borrar mis respuestas». Solo tú decides qué hacer con el resultado."
     },
     {
       "q": "¿Puedo compartirlo con mi médico/a o mi psicólogo/a?",
@@ -195,6 +195,6 @@
   ],
   "privacy": {
     "heading": "Privacidad",
-    "body": "Tus respuestas se calculan en tu navegador: no se envían a nuestros servidores ni se guardan. Solo si aceptas las cookies de analítica se envían a Google Analytics, sin tu nombre ni datos que te identifiquen, para elaborar estadísticas. Decides tú qué compartir y con quién: puedes descargar un PDF del resultado para llevarlo a tu médico/a o terapeuta, o simplemente cerrar la pestaña."
+    "body": "Tus respuestas son confidenciales: se calculan en tu navegador y no salen de él. No se envían a nuestros servidores ni a Google Analytics, y desaparecen al cerrar la pestaña o al pulsar «Borrar mis respuestas». Decides tú qué hacer con el resultado: puedes descargar un PDF del resultado para llevarlo a tu médico/a o terapeuta, o simplemente cerrar la pestaña."
   }
 }

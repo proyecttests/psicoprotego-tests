@@ -73,6 +73,7 @@ const STRINGS = {
       creative_commons:'Creative Commons',
       free_use_with_conditions: 'Uso libre con condiciones (cita y aviso de copyright)',
       public_domain:            'Dominio público',
+      free_noncommercial:       'Uso libre no comercial',
       research_clinical_use:    'Uso clínico y de investigación (permiso de los autores)',
     } as Record<string, string>,
     cutoffLabels: {
@@ -84,6 +85,10 @@ const STRINGS = {
       crisis:             'Crisis',
       below_cutoff:       'Por debajo del corte',
       above_cutoff:       'A partir del corte',
+      zone1:              'Zona I (bajo riesgo)',
+      zone2:              'Zona II (riesgo)',
+      zone3:              'Zona III (perjudicial)',
+      zone4:              'Zona IV (posible dependencia)',
     } as Record<string, string>,
   },
 } as const
@@ -105,6 +110,10 @@ const CUTOFF_COLORS: Record<string, { bg: string; text: string }> = {
   crisis:            { bg: '#fce7f3', text: '#831843' },
   below_cutoff:      { bg: '#d1fae5', text: '#065f46' },
   above_cutoff:      { bg: '#ffedd5', text: '#7c2d12' },
+  zone1:             { bg: '#d1fae5', text: '#065f46' },
+  zone2:             { bg: '#fef3c7', text: '#78350f' },
+  zone3:             { bg: '#ffedd5', text: '#7c2d12' },
+  zone4:             { bg: '#fee2e2', text: '#7f1d1d' },
 }
 
 function getCutoffColor(key: string) {

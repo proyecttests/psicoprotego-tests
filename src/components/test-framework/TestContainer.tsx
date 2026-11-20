@@ -34,7 +34,7 @@ import ResultCard          from '@/components/results/ResultCard'
 import CalculatingScreen   from './CalculatingScreen'
 import SharingScreen       from './SharingScreen'
 import { getScoringFunction, getMaxScore } from '@/utils/scoringFunctions'
-import { buildShareUrl, shareableAnswers } from '@/utils/shareEncoding'
+import { eraseLocalData } from '@/utils/localData'
 import { shouldShowQuestion } from '@/utils/questionVisibility'
 import type { ScoringResult, TestDefinitionForScoring, QuestionWithScoring } from '@/utils/scoringFunctions'
 import { trackEvent } from '@/config/analytics'
@@ -113,6 +113,14 @@ const UI_STRINGS: Record<string, {
     selectAnswer: 'Selecciona una respuesta para continuar',
     writeAnswer:  'Escribe tu respuesta para continuar',
   },
+}
+
+// Pantalla tras «Borrar mis respuestas»
+const ERASED_UI = {
+  title:      'Respuestas borradas',
+  body:       'Hemos borrado de este navegador tus respuestas y tu resultado. No quedaba ninguna copia en nuestros servidores.',
+  backToTest: 'Volver al test',
+  allTests:   'Ver todos los tests',
 }
 
 function getUiStrings(lang: string) {
@@ -244,10 +252,8 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
   // ── Handlers ───────────────────────────────────────────────────────────────
 
   const handleAnswer = (questionId: string, value: string | number | boolean) => {
+    // Las respuestas no salen del navegador: ni a la analítica ni a ningún enlace
     setAnswers((prev) => ({ ...prev, [questionId]: value }))
-    // El texto libre (ejemplos) no sale del navegador: ni a la analítica ni al enlace compartido
-    const isText = testDef?.questions.find((q) => q.id === questionId)?.type === 'text'
-    if (!isText) trackEvent('question_answered', { testId, questionId, answer: value })
   }
 
   const handleSubmit = (finalAnswers: AnswersMap) => {
@@ -267,19 +273,8 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
       return
     }
 
-    trackEvent('test_completed', {
-      testId,
-      score: scored.score,
-      category: scored.category?.label,
-    })
-
-    if (scored.resultType === 'CRISIS' || (scored.redFlags && scored.redFlags.length > 0)) {
-      trackEvent('red_flag_detected', {
-        testId,
-        flagCount: scored.redFlags?.length ?? 0,
-        severity: 'critical',
-      })
-    }
+    // Analítica solo de accesos: qué test se termina, sin puntuación, categoría ni avisos
+    trackEvent('test_completed', { testId })
 
     setResult(scored)
     setUiState('calculating')
@@ -328,8 +323,21 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
+  // «Borrar mis respuestas»: vacía la memoria de la pestaña y lo que quede en sessionStorage
+  const handleErase = () => {
+    eraseLocalData()
+    setAnswers({})
+    setCurrentIdx(0)
+    setResult(null)
+    setPendingShareUrl('')
+    setIsExiting(false)
+    setUiState('erased')
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  // Se comparte el enlace al test, no el resultado
   const handleShare = () => {
-    const url = buildShareUrl(lang, testId, shareableAnswers(testDef?.questions ?? [], answers))
+    const url = `${window.location.origin}/${lang}/test/${testId}`
     trackEvent('share_open', { testId })
     setPendingShareUrl(url)
     setUiState('sharing')
@@ -402,14 +410,27 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
     )
   }
 
+  if (uiState === 'erased') {
+    return (
+      <div className="flex flex-1 items-center justify-center px-4 py-8">
+        <div className="card w-full max-w-sm space-y-4 text-center">
+          <h2 className="text-xl">{ERASED_UI.title}</h2>
+          <p className="text-sm font-sans" style={{ color: 'var(--color-primary)' }}>{ERASED_UI.body}</p>
+          <div className="flex flex-col gap-2">
+            <a href={`/${lang}/test/${testId}`} className="btn-primary">{ERASED_UI.backToTest}</a>
+            <a href={`/${lang}`} className="btn-secondary">{ERASED_UI.allTests}</a>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   if (uiState === 'sharing' && pendingShareUrl) {
     return (
       <SharingScreen
         lang={lang}
         shareUrl={pendingShareUrl}
         testName={testDef?.name ?? ''}
-        resultLabel={result?.category?.label ?? ''}
-        resultColor={(result?.category?.color ?? 'green') as 'green' | 'yellow' | 'orange' | 'red'}
         onDone={() => {
           setPendingShareUrl('')
           setUiState('result')
@@ -428,6 +449,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
             testData={testDef}
             onReset={handleReset}
             onShare={handleShare}
+            onErase={handleErase}
             lang={lang}
             testId={testId}
             maxScore={maxScore}

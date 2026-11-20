@@ -1,0 +1,102 @@
+{
+  "id": "audit",
+  "availableLangs": [
+    "es"
+  ],
+  "category": "psychometric",
+  "condition": "alcohol",
+  "slug": "audit",
+  "tags": [
+    "validado-clinicamente",
+    "adultos",
+    "10-items",
+    "cribado",
+    "adicciones"
+  ],
+  "originalInstrument": "Alcohol Use Disorders Identification Test (AUDIT)",
+  "use": [
+    "clinical_screening"
+  ],
+  "measures": [
+    "alcohol_use"
+  ],
+  "validated": true,
+  "medicalCondition": {
+    "icd10": "F10",
+    "name": "Trastornos mentales y del comportamiento debidos al consumo de alcohol",
+    "schemaOrgUrl": "https://www.icd10data.com/ICD10CM/Codes/F01-F99/F10-F19/F10-"
+  },
+  "validation": {
+    "isValidated": true,
+    "references": [
+      {
+        "authors": "Saunders JB, Aasland OG, Babor TF, de la Fuente JR, Grant M",
+        "year": 1993,
+        "title": "Development of the Alcohol Use Disorders Identification Test (AUDIT): WHO Collaborative Project on Early Detection of Persons with Harmful Alcohol Consumption—II",
+        "journal": "Addiction",
+        "volume": "88",
+        "issue": "6",
+        "pages": "791–804",
+        "doi": "10.1111/j.1360-0443.1993.tb02093.x"
+      }
+    ],
+    "spanishValidation": {
+      "available": true,
+      "note": "Rubio Valladolid G et al. (1998). Validación de la prueba para la identificación de trastornos por uso de alcohol (AUDIT) en Atención Primaria. Rev Clin Esp 198(1):11-14. 326 pacientes de dos centros de salud; corte 8 (sensibilidad y especificidad del 90 %), 6 en mujeres y 5 en mayores de 60 años. Texto: traducción del manual de la OMS (2001)."
+    }
+  },
+  "validationDetails": {
+    "original": {
+      "lang": "en",
+      "reference": "Saunders JB et al. (1993)",
+      "journal": "Addiction, 88(6), 791-804",
+      "doi": "10.1111/j.1360-0443.1993.tb02093.x"
+    },
+    "translations": {
+      "es": {
+        "validated": true,
+        "reference": "Rubio Valladolid et al., 1998"
+      },
+      "en": {
+        "validated": true,
+        "reference": "Original instrument"
+      }
+    }
+  },
+  "authorship": {
+    "author": "emmanuel",
+    "reviewedBy": "cristina"
+  },
+  "ageRange": {
+    "min": 18,
+    "max": null
+  },
+  "selfAdministrable": true,
+  "timeToComplete": "3 min",
+  "itemCount": 10,
+  "itemType": "likert_5",
+  "scoringRange": {
+    "min": 0,
+    "max": 40
+  },
+  "cutoffs": {
+    "zone1": [
+      0,
+      7
+    ],
+    "zone2": [
+      8,
+      15
+    ],
+    "zone3": [
+      16,
+      19
+    ],
+    "zone4": [
+      20,
+      40
+    ]
+  },
+  "copyright": "free_noncommercial",
+  "copyrightNotice": "AUDIT: © Organización Mundial de la Salud 2001. Puede reproducirse y traducirse libremente, pero no para la venta ni con fines comerciales. Traducción: Martínez-Raga, Pérez Gálvez, Castellano Gómez y Temprado Albalat."
+}

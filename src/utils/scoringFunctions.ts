@@ -574,6 +574,43 @@ export const scoreITQ: ScoringFunction = (testData, answers, messages, lang = 'e
   }
 }
 
+/**
+ * AUDIT con los cortes de la validación española (Rubio et al., 1998), decisión de Emmanuel
+ * (2026-11-20): la zona II (consumo de riesgo) empieza en 8 en general, 6 en mujeres y 5 en
+ * mayores de 60 años (con las dos cosas, 5). Zonas III y IV, las de la OMS.
+ * q11 (sexo: 0 mujer, 1 hombre, 2 sin respuesta) y q12 (edad: 0 hasta 60, 1 más de 60, 2 sin
+ * respuesta) no puntúan (`scoring.method: 'none'`). Textos de los avisos: `results.notesByCut`.
+ */
+export const scoreAUDIT: ScoringFunction = (testData, answers, messages, lang = 'es') => {
+  const base = scoreWith(testData, answers, messages, lang, (sum) => sum)
+  const score = base.score ?? 0
+  const woman = answers.q11 === 0
+  const over60 = answers.q12 === 1
+  const cut = over60 ? 5 : woman ? 6 : 8
+  const who = over60 ? 'mayores de 60 años' : 'mujeres'
+  const langMsgs = (messages?.[testData.id] as Record<string, Record<string, unknown>> | undefined)?.[lang]
+  const texts = langMsgs?.['notesByCut'] as { lowered: string; unknown: string } | undefined
+  const unknown = (answers.q11 !== 0 && answers.q11 !== 1) || (answers.q12 !== 0 && answers.q12 !== 1)
+
+  if (score >= cut && score < 8) {
+    const rule = testData.scoring.find((r) => r.messageKey === 'zone2')
+    const normal = langMsgs?.['normal'] as Record<string, { title: string; body: string; recommendation: string }> | undefined
+    const resolved = normal?.['zone2']
+    const note = texts?.lowered.replace('{who}', who).replace('{cut}', String(cut))
+    return {
+      ...base,
+      category: rule
+        ? { min: cut, max: rule.max, label: rule.category, color: rule.color, messageKey: rule.messageKey }
+        : base.category,
+      message: resolved ? { ...resolved, ...(note && { notes: [note] }) } : base.message,
+    }
+  }
+  if (score >= 5 && score < 8 && unknown && texts && base.message) {
+    return { ...base, message: { ...base.message, notes: [...(base.message.notes ?? []), texts.unknown] } }
+  }
+  return base
+}
+
 // ── Registry de funciones de scoring ─────────────────────────────────────────
 
 /**
@@ -592,6 +629,7 @@ const SCORING_REGISTRY: Record<string, ScoringFunction> = {
   scorePHQ9,
   scoreMean,
   scoreITQ,
+  scoreAUDIT,
   // scorePSS10: scorePSS10,  ← ejemplo para test con lógica especial
 }
 

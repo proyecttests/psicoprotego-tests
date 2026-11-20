@@ -29,6 +29,7 @@ interface ResultCardProps {
   testData: TestDefinition | null
   onReset: () => void
   onShare?: () => void
+  onErase?: () => void
   lang: string
   testId: string
   maxScore: number
@@ -74,12 +75,18 @@ const RESULT_UI: Record<string, {
   emergencyNote: string
   examplesTitle: string
   examplesNote: string
+  eraseTitle: string
+  eraseBody: string
+  eraseButton: string
+  eraseConfirm: string
+  eraseYes: string
+  eraseNo: string
 }> = {
   es: {
     retry:          '↺ Volver a intentar',
     recommendation: 'Recomendación',
     disclaimer:     'Estos resultados tienen fines exclusivamente educativos y orientativos. No constituyen un diagnóstico clínico ni sustituyen la valoración de un profesional de la salud mental.',
-    shareResults:   'Compartir resultados',
+    shareResults:   'Compartir el test',
     copyLink:       'Copiar enlace',
     copied:         '¡Copiado!',
     scoreLabel:     'Puntuación',
@@ -89,7 +96,13 @@ const RESULT_UI: Record<string, {
     privacyNote:    'Esta información está solo en tu navegador y no la verá nadie si tú no la compartes.',
     emergencyNote:  'Si es una emergencia, llama al 112',
     examplesTitle:  'Tus ejemplos',
-    examplesNote:   'Solo están en tu navegador: no se guardan ni van en el enlace para compartir. Se incluyen en el PDF con resultados.',
+    examplesNote:   'Solo están en tu navegador: no se guardan ni salen de él. Se incluyen en el PDF con resultados.',
+    eraseTitle:     'Borrar mis respuestas',
+    eraseBody:      'Tus respuestas y tu resultado solo están en este navegador, en esta pestaña: no se guardan en ningún servidor y desaparecen al cerrarla. Si quieres borrarlos ya, pulsa el botón. Si quieres conservar el resultado, descarga antes el PDF.',
+    eraseButton:    'Borrar ahora',
+    eraseConfirm:   '¿Borrar tus respuestas y tu resultado? No se puede deshacer.',
+    eraseYes:       'Sí, borrar',
+    eraseNo:        'Cancelar',
   },
 }
 
@@ -202,6 +215,33 @@ const ShareButtons: React.FC<{
   )
 }
 
+// ── Sub-componente: EraseBlock ────────────────────────────────────────────────
+
+/** «Borrar mis respuestas»: pide confirmación en línea, sin diálogo del navegador. */
+const EraseBlock: React.FC<{ lang: string; onErase?: () => void }> = ({ lang, onErase }) => {
+  const ui = getUi(lang)
+  const [confirming, setConfirming] = React.useState(false)
+  if (!onErase) return null
+
+  return (
+    <div className="rounded-xl border border-neutral-200 p-4 font-sans space-y-3">
+      <h2 className="text-base">{ui.eraseTitle}</h2>
+      <p className="text-sm" style={{ color: 'var(--color-primary)' }}>{ui.eraseBody}</p>
+      {confirming ? (
+        <div className="space-y-2" role="alert">
+          <p className="text-sm font-semibold" style={{ color: 'var(--color-primary)' }}>{ui.eraseConfirm}</p>
+          <div className="flex flex-wrap gap-2">
+            <button type="button" onClick={onErase} className="btn-primary">{ui.eraseYes}</button>
+            <button type="button" onClick={() => setConfirming(false)} className="btn-secondary">{ui.eraseNo}</button>
+          </div>
+        </div>
+      ) : (
+        <button type="button" onClick={() => setConfirming(true)} className="btn-secondary">{ui.eraseButton}</button>
+      )}
+    </div>
+  )
+}
+
 // ── Sub-componente: SupportBlock ──────────────────────────────────────────────
 
 /**
@@ -275,6 +315,7 @@ const NormalResult: React.FC<{
   result: ScoringResult
   onReset: () => void
   onShare?: () => void
+  onErase?: () => void
   lang: string
   testId: string
   maxScore: number
@@ -284,7 +325,7 @@ const NormalResult: React.FC<{
   answers?: AnswersMap
   availableLangs?: string[]
   testLangFile?: TestLangFile
-}> = ({ result, onReset, onShare, lang, testId, maxScore, condition, tags, testCategory, answers, availableLangs, testLangFile }) => {
+}> = ({ result, onReset, onShare, onErase, lang, testId, maxScore, condition, tags, testCategory, answers, availableLangs, testLangFile }) => {
   const visible      = useFadeIn()
   const isCrisis     = result.resultType === 'CRISIS'
   const displayScore = useCountUp(result.score ?? 0)
@@ -444,6 +485,9 @@ const NormalResult: React.FC<{
       {/* ── Bloque de apoyo (red flags / urgencia sin crisis; en CRISIS va arriba) ─ */}
       {showSupport && !isCrisis && <SupportBlock lang={lang} />}
 
+      {/* ── Borrar mis respuestas ─────────────────────────────────────────── */}
+      <EraseBlock lang={lang} onErase={onErase} />
+
       {/* ── Reintentar ──────────────────────────────────────────────────── */}
       <div className="flex justify-start">
         <button
@@ -469,12 +513,13 @@ const NormalResult: React.FC<{
 
 // ── Componente principal ──────────────────────────────────────────────────────
 
-const ResultCard: React.FC<ResultCardProps> = ({ result, onReset, onShare, lang, testId, maxScore, condition, tags, testCategory, answers, availableLangs, testLangFile }) => {
+const ResultCard: React.FC<ResultCardProps> = ({ result, onReset, onShare, onErase, lang, testId, maxScore, condition, tags, testCategory, answers, availableLangs, testLangFile }) => {
   return (
     <NormalResult
       result={result}
       onReset={onReset}
       onShare={onShare}
+      onErase={onErase}
       lang={lang}
       testId={testId}
       maxScore={maxScore}

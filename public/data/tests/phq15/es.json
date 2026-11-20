@@ -37,7 +37,7 @@
       },
       {
         "q": "¿Quedan guardadas mis respuestas?",
-        "a": "No en nuestros servidores. Tus respuestas se procesan en tu navegador y no las guardamos. Si aceptas las cookies de analítica, se envían a Google Analytics, sin tu nombre ni datos que te identifiquen, para elaborar estadísticas. Solo tú decides qué hacer con el resultado."
+        "a": "No. Tus respuestas se procesan en tu navegador y no salen de él: no llegan a nuestros servidores ni a Google Analytics. Desaparecen al cerrar la pestaña, y puedes borrarlas antes con «Borrar mis respuestas». Solo tú decides qué hacer con el resultado."
       },
       {
         "q": "¿Qué hago si obtengo una puntuación alta?",

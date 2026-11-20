@@ -24,6 +24,30 @@
     }
   },
   {
+    "testId": "audit",
+    "category": "psychometric",
+    "condition": "alcohol",
+    "tags": [
+      "validado-clinicamente",
+      "adultos",
+      "10-items",
+      "cribado",
+      "adicciones"
+    ],
+    "availableLangs": [
+      "es"
+    ],
+    "validated": true,
+    "timeToComplete": "3 min",
+    "itemCount": 10,
+    "names": {
+      "es": "Test de identificación de trastornos por consumo de alcohol (AUDIT)"
+    },
+    "hooks": {
+      "es": ""
+    }
+  },
+  {
     "testId": "des2",
     "category": "psychometric",
     "condition": "disociacion",
