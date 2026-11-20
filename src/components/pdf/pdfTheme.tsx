@@ -74,6 +74,8 @@ export interface PdfValidation {
   reference?: string
   originalReference?: string
   originalJournal?: string
+  /** Aviso de copyright que exige el instrumento (ASRS v1.1) */
+  copyrightNotice?: string
 }
 
 // ── Estilos ───────────────────────────────────────────────────────────────────
@@ -321,6 +323,7 @@ export const AboutBlock: React.FC<{ validation?: PdfValidation; links: PdfLinks 
           {`Original: ${validation.originalReference}${validation.originalJournal ? `, ${validation.originalJournal}` : ''}.`}
         </Text>
       )}
+      {validation?.copyrightNotice && <Text style={styles.aboutMuted}>{validation.copyrightNotice}</Text>}
       <Text style={[styles.aboutLine, { marginTop: 4 }]}>
         {'Ficha clínica del test: '}
         <Link src={links.testUrl} style={styles.link}>{links.testUrl.replace(/^https?:\/\//, '')}</Link>

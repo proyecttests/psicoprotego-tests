@@ -351,6 +351,8 @@ export interface TestMetadata {
   scoringRange: { min: number; max: number }
   cutoffs: Record<string, [number, number]>
   copyright: string
+  /** Aviso de copyright que el instrumento pide reproducir (sale en la ficha técnica y en el PDF) */
+  copyrightNotice?: string
 }
 
 // ── Landing page del test ─────────────────────────────────────────────────────

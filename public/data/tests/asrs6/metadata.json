@@ -1,13 +1,25 @@
 {
   "id": "asrs6",
-  "availableLangs": ["es"],
+  "availableLangs": [
+    "es"
+  ],
   "category": "psychometric",
   "condition": "tdah",
   "slug": "asrs-v1-1",
-  "tags": ["validado-clinicamente", "adultos", "likert", "6-items", "cribado"],
+  "tags": [
+    "validado-clinicamente",
+    "adultos",
+    "likert",
+    "6-items",
+    "cribado"
+  ],
   "originalInstrument": "ASRS v1.1 Screener",
-  "use": ["clinical_screening"],
-  "measures": ["adhd"],
+  "use": [
+    "clinical_screening"
+  ],
+  "measures": [
+    "adhd"
+  ],
   "validated": true,
   "medicalCondition": {
     "icd10": "F90",
@@ -51,23 +63,42 @@
       "doi": "10.1017/s0033291704002892"
     },
     "translations": {
-      "es": { "validated": true, "reference": "Ramos-Quiroga et al., 2009" },
-      "en": { "validated": true, "reference": "Original instrument" }
+      "es": {
+        "validated": true,
+        "reference": "Ramos-Quiroga et al., 2009"
+      },
+      "en": {
+        "validated": true,
+        "reference": "Original instrument"
+      }
     }
   },
   "authorship": {
     "author": "emmanuel",
     "reviewedBy": "cristina"
   },
-  "ageRange": { "min": 18, "max": null },
+  "ageRange": {
+    "min": 18,
+    "max": null
+  },
   "selfAdministrable": true,
   "timeToComplete": "1-2 min",
   "itemCount": 6,
   "itemType": "likert_5",
-  "scoringRange": { "min": 0, "max": 24 },
-  "cutoffs": {
-    "below_cutoff": [0, 11],
-    "above_cutoff": [12, 24]
+  "scoringRange": {
+    "min": 0,
+    "max": 24
   },
-  "copyright": "free_use_with_conditions"
+  "cutoffs": {
+    "below_cutoff": [
+      0,
+      11
+    ],
+    "above_cutoff": [
+      12,
+      24
+    ]
+  },
+  "copyright": "free_use_with_conditions",
+  "copyrightNotice": "ASRS v1.1 © New York University y Ronald C. Kessler, PhD. Cuestionario de la Organización Mundial de la Salud. Kessler RC et al. (2005), Psychological Medicine 35(2):245-256."
 }

@@ -20,6 +20,7 @@ async function loadValidation(testId: string, lang: string): Promise<PdfValidati
       reference:         vd.translations?.[lang]?.reference,
       originalReference: vd.original?.reference,
       originalJournal:   vd.original?.journal,
+      copyrightNotice:   meta.copyrightNotice,
     }
   } catch {
     return undefined

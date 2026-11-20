@@ -335,6 +335,9 @@ const TestMetadataTable: React.FC<TestMetadataTableProps> = ({ metadata, lang })
           <p className="text-sm font-medium" style={{ color: 'var(--color-primary)' }}>
             {copyrightLabel}
           </p>
+          {metadata.copyrightNotice && (
+            <p className="mt-1 text-xs" style={{ color: 'var(--color-primary)', opacity: 0.7 }}>{metadata.copyrightNotice}</p>
+          )}
         </FieldCard>
 
       </div>
