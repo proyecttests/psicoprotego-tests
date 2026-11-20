@@ -415,7 +415,7 @@
       "scoring": {
         "method": "none"
       },
-      "instructions": "Dos preguntas más, para aplicar los puntos de corte de la validación española, que son distintos según el sexo y la edad. Como el resto, no salen de este navegador. Si prefiere no responder, se usa el corte general."
+      "instructions": "Dos preguntas más, para aplicar los puntos de corte de la validación española, que son distintos según el sexo y la edad. No puntúan y, como el resto de respuestas, son confidenciales. Si prefiere no responder, se usa el corte general."
     },
     {
       "id": "q12",

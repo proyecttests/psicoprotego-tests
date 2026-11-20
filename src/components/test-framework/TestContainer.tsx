@@ -367,7 +367,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
   // Y si además enunciado + ítem son largos (PCL-5 e ITQ), el ítem baja a text-base para caber en 360×640
   const longContent = manyOptions &&
     ((currentQuestion?.instructions ?? testDef?.instructions ?? '').length + (currentQuestion?.text.length ?? 0)) > 220
-  // Ítem largo con 4 opciones o menos: sin el tamaño más grande
+  // Ítem largo: un paso menos de letra (en pantallas bajas, Montserrat no cabría)
   const longItem = (currentQuestion?.text.length ?? 0) > 100
 
   const showCrisisFooter = result?.resultType === 'CRISIS'
@@ -501,7 +501,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
         {/* SECCIÓN CENTRAL: Pregunta + Opciones con transición TDAH */}
         <div
           key={currentIdx}
-          className={`w-full max-w-2xl flex flex-col items-center ${longContent ? 'gap-2' : manyOptions ? 'gap-3' : 'gap-3 tall:gap-6'} sm:gap-14 flex-1 justify-center py-1 tall:py-2 sm:py-4${isExiting ? ' animate-slide-out-tiktok' : ''}`}
+          className={`w-full max-w-2xl flex flex-col items-center ${longContent ? 'gap-1.5 tall:gap-2' : manyOptions ? 'gap-3' : 'gap-3 tall:gap-6'} sm:gap-14 flex-1 justify-center py-1 tall:py-2 sm:py-4${isExiting ? ' animate-slide-out-tiktok' : ''}`}
         >
           {/* Instrucciones validadas — en cada pregunta: los ítems oficiales no se entienden sin el enunciado */}
           {(currentQuestion.instructions ?? testDef?.instructions) && (
@@ -514,10 +514,11 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
             </p>
           )}
 
-          {/* Pregunta - Grande, fade suave, centrada */}
+          {/* Pregunta - Grande, fade suave, centrada. En Montserrat 600, no en la serifa de los títulos:
+              las guías de dislexia piden letra sin serifa para lo que más se lee (Emmanuel, 2026-11-20) */}
           <h2
             /* Las opciones suben hasta 30 px (riseUp 20 + flotación 10): el hueco bajo el ítem no baja de 32 */
-            className={`${longContent ? 'text-base tall:text-lg pb-6' : manyOptions ? 'text-lg tall:text-xl pb-5' : longItem ? 'text-xl pb-3' : 'text-xl tall:text-2xl pb-5 tall:pb-3'} sm:text-3xl font-semibold leading-snug text-center px-2 animate-fadeInQuestion max-w-md`}
+            className={`${longContent ? 'text-base tall:text-lg pb-6' : manyOptions ? (longItem ? 'text-base tall:text-xl pb-5' : 'text-lg tall:text-xl pb-5') : longItem ? 'text-lg tall:text-xl pb-3' : 'text-xl tall:text-2xl pb-5 tall:pb-3'} sm:text-3xl font-semibold leading-snug text-center px-2 animate-fadeInQuestion max-w-md [font-family:var(--font-sans)]`}
             style={{ color: 'var(--color-primary)' }}
           >
             {currentQuestion.text}
@@ -572,7 +573,8 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
         </div>
 
         {!currentAnswered && (
-          <p aria-live="polite" className="text-center text-sm text-gray-600 mt-2">
+          /* En pantallas bajas con ítem largo no cabe: el botón desactivado ya lo indica */
+          <p aria-live="polite" className={`text-center text-sm text-gray-600 mt-2${longContent ? ' hidden tall:block' : ''}`}>
             {currentQuestion.type === 'text' ? ui.writeAnswer : ui.selectAnswer}
           </p>
         )}
