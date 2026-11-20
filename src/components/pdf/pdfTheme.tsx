@@ -348,8 +348,9 @@ export const AboutBlock: React.FC<{ validation?: PdfValidation; links: PdfLinks 
  * editable para el PDF en blanco.
  */
 export const ExamplesBlock: React.FC<{ examples?: ExampleEntry[]; hint?: string }> = ({ examples, hint }) => (
-  // En blanco, título, indicación y recuadro van juntos en la misma página
-  <View wrap={!!examples}>
+  // Empieza siempre en página nueva (si no, el título se queda solo al final de la anterior); en
+  // blanco, título, indicación y recuadro van juntos
+  <View break wrap={!!examples}>
     <Text style={styles.sectionTitle}>Ejemplos</Text>
     {hint ? <Text style={styles.instructions}>{hint}</Text> : null}
     {examples
