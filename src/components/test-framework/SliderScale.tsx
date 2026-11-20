@@ -6,7 +6,8 @@
  * `"likertDisplay": "slider"` en {lang}.json. Diferencias con un slider nativo:
  * - Sin valor por defecto: hasta el primer toque no hay marcador y no se puede avanzar.
  * - Se toca o se arrastra en cualquier punto de la barra y salta al paso más cercano.
- * - Sin auto-avance: al arrastrar se ajusta, y se confirma con «Siguiente».
+ * - Avance automático 1 s después de soltar (Emmanuel, 2026-11-20): da tiempo a corregir; cualquier
+ *   toque o tecla nueva reinicia la espera. Una línea bajo el valor muestra el segundo que queda.
  * - Teclado: flechas (un paso), Inicio y Fin. role="slider" con aria-valuetext.
  */
 
@@ -19,11 +20,31 @@ interface SliderScaleProps {
   onChange: (value: number) => void
   /** Opciones en orden; cada una es un paso de la barra */
   options: ResponseOption[]
+  /** Avance automático tras soltar; sin él (última pregunta), solo «Siguiente» */
+  onAdvance?: () => void
 }
 
-const SliderScale: React.FC<SliderScaleProps> = ({ question, value, onChange, options }) => {
+const ADVANCE_MS = 1000
+
+const SliderScale: React.FC<SliderScaleProps> = ({ question, value, onChange, options, onAdvance }) => {
   const trackRef = React.useRef<HTMLDivElement>(null)
   const dragging = React.useRef(false)
+  const timer    = React.useRef<ReturnType<typeof setTimeout> | null>(null)
+  // Clave para reiniciar la animación de la cuenta atrás; null = sin cuenta atrás
+  const [countdown, setCountdown] = React.useState<number | null>(null)
+
+  const cancelAdvance = () => {
+    if (timer.current) clearTimeout(timer.current)
+    timer.current = null
+    setCountdown(null)
+  }
+  const scheduleAdvance = () => {
+    if (!onAdvance) return
+    cancelAdvance()
+    setCountdown(Date.now())
+    timer.current = setTimeout(() => { timer.current = null; onAdvance() }, ADVANCE_MS)
+  }
+  React.useEffect(() => () => { if (timer.current) clearTimeout(timer.current) }, [])
   const idx      = options.findIndex((o) => o.value === value)
   const hasValue = idx >= 0
   const last     = options.length - 1
@@ -38,6 +59,7 @@ const SliderScale: React.FC<SliderScaleProps> = ({ question, value, onChange, op
   }
 
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    cancelAdvance()
     dragging.current = true
     e.currentTarget.setPointerCapture(e.pointerId)
     pick(e.clientX)
@@ -45,7 +67,11 @@ const SliderScale: React.FC<SliderScaleProps> = ({ question, value, onChange, op
   const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     if (dragging.current) pick(e.clientX)
   }
-  const onPointerUp = () => { dragging.current = false }
+  const onPointerUp = () => {
+    if (!dragging.current) return
+    dragging.current = false
+    scheduleAdvance()
+  }
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     const from = hasValue ? idx : -1
@@ -56,7 +82,7 @@ const SliderScale: React.FC<SliderScaleProps> = ({ question, value, onChange, op
     else if (e.key === 'End') to = last
     else return
     e.preventDefault()
-    if (to !== from && options[to]) onChange(options[to].value)
+    if (to !== from && options[to]) { onChange(options[to].value); scheduleAdvance() }
   }
 
   return (
@@ -69,6 +95,12 @@ const SliderScale: React.FC<SliderScaleProps> = ({ question, value, onChange, op
       >
         {hasValue ? options[idx].label : 'Toca o desliza en la barra'}
       </p>
+      {/* Cuenta atrás del avance: una línea que se llena en 1 s */}
+      <div className="mx-auto -mt-2 mb-2 h-1 w-16 overflow-hidden rounded-full" aria-hidden="true" style={{ opacity: countdown ? 1 : 0 }}>
+        {countdown && (
+          <div key={countdown} className="h-full rounded-full" style={{ backgroundColor: 'var(--color-accent)', animation: `sliderCountdown ${ADVANCE_MS}ms linear forwards` }} />
+        )}
+      </div>
 
       <div
         ref={trackRef}

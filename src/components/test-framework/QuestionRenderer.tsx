@@ -89,6 +89,7 @@ const QuestionRenderer: React.FC<QuestionRendererProps> = ({
             value={currentValue as number | undefined}
             onChange={(val) => onChange(question.id, val)}
             options={options}
+            onAdvance={onAdvance}
           />
         )
       }
