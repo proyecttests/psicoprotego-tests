@@ -1,0 +1,242 @@
+{
+  "id": "cius",
+  "lang": "es",
+  "name": "Escala de uso compulsivo de internet (CIUS)",
+  "version": "1.0",
+  "scoringFunction": "scoreStandard",
+  "disclaimerBefore": "Este cuestionario es una herramienta de cribado orientativa. **No es un diagnóstico clínico ni sustituye la valoración de un profesional de la salud mental.** Si tienes dudas o síntomas que te preocupan, consulta con un profesional.",
+  "instructions": "Por favor, lea las afirmaciones siguientes respecto al uso de internet (chateando, mandando o recibiendo e-mails, whatsApps, usando redes sociales, jugando con o sin dinero, escuchando o descargándose música, viendo o descargándose vídeos…). Indique cada cuánto tiempo le ocurren las siguientes situaciones. (No tenga en cuenta el tiempo que emplea en internet para hacer deberes o trabajar, sólo indique aquí el tiempo que emplea en internet por diversión).",
+  "responseOptions": [
+    {
+      "value": 0,
+      "label": "Nunca"
+    },
+    {
+      "value": 1,
+      "label": "Rara vez"
+    },
+    {
+      "value": 2,
+      "label": "Alguna vez"
+    },
+    {
+      "value": 3,
+      "label": "A menudo"
+    },
+    {
+      "value": 4,
+      "label": "Muy frecuentemente"
+    }
+  ],
+  "landing": {
+    "hook": "¿Te cuesta desconectar de internet?",
+    "description": "La CIUS es una escala breve para valorar el uso compulsivo de internet, la que usa el Ministerio de Sanidad en sus encuestas.",
+    "whatItMeasures": "Explora si te cuesta dejar de conectarte, si internet ocupa tus pensamientos y si interfiere en tu sueño, tus obligaciones o tus relaciones.",
+    "whoIsItFor": "Adultos que quieren revisar su uso de internet por diversión.",
+    "howItWorks": [
+      "Responde 14 preguntas sobre tu uso de internet",
+      "Cada una de «Nunca» a «Muy frecuentemente»",
+      "Ves tu puntuación, de 0 a 56"
+    ],
+    "faq": [
+      {
+        "q": "¿Es esto un diagnóstico?",
+        "a": "No. La CIUS es un cribado; el diagnóstico solo puede hacerlo un profesional."
+      },
+      {
+        "q": "¿Quedan guardadas mis respuestas?",
+        "a": "No. Tus respuestas se procesan en tu navegador y no salen de él: no llegan a nuestros servidores ni a Google Analytics. Desaparecen al cerrar la pestaña, y puedes borrarlas antes con «Borrar mis respuestas». Solo tú decides qué hacer con el resultado."
+      },
+      {
+        "q": "¿Cuánto tiempo lleva completarlo?",
+        "a": "Unos 3 minutos."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "likert",
+      "text": "¿Con qué frecuencia le ha resultado difícil dejar de usar internet cuando estaba conectado?",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      },
+      "instructions": "Lea las afirmaciones siguientes respecto al uso de internet por diversión e indique cada cuánto tiempo le ocurren. No tenga en cuenta el tiempo que emplea en internet para estudiar o trabajar."
+    },
+    {
+      "id": "q2",
+      "type": "likert",
+      "text": "¿Con qué frecuencia ha seguido conectado a internet a pesar de querer parar?",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      },
+      "instructions": "Piense solo en el tiempo que emplea en internet por diversión."
+    },
+    {
+      "id": "q3",
+      "type": "likert",
+      "text": "¿Con qué frecuencia sus padres, o amigos le dicen que debería pasar menos tiempo en internet?",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      },
+      "instructions": "Piense solo en el tiempo que emplea en internet por diversión."
+    },
+    {
+      "id": "q4",
+      "type": "likert",
+      "text": "¿Con qué frecuencia prefiere conectarse a internet en vez de pasar el tiempo con otros (padres, amigos…)?",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      },
+      "instructions": "Piense solo en el tiempo que emplea en internet por diversión."
+    },
+    {
+      "id": "q5",
+      "type": "likert",
+      "text": "¿Con qué frecuencia duerme menos por estar conectado a internet?",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      },
+      "instructions": "Piense solo en el tiempo que emplea en internet por diversión."
+    },
+    {
+      "id": "q6",
+      "type": "likert",
+      "text": "¿Con qué frecuencia se encuentra pensando en internet, aunque no esté conectado?",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      },
+      "instructions": "Piense solo en el tiempo que emplea en internet por diversión."
+    },
+    {
+      "id": "q7",
+      "type": "likert",
+      "text": "¿Con qué frecuencia está deseando conectarse a internet?",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      },
+      "instructions": "Piense solo en el tiempo que emplea en internet por diversión."
+    },
+    {
+      "id": "q8",
+      "type": "likert",
+      "text": "¿Con qué frecuencia piensa que debería usar menos internet?",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      },
+      "instructions": "Piense solo en el tiempo que emplea en internet por diversión."
+    },
+    {
+      "id": "q9",
+      "type": "likert",
+      "text": "¿Con qué frecuencia ha intentado pasar menos tiempo conectado a internet y no lo ha conseguido?",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      },
+      "instructions": "Piense solo en el tiempo que emplea en internet por diversión."
+    },
+    {
+      "id": "q10",
+      "type": "likert",
+      "text": "¿Con qué frecuencia intenta terminar su trabajo a toda prisa para conectarse a internet?",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      },
+      "instructions": "Piense solo en el tiempo que emplea en internet por diversión."
+    },
+    {
+      "id": "q11",
+      "type": "likert",
+      "text": "¿Con qué frecuencia descuida sus obligaciones (deberes, estar con la familia…) porque prefiere conectarse a internet?",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      },
+      "instructions": "Piense solo en el tiempo que emplea en internet por diversión."
+    },
+    {
+      "id": "q12",
+      "type": "likert",
+      "text": "¿Con qué frecuencia se conecta a internet cuando está «de bajón»?",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      },
+      "instructions": "Piense solo en el tiempo que emplea en internet por diversión."
+    },
+    {
+      "id": "q13",
+      "type": "likert",
+      "text": "¿Con qué frecuencia se conecta a internet para olvidar sus penas o sentimientos negativos?",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      },
+      "instructions": "Piense solo en el tiempo que emplea en internet por diversión."
+    },
+    {
+      "id": "q14",
+      "type": "likert",
+      "text": "¿Con qué frecuencia se siente inquieto, frustrado o irritado si no puede usar internet?",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      },
+      "instructions": "Piense solo en el tiempo que emplea en internet por diversión."
+    }
+  ],
+  "scoring": [
+    {
+      "min": 0,
+      "max": 27,
+      "category": "Puntuación por debajo del punto de corte",
+      "color": "green",
+      "messageKey": "below_cutoff"
+    },
+    {
+      "min": 28,
+      "max": null,
+      "category": "Puntuación a partir del punto de corte: posible uso compulsivo",
+      "color": "orange",
+      "messageKey": "above_cutoff"
+    }
+  ],
+  "results": {
+    "normal": {
+      "below_cutoff": {
+        "title": "Puntuación por debajo del punto de corte",
+        "body": "Tu puntuación está por debajo de 28, el punto de corte que usa el Ministerio de Sanidad en sus encuestas para señalar un posible uso compulsivo de internet.",
+        "recommendation": "Si aun así notas que internet te quita sueño, tiempo o tranquilidad, puedes comentarlo con un profesional."
+      },
+      "above_cutoff": {
+        "title": "Puntuación a partir del punto de corte: posible uso compulsivo",
+        "body": "Tu puntuación es de 28 o más: según el criterio que usa el Ministerio de Sanidad en sus encuestas, indica un posible uso compulsivo de internet. No es un diagnóstico.",
+        "recommendation": "Puede ser útil hablarlo con un psicólogo/a: ayuda a entender qué función cumple internet en tu día a día y a recuperar el control. Puedes llevar el resultado en PDF."
+      }
+    }
+  }
+}

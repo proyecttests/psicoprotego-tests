@@ -16,6 +16,7 @@ import type { Question, AnswersMap, ResponseOption } from '@/types/test'
 import { getResponseOptions } from '@/utils/responseOptions'
 
 import LikertScale            from './LikertScale'
+import SliderScale            from './SliderScale'
 import BooleanQuestion        from './BooleanQuestion'
 import TextQuestion           from './TextQuestion'
 import MultipleChoiceQuestion from './MultipleChoiceQuestion'
@@ -37,6 +38,8 @@ interface QuestionRendererProps {
   onAdvance?: () => void
   /** Opciones Likert comunes del test; una pregunta puede definir las suyas */
   testResponseOptions?: ResponseOption[]
+  /** Escalas de más de 5 opciones: rejilla (por defecto) o barra deslizante */
+  likertDisplay?: 'grid' | 'slider'
 }
 
 // ── Componente ────────────────────────────────────────────────────────────────
@@ -59,6 +62,7 @@ const QuestionRenderer: React.FC<QuestionRendererProps> = ({
   onChange,
   onAdvance,
   testResponseOptions,
+  likertDisplay,
 }) => {
   const currentValue = answers[question.id]
 
@@ -76,6 +80,16 @@ const QuestionRenderer: React.FC<QuestionRendererProps> = ({
             <strong>Pregunta Likert sin opciones de respuesta.</strong> Define{' '}
             <code className="font-mono">responseOptions</code> en el JSON del test.
           </div>
+        )
+      }
+      if (likertDisplay === 'slider' && options.length > 5) {
+        return (
+          <SliderScale
+            question={question.text}
+            value={currentValue as number | undefined}
+            onChange={(val) => onChange(question.id, val)}
+            options={options}
+          />
         )
       }
       return (

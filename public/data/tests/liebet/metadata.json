@@ -1,0 +1,90 @@
+{
+  "id": "liebet",
+  "availableLangs": [
+    "es"
+  ],
+  "category": "psychometric",
+  "condition": "juego",
+  "slug": "lie-bet",
+  "tags": [
+    "adultos",
+    "si-no",
+    "2-items",
+    "cribado",
+    "adicciones"
+  ],
+  "originalInstrument": "Lie/Bet Questionnaire",
+  "use": [
+    "clinical_screening"
+  ],
+  "measures": [
+    "problem_gambling"
+  ],
+  "validated": true,
+  "medicalCondition": {
+    "icd10": "F63.0",
+    "name": "Juego patológico",
+    "schemaOrgUrl": "https://www.icd10data.com/ICD10CM/Codes/F01-F99/F60-F69/F63-/F63.0"
+  },
+  "validation": {
+    "isValidated": true,
+    "references": [
+      {
+        "authors": "Johnson EE, Hamer R, Nora RM, Tan B, Eisenstein N, Engelhart C",
+        "year": 1997,
+        "title": "The Lie/Bet Questionnaire for screening pathological gamblers",
+        "journal": "Psychol Rep",
+        "volume": "80",
+        "issue": "1",
+        "pages": "83–88",
+        "doi": "10.2466/pr0.1997.80.1.83"
+      }
+    ],
+    "spanishValidation": {
+      "available": false,
+      "note": "Sin validación española publicada localizada. Texto: cuestionario ESTUDES 2023 del Ministerio de Sanidad, que lo usa con el corte de 1 respuesta afirmativa; pasado de «tú» a «usted»."
+    }
+  },
+  "validationDetails": {
+    "original": {
+      "lang": "en",
+      "reference": "Johnson EE et al. (1997)",
+      "journal": "Psychol Rep, 80(1), 83-88",
+      "doi": "10.2466/pr0.1997.80.1.83"
+    },
+    "translations": {
+      "es": {
+        "validated": false,
+        "reference": "Ministerio de Sanidad, ESTUDES"
+      }
+    }
+  },
+  "authorship": {
+    "author": "emmanuel",
+    "reviewedBy": "cristina"
+  },
+  "ageRange": {
+    "min": 18,
+    "max": null
+  },
+  "selfAdministrable": true,
+  "timeToComplete": "1 min",
+  "itemCount": 2,
+  "itemType": "boolean",
+  "scoringRange": {
+    "min": 0,
+    "max": 2
+  },
+  "cutoffs": {
+    "below_cutoff": [
+      0,
+      0
+    ],
+    "above_cutoff": [
+      1,
+      2
+    ]
+  },
+  "copyright": "free_use",
+  "copyrightNotice": "Lie/Bet: Johnson et al. (1997). Texto en español: Ministerio de Sanidad, Observatorio Español de las Drogas y las Adicciones, cuestionario ESTUDES 2023 (consultado el 20-11-2026), reutilizado según su aviso legal y adaptado a «usted»."
+}

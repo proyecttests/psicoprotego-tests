@@ -5,6 +5,7 @@ import { VALID_LANGS } from '@/generated/validLangs'
 import { RTL_LANGS } from '@/config/brand'
 import { LangHtmlUpdater } from '../components/LangHtmlUpdater'
 import CookieBanner      from '@/components/common/CookieBanner'
+import { TextSizeInit } from '@/components/common/TextSizeControl'
 import { GTM_ID }      from '@/config/analytics'
 
 // ── Layout ────────────────────────────────────────────────────────────────────
@@ -26,6 +27,7 @@ export default async function LangLayout({
     <>
       {/* Actualiza <html lang> y <html dir> en cliente tras hidratación */}
       <LangHtmlUpdater lang={lang} dir={dir} />
+      <TextSizeInit />
 
       <div dir={dir} className="flex min-h-screen flex-col">
         <Header />

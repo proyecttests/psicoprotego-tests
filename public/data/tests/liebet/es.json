@@ -1,0 +1,97 @@
+{
+  "id": "liebet",
+  "lang": "es",
+  "name": "Cuestionario Lie/Bet de juego problemático",
+  "version": "1.0",
+  "scoringFunction": "scoreStandard",
+  "disclaimerBefore": "Este cuestionario es una herramienta de cribado orientativa. **No es un diagnóstico clínico ni sustituye la valoración de un profesional de la salud mental.** Si tienes dudas o síntomas que te preocupan, consulta con un profesional.",
+  "instructions": "Piense en jugar dinero en general: apuestas, loterías, casinos, máquinas o bingo, en internet o fuera de internet.",
+  "responseOptions": [
+    {
+      "value": 1,
+      "label": "Sí"
+    },
+    {
+      "value": 0,
+      "label": "No"
+    }
+  ],
+  "landing": {
+    "hook": "¿Te preocupa cómo juegas?",
+    "description": "El Lie/Bet son dos preguntas para detectar un posible juego problemático, las que usa el Ministerio de Sanidad en sus encuestas.",
+    "whatItMeasures": "Pregunta si has sentido la necesidad de apostar cada vez más dinero y si has tenido que mentir sobre cuánto juegas.",
+    "whoIsItFor": "Adultos que juegan dinero, en internet o fuera de internet.",
+    "howItWorks": [
+      "Responde 2 preguntas de sí o no",
+      "Ves si alguna indica un posible juego problemático"
+    ],
+    "faq": [
+      {
+        "q": "¿Es esto un diagnóstico?",
+        "a": "No. Son dos preguntas de cribado; el diagnóstico solo puede hacerlo un profesional."
+      },
+      {
+        "q": "¿Quedan guardadas mis respuestas?",
+        "a": "No. Tus respuestas se procesan en tu navegador y no salen de él: no llegan a nuestros servidores ni a Google Analytics. Desaparecen al cerrar la pestaña, y puedes borrarlas antes con «Borrar mis respuestas». Solo tú decides qué hacer con el resultado."
+      },
+      {
+        "q": "¿Cuánto tiempo lleva completarlo?",
+        "a": "Menos de un minuto."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "likert",
+      "text": "¿Alguna vez ha sentido la necesidad de apostar más y más dinero?",
+      "scale": {
+        "min": 0,
+        "max": 1,
+        "step": 1
+      },
+      "instructions": "Piense en jugar dinero en general: apuestas, loterías, casinos, máquinas o bingo, en internet o fuera de internet."
+    },
+    {
+      "id": "q2",
+      "type": "likert",
+      "text": "¿Alguna vez ha tenido que mentir a gente importante para usted acerca de cuánto juega?",
+      "scale": {
+        "min": 0,
+        "max": 1,
+        "step": 1
+      },
+      "instructions": "Piense en jugar dinero en general: apuestas, loterías, casinos, máquinas o bingo, en internet o fuera de internet."
+    }
+  ],
+  "scoring": [
+    {
+      "min": 0,
+      "max": 0,
+      "category": "Ninguna respuesta afirmativa",
+      "color": "green",
+      "messageKey": "below_cutoff"
+    },
+    {
+      "min": 1,
+      "max": null,
+      "category": "Alguna respuesta afirmativa: posible juego problemático",
+      "color": "orange",
+      "messageKey": "above_cutoff"
+    }
+  ],
+  "results": {
+    "normal": {
+      "below_cutoff": {
+        "title": "Ninguna respuesta afirmativa",
+        "body": "Has respondido «No» a las dos preguntas. Según este cribado, no hay indicios de juego problemático.",
+        "recommendation": "Si aun así te preocupa cómo juegas o cuánto gastas, puedes comentarlo con un profesional."
+      },
+      "above_cutoff": {
+        "title": "Alguna respuesta afirmativa: posible juego problemático",
+        "body": "Has respondido «Sí» al menos a una pregunta. En este cribado, una respuesta afirmativa basta para recomendar una valoración más completa del juego. No es un diagnóstico.",
+        "recommendation": "Coméntalo con un psicólogo/a o con tu médico/a de familia. En España hay asociaciones y centros públicos especializados en el juego. Puedes llevar el resultado en PDF."
+      }
+    }
+  }
+}

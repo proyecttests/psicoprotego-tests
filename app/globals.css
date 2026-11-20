@@ -37,6 +37,13 @@
   }
 }
 
+/* ── Modo test: mientras se responde, sin cabecera ni pie (TestContainer pone data-test-mode);
+   la ayuda urgente queda en una línea fija abajo (UrgentHelpLine) ── */
+html[data-test-mode] .site-header,
+html[data-test-mode] .site-footer {
+  display: none;
+}
+
 /* ── Component classes ──────────────────────────────────────────────────────── */
 @layer components {
   .btn-primary {

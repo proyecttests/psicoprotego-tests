@@ -4,6 +4,7 @@
   "name": "Escala de experiencias disociativas (DES-II)",
   "version": "1.0",
   "scoringFunction": "scoreMean",
+  "likertDisplay": "slider",
   "disclaimerBefore": "Este cuestionario es una herramienta de cribado orientativa. **No es un diagnóstico clínico ni sustituye la valoración de un profesional de la salud mental.** Algunas preguntas describen experiencias poco habituales: es normal que muchas no te ocurran nunca. Si tienes dudas o síntomas que te preocupan, consulta con un profesional.",
   "instructions": "El cuestionario consiste en veintiocho preguntas acerca de experiencias que usted puede tener en su vida diaria. Estamos interesados en saber con qué frecuencia tiene usted estas experiencias. Es importante que sus respuestas indiquen con qué frecuencia le ocurren pero, cuando usted no está bajo los efectos del alcohol u otras drogas. Para contestar estas preguntas, por favor, indique hasta qué grado la experiencia descrita en la pregunta se le puede aplicar a usted y marque el porcentaje de tiempo que tiene la experiencia, de 0 % (nunca) a 100 % (siempre).",
   "responseOptions": [

@@ -7,6 +7,7 @@
 import React from 'react'
 import Link from 'next/link'
 import HeaderNav from './HeaderNav'
+import TextSizeControl from './TextSizeControl'
 
 // ── Props ────────────────────────────────────────────────────────────────────
 
@@ -24,7 +25,7 @@ const Header: React.FC<HeaderProps> = ({ testName, currentQuestion, totalQuestio
 
   return (
     <header
-      className="sticky top-0 z-40 w-full border-b border-neutral-200 bg-white shadow-sm"
+      className="site-header sticky top-0 z-40 w-full border-b border-neutral-200 bg-white shadow-sm"
       role="banner"
     >
       <div className="mx-auto flex max-w-3xl items-center justify-between px-4 py-3 sm:px-6">
@@ -45,8 +46,13 @@ const Header: React.FC<HeaderProps> = ({ testName, currentQuestion, totalQuestio
           />
         </Link>
 
-        {/* ── Enlaces al blog y a la web (sin breadcrumb) ──────────────────── */}
-        {!showBreadcrumb && <HeaderNav />}
+        {/* ── Enlaces al blog y a la web (sin breadcrumb) y tamaño de letra ─── */}
+        {!showBreadcrumb && (
+          <div className="flex items-center gap-3">
+            <HeaderNav />
+            <TextSizeControl />
+          </div>
+        )}
 
         {/* ── Breadcrumb dinámico ───────────────────────────────────────────── */}
         {showBreadcrumb && (

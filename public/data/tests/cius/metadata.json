@@ -1,0 +1,84 @@
+{
+  "id": "cius",
+  "availableLangs": [
+    "es"
+  ],
+  "category": "psychometric",
+  "condition": "internet",
+  "slug": "cius",
+  "tags": [
+    "adultos",
+    "14-items",
+    "cribado",
+    "adicciones"
+  ],
+  "originalInstrument": "Compulsive Internet Use Scale (CIUS)",
+  "use": [
+    "clinical_screening"
+  ],
+  "measures": [
+    "compulsive_internet_use"
+  ],
+  "validated": true,
+  "validation": {
+    "isValidated": true,
+    "references": [
+      {
+        "authors": "Meerkerk GJ, Van Den Eijnden RJJM, Vermulst AA, Garretsen HFL",
+        "year": 2009,
+        "title": "The Compulsive Internet Use Scale (CIUS): some psychometric properties",
+        "journal": "Cyberpsychol Behav",
+        "volume": "12",
+        "issue": "1",
+        "pages": "1–6",
+        "doi": "10.1089/cpb.2008.0181"
+      }
+    ],
+    "spanishValidation": {
+      "available": true,
+      "note": "Sarmiento, Zych et al. (2021): 2.090 personas de 15 a 30 años de España, Colombia y México; estructura de un factor e invarianza entre países. Ortuño-Sierra et al. (2024, Adicciones): 1.790 adolescentes españoles, omega 0,91. Texto: cuestionario EDADES 2017 del Ministerio de Sanidad. Corte 28: el que usa el Observatorio Español de las Drogas y las Adicciones, sin validación clínica española."
+    }
+  },
+  "validationDetails": {
+    "original": {
+      "lang": "nl",
+      "reference": "Meerkerk GJ et al. (2009)",
+      "journal": "Cyberpsychol Behav, 12(1), 1-6",
+      "doi": "10.1089/cpb.2008.0181"
+    },
+    "translations": {
+      "es": {
+        "validated": true,
+        "reference": "Sarmiento et al., 2021; Ortuño-Sierra et al., 2024"
+      }
+    }
+  },
+  "authorship": {
+    "author": "emmanuel",
+    "reviewedBy": "cristina"
+  },
+  "ageRange": {
+    "min": 18,
+    "max": null
+  },
+  "selfAdministrable": true,
+  "timeToComplete": "3 min",
+  "itemCount": 14,
+  "itemType": "likert_5",
+  "scoringRange": {
+    "min": 0,
+    "max": 56
+  },
+  "cutoffs": {
+    "below_cutoff": [
+      0,
+      27
+    ],
+    "above_cutoff": [
+      28,
+      56
+    ]
+  },
+  "copyright": "free_use_with_conditions",
+  "copyrightNotice": "CIUS: Meerkerk, Van den Eijnden, Vermulst y Garretsen (2009). Texto en español: Ministerio de Sanidad, Observatorio Español de las Drogas y las Adicciones, cuestionario EDADES 2017 (consultado el 20-11-2026), reutilizado según su aviso legal."
+}

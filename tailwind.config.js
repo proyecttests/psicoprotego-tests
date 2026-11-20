@@ -6,6 +6,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      // Pantallas con al menos 700 px de alto: el test usa letra más grande (en las bajas, la de antes)
+      screens: {
+        tall: { raw: '(min-height: 700px)' },
+      },
       colors: {
         primary: {
           50:  '#f0f4f1',

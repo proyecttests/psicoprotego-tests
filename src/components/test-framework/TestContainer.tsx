@@ -33,6 +33,7 @@ import QuestionRenderer    from './QuestionRenderer'
 import ResultCard          from '@/components/results/ResultCard'
 import CalculatingScreen   from './CalculatingScreen'
 import SharingScreen       from './SharingScreen'
+import UrgentHelpLine      from './UrgentHelpLine'
 import { getScoringFunction, getMaxScore } from '@/utils/scoringFunctions'
 import { eraseLocalData } from '@/utils/localData'
 import { shouldShowQuestion } from '@/utils/questionVisibility'
@@ -192,6 +193,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
           disclaimerBefore: langData.disclaimerBefore,
           instructions:     langData.instructions,
           responseOptions:  langData.responseOptions,
+          likertDisplay:    langData.likertDisplay,
         }
 
         // 4. Build messages map compatible with scoringFunctions format
@@ -248,6 +250,14 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentIdx, visibleQuestions.length, uiState, isExiting])
+
+  // Modo test: mientras se responde, sin cabecera ni pie (globals.css); el resultado los recupera
+  React.useEffect(() => {
+    const root = document.documentElement
+    if (uiState === 'answering') root.dataset.testMode = 'on'
+    else delete root.dataset.testMode
+    return () => { delete root.dataset.testMode }
+  }, [uiState])
 
   // ── Handlers ───────────────────────────────────────────────────────────────
 
@@ -357,6 +367,8 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
   // Y si además enunciado + ítem son largos (PCL-5 e ITQ), el ítem baja a text-base para caber en 360×640
   const longContent = manyOptions &&
     ((currentQuestion?.instructions ?? testDef?.instructions ?? '').length + (currentQuestion?.text.length ?? 0)) > 220
+  // Ítem largo con 4 opciones o menos: sin el tamaño más grande
+  const longItem = (currentQuestion?.text.length ?? 0) > 100
 
   const showCrisisFooter = result?.resultType === 'CRISIS'
 
@@ -473,8 +485,9 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
 
   return (
     <>
-      <main
-        className={`flex flex-1 flex-col items-center justify-between px-4 ${longContent ? 'py-4' : 'py-6'} sm:px-6 sm:py-6`}
+      {/* div, no main: el layout ya pone el <main> de la página. pb-12: la línea de ayuda urgente */}
+      <div
+        className={`flex flex-1 flex-col items-center justify-between px-4 pb-9 ${longContent ? 'pt-1 tall:pt-3' : 'pt-1 tall:pt-5'} sm:px-6 sm:pt-6`}
         aria-live="polite"
       >
         {/* SECCIÓN SUPERIOR: Barra de progreso */}
@@ -488,13 +501,13 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
         {/* SECCIÓN CENTRAL: Pregunta + Opciones con transición TDAH */}
         <div
           key={currentIdx}
-          className={`w-full max-w-2xl flex flex-col items-center ${longContent ? 'gap-2' : manyOptions ? 'gap-3' : 'gap-6'} sm:gap-14 flex-1 justify-center py-2 sm:py-4${isExiting ? ' animate-slide-out-tiktok' : ''}`}
+          className={`w-full max-w-2xl flex flex-col items-center ${longContent ? 'gap-2' : manyOptions ? 'gap-3' : 'gap-3 tall:gap-6'} sm:gap-14 flex-1 justify-center py-1 tall:py-2 sm:py-4${isExiting ? ' animate-slide-out-tiktok' : ''}`}
         >
           {/* Instrucciones validadas — en cada pregunta: los ítems oficiales no se entienden sin el enunciado */}
           {(currentQuestion.instructions ?? testDef?.instructions) && (
             <p
-              className={`w-full max-w-md px-4 ${manyOptions ? 'text-xs sm:text-sm' : 'text-sm'} leading-relaxed text-center animate-fadeInQuestion`}
-              style={{ color: 'var(--color-primary)', opacity: 0.6 }}
+              className={`w-full max-w-md px-2 ${manyOptions ? 'text-xs tall:text-sm' : 'text-sm tall:text-base'} leading-relaxed text-center animate-fadeInQuestion`}
+              style={{ color: 'var(--color-primary)', opacity: 0.85 }}
               aria-label="Instrucciones del test"
             >
               {currentQuestion.instructions ?? testDef?.instructions}
@@ -504,7 +517,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
           {/* Pregunta - Grande, fade suave, centrada */}
           <h2
             /* Las opciones suben hasta 30 px (riseUp 20 + flotación 10): el hueco bajo el ítem no baja de 32 */
-            className={`${longContent ? 'text-base pb-6' : manyOptions ? 'text-lg pb-5' : 'text-xl pb-2'} sm:text-3xl font-semibold leading-snug text-center px-4 animate-fadeInQuestion max-w-md`}
+            className={`${longContent ? 'text-base tall:text-lg pb-6' : manyOptions ? 'text-lg tall:text-xl pb-5' : longItem ? 'text-xl pb-3' : 'text-xl tall:text-2xl pb-5 tall:pb-3'} sm:text-3xl font-semibold leading-snug text-center px-2 animate-fadeInQuestion max-w-md`}
             style={{ color: 'var(--color-primary)' }}
           >
             {currentQuestion.text}
@@ -524,6 +537,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
                     : undefined
               }
               testResponseOptions={testDef?.responseOptions}
+              likertDisplay={testDef?.likertDisplay}
             />
           </div>
         </div>
@@ -558,11 +572,12 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
         </div>
 
         {!currentAnswered && (
-          <p aria-live="polite" className="text-center text-xs text-gray-400 mt-2">
+          <p aria-live="polite" className="text-center text-sm text-gray-600 mt-2">
             {currentQuestion.type === 'text' ? ui.writeAnswer : ui.selectAnswer}
           </p>
         )}
-      </main>
+      </div>
+      <UrgentHelpLine lang={lang} />
     </>
   )
 }

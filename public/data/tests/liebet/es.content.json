@@ -1,0 +1,117 @@
+{
+  "status": "draft-pending-clinical-review",
+  "drafted": "clinical-landing-writer-v2",
+  "draftedAt": "2026-11-20T23:00:00.000Z",
+  "auditedAt": "2026-11-20T23:00:00.000Z",
+  "lastEditedBy": null,
+  "clinicallyApprovedBy": null,
+  "clinicallyApprovedAt": null,
+  "hero": {
+    "title": "Test Lie/Bet: dos preguntas sobre el juego con dinero",
+    "subtitle": "Dos preguntas de sí o no para detectar un posible juego problemático: si has sentido la necesidad de apostar cada vez más y si has tenido que mentir sobre cuánto juegas. El resultado te sirve como punto de partida para hablarlo con un profesional.",
+    "clinicalContext": "Es una herramienta clínica de apoyo. Está pensada para usarse junto con un profesional, o para llevar un registro orientativo a una primera consulta.",
+    "badges": [
+      "2 preguntas",
+      "1 min",
+      "Sin registro",
+      "Datos en tu navegador"
+    ]
+  },
+  "whatItMeasures": {
+    "heading": "¿Qué mide este test?",
+    "body": "El Lie/Bet es un cribado de juego problemático de solo dos preguntas. Se eligieron entre los criterios diagnósticos del juego patológico porque eran las que mejor separaban a quienes tenían el problema de quienes no: la necesidad de apostar cada vez más dinero (la «apuesta») y mentir sobre el juego (la «mentira»).\n\nCada «Sí» vale 1 punto. Una sola respuesta afirmativa basta para recomendar una valoración más completa.\n\nLo desarrollaron Johnson y colaboradores en Estados Unidos (1997). Usamos el texto español del Ministerio de Sanidad, que lo emplea en su encuesta a estudiantes."
+  },
+  "whoIsItFor": {
+    "heading": "¿A quién está dirigido?",
+    "body": "Está dirigido a personas adultas que juegan dinero, en internet o fuera de internet: apuestas deportivas, loterías, casinos, máquinas o bingo. Por su brevedad, se usa en atención primaria, en consultas y en encuestas.\n\nResulta útil para quienes se preguntan si su forma de jugar se está convirtiendo en un problema, o para familiares que acompañan a alguien a revisarlo, siempre que las respuestas sean de la propia persona.",
+    "indications": [
+      "Personas adultas que juegan dinero y quieren revisar si su juego es problemático.",
+      "Familiares que acompañan a alguien a revisarlo, siempre que las respuestas sean de la propia persona.",
+      "Profesionales clínicos, estudiantes e investigadores que quieran consultar el instrumento."
+    ],
+    "limitations": [
+      "No es una herramienta diagnóstica: con dos preguntas solo se detecta quién necesita una valoración más completa.",
+      "No hemos encontrado una validación española publicada. El Ministerio de Sanidad lo usa en su encuesta a estudiantes de 14 a 18 años; el texto es el suyo, pasado de «tú» a «usted». [REVISAR: aprobar la adaptación]",
+      "Se validó sobre todo con hombres; en mujeres hay menos datos.",
+      "Detecta muy bien a quien tiene un problema, pero da algunos falsos positivos: un «Sí» no significa que haya un trastorno."
+    ]
+  },
+  "howItWorks": {
+    "heading": "Cómo funciona",
+    "body": "El cuestionario consta de dos preguntas de sí o no sobre el juego con dinero. Cada «Sí» vale 1 punto; con 1 punto o más, el resultado indica un posible juego problemático.\n\nEsta herramienta se usa típicamente en el marco de una valoración o un seguimiento. Si ya estás en consulta, tu profesional puede decirte si te conviene completarla; si todavía no has consultado, el resultado puede servirte para llevar un registro orientativo a una primera cita.",
+    "steps": [
+      "Respondes 2 preguntas de sí o no.",
+      "El sistema suma las respuestas afirmativas (0–2).",
+      "Ves si alguna indica un posible juego problemático."
+    ]
+  },
+  "validation": {
+    "heading": "Validación científica",
+    "body": "Johnson y colaboradores derivaron las dos preguntas de los 10 criterios del DSM-IV para el juego patológico, en 362 hombres: 191 con juego patológico y 171 sin problemas de juego. Las dos preguntas tuvieron una sensibilidad de 0,99 y una especificidad de 0,91 [1]. En un segundo estudio, con 295 hombres y 128 mujeres, la sensibilidad fue de 1,00 y la especificidad de 0,85 [2].\n\nEn España no hemos encontrado una validación publicada. El Ministerio de Sanidad lo incluye en su encuesta ESTUDES a estudiantes de 14 a 18 años, con el mismo criterio de una respuesta afirmativa [3].",
+    "references": [
+      {
+        "id": 1,
+        "authors": "Johnson EE, Hamer R, Nora RM, Tan B, Eisenstein N, Engelhart C",
+        "year": 1997,
+        "title": "The Lie/Bet Questionnaire for screening pathological gamblers",
+        "journal": "Psychol Rep",
+        "volume": "80",
+        "issue": "1",
+        "pages": "83–88",
+        "doi": "10.2466/pr0.1997.80.1.83",
+        "url": "https://doi.org/10.2466/pr0.1997.80.1.83"
+      },
+      {
+        "id": 2,
+        "authors": "Johnson EE, Hamer RM, Nora RM",
+        "year": 1998,
+        "title": "The Lie/Bet Questionnaire for screening pathological gamblers: a follow-up study",
+        "journal": "Psychol Rep",
+        "volume": "83",
+        "issue": "3 Pt 2",
+        "pages": "1219–1224",
+        "doi": "10.2466/pr0.1998.83.3f.1219",
+        "url": "https://doi.org/10.2466/pr0.1998.83.3f.1219"
+      },
+      {
+        "id": 3,
+        "authors": "Ministerio de Sanidad (Observatorio Español de las Drogas y las Adicciones)",
+        "year": 2023,
+        "title": "Encuesta sobre uso de drogas en enseñanzas secundarias en España (ESTUDES): cuestionario del alumnado",
+        "journal": "Plan Nacional sobre Drogas",
+        "doi": "",
+        "url": "https://pnsd.sanidad.gob.es/profesionales/sistemasInformacion/sistemaInformacion/pdf/ESTUDES_2023_Cuestionario_ALUMNOS_castellano.pdf"
+      }
+    ]
+  },
+  "interpretation": {
+    "heading": "Qué hacer con tu resultado",
+    "body": "Si has respondido «No» a las dos, este cribado no indica juego problemático. Si aun así te preocupa cómo juegas o cuánto gastas, es información útil para comentar.\n\nSi has respondido «Sí» a alguna, conviene una valoración más completa. Un psicólogo/a o tu médico/a de familia pueden ayudarte; en España hay también asociaciones y centros públicos especializados en el juego. Si no tienes un profesional de referencia, en Psicoprotego podemos ayudarte a empezar.\n\nLos rangos son orientativos. Una misma puntuación puede tener significados distintos según el momento vital, la salud y las circunstancias de cada persona. Solo un profesional sanitario puede establecer un diagnóstico tras una evaluación completa."
+  },
+  "faq": [
+    {
+      "q": "¿Es un diagnóstico?",
+      "a": "No. Son dos preguntas de cribado: indican si conviene una valoración más completa, no si hay un trastorno."
+    },
+    {
+      "q": "¿Por qué solo dos preguntas?",
+      "a": "Porque son las dos que mejor distinguían el juego patológico en los estudios originales. Por eso se usan como primer filtro."
+    },
+    {
+      "q": "¿Quedan guardadas mis respuestas?",
+      "a": "No. Tus respuestas se procesan en tu navegador y no salen de él: no llegan a nuestros servidores ni a Google Analytics. Desaparecen al cerrar la pestaña, y puedes borrarlas antes con «Borrar mis respuestas». Solo tú decides qué hacer con el resultado."
+    },
+    {
+      "q": "¿Puedo compartirlo con mi médico/a o mi psicólogo/a?",
+      "a": "Sí. Puedes descargar el resultado en PDF y llevarlo a tu consulta. Es una forma práctica de aportar contexto, aunque el/la profesional hará su propia valoración."
+    },
+    {
+      "q": "¿A quién acudo si me preocupa?",
+      "a": "Un psicólogo/a o tu médico/a de familia son un buen primer paso. En España hay asociaciones de ayuda a jugadores y centros públicos de atención a las adicciones."
+    }
+  ],
+  "privacy": {
+    "heading": "Privacidad",
+    "body": "Tus respuestas son confidenciales: se calculan en tu navegador y no salen de él. No se envían a nuestros servidores ni a Google Analytics, y desaparecen al cerrar la pestaña o al pulsar «Borrar mis respuestas». Decides tú qué hacer con el resultado: puedes descargar un PDF para llevarlo a tu médico/a o terapeuta, o simplemente cerrar la pestaña."
+  }
+}

@@ -55,7 +55,7 @@ const Footer: React.FC<FooterProps> = ({ lang = 'es' }) => {
   return (
     <footer
       role="contentinfo"
-      className="w-full border-t border-neutral-200 py-6 mt-auto"
+      className="site-footer w-full border-t border-neutral-200 py-6 mt-auto"
       style={{ backgroundColor: 'var(--color-cream)' }}
     >
       <div className="mx-auto max-w-3xl px-4 sm:px-6 font-sans text-sm">

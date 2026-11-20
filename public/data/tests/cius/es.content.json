@@ -1,0 +1,131 @@
+{
+  "status": "draft-pending-clinical-review",
+  "drafted": "clinical-landing-writer-v2",
+  "draftedAt": "2026-11-20T23:00:00.000Z",
+  "auditedAt": "2026-11-20T23:00:00.000Z",
+  "lastEditedBy": null,
+  "clinicallyApprovedBy": null,
+  "clinicallyApprovedAt": null,
+  "hero": {
+    "title": "Test CIUS: uso compulsivo de internet",
+    "subtitle": "Catorce preguntas sobre cómo usas internet por diversión: si te cuesta desconectar, si ocupa tus pensamientos y si interfiere en tu sueño, tus obligaciones o tus relaciones. El resultado te sirve como punto de partida para hablarlo con un profesional.",
+    "clinicalContext": "Es una herramienta clínica de apoyo. Está pensada para usarse junto con un profesional, o para llevar un registro orientativo a una primera consulta.",
+    "badges": [
+      "Validado en español",
+      "14 preguntas",
+      "3 min",
+      "Sin registro",
+      "Datos en tu navegador"
+    ]
+  },
+  "whatItMeasures": {
+    "heading": "¿Qué mide este test?",
+    "body": "La CIUS (Compulsive Internet Use Scale) mide el uso compulsivo de internet: la dificultad para controlar el tiempo de conexión, la preocupación por internet cuando no se está conectado, el uso para aliviar el malestar y las consecuencias en el sueño, las obligaciones y las relaciones.\n\nTiene 14 preguntas que se responden de «Nunca» (0) a «Muy frecuentemente» (4), así que la puntuación va de 0 a 56. Se refiere al uso por diversión: redes sociales, mensajería, vídeos, música o juegos, no al trabajo ni a los estudios.\n\nLa desarrollaron Meerkerk y colaboradores en los Países Bajos (2009). Usamos el texto español del Ministerio de Sanidad, que la emplea en sus encuestas nacionales."
+  },
+  "whoIsItFor": {
+    "heading": "¿A quién está dirigido?",
+    "body": "Está dirigida a personas adultas que quieren revisar su relación con internet. Se usa en consultas de salud mental y de adicciones y en encuestas de salud pública.\n\nResulta útil para quienes notan que pasan más tiempo conectados del que querrían, para quienes ya están en seguimiento y quieren registrar cómo cambia, o para quienes han decidido consultar y quieren llegar a la cita con un punto de partida. También la utilizan profesionales clínicos y estudiantes.",
+    "indications": [
+      "Personas adultas que quieren revisar su uso de internet y llevar el resultado a su psicólogo/a.",
+      "Personas en tratamiento que quieran registrar con su profesional cómo evoluciona.",
+      "Profesionales clínicos, estudiantes de Psicología e investigadores que quieran consultar el instrumento y su validación."
+    ],
+    "limitations": [
+      "No es una herramienta diagnóstica. El «uso compulsivo de internet» no es un diagnóstico oficial; el trastorno por videojuegos sí lo es (CIE-11), y se valora con otros instrumentos.",
+      "El punto de corte de 28 es el que usa el Ministerio de Sanidad en sus encuestas; no hay un corte validado clínicamente en España. [REVISAR: confirmar el corte]",
+      "El texto es el del cuestionario de adultos del Ministerio, que conserva ejemplos pensados también para jóvenes («padres», «deberes»).",
+      "Las validaciones españolas son con personas de 15 a 30 años y con adolescentes; no con adultos mayores."
+    ]
+  },
+  "howItWorks": {
+    "heading": "Cómo funciona",
+    "body": "La escala consta de 14 preguntas sobre tu uso de internet por diversión. Cada una se responde de «Nunca» a «Muy frecuentemente», así que la puntuación va de 0 a 56.\n\nEsta herramienta se usa típicamente en el marco de una valoración o un seguimiento. Si ya estás en consulta, tu profesional puede decirte si te conviene completarla; si todavía no has consultado, el resultado puede servirte para llevar un registro orientativo a una primera cita.",
+    "steps": [
+      "Respondes 14 preguntas sobre tu uso de internet.",
+      "Puedes ir atrás si lo necesitas.",
+      "El sistema calcula tu puntuación (rango 0–56).",
+      "Ves si está por debajo o por encima del punto de corte."
+    ]
+  },
+  "validation": {
+    "heading": "Validación científica",
+    "body": "Meerkerk y colaboradores construyeron la CIUS a partir de los criterios de las adicciones (pérdida de control, preocupación, abstinencia, uso para afrontar el malestar y conflicto) y la probaron en tres muestras holandesas: dos de usuarios intensivos de internet (447 y 229 personas) y una de más de 16.000. Mostró un único factor estable y una consistencia interna alta [1].\n\nEn español, Sarmiento, Zych y colaboradores la validaron con 2.090 personas de 15 a 30 años de España, Colombia y México: confirmaron su estructura de un factor y que funciona igual en los tres países [2]. Ortuño-Sierra y colaboradores la estudiaron con 1.790 adolescentes españoles, con una fiabilidad alta (omega de 0,91) [3]. El Ministerio de Sanidad la usa en sus encuestas EDADES y ESTUDES, con un corte de 28 puntos para estimar el posible uso compulsivo [4].",
+    "references": [
+      {
+        "id": 1,
+        "authors": "Meerkerk GJ, Van Den Eijnden RJJM, Vermulst AA, Garretsen HFL",
+        "year": 2009,
+        "title": "The Compulsive Internet Use Scale (CIUS): some psychometric properties",
+        "journal": "Cyberpsychol Behav",
+        "volume": "12",
+        "issue": "1",
+        "pages": "1–6",
+        "doi": "10.1089/cpb.2008.0181",
+        "url": "https://doi.org/10.1089/cpb.2008.0181"
+      },
+      {
+        "id": 2,
+        "authors": "Sarmiento A, Zych I, Herrera-López M, Delgado Sánchez U, Oksanen A",
+        "year": 2021,
+        "title": "Psychometric Properties of the Compulsive Internet Use Scale in Spain, Colombia, and Mexico",
+        "journal": "Cyberpsychol Behav Soc Netw",
+        "volume": "24",
+        "issue": "2",
+        "pages": "108–116",
+        "doi": "10.1089/cyber.2020.0046",
+        "url": "https://doi.org/10.1089/cyber.2020.0046"
+      },
+      {
+        "id": 3,
+        "authors": "Ortuño-Sierra J, Pérez-Sáenz J, Mason O, Pérez de Albéniz A, Fonseca-Pedrero E",
+        "year": 2024,
+        "title": "Uso problemático de Internet en adolescentes: validación en español de la Escala de Uso Compulsivo de Internet (CIUS)",
+        "journal": "Adicciones",
+        "volume": "36",
+        "issue": "3",
+        "pages": "247–256",
+        "doi": "10.20882/adicciones.1801",
+        "url": "https://doi.org/10.20882/adicciones.1801"
+      },
+      {
+        "id": 4,
+        "authors": "Ministerio de Sanidad (Observatorio Español de las Drogas y las Adicciones)",
+        "year": 2017,
+        "title": "Encuesta sobre alcohol y otras drogas en España (EDADES): cuestionario",
+        "journal": "Plan Nacional sobre Drogas",
+        "doi": "",
+        "url": "https://pnsd.sanidad.gob.es/profesionales/sistemasInformacion/sistemaInformacion/pdf/EDADES_2017_Cuestionario.pdf"
+      }
+    ]
+  },
+  "interpretation": {
+    "heading": "Qué hacer con tu resultado",
+    "body": "Por debajo de 28, tu puntuación no indica un uso compulsivo según el criterio del Ministerio de Sanidad. Si aun así notas que internet te quita sueño, tiempo o tranquilidad, es información útil para comentar.\n\nA partir de 28, la puntuación indica un posible uso compulsivo de internet. Un psicólogo/a puede ayudarte a entender qué función cumple internet en tu día a día (descansar, evitar el malestar, compañía) y a recuperar el control. Si no tienes un profesional de referencia, en Psicoprotego podemos ayudarte a empezar.\n\nLos rangos son orientativos. Una misma puntuación puede tener significados distintos según el momento vital, la salud y las circunstancias de cada persona. Solo un profesional sanitario puede establecer un diagnóstico tras una evaluación completa."
+  },
+  "faq": [
+    {
+      "q": "¿Es un diagnóstico?",
+      "a": "No. La CIUS es un cribado: indica si tu uso de internet tiene rasgos de compulsión, no si hay un trastorno."
+    },
+    {
+      "q": "¿Cuenta el tiempo de trabajo o de estudio?",
+      "a": "No. La escala pregunta solo por el uso de internet por diversión: redes sociales, mensajería, vídeos, música o juegos."
+    },
+    {
+      "q": "¿Quedan guardadas mis respuestas?",
+      "a": "No. Tus respuestas se procesan en tu navegador y no salen de él: no llegan a nuestros servidores ni a Google Analytics. Desaparecen al cerrar la pestaña, y puedes borrarlas antes con «Borrar mis respuestas». Solo tú decides qué hacer con el resultado."
+    },
+    {
+      "q": "¿Puedo compartirlo con mi médico/a o mi psicólogo/a?",
+      "a": "Sí. Puedes descargar el resultado en PDF y llevarlo a tu consulta. Es una forma práctica de aportar contexto, aunque el/la profesional hará su propia valoración."
+    },
+    {
+      "q": "¿A quién acudo si me preocupa?",
+      "a": "Un psicólogo/a es el profesional indicado para trabajar el uso compulsivo de internet y lo que hay detrás. Tu médico/a de familia también puede orientarte y derivarte."
+    }
+  ],
+  "privacy": {
+    "heading": "Privacidad",
+    "body": "Tus respuestas son confidenciales: se calculan en tu navegador y no salen de él. No se envían a nuestros servidores ni a Google Analytics, y desaparecen al cerrar la pestaña o al pulsar «Borrar mis respuestas». Decides tú qué hacer con el resultado: puedes descargar un PDF para llevarlo a tu médico/a o terapeuta, o simplemente cerrar la pestaña."
+  }
+}

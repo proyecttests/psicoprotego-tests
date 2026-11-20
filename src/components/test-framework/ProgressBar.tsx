@@ -2,10 +2,11 @@
  * @file components/test-framework/ProgressBar.tsx
  * @description Barra de progreso horizontal para tests psicológicos.
  * Muestra "X de Y • Z restantes" con gradient primary→accent.
- * Sticky debajo del header (top-[60px]).
+ * Sticky arriba del todo: en modo test no hay cabecera. Lleva el botón «A+» (tamaño de letra).
  */
 
 import React from 'react'
+import TextSizeControl from '@/components/common/TextSizeControl'
 
 // ── Props ────────────────────────────────────────────────────────────────────
 
@@ -24,19 +25,22 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ currentQuestion, totalQuestio
 
   return (
     <div
-      className="sticky top-[60px] z-30 w-full bg-white border-b border-gray-200 px-4 py-3"
+      className="sticky top-0 z-30 w-full bg-white border-b border-gray-200 px-4 py-1.5 tall:py-2"
       role="region"
       aria-label="Progreso del cuestionario"
     >
       {/* ── Etiqueta de texto ─────────────────────────────────────────────── */}
-      <div className="mb-2 flex items-center justify-between text-sm">
+      <div className="mb-1.5 flex items-center justify-between gap-2 text-sm">
         <span className="font-medium text-gray-700">
           <span className="font-semibold" style={{ color: 'var(--color-primary)' }}>
             {currentQuestion}
           </span>
           {' '}de {totalQuestions} • <span className="text-gray-500">{remaining} restantes</span>
         </span>
-        <span className="text-gray-400 text-xs">{percentage}%</span>
+        <span className="flex items-center gap-2">
+          <span className="text-gray-500 text-xs">{percentage}%</span>
+          <TextSizeControl compact />
+        </span>
       </div>
 
       {/* ── Barra visual ──────────────────────────────────────────────────── */}

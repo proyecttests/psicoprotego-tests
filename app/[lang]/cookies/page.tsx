@@ -18,10 +18,10 @@ const CONTENT: Record<string, LegalContent> = {
     metaTitle:       "Política de Cookies",
     metaDescription: "Qué guarda Psicoprotego Tests en tu navegador: almacenamiento técnico y, solo si las aceptas, cookies de Google Analytics.",
     heading:         "Política de Cookies",
-    updated:         "4 de noviembre de 2026",
+    updated:         "20 de noviembre de 2026",
     sections: [
       { title: "Qué usamos", body: "Además del almacenamiento técnico necesario para que la web funcione, solo usamos cookies de Google Analytics si las aceptas. Vercel Web Analytics no usa cookies.",
-        table: {"head": ["Nombre", "Tipo", "Para qué", "Duración", "Necesita consentimiento"], "rows": [["psico_cookie_consent", "Almacenamiento local del navegador", "Recordar si aceptaste o rechazaste la analítica", "Hasta que lo borres", "No (técnica)"], ["test_access_granted", "Almacenamiento de la pestaña", "Comprobar que has visto el aviso antes de empezar el test", "Hasta cerrar la pestaña", "No (técnica)"], ["psico_pdf_name", "Almacenamiento de la pestaña", "Recordar el nombre que escribiste para el PDF", "Hasta cerrar la pestaña", "No (técnica)"], ["_ga, _ga_<ID>", "Cookies de Google Analytics", "Estadísticas de uso", "2 años", "**Sí**"]]} },
+        table: {"head": ["Nombre", "Tipo", "Para qué", "Duración", "Necesita consentimiento"], "rows": [["psico_cookie_consent", "Almacenamiento local del navegador", "Recordar si aceptaste o rechazaste la analítica", "Hasta que lo borres", "No (técnica)"], ["test_access_granted", "Almacenamiento de la pestaña", "Comprobar que has visto el aviso antes de empezar el test", "Hasta cerrar la pestaña", "No (técnica)"], ["psico_pdf_name", "Almacenamiento de la pestaña", "Recordar el nombre que escribiste para el PDF", "Hasta cerrar la pestaña", "No (técnica)"], ["psico_text_size", "Almacenamiento local del navegador", "Recordar el tamaño de letra que elegiste con «A+»", "Hasta que vuelvas al tamaño normal o lo borres", "No (técnica)"], ["_ga, _ga_<ID>", "Cookies de Google Analytics", "Estadísticas de uso", "2 años", "**Sí**"]]} },
       { title: "Cómo cambiar tu elección", body: "En «Preferencias de cookies», en el pie de cada página. Si eliges «Solo esenciales», dejamos de cargar Google Analytics y borramos sus cookies.\n\nMás información en la [Política de privacidad](/es/privacidad)." },
     ],
   },

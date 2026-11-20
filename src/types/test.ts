@@ -153,6 +153,8 @@ export interface TestDefinition {
   responseOptions?: ResponseOption[]
   /** Si el test mide crisis y con qué criterios (sin este campo, nunca da crisis) */
   crisisCriteria?: CrisisCriteria
+  /** Cómo se pintan las escalas de más de 5 opciones: rejilla (por defecto) o barra deslizante */
+  likertDisplay?: 'grid' | 'slider'
 }
 
 /**
@@ -394,6 +396,8 @@ export interface TestLangFile {
   crisisCriteria?: CrisisCriteria
   /** Tests con ejemplos escritos (DES-II comentada): indicación del recuadro del PDF en blanco */
   examplesHint?: string
+  /** Cómo se pintan las escalas de más de 5 opciones: rejilla (por defecto) o barra deslizante */
+  likertDisplay?: 'grid' | 'slider'
   results: {
     normal: Record<string, NormalMessage>
     crisis: CrisisMessage

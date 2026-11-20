@@ -48,6 +48,29 @@
     }
   },
   {
+    "testId": "cius",
+    "category": "psychometric",
+    "condition": "internet",
+    "tags": [
+      "adultos",
+      "14-items",
+      "cribado",
+      "adicciones"
+    ],
+    "availableLangs": [
+      "es"
+    ],
+    "validated": true,
+    "timeToComplete": "3 min",
+    "itemCount": 14,
+    "names": {
+      "es": "Escala de uso compulsivo de internet (CIUS)"
+    },
+    "hooks": {
+      "es": ""
+    }
+  },
+  {
     "testId": "des2",
     "category": "psychometric",
     "condition": "disociacion",
@@ -161,6 +184,30 @@
     "itemCount": 18,
     "names": {
       "es": "Cuestionario Internacional de Trauma (ITQ)"
+    },
+    "hooks": {
+      "es": ""
+    }
+  },
+  {
+    "testId": "liebet",
+    "category": "psychometric",
+    "condition": "juego",
+    "tags": [
+      "adultos",
+      "si-no",
+      "2-items",
+      "cribado",
+      "adicciones"
+    ],
+    "availableLangs": [
+      "es"
+    ],
+    "validated": true,
+    "timeToComplete": "1 min",
+    "itemCount": 2,
+    "names": {
+      "es": "Cuestionario Lie/Bet de juego problemático"
     },
     "hooks": {
       "es": ""
