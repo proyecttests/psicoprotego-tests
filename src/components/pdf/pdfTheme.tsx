@@ -226,6 +226,22 @@ function groupByOptions(testData: TestLangFile, questions: Question[]) {
 }
 
 /**
+ * Enunciado propio de una pregunta para el PDF, solo cuando cambia respecto a la anterior (PCL-5,
+ * ITQ, PC-PTSD-5: los ítems no se entienden sin él) y sin las frases que ya están en las
+ * instrucciones generales del test.
+ */
+function blockInstructions(testData: TestLangFile, q: Question): string | null {
+  const scored = testData.questions.filter((x) => x.type !== 'text')
+  const prev = scored[scored.indexOf(q) - 1]
+  if (!q.instructions || q.instructions === prev?.instructions) return null
+  let text = q.instructions
+  for (const sentence of (testData.instructions ?? '').split(/(?<=[.?!])\s+/)) {
+    if (sentence) text = text.replace(sentence, '')
+  }
+  return text.trim() || null
+}
+
+/**
  * Tabla de ítems Likert con una columna por opción.
  * Sin `answers`: casillas editables (PDF en blanco). Con `answers`: marcas fijas (informe).
  */
@@ -261,10 +277,13 @@ export const ItemsTable: React.FC<{
               ))}
             </View>
           )
-          if (i > 0) return row
+          const block = blockInstructions(testData, q)
+          const blockText = block ? <Text style={[styles.instructions, { marginTop: 8, marginBottom: 4 }]}>{block}</Text> : null
+          if (i > 0) return blockText ? <View key={q.id} wrap={false}>{blockText}{row}</View> : row
           // La cabecera no se queda sola al final de una página: va unida a la primera fila
           return (
             <View key={q.id} wrap={false}>
+              {blockText}
               <View style={styles.tableHead}>
                 <Text style={styles.headItem}>{gi === 0 ? 'PREGUNTA' : ''}</Text>
                 {group.options.map((o) => (
@@ -296,14 +315,17 @@ export const TotalField: React.FC<{ max: number; mean?: boolean }> = ({ max, mea
 
 /**
  * Rangos orientativos de interpretación; resalta el del resultado si se indica. Con un solo rango
- * (DES-II, sin punto de corte) no hay nada que interpretar y no se pinta.
+ * (DES-II, sin punto de corte) no hay nada que interpretar y no se pinta. Si las categorías salen
+ * de un algoritmo (ITQ, `min: null`), solo se listan, sin puntuaciones.
  */
 export const RangesTable: React.FC<{ scoring: ScoringRule[]; current?: string }> = ({ scoring, current }) => scoring.length < 2 ? null : (
   <View wrap={false}>
     <Text style={styles.sectionTitle}>Interpretación orientativa</Text>
     {scoring.map((r) => (
       <View key={r.messageKey} style={r.messageKey === current ? [styles.rangeRow, styles.rangeOn] : styles.rangeRow}>
-        <Text style={styles.rangeScore}>{r.max === null ? `${formatScore(r.min)} o más` : `${formatScore(r.min)}–${formatScore(r.max)}`}</Text>
+        {r.min !== null && (
+          <Text style={styles.rangeScore}>{r.max === null ? `${formatScore(r.min)} o más` : `${formatScore(r.min)}–${formatScore(r.max)}`}</Text>
+        )}
         <Text style={styles.rangeLabel}>{r.category}</Text>
       </View>
     ))}

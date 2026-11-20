@@ -98,7 +98,8 @@ export interface Question {
 
 /** Regla de puntuación que mapea un rango de score a una categoría */
 export interface ScoringRule {
-  min: number
+  /** null en tests que clasifican por algoritmo y no por puntuación (ITQ) */
+  min: number | null
   /** null significa "sin límite superior" */
   max: number | null
   /** Etiqueta de la categoría (ej: "Ansiedad leve") */
@@ -353,6 +354,8 @@ export interface TestMetadata {
   copyright: string
   /** Aviso de copyright que el instrumento pide reproducir (sale en la ficha técnica y en el PDF) */
   copyrightNotice?: string
+  /** Texto en lugar de los puntos de corte cuando el test clasifica por algoritmo (ITQ) */
+  cutoffsNote?: string
 }
 
 // ── Landing page del test ─────────────────────────────────────────────────────

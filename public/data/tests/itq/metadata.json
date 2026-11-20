@@ -1,0 +1,87 @@
+{
+  "id": "itq",
+  "availableLangs": [
+    "es"
+  ],
+  "category": "psychometric",
+  "condition": "trauma",
+  "use": [
+    "clinical_screening"
+  ],
+  "measures": [
+    "ptsd",
+    "complex_ptsd"
+  ],
+  "validated": true,
+  "medicalCondition": {
+    "icd10": "F43.1",
+    "name": "Trastorno de estrés postraumático",
+    "schemaOrgUrl": "https://www.icd10data.com/ICD10CM/Codes/F01-F99/F40-F48/F43-/F43.1"
+  },
+  "authorship": {
+    "author": "emmanuel",
+    "reviewedBy": "cristina"
+  },
+  "ageRange": {
+    "min": 18,
+    "max": null
+  },
+  "selfAdministrable": true,
+  "slug": "itq",
+  "tags": [
+    "validado-clinicamente",
+    "adultos",
+    "likert",
+    "18-items",
+    "cie-11"
+  ],
+  "originalInstrument": "International Trauma Questionnaire (ITQ)",
+  "validation": {
+    "isValidated": true,
+    "references": [
+      {
+        "authors": "Cloitre M, Shevlin M, Brewin CR, Bisson JI, Roberts NP, Maercker A, Karatzias T, Hyland P",
+        "year": 2018,
+        "title": "The International Trauma Questionnaire: development of a self-report measure of ICD-11 PTSD and complex PTSD",
+        "journal": "Acta Psychiatr Scand",
+        "volume": "138",
+        "issue": "6",
+        "pages": "536–546",
+        "doi": "10.1111/acps.12956"
+      }
+    ],
+    "spanishValidation": {
+      "available": true,
+      "note": "Versión en español latinoamericano de Fresno, Ramos, Spencer, Salgado, Núñez, López, Roberts y Bisson, validada en Chile con 275 adultos jóvenes (Fresno et al., 2023, Eur J Psychotraumatol). En España: estructura factorial en 225 adultos LGBTQ+ residentes en España (Charak et al., 2023). Sin validación española con la versión de España."
+    }
+  },
+  "validationDetails": {
+    "original": {
+      "lang": "en",
+      "reference": "Cloitre M et al. (2018)",
+      "journal": "Acta Psychiatr Scand, 138(6), 536-546",
+      "doi": "10.1111/acps.12956"
+    },
+    "translations": {
+      "es": {
+        "validated": true,
+        "reference": "Fresno et al., 2023 (español latinoamericano, Chile)"
+      },
+      "en": {
+        "validated": true,
+        "reference": "Original instrument"
+      }
+    }
+  },
+  "timeToComplete": "3-5 min",
+  "itemCount": 18,
+  "itemType": "likert_5",
+  "scoringRange": {
+    "min": 0,
+    "max": 24
+  },
+  "cutoffs": {},
+  "cutoffsNote": "Algoritmo de la CIE-11: TEPT o TEPT complejo (síntoma presente con 2 o más)",
+  "copyright": "free_use",
+  "copyrightNotice": "ITQ: Cloitre et al. (2018), Acta Psychiatrica Scandinavica, de libre acceso. Traducción al español latinoamericano: Fresno, Ramos, Spencer, Salgado, Núñez, López, Roberts y Bisson."
+}

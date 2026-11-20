@@ -1,0 +1,115 @@
+{
+  "status": "draft-pending-clinical-review",
+  "drafted": "clinical-landing-writer-v2",
+  "draftedAt": "2026-11-20T18:00:00.000Z",
+  "auditedAt": "2026-11-20T18:00:00.000Z",
+  "lastEditedBy": null,
+  "clinicallyApprovedBy": null,
+  "clinicallyApprovedAt": null,
+  "hero": {
+    "title": "Test PC-PTSD-5: cribado breve de estrés postraumático",
+    "subtitle": "Una pregunta sobre si has vivido una experiencia traumática y, si es así, cinco preguntas de sí o no sobre el último mes: pesadillas o recuerdos que no quieres, evitar lo que te lo recuerda, estar en guardia, sentirte desconectado/a o con culpa. El resultado te sirve como punto de partida para hablarlo con tu psicólogo/a o psiquiatra.",
+    "clinicalContext": "Es una herramienta clínica de apoyo. Está pensada para usarse junto con un profesional, o para llevar un registro orientativo a una primera consulta.",
+    "badges": [
+      "Traducción oficial sin validar",
+      "5 preguntas",
+      "1-2 min",
+      "Sin registro",
+      "Datos en tu navegador"
+    ]
+  },
+  "whatItMeasures": {
+    "heading": "¿Qué mide este test?",
+    "body": "El PC-PTSD-5 (Primary Care PTSD Screen for DSM-5) es un cuestionario muy breve para detectar un posible trastorno de estrés postraumático (TEPT). Empieza preguntando si la persona ha vivido alguna experiencia inusual o especialmente atemorizante, horrible o traumática, con ejemplos como un accidente grave, una agresión o una catástrofe.\n\nSi la respuesta es sí, siguen cinco preguntas de sí o no sobre el último mes, una por cada aspecto central del TEPT: pesadillas o pensamientos no deseados, evitación, estado de alerta, desconexión emocional y culpa. La puntuación es el número de «sí», de 0 a 5.\n\nLo desarrolló el Centro Nacional de TEPT de Estados Unidos para la atención primaria (Prins y colaboradores, 2016) y es de dominio público. La versión en español es la traducción oficial del mismo centro, que advierte de que no ha sido validada en investigación publicada."
+  },
+  "whoIsItFor": {
+    "heading": "¿A quién está dirigido?",
+    "body": "Está dirigido a personas adultas que han vivido una experiencia muy estresante o traumática. Se usa en consultas de salud mental y de atención primaria como cribado: indica si conviene valorar con más detalle las consecuencias de esa experiencia, no si hay un trastorno.\n\nResulta especialmente útil para quienes ya están en terapia y quieren aportar a su profesional un registro ordenado, o para quienes han decidido consultar y quieren llegar a la primera cita con un punto de partida. También lo utilizan profesionales clínicos y estudiantes de ciencias de la salud para familiarizarse con el instrumento.",
+    "indications": [
+      "Personas adultas en terapia por una experiencia traumática que quieran registrar con su profesional cómo evolucionan los síntomas.",
+      "Personas adultas que han vivido una experiencia muy estresante, han decidido consultar y quieren llevar un registro orientativo a la primera cita.",
+      "Profesionales que quieran que su paciente lo complete antes de la sesión.",
+      "Profesionales clínicos, estudiantes de Psicología o Medicina e investigadores que quieran consultar el instrumento y su validación."
+    ],
+    "limitations": [
+      "No es una herramienta diagnóstica. No sustituye la valoración de un psicólogo/a o psiquiatra.",
+      "La traducción española es la oficial del Centro Nacional de TEPT, pero no ha sido validada en investigación publicada. Ese mismo centro pide tener en cuenta esta limitación.",
+      "Se validó en veteranos de Estados Unidos atendidos en atención primaria, en su mayoría hombres de unos 60 años.",
+      "Con el punto de corte de 4, en las mujeres se escapan muchos casos (falsos negativos); el propio centro sugiere valorar un corte más bajo. [REVISAR: decidir el corte]",
+      "Solo cinco preguntas: un resultado por debajo del corte no descarta que la experiencia te esté afectando.",
+      "No está pensado para menores de edad."
+    ]
+  },
+  "howItWorks": {
+    "heading": "Cómo funciona",
+    "body": "El test empieza con una pregunta: si alguna vez has vivido una experiencia inusual o especialmente atemorizante, horrible o traumática. Si respondes que no, termina ahí, con una puntuación de 0. Si respondes que sí, siguen cinco preguntas de sí o no sobre cómo te ha afectado en el último mes.\n\nLa puntuación es el número de «sí» en esas cinco preguntas, de 0 a 5. El punto de corte que propone el Centro Nacional de TEPT es 4.\n\nEsta herramienta se usa típicamente en el marco de una valoración o un seguimiento. Si ya estás en consulta, tu profesional puede decirte si te conviene completarla; si todavía no has consultado, el resultado puede servirte para llevar un registro orientativo a una primera cita.",
+    "steps": [
+      "Respondes si has vivido una experiencia traumática.",
+      "Si es así, respondes cinco preguntas de «Sí» o «No» sobre el último mes.",
+      "Puedes ir atrás si lo necesitas.",
+      "El sistema cuenta tus «sí» (rango 0–5).",
+      "Ves tu puntuación y si llega al punto de corte."
+    ]
+  },
+  "validation": {
+    "heading": "Validación científica",
+    "body": "El PC-PTSD-5 es la versión para el DSM-5 del cribado de TEPT que usa la red sanitaria de veteranos de Estados Unidos. Prins y colaboradores lo evaluaron en 2016 con 398 veteranos de atención primaria, comparándolo con una entrevista diagnóstica: su exactitud fue excelente (área bajo la curva de 0,94). Con un corte de 3 se detectaban más casos; con 4 se lograba el mejor equilibrio entre falsos positivos y negativos, y con 5, la mayor especificidad. Los pacientes lo encontraron aceptable [1].\n\nLa versión en español es la traducción del Centro Nacional de TEPT (2022), revisada por su personal. El propio centro advierte de que no ha sido validada en investigación publicada, y pide reconocer esa limitación al usarla [2]. No hemos encontrado una validación en España.",
+    "references": [
+      {
+        "id": 1,
+        "authors": "Prins A, Bovin MJ, Smolenski DJ, Marx BP, Kimerling R, Jenkins-Guarnieri MA, Kaloupek DG, Schnurr PP, Kaiser AP, Leyva YE, Tiet QQ",
+        "year": 2016,
+        "title": "The Primary Care PTSD Screen for DSM-5 (PC-PTSD-5): Development and Evaluation Within a Veteran Primary Care Sample",
+        "journal": "J Gen Intern Med",
+        "volume": "31",
+        "issue": "10",
+        "pages": "1206–1211",
+        "doi": "10.1007/s11606-016-3703-5",
+        "url": "https://doi.org/10.1007/s11606-016-3703-5"
+      },
+      {
+        "id": 2,
+        "authors": "Centro Nacional de TEPT de EE. UU.",
+        "year": 2022,
+        "title": "Instrumento de Detección de TEPT para el DSM-5 en Atención Primaria (TEPT-5-AP), traducción al español",
+        "journal": "National Center for PTSD",
+        "doi": "",
+        "url": "https://www.ptsd.va.gov/professional/assessment/screens/pc-ptsd.asp"
+      }
+    ]
+  },
+  "interpretation": {
+    "heading": "Qué hacer con tu resultado",
+    "body": "Una puntuación por debajo del punto de corte (0–3) significa que no llegas a 4 «sí», el valor que el cuestionario usa para recomendar una valoración más completa. Son solo cinco preguntas: si lo vivido te preocupa o te afecta, coméntalo con tu profesional de referencia.\n\nUna puntuación a partir del punto de corte (4–5) significa que tus respuestas están en el rango en el que se recomienda una valoración profesional de un posible TEPT. No es un diagnóstico. Es información útil para llevar a consulta: un psicólogo/a o psiquiatra con experiencia en trauma puede valorar qué te ocurre. Si quieres comentar este resultado en consulta y no tienes psicólogo/a de referencia, en Psicoprotego podemos ayudarte a empezar.\n\nSi en algún momento sientes que no puedes mantenerte a salvo o piensas en hacerte daño, en España puedes llamar al **024** (línea de atención a la conducta suicida, gratuita, 24 horas) o, si estás en peligro, al **112**.\n\nLos rangos son orientativos. Una misma puntuación puede tener significados distintos según el momento vital, la salud y las circunstancias de cada persona. Solo un profesional sanitario puede establecer un diagnóstico tras una evaluación completa."
+  },
+  "faq": [
+    {
+      "q": "¿Es un diagnóstico?",
+      "a": "No. Es un cribado breve. Una puntuación de 4 o 5 indica que conviene una valoración más completa, no que haya un TEPT."
+    },
+    {
+      "q": "¿Está validado en español?",
+      "a": "La traducción es la oficial del Centro Nacional de TEPT de Estados Unidos, que la ha revisado, pero advierte de que no ha sido validada en investigación publicada. Por eso conviene interpretar el resultado con más cautela."
+    },
+    {
+      "q": "¿Y si responder me remueve?",
+      "a": "Es posible: las preguntas hablan de una experiencia difícil. Puedes parar cuando quieras y retomarlo otro día, o responderlo en consulta con tu profesional. Si en algún momento te sientes desbordado/a o piensas en hacerte daño, llama al 024 (gratuito, 24 horas) o, si estás en peligro, al 112."
+    },
+    {
+      "q": "¿Quedan guardadas mis respuestas?",
+      "a": "No en nuestros servidores. Tus respuestas se procesan en tu navegador y no las guardamos. Si aceptas las cookies de analítica, se envían a Google Analytics, sin tu nombre ni datos que te identifiquen, para elaborar estadísticas. Solo tú decides qué hacer con el resultado."
+    },
+    {
+      "q": "¿Puedo compartirlo con mi psicólogo/a o mi psiquiatra?",
+      "a": "Sí. Puedes descargar el resultado en PDF y llevarlo a tu consulta. Es una forma práctica de aportar contexto, aunque el/la profesional hará su propia valoración."
+    },
+    {
+      "q": "¿Debo ir al médico de cabecera, al psicólogo o al psiquiatra?",
+      "a": "Para valorar las consecuencias de una experiencia traumática lo indicado es un psicólogo/a clínico/a o un psiquiatra, mejor con experiencia en trauma. El médico/a de familia puede ser el primer paso: conoce tu salud y puede derivarte. Si se plantea medicación, la valoración corresponde al psiquiatra. Lo que no debería decidirlo es el resultado de este test."
+    }
+  ],
+  "privacy": {
+    "heading": "Privacidad",
+    "body": "Tus respuestas se calculan en tu navegador: no se envían a nuestros servidores ni se guardan. Solo si aceptas las cookies de analítica se envían a Google Analytics, sin tu nombre ni datos que te identifiquen, para elaborar estadísticas. Decides tú qué compartir y con quién: puedes descargar un PDF del resultado para llevarlo a tu médico/a o terapeuta, o simplemente cerrar la pestaña."
+  }
+}

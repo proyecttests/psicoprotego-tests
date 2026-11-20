@@ -1,0 +1,104 @@
+{
+  "id": "pcl5",
+  "availableLangs": [
+    "es"
+  ],
+  "category": "psychometric",
+  "condition": "trauma",
+  "use": [
+    "clinical_screening"
+  ],
+  "measures": [
+    "ptsd"
+  ],
+  "validated": true,
+  "medicalCondition": {
+    "icd10": "F43.1",
+    "name": "Trastorno de estrés postraumático",
+    "schemaOrgUrl": "https://www.icd10data.com/ICD10CM/Codes/F01-F99/F40-F48/F43-/F43.1"
+  },
+  "authorship": {
+    "author": "emmanuel",
+    "reviewedBy": "cristina"
+  },
+  "ageRange": {
+    "min": 18,
+    "max": null
+  },
+  "selfAdministrable": true,
+  "slug": "pcl-5",
+  "tags": [
+    "validado-clinicamente",
+    "adultos",
+    "likert",
+    "20-items",
+    "cribado"
+  ],
+  "originalInstrument": "PTSD Checklist for DSM-5 (PCL-5)",
+  "validation": {
+    "isValidated": true,
+    "references": [
+      {
+        "authors": "Blevins CA, Weathers FW, Davis MT, Witte TK, Domino JL",
+        "year": 2015,
+        "title": "The Posttraumatic Stress Disorder Checklist for DSM-5 (PCL-5): Development and Initial Psychometric Evaluation",
+        "journal": "J Trauma Stress",
+        "volume": "28",
+        "issue": "6",
+        "pages": "489–498",
+        "doi": "10.1002/jts.22059"
+      },
+      {
+        "authors": "Bovin MJ, Marx BP, Weathers FW, Gallagher MW, Rodriguez P, Schnurr PP, Keane TM",
+        "year": 2016,
+        "title": "Psychometric properties of the PTSD Checklist for Diagnostic and Statistical Manual of Mental Disorders-Fifth Edition (PCL-5) in veterans",
+        "journal": "Psychol Assess",
+        "volume": "28",
+        "issue": "11",
+        "pages": "1379–1391",
+        "doi": "10.1037/pas0000254"
+      }
+    ],
+    "spanishValidation": {
+      "available": true,
+      "note": "Haghish EF, Sahuquillo J, Radoi A, Pomposo I, Lozano GC (2024). Validating the Spanish translation of the posttraumatic stress disorder checklist (PCL-5) in a sample of individuals with traumatic brain injury. Front Psychol 15:1216435. 233 pacientes con traumatismo craneoencefálico de cuatro hospitales españoles; alfa 0,95. El texto español está publicado en el artículo (CC BY). Corte usado: 33 (Weathers et al., 2013)."
+    }
+  },
+  "validationDetails": {
+    "original": {
+      "lang": "en",
+      "reference": "Weathers FW et al. (2013); Blevins CA et al. (2015)",
+      "journal": "J Trauma Stress, 28(6), 489-498",
+      "doi": "10.1002/jts.22059"
+    },
+    "translations": {
+      "es": {
+        "validated": true,
+        "reference": "Haghish et al., 2024"
+      },
+      "en": {
+        "validated": true,
+        "reference": "Original instrument"
+      }
+    }
+  },
+  "timeToComplete": "5-10 min",
+  "itemCount": 20,
+  "itemType": "likert_5",
+  "scoringRange": {
+    "min": 0,
+    "max": 80
+  },
+  "cutoffs": {
+    "below_cutoff": [
+      0,
+      32
+    ],
+    "above_cutoff": [
+      33,
+      80
+    ]
+  },
+  "copyright": "public_domain",
+  "copyrightNotice": "PCL-5: dominio público (Centro Nacional de TEPT de EE. UU.; Weathers et al., 2013). Traducción española: Haghish et al. (2024), Front Psychol, licencia CC BY."
+}

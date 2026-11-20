@@ -72,6 +72,7 @@ const STRINGS = {
       proprietary:     'Instrumento propietario',
       creative_commons:'Creative Commons',
       free_use_with_conditions: 'Uso libre con condiciones (cita y aviso de copyright)',
+      public_domain:            'Dominio público',
       research_clinical_use:    'Uso clínico y de investigación (permiso de los autores)',
     } as Record<string, string>,
     cutoffLabels: {
@@ -311,7 +312,7 @@ const TestMetadataTable: React.FC<TestMetadataTableProps> = ({ metadata, lang })
         <FieldCard label={s.cutoffs} wide>
           <div className="flex flex-wrap gap-2 mt-0.5">
             {Object.keys(metadata.cutoffs).length === 0 && (
-              <p className="text-sm font-medium" style={{ color: 'var(--color-primary)' }}>{s.noCutoffs}</p>
+              <p className="text-sm font-medium" style={{ color: 'var(--color-primary)' }}>{metadata.cutoffsNote ?? s.noCutoffs}</p>
             )}
             {Object.entries(metadata.cutoffs).map(([key, range]) => {
               const colors = getCutoffColor(key)

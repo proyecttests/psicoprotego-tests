@@ -1,0 +1,308 @@
+{
+  "id": "pcl5",
+  "lang": "es",
+  "name": "Lista de comprobación del trastorno de estrés postraumático para el DSM-5 (PCL-5)",
+  "version": "1.0",
+  "scoringFunction": "scoreStandard",
+  "disclaimerBefore": "Este cuestionario es una herramienta de cribado orientativa. **No es un diagnóstico clínico ni sustituye la valoración de un profesional de la salud mental.** Algunas preguntas se refieren a experiencias traumáticas y pueden remover recuerdos difíciles: puedes parar cuando quieras. Si tienes dudas o síntomas que te preocupan, consulta con un profesional.",
+  "instructions": "Más abajo hay un listado de problemas que las personas tienen a veces debido a una experiencia muy estresante. Lea por favor cada problema detenidamente y después marque una de las opciones para indicar con cuánta intensidad le ha molestado aquel problema durante el último mes.",
+  "responseOptions": [
+    {
+      "value": 0,
+      "label": "Nada"
+    },
+    {
+      "value": 1,
+      "label": "Un poco"
+    },
+    {
+      "value": 2,
+      "label": "Moderadamente"
+    },
+    {
+      "value": 3,
+      "label": "Bastante"
+    },
+    {
+      "value": 4,
+      "label": "Muchísimo"
+    }
+  ],
+  "landing": {
+    "hook": "¿Una experiencia muy estresante sigue afectándote?",
+    "description": "El PCL-5 es un cuestionario de 20 preguntas sobre síntomas de estrés postraumático en el último mes, validado en España.",
+    "whatItMeasures": "Mide cuánto te han molestado en el último mes los síntomas del trastorno de estrés postraumático (DSM-5): recuerdos y pesadillas, evitación, cambios en el ánimo y en las ideas sobre uno mismo, y estar en alerta.",
+    "whoIsItFor": "Adultos que han vivido una experiencia muy estresante. No sirve para menores de edad.",
+    "howItWorks": [
+      "Responde 20 preguntas sobre el último mes",
+      "Obtén tu puntuación, de 0 a 80, y si llega al punto de corte",
+      "Comparte el resultado con tu psicólogo/a o psiquiatra si lo necesitas"
+    ],
+    "faq": [
+      {
+        "q": "¿Es esto un diagnóstico?",
+        "a": "No. El PCL-5 es una herramienta de cribado; el diagnóstico solo puede hacerlo un profesional con una entrevista clínica."
+      },
+      {
+        "q": "¿Quedan guardadas mis respuestas?",
+        "a": "No en nuestros servidores. Tus respuestas se procesan en tu navegador y no las guardamos. Si aceptas las cookies de analítica, se envían a Google Analytics, sin tu nombre ni datos que te identifiquen, para elaborar estadísticas. Solo tú decides qué hacer con el resultado."
+      },
+      {
+        "q": "¿Cuánto tiempo lleva completarlo?",
+        "a": "Entre 5 y 10 minutos."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "likert",
+      "text": "Tener recuerdos repetidos, perturbadores y no deseados de la experiencia estresante?",
+      "instructions": "Más abajo hay un listado de problemas que las personas tienen a veces debido a una experiencia muy estresante. Lea por favor cada problema detenidamente y después marque una de las opciones para indicar con cuánta intensidad le ha molestado aquel problema durante el último mes. En el último mes, ¿cuánto le ha molestado…",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q2",
+      "type": "likert",
+      "text": "Tener sueños repetidos, perturbadores de la experiencia estresante?",
+      "instructions": "En el último mes, ¿cuánto le ha molestado…",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q3",
+      "type": "likert",
+      "text": "Sentirse o actuar de repente como si la experiencia estresante volviera a suceder (como si realmente estuviera allí reviviéndolo)?",
+      "instructions": "En el último mes, ¿cuánto le ha molestado…",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q4",
+      "type": "likert",
+      "text": "Sentirse muy disgustado cuando algo le recordaba la experiencia estresante?",
+      "instructions": "En el último mes, ¿cuánto le ha molestado…",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q5",
+      "type": "likert",
+      "text": "Tener reacciones físicas intensas cuando algo le recordaba la experiencia estresante (p.ej. palpitaciones, dificultades para respirar, sudoración)?",
+      "instructions": "En el último mes, ¿cuánto le ha molestado…",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q6",
+      "type": "likert",
+      "text": "Evitar recuerdos, pensamientos o sentimientos relacionados con la experiencia estresante?",
+      "instructions": "En el último mes, ¿cuánto le ha molestado…",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q7",
+      "type": "likert",
+      "text": "Evitar estímulos externos relacionados con la experiencia estresante (p.ej. personas, lugares, conversaciones, actividades, objetos o situaciones)?",
+      "instructions": "En el último mes, ¿cuánto le ha molestado…",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q8",
+      "type": "likert",
+      "text": "Tener dificultades para recordar partes importantes de la experiencia estresante?",
+      "instructions": "En el último mes, ¿cuánto le ha molestado…",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q9",
+      "type": "likert",
+      "text": "Tener fuertes creencias negativas sobre uno mismo, otras personas, o el mundo (p.ej. tener pensamientos como: no soy una buena persona, hay algo que seriamente no está bien en mí, no se puede confiar en nadie, el mundo es muy peligroso)?",
+      "instructions": "En el último mes, ¿cuánto le ha molestado…",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q10",
+      "type": "likert",
+      "text": "Culparse a sí mismo o a otra persona de la experiencia estresante o de lo que sucedió después?",
+      "instructions": "En el último mes, ¿cuánto le ha molestado…",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q11",
+      "type": "likert",
+      "text": "Tener fuertes sentimientos negativos tales como miedo, terror, ira, culpa o vergüenza?",
+      "instructions": "En el último mes, ¿cuánto le ha molestado…",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q12",
+      "type": "likert",
+      "text": "Perder el interés en actividades que antes solía disfrutar?",
+      "instructions": "En el último mes, ¿cuánto le ha molestado…",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q13",
+      "type": "likert",
+      "text": "Sentirse distante o apartado de los demás?",
+      "instructions": "En el último mes, ¿cuánto le ha molestado…",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q14",
+      "type": "likert",
+      "text": "Dificultades para sentir emociones positivas (p.ej. ser incapaz de sentir alegría o tener sentimientos de amor hacia personas cercanas)?",
+      "instructions": "En el último mes, ¿cuánto le ha molestado…",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q15",
+      "type": "likert",
+      "text": "Tener conductas irritables, ataques de ira o actuar de manera agresiva?",
+      "instructions": "En el último mes, ¿cuánto le ha molestado…",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q16",
+      "type": "likert",
+      "text": "Tomar demasiados riesgos o hacer cosas que le pudieran dañar?",
+      "instructions": "En el último mes, ¿cuánto le ha molestado…",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q17",
+      "type": "likert",
+      "text": "Estar muy en alerta o en guardia?",
+      "instructions": "En el último mes, ¿cuánto le ha molestado…",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q18",
+      "type": "likert",
+      "text": "Sentirse asustadizo o sobresaltado?",
+      "instructions": "En el último mes, ¿cuánto le ha molestado…",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q19",
+      "type": "likert",
+      "text": "Tener dificultades para concentrarse?",
+      "instructions": "En el último mes, ¿cuánto le ha molestado…",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q20",
+      "type": "likert",
+      "text": "Tener problemas para dormir o mantener el sueño?",
+      "instructions": "En el último mes, ¿cuánto le ha molestado…",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    }
+  ],
+  "scoring": [
+    {
+      "min": 0,
+      "max": 32,
+      "category": "Puntuación por debajo del punto de corte",
+      "color": "green",
+      "messageKey": "below_cutoff"
+    },
+    {
+      "min": 33,
+      "max": null,
+      "category": "Puntuación a partir del punto de corte",
+      "color": "orange",
+      "messageKey": "above_cutoff"
+    }
+  ],
+  "results": {
+    "normal": {
+      "below_cutoff": {
+        "title": "Puntuación por debajo del punto de corte",
+        "body": "Tus respuestas no llegan a 33 puntos, el valor más usado con el PCL-5 para considerar un posible trastorno de estrés postraumático.",
+        "recommendation": "Una puntuación baja no descarta que lo vivido te esté afectando. Si te preocupa, coméntalo con un profesional."
+      },
+      "above_cutoff": {
+        "title": "Puntuación a partir del punto de corte",
+        "body": "Tus respuestas llegan a 33 puntos o más: el rango en el que se recomienda valorar un posible trastorno de estrés postraumático. No es un diagnóstico. La depresión, la ansiedad y otros problemas también pueden dar puntuaciones altas.",
+        "recommendation": "Pide una valoración a un psicólogo/a o psiquiatra con experiencia en trauma. Puedes llevar el resultado en PDF."
+      }
+    }
+  }
+}

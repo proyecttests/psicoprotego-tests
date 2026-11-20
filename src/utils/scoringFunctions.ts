@@ -75,7 +75,7 @@ export interface TestDefinitionForScoring {
   lang: string
   questions: QuestionWithScoring[]
   scoring: Array<{
-    min: number
+    min: number | null
     max: number | null
     category: string
     color: string
@@ -105,7 +105,7 @@ export interface RedFlag {
  * Categoría de resultado del test (tramo de score).
  */
 export interface ScoringCategory {
-  min: number
+  min: number | null
   max: number | null
   /** Etiqueta de la categoría (ej: "Ansiedad Moderada") */
   label: string
@@ -286,7 +286,7 @@ function findCategory(
   scoringRules: TestDefinitionForScoring['scoring'],
 ): ScoringCategory | null {
   const rule = scoringRules.find(
-    (r) => score >= r.min && (r.max === null || score <= r.max),
+    (r) => r.min !== null && score >= r.min && (r.max === null || score <= r.max),
   )
   if (!rule) return null
 
@@ -535,6 +535,45 @@ export const scoreMean: ScoringFunction = (testData, answers, messages, lang = '
   scoreWith(testData, answers, messages, lang, (sum, n) => (n > 0 ? Math.floor((sum / n) * 10) / 10 : 0))
 
 
+/**
+ * ITQ (International Trauma Questionnaire, Cloitre et al., 2018): clasifica por el algoritmo de la
+ * CIE-11, no por la suma. Un síntoma o deterioro cuenta si vale 2 o más («Moderadamente»).
+ *  - TEPT: un ítem de cada par (q1/q2 reexperimentación, q3/q4 evitación, q5/q6 amenaza) y uno de
+ *    deterioro (q7–q9).
+ *  - Alteraciones en la autoorganización (AAO): un ítem de cada par (q10/q11, q12/q13, q14/q15) y
+ *    uno de deterioro (q16–q18).
+ *  - TEPT complejo = TEPT + AAO; TEPT = TEPT sin AAO; si no hay TEPT, ninguno.
+ * `score` es null (no hay total); las puntuaciones dimensionales (0–24) van en `notes`.
+ * Las claves de categoría (`messageKey` de `scoring`) son `none`, `ptsd` y `cptsd`.
+ */
+export const scoreITQ: ScoringFunction = (testData, answers, messages, lang = 'es') => {
+  const v = (n: number) => (typeof answers[`q${n}`] === 'number' ? (answers[`q${n}`] as number) : 0)
+  const any = (...ns: number[]) => ns.some((n) => v(n) >= 2)
+  const sum = (...ns: number[]) => ns.reduce((acc, n) => acc + v(n), 0)
+  const ptsd = any(1, 2) && any(3, 4) && any(5, 6) && any(7, 8, 9)
+  const dso  = any(10, 11) && any(12, 13) && any(14, 15) && any(16, 17, 18)
+  const key  = ptsd ? (dso ? 'cptsd' : 'ptsd') : 'none'
+  const rule = testData.scoring.find((r) => r.messageKey === key)
+  const category: ScoringCategory | null = rule
+    ? { min: rule.min, max: rule.max, label: rule.category, color: rule.color, messageKey: rule.messageKey }
+    : null
+  const normal = (messages?.[testData.id] as Record<string, Record<string, unknown>> | undefined)?.[lang]?.['normal'] as
+    | Record<string, { title: string; body: string; recommendation: string }>
+    | undefined
+  const resolved = normal?.[key]
+  const notes = [
+    `Síntomas de TEPT: ${sum(1, 2, 3, 4, 5, 6)} de 24. Alteraciones en la autoorganización: ${sum(10, 11, 12, 13, 14, 15)} de 24.`,
+  ]
+  return {
+    score:      null,
+    category,
+    redFlags:   [],
+    urgency:    'none',
+    resultType: 'NORMAL',
+    message:    resolved ? { ...resolved, notes } : undefined,
+  }
+}
+
 // ── Registry de funciones de scoring ─────────────────────────────────────────
 
 /**
@@ -552,6 +591,7 @@ const SCORING_REGISTRY: Record<string, ScoringFunction> = {
   scoreGAD7,
   scorePHQ9,
   scoreMean,
+  scoreITQ,
   // scorePSS10: scorePSS10,  ← ejemplo para test con lógica especial
 }
 

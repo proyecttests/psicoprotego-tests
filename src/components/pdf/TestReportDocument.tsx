@@ -91,12 +91,15 @@ export const TestReportDocument: React.FC<TestReportDocumentProps> = ({
           </View>
         )}
 
-        {result.score !== null && (
+        {/* Sin puntuación total (ITQ, por algoritmo): solo la categoría y las notas */}
+        {(result.score !== null || result.category) && (
           <View style={local.result} wrap={false}>
-            <View style={local.scoreCol}>
-              <Text style={local.score}>{formatScore(result.score)}</Text>
-              <Text style={local.scoreMax}>{`de ${maxScore}`}</Text>
-            </View>
+            {result.score !== null && (
+              <View style={local.scoreCol}>
+                <Text style={local.score}>{formatScore(result.score)}</Text>
+                <Text style={local.scoreMax}>{`de ${maxScore}`}</Text>
+              </View>
+            )}
             <View style={{ flex: 1 }}>
               <Text style={local.category}>{result.category?.label ?? ''}</Text>
               {result.message?.notes?.map((n) => <Text key={n} style={local.note}>{n}</Text>)}

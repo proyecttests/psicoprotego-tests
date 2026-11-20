@@ -346,6 +346,9 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
   // Más de 4 opciones (ASRS-6, DES-II): enunciado e ítem algo más pequeños para que quepan
   const manyOptions = (currentQuestion?.responseOptions ?? testDef?.responseOptions ?? []).length > 4
     && currentQuestion?.type === 'likert'
+  // Y si además enunciado + ítem son largos (PCL-5 e ITQ), el ítem baja a text-base para caber en 360×640
+  const longContent = manyOptions &&
+    ((currentQuestion?.instructions ?? testDef?.instructions ?? '').length + (currentQuestion?.text.length ?? 0)) > 220
 
   const showCrisisFooter = result?.resultType === 'CRISIS'
 
@@ -449,7 +452,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
   return (
     <>
       <main
-        className="flex flex-1 flex-col items-center justify-between px-4 py-6 sm:px-6"
+        className={`flex flex-1 flex-col items-center justify-between px-4 ${longContent ? 'py-4' : 'py-6'} sm:px-6 sm:py-6`}
         aria-live="polite"
       >
         {/* SECCIÓN SUPERIOR: Barra de progreso */}
@@ -463,7 +466,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
         {/* SECCIÓN CENTRAL: Pregunta + Opciones con transición TDAH */}
         <div
           key={currentIdx}
-          className={`w-full max-w-2xl flex flex-col items-center ${manyOptions ? 'gap-3' : 'gap-6'} sm:gap-14 flex-1 justify-center py-2 sm:py-4${isExiting ? ' animate-slide-out-tiktok' : ''}`}
+          className={`w-full max-w-2xl flex flex-col items-center ${longContent ? 'gap-2' : manyOptions ? 'gap-3' : 'gap-6'} sm:gap-14 flex-1 justify-center py-2 sm:py-4${isExiting ? ' animate-slide-out-tiktok' : ''}`}
         >
           {/* Instrucciones validadas — en cada pregunta: los ítems oficiales no se entienden sin el enunciado */}
           {(currentQuestion.instructions ?? testDef?.instructions) && (
@@ -479,7 +482,7 @@ const TestContainer: React.FC<TestContainerProps> = ({ testId, lang = 'es' }) =>
           {/* Pregunta - Grande, fade suave, centrada */}
           <h2
             /* Las opciones suben hasta 30 px (riseUp 20 + flotación 10): el hueco bajo el ítem no baja de 32 */
-            className={`${manyOptions ? 'text-lg pb-5' : 'text-xl pb-2'} sm:text-3xl font-semibold leading-snug text-center px-4 animate-fadeInQuestion max-w-md`}
+            className={`${longContent ? 'text-base pb-6' : manyOptions ? 'text-lg pb-5' : 'text-xl pb-2'} sm:text-3xl font-semibold leading-snug text-center px-4 animate-fadeInQuestion max-w-md`}
             style={{ color: 'var(--color-primary)' }}
           >
             {currentQuestion.text}

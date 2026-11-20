@@ -1,0 +1,146 @@
+{
+  "status": "draft-pending-clinical-review",
+  "drafted": "clinical-landing-writer-v2",
+  "draftedAt": "2026-11-20T18:00:00.000Z",
+  "auditedAt": "2026-11-20T18:00:00.000Z",
+  "lastEditedBy": null,
+  "clinicallyApprovedBy": null,
+  "clinicallyApprovedAt": null,
+  "hero": {
+    "title": "Test ITQ: cuestionario orientativo de estrés postraumático y TEPT complejo",
+    "subtitle": "Dieciocho preguntas sobre la experiencia traumática que más te perturba: si la revives, si evitas lo que te la recuerda, si te sientes en alerta, y cómo te sientes contigo y con los demás. El resultado te sirve como punto de partida para hablarlo con tu psicólogo/a o psiquiatra.",
+    "clinicalContext": "Es una herramienta clínica de apoyo. Está pensada para usarse junto con un profesional, o para llevar un registro orientativo a una primera consulta.",
+    "badges": [
+      "Instrumento validado",
+      "18 preguntas",
+      "3-5 min",
+      "Sin registro",
+      "Datos en tu navegador"
+    ]
+  },
+  "whatItMeasures": {
+    "heading": "¿Qué mide este test?",
+    "body": "El ITQ (International Trauma Questionnaire) es un cuestionario de 18 preguntas sobre el trastorno de estrés postraumático (TEPT) y el TEPT complejo tal como los define la CIE-11, la clasificación de la Organización Mundial de la Salud.\n\nSeis preguntas exploran los síntomas del TEPT en el último mes, en tres grupos: revivir la experiencia en el aquí y ahora, evitar lo que la recuerda y sentirse amenazado/a. Otras seis exploran las alteraciones que definen el TEPT complejo, en cómo la persona se siente normalmente: dificultad para regular las emociones, una imagen negativa de uno mismo y problemas en las relaciones. Las seis restantes preguntan cuánto afectan esos problemas a la vida social, al trabajo y a otras áreas.\n\nNo da una puntuación total: aplica a las respuestas las reglas de la CIE-11 (un síntoma cuenta a partir de «Moderadamente») y muestra además dos puntuaciones, de 0 a 24, para los síntomas de TEPT y las alteraciones del TEPT complejo. Lo publicaron Cloitre y colaboradores en 2018 y es de libre acceso. Usamos la versión en español latinoamericano, validada en Chile."
+  },
+  "whoIsItFor": {
+    "heading": "¿A quién está dirigido?",
+    "body": "Está dirigido a personas adultas que han vivido una experiencia muy estresante o traumática. Se usa en consultas de salud mental y de atención primaria como cribado: indica si conviene valorar con más detalle las consecuencias de esa experiencia, no si hay un trastorno.\n\nResulta especialmente útil para quienes ya están en terapia y quieren aportar a su profesional un registro ordenado, o para quienes han decidido consultar y quieren llegar a la primera cita con un punto de partida. También lo utilizan profesionales clínicos y estudiantes de ciencias de la salud para familiarizarse con el instrumento.",
+    "indications": [
+      "Personas adultas en terapia por una experiencia traumática que quieran registrar con su profesional cómo evolucionan los síntomas.",
+      "Personas adultas que han vivido una experiencia muy estresante, han decidido consultar y quieren llevar un registro orientativo a la primera cita.",
+      "Profesionales que quieran que su paciente lo complete antes de la sesión.",
+      "Profesionales clínicos, estudiantes de Psicología o Medicina e investigadores que quieran consultar el instrumento y su validación."
+    ],
+    "limitations": [
+      "No es una herramienta diagnóstica. Aplica los criterios de la CIE-11 a tus respuestas, pero no sustituye la valoración de un psicólogo/a o psiquiatra.",
+      "Usamos la versión en español latinoamericano, validada en Chile. En España hay estudios con el ITQ, pero no con esta versión en población general. [REVISAR: confirmar si basta o se busca la versión usada en España]",
+      "No pregunta qué ocurrió ni cuándo: el cuestionario original pide describir brevemente la experiencia y la fecha, y aquí no lo hacemos. [REVISAR: decidir si se añade]",
+      "Un síntoma cuenta a partir de «Moderadamente». Algunas copias en español dicen «más de 2»; seguimos el original de Cloitre et al. (2018), que cuenta desde 2.",
+      "La depresión, la ansiedad y otros problemas comparten síntomas con el TEPT complejo.",
+      "No está pensado para menores de edad (existe una versión para niños y adolescentes, el ITQ-CA)."
+    ]
+  },
+  "howItWorks": {
+    "heading": "Cómo funciona",
+    "body": "Antes de empezar, piensa en la experiencia traumática que más te perturba. El test consta de 18 preguntas con cinco opciones, de «Nada» a «Extremadamente». Las seis primeras preguntan cuánto te han molestado ciertos problemas durante el último mes; otras seis, cuán cierto es para ti lo que describen, pensando en cómo te sientes normalmente; y las demás, cómo te han afectado esos problemas en el último mes.\n\nEl resultado aplica los criterios de la CIE-11: indica si tus respuestas cumplen los del TEPT, los del TEPT complejo o ninguno, y muestra dos puntuaciones de 0 a 24.\n\nEsta herramienta se usa típicamente en el marco de una valoración o un seguimiento. Si ya estás en consulta, tu profesional puede decirte si te conviene completarla; si todavía no has consultado, el resultado puede servirte para llevar un registro orientativo a una primera cita.",
+    "steps": [
+      "Piensas en la experiencia traumática que más te perturba.",
+      "Respondes 18 preguntas con cinco opciones, de «Nada» a «Extremadamente».",
+      "Puedes ir atrás si lo necesitas.",
+      "El sistema aplica los criterios de la CIE-11 a tus respuestas.",
+      "Ves si cumplen los criterios de TEPT o de TEPT complejo, y tus puntuaciones de síntomas (0–24 cada una)."
+    ]
+  },
+  "validation": {
+    "heading": "Validación científica",
+    "body": "El ITQ lo publicaron Cloitre y colaboradores en 2018 para medir el TEPT y el TEPT complejo de la CIE-11. Eligieron las preguntas con análisis estadísticos en una muestra comunitaria (1.051 personas) y otra clínica (247) del Reino Unido expuestas a experiencias traumáticas. Los autores lo describen como un cuestionario breve, sencillo y de libre acceso [1].\n\nLa versión en español latinoamericano la tradujeron Fresno, Ramos y colaboradores. En 2023 la validaron con 275 adultos jóvenes chilenos: la estructura de dos grandes factores (TEPT y alteraciones de la autoorganización) se ajustó bien, y las puntuaciones se relacionaron con el número de experiencias traumáticas, la ansiedad, la depresión y el riesgo suicida [2]. En España, Charak y colaboradores (2023) comprobaron su estructura en 225 adultos LGBTQ+ residentes en España [3]. Una revisión con metaanálisis de 62 estudios de 28 países (2025) encontró una fiabilidad alta: alfa de 0,90 para el total, 0,85 para el TEPT y 0,87 para las alteraciones de la autoorganización [4].",
+    "references": [
+      {
+        "id": 1,
+        "authors": "Cloitre M, Shevlin M, Brewin CR, Bisson JI, Roberts NP, Maercker A, Karatzias T, Hyland P",
+        "year": 2018,
+        "title": "The International Trauma Questionnaire: development of a self-report measure of ICD-11 PTSD and complex PTSD",
+        "journal": "Acta Psychiatr Scand",
+        "volume": "138",
+        "issue": "6",
+        "pages": "536–546",
+        "doi": "10.1111/acps.12956",
+        "url": "https://doi.org/10.1111/acps.12956"
+      },
+      {
+        "id": 2,
+        "authors": "Fresno A, Ramos Alvarado N, Núñez D, Ulloa JL, Arriagada J, Cloitre M, Bisson JI, Roberts NP, Shevlin M, Karatzias T",
+        "year": 2023,
+        "title": "Initial validation of the International Trauma Questionnaire (ITQ) in a sample of Chilean adults",
+        "journal": "Eur J Psychotraumatol",
+        "volume": "14",
+        "issue": "2",
+        "pages": "2263313",
+        "doi": "10.1080/20008066.2023.2263313",
+        "url": "https://doi.org/10.1080/20008066.2023.2263313"
+      },
+      {
+        "id": 3,
+        "authors": "Charak R, Cano-Gonzalez I, Ronzón-Tirado R, Ford JD, Byllesby BM, Shevlin M, Karatzias T, Hyland P, Cloitre M",
+        "year": 2023,
+        "title": "Factor structure of the international trauma questionnaire in trauma exposed LGBTQ+ adults: Role of cumulative traumatic events and minority stress heterosexist experiences",
+        "journal": "Psychol Trauma",
+        "volume": "15",
+        "issue": "4",
+        "pages": "628–636",
+        "doi": "10.1037/tra0001440",
+        "url": "https://doi.org/10.1037/tra0001440"
+      },
+      {
+        "id": 4,
+        "authors": "Nvo-Fernández M, Villacura-Herrera C, Miño-Reyes V, Serrano C, Salas F, Ahumada F, Leiva-Bianchi M",
+        "year": 2025,
+        "title": "Can We Trust the International Trauma Questionnaire? A Comprehensive Systematic Meta-Analytic Review of Its Reliability Across Cultural Contexts in Adult and Child/Adolescent Versions",
+        "journal": "J Korean Acad Child Adolesc Psychiatry",
+        "volume": "36",
+        "issue": "4",
+        "pages": "196–214",
+        "doi": "10.5765/jkacap.250017",
+        "url": "https://doi.org/10.5765/jkacap.250017"
+      }
+    ]
+  },
+  "interpretation": {
+    "heading": "Qué hacer con tu resultado",
+    "body": "Si tus respuestas no cumplen los criterios del ITQ, el algoritmo de la CIE-11 no identifica un TEPT ni un TEPT complejo. Eso no significa que lo vivido no te afecte: si te sigue pesando, coméntalo con tu profesional de referencia.\n\nSi tus respuestas son compatibles con los criterios de TEPT o de TEPT complejo, se recomienda una valoración profesional. No es un diagnóstico: lo confirma o lo descarta un profesional en una entrevista. Es información útil para llevar a consulta, junto con las dos puntuaciones de síntomas. Un psicólogo/a o psiquiatra con experiencia en trauma puede ayudarte a entender qué te ocurre. Si quieres comentar este resultado en consulta y no tienes psicólogo/a de referencia, en Psicoprotego podemos ayudarte a empezar.\n\nSi en algún momento sientes que no puedes mantenerte a salvo o piensas en hacerte daño, en España puedes llamar al **024** (línea de atención a la conducta suicida, gratuita, 24 horas) o, si estás en peligro, al **112**.\n\nLos rangos son orientativos. Una misma puntuación puede tener significados distintos según el momento vital, la salud y las circunstancias de cada persona. Solo un profesional sanitario puede establecer un diagnóstico tras una evaluación completa."
+  },
+  "faq": [
+    {
+      "q": "¿Es un diagnóstico?",
+      "a": "No. El ITQ aplica los criterios de la CIE-11 a tus respuestas, pero solo un profesional puede establecer un diagnóstico tras una entrevista."
+    },
+    {
+      "q": "¿Qué es el TEPT complejo?",
+      "a": "Es un diagnóstico de la CIE-11 que incluye los síntomas del TEPT y, además, dificultades persistentes para regular las emociones, una imagen negativa de uno mismo y problemas en las relaciones. Suele asociarse a experiencias traumáticas repetidas o prolongadas, aunque no siempre."
+    },
+    {
+      "q": "¿Por qué no da una puntuación total?",
+      "a": "Porque el ITQ está pensado para aplicar los criterios de la CIE-11, que exigen síntomas de cada grupo y que afecten a tu vida, no una suma. Además del resultado, ves dos puntuaciones de 0 a 24, una para los síntomas de TEPT y otra para las alteraciones del TEPT complejo."
+    },
+    {
+      "q": "¿Y si responder me remueve?",
+      "a": "Es posible: las preguntas hablan de una experiencia difícil. Puedes parar cuando quieras y retomarlo otro día, o responderlo en consulta con tu profesional. Si en algún momento te sientes desbordado/a o piensas en hacerte daño, llama al 024 (gratuito, 24 horas) o, si estás en peligro, al 112."
+    },
+    {
+      "q": "¿Quedan guardadas mis respuestas?",
+      "a": "No en nuestros servidores. Tus respuestas se procesan en tu navegador y no las guardamos. Si aceptas las cookies de analítica, se envían a Google Analytics, sin tu nombre ni datos que te identifiquen, para elaborar estadísticas. Solo tú decides qué hacer con el resultado."
+    },
+    {
+      "q": "¿Puedo compartirlo con mi psicólogo/a o mi psiquiatra?",
+      "a": "Sí. Puedes descargar el resultado en PDF y llevarlo a tu consulta. Es una forma práctica de aportar contexto, aunque el/la profesional hará su propia valoración."
+    },
+    {
+      "q": "¿Debo ir al médico de cabecera, al psicólogo o al psiquiatra?",
+      "a": "Para valorar las consecuencias de una experiencia traumática lo indicado es un psicólogo/a clínico/a o un psiquiatra, mejor con experiencia en trauma. El médico/a de familia puede ser el primer paso: conoce tu salud y puede derivarte. Si se plantea medicación, la valoración corresponde al psiquiatra. Lo que no debería decidirlo es el resultado de este test."
+    }
+  ],
+  "privacy": {
+    "heading": "Privacidad",
+    "body": "Tus respuestas se calculan en tu navegador: no se envían a nuestros servidores ni se guardan. Solo si aceptas las cookies de analítica se envían a Google Analytics, sin tu nombre ni datos que te identifiquen, para elaborar estadísticas. Decides tú qué compartir y con quién: puedes descargar un PDF del resultado para llevarlo a tu médico/a o terapeuta, o simplemente cerrar la pestaña."
+  }
+}

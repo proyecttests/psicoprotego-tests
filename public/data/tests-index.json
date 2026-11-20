@@ -119,6 +119,77 @@
     }
   },
   {
+    "testId": "itq",
+    "category": "psychometric",
+    "condition": "trauma",
+    "tags": [
+      "validado-clinicamente",
+      "adultos",
+      "likert",
+      "18-items",
+      "cie-11"
+    ],
+    "availableLangs": [
+      "es"
+    ],
+    "validated": true,
+    "timeToComplete": "3-5 min",
+    "itemCount": 18,
+    "names": {
+      "es": "Cuestionario Internacional de Trauma (ITQ)"
+    },
+    "hooks": {
+      "es": ""
+    }
+  },
+  {
+    "testId": "pcl5",
+    "category": "psychometric",
+    "condition": "trauma",
+    "tags": [
+      "validado-clinicamente",
+      "adultos",
+      "likert",
+      "20-items",
+      "cribado"
+    ],
+    "availableLangs": [
+      "es"
+    ],
+    "validated": true,
+    "timeToComplete": "5-10 min",
+    "itemCount": 20,
+    "names": {
+      "es": "Lista de comprobación del trastorno de estrés postraumático para el DSM-5 (PCL-5)"
+    },
+    "hooks": {
+      "es": ""
+    }
+  },
+  {
+    "testId": "pcptsd5",
+    "category": "psychometric",
+    "condition": "trauma",
+    "tags": [
+      "adultos",
+      "si-no",
+      "5-items",
+      "cribado"
+    ],
+    "availableLangs": [
+      "es"
+    ],
+    "validated": true,
+    "timeToComplete": "1-2 min",
+    "itemCount": 5,
+    "names": {
+      "es": "Instrumento de detección de TEPT para el DSM-5 en atención primaria (PC-PTSD-5)"
+    },
+    "hooks": {
+      "es": ""
+    }
+  },
+  {
     "testId": "phq15",
     "category": "psychometric",
     "condition": "sintomas-fisicos",

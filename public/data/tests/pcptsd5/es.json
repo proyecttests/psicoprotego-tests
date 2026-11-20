@@ -1,0 +1,176 @@
+{
+  "id": "pcptsd5",
+  "lang": "es",
+  "name": "Instrumento de detección de TEPT para el DSM-5 en atención primaria (PC-PTSD-5)",
+  "version": "1.0",
+  "scoringFunction": "scoreStandard",
+  "disclaimerBefore": "Este cuestionario es una herramienta de cribado orientativa. **No es un diagnóstico clínico ni sustituye la valoración de un profesional de la salud mental.** Algunas preguntas se refieren a experiencias traumáticas y pueden remover recuerdos difíciles: puedes parar cuando quieras. Si tienes dudas o síntomas que te preocupan, consulta con un profesional.",
+  "instructions": "Si la respuesta a la primera pregunta es no, el puntaje total de la evaluación = 0. Por favor deténgase aquí. Si la respuesta es sí, por favor conteste las siguientes preguntas.",
+  "responseOptions": [
+    {
+      "value": 1,
+      "label": "Sí"
+    },
+    {
+      "value": 0,
+      "label": "No"
+    }
+  ],
+  "landing": {
+    "hook": "¿Una experiencia traumática sigue presente en tu día a día?",
+    "description": "El PC-PTSD-5 es un cribado muy breve de estrés postraumático: una pregunta sobre experiencias traumáticas y cinco de sí o no sobre el último mes.",
+    "whatItMeasures": "Explora si una experiencia traumática te ha dejado, en el último mes, pesadillas o recuerdos no deseados, evitación, estado de alerta, desconexión emocional o culpa.",
+    "whoIsItFor": "Adultos que se preguntan si una experiencia traumática les sigue afectando. No sirve para menores de edad.",
+    "howItWorks": [
+      "Responde si has vivido una experiencia traumática",
+      "Si es así, responde cinco preguntas de sí o no sobre el último mes",
+      "Comparte el resultado con tu psicólogo/a o psiquiatra si lo necesitas"
+    ],
+    "faq": [
+      {
+        "q": "¿Es esto un diagnóstico?",
+        "a": "No. Es un cribado; el diagnóstico solo puede hacerlo un profesional con una entrevista clínica."
+      },
+      {
+        "q": "¿Quedan guardadas mis respuestas?",
+        "a": "No en nuestros servidores. Tus respuestas se procesan en tu navegador y no las guardamos. Si aceptas las cookies de analítica, se envían a Google Analytics, sin tu nombre ni datos que te identifiquen, para elaborar estadísticas. Solo tú decides qué hacer con el resultado."
+      },
+      {
+        "q": "¿Cuánto tiempo lleva completarlo?",
+        "a": "Uno o dos minutos."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "q0",
+      "type": "likert",
+      "text": "¿Alguna vez ha experimentado este tipo de evento?",
+      "instructions": "A veces, a las personas les suceden cosas que son inusual o especialmente atemorizantes, horribles o traumáticas. Por ejemplo: un accidente o incendio grave; una agresión física o sexual, o abuso; un terremoto o inundación; una guerra; ver a alguien ser asesinado/a o seriamente herido/a; perder a un ser querido debido a un homicidio o un suicidio.",
+      "scale": {
+        "min": 0,
+        "max": 1,
+        "step": 1
+      },
+      "scoring": {
+        "method": "none"
+      }
+    },
+    {
+      "id": "q1",
+      "type": "likert",
+      "text": "tenido pesadillas sobre el/los evento(s) o ha pensado en el/los evento(s) cuando no quería?",
+      "instructions": "En el mes pasado, ¿usted ha…",
+      "scale": {
+        "min": 0,
+        "max": 1,
+        "step": 1
+      },
+      "showIf": {
+        "questionId": "q0",
+        "value": 1
+      }
+    },
+    {
+      "id": "q2",
+      "type": "likert",
+      "text": "tratado mucho de no pensar en el/los evento(s) o hizo todo lo posible por evitar situaciones que le recuerdan de el/los evento(s)?",
+      "instructions": "En el mes pasado, ¿usted ha…",
+      "scale": {
+        "min": 0,
+        "max": 1,
+        "step": 1
+      },
+      "showIf": {
+        "questionId": "q0",
+        "value": 1
+      }
+    },
+    {
+      "id": "q3",
+      "type": "likert",
+      "text": "estado constantemente en guardia, vigilante, o se ha sobresaltado con facilidad?",
+      "instructions": "En el mes pasado, ¿usted ha…",
+      "scale": {
+        "min": 0,
+        "max": 1,
+        "step": 1
+      },
+      "showIf": {
+        "questionId": "q0",
+        "value": 1
+      }
+    },
+    {
+      "id": "q4",
+      "type": "likert",
+      "text": "sentido insensibilidad emocional o desconexión de las personas, actividades o de su entorno?",
+      "instructions": "En el mes pasado, ¿usted ha…",
+      "scale": {
+        "min": 0,
+        "max": 1,
+        "step": 1
+      },
+      "showIf": {
+        "questionId": "q0",
+        "value": 1
+      }
+    },
+    {
+      "id": "q5",
+      "type": "likert",
+      "text": "tenido sentimientos de culpa o ha sido incapaz de dejar de culparse a sí mismo o a los demás por el(los) evento(s) o cualquier problema que el(los) evento(s) haya(n) causado?",
+      "instructions": "En el mes pasado, ¿usted ha…",
+      "scale": {
+        "min": 0,
+        "max": 1,
+        "step": 1
+      },
+      "showIf": {
+        "questionId": "q0",
+        "value": 1
+      }
+    }
+  ],
+  "scoring": [
+    {
+      "min": 0,
+      "max": 3,
+      "category": "Puntuación por debajo del punto de corte",
+      "color": "green",
+      "messageKey": "below_cutoff"
+    },
+    {
+      "min": 4,
+      "max": null,
+      "category": "Puntuación a partir del punto de corte",
+      "color": "orange",
+      "messageKey": "above_cutoff"
+    }
+  ],
+  "results": {
+    "normal": {
+      "below_cutoff": {
+        "title": "Puntuación por debajo del punto de corte",
+        "body": "Tus respuestas no llegan a 4 «sí», el valor que el cuestionario usa para recomendar una valoración más completa.",
+        "recommendation": "Una puntuación baja no descarta que lo vivido te esté afectando. Si te preocupa, coméntalo con un profesional."
+      },
+      "above_cutoff": {
+        "title": "Puntuación a partir del punto de corte",
+        "body": "Has respondido «sí» a 4 o 5 preguntas: el rango en el que se recomienda una valoración más completa de un posible trastorno de estrés postraumático. No es un diagnóstico.",
+        "recommendation": "Pide una valoración a un psicólogo/a o psiquiatra con experiencia en trauma. Puedes llevar el resultado en PDF."
+      }
+    },
+    "notes": [
+      {
+        "allBelow": {
+          "questions": [
+            "q0"
+          ],
+          "value": 1
+        },
+        "text": "Has indicado que no has vivido una experiencia de este tipo, así que el cuestionario termina en la primera pregunta y la puntuación es 0."
+      }
+    ]
+  }
+}

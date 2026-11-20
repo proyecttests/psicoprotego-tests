@@ -1,0 +1,298 @@
+{
+  "id": "itq",
+  "lang": "es",
+  "name": "Cuestionario Internacional de Trauma (ITQ)",
+  "version": "1.0",
+  "scoringFunction": "scoreITQ",
+  "disclaimerBefore": "Este cuestionario es una herramienta de cribado orientativa. **No es un diagnóstico clínico ni sustituye la valoración de un profesional de la salud mental.** Algunas preguntas se refieren a experiencias traumáticas y pueden remover recuerdos difíciles: puedes parar cuando quieras. Si tienes dudas o síntomas que te preocupan, consulta con un profesional.",
+  "instructions": "Por favor, piense en la experiencia traumática que más le perturba y responda a las siguientes preguntas relacionadas con dicha experiencia. Preguntas 1 a 6: cuánto le ha molestado cada problema durante el mes pasado. Preguntas 7 a 9 y 16 a 18: en el último mes, cómo le han afectado esos problemas. Preguntas 10 a 15: cuán cierto es para usted, pensando en cómo se siente, piensa acerca de sí mismo y se relaciona con los demás normalmente.",
+  "responseOptions": [
+    {
+      "value": 0,
+      "label": "Nada"
+    },
+    {
+      "value": 1,
+      "label": "Poco"
+    },
+    {
+      "value": 2,
+      "label": "Moderadamente"
+    },
+    {
+      "value": 3,
+      "label": "Mucho"
+    },
+    {
+      "value": 4,
+      "label": "Extremadamente"
+    }
+  ],
+  "landing": {
+    "hook": "¿Lo que viviste sigue afectando a cómo te sientes y te relacionas?",
+    "description": "El ITQ es un cuestionario de 18 preguntas sobre el trastorno de estrés postraumático (TEPT) y el TEPT complejo según la CIE-11.",
+    "whatItMeasures": "Explora los síntomas del TEPT (revivir la experiencia, evitarla, sentirse amenazado/a) y las alteraciones del TEPT complejo (regular las emociones, la imagen de uno mismo y las relaciones), y cuánto afectan a la vida diaria.",
+    "whoIsItFor": "Adultos que han vivido una experiencia traumática. No sirve para menores de edad.",
+    "howItWorks": [
+      "Piensa en la experiencia que más te perturba",
+      "Responde 18 preguntas con cinco opciones",
+      "Ves si tus respuestas cumplen los criterios del cuestionario y tus puntuaciones de síntomas"
+    ],
+    "faq": [
+      {
+        "q": "¿Es esto un diagnóstico?",
+        "a": "No. El ITQ aplica los criterios de la CIE-11 a tus respuestas, pero el diagnóstico solo puede hacerlo un profesional con una entrevista clínica."
+      },
+      {
+        "q": "¿Quedan guardadas mis respuestas?",
+        "a": "No en nuestros servidores. Tus respuestas se procesan en tu navegador y no las guardamos. Si aceptas las cookies de analítica, se envían a Google Analytics, sin tu nombre ni datos que te identifiquen, para elaborar estadísticas. Solo tú decides qué hacer con el resultado."
+      },
+      {
+        "q": "¿Cuánto tiempo lleva completarlo?",
+        "a": "Entre 3 y 5 minutos."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "likert",
+      "text": "¿Tener sueños perturbadores que reproducen parte de la experiencia o están claramente relacionados con la experiencia?",
+      "instructions": "Por favor, piense en la experiencia traumática que más le perturba y responda a las siguientes preguntas relacionadas con dicha experiencia. ¿Cuánto le ha molestado este problema durante el mes pasado?",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q2",
+      "type": "likert",
+      "text": "¿Tener imágenes o recuerdos intensos que a veces vienen a su mente, en los cuales siente que la experiencia está ocurriendo de nuevo aquí y ahora?",
+      "instructions": "¿Cuánto le ha molestado este problema durante el mes pasado?",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q3",
+      "type": "likert",
+      "text": "¿Evitar pensamientos, sentimientos, sensaciones físicas u otros estímulos internos que le recuerden la experiencia?",
+      "instructions": "¿Cuánto le ha molestado este problema durante el mes pasado?",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q4",
+      "type": "likert",
+      "text": "¿Evitar personas, lugares, conversaciones, objetos, actividades, situaciones u otros estímulos externos que le recuerden la experiencia?",
+      "instructions": "¿Cuánto le ha molestado este problema durante el mes pasado?",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q5",
+      "type": "likert",
+      "text": "¿Estar \"súper alerta,\" vigilante o en guardia?",
+      "instructions": "¿Cuánto le ha molestado este problema durante el mes pasado?",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q6",
+      "type": "likert",
+      "text": "¿Sentirse sobresaltado/a o asustarse fácilmente?",
+      "instructions": "¿Cuánto le ha molestado este problema durante el mes pasado?",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q7",
+      "type": "likert",
+      "text": "¿Han afectado sus relaciones interpersonales o a su vida social?",
+      "instructions": "En el último mes, si ha tenido alguno de los problemas anteriormente mencionados, indique cómo le han afectado:",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q8",
+      "type": "likert",
+      "text": "¿Han afectado su trabajo o su capacidad para trabajar?",
+      "instructions": "En el último mes, si ha tenido alguno de los problemas anteriormente mencionados, indique cómo le han afectado:",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q9",
+      "type": "likert",
+      "text": "¿Han afectado otras áreas importantes de su vida, como la crianza de sus hijos o hijas, su desempeño en la escuela o en la universidad, u otras actividades importantes?",
+      "instructions": "En el último mes, si ha tenido alguno de los problemas anteriormente mencionados, indique cómo le han afectado:",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q10",
+      "type": "likert",
+      "text": "Cuando estoy molesto/a, tardo bastante tiempo en calmarme.",
+      "instructions": "Las preguntas siguientes se refieren a la forma en que usted normalmente se siente, a la manera habitual en que piensa acerca de sí mismo y el modo en que normalmente se relaciona con los demás. ¿Cuán cierto es para usted?",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q11",
+      "type": "likert",
+      "text": "Me siento desconectado/a emocionalmente o emocionalmente apagado/a",
+      "instructions": "¿Cuán cierto es para usted?",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q12",
+      "type": "likert",
+      "text": "Me siento como un/a fracasado/a",
+      "instructions": "¿Cuán cierto es para usted?",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q13",
+      "type": "likert",
+      "text": "Siento que no valgo nada",
+      "instructions": "¿Cuán cierto es para usted?",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q14",
+      "type": "likert",
+      "text": "Me siento distante o alejado/a de las personas",
+      "instructions": "¿Cuán cierto es para usted?",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q15",
+      "type": "likert",
+      "text": "Me resulta difícil estar emocionalmente cercano/a a la gente.",
+      "instructions": "¿Cuán cierto es para usted?",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q16",
+      "type": "likert",
+      "text": "¿Han generado preocupación o malestar sobre sus relaciones o su vida social?",
+      "instructions": "En el último mes, si ha tenido alguno de los problemas mencionados respecto a sus emociones, creencias sobre usted mismo o dificultad en sus relaciones, indique cómo le han afectado:",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q17",
+      "type": "likert",
+      "text": "¿Han afectado su trabajo o su capacidad para trabajar?",
+      "instructions": "En el último mes, si ha tenido alguno de los problemas mencionados respecto a sus emociones, creencias sobre usted mismo o dificultad en sus relaciones, indique cómo le han afectado:",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    },
+    {
+      "id": "q18",
+      "type": "likert",
+      "text": "¿Han afectado otras áreas importantes de su vida, como la crianza de sus hijos o hijas, su desempeño en la escuela o en la universidad, u otras actividades importantes?",
+      "instructions": "En el último mes, si ha tenido alguno de los problemas mencionados respecto a sus emociones, creencias sobre usted mismo o dificultad en sus relaciones, indique cómo le han afectado:",
+      "scale": {
+        "min": 0,
+        "max": 4,
+        "step": 1
+      }
+    }
+  ],
+  "scoring": [
+    {
+      "min": null,
+      "max": null,
+      "category": "Respuestas que no cumplen los criterios del ITQ",
+      "color": "green",
+      "messageKey": "none"
+    },
+    {
+      "min": null,
+      "max": null,
+      "category": "Respuestas compatibles con los criterios de TEPT del ITQ",
+      "color": "orange",
+      "messageKey": "ptsd"
+    },
+    {
+      "min": null,
+      "max": null,
+      "category": "Respuestas compatibles con los criterios de TEPT complejo del ITQ",
+      "color": "orange",
+      "messageKey": "cptsd"
+    }
+  ],
+  "results": {
+    "normal": {
+      "none": {
+        "title": "Respuestas que no cumplen los criterios del ITQ",
+        "body": "Según el algoritmo del cuestionario, tus respuestas no cumplen los criterios de trastorno de estrés postraumático (TEPT) ni de TEPT complejo de la CIE-11. Para cumplirlos hacen falta a la vez síntomas de revivir la experiencia, de evitarla y de sentirse amenazado/a, y que afecten a tu vida.",
+        "recommendation": "Que no se cumplan los criterios no significa que lo vivido no te afecte. Si te sigue pesando, coméntalo con un profesional."
+      },
+      "ptsd": {
+        "title": "Respuestas compatibles con los criterios de TEPT del ITQ",
+        "body": "Tus respuestas cumplen los criterios del cuestionario para el trastorno de estrés postraumático (TEPT) de la CIE-11: revivir la experiencia, evitarla y sentirse amenazado/a, con impacto en tu vida. No es un diagnóstico; lo confirma o lo descarta un profesional en una entrevista.",
+        "recommendation": "Pide una valoración a un psicólogo/a o psiquiatra con experiencia en trauma. Puedes llevar el resultado en PDF."
+      },
+      "cptsd": {
+        "title": "Respuestas compatibles con los criterios de TEPT complejo del ITQ",
+        "body": "Tus respuestas cumplen los criterios del cuestionario para el TEPT complejo de la CIE-11: además de los síntomas del TEPT, dificultades para regular las emociones, una imagen negativa de ti mismo/a y problemas en las relaciones, con impacto en tu vida. No es un diagnóstico; lo confirma o lo descarta un profesional en una entrevista.",
+        "recommendation": "Pide una valoración a un psicólogo/a o psiquiatra con experiencia en trauma. Puedes llevar el resultado en PDF."
+      }
+    }
+  }
+}

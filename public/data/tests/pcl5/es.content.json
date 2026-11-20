@@ -1,0 +1,139 @@
+{
+  "status": "draft-pending-clinical-review",
+  "drafted": "clinical-landing-writer-v2",
+  "draftedAt": "2026-11-20T18:00:00.000Z",
+  "auditedAt": "2026-11-20T18:00:00.000Z",
+  "lastEditedBy": null,
+  "clinicallyApprovedBy": null,
+  "clinicallyApprovedAt": null,
+  "hero": {
+    "title": "Test PCL-5: cuestionario orientativo de estrés postraumático",
+    "subtitle": "Veinte preguntas sobre cuánto te han molestado en el último mes las secuelas de una experiencia muy estresante: recuerdos que vuelven, pesadillas, evitar lo que te la recuerda, sentirte en alerta o distante de los demás. El resultado te sirve como punto de partida para hablarlo con tu psicólogo/a o psiquiatra.",
+    "clinicalContext": "Es una herramienta clínica de apoyo. Está pensada para usarse junto con un profesional, o para llevar un registro orientativo a una primera consulta.",
+    "badges": [
+      "Instrumento validado",
+      "20 preguntas",
+      "5-10 min",
+      "Sin registro",
+      "Datos en tu navegador"
+    ]
+  },
+  "whatItMeasures": {
+    "heading": "¿Qué mide este test?",
+    "body": "El PCL-5 (PTSD Checklist for DSM-5) es un cuestionario de 20 preguntas sobre los síntomas del trastorno de estrés postraumático (TEPT) tal como los define el DSM-5. Pregunta cuánto ha molestado cada problema durante el último mes, de «Nada» a «Muchísimo».\n\nRecoge los cuatro grupos de síntomas del TEPT: los recuerdos, sueños y reacciones que hacen revivir la experiencia; la evitación de lo que la recuerda; los cambios negativos en el ánimo y en las ideas sobre uno mismo, los demás y el mundo; y la activación (estar en alerta, sobresaltarse, irritabilidad, dificultades para concentrarse o dormir).\n\nLo desarrolló el Centro Nacional de TEPT de Estados Unidos (Weathers y colaboradores, 2013) y es de dominio público. La versión española que usamos es la publicada por Haghish y colaboradores en 2024, validada en hospitales españoles."
+  },
+  "whoIsItFor": {
+    "heading": "¿A quién está dirigido?",
+    "body": "Está dirigido a personas adultas que han vivido una experiencia muy estresante o traumática. Se usa en consultas de salud mental y de atención primaria como cribado: indica si conviene valorar con más detalle las consecuencias de esa experiencia, no si hay un trastorno.\n\nResulta especialmente útil para quienes ya están en terapia y quieren aportar a su profesional un registro ordenado, o para quienes han decidido consultar y quieren llegar a la primera cita con un punto de partida. También lo utilizan profesionales clínicos y estudiantes de ciencias de la salud para familiarizarse con el instrumento.",
+    "indications": [
+      "Personas adultas en terapia por una experiencia traumática que quieran registrar con su profesional cómo evolucionan los síntomas.",
+      "Personas adultas que han vivido una experiencia muy estresante, han decidido consultar y quieren llevar un registro orientativo a la primera cita.",
+      "Profesionales que quieran que su paciente lo complete antes de la sesión.",
+      "Profesionales clínicos, estudiantes de Psicología o Medicina e investigadores que quieran consultar el instrumento y su validación."
+    ],
+    "limitations": [
+      "No es una herramienta diagnóstica. No sustituye la valoración de un psicólogo/a o psiquiatra.",
+      "Pregunta por síntomas, no por la experiencia vivida: no valora si lo ocurrido cumple la definición de trauma, que forma parte del diagnóstico.",
+      "La validación española se hizo con 233 pacientes con traumatismo craneoencefálico; no hay datos españoles en otras poblaciones.",
+      "El punto de corte de 33 viene de estudios estadounidenses; según el estudio, los valores propuestos van de 28 a 38. [REVISAR: decidir el corte o si se usa]",
+      "La depresión, la ansiedad y otros problemas comparten síntomas con el TEPT y pueden dar puntuaciones altas.",
+      "No está pensado para menores de edad."
+    ]
+  },
+  "howItWorks": {
+    "heading": "Cómo funciona",
+    "body": "El test consta de 20 preguntas sobre problemas que a veces aparecen después de una experiencia muy estresante. En cada una marcas cuánto te ha molestado durante el último mes: «Nada», «Un poco», «Moderadamente», «Bastante» o «Muchísimo». No hay respuestas correctas o incorrectas.\n\nCada respuesta suma de 0 a 4 puntos, así que la puntuación total va de 0 a 80. El punto de corte más usado es 33.\n\nEsta herramienta se usa típicamente en el marco de una valoración o un seguimiento. Si ya estás en consulta, tu profesional puede decirte si te conviene completarla; si todavía no has consultado, el resultado puede servirte para llevar un registro orientativo a una primera cita.",
+    "steps": [
+      "Piensas en la experiencia muy estresante que más te afecta.",
+      "Respondes 20 preguntas sobre el último mes, con cinco opciones de «Nada» a «Muchísimo».",
+      "Puedes ir atrás si lo necesitas.",
+      "El sistema calcula automáticamente tu puntuación total (rango 0–80).",
+      "Ves tu puntuación y si llega al punto de corte."
+    ]
+  },
+  "validation": {
+    "heading": "Validación científica",
+    "body": "El PCL-5 lo desarrolló el Centro Nacional de TEPT de Estados Unidos al publicarse el DSM-5, y es de dominio público [1]. En 2015, Blevins y colaboradores lo estudiaron en dos muestras de estudiantes universitarios expuestos a experiencias traumáticas (278 y 558 personas): mostró una consistencia interna alta (alfa de 0,94) y una buena fiabilidad test-retest (0,82) [2]. En 2016, Bovin y colaboradores lo compararon con una entrevista clínica estructurada (CAPS-5) en 468 veteranos: las puntuaciones de 31 a 33 fueron las que mejor identificaban un probable TEPT [3].\n\nLa traducción española que usamos la publicaron Haghish y colaboradores en 2024. La validaron con 233 pacientes atendidos por un traumatismo craneoencefálico en cuatro hospitales españoles, seis meses después de la lesión. La consistencia interna fue muy alta (alfa de 0,95) y el cuestionario se relacionó con el GAD-7 y el PHQ-9 como se esperaba (0,70 y 0,74). Con el punto de corte de 33, el 12,2 % de la muestra cumplía los criterios provisionales de TEPT [4].",
+    "references": [
+      {
+        "id": 1,
+        "authors": "Weathers FW, Litz BT, Keane TM, Palmieri PA, Marx BP, Schnurr PP",
+        "year": 2013,
+        "title": "The PTSD Checklist for DSM-5 (PCL-5)",
+        "journal": "National Center for PTSD",
+        "doi": "",
+        "url": "https://www.ptsd.va.gov/professional/assessment/adult-sr/ptsd-checklist.asp"
+      },
+      {
+        "id": 2,
+        "authors": "Blevins CA, Weathers FW, Davis MT, Witte TK, Domino JL",
+        "year": 2015,
+        "title": "The Posttraumatic Stress Disorder Checklist for DSM-5 (PCL-5): Development and Initial Psychometric Evaluation",
+        "journal": "J Trauma Stress",
+        "volume": "28",
+        "issue": "6",
+        "pages": "489–498",
+        "doi": "10.1002/jts.22059",
+        "url": "https://doi.org/10.1002/jts.22059"
+      },
+      {
+        "id": 3,
+        "authors": "Bovin MJ, Marx BP, Weathers FW, Gallagher MW, Rodriguez P, Schnurr PP, Keane TM",
+        "year": 2016,
+        "title": "Psychometric properties of the PTSD Checklist for Diagnostic and Statistical Manual of Mental Disorders-Fifth Edition (PCL-5) in veterans",
+        "journal": "Psychol Assess",
+        "volume": "28",
+        "issue": "11",
+        "pages": "1379–1391",
+        "doi": "10.1037/pas0000254",
+        "url": "https://doi.org/10.1037/pas0000254"
+      },
+      {
+        "id": 4,
+        "authors": "Haghish EF, Sahuquillo J, Radoi A, Pomposo I, Lozano GC",
+        "year": 2024,
+        "title": "Validating the Spanish translation of the posttraumatic stress disorder checklist (PCL-5) in a sample of individuals with traumatic brain injury",
+        "journal": "Front Psychol",
+        "volume": "15",
+        "issue": "",
+        "pages": "1216435",
+        "doi": "10.3389/fpsyg.2024.1216435",
+        "url": "https://doi.org/10.3389/fpsyg.2024.1216435"
+      }
+    ]
+  },
+  "interpretation": {
+    "heading": "Qué hacer con tu resultado",
+    "body": "Una puntuación por debajo del punto de corte (0–32 puntos) significa que tus respuestas no llegan al valor más usado para considerar un posible TEPT. Aun así, una puntuación baja no descarta que lo vivido te esté afectando: si te preocupa, coméntalo con tu profesional de referencia.\n\nUna puntuación a partir del punto de corte (33–80 puntos) significa que tus respuestas están en el rango en el que se recomienda una valoración profesional. No indica que tengas un TEPT: otros problemas comparten síntomas. Es información útil para llevar a consulta: un psicólogo/a o psiquiatra con experiencia en trauma puede valorar qué te ocurre. Si quieres comentar este resultado en consulta y no tienes psicólogo/a de referencia, en Psicoprotego podemos ayudarte a empezar.\n\nSi en algún momento sientes que no puedes mantenerte a salvo o piensas en hacerte daño, en España puedes llamar al **024** (línea de atención a la conducta suicida, gratuita, 24 horas) o, si estás en peligro, al **112**.\n\nLos rangos son orientativos. Una misma puntuación puede tener significados distintos según el momento vital, la salud y las circunstancias de cada persona. Solo un profesional sanitario puede establecer un diagnóstico tras una evaluación completa."
+  },
+  "faq": [
+    {
+      "q": "¿Es un diagnóstico?",
+      "a": "No. El PCL-5 es un cuestionario de cribado orientativo. Una puntuación de 33 o más indica que conviene una valoración profesional, no que haya un TEPT."
+    },
+    {
+      "q": "¿En qué experiencia tengo que pensar?",
+      "a": "En la experiencia muy estresante que más te afecta ahora. El cuestionario no pide que la describas: solo pregunta cuánto te han molestado los problemas que suelen aparecer después."
+    },
+    {
+      "q": "¿Y si responder me remueve?",
+      "a": "Es posible: las preguntas hablan de una experiencia difícil. Puedes parar cuando quieras y retomarlo otro día, o responderlo en consulta con tu profesional. Si en algún momento te sientes desbordado/a o piensas en hacerte daño, llama al 024 (gratuito, 24 horas) o, si estás en peligro, al 112."
+    },
+    {
+      "q": "¿Quedan guardadas mis respuestas?",
+      "a": "No en nuestros servidores. Tus respuestas se procesan en tu navegador y no las guardamos. Si aceptas las cookies de analítica, se envían a Google Analytics, sin tu nombre ni datos que te identifiquen, para elaborar estadísticas. Solo tú decides qué hacer con el resultado."
+    },
+    {
+      "q": "¿Puedo compartirlo con mi psicólogo/a o mi psiquiatra?",
+      "a": "Sí. Puedes descargar el resultado en PDF y llevarlo a tu consulta. Es una forma práctica de aportar contexto, aunque el/la profesional hará su propia valoración."
+    },
+    {
+      "q": "¿Debo ir al médico de cabecera, al psicólogo o al psiquiatra?",
+      "a": "Para valorar las consecuencias de una experiencia traumática lo indicado es un psicólogo/a clínico/a o un psiquiatra, mejor con experiencia en trauma. El médico/a de familia puede ser el primer paso: conoce tu salud y puede derivarte. Si se plantea medicación, la valoración corresponde al psiquiatra. Lo que no debería decidirlo es el resultado de este test."
+    }
+  ],
+  "privacy": {
+    "heading": "Privacidad",
+    "body": "Tus respuestas se calculan en tu navegador: no se envían a nuestros servidores ni se guardan. Solo si aceptas las cookies de analítica se envían a Google Analytics, sin tu nombre ni datos que te identifiquen, para elaborar estadísticas. Decides tú qué compartir y con quién: puedes descargar un PDF del resultado para llevarlo a tu médico/a o terapeuta, o simplemente cerrar la pestaña."
+  }
+}

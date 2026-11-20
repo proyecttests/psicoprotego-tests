@@ -1,0 +1,94 @@
+{
+  "id": "pcptsd5",
+  "availableLangs": [
+    "es"
+  ],
+  "category": "psychometric",
+  "condition": "trauma",
+  "use": [
+    "clinical_screening"
+  ],
+  "measures": [
+    "ptsd"
+  ],
+  "validated": true,
+  "medicalCondition": {
+    "icd10": "F43.1",
+    "name": "Trastorno de estrés postraumático",
+    "schemaOrgUrl": "https://www.icd10data.com/ICD10CM/Codes/F01-F99/F40-F48/F43-/F43.1"
+  },
+  "authorship": {
+    "author": "emmanuel",
+    "reviewedBy": "cristina"
+  },
+  "ageRange": {
+    "min": 18,
+    "max": null
+  },
+  "selfAdministrable": true,
+  "slug": "pc-ptsd-5",
+  "tags": [
+    "adultos",
+    "si-no",
+    "5-items",
+    "cribado"
+  ],
+  "originalInstrument": "Primary Care PTSD Screen for DSM-5 (PC-PTSD-5)",
+  "validation": {
+    "isValidated": true,
+    "references": [
+      {
+        "authors": "Prins A, Bovin MJ, Smolenski DJ, Marx BP, Kimerling R, Jenkins-Guarnieri MA, Kaloupek DG, Schnurr PP, Kaiser AP, Leyva YE, Tiet QQ",
+        "year": 2016,
+        "title": "The Primary Care PTSD Screen for DSM-5 (PC-PTSD-5): Development and Evaluation Within a Veteran Primary Care Sample",
+        "journal": "J Gen Intern Med",
+        "volume": "31",
+        "issue": "10",
+        "pages": "1206–1211",
+        "doi": "10.1007/s11606-016-3703-5"
+      }
+    ],
+    "spanishValidation": {
+      "available": false,
+      "note": "Traducción del Centro Nacional de TEPT de EE. UU. (2022), revisada por su personal. El propio centro advierte: «no ha sido validada en investigación publicada», y pide reconocer esa limitación al usarla."
+    }
+  },
+  "validationDetails": {
+    "original": {
+      "lang": "en",
+      "reference": "Prins A et al. (2016)",
+      "journal": "J Gen Intern Med, 31(10), 1206-1211",
+      "doi": "10.1007/s11606-016-3703-5"
+    },
+    "translations": {
+      "es": {
+        "validated": false,
+        "reference": "Traducción del Centro Nacional de TEPT (2022)",
+        "note": "Sin validar"
+      },
+      "en": {
+        "validated": true,
+        "reference": "Original instrument"
+      }
+    }
+  },
+  "timeToComplete": "1-2 min",
+  "itemCount": 5,
+  "itemType": "boolean",
+  "scoringRange": {
+    "min": 0,
+    "max": 5
+  },
+  "cutoffs": {
+    "below_cutoff": [
+      0,
+      3
+    ],
+    "above_cutoff": [
+      4,
+      5
+    ]
+  },
+  "copyright": "public_domain",
+  "copyrightNotice": "PC-PTSD-5: dominio público (Centro Nacional de TEPT de EE. UU.; Prins et al., 2015). Traducción española del mismo centro, no validada en investigación publicada."
+}
