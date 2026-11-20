@@ -37,6 +37,7 @@ const STRINGS = {
     duration:       'Duración estimada',
     scoring:        'Rango de puntuación',
     cutoffs:        'Puntos de corte',
+    noCutoffs:      'Sin punto de corte',
     copyright:      'Copyright / uso',
     langNames: {
       es: 'español', en: 'inglés', pt: 'portugués',
@@ -309,6 +310,9 @@ const TestMetadataTable: React.FC<TestMetadataTableProps> = ({ metadata, lang })
         {/* Cutoffs — span 2 columns */}
         <FieldCard label={s.cutoffs} wide>
           <div className="flex flex-wrap gap-2 mt-0.5">
+            {Object.keys(metadata.cutoffs).length === 0 && (
+              <p className="text-sm font-medium" style={{ color: 'var(--color-primary)' }}>{s.noCutoffs}</p>
+            )}
             {Object.entries(metadata.cutoffs).map(([key, range]) => {
               const colors = getCutoffColor(key)
               const label  = s.cutoffLabels[key] ?? key

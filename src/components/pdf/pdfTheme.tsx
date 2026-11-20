@@ -292,8 +292,11 @@ export const TotalField: React.FC<{ max: number; mean?: boolean }> = ({ max, mea
   </View>
 )
 
-/** Rangos orientativos de interpretación; resalta el del resultado si se indica */
-export const RangesTable: React.FC<{ scoring: ScoringRule[]; current?: string }> = ({ scoring, current }) => (
+/**
+ * Rangos orientativos de interpretación; resalta el del resultado si se indica. Con un solo rango
+ * (DES-II, sin punto de corte) no hay nada que interpretar y no se pinta.
+ */
+export const RangesTable: React.FC<{ scoring: ScoringRule[]; current?: string }> = ({ scoring, current }) => scoring.length < 2 ? null : (
   <View wrap={false}>
     <Text style={styles.sectionTitle}>Interpretación orientativa</Text>
     {scoring.map((r) => (

@@ -52,7 +52,7 @@
     ],
     "spanishValidation": {
       "available": true,
-      "note": "Icarán E, Colom R, Orengo-García F (1996). Estudio de validación de la escala de experiencias disociativas con muestra de población española. Actas Luso-Españolas de Neurología, Psiquiatría y Ciencias Afines 24(1):7-10 (PMID 8900971). También: Icarán E, Colom R, Orengo F (1996). Experiencias disociativas: una escala de medida. Anuario de Psicología 70:69-84. Los pacientes españoles tuvieron dificultad con la idea de «porcentaje del tiempo». Punto de corte de 30: Carlson et al. (1993), en población estadounidense."
+      "note": "Icarán E, Colom R, Orengo-García F (1996). Estudio de validación de la escala de experiencias disociativas con muestra de población española. Actas Luso-Españolas de Neurología, Psiquiatría y Ciencias Afines 24(1):7-10 (PMID 8900971). También: Icarán E, Colom R, Orengo F (1996). Experiencias disociativas: una escala de medida. Anuario de Psicología 70:69-84. Texto usado aquí: traducción y adaptación al castellano de Olaf Holm (2002), difundida por la ISSTD; no hay certeza de que coincida con la versión validada. Sin punto de corte."
     }
   },
   "validationDetails": {
@@ -65,7 +65,8 @@
     "translations": {
       "es": {
         "validated": true,
-        "reference": "Icarán et al., 1996"
+        "reference": "Icarán et al., 1996",
+        "note": "Texto: traducción de Olaf Holm (2002); sin certeza de que sea el validado"
       },
       "en": {
         "validated": true,
@@ -88,16 +89,7 @@
     "min": 0,
     "max": 100
   },
-  "cutoffs": {
-    "below_cutoff": [
-      0,
-      29.9
-    ],
-    "above_cutoff": [
-      30,
-      100
-    ]
-  },
+  "cutoffs": {},
   "copyright": "research_clinical_use",
   "timeToComplete": "10-15 min"
 }

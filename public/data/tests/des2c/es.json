@@ -5,7 +5,7 @@
   "version": "1.0",
   "scoringFunction": "scoreMean",
   "disclaimerBefore": "Este cuestionario es una herramienta de cribado orientativa. **No es un diagnóstico clínico ni sustituye la valoración de un profesional de la salud mental.** Algunas preguntas describen experiencias poco habituales: es normal que muchas no te ocurran nunca. Si tienes dudas o síntomas que te preocupan, consulta con un profesional.",
-  "instructions": "Este cuestionario consta de 28 preguntas sobre experiencias que usted puede tener en su vida diaria. Nos interesa saber con qué frecuencia le ocurren. Es importante que sus respuestas reflejen con qué frecuencia le ocurren cuando no está bajo los efectos del alcohol o las drogas. Para responder, piense en qué medida la experiencia descrita se aplica a usted y marque el porcentaje del tiempo en que le ocurre.",
+  "instructions": "El cuestionario consiste en veintiocho preguntas acerca de experiencias que usted puede tener en su vida diaria. Estamos interesados en saber con qué frecuencia tiene usted estas experiencias. Es importante que sus respuestas indiquen con qué frecuencia le ocurren pero, cuando usted no está bajo los efectos del alcohol u otras drogas. Para contestar estas preguntas, por favor, indique hasta qué grado la experiencia descrita en la pregunta se le puede aplicar a usted y marque el porcentaje de tiempo que tiene la experiencia, de 0 % (nunca) a 100 % (siempre).",
   "responseOptions": [
     {
       "value": 0,
@@ -66,7 +66,7 @@
     "faq": [
       {
         "q": "¿Es esto un diagnóstico?",
-        "a": "No. La DES-II es una herramienta de cribado. Una media de 30 o más indica que conviene una valoración profesional; el diagnóstico solo puede hacerlo un profesional con una entrevista clínica."
+        "a": "No. La DES-II es una herramienta orientativa: resume con qué frecuencia te ocurren estas experiencias. Solo un profesional puede valorarlas, con una entrevista clínica."
       },
       {
         "q": "¿Quedan guardadas mis respuestas?",
@@ -82,8 +82,8 @@
     {
       "id": "q1",
       "type": "likert",
-      "text": "Algunas personas tienen la experiencia de estar conduciendo un coche y de pronto se dan cuenta de que no se acuerdan de lo que pasó durante una parte o casi todo el viaje.",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "Algunas personas tienen la experiencia de darse cuenta repentinamente durante la conducción de un coche de que no recuerdan lo que ha pasado durante el viaje o parte de él.",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -94,7 +94,7 @@
       "id": "q1e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 1: Algunas personas tienen la experiencia de estar conduciendo un coche y de pronto se dan cuenta de que no se acuerdan de lo que pasó durante una parte o casi todo el viaje.",
+      "instructions": "Pregunta 1: Algunas personas tienen la experiencia de darse cuenta repentinamente durante la conducción de un coche de que no recuerdan lo que ha pasado durante el viaje o parte de él.",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -111,8 +111,8 @@
     {
       "id": "q2",
       "type": "likert",
-      "text": "Algunas personas se dan cuenta de que a veces, escuchando una conversación, sin querer han dejado de percibir una parte más o menos extensa de la misma.",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "Algunas personas descubren que a veces están escuchando hablar a alguien y repentinamente se dan cuenta que no oyeron todo o parte de lo que le dijeron.",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -123,7 +123,7 @@
       "id": "q2e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 2: Algunas personas se dan cuenta de que a veces, escuchando una conversación, sin querer han dejado de percibir una parte más o menos extensa de la misma.",
+      "instructions": "Pregunta 2: Algunas personas descubren que a veces están escuchando hablar a alguien y repentinamente se dan cuenta que no oyeron todo o parte de lo que le dijeron.",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -141,7 +141,7 @@
       "id": "q3",
       "type": "likert",
       "text": "Algunas personas tienen la experiencia de encontrarse en un lugar y no saber cómo llegaron hasta allí.",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -169,8 +169,8 @@
     {
       "id": "q4",
       "type": "likert",
-      "text": "Algunas personas tienen la experiencia de encontrarse vestidas con una ropa que no recuerdan haberse puesto.",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "Algunas personas tienen la experiencia de verse a sí mismos vestidos con ropas que no recuerdan haberse puesto.",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -181,7 +181,7 @@
       "id": "q4e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 4: Algunas personas tienen la experiencia de encontrarse vestidas con una ropa que no recuerdan haberse puesto.",
+      "instructions": "Pregunta 4: Algunas personas tienen la experiencia de verse a sí mismos vestidos con ropas que no recuerdan haberse puesto.",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -198,8 +198,8 @@
     {
       "id": "q5",
       "type": "likert",
-      "text": "Algunas personas tienen la experiencia de encontrar entre sus cosas objetos nuevos que no recuerdan haber comprado.",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "Algunas personas tienen la experiencia de encontrar cosas nuevas entre sus pertenencias que no recuerdan haber comprado.",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -210,7 +210,7 @@
       "id": "q5e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 5: Algunas personas tienen la experiencia de encontrar entre sus cosas objetos nuevos que no recuerdan haber comprado.",
+      "instructions": "Pregunta 5: Algunas personas tienen la experiencia de encontrar cosas nuevas entre sus pertenencias que no recuerdan haber comprado.",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -227,8 +227,8 @@
     {
       "id": "q6",
       "type": "likert",
-      "text": "Algunas personas se encuentran a veces con que se les acerca gente que no conocen, que les llama por otro nombre o insiste en que ya se conocían.",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "Algunas personas descubren que se les acerca gente que no conocen y que les llaman por otro nombre o insisten en que les conocen de antes.",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -239,7 +239,7 @@
       "id": "q6e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 6: Algunas personas se encuentran a veces con que se les acerca gente que no conocen, que les llama por otro nombre o insiste en que ya se conocían.",
+      "instructions": "Pregunta 6: Algunas personas descubren que se les acerca gente que no conocen y que les llaman por otro nombre o insisten en que les conocen de antes.",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -256,8 +256,8 @@
     {
       "id": "q7",
       "type": "likert",
-      "text": "Algunas personas tienen a veces la experiencia de sentirse como si estuvieran de pie a su propio lado o como si se vieran a sí mismas hacer algo, y realmente se ven como si miraran a otra persona.",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "Algunas personas tienen la experiencia de sentir como si estuvieran junto a sí mismos u observándose haciendo algo como si fueran otra persona.",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -268,7 +268,7 @@
       "id": "q7e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 7: Algunas personas tienen a veces la experiencia de sentirse como si estuvieran de pie a su propio lado o como si se vieran a sí mismas hacer algo, y realmente se ven como si miraran a otra persona.",
+      "instructions": "Pregunta 7: Algunas personas tienen la experiencia de sentir como si estuvieran junto a sí mismos u observándose haciendo algo como si fueran otra persona.",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -285,8 +285,8 @@
     {
       "id": "q8",
       "type": "likert",
-      "text": "A algunas personas les dicen que a veces no reconocen a amigos o familiares.",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "A algunas personas les dicen que no reconocen amigos o miembros de la familia.",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -297,7 +297,7 @@
       "id": "q8e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 8: A algunas personas les dicen que a veces no reconocen a amigos o familiares.",
+      "instructions": "Pregunta 8: A algunas personas les dicen que no reconocen amigos o miembros de la familia.",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -314,8 +314,8 @@
     {
       "id": "q9",
       "type": "likert",
-      "text": "Algunas personas se encuentran con que no tienen memoria de algunos eventos importantes de su vida (boda, servicio militar, etc.).",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "Algunas personas no tienen el recuerdo de acontecimientos importantes en sus vidas, (por ejemplo una boda, una Semana Santa, unas Navidades)",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -326,7 +326,7 @@
       "id": "q9e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 9: Algunas personas se encuentran con que no tienen memoria de algunos eventos importantes de su vida (boda, servicio militar, etc.).",
+      "instructions": "Pregunta 9: Algunas personas no tienen el recuerdo de acontecimientos importantes en sus vidas, (por ejemplo una boda, una Semana Santa, unas Navidades)",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -343,8 +343,8 @@
     {
       "id": "q10",
       "type": "likert",
-      "text": "Algunas personas tienen la experiencia de que se les acuse de mentir cuando creen que no han mentido.",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "Algunas personas son acusadas de mentir cuando piensan que no han mentido.",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -355,7 +355,7 @@
       "id": "q10e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 10: Algunas personas tienen la experiencia de que se les acuse de mentir cuando creen que no han mentido.",
+      "instructions": "Pregunta 10: Algunas personas son acusadas de mentir cuando piensan que no han mentido.",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -372,8 +372,8 @@
     {
       "id": "q11",
       "type": "likert",
-      "text": "Algunas personas tienen la experiencia de mirarse en un espejo y no reconocerse.",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "Algunas personas tienen la experiencia de mirarse en un espejo y no reconocerse a sí mismos.",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -384,7 +384,7 @@
       "id": "q11e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 11: Algunas personas tienen la experiencia de mirarse en un espejo y no reconocerse.",
+      "instructions": "Pregunta 11: Algunas personas tienen la experiencia de mirarse en un espejo y no reconocerse a sí mismos.",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -401,8 +401,8 @@
     {
       "id": "q12",
       "type": "likert",
-      "text": "Algunas personas tienen la experiencia de sentir que otras personas, los objetos y el mundo que les rodea no son reales.",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "Algunas personas tienen la experiencia de sentir que las personas, objetos y el mundo que les rodea no son reales.",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -413,7 +413,7 @@
       "id": "q12e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 12: Algunas personas tienen la experiencia de sentir que otras personas, los objetos y el mundo que les rodea no son reales.",
+      "instructions": "Pregunta 12: Algunas personas tienen la experiencia de sentir que las personas, objetos y el mundo que les rodea no son reales.",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -430,8 +430,8 @@
     {
       "id": "q13",
       "type": "likert",
-      "text": "Algunas personas tienen la experiencia de sentir que su cuerpo no les pertenece.",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "Algunas personas tienen la experiencia de sentir que sus cuerpos no les pertenecen.",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -442,7 +442,7 @@
       "id": "q13e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 13: Algunas personas tienen la experiencia de sentir que su cuerpo no les pertenece.",
+      "instructions": "Pregunta 13: Algunas personas tienen la experiencia de sentir que sus cuerpos no les pertenecen.",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -459,8 +459,8 @@
     {
       "id": "q14",
       "type": "likert",
-      "text": "Algunas personas tienen la experiencia de recordar a veces un hecho pasado con tanta viveza que sienten como si lo estuvieran volviendo a vivir.",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "Algunas personas tienen la experiencia de recordar el pasado, a veces tan intensamente, que sienten que lo están volviendo a vivir.",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -471,7 +471,7 @@
       "id": "q14e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 14: Algunas personas tienen la experiencia de recordar a veces un hecho pasado con tanta viveza que sienten como si lo estuvieran volviendo a vivir.",
+      "instructions": "Pregunta 14: Algunas personas tienen la experiencia de recordar el pasado, a veces tan intensamente, que sienten que lo están volviendo a vivir.",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -488,8 +488,8 @@
     {
       "id": "q15",
       "type": "likert",
-      "text": "Algunas personas tienen la experiencia de no estar seguras de si cosas que recuerdan haber vivido ocurrieron de verdad o solo las soñaron.",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "Algunas personas tienen la experiencia de no estar seguros de si las cosas que recuerdan sucedieron realmente o si solamente lo soñaron.",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -500,7 +500,7 @@
       "id": "q15e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 15: Algunas personas tienen la experiencia de no estar seguras de si cosas que recuerdan haber vivido ocurrieron de verdad o solo las soñaron.",
+      "instructions": "Pregunta 15: Algunas personas tienen la experiencia de no estar seguros de si las cosas que recuerdan sucedieron realmente o si solamente lo soñaron.",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -517,8 +517,8 @@
     {
       "id": "q16",
       "type": "likert",
-      "text": "Algunas personas tienen la experiencia de estar en un lugar conocido y sentirlo extraño y desconocido.",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "Algunas personas tienen la experiencia de que, estando en un lugar conocido, lo encuentran extraño y poco familiar.",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -529,7 +529,7 @@
       "id": "q16e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 16: Algunas personas tienen la experiencia de estar en un lugar conocido y sentirlo extraño y desconocido.",
+      "instructions": "Pregunta 16: Algunas personas tienen la experiencia de que, estando en un lugar conocido, lo encuentran extraño y poco familiar.",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -546,8 +546,8 @@
     {
       "id": "q17",
       "type": "likert",
-      "text": "Algunas personas encuentran que cuando miran la televisión o una película, se absorben tanto en la historia que no se dan cuenta de otras cosas que ocurren a su alrededor.",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "Algunas personas descubren que mientras ven la televisión o una película se encuentran tan absortos en la historia que no se dan cuenta de otros acontecimientos que están ocurriendo alrededor de ellos.",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -558,7 +558,7 @@
       "id": "q17e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 17: Algunas personas encuentran que cuando miran la televisión o una película, se absorben tanto en la historia que no se dan cuenta de otras cosas que ocurren a su alrededor.",
+      "instructions": "Pregunta 17: Algunas personas descubren que mientras ven la televisión o una película se encuentran tan absortos en la historia que no se dan cuenta de otros acontecimientos que están ocurriendo alrededor de ellos.",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -575,8 +575,8 @@
     {
       "id": "q18",
       "type": "likert",
-      "text": "Algunas personas se encuentran tan metidas en una fantasía o una ensoñación que sienten como si les estuviera ocurriendo de verdad.",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "Algunas personas se dan cuenta a veces que están tan metidos en una fantasía, o soñando despiertos, que sienten como si estuviera ocurriendo de verdad.",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -587,7 +587,7 @@
       "id": "q18e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 18: Algunas personas se encuentran tan metidas en una fantasía o una ensoñación que sienten como si les estuviera ocurriendo de verdad.",
+      "instructions": "Pregunta 18: Algunas personas se dan cuenta a veces que están tan metidos en una fantasía, o soñando despiertos, que sienten como si estuviera ocurriendo de verdad.",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -604,8 +604,8 @@
     {
       "id": "q19",
       "type": "likert",
-      "text": "Algunas personas se dan cuenta de que a veces son capaces de no hacer caso al dolor.",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "Algunas personas descubren que a veces son capaces de ignorar el dolor.",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -616,7 +616,7 @@
       "id": "q19e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 19: Algunas personas se dan cuenta de que a veces son capaces de no hacer caso al dolor.",
+      "instructions": "Pregunta 19: Algunas personas descubren que a veces son capaces de ignorar el dolor.",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -633,8 +633,8 @@
     {
       "id": "q20",
       "type": "likert",
-      "text": "Algunas personas se encuentran a veces sentadas con la mirada perdida, sin pensar en nada y sin darse cuenta del paso del tiempo.",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "Algunas personas descubren que están mirando hacia el vacío, sin pensar, y no se dan cuenta del paso del tiempo.",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -645,7 +645,7 @@
       "id": "q20e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 20: Algunas personas se encuentran a veces sentadas con la mirada perdida, sin pensar en nada y sin darse cuenta del paso del tiempo.",
+      "instructions": "Pregunta 20: Algunas personas descubren que están mirando hacia el vacío, sin pensar, y no se dan cuenta del paso del tiempo.",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -662,8 +662,8 @@
     {
       "id": "q21",
       "type": "likert",
-      "text": "Algunas personas se dan cuenta de que, cuando están solas, a veces hablan en voz alta consigo mismas.",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "Algunas personas descubren a veces que cuando están solos se hablan en alto a sí mismos.",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -674,7 +674,7 @@
       "id": "q21e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 21: Algunas personas se dan cuenta de que, cuando están solas, a veces hablan en voz alta consigo mismas.",
+      "instructions": "Pregunta 21: Algunas personas descubren a veces que cuando están solos se hablan en alto a sí mismos.",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -691,8 +691,8 @@
     {
       "id": "q22",
       "type": "likert",
-      "text": "Algunas personas se encuentran con que en una situación actúan de forma tan distinta a como lo hacen en otra que se sienten casi como si fueran dos personas diferentes.",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "Algunas personas se dan cuenta de que en una situación pueden actuar tan diferentemente, comparada con otra situación, que sienten como si fueran personas diferentes.",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -703,7 +703,7 @@
       "id": "q22e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 22: Algunas personas se encuentran con que en una situación actúan de forma tan distinta a como lo hacen en otra que se sienten casi como si fueran dos personas diferentes.",
+      "instructions": "Pregunta 22: Algunas personas se dan cuenta de que en una situación pueden actuar tan diferentemente, comparada con otra situación, que sienten como si fueran personas diferentes.",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -720,8 +720,8 @@
     {
       "id": "q23",
       "type": "likert",
-      "text": "Algunas personas se encuentran a veces con que en ciertas situaciones son capaces de hacer, con una facilidad y una espontaneidad sorprendentes, cosas que normalmente les resultarían difíciles (por ejemplo, deportes, trabajo, situaciones sociales).",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "Algunas personas descubren a veces que en ciertas situaciones son capaces de hacer cosas con asombrosa facilidad y espontaneidad cuando normalmente les sería difícil (por ejemplo: deportes, trabajo, situaciones sociales, etc.).",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -732,7 +732,7 @@
       "id": "q23e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 23: Algunas personas se encuentran a veces con que en ciertas situaciones son capaces de hacer, con una facilidad y una espontaneidad sorprendentes, cosas que normalmente les resultarían difíciles (por ejemplo, deportes, trabajo, situaciones sociales).",
+      "instructions": "Pregunta 23: Algunas personas descubren a veces que en ciertas situaciones son capaces de hacer cosas con asombrosa facilidad y espontaneidad cuando normalmente les sería difícil (por ejemplo: deportes, trabajo, situaciones sociales, etc.).",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -749,8 +749,8 @@
     {
       "id": "q24",
       "type": "likert",
-      "text": "Algunas personas se encuentran a veces con que no pueden recordar si han hecho algo o solo han pensado en hacerlo (por ejemplo, no saber si han echado una carta al correo o solo han pensado en echarla).",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "Algunas personas a veces descubren que no pueden recordar si han hecho algo o solo pensaron en ello (por ejemplo: si enviaron una carta o solo pensaron en hacerlo)",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -761,7 +761,7 @@
       "id": "q24e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 24: Algunas personas se encuentran a veces con que no pueden recordar si han hecho algo o solo han pensado en hacerlo (por ejemplo, no saber si han echado una carta al correo o solo han pensado en echarla).",
+      "instructions": "Pregunta 24: Algunas personas a veces descubren que no pueden recordar si han hecho algo o solo pensaron en ello (por ejemplo: si enviaron una carta o solo pensaron en hacerlo)",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -778,8 +778,8 @@
     {
       "id": "q25",
       "type": "likert",
-      "text": "Algunas personas encuentran pruebas de que han hecho cosas que no recuerdan haber hecho.",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "Algunas personas encuentran evidencias de que han hecho cosas que no recuerdan haberlas hecho.",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -790,7 +790,7 @@
       "id": "q25e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 25: Algunas personas encuentran pruebas de que han hecho cosas que no recuerdan haber hecho.",
+      "instructions": "Pregunta 25: Algunas personas encuentran evidencias de que han hecho cosas que no recuerdan haberlas hecho.",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -807,8 +807,8 @@
     {
       "id": "q26",
       "type": "likert",
-      "text": "Algunas personas encuentran a veces entre sus cosas escritos, dibujos o notas que deben de haber hecho ellas, pero que no recuerdan haber hecho.",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "Algunas personas a veces encuentran escritos, dibujos o notas entre sus pertenencias que sí las hicieron, pero no lo recuerdan.",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -819,7 +819,7 @@
       "id": "q26e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 26: Algunas personas encuentran a veces entre sus cosas escritos, dibujos o notas que deben de haber hecho ellas, pero que no recuerdan haber hecho.",
+      "instructions": "Pregunta 26: Algunas personas a veces encuentran escritos, dibujos o notas entre sus pertenencias que sí las hicieron, pero no lo recuerdan.",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -836,8 +836,8 @@
     {
       "id": "q27",
       "type": "likert",
-      "text": "Algunas personas oyen a veces voces dentro de su cabeza que les dicen que hagan cosas o que comentan lo que están haciendo.",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "Algunas personas a veces se dan cuenta de que oyen voces dentro de sus cabezas que les dicen que hagan ciertas cosas, o que comentan las cosas que están haciendo.",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -848,7 +848,7 @@
       "id": "q27e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 27: Algunas personas oyen a veces voces dentro de su cabeza que les dicen que hagan cosas o que comentan lo que están haciendo.",
+      "instructions": "Pregunta 27: Algunas personas a veces se dan cuenta de que oyen voces dentro de sus cabezas que les dicen que hagan ciertas cosas, o que comentan las cosas que están haciendo.",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -865,8 +865,8 @@
     {
       "id": "q28",
       "type": "likert",
-      "text": "Algunas personas sienten a veces como si miraran el mundo a través de una niebla, de modo que las personas y los objetos parecen lejanos o poco claros.",
-      "instructions": "¿Qué porcentaje del tiempo le ocurre esto a usted, sin estar bajo los efectos del alcohol o las drogas?",
+      "text": "Algunas personas sienten como si vieran el mundo a través de una neblina, de tal manera que las personas u objetos parecen distantes o poco claros.",
+      "instructions": "Marque qué porcentaje de tiempo le pasa esto a usted, de 0 % (nunca) a 100 % (siempre).",
       "scale": {
         "min": 0,
         "max": 100,
@@ -877,7 +877,7 @@
       "id": "q28e",
       "type": "text",
       "text": "¿Puedes poner algún ejemplo?",
-      "instructions": "Pregunta 28: Algunas personas sienten a veces como si miraran el mundo a través de una niebla, de modo que las personas y los objetos parecen lejanos o poco claros.",
+      "instructions": "Pregunta 28: Algunas personas sienten como si vieran el mundo a través de una neblina, de tal manera que las personas u objetos parecen distantes o poco claros.",
       "placeholder": "Escribe aquí un ejemplo de cuándo te ha pasado…",
       "maxLength": 600,
       "validation": {
@@ -895,30 +895,18 @@
   "scoring": [
     {
       "min": 0,
-      "max": 29.9,
-      "category": "Puntuación por debajo del punto de corte",
-      "color": "green",
-      "messageKey": "below_cutoff"
-    },
-    {
-      "min": 30,
       "max": null,
-      "category": "Puntuación a partir del punto de corte",
-      "color": "orange",
-      "messageKey": "above_cutoff"
+      "category": "Media de tus respuestas",
+      "color": "green",
+      "messageKey": "mean"
     }
   ],
   "results": {
     "normal": {
-      "below_cutoff": {
-        "title": "Puntuación por debajo del punto de corte",
-        "body": "La media de tus respuestas no llega a 30, el valor a partir del cual se suele recomendar una valoración más detallada de las experiencias disociativas. Casi todo el mundo tiene alguna de estas experiencias de vez en cuando, sobre todo las de absorción (quedarse metido en una película o en una ensoñación).",
-        "recommendation": "Una puntuación baja no descarta un problema. Si alguna de estas experiencias te preocupa o te ocurre a menudo, coméntalo con un profesional de la salud mental."
-      },
-      "above_cutoff": {
-        "title": "Puntuación a partir del punto de corte",
-        "body": "La media de tus respuestas es de 30 o más: el rango en el que se recomienda que un profesional valore con más detalle las experiencias disociativas. No es un diagnóstico. Muchas personas con esta puntuación no tienen un trastorno disociativo; también puede aparecer con estrés intenso, ansiedad, falta de sueño, consumo de sustancias o después de experiencias traumáticas.",
-        "recommendation": "Pide una valoración a un psicólogo/a o psiquiatra con experiencia en trauma y disociación. Llevar el resultado en PDF puede ayudarte a explicar qué te ocurre."
+      "mean": {
+        "title": "Media de tus respuestas",
+        "body": "La puntuación es la media de tus 28 respuestas, de 0 a 100: resume con qué frecuencia te ocurren, en conjunto, estas experiencias. En esta herramienta no usamos punto de corte, así que el resultado no se clasifica como alto o bajo. Casi todo el mundo tiene alguna de estas experiencias de vez en cuando, sobre todo las de absorción (quedarse metido en una película o en una ensoñación).",
+        "recommendation": "Lo más útil es comentar el resultado, y las experiencias que más te ocurren, con un psicólogo/a o psiquiatra, mejor con experiencia en trauma y disociación. Llevar el PDF puede ayudarte a explicarlo."
       }
     }
   }
